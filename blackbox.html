@@ -115,8 +115,8 @@
 var userInput;
 $('input[name="input"]').bind('keypress', function(evt) {
    if(evt.keyCode === 13) {
-    userInput = parseInt($(this).val());
-    if (!userInput) return;
+    userInput = parseFloat($(this).val());
+    if (!userInput && $(this).val() !== '0') return;
     $(this).css({
         "-webkit-animation-name": 'sendthru',
         "-webkit-animation-duration" : "2s",
