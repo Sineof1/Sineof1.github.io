@@ -17,7 +17,10 @@
    margin:50px auto 20px auto;
    padding-top:20px;
    overflow:hidden;
+   border-radius:20px;
+   box-shadow:0px 0px 30px #cccccc;
 }
+
 #box {
    position:absolute;
    left:32%;
@@ -54,6 +57,46 @@
    top:80px;
    color:red;
    font-size:28px;
+}
+#func_direc {
+   position:absolute;
+   left:55px;
+   top:180px;
+   color:red;
+   font-size:22px;
+   display:none;
+   -moz-transform:rotateX(180deg);
+   -webkit-transform:rotateX(180deg);
+   transform:rotateX(180deg);
+}
+#options {
+   color:#069;
+   width:500px;
+   text-align:right;
+   font-size:16px;
+   margin-left:auto;
+   margin-right:auto;
+}
+#options:hover {
+   cursor:pointer;
+}
+
+#enterInput {
+   position:absolute;
+   top: 120px;
+   left:100px;
+   width:300px;
+   height:50px;
+   font-size:22px;
+   color:gray;
+   text-align:center;
+   border-radius:5px;
+   border:none;
+   z-index:1;
+   display:none;
+   -moz-transform:rotateX(180deg);
+   -webkit-transform:rotateX(180deg);
+   transform:rotateX(180deg);
 }
 @-moz-keyframes sendthru {
     from {-moz-transform:translate(0px);}       
@@ -103,12 +146,40 @@
     from{transform:translate(-150px);}       
     to {transform:translate(0px);}                
 }
+
+@-moz-keyframes flipdiv {
+    from {-moz-transform:rotateX(0deg);}       
+    to {-moz-transform:rotateX(180deg);}                       
+}
+@-webkit-keyframes flipdiv {
+    from{-webkit-transform:rotateX(0deg);}       
+    to {-webkit-transform:rotateX(180deg);}                
+}
+@keyframes flipdiv {
+    from{transform:rotateX(0deg);}       
+    to {transform:rotateX(180deg);}                
+}
+
+@-moz-keyframes flipback{
+    from {-moz-transform:rotateX(180deg);}       
+    to {-moz-transform:rotateX(0deg);}                       
+}
+@-webkit-keyframes flipback {
+    from{-webkit-transform:rotateX(180deg);}       
+    to {-webkit-transform:rotateX(0deg);}                
+}
+@keyframes flipback {
+    from{transform:rotateX(180deg);}       
+    to {transform:rotateX(0deg);}                
+}
 </style>
 </head>
 <body>
 <div id='black_box'>
-<span id='intext'>Input</span><span id='outtext'>Output</span>
+<span id='func_direc'>Use x for variable. Press Enter when done.</span>
+<div id='intext'>Input</div><div id='outtext'>Output</div>
 <input name='input' id='in_out' type='text' autofocus>
+<input name='user_input' id='enterInput' type='text' autofocus value='2 * x + 30'>
 <svg id='box' width='200px' height='200px' viewBox='0 0 200 200' xlmns='http://www.w3.org/2000/svg' style='fill:black;stroke:white;stroke-width:1;'>
 <rect x='5' y='45' width='150' height='150' />
 <path d='M 155 195 L 195 155 L 195 5 L 155 45 Z' style='fill:rgba(0, 0, 0, 0.5);' />
@@ -116,14 +187,24 @@
 <line x1='195' y1='155' x2='155' y2='155' />
 </svg>
 </div>
-<img src='https://lh3.googleusercontent.com/-yTUxrYDlV0g/VSM4xyfaNfI/AAAAAAAAR70/ZJq7uT-NZd4/w1116-h600-no/input-output.PNG' style='position:fixed; visibility:hidden;'>
+<div id='options'>Flip</div>
 </body>
 <script>
-var userInput;
+var x;
+var userFunc = '2 * x + 30';
+
+$('#options').bind("click", menu);
+$('input[name="user_input"]').bind('keypress', function(evt) {
+   if (evt.keyCode === 13) {
+      userFunc = $(this).val();
+      back();
+   }
+});
 $('input[name="input"]').bind('keypress', function(evt) {
    if(evt.keyCode === 13) {
-    userInput = parseFloat($(this).val());
-    if (!userInput && $(this).val() !== '0') return;
+    x = parseFloat($(this).val());
+    if (!x && $(this).val() !== '0') return;
+    $('#options').unbind("click");
     $(this).css({
         "-webkit-animation-name": 'sendthru',
         "-webkit-animation-duration" : "2s",
@@ -140,7 +221,7 @@ $('input[name="input"]').bind('keypress', function(evt) {
 });
 
 function secondAnim() {
-   $('input[name="input"]').val(userInput * 2 + 30);
+   $('input[name="input"]').val(eval(userFunc));
    $('input[name="input"]').prop('disabled', true);
    $('input[name="input"]').css({
         "-webkit-animation-name": 'getout',
@@ -189,6 +270,48 @@ function fourthAnim() {
         "animation-timing-function" : "ease-in-out",
         "animation-fill-mode" : "forwards"});
     $('input[name="input"]').focus();
+    $('#options').bind("click", menu);
+}
+function menu() {
+   $('#black_box').css({
+   "-webkit-animation-name": 'flipdiv',
+   "-webkit-animation-duration" : "1s",
+   "-webkit-animation-iteration-count" : "1",
+   "-webkit-animation-fill-mode" : "forwards"});
+   $('#black_box').css({
+   "animation-name": 'flipdiv',
+   "animation-duration" : "1s",
+   "animation-iteration-count" : "1"});
+   setTimeout(function() {
+      $('#box').hide();
+      $('input[name="input"]').hide();
+      $('#intext').hide();
+      $('#outtext').hide();
+      $('#enterInput').show();
+      $('#func_direc').show();
+   }, 300);
+   $('#options').bind("click", back);
+}
+
+function back() {
+   $('#black_box').css({
+   "-webkit-animation-name": 'flipback',
+   "-webkit-animation-duration" : "1s",
+   "-webkit-animation-iteration-count" : "1",
+   "-webkit-animation-fill-mode" : "forwards"});
+   $('#black_box').css({
+   "animation-name": 'flipback',
+   "animation-duration" : "1s",
+   "animation-iteration-count" : "1"});
+   setTimeout(function() {
+      $('#box').show();
+      $('input[name="input"]').show();
+      $('#intext').show();
+      $('#outtext').show();
+      $('#enterInput').hide();
+      $('#func_direc').hide();
+   }, 300);
+   $('#options').bind("click", menu);
 }
 </script>
 </html>
