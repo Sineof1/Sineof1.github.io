@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<link rel='icon' href='https://lh4.googleusercontent.com/-AMeH0eiIkJw/VSXiNSbtalI/AAAAAAAAR-0/p0_wNTDBMV4/s762-no/explore.gif'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>Math Notebook</title>
+<style>
+html {
+   background:#3F51B5;
+}
+
+.navbar {
+   z-index:1;
+   position:fixed;
+   top:-10px;
+   left:-10px;
+   width:100%;
+   height:40px;
+   background:#303F9F;
+   padding:25px 10px 10px 30px;
+   font-family:Josefin Sans;
+   font-size:22px;
+   font-variant:small-caps;
+   font-weight:900;
+   letter-spacing:1px;
+   color:white;
+}
+
+#nbktitle {
+   vertical-align: -10px;
+}
+
+body {
+   padding:0px;
+   width:800px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:100px;
+}
+.lesson {
+   position:relative;
+   display:inline-block;
+   width:200px;
+   height:300px;
+   border: 2px solid #303F9F;
+   background:#303F9F;
+   margin-left:25px;
+   margin-right:25px;
+   margin-bottom:40px;
+   overflow:hidden;
+}
+
+.lesson:hover {
+   cursor:pointer;
+}
+
+#imgframe {
+   position:absolute;
+   top:-10px;
+   left:-10px;
+   width:211px;
+   height:60%;
+   overflow:hidden;
+}
+
+#borderline {
+   position:absolute;
+   font-family:Neucha;
+   font-variant:small-caps;
+   font-weight:bold;
+   font-size:22px;
+   text-align:center;
+   padding:left:1px;
+   top:170px;
+   left:-1px;
+   width:201px;
+   height:35px;
+   background:white;
+   padding-top:10px;
+   box-shadow:0px -4px 5px rgba(136, 136, 136, 0.5);
+   -webkit-transition: all 0.5s ease-in-out;
+}
+
+#borderline:hover {
+   background:#757575;
+   color:#f4f4f0;
+}
+
+#new_lesson {
+   position:absolute;
+   font-family:Josefin Sans;
+   font-weight:bold;
+   padding-top:5px;
+   top:20px;
+   left:-40px;
+   width:160px;
+   height:25px;
+   background:green;
+   color:white;
+   -ms-transform: rotate(-45deg);
+   -webkit-transform: rotate(-45deg);
+   transform: rotate(-45deg);
+   text-align:center;
+}
+
+@font-face {
+   font-family:'Josefin Sans';
+   src:url('JosefinSans.ttf');
+}
+
+@font-face {
+   font-family:'Neucha';
+   src:url('Neucha.ttf');
+}
+
+a {
+   color:black;
+}
+
+#menu-link {
+   color:white;
+   text-decoration:none;
+}
+
+#txtframe {
+   position:absolute;
+   font-family:Josefin Sans;
+   font-weight:bold;
+   padding:10px;
+   top:215px;
+   left:0px;
+   height:40%;
+   width:180px;
+   color:#f4f4f0;
+   background-image:url(https://lh3.googleusercontent.com/-FMHQh3jc91k/VSXiL2nXMkI/AAAAAAAASA4/BFmNuxlzduI/w1076-h762-no/chalk.jpg);
+   word-wrap:break-word;
+}
+#menu {
+   position:fixed;
+   right:5px;
+   top:45px;
+}
+#toys {
+   list-style-type:none;
+   font-family:Josefin Sans;
+   font-weight:600;
+   font-variant:small-caps;
+}
+#toys li {
+   padding:10px 0px 10px 5px;
+   background:#3F51B5;
+   width:150px;
+   border-bottom:1px solid white;
+   color:white;
+}
+#toys li:hover {
+   cursor:pointer;
+   background:rgba(242,163,189, 0.5);
+}
+#icon {
+   display:inline-block;
+   margin-top:10px;
+   width:30px;
+   height:30px;
+   float:right;
+   margin-right:80px;
+   -webkit-transition: 2s ease-in-out;
+   -moz-transition: 2s ease-in-out;
+   -o-transition: 2s ease-in-out;
+   transition: 2s ease-in-out;
+}
+#icon:hover {
+   cursor:pointer;
+   -webkit-transform: rotate(360deg);
+   -moz-transform: rotate(360deg);
+   -o-transform: rotate(360deg);
+   -ms-transform: rotate(360deg);
+}
+
+</style>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<div class='navbar'><span id='nbktitle'>My Math Notebook</span><img id='icon' src='https://lh4.googleusercontent.com/-AMeH0eiIkJw/VSXiNSbtalI/AAAAAAAAR-0/p0_wNTDBMV4/s762-no/explore.gif' /></div>
+<div id='menu'>
+<ul id='toys'>
+<a id='menu-link' href='http://goo.gl/D26WXE' target='_blank'><li>Fraction Slider</li></a>
+<a id='menu-link' href='http://goo.gl/RXOVjj' target='_blank'><li>Distributive Property</li></a>
+<a id='menu-link' href='http://goo.gl/H15FQr' target='_blank'><li>Division</li></a>
+<a id='menu-link' href='http://goo.gl/kpYYu9' target='_blank'><li>Place Value</li></a>
+<a id='menu-link' href='http://goo.gl/orvzPL' target='_blank'><li>Four Strikes</li></a>
+<a id='menu-link' href='http://goo.gl/aB8n9S' target='_blank'><li>Line 'Em Up</li></a>
+</ul>
+</div>
+
+<body>
+<a href='http://goo.gl/lghGG2' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh5.googleusercontent.com/-CxYE3xN9JfI/VSXiNVK2RSI/AAAAAAAAR-w/T-Gz8rm4On4/w585-h324-no/fatigue.jpg'/></div>
+<div id='new_lesson' style='background:rgb(217,70,22);'>NEW</div>
+<div id='borderline'>Proposition II.4</div>
+<div id='txtframe'>Animated setup for II.4. Then it peters out.</div>
+</div></a>
+
+<a href='http://goo.gl/Ynn0cY' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh5.googleusercontent.com/-cyTCl9LUttg/VSXiMFwwEII/AAAAAAAAR-Q/oCt-FoK96CI/w363-h270-no/distributive.PNG' /></div>
+<div id='new_lesson' style='background:rgb(217,70,22);'>NEW</div>
+<div id='borderline'>The Distributive Property</div>
+<div id='txtframe'>Some interactive work with II.1, a geometric Distributive Property.</div>
+</div></a>
+
+<a href='http://goo.gl/nNKOSm' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh5.googleusercontent.com/-X2e_OAqNKqg/VSXiMrOI7DI/AAAAAAAAR-g/WFXRpEDpw0o/w386-h749-no/euclid.jpg' /></div>
+<div id='borderline'>Extending Pythagoras</div>
+<div id='txtframe'>Pappus' extension of I.47, the Pythagorean Theorem. And blobs.</div>
+</div></a>
+
+<a href='http://goo.gl/hKr4rL' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh4.googleusercontent.com/-BZAjyA3pTeQ/VSXiQX2EXyI/AAAAAAAASAM/M7xFl0HS_L4/w375-h281-no/turduchen.jpg' /></div>
+<div id='borderline'>Combining Theorems</div>
+<div id='txtframe'>Three proofs in one (I.34, I.37, and I.41). And a simulation.</div>
+</div></a>
+
+<a href='http://goo.gl/FtFWLU' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh4.googleusercontent.com/-eChR8AK839c/VSXiQX_GdfI/AAAAAAAASAY/q41zd6xqdxo/w960-h603-no/triangle-181.jpg' /></div>
+<div id='borderline'>Angles in a Triangle</div>
+<div id='txtframe'>Euclid's proof (I.32) that a triangle's angle measures have a sum of 180\(^\circ\).</div>
+</div></a>
+
+<a href='http://goo.gl/NdhO0l' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh5.googleusercontent.com/-3HWCHI2jfV0/VSXiOScFVGI/AAAAAAAASAU/lMX0Ws069zc/w375-h329-no/hex_prfmask.PNG' /></div>
+<div id='borderline'>Elegance Schmelegance</div>
+<div id='txtframe'>Proof of a 2005 Math Olympiad problem.</div>
+</div></a>
+
+<a href='http://goo.gl/EkalBk' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh6.googleusercontent.com/-qWmE04rNeoM/VSXiPwBGxcI/AAAAAAAAR_4/u_tCYUfmZOw/w375-h359-no/tri-mid.PNG' /></div>
+<div id='borderline'><span style='vertical-align:-1px;'>\(\small\Delta\)</span> Midsegment Theorem</div>
+<div id='txtframe'>Proof using SAS and congruent corresponding angles.</div>
+</div></a>
+
+<a href='http://goo.gl/QUyPYr' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh4.googleusercontent.com/-dqDZ5kn3xwo/VSXiPZU4pcI/AAAAAAAAR_0/UU2CLC1_iac/w375-h362-no/quad_quilt.jpg' /></div>
+<div id='borderline'>Varignon's Theorem</div>
+<div id='txtframe'>Interactive demo and proof using Midsegment Theorem.</div>
+</div></a>
+
+<a href='http://goo.gl/BhtSWA' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh4.googleusercontent.com/-8w1THsCMICE/VSXiNulUv1I/AAAAAAAAR-4/7-XdyYiWK00/w500-h270-no/fib-mask.PNG' /></div>
+<div id='borderline'>Fibonacci Sequence</div>
+<div id='txtframe'>A musical pattern in the Fibonacci numbers.</div>
+</div></a>
+
+<a href='http://goo.gl/TlNyWm' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh3.googleusercontent.com/-3IRXth0YOIo/VSXiLOO_F3I/AAAAAAAAR-A/3jeeRiQOBKw/w486-h270-no/background2.gif' /></div>
+<div id='borderline'>Spacetime</div>
+<div id='txtframe'>Spacetime graphs and some basic ideas in special relativity.</div>
+</div></a>
+
+<a href='http://goo.gl/WvPQyw' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh6.googleusercontent.com/-CTT3WsMCPlY/VSXiLOiqV-I/AAAAAAAAR98/VDCFJ7SEju4/s375-no/alt-mask.jpg' /></div>
+<div id='borderline'>Alternate Interior \(\small\measuredangle\)s</div>
+<div id='txtframe'>Euclid's proof of I.27 and some discussion about 'transitional' topics in math.</div>
+</div></a>
+
+<a href='http://goo.gl/MSyUOy' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh6.googleusercontent.com/-71v2LAI1vgY/VSXiPMKwhRI/AAAAAAAAR_o/MxUiVGr3Fg4/w375-h281-no/puzzle-secant.jpg' /></div>
+<div id='borderline'>Secant Theorem</div>
+<div id='txtframe'>Proof using inscribed angles and AA similarity.</div>
+</div></a>
+
+<a href='http://goo.gl/yD3sIi' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh4.googleusercontent.com/-ty7LMmTsq1c/VSXiPviSaoI/AAAAAAAAR_8/kP6CcaEmhvE/w375-h366-no/sphere.png' /></div>
+<div id='borderline'>Formula for Intensity</div>
+<div id='txtframe'>The formula is related to simple division and graphed.</div>
+</div></a>
+
+<a href='http://goo.gl/hUd0rS' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh4.googleusercontent.com/-lj1YVfo-pcU/VSXiNZiP2yI/AAAAAAAASAg/3uIT166RvJ4/w405-h270-no/euclid_ish.jpg' /></div>
+<div id='borderline'>Side-Angle-Side</div>
+<div id='txtframe'>Euclid's proof of I.4 and some discussion about precision.</div>
+</div></a>
+
+<a href='http://goo.gl/RBZZ0j' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh5.googleusercontent.com/-cX9ymKIjgmk/VSXiOYAPR9I/AAAAAAAAR_Y/qAGUlftiZlU/w375-h404-no/inside_4.png' /></div>
+<div id='borderline'>Inscribed \(\small\measuredangle\) Theorem</div>
+<div id='txtframe'>Proof involves 3 cases. Uses the base angle and exterior angle theorems.</div>
+</div></a>
+
+<a href='http://goo.gl/h29wx2' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh3.googleusercontent.com/-tH5trjqFQcI/VSXiO_6lqmI/AAAAAAAASAI/nqu4BcDIkW8/w404-h270-no/lattice.jpg' /></div>
+<div id='borderline'>Pick's Theorem</div>
+<div id='txtframe'>Interactive demo and proof. Some notes about speculation in math.</div>
+</div></a>
+
+<a href='http://goo.gl/lBIuxm' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh5.googleusercontent.com/-eGSHrBqpCM4/VSXiLuvkyLI/AAAAAAAASAk/7oki-V71LU0/w404-h270-no/bike_verticals.jpg' /></div>
+<div id='borderline'>Vertical \(\small\measuredangle\) Theorem</div>
+<div id='txtframe'>Proof of I.15 using I.13. Explains where vertical angles got their name.</div>
+</div></a>
+
+<a href='http://goo.gl/8LYDMO' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh6.googleusercontent.com/--VjgzR1mChE/VSXiMeekvzI/AAAAAAAAR_M/JU-UaaoKdl0/w425-h270-no/donkey.png' /></div>
+<div id='borderline'><span style='vertical-align:-1px;'>\(\small\Delta\)</span> Inequality Theorem</div>
+<div id='txtframe'>Proof and discussion about intuition in mathematics.</div>
+</div></a>
+
+<a href='http://goo.gl/vX5otF' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh4.googleusercontent.com/-uJiqzSy_RFI/VSXiOk-6UuI/AAAAAAAASAc/a_DIy6ZzlF0/w393-h270-no/ivy_mask.gif' /></div>
+<div id='borderline'>The Cissoid</div>
+<div id='txtframe'>Demo and explanation of the cissoid curve. Other stuff too.</div>
+</div></a>
+
+<a href='http://goo.gl/o9OpK0' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh4.googleusercontent.com/-Wpkb4tF0FB0/VSXiLGmdEUI/AAAAAAAAR90/y37tbybHxag/w375-h281-no/aberdeen.jpg' /></div>
+<div id='borderline'>Angle-Side-Angle</div>
+<div id='txtframe'>Proof by contradiction of I.26. Some notes about how it was first used.</div>
+</div></a>
+
+<a href='http://goo.gl/N9dMcm' target='_blank'><div class='lesson'>
+<div id='imgframe'><img src='https://lh5.googleusercontent.com/-bylZAYehnnE/VSXiLu02YeI/AAAAAAAAR-M/oM1okXFMxiw/w374-h270-no/ceva-proof.gif' /></div>
+<div id='borderline'>Ceva's Theorem</div>
+<div id='txtframe'>Interactive proportionality demo. Then the proof.</div>
+</div></a>
+
+<script>
+$(document).ready(function() {
+$("#menu").hide();
+$( "#icon" ).click(
+  function() {
+    $("#menu").slideToggle(1000);
+});
+});
+</script> 
+</body>
+</html>
