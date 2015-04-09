@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content='Engagingly illustrated geometry proofs in narrative form.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<title>Angles in a Triangle (HSG.CO.C.10)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<div id='nav'>
+<li><a href='http://goo.gl/BfPSbq'>Home</a></li><li><a href='https://drive.google.com/folderview?id=0B9y9PCgl63o-aXN4ZE1maW9fNEE&usp=sharing' 
+
+target='blank'>Download</a></li><li><button onclick="TogetherJS(this); return false;">Together</button></li>
+</div>
+
+<body>
+
+<h1>The Angles in a Triangle</h1>
+
+<article>
+<section id="Introduction">
+<canvas id='canvas' width='300px' height='300px'>Canvas not supported.</canvas>
+<p>In the diagram (which you can click or tap to rotate), we have \(\small\Delta\mathtt{ABC}\) with \(\overline{\small\mathtt{BC}}\) extended to point \(\small\mathtt{D}\). Also, 
+
+\(\overline{\small\mathtt{CE}}\) is drawn so that it is parallel to \(\overline{\small\mathtt{AB}}\) (which the <a href='http://archimedes.fas.harvard.edu/euclid/output/files/elem.1.31.html' 
+
+target='_blank'>construction just before this proposition</a> shows us how to do), and I've extended these parallel segments and also \(\overline{\small\mathtt{AC}}\) with dashed 
+
+lines to help me visualize what's coming next.</p>
+
+<p>Hover over the diagram to see the angle congruences. \(\small\measuredangle\mathtt{A}\) and \(\small\measuredangle\mathtt{ACE}\) are congruent because they are alternate 
+
+interior angles&mdash;the converse of the theorem I wrote about <a href='http://goo.gl/WvPQyw' target='_blank'>here</a> is used to justify this statement. And \(\small
+
+\measuredangle\mathtt{B}\) and \(\small\measuredangle\mathtt{ECD}\) are congruent because they are corresponding angles, which is also covered in that theorem (I.29).</p>
+
+<p>Since pink + green = pink + green, the measure of the exterior angle, \(\small\measuredangle\mathtt{ACD}\), is equal to the sum of the opposite interior angles: \(\small
+
+\measuredangle\mathtt{A}\) + \(\small\measuredangle\mathtt{B}\). Finally, <a href='http://goo.gl/lBIuxm' target='_blank'>I.13</a> tells us that pink + green + m\(\small
+
+\measuredangle\mathtt{ACB}\) is equal to 180\(^\circ\). So, the sum of the measures of the angles of a triangle (in Euclidean geometry) is 180 degrees. Or, as Euclid might have said it, 
+
+equal to two right angles.</p>
+
+</section>
+<br>
+<hr></hr>
+
+<section id="Setup">
+<h2>Just a Couple of Notes</h2>
+
+<p>I've mentioned before that the notes given alongside these proofs can be more interesting than the proofs themselves. Here's one (a quote from <a 
+
+href='http://en.wikipedia.org/wiki/Geminus' target='_blank'>Geminus</a>) that can help to dispel the notion that geometry&mdash;and certainly mathematics in general&mdash;does 
+
+not involve iteration and a gradual climb to truth:</p>
+
+<div id='blockquote'>The ancients investigated the theorem of the two right angles in each individual species of triangle, first in the equilateral, again in the isosceles, and afterwards in 
+
+the scalene triangle, and later geometers demonstrated the general theorem to the effect that in <em>any</em> triangle the three interior angles are equal to two right angles.</div>
+
+<p>It's also interesting for me to reflect on how much this proof acts like a real proof for me and I think other people. That is, we do some fairly deep reasoning to establish the general 
+
+result&mdash;i.e., prove a theorem, or at least convince ourselves that the theorem is proved&mdash;and then we close the door. We are satisfied in the future to use the implications of 
+
+this proof without revisiting the arguments all over again. Our re-entry point back into using the theorem is often breathtakingly superficial: something is or looks like a triangle. I'm not 
+
+sure that a lot of other proofs (or other established concepts in mathematics) have this characteristic for those of us in K12 land.</p>
+
+</section>
+<br>
+<hr></hr>
+<small style='font-family:Josefin Sans; margin-left:100px;'>Image-mask credit: <a href='https://flic.kr/p/7m4BVk' target='_blank'>Jimmie</a></small>
+</article>
+</body>
+<img src='https://lh4.googleusercontent.com/-eChR8AK839c/VSXiQX_GdfI/AAAAAAAASAY/q41zd6xqdxo/w960-h603-no/triangle-181.jpg' style='position:fixed;visibility:hidden;' />
+<script>
+var canvas = document.getElementById('canvas');
+var contxt = canvas.getContext('2d');
+
+var count = 0;
+
+$("canvas").hover(function() {
+    startUp();
+    hoverStuff();
+    },
+    function() {
+        startUp();
+    });
+
+$("canvas").click(function(evt) {
+    evt.preventDefault();
+    if (count % 4 === 0) var name = 'rot-canvas';
+    else if (count % 4 === 1) var name = 'rot-canvas1';
+    else if (count % 4 === 2) var name = 'rot-canvas2';
+    else if (count % 4 === 3) var name = 'rot-canvas3';
+    $(this).css({
+        "-webkit-animation-name": name,
+        "-webkit-animation-duration" : "1s",
+        "-webkit-animation-iteration-count" : "1",
+        "-webkit-animation-timing-function" : "ease-in-out",
+        "-webkit-animation-fill-mode" : "forwards"});
+    $(this).css({
+        "animation-name": name,
+        "animation-duration" : "1s",
+        "animation-iteration-count" : "1",
+        "animation-timing-function" : "ease-in-out",
+        "animation-fill-mode" : "forwards"});
+    count++;
+    });
+
+function startUp() {
+    contxt.clearRect(0, 0, canvas.width, canvas.height);
+    contxt.strokeStyle = '#f4f4f0';
+    contxt.lineWidth = 1;
+    contxt.setLineDash([1, 0]);
+    
+    contxt.beginPath();
+    contxt.moveTo(100, 100);
+    contxt.lineTo(20, 200);
+    contxt.lineTo(180, 200);
+    contxt.lineTo(100, 100);
+    contxt.moveTo(180, 200);
+    contxt.lineTo(260, 100);
+    contxt.moveTo(180, 200);
+    contxt.lineTo(260, 200);
+    contxt.stroke();
+    
+    contxt.font = '14px Arial';
+    contxt.fillStyle = '#f4f4f0';
+    
+    contxt.fillText('A', 95, 95);
+    contxt.fillText('E', 255, 95);
+    contxt.fillText('B', 15, 215);
+    contxt.fillText('C', 175, 215);
+    contxt.fillText('D', 255, 215);
+    
+    contxt.beginPath();
+    contxt.setLineDash([3]);
+    contxt.strokeStyle = 'rgba(214,217,99,0.4)';
+    contxt.moveTo(100, 100);
+    contxt.lineTo(20, 0);
+    contxt.moveTo(180, 200);
+    contxt.lineTo(260, 300);
+    contxt.stroke();
+    
+    contxt.beginPath();
+    contxt.strokeStyle = 'rgba(111,231,219,0.4)';
+    contxt.moveTo(100, 100);
+    contxt.lineTo(180, 0);
+    contxt.moveTo(20, 200);
+    contxt.lineTo(-60, 300);
+    contxt.moveTo(260, 100);
+    contxt.lineTo(340, 0);
+    contxt.moveTo(180, 200);
+    contxt.lineTo(100, 300);
+    contxt.stroke();
+}
+
+function hoverStuff() {
+    contxt.beginPath();
+    contxt.fillStyle = 'rgba(188,223,138,0.8)';
+    contxt.moveTo(20, 200);
+    contxt.arc(20, 200, 16, 0, 2 * Math.PI - (2.81 / Math.PI), true);
+    contxt.closePath();
+    contxt.fill();
+    
+    contxt.beginPath();
+    contxt.moveTo(180, 200);
+    contxt.arc(180, 200, 16, 0, 2 * Math.PI - (2.81 / Math.PI), true);
+    contxt.closePath();
+    contxt.fill();
+    
+    contxt.beginPath();
+    contxt.strokeStyle = '#f2a3bd';
+    contxt.setLineDash([1, 0]);
+    contxt.arc(100, 100, 16, 3.29 / Math.PI, 3.29 / Math.PI + 3.29 / Math.PI);
+    contxt.stroke();
+    
+    contxt.beginPath();
+    contxt.arc(180, 200, 16, -3.29 / Math.PI, -3.29 / Math.PI - 3.29 / Math.PI, true);
+    contxt.stroke();
+}
+
+startUp();
+</script>
+</html>
