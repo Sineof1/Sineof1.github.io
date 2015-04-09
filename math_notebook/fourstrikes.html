@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1">
+<title>4 Strikes</title>
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<style>
+img {
+   visibility:hidden;
+   position:fixed;
+}
+#operator {
+   vertical-align:90px;
+   font-size:40px;
+   font-weight:900;
+   font-family:'Arial' sans-serif;
+}
+#block1, #block2, #block3,
+#block4, #block5, #block6 {
+   display:inline-block;
+   background-color:#85BDB0;
+   width:150px;
+   height:200px;
+   border:2px solid;
+   margin-right:20px;
+   margin-left:20px;
+   position:relative;
+   transition:background 3s ease;
+   -webkit-transition: background 3s ease;
+   -moz-transition: background 3s ease;
+   -o-transition: background 3s ease;
+   transition-delay:1s;
+}
+#number1,  #number2, #number3,
+#number4, #number5, #number6 {
+   font-family:'Arial', sans-serif;
+   font-size:200px;
+   color:#85BDB0;
+   position:absolute;
+   left:23px;
+   top:-15px;
+}
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1.5em;
+   font-family: 'Arial', sans-serif;
+   border-radius:5px;
+   display:inline;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #000000;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+#digit {
+   width:60px;
+   height:40px;
+   margin-left:20px;
+   margin-right:20px;
+}
+</style>
+</head>
+
+<body>
+<center><div style='margin-top:100px; width:1250px;'><center><div id='block1'><span id='number1'></span></div><div id='block2'><span id='number2'></span></div> <span 
+
+id='operator'>+</span> <div id='block3'><span id='number3'></span></div><div id='block4'><span id='number4'></span></div> <span id='operator'>=</span> <div 
+
+id='block5'><span id='number5'></span></div><div id='block6'><span id='number6'></span></div></div></center>
+
+<center><div style='margin-top:50px; width:1250px;'><button id='digit' name='but0' onClick='makeGuess(0)'>0</button><button id='digit' name='but1' onClick='makeGuess
+
+(1)'>1</button><button id='digit' name='but2' onClick='makeGuess(2)'>2</button><button id='digit' name='but3' onClick='makeGuess(3)'>3</button><button id='digit' 
+
+name='but4' onClick='makeGuess(4)'>4</button><button id='digit' name='but5' onClick='makeGuess(5)'>5</button><button id='digit' name='but6' onClick='makeGuess
+
+(6)'>6</button><button id='digit' name='but7' onClick='makeGuess(7)'>7</button><button id='digit' name='but8' onClick='makeGuess(8)'>8</button><button id='digit' 
+
+name='but9' onClick='makeGuess (9)'>9</button></div></center>
+
+<center><div style='width:1250px;'><div style='float:right; margin-top:60px;'><button onClick='clearBoard()' style='margin-right:30px; color:#069;'>New 
+
+Game</button></div></div></center>
+</body>
+
+<script>
+var addend1, addend2, result, firstDig, secDig, thirDig, fouDig, fivDig, sixDig;
+
+function setupBoard() {
+   addend1 = Math.floor(Math.random() * 49);
+   addend2 = Math.floor(Math.random() * (99 - addend1));
+   result = addend1 + addend2;
+
+   console.log(addend1, addend2, result);
+
+   firstDig = numProcess(addend1, 0);
+   secDig = numProcess(addend1, 1);
+   thirDig = numProcess(addend2, 0);
+   fouDig = numProcess(addend2, 1);
+   fivDig = numProcess(result, 0);
+   sixDig = numProcess(result, 1);
+}
+
+function clearBoard() {
+   var buts = ['but0', 'but1', 'but2', 'but3', 'but4', 'but5', 'but6', 'but7', 'but8', 'but9'];
+   var nums = ['number1', 'number2', 'number3', 'number4', 'number5', 'number6'];
+   var blox = ['block1', 'block2', 'block3', 'block4', 'block5', 'block6'];
+   for (var inx in buts)
+      document.getElementsByName(buts[inx])[0].setAttribute('style', 'background:#ffffff;');
+   for (var ind1 in nums)
+      document.getElementById(nums[ind1]).innerHTML = '';
+   for (var ind2 in blox)
+      document.getElementById(blox[ind2]).setAttribute('style', 'background:#85BDB0;');
+   setupBoard();
+}
+
+function numProcess(num, ord) {
+   if (num.toString().length === 1 && ord === 0) return '';
+   else if (num.toString().length === 1 && ord === 1)  return num.toString();
+   else if (num.toString().length === 2) return num.toString()[ord];
+}
+
+function makeGuess(b) {
+   var butName = '';
+   var wrongCol = 'background:rgba(228, 149, 86, 0.4);';
+   switch (b) {
+      case 0:
+         document.getElementsByName('but0')[0].setAttribute('style', wrongCol);
+         butName = 'but0';
+         break;
+      case 1:
+         document.getElementsByName('but1')[0].setAttribute('style', wrongCol);
+         butName = 'but1';
+         break;
+      case 2:
+         document.getElementsByName('but2')[0].setAttribute('style', wrongCol);
+         butName = 'but2';
+         break;
+      case 3:
+         document.getElementsByName('but3')[0].setAttribute('style', wrongCol);
+         butName = 'but3';
+         break;
+      case 4:
+         document.getElementsByName('but4')[0].setAttribute('style', wrongCol);
+         butName = 'but4';
+         break;
+      case 5:
+         document.getElementsByName('but5')[0].setAttribute('style', wrongCol);
+         butName = 'but5';
+         break;
+      case 6:
+         document.getElementsByName('but6')[0].setAttribute('style', wrongCol);
+         butName = 'but6';
+         break;
+      case 7:
+         document.getElementsByName('but7')[0].setAttribute('style', wrongCol);
+         butName = 'but7';
+         break;
+      case 8:
+         document.getElementsByName('but8')[0].setAttribute('style', wrongCol);
+         butName = 'but8';
+         break;
+      case 9:
+         document.getElementsByName('but9')[0].setAttribute('style', wrongCol);
+         butName = 'but9';
+         break;
+   }
+   if (b === parseInt(firstDig)) {
+      document.getElementById('number1').innerHTML = firstDig;
+      document.getElementById('block1').setAttribute('style', 'background:#ffffff;');
+      document.getElementsByName(butName)[0].setAttribute('style', 'background:#85BDB0;');}
+   if (b === parseInt(secDig)) {
+      document.getElementById('number2').innerHTML = secDig;
+      document.getElementById('block2').setAttribute('style', 'background:#ffffff;');
+      document.getElementsByName(butName)[0].setAttribute('style', 'background:#85BDB0;');}
+   if (b === parseInt(thirDig)) {
+      document.getElementById('number3').innerHTML = thirDig;
+      document.getElementById('block3').setAttribute('style', 'background:#ffffff;');
+      document.getElementsByName(butName)[0].setAttribute('style', 'background:#85BDB0;');}
+   if (b === parseInt(fouDig)) {
+      document.getElementById('number4').innerHTML = fouDig;
+      document.getElementById('block4').setAttribute('style', 'background:#ffffff;');
+      document.getElementsByName(butName)[0].setAttribute('style', 'background:#85BDB0;');}
+   if (b === parseInt(fivDig)) {
+      document.getElementById('number5').innerHTML = fivDig;
+      document.getElementById('block5').setAttribute('style', 'background:#ffffff;');
+      document.getElementsByName(butName)[0].setAttribute('style', 'background:#85BDB0;');}
+   if (b === parseInt(sixDig)) {
+      document.getElementById('number6').innerHTML = sixDig;
+      document.getElementById('block6').setAttribute('style', 'background:#ffffff;');
+      document.getElementsByName(butName)[0].setAttribute('style', 'background:#85BDB0;');}
+}
+window.addEventListener('load', setupBoard);
+</script>
+<img src='four_strikes.png'>
+</html>
