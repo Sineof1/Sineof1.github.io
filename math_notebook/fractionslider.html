@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang='en'>
+<html>
+
+<head>
+<title>Fraction Slider</title>
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+</head>
+
+<style type="text/css">
+
+#canvas {
+   margin-top:0px;
+   width:900px;
+   height:600px;
+   padding:10px;
+   float:right;
+}
+
+#canvas:hover {
+   cursor:pointer;
+}
+
+#numlinecanvas {
+   float:left;
+   width:275px;
+   height:200px;
+   margin-top:110px;
+   margin-left:50px;
+}
+
+#numlinecanvas:hover {
+   cursor:pointer;
+}
+
+</style>
+
+<body>
+<canvas id='numlinecanvas' width='275px' height='200px'>Canvas is not supported.</canvas>
+<canvas id='canvas' width='900px' height='600px'>Canvas is not supported.</canvas>
+</body>
+
+<script type="text/javascript">
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+var canvas2 = document.getElementById('numlinecanvas');
+var context2 = canvas2.getContext('2d');
+
+var mouseIsDown = false;
+var topKnobOn = false;
+var botKnobOn = false;
+var circSecs = 1;
+var shadSecs = 1;
+
+function windowToCanvas_touch(elem, x, y) {
+    var box = elem.getBoundingClientRect();
+    var body = document.body;
+    var docElem = document.documentElement;
+    var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
+    var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+    var clientTop = docElem.clientTop || body.clientTop || 0;
+    var clientLeft = docElem.clientLeft || body.clientLeft || 0;
+    var top  = box.top +  scrollTop - clientTop;
+    var left = box.left + scrollLeft - clientLeft;
+    return { y: (y - top) * (canvas.height / box.height), x: (x - left) * (canvas.width / box.width) };
+};
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+};
+
+function drawSliders(y) {
+   context.lineWidth = 0.7;
+   context.strokeStyle = 'black';
+   context.beginPath();
+   context.rect(240, y, 400, 20);
+   context.stroke();
+};
+
+function drawCircle() {
+   context.strokeStyle = 'black';
+   context.lineWidth = 5;
+   context.beginPath();
+   context.arc(canvas.width / 2, 200, 150, 0, Math.PI * 2);
+   context.stroke();
+};
+
+function numKnob(x) {
+   this.x = x;
+   this.color = '#3DB6F4';
+   this.draw = function(context) {
+      context.strokeStyle = 'black';
+      context.fillStyle = this.color;
+      context.lineWidth = 5;
+      context.beginPath();
+      context.arc(this.x, 425, 32, 5 * Math.PI / 4, 7 * Math.PI / 4);
+      context.lineTo(this.x, 425);
+      context.lineTo(this.x - 23, 400.5);
+      context.stroke();
+      context.globalAlpha = 1;
+      context.fill();
+   };
+};
+
+function denomKnob(x) {
+   this.x = x;
+   this.draw = function(context) {
+      context.strokeStyle = 'black';
+      context.fillStyle = 'white';
+      context.lineWidth = 5;
+      context.globalAlpha = 1;
+      context.beginPath();
+      context.arc(this.x, 510, 18, 0, Math.PI * 2);
+      context.stroke();
+      context.fill();
+   };
+};
+
+function drawTicks() {
+   context.strokeStyle = 'black';
+   context.globalAlpha = 1;
+   context.lineWidth = 0.7;
+
+   for (var x = 290; x <= 640; x += 80) {
+      context.beginPath();
+      context.moveTo(x, 505);
+      context.lineTo(x, 515);
+      context.moveTo(x, 405);
+      context.lineTo(x, 415);
+      context.stroke();
+   }
+};
+
+function drawCircleSec() {
+   numLineDenom();
+   if (circSecs !== 1) {
+      for (var i = 1; i <= circSecs; i++) {
+         context.strokeStyle = 'black';
+         context.lineWidth = 1;
+         context.beginPath();
+         context.moveTo(canvas.width / 2, 200);
+         context.lineTo(150 * Math.cos(i * (2 * Math.PI) / circSecs) + canvas.width / 2, 150 * Math.sin(i * (2 * Math.PI) / circSecs) + 200);
+         context.stroke();
+   }}
+};
+
+function shadCircleSec() {
+   context.fillStyle = '#3DB6F4';
+   context.globalAlpha = 1;
+   context.beginPath();
+   context.moveTo(canvas.width / 2, 200);
+   context.lineTo(150 + canvas.width / 2, 200);
+   context.arc(canvas.width / 2, 200, 149.9, 0, (shadSecs * 2 * Math.PI) / circSecs);
+   context.moveTo(canvas.width / 2, 200);
+   context.lineTo(150 * Math.cos(shadSecs * (2 * Math.PI) / circSecs) + canvas.width / 2, 150 * Math.sin(shadSecs * (2 * Math.PI) / circSecs) + 200);
+   context.fill();
+   context.globalAlpha = 1;
+};
+
+function drawNumLine() {
+   context2.clearRect(0, 0, canvas2.width, canvas2.height);
+   numLineNum();
+   context2.beginPath();
+   context2.strokeStyle = 'black';
+   context2.fillStyle = 'black';
+   context2.lineWidth = 1;
+   context2.moveTo(0, 100);
+   context2.lineTo(250, 100);
+   context2.lineTo(245, 105);
+   context2.lineTo(245, 95);
+   context2.lineTo(250, 100);
+   context2.moveTo(0, 100);
+   context2.lineTo(5, 105);
+   context2.lineTo(5, 95);
+   context2.lineTo(0, 100);
+   context2.moveTo(235, 90);
+   context2.lineTo(235, 110);
+   context2.moveTo(15, 90);
+   context2.lineTo(15, 110);
+   context2.stroke();
+   context2.fill();
+   context2.font = '14px Arial';
+   context2.strokeText('1', 231, 125);
+   context2.strokeText('0', 11, 125);
+   context2.fillText('1', 231, 125);
+   context2.fillText('0', 11, 125);
+};
+
+function numLineDenom() {
+   drawNumLine();
+   context2.beginPath();
+   context2.lineStyle = 'black';
+   context2.lineWidth = 1;
+   for (var q = 1; q < circSecs; q++) {
+      context2.moveTo(15 + (q / circSecs * 220), 90);
+      context2.lineTo(15 + (q / circSecs * 220), 110);
+      context2.strokeText(String(q), (q / circSecs * 220) + 11, 125);
+      context2.strokeText(String(circSecs), (q / circSecs * 220) + 11, 140);
+      context2.fillText(String(q), (q / circSecs * 220) + 11, 125);
+      context2.fillText(String(circSecs), (q / circSecs * 220) + 11, 140);
+      context2.moveTo((q / circSecs * 220) + 6, 127);
+      context2.lineTo((q / circSecs * 220) + 22, 127);
+   }
+   context2.stroke();
+};
+
+function numLineNum() {
+   var lenShad = shadSecs * 220 / circSecs;
+   var grad = context2.createLinearGradient(15, 90, 15 + lenShad, 110);
+   grad.addColorStop(0.3, '#d8f0fc');
+   grad.addColorStop(1, '#3DB6F4');
+   context2.fillStyle = grad;
+   context2.beginPath();
+   context2.fillRect(15, 90, lenShad, 20);
+   context2.fill();
+};
+
+
+function init() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.fillStyle = 'white';
+   context.rect(0, 0, canvas.width, canvas.height);
+   context.fill();
+   drawTicks();
+   shadCircleSec();
+   drawCircle();
+   for (var i = 400; i <= 500; i += 100) {
+      drawSliders(i);
+   }
+   context.font = '20px Arial';
+   context.strokeStyle = '#3DB6F4'
+   for (var x = 285, i = 1; x <= 640; x += 80, i += 1) {
+      context.strokeText(String(i), x, 450);
+      context.fillText(String(i), x, 450);
+   }
+   context.strokeText('numerator', 100, 449);
+   context.fillText('numerator', 100, 449);
+   context.fillStyle = 'black';
+   context.strokeStyle = 'black';
+   for (var q = 285, r = 1; q <= 640; q += 80, r += 1) {
+      context.strokeText(String(r), q, 550);
+      context.fillText(String(r), q, 550);
+   }
+   context.strokeText('denominator', 80, 549);
+   context.fillText('denominator', 80, 549);
+   if (circSecs === 10) var denom = 744;
+   else var denom = 750;
+   if (shadSecs === 10) var numer = 744;
+   else var numer = 750;
+   context.beginPath();
+   context.font = '20px Arial';
+   context.strokeStyle = '#3DB6F4';
+   context.fillStyle = '#3DB6F4';
+   context.strokeText(String(shadSecs), numer, 460);
+   context.fillText(String(shadSecs), numer, 460);
+   context.fillStyle = 'black';
+   context.strokeStyle = 'black';
+   context.strokeText(String(circSecs), denom, 495);
+   context.fillText(String(circSecs), denom, 495);
+   context.strokeStyle = 'black';
+   context.moveTo(745, 470);
+   context.lineTo(767, 470);
+   context.stroke();
+};
+
+canvas.onmousedown = function(evt) {
+   evt.preventDefault();
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+
+   if (shadSecs <= circSecs && loc.y <= 430 && loc.y >= 380 && !(circSecs === 1 && shadSecs === 1)) {
+      mouseIsDown = true;
+      topKnobOn = true;
+      botKnobOn = false;
+   }
+   else if (loc.y <= 530 && loc.y >= 480) {
+      mouseIsDown = true;
+      botKnobOn = true;
+      topKnobOn = false;
+   }
+   else {
+      mouseIsDown = false;
+      topKnobOn = false;
+      botKnobOn = false;
+   }
+};
+
+canvas.ontouchstart = function(evt) {
+   evt.preventDefault();
+   var t = windowToCanvas_touch(canvas, evt.changedTouches[0].pageX, evt.changedTouches[0].pageY);
+   console.log(t.x);
+   console.log(t.y);
+
+   if (shadSecs <= circSecs && t.y <= 430 && t.y >= 380 && !(circSecs === 1 && shadSecs === 1)) {
+      mouseIsDown = true;
+      topKnobOn = true;
+      botKnobOn = false;
+   }
+   else if (t.y <= 530 && t.y >= 480) {
+      mouseIsDown = true;
+      botKnobOn = true;
+      topKnobOn = false;
+   }
+   else {
+      mouseIsDown = false;
+      topKnobOn = false;
+      botKnobOn = false;
+   }
+};
+
+canvas.onmouseup = function(evt) {
+   evt.preventDefault();
+   mouseIsDown = false;
+   topKnobOn = false;
+   botKnobOn = false;
+};
+
+canvas.ontouchend = function(evt) {
+   evt.preventDefault();
+   mouseIsDown = false;
+   topKnobOn = false;
+   botKnobOn = false;
+};
+
+canvas.onmousemove = function(evt) {
+   evt.preventDefault();
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   if (mouseIsDown && botKnobOn && shadSecs <= circSecs && loc.x >= 290 && loc.x <= 610) {
+      init();
+      drawCircleSec();
+      topKnob.draw(context);
+      botKnob.x = loc.x;
+      botKnob.draw(context);
+   }
+   else if (mouseIsDown && topKnobOn && shadSecs <= circSecs && loc.x >= 290 && loc.x <= 610) {
+      init();
+      drawCircleSec();
+      botKnob.draw(context);
+      topKnob.x = loc.x;
+      topKnob.draw(context);
+   }
+
+   if (botKnobOn && loc.x >= 600 && loc.x <= 610) circSecs = 5;
+   else if (botKnobOn && loc.x >= 520 && loc.x < 560) circSecs = 4;
+   else if (botKnobOn && loc.x >= 440 && loc.x < 480) circSecs = 3;
+   else if (botKnobOn && loc.x >= 360 && loc.x < 400) circSecs = 2;
+   else if (botKnobOn && loc.x >= 280 && loc.x < 320) circSecs = 1;
+
+   if (topKnobOn && loc.x >= 600 && loc.x <= 610) shadSecs = 5;
+   else if (topKnobOn && loc.x >= 520 && loc.x < 560) shadSecs = 4;
+   else if (topKnobOn && loc.x >= 440 && loc.x < 480) shadSecs = 3;
+   else if (topKnobOn && loc.x >= 360 && loc.x < 400) shadSecs = 2;
+   else if (topKnobOn && loc.x >= 280 && loc.x < 320) shadSecs = 1;
+};
+
+canvas.ontouchmove = function(evt) {
+   evt.preventDefault();
+   var t = windowToCanvas_touch(canvas, evt.changedTouches[0].pageX, evt.changedTouches[0].pageY);
+
+   if (mouseIsDown && botKnobOn && shadSecs <= circSecs && t.x >= 290 && t.x <= 610) {
+      init();
+      drawCircleSec();
+      topKnob.draw(context);
+      botKnob.x = t.x;
+      botKnob.draw(context);
+   }
+   else if (mouseIsDown && topKnobOn && shadSecs <= circSecs && t.x >= 290 && t.x <= 610) {
+      init();
+      drawCircleSec();
+      botKnob.draw(context);
+      topKnob.x = t.x;
+      topKnob.draw(context);
+   }
+
+   if (botKnobOn && t.x >= 600 && t.x <= 610) circSecs = 5;
+   else if (botKnobOn && t.x >= 520 && t.x < 560) circSecs = 4;
+   else if (botKnobOn && t.x >= 440 && t.x < 480) circSecs = 3;
+   else if (botKnobOn && t.x >= 360 && t.x < 400) circSecs = 2;
+   else if (botKnobOn && t.x >= 280 && t.x < 320) circSecs = 1;
+
+   if (topKnobOn && t.x >= 600 && t.x <= 610) shadSecs = 5;
+   else if (topKnobOn && t.x >= 520 && t.x < 560) shadSecs = 4;
+   else if (topKnobOn && t.x >= 440 && t.x < 480) shadSecs = 3;
+   else if (topKnobOn && t.x >= 360 && t.x < 400) shadSecs = 2;
+   else if (topKnobOn && t.x >= 280 && t.x < 320) shadSecs = 1;
+};
+
+var topKnob = new numKnob(290);
+var botKnob = new denomKnob(290);
+init();
+topKnob.draw(context);
+botKnob.draw(context);
+drawNumLine();
+
+
+</script>
+</html>
