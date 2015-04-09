@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Place Value</title>
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+</head>
+<style type="text/css">
+
+img {
+   visibility:hidden;
+   position:fixed;
+   top:0px;
+   left:200px;
+}
+
+#canvas {
+   width:750px;
+   height:750px;
+   border:2px solid black;
+   border-radius:25px;
+   background: linear-gradient(rgba(10, 192, 40, 0), rgba(10, 192, 40, 0.3));
+}
+
+#canvas:hover {
+   cursor:pointer;
+}
+
+#number {
+   margin-top:5px;
+   margin-bottom:10px;
+   text-align:center;
+}
+
+#number span {
+   font-family: 'Arial', sans;
+   font-size:48px;
+}
+
+button {
+   margin-top:15px;
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:2em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#d3d3d3;
+   cursor:pointer;
+}
+
+</style>
+<img src='https://lh5.googleusercontent.com/-4NInG4T3sy0/VSXtOkGyahI/AAAAAAAASCA/tgdUhf-x7I0/w663-h761-no/pv_board.PNG'>
+<body>
+<div id='number'><span id='hunsCount'></span><span id='tensCount'></span><span id='onesCount'>0</span></div>
+<center><canvas id='canvas' width='750px' height='750px'>Canvas is not supported.</canvas></center>
+<center>
+<button id='clear' onmousedown='clearBoard()'>Reset</button>
+</center>
+</body>
+<script>
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+var hunsLocX = (canvas.width / 6) - 45;
+var hunsLocY = canvas.height - (canvas.height / 10) - 45;
+var tensLocX = (canvas.width / 3) + (canvas.width / 6) - 4.5;
+var tensLocY = canvas.height - (canvas.height / 10) - 45;
+var onesLocX = (2 * canvas.width / 3) + (canvas.width / 6) - 4.5;
+var onesLocY = canvas.height - (canvas.height / 10) - 4.5;
+var circRad = canvas.height / 5 - 80;
+var circY = canvas.height - (canvas.height / 10);
+var hunsCircLocX = canvas.width / 6;
+var tensCircLocX = (canvas.width / 3) + (canvas.width / 6);
+var onesCircLocX = (2 * canvas.width / 3) + (canvas.width / 6);
+var secWidth = 110;
+var secHeight = 108;
+var fillSecs = [];
+var filled = [];
+var pick = '';
+var hunsFilled = 0;
+var tensFilled = 0;
+var onesFilled = 0;
+
+var mouseIsDown = false;
+var moveHuns = false;
+var moveTens = false;
+var moveOnes = false;
+
+function windowToCanvas_touch(elem, x, y) {
+    var box = elem.getBoundingClientRect();
+    var body = document.body;
+    var docElem = document.documentElement;
+    var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
+    var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+    var clientTop = docElem.clientTop || body.clientTop || 0;
+    var clientLeft = docElem.clientLeft || body.clientLeft || 0;
+    var top  = box.top +  scrollTop - clientTop;
+    var left = box.left + scrollLeft - clientLeft;
+    return { y: (y - top) * (canvas.height / box.height), x: (x - left) * (canvas.width / box.width) };
+}
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+};
+
+function drawOnes(col) {
+    context.strokeStyle = 'black';
+    context.fillStyle = col;
+    context.lineWidth = 5;
+    context.beginPath();
+    context.arc(onesCircLocX, circY, circRad, 0, Math.PI * 2);
+    context.stroke();
+    context.fill();
+    context.fillStyle = 'green';
+    context.fillRect(onesLocX, onesLocY, 9, 9);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    context.strokeRect(onesLocX, onesLocY, 9, 9);
+}
+function drawTens(col) {
+    context.strokeStyle = 'black';
+    context.fillStyle = col;
+    context.lineWidth = 5;
+    context.beginPath();
+    context.arc(tensCircLocX, circY, circRad, 0, Math.PI * 2);
+    context.stroke();
+    context.fill();
+    context.beginPath();
+    context.fillStyle = 'green';
+    context.fillRect(tensLocX, tensLocY, 9, 90);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    context.strokeRect(tensLocX, tensLocY, 9, 90);
+    for (var b = 0; b <= 10; b++) {
+        context.moveTo(tensLocX, tensLocY + b * 9);
+        context.lineTo(tensLocX + 9, tensLocY + b * 9);
+        context.stroke();}
+}
+function drawHuns(col) {
+    context.strokeStyle = 'black';
+    context.fillStyle = col;
+    context.lineWidth = 5;
+    context.beginPath();
+    context.arc(hunsCircLocX, circY, circRad, 0, Math.PI * 2);
+    context.stroke();
+    context.fill();
+    context.beginPath();
+    context.fillStyle = 'green';
+    context.fillRect(hunsLocX, hunsLocY, 90, 90);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    for (var a = 0; a <= 10; a++) {
+        context.moveTo(hunsLocX + a * 9, hunsLocY);
+        context.lineTo(hunsLocX + a * 9, hunsLocY + 90);
+        context.stroke();}
+    for (var b = 0; b <= 10; b++) {
+        context.moveTo(hunsLocX, hunsLocY + b * 9);
+        context.lineTo(hunsLocX + 90, hunsLocY + b * 9);
+        context.stroke();}
+}
+
+function dragHighlight(x, y) {
+    if (!moveHuns && !moveTens && !moveOnes) return;
+    var sect;
+    if (x < canvas.width / 3) sect = huns;
+    else if (x < 2 * canvas.width / 3 && x > canvas.width / 3) sect = tens;
+    else sect = ones;
+    for (var ind in sect) {
+    if (!Array.isArray(sect[ind])) continue;
+    var num = String(ind).slice(7);
+    if (!sect[ind][2] && x < sect[ind][0] + secWidth - 10 && x > sect[ind][0] + 10 && y < sect[ind][1] + secHeight - 10 && y > sect[ind][1] + 10) {
+    context.clearRect(sect[ind][0] - 5, sect[ind][1] - 5, secWidth + 7, secHeight + 7);
+    sect.drawSecs(num, 'rgba(152, 152, 251, 0.4');
+    fillSecs = [sect, ind];
+    return;}
+    else {context.clearRect(sect[ind][0] - 5, sect[ind][1] - 5, secWidth + 7, secHeight + 7); sect.drawSecs(num); fillSecs = [];}
+    }
+}
+
+function drawMoveableOnes(event) {
+    if (!moveOnes) return;
+    if (!mouseIsDown) return;
+    reDraw();
+    var loc = windowToCanvas_mouse(canvas, event.clientX, event.clientY);
+    if (loc.x > 2 * (canvas.width / 3)) dragHighlight(loc.x, loc.y);
+    context.fillStyle = 'green';
+    context.fillRect(loc.x, loc.y - 20, 9, 9);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    context.strokeRect(loc.x, loc.y - 20, 9, 9);
+    drawFilled();
+}
+
+function drawMoveableOnes_touch(event) {
+    if (!moveOnes) return;
+    if (!mouseIsDown) return;
+    event.preventDefault();
+    reDraw();
+    var loc = windowToCanvas_touch(canvas, event.changedTouches[0].pageX, event.changedTouches[0].pageY);
+    if (loc.x > 2 * (canvas.width / 3)) dragHighlight(loc.x, loc.y - 70);
+    context.fillStyle = 'green';
+    context.fillRect(loc.x, loc.y - 90, 9, 9);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    context.strokeRect(loc.x, loc.y - 90, 9, 9);
+    drawFilled();
+}
+
+function drawMoveableHuns(event) {
+    if (!moveHuns) return;
+    if (!mouseIsDown) return;
+    reDraw();
+    var loc = windowToCanvas_mouse(canvas, event.clientX, event.clientY);
+    if (loc.x < canvas.width / 3) dragHighlight(loc.x, loc.y);
+    context.beginPath();
+    context.fillStyle = 'green';
+    context.fillRect(loc.x - 45, loc.y - 45, 90, 90);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    for (var a = 0; a <= 10; a++) {
+        context.moveTo((loc.x - 45) + a * 9, loc.y - 45);
+        context.lineTo((loc.x - 45) + a * 9, (loc.y - 45) + 90);
+        context.stroke();}
+    for (var b = 0; b <= 10; b++) {
+        context.moveTo(loc.x - 45, (loc.y - 45) + b * 9);
+        context.lineTo((loc.x - 45) + 90, (loc.y - 45) + b * 9);
+        context.stroke();}
+    drawFilled();
+}
+
+function drawMoveableHuns_touch(event) {
+    if (!moveHuns) return;
+    if (!mouseIsDown) return;
+    event.preventDefault();
+    reDraw();
+    var loc = windowToCanvas_touch(canvas, event.changedTouches[0].pageX, event.changedTouches[0].pageY);
+    if (loc.x < canvas.width / 3) dragHighlight(loc.x, loc.y - 70);
+    context.beginPath();
+    context.fillStyle = 'green';
+    context.fillRect(loc.x - 45, loc.y - 115, 90, 90);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    for (var a = 0; a <= 10; a++) {
+        context.moveTo((loc.x - 45) + a * 9, loc.y - 115);
+        context.lineTo((loc.x - 45) + a * 9, (loc.y - 115) + 90);
+        context.stroke();}
+    for (var b = 0; b <= 10; b++) {
+        context.moveTo(loc.x - 45, (loc.y - 115) + b * 9);
+        context.lineTo((loc.x - 45) + 90, (loc.y - 115) + b * 9);
+        context.stroke();}
+    drawFilled();
+}
+
+function drawMoveableTens(event) {
+    if (!moveTens) return;
+    if (!mouseIsDown) return;
+    reDraw();
+    var loc = windowToCanvas_mouse(canvas, event.clientX, event.clientY);
+    if (loc.x > canvas.width / 3 && loc.x < 2 * canvas.width / 3) dragHighlight(loc.x, loc.y);
+    context.beginPath();
+    context.fillStyle = 'green';
+    context.fillRect(loc.x - 4.5, loc.y - 45, 9, 90);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    context.strokeRect(loc.x - 4.5, loc.y - 45, 9, 90);
+    for (var b = 0; b <= 10; b++) {
+        context.moveTo(loc.x - 4.5, (loc.y - 45) + b * 9);
+        context.lineTo((loc.x - 4.5) + 9, (loc.y - 45) + b * 9);
+        context.stroke();}
+    drawFilled();
+}
+
+function drawMoveableTens_touch(event) {
+    if (!moveTens) return;
+    if (!mouseIsDown) return;
+    event.preventDefault();
+    reDraw();
+    var loc = windowToCanvas_touch(canvas, event.changedTouches[0].pageX, event.changedTouches[0].pageY);
+    if (loc.x > canvas.width / 3 && loc.x < 2 * canvas.width / 3) dragHighlight(loc.x, loc.y - 50);
+    context.beginPath();
+    context.fillStyle = 'green';
+    context.fillRect(loc.x - 4.5, loc.y - 115, 9, 90);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    context.strokeRect(loc.x - 4.5, loc.y - 115, 9, 90);
+    for (var b = 0; b <= 10; b++) {
+        context.moveTo(loc.x - 4.5, (loc.y - 115) + b * 9);
+        context.lineTo((loc.x - 4.5) + 9, (loc.y - 115) + b * 9);
+        context.stroke();}
+    drawFilled();
+}
+
+
+var pv_board = {base: {draw: function() {
+                       context.fillStyle = '#9898fb';
+                       context.fillRect(0, canvas.height - (canvas.height / 5), canvas.width, canvas.height / 5);
+                       context.strokeStyle = 'black';
+                       context.lineWidth = 2;
+                       for (var a = 1; a < 3; a++) {
+                       context.moveTo(a * canvas.width / 3, 0);
+                       context.lineTo(a * canvas.width / 3, canvas.height);
+                       context.stroke();}
+                       huns.draw('white');
+                       tens.draw('white');
+                       ones.draw('white');
+                }}};
+var huns = {draw: drawHuns, section1: [10, 10, false], section2: [130, 10, false],
+                            section3: [10, 128, false], section4: [130, 128, false],
+                            section5: [10, 246, false], section6: [130, 246, false],
+                            section7: [10, 364, false], section8: [130, 364, false],
+                            section9: [10, 482, false], 
+            name: 'huns',
+            drawSecs: function(sec, col) {
+                      var sec2;
+                      if (!sec && !col){sec = 1; sec2 = 9;}
+                      else sec2 = sec;
+                      for (var q = sec; q <= sec2; q++) {
+                      var num = String(q);
+                      context.strokeStyle = '#d3d3d3';
+                      context.strokeRect(this['section' + num][0], this['section' + num][1], secWidth, secHeight);
+                      if (sec && col) {context.fillStyle = col; context.fillRect(this['section' + num][0], this['section' + num][1], secWidth, secHeight);}}
+            }};
+var tens = {draw: drawTens, section1: [260, 10, false], section2: [380, 10, false],
+                            section3: [260, 128, false], section4: [380, 128, false],
+                            section5: [260, 246, false], section6: [380, 246, false],
+                            section7: [260, 364, false], section8: [380, 364, false],
+                            section9: [260, 482, false], 
+            name: 'tens',
+            drawSecs: function(sec, col) {
+                      var sec2;
+                      if (!sec && !col){sec = 1; sec2 = 9;}
+                      else sec2 = sec;
+                      for (var q = sec; q <= sec2; q++) {
+                      var num = String(q);
+                      context.strokeStyle = '#d3d3d3';
+                      context.strokeRect(this['section' + num][0], this['section' + num][1], secWidth, secHeight);
+                      if (sec && col) {context.fillStyle = col; context.fillRect(this['section' + num][0], this['section' + num][1], secWidth, secHeight);}}
+            }};
+var ones = {draw: drawOnes, section1: [510, 10, false], section2: [630, 10, false],
+                            section3: [510, 128, false], section4: [630, 128, false],
+                            section5: [510, 246, false], section6: [630, 246, false],
+                            section7: [510, 364, false], section8: [630, 364, false],
+                            section9: [510, 482, false], 
+            name: 'ones',
+            drawSecs: function(sec, col) {
+                      var sec2;
+                      if (!sec){sec = 1; sec2 = 9;}
+                      else sec2 = sec;
+                      for (var q = sec; q <= sec2; q++) {
+                      var num = String(q);
+                      context.strokeStyle = '#d3d3d3';
+                      context.strokeRect(this['section' + num][0], this['section' + num][1], secWidth, secHeight);
+                      if (sec && col) {context.fillStyle = col; context.fillRect(this['section' + num][0], this['section' + num][1], secWidth, secHeight);}}
+            }};
+
+
+function highlight(event) {
+    var loc = windowToCanvas_mouse(canvas, event.clientX, event.clientY);
+    if (loc.x < onesCircLocX + 45 && loc.x > onesCircLocX - 45 && loc.y < circY + 45 && loc.y > circY - 45) ones.draw('#d3d3d3');
+    else ones.draw('white');
+    if (loc.x < tensCircLocX + 45 && loc.x > tensCircLocX - 45 && loc.y < circY + 45 && loc.y > circY - 45) tens.draw('#d3d3d3');
+    else tens.draw('white');
+    if (loc.x < hunsCircLocX + 45 && loc.x > hunsCircLocX - 45 && loc.y < circY + 45 && loc.y > circY - 45) huns.draw('#d3d3d3');
+    else huns.draw('white');
+}
+
+function pickup(event) {
+    if (!mouseIsDown) return;
+    var loc = windowToCanvas_mouse(canvas, event.clientX, event.clientY);
+    if (loc.x < hunsLocX + 150 && loc.x > hunsLocX - 60 && loc.y < hunsLocY + 150 && loc.y > hunsLocY - 60) {
+        moveHuns = true;
+        pick = 'huns';}
+    else moveHuns = false;
+    if (loc.x < tensLocX + 70 && loc.x > tensLocX - 60 && loc.y < tensLocY + 150 && loc.y > tensLocY - 60) {
+        moveTens = true;
+        pick = 'tens';}
+    else moveTens = false;
+    if (loc.x < onesLocX + 70 && loc.x > onesLocX - 60 && loc.y < onesLocY + 70 && loc.y > onesLocY - 60) {
+        moveOnes = true;
+        pick = 'ones';}
+    else moveOnes = false;
+}
+
+function pickup_touch(event) {
+    if (!mouseIsDown) return;
+    event.preventDefault();
+    var loc = windowToCanvas_touch(canvas, event.changedTouches[0].pageX, event.changedTouches[0].pageY);
+    if (loc.x < hunsLocX + 150 && loc.x > hunsLocX - 60 && loc.y < hunsLocY + 150 && loc.y > hunsLocY - 60) {
+        moveHuns = true;
+        pick = 'huns';}
+    else moveHuns = false;
+    if (loc.x < tensLocX + 70 && loc.x > tensLocX - 60 && loc.y < tensLocY + 150 && loc.y > tensLocY - 60) {
+        moveTens = true;
+        pick = 'tens';}
+    else moveTens = false;
+    if (loc.x < onesLocX + 70 && loc.x > onesLocX - 60 && loc.y < onesLocY + 70 && loc.y > onesLocY - 60) {
+        moveOnes = true;
+        pick = 'ones';}
+    else moveOnes = false;
+}
+
+function reDraw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    pv_board.base.draw();
+    huns.drawSecs();
+    tens.drawSecs();
+    ones.drawSecs();
+}
+
+function drawFinalHuns() {
+    var newX = (fillSecs[0][fillSecs[1]])[0];
+    var newY = (fillSecs[0][fillSecs[1]])[1];
+    reDraw();
+    context.fillStyle = 'green';
+    context.fillRect(newX + 10, newY + 9, 90, 90);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    for (var a = 0; a <= 10; a++) {
+        context.moveTo((newX + 10) + a * 9, newY + 9);
+        context.lineTo((newX + 10) + a * 9, (newY + 9) + 90);
+        context.stroke();}
+    for (var b = 0; b <= 10; b++) {
+        context.moveTo(newX + 10, (newY + 9) + b * 9);
+        context.lineTo((newX + 10) + 90, (newY + 9) + b * 9);
+        context.stroke();}
+}
+
+function drawFinalTens() {
+    var newX = (fillSecs[0][fillSecs[1]])[0];
+    var newY = (fillSecs[0][fillSecs[1]])[1];
+    reDraw();
+    context.fillStyle = 'green';
+    context.fillRect(newX + 50.5, newY + 9, 9, 90);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    context.strokeRect(newX + 50.5, newY + 9, 9, 90);
+    for (var b = 0; b <= 10; b++) {
+        context.moveTo(newX + 50.5, (newY + 9) + b * 9);
+        context.lineTo((newX + 50.5) + 9, (newY + 9) + b * 9);
+        context.stroke();}
+}
+
+function drawFinalOnes() {
+    var newX = (fillSecs[0][fillSecs[1]])[0];
+    var newY = (fillSecs[0][fillSecs[1]])[1];
+    reDraw();
+    context.fillStyle = 'green';
+    context.fillRect(newX + 50.5, newY + 49.5, 9, 9);
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    context.strokeRect(newX + 50.5, newY + 49.5, 9, 9);
+}
+
+function drawFilled() {
+    hunsFilled = 0;
+    tensFilled = 0;
+    onesFilled = 0;
+    for (var inx in filled) {
+        var newX = (filled[inx][0][filled[inx][1]])[0];
+        var newY = (filled[inx][0][filled[inx][1]])[1];
+        if (filled[inx][0].name === 'huns') {
+            hunsFilled += 1;
+            context.fillStyle = 'green';
+            context.fillRect(newX + 10, newY + 9, 90, 90);
+            context.strokeStyle = 'black';
+            context.lineWidth = 1;
+            for (var a = 0; a <= 10; a++) {
+                context.moveTo((newX + 10) + a * 9, newY + 9);
+                context.lineTo((newX + 10) + a * 9, (newY + 9) + 90);
+                context.stroke();}
+            for (var b = 0; b <= 10; b++) {
+                context.moveTo(newX + 10, (newY + 9) + b * 9);
+                context.lineTo((newX + 10) + 90, (newY + 9) + b * 9);
+                context.stroke();}
+        }
+        else if (filled[inx][0].name === 'tens') {
+            tensFilled += 1;
+            context.fillStyle = 'green';
+            context.fillRect(newX + 50.5, newY + 9, 9, 90);
+            context.strokeStyle = 'black';
+            context.lineWidth = 1;
+            context.strokeRect(newX + 50.5, newY + 9, 9, 90);
+            for (var c = 0; c <= 10; c++) {
+                context.moveTo(newX + 50.5, (newY + 9) + c * 9);
+                context.lineTo((newX + 50.5) + 9, (newY + 9) + c * 9);
+                context.stroke();}
+        }
+        else if (filled[inx][0].name === 'ones') {
+            onesFilled += 1;
+            context.fillStyle = 'green';
+            context.fillRect(newX + 50.5, newY + 49.5, 9, 9);
+            context.strokeStyle = 'black';
+            context.lineWidth = 1;
+            context.strokeRect(newX + 50.5, newY + 49.5, 9, 9);
+    }}
+};
+
+function showCount() {
+    var hundreds = document.getElementById('hunsCount');
+    if (hunsFilled > 0) hundreds.innerHTML = String(hunsFilled);
+    var tens = document.getElementById('tensCount');
+    if (tensFilled > 0 || hunsFilled > 0) tens.innerHTML = String(tensFilled);
+    var ones = document.getElementById('onesCount');
+    ones.innerHTML = String(onesFilled);
+};
+
+function mouseUp() {
+    mouseIsDown = false;
+    moveHuns = moveTens = moveOnes = false;
+    if (fillSecs[0] && fillSecs[0].name === pick) {
+        filled.push([fillSecs[0], fillSecs[1]]);
+       (filled[filled.length - 1][0][filled[filled.length - 1][1]])[2] = true;}
+    reDraw();
+    if (fillSecs[0] && pick === 'huns' && fillSecs[0].name === pick) drawFinalHuns();
+    else if (fillSecs[0] && pick === 'tens' && fillSecs[0].name === pick) drawFinalTens();
+    else if (fillSecs[0] && pick === 'ones' && fillSecs[0].name === pick) drawFinalOnes();
+    else reDraw();
+    drawFilled();
+    showCount();
+};
+
+function clearBoard() {
+    for (var t = 0; t < 2; t++) {
+    fillSecs = [];
+    filled = [];
+    hunsFilled = 0;
+    tensFilled = 0;
+    onesFilled = 0;
+    var groups = [ones, tens, huns];
+    var sections = ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'section8', 'section9'];
+    for (var inx in groups) {
+        for (var ind in sections) {
+            groups[inx][sections[ind]][2] = false;
+    }}
+    reDraw();
+    var hundrds = document.getElementById('hunsCount');
+    hundrds.innerHTML = '';
+    var tns = document.getElementById('tensCount');
+    tns.innerHTML = '';
+    var ons = document.getElementById('onesCount');
+    ons.innerHTML = '0';}
+    document.getElementById('clear').style.backgroundColor = 'white';
+};
+
+reDraw();
+
+canvas.addEventListener('mousemove', highlight, true);
+canvas.addEventListener('mousemove', drawMoveableHuns, true);
+canvas.addEventListener('mousemove', drawMoveableTens, true);
+canvas.addEventListener('mousemove', drawMoveableOnes, true);
+
+canvas.addEventListener('touchmove', drawMoveableHuns_touch, true);
+canvas.addEventListener('touchmove', drawMoveableTens_touch, true);
+canvas.addEventListener('touchmove', drawMoveableOnes_touch, true);
+
+window.addEventListener('mousedown', function() {mouseIsDown = true;}, true);
+window.addEventListener('touchstart', function() {mouseIsDown = true;}, true);
+canvas.addEventListener('mousedown', pickup, true);
+canvas.addEventListener('touchstart', pickup_touch, true);
+
+canvas.addEventListener('mouseup', mouseUp, true);
+canvas.addEventListener('touchend', mouseUp, true);
+window.addEventListener('mouseup', function() {mouseIsDown = false;}, true);
+window.addEventListener('touchend', function() {mouseIsDown = false;}, true);
+</script>
+</html>
