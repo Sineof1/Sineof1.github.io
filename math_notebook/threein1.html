@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content='Engagingly illustrated geometry proofs in narrative form.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link rel="stylesheet" type="text/css" href="three1-style.css" />
+<title>Combining Theorems (HSG.CO.C.10-11)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script src="https://togetherjs.com/togetherjs-min.js"></script>
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#clear {
+   width:60px;
+   height:40px;
+   margin-bottom:15px;
+}
+
+#desmos {
+   margin-left:40px;
+   border:0px solid #ffffff; 
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;"
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+table {
+   border-collapse:collapse;
+   font-family:'Josefin Sans';
+   font-size:1.6em;
+   margin-left:40px;
+   margin-right:30px;
+   margin-top:10px;
+   float:left;
+   box-shadow:2px 2px 2px #888888;
+}
+
+th {
+   padding:10px;
+   background:#c4adc9;
+}
+
+tr:hover {
+   background:#fafafa;
+}
+
+td {
+   text-align:center;
+   padding:10px;
+}
+
+#Setup li {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:80px;
+   text-align:justify;
+   margin-right:100px;
+   margin-bottom:30px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#sim_button {
+   display:inline-block;
+   margin-right:20px;
+}
+
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#sim_button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#blockquote {
+   float:left;
+   margin-top:0.5em;
+   margin-right:10em;
+   margin-bottom:1.4em;
+   margin-left:5em;
+   font-family:'Neucha';
+   text-align:justify;
+   font-size:1.6em;
+   line-height:1.2em;
+   box-shadow:1px 1px 1px 1px #f0f0f0;
+   border-left:4px solid #CC9900;
+   border-radius:5px;
+   padding:10px 20px 10px 20px;
+   -webkit-transition: all 0.5s linear;
+   -o-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+   transition: all 0.5s linear;
+}
+
+#blockquote:hover {
+   background-color:#f8f8f8;
+   padding:20px;
+   box-shadow:2px 2px 2px 1px #888888;
+   border-radius:10px;
+}
+
+mark {
+   background-color:#ffffcc;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+   margin-right:200px;
+}
+
+h2 {
+   font-family:'Neucha';
+}
+
+#imgnorm {
+   border:2px solid black;
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;
+   margin-left:100px;
+   margin-right:30px;
+   margin-top:10px;
+   margin-bottom:25px;
+   float:left;
+}
+
+#imgright {
+   float:right; 
+   margin-left:30px;
+   margin-right:200px;
+   margin-top:15px;
+   margin-bottom:10px;
+   transition: opacity 2s;
+}
+
+#imgnorm:hover {
+   box-shadow: 5px 5px 5px  #996699;
+}
+
+@-moz-keyframes rot-canvas {
+    from {-moz-transform:rotate(0deg);}       
+    to {-moz-transform:rotate(90deg);}                       
+}
+@-webkit-keyframes rot-canvas {
+    from{-webkit-transform:rotate(0deg);}       
+    to {-webkit-transform:rotate(90deg);}                
+}
+@keyframes rot-canvas {
+    from{transform:rotate(0deg);}       
+    to {transform:rotate(90deg);}                
+}
+
+@-moz-keyframes rot-canvas1 {
+    from {-moz-transform:rotate(90deg);}       
+    to {-moz-transform:rotate(180deg);}                       
+}
+@-webkit-keyframes rot-canvas1 {
+    from{-webkit-transform:rotate(90deg);}       
+    to {-webkit-transform:rotate(180deg);}                       
+}
+@keyframes rot-canvas1 {
+    from{transform:rotate(90deg);}       
+    to {transform:rotate(180deg);}                       
+}
+
+@-moz-keyframes rot-canvas2 {
+    from {-moz-transform:rotate(180deg);}       
+    to {-moz-transform:rotate(270deg);}                       
+}
+@-webkit-keyframes rot-canvas2 {
+    from{-webkit-transform:rotate(180deg);}       
+    to {-webkit-transform:rotate(270deg);}                       
+}
+@keyframes rot-canvas2 {
+    from{transform:rotate(180deg);}       
+    to {transform:rotate(270deg);}                       
+}
+
+@-moz-keyframes rot-canvas3 {
+    from {-moz-transform:rotate(270deg);}       
+    to {-moz-transform:rotate(360deg);}                       
+}
+@-webkit-keyframes rot-canvas3 {
+    from{-webkit-transform:rotate(270deg);}       
+    to {-webkit-transform:rotate(360deg);}                       
+}
+@keyframes rot-canvas3 {
+    from{transform:rotate(270deg);}       
+    to {transform:rotate(360deg);}                       
+}
+
+#canvas1, #canvas4 {
+   position:relative;
+   display:inline-block;
+   width:300px;
+   height:300px;
+   background:url(https://lh3.googleusercontent.com/-FMHQh3jc91k/VSXiL2nXMkI/AAAAAAAASA8/Uo6a8FboNGA/w1076-h762-no/chalk.jpg);
+   box-shadow: 2px 2px 2px #888888;
+   border-radius:10px;
+   float:right;
+   margin-left:30px;
+   margin-right:200px;
+   margin-bottom:30px;
+   margin-top:15px;
+}
+
+#canvas2 {
+   position:relative;
+   display:inline-block;
+   width:300px;
+   height:300px;
+   background:url('chalk.jpg');
+   box-shadow: 2px 2px 2px #888888;
+   border-radius:10px;
+   float:left;
+   margin-left:100px;
+   margin-right:30px;
+   margin-bottom:30px;
+   margin-top:15px;
+}
+
+#canvas3 {
+   position:relative;
+   display:inline-block;
+   width:550px;
+   height:300px;
+   background:url('chalk.jpg');
+   box-shadow: 2px 2px 2px #888888;
+   border-radius:10px;
+   float:right;
+   margin-left:30px;
+   margin-right:200px;
+   margin-bottom:30px;
+   margin-top:15px;
+}
+
+#canvas1:hover, #canvas2:hover, #canvas3:hover, #canvas4:hover {
+   cursor:pointer;
+}
+
+#abc_area, #dbc_area {
+   margin-left:5px;
+   margin-right:20px;
+   width:110px;
+   overflow:hidden;
+   display:inline-block;
+   vertical-align:-10px;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://goo.gl/BfPSbq'>Home</a></li><li><a href='https://drive.google.com/folderview?id=0B9y9PCgl63o-clU2YUtZaW5oX0E&usp=sharing' 
+
+target='blank'>Download</a></li><li><button onclick="TogetherJS(this); return false;">Together</button></li>
+</div>
+
+<body>
+
+<h1>A Proof Tur-Duc-Hen</h1>
+
+<article>
+<section id="Introduction">
+<canvas id='canvas1' width='300px' height='300px'>Canvas not supported.</canvas>
+<p>For this first proof (I.34), we draw two pairs of parallel line segments (\(\small\overline{\mathtt{AC}} \parallel \overline{\mathtt{BD}}\) and \(\small\overline{\mathtt{AB}} \parallel 
+
+\overline{\mathtt{CD}}\)) and a diagonal, which Euclid calls a diameter (\(\small\overline{\mathtt{BC}}\)).</p>
+
+<p>What we want to show in this proof is that "in parallelogrammic areas the opposite sides and angles are equal to one another, and the diameter [diagonal] bisects the areas." 
+
+(Hover and click on the chalkboard if you want.)</p>
+
+<div id='blockquote'>Since \(\small\mathtt{AB}\) is parallel to \(\small\mathtt{CD}\), and the straight line \(\small\mathtt{BC}\) has fallen upon them, the alternate angles <span 
+
+style='color:rgb(250, 212, 139);'>\(\small\mathtt{ABC}\), \(\small\mathtt{BCD}\)</span> are equal to one another. [I.29, the converse of <a href='http://goo.gl/WvPQyw' 
+
+target='_blank'>I.27</a> allows us to make this conclusion.]<br><br>
+Again, since \(\small\mathtt{AC}\) is parallel to \(\small\mathtt{BD}\), and \(\small\mathtt{BC}\) has fallen upon them, the alternate angles <span style='color:rgb(188, 223, 138);'>
+
+\(\small\mathtt{ACB}\), \(\small\mathtt{CBD}\)</span> are equal to one another [I.29 again].<br><br>
+
+Therefore \(\small\mathtt{ABC}\), \(\small\mathtt{DCB}\) are two triangles having the two angles <span style='color:rgb(250, 212, 139);'>\(\small\mathtt{ABC}\)</span>, <span 
+
+style='color:rgb(188, 223, 138);'>\(\small\mathtt{BCA}\)</span> equal to the two angles <span style='color:rgb(250, 212, 139);'>\(\small\mathtt{DCB}\)</span>, <span 
+
+style='color:rgb(188, 223, 138);'>\(\small\mathtt{CBD}\)</span> respectively, and one side equal to one side, namely that adjoining the equal angles and common to both of them, 
+
+\(\small\mathtt{BC}\); therefore they will also have the remaining sides equal to the remaining sides respectively, and the remaining angle to the remaining angle.</div>
+
+<p>That final "therefore" from Euclid in the quotation comes to us courtesy of the <a href='http://goo.gl/o9OpK0' target='_blank'>Angle-Side-Angle Congruence Theorem</a> (I.26). 
+
+So, we know that \(\small\Delta\mathtt{ABC} \cong \Delta\mathtt{DCB}\), and the corresponding congruent sides in each triangle are those opposite the corresponding congruent 
+
+angles.</p>
+
+<p>The diagram really tells the rest of the story. The opposite angles are equal to each other, and the diagonal, or "diameter," divides the "parallelogrammic area" into two equal 
+
+triangular areas, <a href='http://en.wikipedia.org/wiki/Q.E.D.' target='_blank'>quod erat demonstrandum</a>.</p>
+
+</section>
+<br>
+<hr></hr>
+
+<section id="Setup">
+<h2>Same Base, Same Parallels</h2>
+<canvas id='canvas2' width='300px' height='300px'>Canvas not supported.</canvas>
+
+<p>Next up is I.37, where we want to show that "triangles which are on the same base and in the same parallels are equal [in area] to one another."</p>
+
+<p>First, though, we can do a demonstration. Click <span style='font-variant:small-caps;'>Run</span> below to start the simulation at the left, and click <span style='font-
+
+variant:small-caps;'>Reset</span> to stop it and start over.</p>
+
+<p>\(\small\Delta\mathtt{ABC}\): <span id='abc_area'>Area</span> \(\small\Delta\mathtt{DBC}\): <span id='dbc_area'>Area</span></p>
+
+<div style='display:block; margin-left:175px;'>
+<button id='sim_button' onclick = 'runSim()'>Run</button>
+<button id='sim_button' onclick = 'startUp1()'>Reset</button>
+
+</div>
+
+<p>The way this works is that the computer chooses a random point on the chalkboard. For each triangle, it records whether that point falls inside or outside and then displays the 
+
+fraction of points that fall inside the triangle (and of course shows you all the points that land inside the triangles [but with repeats, so this test has some flaws besides being 
+
+probabilistic]). I know that the width of \(\small\Delta\mathtt{DBC}\) is 190 pixels, and its height is 170 pixels. The chalkboard measures 300 &times 300 square pixels. You can tell from 
+
+that whether the numbers given in your run of the simulation are close to correct.</p>
+<canvas id='canvas3' width='550px' height='300px'>Canvas not supported.</canvas>
+
+<p>That was nice, but let's prove that the two triangles with the same base and between the same parallel lines must be congruent.</p>
+<p>I'll partly follow Euclid's lead in re-sketching the diagram, since he got to this first&mdash;about 2300 years ago:</p>
+
+<div id='blockquote'>Let \(\small\mathtt{AD}\) be produced in both directions to \(\small\mathtt{E}\), \(\small\mathtt{F}\); through \(\small\mathtt{B}\) let \(\small\mathtt{BE}\) be 
+
+drawn parallel to \(\small\mathtt{CA}\), and through \(\small\mathtt{C}\) let \(\small\mathtt{CF}\) be drawn parallel to \(\small\mathtt{BD}\). Then each of the figures \(\small
+
+\mathtt{EBCA}\), \(\small\mathtt{DBCF}\) is a parallelogram; and they are equal, for they are on the same base \(\small\mathtt{BC}\) and in the same parallels \(\small\mathtt{BC}\), 
+
+\(\small\mathtt{EF}\).</div>
+
+<p>Euclid gets this conclusion from I.35, which we haven't discussed here. But the proof you saw in the first section (I.34) gets us the next step. That is, \(\small\Delta\mathtt{ABC}\) is 
+
+half the area of parallelogram \(\small\mathtt{EBCA}\) because \(\small\overline{\mathtt{AB}}\) bisects it, and \(\small\Delta\mathtt{DBC}\) is half the area of parallelogram \(\small
+
+\mathtt{DBCF}\) because \(\small\overline{\mathtt{DC}}\) bisects it. This means that \(\small\Delta\mathtt{ABC}\) is equal in area to \(\small\Delta\mathtt{DBC}\), since "halves of 
+
+equal things are equal to one another."</p>
+</section>
+<br>
+<hr></hr>
+
+<section id="Finale">
+<h2>And Finally, Ladies and Germs, I.41</h2>
+<canvas id='canvas4' width='300px' height='300px'>Canvas not supported.</canvas>
+
+<p>We can now use our conclusions in I.34 and I.37 above to prove I.41: that "if a parallelogram have the same base with a triangle and be in the same parallels, the parallelogram is 
+
+double of the triangle."</p>
+
+<p>Euclid starts with parallelogram \(\small\mathtt{ABCD}\) which has the same base as \(\small\Delta\mathtt{EBC}\), and both are "in the same parallels," \(\small
+
+\overleftrightarrow{\mathtt{AE}} \parallel \overleftrightarrow{\mathtt{BC}}\).</p>
+
+<p>The diagonal segment \(\small\overline{\mathtt{AC}}\), along with I.37 above, tells us that \(\small\Delta\mathtt{ABC}\) and \(\small\Delta\mathtt{EBC}\) have the same area, 
+
+because they are in the same parallels and have the same base. And I.34 tells us that \(\small\Delta\mathtt{ABC}\) is half the area of parallelogram \(\small\mathtt{ABCD}\). 
+
+Therefore, \(\small\Delta\mathtt{EBC}\) is also half the area of parallelogram \(\small\mathtt{ABCD}\).</p>
+</section>
+<br>
+<hr></hr>
+<small style='font-family:Josefin Sans; margin-left:100px;'>Image-mask credit: <a href="https://www.flickr.com/photos/jlkinsel/2969255219" title="Turducken! by John Kinsella, on 
+
+Flickr">John Kinsella</a></small>
+</article>
+</body>
+<img src='https://lh3.googleusercontent.com/-1IqOBhJEcAw/VMUYiyOpuWI/AAAAAAAAQzs/1QqvhznnGIA/w960-h720-no/turduchen.jpg' style='position:fixed; visibility:hidden;' />
+<footer>
+
+<div id='nav'>
+<li><a href='https://drive.google.com/folderview?id=0B9y9PCgl63o-clU2YUtZaW5oX0E&usp=sharing' target='blank'>Download</a></li>
+</div>
+</footer>
+
+<script>
+var canvas = document.getElementById('canvas1');
+var contxt = canvas1.getContext('2d');
+
+var count = 0;
+
+
+$("#canvas1").click(function(evt) {
+    evt.preventDefault();
+    if (count % 4 === 0) var name = 'rot-canvas';
+    else if (count % 4 === 1) var name = 'rot-canvas1';
+    else if (count % 4 === 2) var name = 'rot-canvas2';
+    else if (count % 4 === 3) var name = 'rot-canvas3';
+    $(this).css({
+        "-webkit-animation-name": name,
+        "-webkit-animation-duration" : "1s",
+        "-webkit-animation-iteration-count" : "1",
+        "-webkit-animation-timing-function" : "ease-in-out",
+        "-webkit-animation-fill-mode" : "forwards"});
+    $(this).css({
+        "animation-name": name,
+        "animation-duration" : "1s",
+        "animation-iteration-count" : "1",
+        "animation-timing-function" : "ease-in-out",
+        "animation-fill-mode" : "forwards"});
+    count++;
+    });
+
+$('#canvas1').hover(function() {
+    startUp();
+    hoverStuff();
+}, function() {
+    startUp();
+});
+
+function startUp() {
+    contxt.clearRect(0, 0, canvas.width, canvas.height);
+    contxt.strokeStyle = '#f4f4f0';
+    contxt.fillStyle = '#f4f4f0';
+    contxt.lineWidth = 1;
+    contxt.setLineDash([1,0]);
+    
+    contxt.beginPath();
+    contxt.moveTo(100, 100);
+    contxt.lineTo(250, 100);
+    contxt.lineTo(200, 200);
+    contxt.lineTo(50, 200);
+    contxt.lineTo(100, 100);
+    contxt.lineTo(200, 200);
+    contxt.stroke();
+    
+    contxt.font = '14px Arial';
+    contxt.fillText('C', 95, 95);
+    contxt.fillText('D', 245, 95);
+    contxt.fillText('A', 45, 215);
+    contxt.fillText('B', 195, 215);
+    
+    contxt.setLineDash([3]);
+    contxt.strokeStyle = 'rgba(237, 119, 119, 0.4)';
+    
+    contxt.beginPath();
+    contxt.moveTo(100, 100);
+    contxt.lineTo(0, 0);
+    contxt.moveTo(200, 200);
+    contxt.lineTo(300, 300);
+    contxt.stroke();
+    
+    contxt.beginPath();
+    contxt.strokeStyle = 'rgba(214, 217, 99, 0.4)';
+    contxt.moveTo(100, 100);
+    contxt.lineTo(150, 0);
+    contxt.moveTo(50, 200);
+    contxt.lineTo(0, 300);
+    contxt.stroke();
+    
+    contxt.beginPath();
+    contxt.moveTo(250, 100);
+    contxt.lineTo(300, 0);
+    contxt.moveTo(200, 200);
+    contxt.lineTo(150, 300);
+    contxt.stroke();
+    
+    contxt.beginPath();
+    contxt.strokeStyle = 'rgba(148, 192, 204, 0.4)';
+    contxt.moveTo(100, 100);
+    contxt.lineTo(0, 100);
+    contxt.moveTo(250, 100);
+    contxt.lineTo(300, 100);
+    contxt.stroke();
+    
+    contxt.beginPath();
+    contxt.moveTo(50, 200);
+    contxt.lineTo(0, 200);
+    contxt.moveTo(200, 200);
+    contxt.lineTo(300, 200);
+    contxt.stroke();
+}
+
+function hoverStuff() {
+    contxt.beginPath();
+    contxt.setLineDash([1, 0]);
+    contxt.fillStyle = 'rgba(188, 223, 138, 0.6)';
+    contxt.moveTo(100, 100);
+    contxt.arc(100, 100, 16, Math.PI / 4, Math.PI / 2 + 0.4);
+    contxt.closePath();
+    contxt.fill();
+    
+    contxt.beginPath();
+    contxt.moveTo(200, 200);
+    contxt.arc(200, 200, 16, -1.10714872, Math.PI + 0.866, true);
+    contxt.closePath();
+    contxt.fill();
+    
+    contxt.beginPath();
+    contxt.strokeStyle = 'rgb(250, 212, 139)';
+    contxt.arc(200, 200, 16, Math.PI, 5 * Math.PI / 4);
+    contxt.stroke();
+    
+    contxt.beginPath();
+    contxt.arc(100, 100, 16, 0, Math.PI / 4);
+    contxt.stroke();
+    
+    contxt.beginPath();
+    contxt.fillStyle = 'rgba(196, 173, 201, 0.6)';
+    contxt.moveTo(50, 200);
+    contxt.arc(50, 200, 16, 0, 5.17603658718, true);
+    contxt.closePath();
+    contxt.fill();
+    
+    contxt.beginPath();
+    contxt.moveTo(250, 100);
+    contxt.arc(250, 100, 16, Math.PI, 5.17603658718 - Math.PI, true);
+    contxt.closePath();
+    contxt.fill();
+}
+    
+    startUp();
+</script>
+<script>
+var canvas1 = document.getElementById('canvas2');
+var contxt1 = canvas2.getContext('2d');
+
+var count1 = 0;
+var hit1 = 0;
+var hit2 = 0;
+var area1 = 0;
+var area2 = 0;
+
+var simVar1, simVar2;
+
+
+$("#canvas2").click(function(evt) {
+    evt.preventDefault();
+    if (count1 % 4 === 0) var name = 'rot-canvas';
+    else if (count1 % 4 === 1) var name = 'rot-canvas1';
+    else if (count1 % 4 === 2) var name = 'rot-canvas2';
+    else if (count1 % 4 === 3) var name = 'rot-canvas3';
+    $(this).css({
+        "-webkit-animation-name": name,
+        "-webkit-animation-duration" : "1s",
+        "-webkit-animation-iteration-count" : "1",
+        "-webkit-animation-timing-function" : "ease-in-out",
+        "-webkit-animation-fill-mode" : "forwards"});
+    $(this).css({
+        "animation-name": name,
+        "animation-duration" : "1s",
+        "animation-iteration-count" : "1",
+        "animation-timing-function" : "ease-in-out",
+        "animation-fill-mode" : "forwards"});
+    count1++;
+    });
+
+function startUp1() {
+    clearInterval(simVar1);
+    clearInterval(simVar2);
+    hit1 = 0;
+    hit2 = 0;
+    area1 = 0;
+    area2 = 0;
+    $('#abc_area').text('Area');
+    $('#dbc_area').text('Area');
+    contxt1.clearRect(0, 0, canvas1.width, canvas1.height);
+    contxt1.beginPath();
+    contxt1.strokeStyle = '#f4f4f0';
+    contxt1.fillStyle = '#f4f4f0';
+    contxt1.lineWidth = 1;
+    contxt1.setLineDash([1,0]);
+    
+    contxt1.moveTo(20, 70);
+    contxt1.lineTo(270, 70);
+    contxt1.moveTo(240, 240);
+    contxt1.lineTo(50, 240);
+    contxt1.stroke();
+    
+    contxt1.font = '14px Arial';
+    contxt1.fillText('A', 135, 65);
+    contxt1.fillText('D', 235, 65);
+    contxt1.fillText('B', 45, 255);
+    contxt1.fillText('C', 235, 255);
+    
+    contxt1.beginPath();
+    contxt1.strokeStyle = '#f2a3bd';
+    contxt1.setLineDash([3]);
+    contxt1.moveTo(50, 240);
+    contxt1.lineTo(140, 70);
+    contxt1.lineTo(240, 240);
+    contxt1.stroke();
+    
+    contxt1.beginPath();
+    contxt1.strokeStyle = '#c4adc9';
+    contxt1.moveTo(50, 240);
+    contxt1.lineTo(240, 70);
+    contxt1.lineTo(240, 240);
+    contxt1.stroke();
+}
+
+function calcArea1() {
+    contxt1.fillStyle = '#c4adc9';
+    contxt1.lineWidth = 1;
+    contxt1.setLineDash([1,0]);
+    
+    for (var a = 0; a < 100; a++) {
+        contxt1.beginPath();
+        var randX = Math.floor(Math.random() * 300);
+        var randY = Math.floor(Math.random() * 300);
+        if (randY > -17 * randX / 9 + 334 && randY > 17 * randX / 10 - 168 && randY < 240) {
+            contxt1.fillRect(randX - 0.5, randY - 0.5, 1, 1);
+            hit1++;
+            area1++;
+        }
+        else area1++;
+    }
+
+    $('#abc_area').text('');
+    $('#abc_area').text((hit1 / area1).toFixed(5));
+}
+
+function calcArea2() {
+    contxt1.lineWidth = 1;
+    contxt1.setLineDash([1,0]);
+    contxt1.fillStyle = '#ed7777';
+    for (var b = 0; b < 100; b++) {
+        contxt1.beginPath();
+        var randX1 = Math.floor(Math.random() * 300);
+        var randY1 = Math.floor(Math.random() * 300);
+        if (randY1 > -17 * randX1 / 19 + 284.7368 && randY1 < 240 && randX1 < 240) {
+            contxt1.fillRect(randX1 - 0.5, randY1 - 0.5, 1, 1);
+            hit2++;
+            area2++;
+        }
+        else area2++;
+    }
+    $('#dbc_area').text('');
+    $('#dbc_area').text((hit2 / area2).toFixed(5));
+}
+
+function runSim() {
+    simVar1 = setInterval(calcArea1, 50);
+    simVar2 = setInterval(calcArea2, 50);
+}
+
+startUp1();
+</script>
+<script>
+var canvas2 = document.getElementById('canvas3');
+var contxt2 = canvas3.getContext('2d');
+
+var count2 = 0;
+
+
+$("#canvas3").click(function(evt) {
+    evt.preventDefault();
+    if (count2 % 4 === 0) var name = 'rot-canvas';
+    else if (count2 % 4 === 1) var name = 'rot-canvas1';
+    else if (count2 % 4 === 2) var name = 'rot-canvas2';
+    else if (count2 % 4 === 3) var name = 'rot-canvas3';
+    $(this).css({
+        "-webkit-animation-name": name,
+        "-webkit-animation-duration" : "1s",
+        "-webkit-animation-iteration-count" : "1",
+        "-webkit-animation-timing-function" : "ease-in-out",
+        "-webkit-animation-fill-mode" : "forwards"});
+    $(this).css({
+        "animation-name": name,
+        "animation-duration" : "1s",
+        "animation-iteration-count" : "1",
+        "animation-timing-function" : "ease-in-out",
+        "animation-fill-mode" : "forwards"});
+    count2++;
+    });
+
+function startUp2() {
+    contxt2.clearRect(0, 0, canvas2.width, canvas2.height);
+    contxt2.beginPath();
+    contxt2.strokeStyle = '#f4f4f0';
+    contxt2.fillStyle = '#f4f4f0';
+    contxt2.lineWidth = 1;
+    contxt2.setLineDash([1,0]);
+    
+    contxt2.moveTo(20, 70);
+    contxt2.lineTo(540, 70);
+    contxt2.moveTo(340, 240);
+    contxt2.lineTo(150, 240);
+    contxt2.stroke();
+    
+    contxt2.beginPath();
+    contxt2.moveTo(240, 410);
+    contxt2.lineTo(-30, -100);
+    contxt2.moveTo(150, 410);
+    contxt2.lineTo(720, -100);
+    contxt2.stroke();
+    
+    contxt2.font = '14px Arial';
+    contxt2.fillText('E', 65, 65);
+    contxt2.fillText('A', 235, 65);
+    contxt2.fillText('D', 335, 65);
+    contxt2.fillText('F', 525, 65);
+    contxt2.fillText('B', 145, 255);
+    contxt2.fillText('C', 335, 255);
+    
+    contxt2.beginPath();
+    contxt2.strokeStyle = '#f2a3bd';
+    contxt2.setLineDash([3]);
+    contxt2.moveTo(150, 240);
+    contxt2.lineTo(240, 70);
+    contxt2.lineTo(340, 240);
+    contxt2.stroke();
+    
+    contxt2.beginPath();
+    contxt2.strokeStyle = '#c4adc9';
+    contxt2.moveTo(150, 240);
+    contxt2.lineTo(340, 70);
+    contxt2.lineTo(340, 240);
+    contxt2.stroke();
+}
+
+startUp2();
+</script>
+<script>
+var canvas3 = document.getElementById('canvas4');
+var contxt3 = canvas3.getContext('2d');
+
+var count3 = 0;
+
+
+$("#canvas4").click(function(evt) {
+    evt.preventDefault();
+    if (count3 % 4 === 0) var name = 'rot-canvas';
+    else if (count3 % 4 === 1) var name = 'rot-canvas1';
+    else if (count3 % 4 === 2) var name = 'rot-canvas2';
+    else if (count3 % 4 === 3) var name = 'rot-canvas3';
+    $(this).css({
+        "-webkit-animation-name": name,
+        "-webkit-animation-duration" : "1s",
+        "-webkit-animation-iteration-count" : "1",
+        "-webkit-animation-timing-function" : "ease-in-out",
+        "-webkit-animation-fill-mode" : "forwards"});
+    $(this).css({
+        "animation-name": name,
+        "animation-duration" : "1s",
+        "animation-iteration-count" : "1",
+        "animation-timing-function" : "ease-in-out",
+        "animation-fill-mode" : "forwards"});
+    count3++;
+    });
+
+function startUp3() {
+    contxt3.clearRect(0, 0, canvas3.width, canvas3.height);
+    contxt3.beginPath();
+    contxt3.strokeStyle = '#f4f4f0';
+    contxt3.fillStyle = '#f4f4f0';
+    contxt3.lineWidth = 1;
+    contxt3.setLineDash([1,0]);
+    
+    contxt3.moveTo(50, 100);
+    contxt3.lineTo(250, 100);
+    contxt3.lineTo(200, 250);
+    contxt3.lineTo(100, 250);
+    contxt3.lineTo(50, 100);
+    contxt3.moveTo(200, 250);
+    contxt3.lineTo(150, 100);
+    contxt3.moveTo(100, 250);
+    contxt3.lineTo(250, 100);
+    contxt3.stroke();
+    
+    contxt3.font = '14px Arial';
+    contxt3.fillText('A', 45, 95);
+    contxt3.fillText('D', 145, 95);
+    contxt3.fillText('E', 245, 95);
+    contxt3.fillText('B', 95, 265);
+    contxt3.fillText('C', 195, 265);
+    
+    contxt3.beginPath();
+    contxt3.strokeStyle = '#f2a3bd';
+    contxt3.moveTo(50, 100);
+    contxt3.lineTo(200, 250);
+    contxt3.stroke();
+}
+
+startUp3();
+</script>
+</html>
