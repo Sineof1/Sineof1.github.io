@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang='en'>
+<html>
+
+<head>
+<title>Distributive Property</title>
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+</head>
+
+<style>
+#canvas {
+   width:800px;
+   height:800px;
+}
+
+#canvas:hover {
+   cursor:pointer;
+}
+
+img {
+   visibility:hidden;
+}
+
+</style>
+
+
+<body>
+
+<center><canvas id='canvas' width='800px' height='800px'>Canvas is not supported.</canvas></center>
+</body>
+<img src='https://lh3.googleusercontent.com/-iZ6MxyHAyCQ/VSXr4XXETuI/AAAAAAAASBk/lyQjkL3HNh4/w758-h762-no/distprop_img.PNG' width='417px'>
+<script>
+
+
+
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+var multKnobOn = false;
+var oldX = 0;
+var oldY = 0;
+var botKnobOn = false;
+
+function windowToCanvas_touch(elem, x, y) {
+    var box = elem.getBoundingClientRect();
+    var body = document.body;
+    var docElem = document.documentElement;
+    var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
+    var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+    var clientTop = docElem.clientTop || body.clientTop || 0;
+    var clientLeft = docElem.clientLeft || body.clientLeft || 0;
+    var top  = box.top +  scrollTop - clientTop;
+    var left = box.left + scrollLeft - clientLeft;
+    return { y: (y - top) * (canvas.height / box.height), x: (x - left) * (canvas.width / box.width) };
+};
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+};
+
+function drawGrid() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   var gridCells = [];
+   context.strokeStyle = 'black';
+   context.lineWidth = 0.4;
+   for (var y = 2; y < 20; y++) {
+      for (var x = 0; x < 20; x++) {
+         context.beginPath();
+         context.rect(2 * x * 18 + 40, 2 * y * 18, 36, 36);
+         context.stroke();
+         gridCells.push({hor: 2 * x * 18 + 40, ver: 2 * y * 18, col: 'rgba(200, 100, 153, 0.2)', fillCell: function(colr) {
+                         if (!colr) colr = this.col; context.fillStyle = colr; context.beginPath(); context.rect(this.hor + 1, this.ver + 1, 35, 35);
+                         context.fill();}});
+      }
+   }
+   drawSliders();
+   return gridCells;
+};
+
+function drawSliders() {
+   context.lineWidth = 0.7;
+   context.strokeStyle = 'black';
+   context.fillStyle = '#d3d3d3';
+   context.beginPath();
+   context.rect(40, 730, 720, 20);
+   context.fill();
+   context.stroke();
+};
+
+function drawGrabber() {
+   context.fillStyle = 'rgba(200, 100, 153, 1)';
+   context.strokeStyle = 'black';
+   context.beginPath();
+   context.arc(40, 72, 8, 0, Math.PI * 2);
+   context.fill();
+   context.stroke();
+   return {x: 40, y: 72, fillCol: 'rgb(200, 100, 153)', strkCol: 'black', rad: 8, move: function(x, y) {this.x = x; this.y = y; context.beginPath();
+           context.fillStyle = this.fillCol; context.strokeStyle = this.strkCol; context.arc(this.x, this.y, this.rad, 0, Math.PI * 2);
+           context.fill(); context.stroke();}};
+};
+
+function botKnob(x) {
+   this.x = x;
+   this.draw = function() {
+      context.strokeStyle = 'black';
+      context.fillStyle = 'white';
+      context.lineWidth = 5;
+      context.globalAlpha = 1;
+      context.beginPath();
+      context.arc(this.x, 740, 8, 0, Math.PI * 2);
+      context.stroke();
+      context.fill();
+   };
+};
+
+function moveSlider(loct) {
+    drawGrid();
+    context.beginPath();
+    context.rect(40, 72, grabber.x - 40, grabber.y - 72);
+    context.stroke();
+    grabber.move(grabber.x, grabber.y);
+    drawFill();
+    if (botSlid.x >= grabber.x) {
+        oldX = Math.floor((grabber.x - 40) / 36);
+        oldY = Math.floor((grabber.y - 72) / 36);
+        drawText(oldX, oldY);
+    }
+    else {
+        for (var q = 0; q < grid.length; q++) {
+           if (grid[q].hor > botSlid.x && grid[q].hor + 36 <= grabber.x && grid[q].ver + 36 <= grabber.y) grid[q].fillCell('rgba(153, 76, 0, 0.2)');
+        }
+        oldX = '(' + String(Math.ceil((botSlid.x - 40) / 36)) + ' + ' + String(((grabber.x - 40) / 36) - Math.ceil((botSlid.x - 40) / 36)) + ')';
+        oldY = (grabber.y - 72) / 36;
+        drawText(oldX, oldY);
+    }
+    context.beginPath();
+    context.strokeStyle = '#888888';
+    context.lineWidth = 0.5;
+    context.moveTo(botSlid.x, 740);
+    context.lineTo(botSlid.x, 72);
+    context.stroke();
+    botSlid.x = loct.x;
+    botSlid.draw();
+};
+
+function drawText(x, y) {
+    context.beginPath();
+    context.font = '30px Arial';
+    context.strokeStyle = 'black';
+    context.fillStyle = 'black';
+    context.textAlign = 'center';
+    context.strokeText(String(y) + ' \u00D7 ' + String(x) + ' = ' + y * eval(x), canvas.width / 2, canvas.height - 5);
+    context.fillText(String(y) + ' \u00D7 ' + String(x) + ' = ' + y * eval(x), canvas.width / 2, canvas.height - 5);
+};
+
+function drawFill(col) {
+    if (!col) col = 'rgba(200, 100, 153, 0.2)';
+    for (var q = 0; q < grid.length; q++) {
+        if (grid[q].hor + 36 <= grabber.x && grid[q].ver + 36 <= grabber.y && grid[q].hor <= botSlid.x) grid[q].fillCell(col);
+   }
+};
+
+canvas.onmousedown = function(evt) {
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   if (loc.y >= 730) {
+      botKnobOn = true;
+   }
+   else multKnobOn = true;
+};
+
+canvas.ontouchstart = function(evt) {
+   evt.preventDefault();
+   var t = windowToCanvas_touch(canvas, evt.changedTouches[0].pageX, evt.changedTouches[0].pageY);
+   if (t.y >= 730) {
+      botKnobOn = true;
+   }
+   else multKnobOn = true;
+};
+
+canvas.onmousemove = function(evt) {
+    var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+    if (botKnobOn === true && loc.x >= 38 && loc.x <= 764) moveSlider(loc);
+    else if (multKnobOn === true) {
+        for (snap = 1; snap <= 21; snap++) {
+           if (loc.y < snap * 36 + 8 && loc.y > snap * 36 - 8) loc.y = snap * 36;
+           if (loc.x < snap * 36 + 8 && loc.x > snap * 36 - 8) loc.x = snap * 36 + 4;
+        }
+        if (loc.x >= 38 && loc.x <= 764 && loc.y >= 70 && loc.y <= 720) {
+           drawGrid();
+           context.beginPath();
+           context.rect(40, 72, grabber.x - 40, grabber.y - 72);
+           context.stroke();
+           grabber.move(loc.x, loc.y);
+           if (Math.floor((grabber.y - 72) / 36) === (grabber.y - 72) / 36 && Math.floor((grabber.x - 40) / 36) === (grabber.x - 40) / 36 && botSlid.x >= grabber.x) {
+              oldX = (grabber.x - 40) / 36;
+              oldY = (grabber.y - 72) / 36;
+              drawText(oldX, oldY);
+           }
+           else if (botSlid.x < grabber.x){
+              oldX = '(' + String(Math.ceil((botSlid.x - 40) / 36)) + ' + ' + String(Math.ceil(((grabber.x - 40) / 36)) - Math.ceil((botSlid.x - 40) / 36)) + ')';
+              oldY = Math.floor((grabber.y - 72) / 36);
+              drawText(oldX, oldY);
+           }
+           else {
+              oldX = Math.floor((grabber.x - 40) / 36);
+              oldY = Math.floor((grabber.y - 72) / 36);
+              drawText(oldX, oldY);
+           }
+           drawFill();
+           if (botSlid.x < grabber.x)  {
+              for (var q = 0; q < grid.length; q++) {
+                 if (grid[q].hor > botSlid.x && grid[q].hor + 36 <= grabber.x && grid[q].ver + 36 <= grabber.y) grid[q].fillCell('rgba(153, 76, 0, 0.2)');
+              }
+           }
+           context.beginPath();
+           context.strokeStyle = '#888888';
+           context.lineWidth = 0.5;
+           context.moveTo(botSlid.x, 740);
+           context.lineTo(botSlid.x, 72);
+           context.stroke();
+           botSlid.draw();
+      }}
+};
+
+canvas.ontouchmove = function(evt) {
+   evt.preventDefault();
+   var t = windowToCanvas_touch(canvas, evt.changedTouches[0].pageX, evt.changedTouches[0].pageY);
+    if (botKnobOn === true && t.x >= 38 && t.x <= 764) moveSlider(t);
+    else if (multKnobOn === true) {
+        for (snap = 1; snap <= 21; snap++) {
+           if (t.y < snap * 36 + 8 && t.y > snap * 36 - 8) t.y = snap * 36;
+           if (t.x < snap * 36 + 8 && t.x > snap * 36 - 8) t.x = snap * 36 + 4;
+        }
+        if (t.x >= 38 && t.x <= 764 && t.y >= 70 && t.y <= 720) {
+           drawGrid();
+           context.beginPath();
+           context.rect(40, 72, grabber.x - 40, grabber.y - 72);
+           context.stroke();
+           grabber.move(t.x, t.y);
+           if (Math.floor((grabber.y - 72) / 36) === (grabber.y - 72) / 36 && Math.floor((grabber.x - 40) / 36) === (grabber.x - 40) / 36 && botSlid.x >= grabber.x) {
+              oldX = (grabber.x - 40) / 36;
+              oldY = (grabber.y - 72) / 36;
+              drawText(oldX, oldY);
+           }
+           else if (botSlid.x < grabber.x){
+              oldX = '(' + String(Math.ceil((botSlid.x - 40) / 36)) + ' + ' + String(Math.ceil(((grabber.x - 40) / 36)) - Math.ceil((botSlid.x - 40) / 36)) + ')';
+              oldY = Math.floor((grabber.y - 72) / 36);
+              drawText(oldX, oldY);
+           }
+           else {
+              oldX = Math.floor((grabber.x - 40) / 36);
+              oldY = Math.floor((grabber.y - 72) / 36);
+              drawText(oldX, oldY);
+           }
+           drawFill();
+           if (botSlid.x < grabber.x)  {
+              for (var q = 0; q < grid.length; q++) {
+                 if (grid[q].hor > botSlid.x && grid[q].hor + 36 <= grabber.x && grid[q].ver + 36 <= grabber.y) grid[q].fillCell('rgba(153, 76, 0, 0.2)');
+              }
+           }
+           context.beginPath();
+           context.strokeStyle = '#888888';
+           context.lineWidth = 0.5;
+           context.moveTo(botSlid.x, 740);
+           context.lineTo(botSlid.x, 72);
+           context.stroke();
+           botSlid.draw();
+      }}
+};
+
+window.onmouseup = function(e) {
+   multKnobOn = false;
+   botKnobOn = false;
+   for (snap = 1; snap <= 21; snap++) {
+      if (grabber.y < snap * 36 + 18 && grabber.y > snap * 36 - 18) {
+         grabber.y = snap * 36;
+      }
+      if (grabber.x < snap * 36 + 18 && grabber.x > snap * 36 - 18) {
+         grabber.x = snap * 36 + 4;
+      }
+   }
+   drawGrid();
+   context.beginPath();
+   context.rect(40, 72, grabber.x - 40, grabber.y - 72);
+   context.stroke();
+   grabber.move(grabber.x, grabber.y);
+   if (botSlid.x >= grabber.x) drawText((grabber.x - 40) / 36, (grabber.y - 72) / 36);
+   else {
+    oldX = '(' + String(Math.ceil((botSlid.x - 40) / 36)) + ' + ' + String(((grabber.x - 40) / 36) - Math.ceil((botSlid.x - 40) / 36)) + ')';
+    oldY = Math.floor((grabber.y - 72) / 36);
+    drawText(oldX, oldY);
+   }
+   botSlid.draw();
+   drawFill();
+   if (botSlid.x < grabber.x) {
+    for (var q = 0; q < grid.length; q++) {
+    if (grid[q].hor > botSlid.x && grid[q].hor + 36 <= grabber.x && grid[q].ver + 36 <= grabber.y) grid[q].fillCell('rgba(153, 76, 0, 0.2)');
+    }
+   }
+};
+
+window.ontouchend = function(e) {
+   multKnobOn = false;
+   botKnobOn = false;
+   for (snap = 1; snap <= 21; snap++) {
+      if (grabber.y < snap * 36 + 18 && grabber.y > snap * 36 - 18) {
+         grabber.y = snap * 36;
+      }
+      if (grabber.x < snap * 36 + 18 && grabber.x > snap * 36 - 18) {
+         grabber.x = snap * 36 + 4;
+      }
+   }
+   drawGrid();
+   context.beginPath();
+   context.rect(40, 72, grabber.x - 40, grabber.y - 72);
+   context.stroke();
+   grabber.move(grabber.x, grabber.y);
+   if (botSlid.x >= grabber.x) drawText((grabber.x - 40) / 36, (grabber.y - 72) / 36);
+   else {
+    oldX = '(' + String(Math.ceil((botSlid.x - 40) / 36)) + ' + ' + String(((grabber.x - 40) / 36) - Math.ceil((botSlid.x - 40) / 36)) + ')';
+    oldY = Math.floor((grabber.y - 72) / 36);
+    drawText(oldX, oldY);
+   }
+   botSlid.draw();
+   drawFill();
+   if (botSlid.x < grabber.x) {
+    for (var q = 0; q < grid.length; q++) {
+    if (grid[q].hor > botSlid.x && grid[q].hor + 36 <= grabber.x && grid[q].ver + 36 <= grabber.y) grid[q].fillCell('rgba(153, 76, 0, 0.2)');
+    }
+   }
+};
+
+var grid = drawGrid();
+var grabber = drawGrabber();
+var botSlid = new botKnob(764);
+drawText(0, 0);
+botSlid.draw();
+</script>
+</html>
