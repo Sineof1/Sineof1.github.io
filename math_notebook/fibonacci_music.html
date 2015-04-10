@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<title>The Fibonacci Sequence (HSF.IF.A.3)</title>
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+
+<!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button {
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Questions {
+   padding:10px 10px 0px 10px;
+   background-color:#fff5f1;
+   border-radius:5px;
+   margin-left:20px;
+   margin-right:100px;
+}
+
+#Questions li {
+   font-family:'Arial', sans-serif;
+   font-size:1.2em;
+   padding-bottom:40px;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+    margin-right:100px;
+}
+
+#ggbra {
+   float:right;
+}
+
+#imgnorm, #imgright {
+   border:2px solid black;
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#imgright {
+   float:right; 
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+}
+
+#trinketright {
+   float:right;
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+   margin-bottom:15px;
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#trinket {
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home' target='_blank'>Home</a></li>
+</div>
+
+<body>
+<iframe id="trinketright" src="https://trinket.io/embed/music/a5a311dd55" width="600" height="300" frameborder="0" marginwidth="0" marginheight="0" 
+
+allowfullscreen></iframe><h1>Fibonacci Sequence Music and Recursion Sucks</h1>
+
+<article>
+<section id='Introduction'>
+
+<p>The notes shown are based on the <a href="http://www.mathsisfun.com/numbers/fibonacci-sequence.html" target='blank'>Fibonacci Sequence</a>--a mathematical sequence that 
+
+begins with the numbers 1, 1. All of the other numbers in the sequence are produced by adding the previous two numbers.
+<br><br>So, 1 + 1 = 2. (Now the sequence is 1, 1, 2.) Then 1 + 2 = 3. (Now the sequence is 1, 1, 2, 3.) Then 2 + 3 = 5. (Now the sequence is 1, 1, 2, 3, 5.) And on and on.</p>
+
+<p>The way I wrote this piece was to just assign the C below middle-C to 1. The next whole note up (using only the white keys on the piano) is D, which is assigned to 2, and so on. 
+
+Just click above in the trinket to listen to the notes if you want. Could you write the next note in the sequence?</p></section>
+
+<section id="Questions">
+<a href="https://flic.kr/p/73Ltpf"><img src="https://lh6.googleusercontent.com/-X8TtZfcFqvA/VSdCaNNN1zI/AAAAAAAASHE/ehAIqA4yOyY/w252-h306-no/questions.jpg" 
+
+width="179px" height="216px" style="float:right;"></a>
+<ol><li>What is the next number in the sequence?
+<br><br>
+<input type="text" size='5' id="next_fib" />
+<input type='submit' value='Check' onclick='check_ans();' /><span id="show_ans"></span></li>
+
+
+<li>Can you figure out the name of the next note in the sequence?
+<br><br>
+<input type="text" size='5' id="next_note" />
+<input type='submit' value='Check' onclick='check_note();' /><span id="show_note"></span></li></ol>
+</section>
+
+<section id="Introduction">
+<p>I'd like to compose a piece of music based on the Fibonacci numbers, but I can see already that the numbers "grow" too quickly. Even if we start much lower on the keyboard, we'll 
+
+run out of room too fast to compose anything interesting.</p>
+</section>
+
+<hr></hr>
+
+<section id="Setup">
+<h2>Modular Arithmetic</h2>
+
+<p>First, let me start by being able to generate any Fibonacci number that I want, rather than having to <a href="http://oeis.org/A000045" target='blank'>look up the numbers in a 
+
+list</a>. The Fibonacci sequence is also a function, which can be defined <a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-
+
+8#safe=off&q=recursion" target='blank'>recursively</a> as follows:
+
+\[\small\mathtt{
+F(n) =} \left\{\begin{array}{ll}
+            \small\mathtt{1,} & \quad \small\mathtt{n = 1} \\
+            \small\mathtt{1,} & \quad \small\mathtt{n = 2} \\
+            \small\mathtt{F(n-1) + F(n-2),} & \quad \small\mathtt{n > 2}
+             \end{array}
+             \right.
+\]
+</p>
+<p>Notice that this is a <a href="http://www.mathsisfun.com/sets/functions-piecewise.html" target='blank'>piecewise function</a> with 3 pieces. The variable \(\small\mathtt{n}\) goes 
+
+from 1 to infinity and just counts the numbers in the list (1st Fibonacci number, 2nd Fibonacci number, and so on). The first piece (the first line) of the piecewise function says that the 1st 
+
+Fibonacci number is 1. The second piece says that the 2nd Fibonacci number is also 1. And the third piece tells us that the \(\small\mathtt{n}\)th Fibonacci number (3rd or greater) is the 
+
+sum of the two previous Fibonacci numbers: \(\small\mathtt{F(n-1) + F(n-2)}\).</p>
+
+<p>This is awful. Recursion is awful. The <a href="http://mathworld.wolfram.com/BinetsFibonacciNumberFormula.html">following formula</a> is just better, although it's a little more 
+
+difficult to understand. But we don't have to understand how everything is put together before we use it.
+
+\[\small\mathtt{
+F(n) = \frac{(1 + \sqrt{5})^n - (1 - \sqrt{5})^n}{(2^n)(\sqrt{5})}}
+\]
+</p>
+<p>We can then write a program to generate these numbers for us:</p>
+
+<iframe id="trinketright" src="https://trinket.io/embed/python/55bdc46543" width="600" height="300" frameborder="0" marginwidth="0" marginheight="0" 
+
+allowfullscreen></iframe>
+
+<p>This program returns the first 20 Fibonacci numbers. And if you can read this code, or go <a href="https://sites.google.com/site/pymathk12/loops/the-for-loop">read about it</a>, 
+
+you can change it to get more numbers. But now I'm going to restrict those numbers to a certain range, which is where modular arithmetic comes in. I'll take each of those numbers and 
+
+divide them by, say, 11. The result that I want will be a list of the <u>remainders</u> of each division.</p>
+
+<iframe id="trinketright" src="https://trinket.io/embed/python/c74c95dc76" width="600" height="250" frameborder="0" marginwidth="0" marginheight="0" 
+
+allowfullscreen></iframe>
+
+<p>Here's what I get for the first 20 Fibonacci numbers (we can say that these are the first 20 Fibonacci numbers, "mod 11"). This program at the right actually has a creepy issue with 
+
+it. Can you identify it?</p>
+<br><br><br><br><br>
+</section>
+
+<section id="Questions">
+<ol start="3"><li>Which Fibonacci numbers show incorrect remainders in the program? 
+<br><br>
+<input type="text" size="5" id="bad_rem1" /> <input type="text" size="5" id="bad_rem2" />
+<input type='submit' value='Check' onclick='check_rem();' /><span id="show_rem"></span></li>
+
+<li>What remainder should be displayed for each of the numbers in Question 3?
+<br><br>
+<input type="text" size="5" id="bad_zer" /> 
+<input type='submit' value='Check' onclick='check_zer();' /> <span id="show_zer"></span></li></ol>
+</section>
+
+<section id="Setup"> 
+<br><br>
+<hr></hr>
+<iframe id="trinketright" src="https://trinket.io/embed/python/f76effece0" width="600" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen 
+
+style="margin-top:70px;"></iframe>
+<h2>Play That Fibonacci Music</h2>
+<p>The reason we get some buggy numbers is that operating with floating point numbers is tricky when what we want are integer remainders. I've improved the program's results a 
+
+bit at the right by first rounding the numbers returned by the function and then turning these numbers into integers. I'll look into further improvements for the next part of this post, but 
+
+it looks like we get correct values for at least the first 50 Fibonacci numbers and their corresponding "mod 11" values.</p>
+</section>
+
+<section id="Finale">
+<p>So, now I can use the same methodology I started writing music with to produce something of a little greater length. Of course, this makes the pattern you might have noticed in 
+
+the remainder lists unmistakeable! Do you think we'd still get this pattern if we used a different "mod"?</p>
+
+<center><iframe id="trinket" src="https://trinket.io/embed/music/646cdb6102" width="90%" height="256" frameborder="0" marginwidth="0" marginheight="0" 
+
+allowfullscreen></iframe></center>
+</section>
+<br><br>
+
+</body>
+<script>
+function check_ans() {
+   var ans = document.getElementById('next_fib').value;
+   var sho = document.getElementById('show_ans');
+
+    if (ans === '34') {
+      sho.innerHTML = '  <img src="https://lh5.googleusercontent.com/--7hCvHEQAms/VSdCZsudRyI/AAAAAAAASHU/xzV9ZO-5W3o/s15-no/c_mark.png">';
+   }
+   else {
+      sho.innerHTML = '  <img src="https://lh5.googleusercontent.com/-LX_n_-ov1U8/VSdCaCtgDOI/AAAAAAAASHQ/NPqpnYhmjz4/s15-no/red_x.png">';
+   }
+}
+function check_note() {
+   var note = document.getElementById('next_note').value;
+   var sho = document.getElementById('show_note');
+
+    if (note === 'A' || note === 'a') {
+      sho.innerHTML = '  <img src="https://lh5.googleusercontent.com/--7hCvHEQAms/VSdCZsudRyI/AAAAAAAASHU/xzV9ZO-5W3o/s15-no/c_mark.png">';
+   }
+   else {
+      sho.innerHTML = '  <img src="https://lh5.googleusercontent.com/-LX_n_-ov1U8/VSdCaCtgDOI/AAAAAAAASHQ/NPqpnYhmjz4/s15-no/red_x.png">';
+   }
+}
+function check_rem() {
+   var rem1 = document.getElementById('bad_rem1').value;
+   var rem2 = document.getElementById('bad_rem2').value;
+   var sho = document.getElementById('show_rem');
+
+   if ((rem1 === '55' && rem2 === '6765') || (rem1 === '6765' && rem2 === '55')) {
+      sho.innerHTML = '  <img src="https://lh5.googleusercontent.com/--7hCvHEQAms/VSdCZsudRyI/AAAAAAAASHU/xzV9ZO-5W3o/s15-no/c_mark.png">';
+   }
+   else {
+      sho.innerHTML = '  <img src="https://lh5.googleusercontent.com/-LX_n_-ov1U8/VSdCaCtgDOI/AAAAAAAASHQ/NPqpnYhmjz4/s15-no/red_x.png">';
+   }
+}
+
+function check_zer() {
+   var zer = document.getElementById('bad_zer').value;
+   var sho = document.getElementById('show_zer');
+
+   if (zer === '0') {
+      sho.innerHTML = '  <img src="https://lh5.googleusercontent.com/--7hCvHEQAms/VSdCZsudRyI/AAAAAAAASHU/xzV9ZO-5W3o/s15-no/c_mark.png">';
+   }
+   else {
+      sho.innerHTML = '  <img src="https://lh5.googleusercontent.com/-LX_n_-ov1U8/VSdCaCtgDOI/AAAAAAAASHQ/NPqpnYhmjz4/s15-no/red_x.png">';
+   }
+}
+</script>
+</html>
