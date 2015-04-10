@@ -1,3 +1,31 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta name='description' content='Engagingly illustrated geometry proofs in narrative form.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>Side-Angle-Side (HSG.CO.C.10)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<style>
 #nav {
    width: 100%;
    float: left;
@@ -241,3 +269,128 @@ hr {
    margin-right:20px;
    margin-left:50px;
 }
+
+</style>
+
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home' target='_blank'>Home</a></li>
+</div>
+
+<body>
+<h1>The Side-Angle-Side Axiom Maybe?</h1>
+
+<article>
+<section id="Introduction">
+
+<p>The following quotation is from <a href="http://books.google.com/books/about/The_Thirteen_Books_of_Euclid_s_Elements.html?id=KHMDAAAAYAAJ" 
+
+target='blank'>Euclid's <em>Elements</em></a>. It's what we would call a statement of the Side-Angle-Side Congruence Theorem (SAS), but in 
+
+<em>Elements</em> it is Proposition I.4. Not exactly a model of precision here:</p>
+
+<div id='blockquote'>If two triangles have the two sides equal to two sides respectively, and have the angles contained by the equal straight lines 
+
+equal, they will also have the base equal to the base, the triangle will be equal to the triangle, and the remaining angles will be equal to the 
+
+remaining angles respectively, namely those which the equal sides subtend.</div>
+
+<p>The "proof" that Euclid offers for SAS relies completely on his <a href="http://aleph0.clarku.edu/~djoyce/java/elements/bookI/cn.html" 
+
+target="blank">Common Notion 4</a>, which says that "things which coincide with one another are equal to one another"--an assertion that he accepts 
+
+without proof. Some refer to this method of proof as "proof by superposition." Let's run through Euclid's (translated) words to see how he does it. 
+
+I'll highlight every spot where Common Notion 4 is applied (or is thought to be applied).</p>
+
+<div id='blockquote'>Let \(\small\mathtt{ABC, DEF}\) be two triangles having the two sides \(\small\mathtt{AB, AC}\) equal to the two sides \(\small
+
+\mathtt{DE, DF}\) respectively, namely \(\small\mathtt{AB}\) to \(\small\mathtt{DE}\) and \(\small\mathtt{AC}\) to \(\small\mathtt{DF}\), and the angle 
+
+\(\small\mathtt{BAC}\) equal to the angle \(\small\mathtt{EDF}\). . . .<br><br>
+<center><img src='https://lh4.googleusercontent.com/-lj1YVfo-pcU/VSXiNZiP2yI/AAAAAAAASAg/3uIT166RvJ4/w270-h180-no/euclid_ish.jpg' width='484' 
+
+height='136' /></center>
+<br>
+
+If the triangle \(\small\mathtt{ABC}\) be applied to the triangle \(\small\mathtt{DEF}\), and if the point \(\small\mathtt{A}\) be placed on the point 
+
+\(\small\mathtt{D}\) and the straight line \(\small\mathtt{AB}\) on \(\small\mathtt{DE}\), <mark>then the point \(\small\mathtt{B}\) will also coincide 
+
+with \(\small\mathtt{E}\), because \(\small\mathtt{AB}\) is equal to \(\small\mathtt{DE}\).</mark></div>
+<a href="https://flic.kr/p/bAyTg3" target="blank"><img id='imgright' src='https://lh4.googleusercontent.com/-lj1YVfo-
+
+pcU/VSXiNZiP2yI/AAAAAAAASAg/3uIT166RvJ4/w270-h180-no/euclid_ish.jpg' width='350' /></a>
+<p>It's pretty amazing--and, depending on who you talk to, wonderful or sad--how little geometry has changed since the veritable father of the subject 
+
+started writing it down over 2000 years ago. But anyway, here we see the typical "Given"s followed by what amounts to an astounding assertion: that if 
+
+we place \(\small\mathtt{\overline{AB}}\) on top of \(\small\mathtt{\overline{DE}}\) such that point \(\small\mathtt{A}\) lines up with point \(\small
+
+\mathtt{D}\), then point \(\small\mathtt{B}\) will line up with point \(\small\mathtt{E}\) because \(\small\mathtt{\overline{AB} \cong \overline
+
+{DE}}\).</p>
+
+<p>The reason this assertion is astounding is that it's actually the <a href="http://en.wikipedia.org/wiki/Converse_(logic)" 
+
+target='blank'>converse</a> of Common Notion 4. While the idea that "things which coincide with one another are equal to one another" is 
+
+unobjectionable, at least in plane geometry, the converse--that things which are equal to one another coincide with one another--is insanity. Two equal 
+
+things could be in different places.</p>
+
+<div id='blockquote'><img src='https://lh6.googleusercontent.com/-3QkXiuhQtVo/VSgZFuLxbSI/AAAAAAAASLQ/YegZy7raGuU/w646-h181-no/sas_pic.gif' width='353' 
+
+height='85' style="float:right; margin-left:30px; margin-bottom:90px; margin-top:60px;" />
+Again, \(\small\mathtt{AB}\) coinciding with \(\small\mathtt{DE}\), the straight line \(\small\mathtt{AC}\) will also coincide with \(\small\mathtt
+
+{DF}\), <mark>because the angle \(\small\mathtt{BAC}\) is equal to the angle \(\small\mathtt{EDF}\);</mark> hence the point \(\small\mathtt{C}\) will 
+
+also coincide with the point \(\small\mathtt{F}\), <mark>because \(\small\mathtt{AC}\) is again equal to \(\small\mathtt{DF}\).</mark> But \(\small
+
+\mathtt{B}\) also coincided with \(\small\mathtt{E}\); <mark>hence the base \(\small\mathtt{BC}\) will coincide with the base \(\small\mathtt
+
+{EF}\).</mark>
+<br><br>
+Thus the whole triangle \(\small\mathtt{ABC}\) will coincide with the whole triangle \(\small\mathtt{DEF}\) and will be equal to it. And the remaining 
+
+angles will also coincide with the remaining angles and will be equal to them, the angle \(\small\mathtt{ABC}\) to the angle \(\small\mathtt{DEF}\), 
+
+and the angle \(\small\mathtt{ACB}\) to the angle \(\small\mathtt{DFE}\).</div>
+
+<p>Only the last of those highlighted statements seems justified, but it is of course built on top of all the wobbly ones that came before it.</p>
+</section>
+<br>
+<hr></hr>
+
+<section id="Finale">
+<h2>Axiomatizations</h2>
+
+<p>To wrap this up, let's take a look at some helpful notes on this "theorem," written by <a href="http://en.wikipedia.org/wiki/Thomas_Little_Heath" 
+
+target='blank'>Sir Thomas Heath</a>, whose translation I've been quoting in this article. I think it's amazing to watch both Heath and the person he 
+
+quotes, Peletier, fanboyishly defend Euclid.</p>
+
+<div id='blockquote'>Euclid obviously used the method of superposition with reluctance. . . . Mr Bertrand Russell observes that Euclid would have done 
+
+better to assume I.4 as an axiom, as is practically done by Hilbert. It may be that Euclid himself was as well aware of the objections to the method as 
+
+are his modern critics; but at all events those objections were stated, with almost equal clearness, as early as the middle of the 16th century.
+<br><br>
+Peletarius (Jacques Peletier) has a long note on this proposition in which he observes that, if superposition of lines and figures could be assumed as 
+
+a method of proof, the whole of geometry would be full of such proofs. . . . The theorem, he adds, is obvious in itself and does not require proof; 
+
+although it is introduced as a theorem, it would seem that Euclid intended it rather as a <em>definition</em> than a theorem, "for I cannot think that 
+
+two angles are equal unless I have a conception of what equality of angles is."</div>
+
+<p>Hilbert <a href="http://en.wikipedia.org/wiki/Hilbert's_axioms" target='blank'>did indeed make SAS an axiom</a>.</p>
+</article>
+<br>
+<hr></hr>
+</body>
+
+</html>
