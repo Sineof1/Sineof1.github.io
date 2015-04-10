@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content='A geometric version of the Distributive Property.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>A(B + C + D) = AB + AC + AD</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 0px 1px 5px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   background-color:#747861;
+   color: #ffffff;
+}
+
+#nav li a:hover {
+   background-color: #ffffff;
+   color:#069;
+}
+
+#clear {
+   width:60px;
+   height:40px;
+   margin-left:300px;
+   margin-right:auto;
+   margin-bottom:15px;
+   text-align:center;
+   color:#069;
+   background-color:#ffffff;
+}
+#clear:hover {
+   background-color:#f5f5f5;
+}
+
+iframe {
+   display:block;
+   margin:20px 35px 30px 100px;
+   border:0px solid #ffffff; 
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;"
+}
+
+#Setup li {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:80px;
+   text-align:justify;
+   margin-right:100px;
+   margin-bottom:30px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+button {
+   outline: 0 none;
+   box-shadow: 0px 1px 5px #cccccc;
+   border:0px;
+   background-color:#747861;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #ffffff;
+}
+
+button:hover {
+   background-color:#ffffff;
+   color:#069;
+   cursor:pointer;
+}
+
+#blockquote {
+   float:left;
+   margin-top:0.5em;
+   margin-right:13em;
+   margin-bottom:1.4em;
+   margin-left:6em;
+   font-family:'Neucha';
+   text-align:justify;
+   font-size:1.6em;
+   line-height:1.2em;
+   box-shadow:1px 1px 1px 1px #f0f0f0;
+   border-left:4px solid #CC9900;
+   border-radius:5px;
+   padding:10px 20px 10px 20px;
+   -webkit-transition: all 0.5s linear;
+   -o-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+   transition: all 0.5s linear;
+}
+
+#blockquote:hover {
+   background-color:#f8f8f8;
+   padding:20px;
+   box-shadow:2px 2px 2px 1px #888888;
+   border-radius:10px;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+   margin-right:200px;
+}
+
+h2 {
+   font-family:'Neucha';
+}
+
+#canvas {
+   float:right;
+   width:400px;
+   height:300px;
+   box-shadow: 0px 0px 35px 0px #d3d3d3;
+   border-radius:10px;
+   margin-left:40px;
+   margin-right:200px;
+   margin-bottom:30px;
+   margin-top:20px;
+}
+#canvas:hover {
+   cursor:url(https://lh5.googleusercontent.com/-fBvUdZJXb1M/VSdASoBcWRI/AAAAAAAASGY/BVCpvUyIT4c/w57-h98-no/pencil.gif), auto;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home'>Home</a></li>
+</div>
+
+<body>
+
+<h1>A(B + C + D) = AB + AC + AD</h1>
+
+<article>
+<section id="Introduction">
+<canvas id='canvas' width='400px' height='300px'>Canvas not supported.</canvas>
+<p>To get started here, draw two line segments on the canvas at the right&mdash;first a horizontal segment and then a vertical segment. These will form two adjacent sides of a 
+
+rectangle.</p>
+<button id='clear' onclick='init()'>Clear</button>
+<p>Next, click to choose any 2 points on the horizontal line segment between its endpoints. The animation should take it from there.</p>
+
+<p>This is pretty close to what the beginning of Euclid's Proposition 2.1 (we're in Book 2!) looks like, though you a drew a vertical line and horizontal line instead of two horizontal lines. 
+
+What appears as \(\small\mathtt{A}\) in the original, I have replaced with [\(\small\mathtt{BG}\)]:</p>
+
+<div id='blockquote'>Let \(\small\mathtt{BC}\) be cut at random at the points \(\small\mathtt{D}\), \(\small\mathtt{E}\); I say that the rectangle contained by [\(\small\mathtt{BG}\)], 
+
+\(\small\mathtt{BC}\) is equal to the rectangle contained by [\(\small\mathtt{BG}\)], \(\small\mathtt{BD}\), that contained by [\(\small\mathtt{BG}\)], \(\small\mathtt{DE}\) and that 
+
+contained by [\(\small\mathtt{BG}\)], \(\small\mathtt{EC}\).</div>
+
+<p>There are four theorems from Book 1 that Euclid uses to construct this proof, which is interesting given how simple it is. They are 1.11, which demonstrates how to construct a line at a 
+
+right angle to another line at a given point (necessary for making side \(\small\mathtt{BG}\) of the rectangle), 1.3, which allows us to snip off \(\small\mathtt{BG}\) to just the right length 
+
+(doesn't quite make sense in terms of how we built the model), 1.31, which allows us to draw the bottom of the rectangle parallel to the top, and <a href='http://goo.gl/hKr4rL' 
+
+target='_blank'>1.34</a>, which Euclid uses to show that the middle rectangle has sides equal to \(\small\mathtt{BG}\).</p>
+</section>
+<br>
+<hr></hr>
+
+<section id="Setup">
+<h2>The Distributive Property</h2>
+<div><iframe frameborder="0" scrolling="no" width="400" height="340" style='float:left;' src="https://www.khanacademy.org/embed_video?v=gl_-E6iVAg4" allowfullscreen 
+
+webkitallowfullscreen mozallowfullscreen></iframe></div>
+
+<p>Of course, the most interesting thing about this theorem&mdash;and about several that start out Book 2&mdash;is that it's essentially the geometric equivalent of the <a 
+
+href='http://coolmath.com/prealgebra/06-properties/05-properties-distributive-01.htm' target='_blank'>Distributive Property of Multiplication over Addition</a> for positive numbers. 
+
+That is, \(\small\mathtt{A}\)(\(\small\mathtt{B}\) + \(\small\mathtt{C}\) + \(\small\mathtt{D}\)) = \(\small\mathtt{A}\)(\(\small\mathtt{B}\)) + \(\small\mathtt{A}\)(\(\small\mathtt
+
+{C}\)) + \(\small\mathtt{A}\)(\(\small\mathtt{D}\)).</p>
+
+<p>What makes it equivalent to this property are the variables that Euclid uses in his proof&mdash;the same ones you used in your drawing above.</p>
+
+<p>You decided, within limits, what the length of \(\small\mathtt{B}\) + \(\small\mathtt{C}\) + \(\small\mathtt{D}\) would be when you drew the horizontal line, and you also decided 
+
+what the length of \(\overline{\small\mathtt{BG}}\), or \(\small\mathtt{A}\), would be when you drew the vertical line. You also determined that \(\small\mathtt{B}\), \(\small\mathtt
+
+{C}\), and \(\small\mathtt{D}\) all had individual values when you "randomly" selected 2 points on the horizontal line.</p>
+
+</section>
+<br>
+<hr></hr>
+
+<section id="Finale">
+<h2>What Variables Mean</h2>
+
+<p>Often, in school mathematics, we come away from lessons with the sense that variables are "unknowns" that we need to figure out. But, if I could be so bold, that's not what 
+
+variables most often mean. What they generally represent are values that <span style='font-family:Neucha; font-weight:bold;'>we don't care about</span>.</p>
+
+<p>A systematic lack of concern is a soft skill in high demand for mathematical work. It takes years and years of practice to not care, and it is certainly something for which some have a 
+
+strong innate ability.  : )</p>
+
+<p>P.S.: Check out the bonus toy <a href='http://sineof1.github.io/math_notebook/distributiveexplore' target='_blank'>here</a>.</p>
+
+</section>
+<br>
+<hr></hr>
+<span style='margin-left:100px; font-family:Josefin Sans;'>Image mask credit: <a href="https://www.flickr.com/photos/goldberg/10997607653" title="Awesome way to learn distributive 
+
+property! by Joe Goldberg, on Flickr">Joe Goldberg</a></span>
+</article>
+</body>
+
+
+<a href="https://www.flickr.com/photos/goldberg/10997607653" title="Awesome way to learn distributive property! by Joe Goldberg, on Flickr"><img style='position:fixed; 
+
+visibility:hidden;' src="https://farm4.staticflickr.com/3800/10997607653_d9f32d1c20_o.jpg" width="3264" height="1840" alt="Awesome way to learn distributive property!"></a>
+<script>
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+
+function init() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   mouseIsDown = false;
+   startPoint1 = undefined;
+   endPoint1 = undefined;
+   startPoint2 = undefined;
+   endPoint2 = undefined;
+   lineCount = 0;
+   Line1 = {};
+   Line2 = {};
+   loopStartX = undefined;
+   loopStartY = undefined;
+   anim1Done = false;
+   pointCount = 0;
+   selectPoint1 = undefined;
+   selectPoint2 = undefined;
+   selectLoop1 = 41;
+   selectLoop2 = undefined;
+   selectLoop3 = undefined;
+   target1 = undefined;
+   target2 = undefined;
+   context.shadowColor = '#ffffff';
+   context.shadowOffsetX = 0;
+   context.shadowOffsetY = 0;
+   context.shadowBlur = 0;
+   context.strokeStyle = 'black';
+   context.fillStyle = 'black';
+   context.beginPath();
+   canvas.addEventListener('mousedown', startLoc, false);
+   canvas.addEventListener('mousemove', drawLine, false);
+   canvas.addEventListener('mouseup', stopDraw, false);
+
+   reqAnimFrame1 = window.requestAnimationFrame;
+   reqAnimFrame2 = window.requestAnimationFrame;
+}
+
+function startLoc(evt) {
+   mouseIsDown = true;
+   if (lineCount === 0) {
+      startPoint1 = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   }
+   else if (lineCount === 1) {
+      startPoint2 = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   }
+}
+
+function drawLine(evt) {
+   if (!mouseIsDown) return;
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   if (lineCount === 0 && loc.x >= startPoint1.x) {
+      context.beginPath();
+      context.moveTo(startPoint1.x, startPoint1.y);
+      context.lineTo(loc.x, startPoint1.y);
+      context.stroke();
+   }
+   else if (lineCount === 1 && loc.y >= startPoint1.y) {
+      context.beginPath();
+      context.moveTo(startPoint1.x, startPoint1.y);
+      context.lineTo(endPoint1.x, startPoint1.y);
+      context.stroke();
+      context.beginPath();
+      context.moveTo(startPoint1.x, startPoint1.y);
+      context.lineTo(startPoint1.x, loc.y);
+      context.stroke();
+   }
+}
+
+function stopDraw(evt) {
+   mouseIsDown = false;
+   lineCount++;
+   if (lineCount === 1) {
+      endPoint1 = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+      Line1.start = startPoint1;
+      Line1.end = endPoint1;
+      Line1.end.y = Line1.start.y;
+      loopStartX = Line1.start.x;
+      loopStartY = Line1.start.y;
+   }
+   else if (lineCount === 2) {
+      endPoint2 = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+      Line2.start = startPoint2;
+      Line2.end = endPoint2;
+      Line2.end.x = Line2.start.x;
+      canvas.removeEventListener('mousedown', startLoc, false);
+      canvas.removeEventListener('mousemove', drawLine, false);
+      canvas.removeEventListener('mouseup', stopDraw, false);
+      if (startPoint1.x < endPoint1.x && startPoint1.y < endPoint2.y) {
+         animate1();
+         context.save();
+      }
+   }
+}
+
+var mouseIsDown = false;
+var startPoint1;
+var endPoint1;
+var startPoint2;
+var endPoint2;
+var lineCount = 0;
+var Line1 = {};
+var Line2 = {};
+var loopStartX;
+var loopStartY;
+var anim1Done = false;
+var pointCount = 0;
+var selectPoint1, selectPoint2;
+var selectLoop1 = 41;
+var selectLoop2;
+var selectLoop3;
+var target1;
+var target2;
+
+canvas.addEventListener('mousedown', startLoc, false);
+canvas.addEventListener('mousemove', drawLine, false);
+canvas.addEventListener('mouseup', stopDraw, false);
+
+var reqAnimFrame1 = window.requestAnimationFrame;
+var reqAnimFrame2 = window.requestAnimationFrame;
+function animate1() {
+   if (loopStartX > 42) var stepX = -2;
+   else if (loopStartX < 38) var stepX = 2;
+   else var stepX = 0;
+
+   if (loopStartY > 42) var stepY = -2;
+   else if (loopStartY < 38) var stepY = 2;
+   else var stepY = 0;
+
+   if (stepX !== 0 || stepY !== 0) {
+      firstLineDraw(stepX, stepY);
+      reqAnimFrame1(animate1);
+   }
+   else {
+      anim1Done = true;
+      canvas.addEventListener('mousedown', selectPoints, false);
+      context.restore();
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.beginPath();
+      context.moveTo(40, 40);
+      context.lineTo(40 + Math.abs(Line1.end.x - Line1.start.x), 40);
+      context.stroke();
+      context.fill();
+      context.beginPath();
+      context.moveTo(40, 40);
+      context.lineTo(40, Math.abs(Line2.end.y - Line1.start.y) + 40);
+      context.stroke();
+      context.fill();
+      context.save();
+      context.shadowColor = '#ffffff';
+      context.shadowOffsetX = 0;
+      context.shadowOffsetY = 0;
+      context.font = '14px Arial';
+      context.fillText('B', 28, 36);
+      context.restore();
+   }
+}
+
+function firstLineDraw(sX, sY) {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.translate(sX, sY);
+   context.beginPath();
+   context.shadowColor = '#999';
+   context.shadowBlur = 10;
+   context.shadowOffsetX = 10;
+   context.shadowOffsetY = -10;
+   context.moveTo(Line1.start.x, Line1.start.y);
+   context.lineTo(Line1.end.x, Line1.end.y);
+   context.stroke();
+   context.fill();
+   context.beginPath();
+   context.shadowColor = '#999';
+   context.shadowBlur = 10;
+   context.shadowOffsetX = 10;
+   context.shadowOffsetY = -10;
+   context.strokeStyle = 'black';
+   context.moveTo(Line1.start.x, Line1.start.y);
+   context.lineTo(Line1.start.x, Line2.end.y);
+   context.stroke();
+   context.fill();
+
+   loopStartX += sX;
+   loopStartY += sY;
+}
+
+function selectPoints(evt) {
+   if (!anim1Done) return;
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   if (loc.x < 35 + Math.abs(Line1.end.x - Line1.start.x) && loc.x > 45) {
+      context.beginPath();
+      //context.arc(loc.x, 40, 3, 0, Math.PI * 2);
+      var ptX = loc.x;
+      //context.fill();
+      pointCount++;
+      if (pointCount === 1) {
+         selectPoint1 = ptX;
+         context.save();
+         context.shadowColor = '#ffffff';
+         context.shadowOffsetX = 0;
+         context.shadowOffsetY = 0;
+         context.font = '14px Arial';
+         context.fillText('D', selectPoint1 - 4, 35);
+         context.restore();
+      }
+      else if (pointCount === 2) {
+         selectPoint2 = ptX;
+         selectLoop2 = Math.min(selectPoint1, selectPoint2);
+         selectLoop3 = Math.max(selectPoint2, selectPoint1);
+         context.save();
+         context.shadowColor = '#ffffff';
+         context.shadowOffsetX = 0;
+         context.shadowOffsetY = 0;
+         context.font = '14px Arial';
+         context.fillText('E', selectPoint2 - 4, 35);
+         context.restore();
+      }
+   }
+   if (pointCount >= 2) {
+      canvas.removeEventListener('mousedown', selectPoints, false);
+      setTimeout(animate2, 1000);
+   }
+}
+
+function animate2() {
+   target1 = Math.min(selectPoint1, selectPoint2);
+   target2 = Math.max(selectPoint1, selectPoint2);
+   target3 = 40 + (Line1.end.x - Line1.start.x);
+
+   if (selectLoop1 <= target1 && target1 - selectLoop1 > 0.1) {
+      drawRecs1();
+      reqAnimFrame2(animate2);
+   }
+   else if (selectLoop2 <= target2 && target2 - selectLoop2 > 0.1) {
+      drawRecs2();
+      reqAnimFrame2(animate2);
+   }
+   else if (selectLoop3 <= target3 && target3 - selectLoop3 > 0.1) {
+      drawRecs3();
+      reqAnimFrame2(animate2);
+   }
+   else {
+      context.save();
+      context.font = '14px Arial';
+      context.fillStyle = 'black';
+      context.fillText('G', 25, Math.abs(Line2.end.y - Line1.start.y) + 55);
+      context.fillText('K', selectPoint1 - 4, Math.abs(Line2.end.y - Line1.start.y) + 55);
+      context.fillText('L', selectPoint2 - 4, Math.abs(Line2.end.y - Line1.start.y) + 55);
+      context.fillText('H', target3, Math.abs(Line2.end.y - Line1.start.y) + 55);
+      context.fillText('C', target3, 35);
+      context.restore();
+   }
+}
+
+function drawRecs1() {
+   context.beginPath();
+   context.shadowColor = '#ffffff';
+   context.shadowOffsetX = 0;
+   context.shadowOffsetY = 0;
+   context.shadowBlur = 0;
+   context.fillStyle = 'rgba(235, 243, 12,0.1)';
+   context.rect(41, 41, selectLoop1 - 41, Math.abs(Line2.end.y - Line1.start.y) - 1);
+   context.fill();
+   selectLoop1 += (target1 - selectLoop1) / 25;
+}
+
+function drawRecs2() {
+   context.beginPath();
+   context.shadowColor = '#ffffff';
+   context.shadowOffsetX = 0;
+   context.shadowOffsetY = 0;
+   context.shadowBlur = 0;
+   context.fillStyle = 'rgba(255,165,0,0.1)';
+   context.rect(target1, 41, selectLoop2 - target1, Math.abs(Line2.end.y - Line1.start.y) - 1);
+   context.fill();
+   selectLoop2 += (target2 - selectLoop2) / 25;
+}
+
+function drawRecs3() {
+   context.beginPath();
+   context.shadowColor = '#ffffff';
+   context.shadowOffsetX = 0;
+   context.shadowOffsetY = 0;
+   context.shadowBlur = 0;
+   context.fillStyle = 'rgba(217,70,22,0.1)'
+   context.rect(target2, 41, selectLoop3 - target2, Math.abs(Line2.end.y - Line1.start.y) - 1);
+   context.fill();
+   selectLoop3 += (target3 - selectLoop3) / 25;
+}
+</script>
+</html>
