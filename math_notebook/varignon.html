@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name='description' content="Interactive demo and proof of Varignon's Theorem.">
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>Varignon's Theorem (HSG.CO.C.11)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#clear {
+   width:40px;
+   height:40px;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#problem p {
+   font-family:'Indie Flower';
+   font-weight:400;
+   margin-right:600px;
+   text-align:justify;
+}
+
+#Questions {
+   padding:10px 10px 0px 10px;
+   background-color:#fff5f1;
+   border-radius:5px;
+   margin-left:20px;
+   margin-right:100px;
+}
+
+#Questions li {
+   font-family:'Arial', sans-serif;
+   font-size:1.2em;
+   padding-bottom:40px;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#desmos {
+   border:0px solid #ffffff; 
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;"
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+table, tr, th, td {
+   margin:auto;
+}
+
+th, td {
+   width:33%;
+   padding-left:20px;
+   padding-right:50px;
+   padding-bottom:20px;
+   font-family:'Josefin Sans';
+   text-align:justify;
+   font-size:1.2em;
+   line-height:1.4em;
+   font-weight:600;
+   vertical-align:top;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+    margin-right:100px;
+}
+
+#ggbra {
+   float:right;
+}
+
+#imgnorm {
+   border:2px solid black;
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;
+   margin-left:20px;
+   margin-right:50px;
+   margin-top:20px;
+   margin-bottom:25px;
+   float:left;
+}
+
+#imgright {
+   float:right; 
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+   margin-bottom:10px;
+   transition: opacity 2s;
+}
+
+#imgright:hover {
+   opacity:0.6;
+}
+
+#imgnorm:hover {
+   box-shadow: 5px 5px 5px  #996699;
+}
+
+#imgtbl {
+   padding-top:5px;
+   padding-bottom:5px;
+   width:75%;
+}
+
+#trinketright {
+   float:right;
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+   margin-bottom:15px;
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#trinket {
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#canvas {
+   border: 1px solid #cccccc;
+   border-radius:10px;
+   padding:5px;
+   float:right;
+   margin-right:20px;
+   margin-left:50px;
+}
+
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home' target='_blank'>Home</a></li>
+</div>
+
+<body>
+
+<h1>Varignon's Theorem</h1>
+
+<article>
+<section id="Introduction">
+
+<canvas id='canvas' width='600' height = '360'>Download Chrome <a href="https://www.google.com/chrome/browser/" target="blank">here</a>. It's like 15 
+
+seconds, and it's way better.</canvas>
+
+<p>Click or tap to create the 4 vertices of a quadrilateral on the canvas at the right. Then I'll do some hocus pocus and draw in some lines to create 
+
+a new figure.</p>
+<center><button id='clear' onclick='clearScreen()'>C</button></center>
+<p>Press the C button above to clear the canvas, and then draw 4 more points. Try to make a really wacky quadrilateral. What's happening every time? 
+
+What do you notice?</p>
+
+<p>What you should see if I did everything right (and if you actually made a quadrilateral) is another quadrilateral--a green one--whose vertices are 
+
+the midpoints of the quadrilateral you specified. The cool thing is that no matter what kind of wacky quadrilateral you make, my green quadrilateral 
+
+will always be a parallelogram, with opposite sides parallel and congruent.</p>
+</section>
+<br>
+<hr></hr>
+
+<section id="Setup">
+<h2>Let's Prove It</h2>
+<img id='imgnorm' src='https://lh3.googleusercontent.com/-3ZgD-5iG12k/VSgqaml9AhI/AAAAAAAASNY/HJ8VWGC_9fE/w711-h594-no/pgram_proof.png' width='426' 
+
+height='356'>
+<p>The <a href="http://goo.gl/EkalBk" target='blank'>Triangle Midsegment Theorem</a> will save us a lot of time here. At the left, I've drawn a random 
+
+quadrilateral, \(\small\mathtt{ABCD}\). When I draw diagonals \(\small\mathtt{\overline{AC}}\) and \(\small\mathtt{\overline{BD}}\), I form four large 
+
+triangles: \(\small\Delta\)\(\small\mathtt{ABD}\), \(\small\Delta\)\(\small\mathtt{CBD}\), \(\small\Delta\)\(\small\mathtt{ABC}\), and \(\small\Delta
+
+\)\(\small\mathtt{ADC}\).</p>
+
+<p>This makes side \(\small\mathtt{\overline{PQ}}\) a midsegment of \(\small\Delta\)\(\small\mathtt{ABD}\), side \(\small\mathtt{\overline{RS}}\) a 
+
+midsegment of \(\small\Delta\)\(\small\mathtt{CBD}\), side \(\small\mathtt{\overline{QR}}\) a midsegment of \(\small\Delta\)\(\small\mathtt{ABC}\), and 
+
+side \(\small\mathtt{\overline{PS}}\) a midsegment of \(\small\Delta\)\(\small\mathtt{ADC}\), because a midsegment is a segment that connects the 
+
+midpoints of two sides of a triangle.</p>
+
+<p>Well, since we know that (\(\small\mathtt{\overline{PQ}}\) and \(\small\mathtt{\overline{RS}}\)) are midsegments, the Triangle Midsegment Theorem 
+
+tells us that they are each parallel to diagonal \(\small\mathtt{\overline{BD}}\). This means that they are parallel to each other. The Triangle 
+
+Midsegment Theorem also tells us that \(\small\mathtt{\overline{PQ}}\) and \(\small\mathtt{\overline{RS}}\) are each half the length of \(\small
+
+\mathtt{\overline{BD}}\). And if they're both half the length of something, they must be congruent. So, \(\small\mathtt{\overline{PQ}}\) and \(\small
+
+\mathtt{\overline{RS}}\) are congruent and parallel.</p>
+
+<p>The same reasoning we used in the previous paragraph can be applied to sides \(\small\mathtt{\overline{PS}}\) and \(\small\mathtt{\overline{QR}}\) 
+
+along with diagonal \(\small\mathtt{\overline{AC}}\), demonstrating that \(\small\mathtt{\overline{PS}}\) and \(\small\mathtt{\overline{QR}}\) are 
+
+parallel and congruent and proving that Quadrilateral \(\small\mathtt{PQRS}\) is a parallelogram.</p>
+</section>
+
+<section id="Finale">
+<h2>Extensions</h2>
+<a href="https://flic.kr/p/9tKTTn" target='blank'><img id='imgright' src='quad_quilt.jpg' width='300' height='300'></a>
+<p>A nice thing about this strategy for the proof is that it seems to work even on "weird" quadrilaterals, where the quadrilateral formed by the 
+
+midpoints crosses two sides of the original quadrilateral. In addition, this strategy can help you to also show that the resulting parallelogram always 
+
+has half the area of the original quadrilateral, though this gets a little tricky with "weird" quadrilaterals.</p>
+
+<p>(P.S.: Here's a Wikipedia entry on <a href="http://en.wikipedia.org/wiki/Varignon%27s_theorem" target="blank">Varignon's Theorem</a>. According to 
+
+some cluelessly pretentious goober writing or working on that entry, the proof we just did above is one that "requires less mathematical aptitude" than 
+
+one involving linear algebra--which is both untrue and irrelevant. I changed it to "requires less algebra," although "less arrogance" was much more 
+
+tempting.)</p>
+</article>
+<br>
+<hr></hr>
+</body>
+
+<script>
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+var clicks = 0;
+var point1 = [], point2 = [], point3 = [], point4 = [];
+var mid1 = [], mid2 = [], mid3 = [], mid4 = [];
+
+function windowToCanvas(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+};
+
+function clearScreen() {
+    context.clearRect(0, 0, 600, 360);
+    clicks = 0;
+    point1 = [];
+    point2 = [];
+    point3 = [];
+    point4 = [];
+};
+
+function drawMids(pt1, pt2, pt3, pt4) {
+    mid1 = [(pt1[0] + pt2[0]) / 2, (pt1[1] + pt2[1]) / 2];
+    mid2 = [(pt2[0] + pt3[0]) / 2, (pt2[1] + pt3[1]) / 2];
+    mid3 = [(pt3[0] + pt4[0]) / 2, (pt3[1] + pt4[1]) / 2];
+    mid4 = [(pt4[0] + pt1[0]) / 2, (pt4[1] + pt1[1]) / 2];
+    
+    context.strokeStyle = 'green';
+    context.beginPath();
+    context.moveTo(mid1[0], mid1[1]);
+    context.lineTo(mid2[0], mid2[1]);
+    context.moveTo(mid2[0], mid2[1]);
+    context.lineTo(mid3[0], mid3[1]);
+    context.moveTo(mid3[0], mid3[1]);
+    context.lineTo(mid4[0], mid4[1]);
+    context.moveTo(mid4[0], mid4[1]);
+    context.lineTo(mid1[0], mid1[1]);
+    
+    context.stroke();
+}
+
+function drawLines() {
+    var points = [point1, point2, point3, point4];
+    points.sort(function(a, b) {return a[0]-b[0];});
+    
+    var pt1 = points[0];
+    var i = points.indexOf(pt1);
+    points.splice(i, 1);
+    
+    points.sort(function(p, q) {return ((p[1] - pt1[1]) / (p[0] - pt1[0]))-((q[1] - pt1[1]) / (q[0] - pt1[0]));});
+    var pt2 = points[0], pt3 = points[1], pt4 = points[2];
+    
+    context.strokeStyle = 'black';
+    context.lineWidth = 0.5;
+    context.beginPath();
+    context.moveTo(pt1[0], pt1[1]);
+    context.lineTo(pt2[0], pt2[1]);
+    context.moveTo(pt2[0], pt2[1]);
+    context.lineTo(pt3[0], pt3[1]);
+    context.moveTo(pt3[0], pt3[1]);
+    context.lineTo(pt4[0], pt4[1]);
+    context.moveTo(pt4[0], pt4[1]);
+    context.lineTo(pt1[0], pt1[1]);
+    
+    context.stroke();
+    
+    drawMids(pt1, pt2, pt3, pt4);
+};
+
+canvas.onmousedown = function(evt) {
+    if (clicks > 3) {
+        return null;
+    }
+    else {
+        var loc = windowToCanvas(canvas, evt.clientX, evt.clientY);
+        if (clicks === 0) {
+            point1 = [loc.x, loc.y];
+        }
+        else if (clicks === 1) {
+            point2 = [loc.x, loc.y];
+        }
+        else if (clicks === 2) {
+            point3 = [loc.x, loc.y];
+        }
+        else if (clicks === 3) {
+            point4 = [loc.x, loc.y];
+        }
+        context.strokeStyle = '#6600CC';
+        context.fillStyle = '#6600CC';
+        context.beginPath();
+        context.arc(loc.x, loc.y, 2, 0, Math.PI * 2);
+        context.stroke();
+        context.fill();
+    
+        clicks += 1;
+        
+        if (clicks === 4) {
+            drawLines();
+        }
+    }
+};
+</script>
+</html>
