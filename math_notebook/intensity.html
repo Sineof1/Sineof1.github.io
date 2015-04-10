@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>The Formula for Intensity (HSA.SSE.A.1)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+button {
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#problem p {
+   font-family:'Indie Flower';
+   font-weight:400;
+   margin-right:600px;
+   text-align:justify;
+}
+
+#Questions {
+   padding:10px 10px 0px 10px;
+   background-color:#fff5f1;
+   border-radius:5px;
+   margin-left:20px;
+   margin-right:100px;
+}
+
+#Questions li {
+   font-family:'Arial', sans-serif;
+   font-size:1.2em;
+   padding-bottom:40px;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#desmos {
+   border:0px solid #ffffff; 
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;"
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+    margin-right:100px;
+}
+
+#ggbra {
+   float:right;
+}
+
+#imgnorm {
+   border:2px solid black;
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#imgright {
+   float:right; 
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+}
+
+#trinketright {
+   float:right;
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+   margin-bottom:15px;
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#trinket {
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home' target='_blank'>Home</a></li>
+</div>
+
+<body>
+<img id="imgright" src='https://lh5.googleusercontent.com/-pXiQ1QI1h7s/VSdPZuIhREI/AAAAAAAASJw/mgRe9EyMTy0/w1200-h435-no/sally_div.png' width='400px' />
+<h1>The Formula for Intensity</h1>
+
+<article>
+<section id="Introduction">
+
+<div id="problem">
+<p><span style="font-family:'Josefin Sans'; font-size:1.4em;">"</span>Sally has 6 chocolate bars. She wants to give each of her 2 friends 3 chocolate bars.<span style="font-family:'Josefin 
+
+Sans'; font-size:1.4em;">"</span></p>
+</div>
+
+<p>We recognize this as a situation that involves division. Sally will divide her 6 chocolate bars equally among her 2 friends, giving each friend 3 chocolate bars with none left over, or 
+
+\(\small\mathtt{6 \div 2 = 3}\), or \(\small\mathtt{\frac{6}{2} = 3}\). Sharing and caring. And chocolate.</p>
+
+<p>But the <a href="http://en.wikipedia.org/wiki/Intensity_(physics)" target="blank">situation below</a> also involves simple division. It's just that this fact is concealed by a 
+
+nightmarish stew of words and symbols. Here we are trying to learn how to mathematically quantify the concept of "intensity":</p>
+
+<img style="float:right; margin-right:150px; padding-left:100px;" src='https://lh4.googleusercontent.com/-ty7LMmTsq1c/VSXiPviSaoI/AAAAAAAAR_8/kP6CcaEmhvE/w375-h366-
+
+no/sphere.png' />
+<p style="font-size:1.2em;">"Over a sphere centered around the point source, the equation [for power, \(\small\mathtt{P}\)] becomes \(\small\mathtt{P = |I| \cdot A_{surf} = |I| \cdot 
+
+4\pi r^2}\), where \(\small\mathtt{I}\) is the intensity at the surface of the sphere, and \(\small\mathtt{r}\) is the radius of the sphere. Solving for \(\small\mathtt{I}\) gives \(\small
+
+\mathtt{|I| = \frac{P}{A_{surf}} = \frac{P}{4\pi r^2}}\)."</p>
+</section>
+<br>
+<hr></hr>
+<section id="Setup">
+<h2>Sally Is the Power, and Chocolate Is the Point</h2>
+<p>Let's imagine Sally is a power source--giving off chocolate power! She's the red dot at the center of the sphere shown above. And the amount of chocolate power she has is 6, 
+
+because she has 6 chocolate bars. Instead of sharing her chocolate power with 2 friends, she spreads it out to an infinite number of friends in all directions, represented by the other red 
+
+points (and all the points I didn't draw). These are all the points on the surface of the sphere.</p>
+
+<p>Because there are an infinite number of points on the surface of a sphere, we don't count them, <u>we measure them in some way</u>. And the measurement we use is an 
+
+area measurement, \(\small\mathtt{4 \cdot \pi \cdot r^2}\). This tells us the <a href="http://www.mathopenref.com/spherearea.html" target="blank">area covered by all of the points 
+
+on the surface of a sphere</a>, so long as we know the radius, \(\small\mathtt{r}\), of the sphere. Intensity, then, is just Power divided by the surface area of a sphere:
+\[\small\mathtt{I = \frac{P}{4\pi r^2}}\]</p>
+
+<p>The radius of the sphere matters because when it's larger the sphere is bigger and therefore has a larger measure of the number of points that cover its surface. So, as the power 
+
+gets spread out across the surface of a larger sphere, the intensity of the power decreases. This is the same as Sally having more friends to share chocolate with.</p>
+
+<p>Both of these situations can be represented similarly as functions, too.</p>
+
+<center><iframe id="desmos" src="https://www.desmos.com/calculator/fafabjihzf" width="900px" height="600px"></iframe></center>
+
+</section>
+</article>
+<br><br>
+<hr></hr>
+</body>
+</html>
