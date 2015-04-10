@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta name='description' content='Engagingly illustrated geometry proofs in narrative form.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>Vertical Angle Theorem (HSG.CO.C.9)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#blockquote {
+   float:left;
+   margin-top:0.5em;
+   margin-right:10em;
+   margin-bottom:1.4em;
+   margin-left:5em;
+   font-family:'Neucha';
+   text-align:justify;
+   font-size:1.6em;
+   line-height:1.2em;
+   box-shadow:1px 1px 1px 1px #f0f0f0;
+   border-left:4px solid #CC9900;
+   border-radius:5px;
+   padding:10px 20px 10px 20px;
+   -webkit-transition: all 0.5s linear;
+   -o-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+   transition: all 0.5s linear;
+}
+
+#blockquote:hover {
+   background-color:#f8f8f8;
+   padding:20px;
+   box-shadow:2px 2px 2px 1px #888888;
+   border-radius:10px;
+}
+
+mark {
+   background-color:#ffffcc;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:40px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:40px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:40px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:40px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+    margin-right:100px;
+}
+
+#imgnorm {
+   border:2px solid black;
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;
+   margin-left:40px;
+   margin-right:50px;
+   margin-top:20px;
+   margin-bottom:25px;
+   float:left;
+   transition: opacity 1s;
+}
+
+#imgnorm:hover {
+   opacity:0.6;
+}
+
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home' target='_blank'>Home</a></li>
+</div>
+
+<body>
+<h1>Why Did Someone Ever Call These "Vertical" Angles?</h1>
+
+<article>
+<section id="Introduction">
+<center><iframe scrolling="no" 
+
+src="https://tube.geogebra.org/material/iframe/id/290397/width/900/height/501/border/ffffff/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld
+
+/true/sri/false/at/preferhtml5" width="900px" height="501px" style="border:0px; margin-top:-30px;"> </iframe></center>
+
+<p>The Vertical Angle Theorem, or Proposition 15 in Euclid's <em>Elements</em>, is one of my favorites, because of its simplicity. You can produce two 
+
+angles which are exactly equal in measure simply by drawing two intersecting straight lines. Even better, you draw two pairs of congruent angles 
+
+whenever you simply draw two straight intersecting lines. Of course, "simply" is a bit of an understatement. You have to draw two perfectly straight, 
+
+one-dimensional lines, but other than that, it's cake. (And I suppose those two lines should intersect in just one point. Or does that matter?) The 
+
+angles in each pair that are congruent are called vertical angles.</p>
+
+<p>The name has to do with the "vertex" sense of "vertical" instead of the "up and down" sense. <a href='http://goo.gl/hUd0rS' target='blank'>Heath</a> 
+
+explains, by way of <a href='http://en.wikipedia.org/wiki/Proclus' target='blank'>Proclus</a>, the difference between vertical angles and adjacent 
+
+angles (today, we would call these adjacent angles a linear pair). I've highlighted the part which clarifies the naming of vertical angles:</p>
+<div id='blockquote'><img src='https://lh6.googleusercontent.com/-smIooyGzTck/VSgrsJU5LFI/AAAAAAAASOE/BNueS8a4MW4/w753-h809-no/vertadj_angle.gif' 
+
+width='300px' style='float:right; margin-top:10px; margin-left:15px;' />
+The first term describes the angles made by two straight lines when one only is divided by the other, i.e., when one straight line meets another at a 
+
+point which is not either of its extremities, but is not itself produced beyond the point of meeting. When the first straight line <em>is</em> 
+
+produced, so that the lines cross at the point, they make two pairs of <em>vertical</em> angles <mark>(which are more clearly described as 
+
+<em>vertically opposite</em> angles), and which are so called because their convergence is from opposite directions to one point (the intersection of 
+
+the lines) as vertex.</mark></div>
+
+</section>
+<br>
+<hr></hr>
+
+<section id="Setup">
+<h2>But the Proof Relies on "Adjacent Angles," a.k.a. Linear Pairs</h2>
+
+<p>The proof that vertical angles are congruent makes use of Proposition 13, which is a proof that the angles in a linear pair (the so-called adjacent 
+
+angles) have measures that add up to \(\small\mathtt{180^\circ}\). Let's just assume that Proposition 13 is true for now and see how it is applied in 
+
+Euclid's proof of the Vertical Angle Theorem.</p>
+<div id='blockquote'><img src='https://lh5.googleusercontent.com/-OA6OrpDT9-s/VSgrsRsal7I/AAAAAAAASOI/3XGimYs-yz4/w205-h132-no/verts.gif' 
+
+style='float:right; margin-left:15px; margin-top:40px; margin-bottom:50px; margin-right:15px;' />
+For let the straight lines \(\small\mathtt{AB}\), \(\small\mathtt{CD}\) cut one another at the point \(\small\mathtt{E}\); I say that the angle 
+
+\(\small\mathtt{AEC}\) is equal to the angle \(\small\mathtt{DEB}\), and the angle \(\small\mathtt{CEB}\) to the angle \(\small\mathtt{AED}\). 
+
+<mark>For, since the straight line \(\small\mathtt{AE}\) stands on the straight line \(\small\mathtt{CD}\), making the angles \(\small\mathtt{CEA}\), 
+
+\(\small\mathtt{AED}\), the angles \(\small\mathtt{CEA}\), \(\small\mathtt{AED}\) are equal to two right angles. Again, since the straight line 
+
+\(\small\mathtt{DE}\) stands on the straight line \(\small\mathtt{AB}\), making the angles \(\small\mathtt{AED}\), \(\small\mathtt{DEB}\), the angles 
+
+\(\small\mathtt{AED}\), \(\small\mathtt{DEB}\) are equal to two right angles.</mark></div>
+
+<p>The section highlighted shows two applications of Proposition 13, or what most would call the Linear Pair Postulate today. It just lets us say that 
+
+those angles mentioned in the quotation are supplementary. It's interesting that Euclid uses "straight line" to describe both a ray and a line, and 
+
+note that "two right angles" is used instead of what we would substitute with "a straight angle." This has to do with Euclid's definition of 
+
+<em>angle</em> (Definition 1.8): "A plane angle is the inclination to one another of two lines in a plane which meet one another and do not lie in a 
+
+straight line."</p>
+
+<div id='blockquote'><img src='https://lh5.googleusercontent.com/-OA6OrpDT9-s/VSgrsRsal7I/AAAAAAAASOI/3XGimYs-yz4/w205-h132-no/verts.gif' 
+
+style='float:right; margin-left:15px; margin-top:40px; margin-bottom:50px; margin-right:15px;' />
+But the angles \(\small\mathtt{CEA}\), \(\small\mathtt{AED}\) were also proved equal to two right angles; therefore the angles \(\small\mathtt{CEA}\), 
+
+\(\small\mathtt{AED}\) are equal to the angles \(\small\mathtt{AED}\), \(\small\mathtt{DEB}\).<br><br>
+Let the angle \(\small\mathtt{AED}\) be subtracted from each; therefore the remaining angle \(\small\mathtt{CEA}\) is equal to the remaining angle 
+
+\(\small\mathtt{BED}\). Similarly it can be proved that the angles \(\small\mathtt{CEB}\), \(\small\mathtt{DEA}\) are also equal. Therefore etc.</div>
+
+<p>Once we get that \(\measuredangle\small\mathtt{CEA}\) + \(\measuredangle\small\mathtt{AED}\) = \(\measuredangle\small\mathtt{AED}\) + 
+
+\(\measuredangle\small\mathtt{DEB}\), then we subtract \(\measuredangle\small\mathtt{AED}\) from both sides of the equation to see that the remaining 
+
+angles are congruent. Rinse and repeat from the beginning for the other pair of vertical angles.</p>
+</section>
+<br>
+<hr></hr>
+<section id="Finale">
+<h2>Assumptions and Questions</h2>
+<a href='https://flic.kr/p/eEvRmb' target='blank'><img id='imgnorm' src='https://lh6.googleusercontent.com/-eGSHrBqpCM4/VSXiLuvkyLI/AAAAAAAASAk/7oki-
+
+V71LU0/w269-h180-no/bike_verticals.jpg' width='320px'></a>
+<p>We see in the last part of the proof the use of Postulate 4 ("That all right angles are equal to one another"), Common Notion 1 ("Things which are 
+
+equal to the same thing are also equal to one another"), and Common Notion 3 ("If equals be subtracted from equals, the remainders are equal"). What's 
+
+missing is some assurance that no matter how I draw the two straight lines that intersect at a point, I can still do this proof.</p>
+</section>
+<br>
+<hr></hr>
+</article>
+</body>
+
+</html>
