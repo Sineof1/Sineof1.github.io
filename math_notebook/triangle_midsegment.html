@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta name='description' content='Exploration and proof of the Triangle Midsegment Theorem.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>Triangle Midsegment Theorem (HSG.CO.C.10)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+button {
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:400px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#FollowUp p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+}
+
+h1 {
+   padding-bottom:10px;
+   font-weight:600;
+}
+
+hr {
+   margin-bottom:40px;
+    margin-right:100px;
+}
+
+#ggbra {
+   float:right;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home' target='_blank'>Home</a></li>
+</div>
+<body>
+<h1>The Parallel Midpoint Triangle Thing</h1>
+<div id='ggbra'>
+<iframe scrolling="no" 
+
+src="https://www.geogebratube.org/material/iframe/id/157211/width/500/height/500/border/ffffff/rc/false/ai/false/sdz/false/smb/false/stb/false/stbh/tru
+
+e/ld/false/sri/false/at/preferhtml5" width="400px" height="400px" style="border:0px;"> </iframe></div>
+
+<article>
+<section id="Introduction">
+<p>In \(\small\Delta\)\(\small\mathtt{ABC}\), point \(\small\mathtt{D}\) is fixed at the midpoint of \(\overline{\small\mathtt{AC}}\), and point 
+
+\(\small\mathtt{E}\) is fixed at the midpoint of \(\overline{\small\mathtt{BC}}\). The <span style='color:brown'>Triangle Midsegment Theorem</span> 
+
+boldly says that no matter how you mess with that triangle, \(\overline{\small\mathtt{DE}}\) will be parallel to \(\overline{\small\mathtt{AB}}\) and 
+
+also half the length of \(\overline{\small\mathtt{AB}}\).</p>
+
+<p>You can click and drag points \(\small\mathtt{A}\), \(\small\mathtt{B}\), and \(\small\mathtt{C}\) to see that the theorem at least seems to be 
+
+true: \(\overline{\small\mathtt{AB}}\) and \(\overline{\small\mathtt{DE}}\) seem to stay parallel, and \(\overline{\small\mathtt{DE}}\) looks like it 
+
+stays at about half the length of \(\overline{\small\mathtt{AB}}\).</p>
+</section>
+
+<hr></hr>
+
+<section id="Setup">
+<h2>Side-Angle-Side</h2>
+<p>Notice that we've got two triangles, \(\small\Delta\mathtt{ABC}\) and \(\small\Delta\mathtt{DEC}\). The two triangles share an angle, \(\small
+
+\measuredangle\mathtt{C}\). Plus, since the midpoints divide the two sides into two congruent segments, the ratios of the corresponding side lengths of 
+
+the big triangle and small triangle are equal: \(\small\mathtt{AC}\) : \(\small\mathtt{DC}\) = \(\small\mathtt{BC}\) : \(\small\mathtt{EC}\) = 2 : 1. 
+
+This means, by the <a href='http://www.mathwords.com/s/sas_similarity.htm' target='blank'>Side-Angle-Side Similarity Theorem</a> (or is it a <a 
+
+href="http://goo.gl/hUd0rS" target="blank">postulate?</a>), that all of the corresponding side lengths have the same ratio. So \(\overline{\small
+
+\mathtt{AB}}\) has twice the length of \(\overline{\small\mathtt{DE}}\).</p>
+</section>
+
+<section id="Finale">
+<h2 style="padding-top:20px;">But Are They Parallel?</h2>
+<p>That's one part down. The other part of the theorem mentioned that the two line segments (the <a 
+
+href='http://regentsprep.org/regents/math/geometry/gp10/MidLineL.htm' target='blank'>midsegment</a> and the "third" side) are always parallel. How can 
+
+we show that that's true?</p>
+
+<iframe scrolling="no" 
+
+src="https://www.geogebratube.org/material/iframe/id/157211/width/500/height/500/border/ffffff/rc/false/ai/false/sdz/false/smb/false/stb/false/stbh/tru
+
+e/ld/false/sri/false/at/preferhtml5" width="400px" height="400px" style="border:0px; float:left;"> </iframe>
+
+<p>Well, since \(\small\Delta\mathtt{ABC}\) and \(\small\Delta\mathtt{DEC}\) are similar, their corresponding angles are congruent. So, \(\small
+
+\measuredangle\mathtt{A}\) \(\small\cong\) \(\small\measuredangle\mathtt{D}\) and \(\small\measuredangle\mathtt{B}\) \(\small\cong\) \(\small
+
+\measuredangle\mathtt{E}\).<br><br>
+
+This matters because you can think of imaginary lines running through \(\overline{\small\mathtt{DE}}\) and \(\overline{\small\mathtt{AB}}\), which are 
+
+"cut" by a <a href='http://www.mathopenref.com/transversal.html' target='blank'>transversal</a>--either line \(\small\mathtt{AC}\) or line \(\small
+
+\mathtt{BC}\). And when corresponding angles are congruent <a href='http://www.mathsisfun.com/geometry/parallel-lines.html' target='blank'>in that 
+
+situation</a>, the lines must be parallel.</p>
+</section>
+
+<hr></hr>
+
+<section id="FollowUp">
+<br><br>
+<h2>Confusion and Clarification Points</h2>
+<p>What I really want to do with this theorem is demonstrate it algebraically, using linear functions on the coordinate plane. I've included a Desmos 
+
+graph below that does this--but with too much trigonometry for my taste.</p>
+
+<center><iframe src="https://www.desmos.com/calculator/cqwgbfebdf" width="800px" height="500px" style="border:0px solid #ffffff; border-radius:5px; 
+
+box-shadow: 5px 5px 5px  #888888;"></iframe></center>
+
+<p>One reason I'm more tempted to approach this through algebra is that it is not obvious to me that the two triangles <u>remain</u> similar even when 
+
+I tug on the vertices to distort them. Maybe the better idea to have in my head is that no matter how many <u>different</u> triangles I draw, I can 
+
+always pick two sides, determine their midpoints, and connect these midpoints to form two similar triangles.</p>
+
+<p>Of course, that raises the question, why \(\small\frac{1}{2}\)? Drawing the line segment <u>anywhere</u> to connect two sides gets me two similar 
+
+triangles, doesn't it? Or maybe not just anywhere. But drawing the midsegment of the smaller triangle in the example above would create <u>three</u> 
+
+similar triangles, no? And that tiny midsegment would divide the two sides of the larger triangle into a segment that is \(\small\frac{1}{4}\) the 
+
+length of the whole and a segment that is \(\small\frac{3}{4}\) the length of the whole.</p>
+
+<p>The parallel part is confusing too, mostly because when we talk about transversals, we're almost always talking about things that cross lines that 
+
+we already know are parallel. It seems like I didn't spend enough time nailing down the fact that as long as two lines aren't <a 
+
+href="http://mathworld.wolfram.com/CoincidentLines.html" target='blank'>coincident</a>, they have a transversal. I think.</p>
+</section>
+<hr style="margin-right:100px;"></hr>
+
+</body>
+
+</html>
