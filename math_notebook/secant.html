@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta name='description' content='Engagingly illustrated geometry proofs in narrative form.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>The Secant Theorem (HSG.C)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+button {
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#problem p {
+   font-family:'Indie Flower';
+   font-weight:400;
+   margin-right:600px;
+   text-align:justify;
+}
+
+#Questions {
+   padding:10px 10px 0px 10px;
+   background-color:#fff5f1;
+   border-radius:5px;
+   margin-left:20px;
+   margin-right:100px;
+}
+
+#Questions li {
+   font-family:'Arial', sans-serif;
+   font-size:1.2em;
+   padding-bottom:40px;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#desmos {
+   border:0px solid #ffffff; 
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;"
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+table, tr, th, td {
+   margin:auto;
+}
+
+th, td {
+   width:33%;
+   padding-left:20px;
+   padding-right:50px;
+   padding-bottom:20px;
+   font-family:'Josefin Sans';
+   text-align:justify;
+   font-size:1.2em;
+   line-height:1.4em;
+   font-weight:600;
+   vertical-align:top;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+    margin-right:100px;
+}
+
+#ggbra {
+   float:right;
+}
+
+#imgnorm {
+   border:2px solid black;
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;
+   margin-left:20px;
+   margin-right:20px;
+   margin-bottom:10px;
+   float:left;
+}
+
+#imgright {
+   float:right; 
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+}
+
+#imgtbl {
+   padding-top:5px;
+   padding-bottom:5px;
+   width:75%;
+}
+
+#trinketright {
+   float:right;
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+   margin-bottom:15px;
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#trinket {
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#canvas {
+   padding:5px;
+   float:right;
+   margin-right:100px;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home' target='_blank'>Home</a></li>
+</div>
+
+<body>
+
+<h1>The Secant Theorem</h1>
+
+<article>
+<section id="Introduction">
+<center><iframe scrolling="no" 
+
+src="https://tube.geogebra.org/material/iframe/id/200785/width/900/height/600/border/ffffff/rc/false/ai/false/sdz/false/smb/false/stb/false/stbh/true/l
+
+d/false/sri/false/at/preferhtml5" width="900px" height="600px" style="border:0px;"></iframe></center>
+<p>So, if you drag point \(\small\mathtt{C}\) around in the diagram above, you will see that the two expressions \(\small\mathtt{f \cdot (d + f)}\) and 
+
+\(\small\mathtt{g \cdot (e + g)}\) are always equal. This result is known as the Secant (SEE-knt) Theorem--also called the Secant Segment Theorem.</p>
+
+<p>Here's how it goes. The lines above, \(\small\mathtt{\overleftrightarrow{GC}}\) and \(\small\mathtt{\overleftrightarrow{IC}}\), are called <a 
+
+href="http://en.wikipedia.org/wiki/Secant_line" target="blank">secant lines</a> of the circle, because they are straight lines and they each intersect 
+
+the circle at two points. (I haven't drawn them as extending past point \(\small\mathtt{C}\), but they are lines, so they do.) These particular secant 
+
+lines meet at a point outside of the circle (point \(\small\mathtt{C}\)). And secant lines of a circle that meet outside of the circle are the kinds of 
+
+secant lines that are important to the Secant Theorem.</p>
+
+<p>You can see that four segments--called secant segments now--are created: two internal secant segments (\(\small\mathtt{d}\) and  \(\small\mathtt
+
+{e}\)) and two external secant segments (\(\small\mathtt{f}\) and  \(\small\mathtt{g}\)). The Secant Theorem says that \(\small\mathtt{f \cdot (d + f) 
+
+= g \cdot (e + g)}\).</p>
+</section>
+<br>
+<hr></hr>
+<section id="Setup">
+<h2>Part of the Why</h2>
+<canvas id='canvas' width='600' height = '400'>Download Chrome <a href="https://www.google.com/chrome/browser/" target="blank">here</a>. It's like 15 
+
+seconds, and it's way better.</canvas>
+<p>When you move your mouse over the diagram at the right, you should see two triangles: \(\small\Delta\)\(\small\mathtt{CAB}\) and \(\small\Delta
+
+\)\(\small\mathtt{CED}\). The two \(\small\mathtt{\alpha}\) symbols show congruent angles. These angles are congruent because <a 
+
+href="http://goo.gl/RBZZ0j" target="blank">they are inscribed angles that both mark off the same arc</a> on the circle. (Since they're each half the 
+
+measure of the [invisible] central angle that marks off that green arc, they have to be equal.) The \(\small\mathtt{\beta}\) symbol shows that both 
+
+triangles share \(\small\mathtt{\measuredangle{C}}\).</p>
+
+<p>According to the AA Similarity Theorem, <a href="http://hotmath.com/hotmath_help/topics/angle-angle-similarity.html" target="blank">the two 
+
+triangles are similar</a>, which means that the ratios of the lengths of their corresponding sides are equal. Click on the circle a few times to see 
+
+the corresponding sides. We can see that the equation below is true:<br>
+\[\mathtt{\frac{m\overline{CB}}{m\overline{CD} + m\overline{CA}} = \frac{m\overline{CD}}{m\overline{CB} + m\overline{BE}}}\]</p>
+<p>And "we" (meaning "I") have to click and look back at that equation every time to convince myself that it's true because of similarity. Anyway, this 
+
+means that after a little cross-multiplying action, we've got \(\small\mathtt{m\overline{CB} \cdot (m\overline{CB} + m\overline{BE}) = m\overline{CD} 
+
+\cdot (m\overline{CD} + m\overline{CA})}\), which is a restatement of the Secant Theorem.</p>
+</section>
+<br>
+<hr></hr>
+<section id="Finale">
+<h2>Some Questions We Didn't Ask</h2>
+<a href="https://flic.kr/p/C9EbG" target="blank"><img src="https://lh5.googleusercontent.com/-71v2LAI1vgY/VSXiPMKwhRI/AAAAAAAAR_o/MxUiVGr3Fg4/w250-
+
+h187-no/puzzle-secant.jpg" width = '320' height = '240' style="float:left; padding:20px;"></a>
+<p>This is another situation where I drew <a href="http://www.sparknotes.com/math/geometry3/geometricproofs/section3.rhtml" target="blank">auxiliary 
+
+lines</a> to demonstrate the proof. But could I always draw auxiliary lines for this proof? I was able to create similar triangles in the diagram just 
+
+above, and it looks like I could do it for every position I could get to in the GeoGebra applet at the top. But not every possibility is represented 
+
+there.</p>
+
+<p>Also, we didn't talk about what <i>corresponding</i> really means (and a lot of textbooks that cover geometry kind of breeze past it too). The 
+
+standard definition of <i>corresponding angles</i> is something like "angles that are in the same relative position." Which is ambiguous to say the 
+
+least.</p>
+
+</article>
+<br>
+<hr></hr>
+</body>
+
+<script>
+
+
+var canvas = document.getElementById('canvas');
+var sec_tm = canvas.getContext('2d');
+
+var clicked = 0;
+
+function drawCircle(can, ctxt) {
+    ctxt.beginPath();
+    ctxt.arc(can.width / 2, can.height / 2, 150, 0, Math.PI * 2);
+    ctxt.stroke();
+};
+
+function drawPoints(can, ctxt) {
+    ctxt.beginPath();
+    ctxt.arc(can.width / 2 + (150 * Math.cos(Math.PI / 6)), can.height / 2 - (150 * Math.sin(Math.PI / 6)), 4, 0, Math.PI * 2);
+    ctxt.stroke();
+    ctxt.fill();
+    ctxt.beginPath();
+    ctxt.arc(can.width / 2 + (150 * Math.cos(Math.PI / 6)), can.height / 2 + (150 * Math.sin(Math.PI / 6)), 4, 0, Math.PI * 2);
+    ctxt.stroke();
+    ctxt.fill();
+    ctxt.beginPath();
+    ctxt.arc(can.width / 2, can.height / 2 - 150, 4, 0, Math.PI * 2);
+    ctxt.stroke();
+    ctxt.fill();
+    ctxt.beginPath();
+    ctxt.arc(can.width / 2, can.height / 2 + 150, 4, 0, Math.PI * 2);
+    ctxt.stroke();
+    ctxt.fill();
+    ctxt.beginPath();
+    ctxt.arc(can.width / 2 + 260, can.height / 2, 4, 0, Math.PI * 2);
+    ctxt.stroke();
+    ctxt.fill();
+};
+
+function drawLines(can, ctxt) {
+    ctxt.beginPath();
+    ctxt.moveTo(can.width / 2 + 260, can.height / 2);
+    ctxt.lineTo(can.width / 2, can.height / 2 - 150);
+    ctxt.stroke();
+    ctxt.beginPath();
+    ctxt.moveTo(can.width / 2 + 260, can.height / 2);
+    ctxt.lineTo(can.width / 2, can.height / 2 + 150);
+    ctxt.stroke();
+};
+
+function drawText(can, ctxt) {
+    ctxt.font = '18px sans serif';
+    ctxt.fillStyle = 'black';
+    ctxt.strokeStyle = 'black';
+    ctxt.fillText('\u03B1', can.width / 2 + 25, can.height / 2 + 125);
+    ctxt.fillText('\u03B1', can.width / 2 + 30, can.height / 2 - 112);
+    ctxt.fillText('\u03B2', can.width / 2 + 230, can.height / 2 + 5);
+    ctxt.fillText('A', can.width / 2 - 5, can.height / 2 - 160);
+    ctxt.fillText('C', can.width / 2 + 270, can.height / 2 + 5);
+    ctxt.fillText('D', can.width / 2 + 7 + (150 * Math.cos(Math.PI / 6)), can.height / 2 - (150 * Math.sin(Math.PI / 6)));
+    ctxt.fillText('B', can.width / 2 + 7 + (150 * Math.cos(Math.PI / 6)), can.height / 2 + 10 + (150 * Math.sin(Math.PI / 6)));
+    ctxt.fillText('E', can.width / 2 - 5, can.height / 2 + 170);
+};
+
+function drawBlueArc(can, ctxt) {
+    ctxt.strokeStyle = 'green';
+    ctxt.setLineDash([0]);
+    ctxt.lineWidth = 4;
+    ctxt.beginPath();
+    ctxt.arc(can.width / 2, can.height / 2, 150, -Math.PI / 6, Math.PI / 6);
+    ctxt.stroke();
+};
+
+canvas.onmouseover = function() {
+    sec_tm.strokeStyle = 'green';
+    sec_tm.setLineDash([4]);
+    sec_tm.beginPath();
+    sec_tm.moveTo(canvas.width / 2, canvas.height / 2 - 150);
+    sec_tm.lineTo(canvas.width / 2 + (150 * Math.cos(Math.PI / 6)), canvas.height / 2 + (150 * Math.sin(Math.PI / 6)));
+    sec_tm.stroke();
+    sec_tm.beginPath();
+    sec_tm.moveTo(canvas.width / 2, canvas.height / 2 + 150);
+    sec_tm.lineTo(canvas.width / 2 + (150 * Math.cos(Math.PI / 6)), canvas.height / 2 - (150 * Math.sin(Math.PI / 6)));
+    sec_tm.stroke();
+    drawText(canvas, sec_tm);
+    drawBlueArc(canvas, sec_tm);
+};
+
+canvas.onmouseout = function() {
+    clicked = 0;
+    sec_tm.clearRect(0, 0, 600, 400);
+    sec_tm.strokeStyle = 'black';
+    sec_tm.fillStyle = 'black';
+    sec_tm.setLineDash([0]);
+    sec_tm.lineWidth = 1;
+    drawCircle(canvas, sec_tm);
+    drawPoints(canvas, sec_tm);
+    drawLines(canvas, sec_tm);
+};
+
+canvas.onclick = function() {
+    clicked += 1;
+    if (clicked === 1) {
+        sec_tm.beginPath();
+        sec_tm.strokeStyle='blue';
+        sec_tm.lineWidth = 3;
+        sec_tm.moveTo(canvas.width / 2 + 260, canvas.height / 2);
+        sec_tm.lineTo(canvas.width / 2, canvas.height / 2 + 150);
+        sec_tm.moveTo(canvas.width / 2 + 260, canvas.height / 2);
+        sec_tm.lineTo(canvas.width / 2, canvas.height / 2 - 150);
+        sec_tm.stroke();
+    }
+    else if (clicked === 2) {
+        sec_tm.beginPath();
+        sec_tm.strokeStyle='red';
+        sec_tm.lineWidth = 3;
+        sec_tm.moveTo(canvas.width / 2 + (150 * Math.cos(Math.PI / 6)), canvas.height / 2 + (150 * Math.sin(Math.PI / 6)));
+        sec_tm.lineTo(canvas.width / 2, canvas.height / 2 - 150);
+        sec_tm.moveTo(canvas.width / 2, canvas.height / 2 + 150);
+        sec_tm.lineTo(canvas.width / 2 + (150 * Math.cos(Math.PI / 6)), canvas.height / 2 - (150 * Math.sin(Math.PI / 6)));
+        sec_tm.stroke();
+    }
+    else if (clicked === 3) {
+        sec_tm.beginPath();
+        sec_tm.strokeStyle='yellow';
+        sec_tm.lineWidth = 3;
+        sec_tm.moveTo(canvas.width / 2 + 260, canvas.height / 2);
+        sec_tm.lineTo(canvas.width / 2 + (150 * Math.cos(Math.PI / 6)), canvas.height / 2 + (150 * Math.sin(Math.PI / 6)));
+        sec_tm.moveTo(canvas.width / 2 + 260, canvas.height / 2);
+        sec_tm.lineTo(canvas.width / 2 + (150 * Math.cos(Math.PI / 6)), canvas.height / 2 - (150 * Math.sin(Math.PI / 6)));
+        sec_tm.stroke();
+    }
+    else {
+    clicked = 0;
+    sec_tm.clearRect(0, 0, 600, 400);
+    sec_tm.strokeStyle = 'black';
+    sec_tm.fillStyle = 'black';
+    sec_tm.setLineDash([0]);
+    sec_tm.lineWidth = 1;
+    drawCircle(canvas, sec_tm);
+    drawPoints(canvas, sec_tm);
+    drawLines(canvas, sec_tm);
+    sec_tm.strokeStyle = 'green';
+    sec_tm.setLineDash([4]);
+    sec_tm.beginPath();
+    sec_tm.moveTo(canvas.width / 2, canvas.height / 2 - 150);
+    sec_tm.lineTo(canvas.width / 2 + (150 * Math.cos(Math.PI / 6)), canvas.height / 2 + (150 * Math.sin(Math.PI / 6)));
+    sec_tm.stroke();
+    sec_tm.beginPath();
+    sec_tm.moveTo(canvas.width / 2, canvas.height / 2 + 150);
+    sec_tm.lineTo(canvas.width / 2 + (150 * Math.cos(Math.PI / 6)), canvas.height / 2 - (150 * Math.sin(Math.PI / 6)));
+    sec_tm.stroke();
+    drawText(canvas, sec_tm);
+    drawBlueArc(canvas, sec_tm);
+    }
+};
+
+drawCircle(canvas, sec_tm);
+drawPoints(canvas, sec_tm);
+drawLines(canvas, sec_tm);
+</script>
+</html>
