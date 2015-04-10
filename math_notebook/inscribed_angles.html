@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta name='description' content='Engagingly illustrated geometry proofs in narrative form.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>Inscribed Angle Theorem (HSG.C.A.2)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({messageStyle: "none"});
+</script>
+
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0;
+   list-style: none;
+}
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+button {
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#problem p {
+   font-family:'Indie Flower';
+   font-weight:400;
+   margin-right:600px;
+   text-align:justify;
+}
+
+#Questions {
+   padding:10px 10px 0px 10px;
+   background-color:#fff5f1;
+   border-radius:5px;
+   margin-left:20px;
+   margin-right:100px;
+}
+
+#Questions li {
+   font-family:'Arial', sans-serif;
+   font-size:1.2em;
+   padding-bottom:40px;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+   text-align:justify;
+   margin-right:100px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#desmos {
+   border:0px solid #ffffff; 
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;"
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+table, tr, th, td {
+   margin:auto;
+}
+
+th, td {
+   width:33%;
+   padding-left:20px;
+   padding-right:50px;
+   padding-bottom:20px;
+   font-family:'Josefin Sans';
+   text-align:justify;
+   font-size:1.2em;
+   line-height:1.4em;
+   font-weight:600;
+   vertical-align:top;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:20px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+    margin-right:100px;
+}
+
+#ggbra {
+   float:right;
+}
+
+#imgnorm {
+   border:2px solid black;
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;
+   margin-left:20px;
+   margin-right:20px;
+   margin-bottom:10px;
+   float:left;
+}
+
+#imgright {
+   float:right; 
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+}
+
+#imgtbl {
+   padding-top:5px;
+   padding-bottom:5px;
+   width:75%;
+}
+
+#trinketright {
+   float:right;
+   margin-left:30px;
+   margin-right:100px;
+   margin-top:15px;
+   margin-bottom:15px;
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+
+#trinket {
+   border:1px solid green;
+   border-radius:3px;
+   box-shadow: 5px 5px 5px  #888888;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home' target='_blank'>Home</a></li>
+</div>
+
+<body>
+
+<h1>The Inscribed Angle Theorem</h1>
+<center><iframe id="desmos" width="900" height="500" src="https://www.desmos.com/calculator/a2iy63xfcx"></iframe></center>
+<article>
+<section id="Introduction">
+
+<p>Check out the demo above and fiddle with the sliders for just a minute to see how they affect the diagram. The "a" and "b" sliders control the sides of the central angle (the angle 
+
+with red sides)--and increase and decrease its measure. The value <i>O</i> on Line 8 shows the measure of the central angle. The "c" slider controls the vertex of the inscribed angle 
+
+(the angle with the dashed sides), and the "r" slider increases and decreases the size of the circle. </p>
+
+<p>The idea here is to get close to demonstrating the inscribed angle theorem, which says that the measure of the inscribed angle (dashed sides) is always half the measure of the 
+
+central angle (red sides). It seems that this is true for <u>most</u> of the positions you can get to above, but it certainly doesn't seem true for every position (like when \(\small
+
+\mathtt{a = 0, b = -2.2, c = -1}\)).
+</section>
+<br>
+<hr></hr>
+<section id="Setup">
+<h2>The Sorta Kinda Proof</h2>
+<p>The way that this is typically done is to look at 3 different cases (shown below)--one where the center of the circle is inside the inscribed angle; one where it's outside the angle, and 
+
+one where the center lies on one of the sides of the inscribed angle. Notice that we get to use the Greek letters alpha (\(\small\mathtt{\alpha}\)) and beta (\(\small\mathtt{\beta}\)) in 
+
+order to make this seem really cool and sophisticated.</p>
+
+<table>
+<tr>
+<th><img id="imgnorm" src="https://lh3.googleusercontent.com/-WP6-jj3vhRA/VSdI2ZwlZpI/AAAAAAAASII/1ujrR6vfZFQ/w596-h641-no/inscribed_inside.png" width=298 
+
+height=320 /></th>
+<th><img id="imgnorm" src="https://lh3.googleusercontent.com/-KgJxvwH5D1c/VSdI2eVCy_I/AAAAAAAASJI/_zM00tfn6eA/w596-h641-no/inscribed_outside.png" width=298 
+
+height=320 /></th>
+<th><img id="imgnorm" src="https://lh3.googleusercontent.com/-ZeeaEMHbFBU/VSdI2dIx_NI/AAAAAAAASJA/OHSg302qV9I/w596-h641-no/inscribed_on.png" width=298 
+
+height=320 /></th></tr>
+<tr><th><center>Inside the Angle</center></th><th><center>Outside the Angle</center></th><th><center>On the Line</center></th>
+</tr>
+
+<tr><td>First, construct a diameter that runs through the vertex of the inscribed angle (and of course the center). In this case, the green dashed line segment, \(\overline{\small\mathtt
+
+{BQ}}\), is our diameter.
+<center><img id="imgtbl" src="https://lh6.googleusercontent.com/-MADTG7TUnQY/VSdI2gGu5UI/AAAAAAAASIQ/Jk64GenQwJ0/w609-h645-no/inside_2.png" /></center>
+This makes \(\overline{\small\mathtt{OB}}\) a radius, so \(\overline{\small\mathtt{OB}} \cong \overline{\small\mathtt{OR}} \cong \overline{\small\mathtt{OS}}\).
+<br><br>
+The <a href="http://www.icoachmath.com/math_dictionary/Base_Angle_Theorem.html" target="blank">base angle theorem</a> tells us that if two sides of a triangle are congruent, 
+
+then the angles opposite those sides are also congruent. The congruent radii give us 2 pairs of congruent angles, as you can see below: \(\small\measuredangle\mathtt{OBR} \cong 
+
+\small\measuredangle\mathtt{ORB}\), and \(\small\measuredangle\mathtt{OBS} \cong \small\measuredangle\mathtt{OSB}\).
+<center><img id="imgtbl" src="https://lh3.googleusercontent.com/-2fsoChvWE-g/VSdI2wjyXXI/AAAAAAAASIc/XFo-_F4h-Cg/w617-h665-no/inside_3.png" /></center>
+It's tempting for me to think, by the way, that all of the shaded angles above are congruent, because they are all opposite the radiuses, which are all congruent. But that's not true! 
+
+<br><br>
+Anyway, although I deleted the \(\small\mathtt{\alpha}\) and \(\small\mathtt{\beta}\) above to make the diagram cleaner, I hope you can see that the measure of the inscribed angle, 
+
+\(\small\measuredangle\mathtt{B}\), is 1 pink + 1 green. Now we have to show that the measure of the central angle is twice that, or 2 &times (pink + green), or 2(pink) + 2(green).
+<center><img id="imgtbl" src="https://lh3.googleusercontent.com/-jfx83jduqR8/VSdI26w0ebI/AAAAAAAASIw/kBfl-kjIoEw/w617-h665-no/inside_4.png" /></center>
+And so it is! Because of the <a href="http://hotmath.com/hotmath_help/topics/exterior-angle-theorem.html" target="blank">exterior angle theorem</a>, we know that the measure of 
+
+\(\small\measuredangle\mathtt{SOQ}\) is equal to pink + pink and the measure of \(\small\measuredangle\mathtt{ROQ}\) is equal to green + green. This means that the central angle, 
+
+\(\small\measuredangle\mathtt{SOR}\), has a measure that is twice the measure of the inscribed angle, \(\small\measuredangle\mathtt{SBR}\).</td>
+
+<td>Diameter \(\overline{\small\mathtt{OB}}\) again reveals some congruent radii, marked with red tick marks. The base angle theorem also reveals some congruent angles--marked 
+
+again in pink and green. 
+<center><img id="imgtbl" src="https://lh6.googleusercontent.com/-ZZwZFOtIbrc/VSdI3szWuHI/AAAAAAAASI4/PU9MlgHHYZ4/w617-h657-no/outside_1.png" /></center>
+Once we've got this puppy thoroughly marked up, we don't need to do anything else except remember that the sum of the measures of the interior angles of a triangle is \(\small
+
+\mathtt{180^\circ}\). But, let's label some vertices to make this easier to talk about:
+<center><img id="imgtbl" src="https://lh4.googleusercontent.com/-X3WW-VrFOSk/VSdI3z6o7WI/AAAAAAAASI8/2Ret9-x7FSg/w617-h657-no/outside_2.png" /></center>
+Notice that \(\small\mathtt{\beta}\) = green. And, just for convenience, we make use of the Greek letter gamma (\(\small\mathtt{\gamma}\)).<br><br>
+For \(\small\Delta\mathtt{JOB}\), 2(pink) + \(\small\mathtt{\alpha}\) + \(\small\mathtt{\gamma}\) = \(\small\mathtt{180^\circ}\).<br>
+For \(\small\Delta\mathtt{BOD}\), 2(pink) + 2\(\small\mathtt{\beta}\) + \(\small\mathtt{\gamma}\) = \(\small\mathtt{180^\circ}\).
+<br><br>
+The only difference between those equations is that one uses \(\small\mathtt{\alpha}\) and the other uses 2\(\small\mathtt{\beta}\). This means that 2\(\small\mathtt{\beta}\) = 
+
+\(\small\mathtt{\alpha}\), or 2 times the measure of the inscribed angle is equal to the measure of the central angle.</td>
+
+<td>This case is the most straightforward--at least as I've drawn it here. The base angle theorem once again allows us to mark congruent angles.
+<center><img id="imgtbl" src="on_1.png" /></center>
+The angles marked \(\small\mathtt{\alpha}\) and \(\small\mathtt{\gamma}\) together form a <a href="http://www.mathopenref.com/linearpair.html" target="blank">linear pair</a>, 
+
+which means they "add up to a line." In more mathy speak, those two angle measures together have a sum of \(\small\mathtt{180^\circ}\).
+<br><br>
+So, we get  \(\small\mathtt{\alpha} + \small\mathtt{\gamma} = \small\mathtt{180^\circ}\) and also, looking at the triangle, we see that 2\(\small\mathtt{\beta} + \small\mathtt
+
+{\gamma} = \small\mathtt{180^\circ}\).
+<br><br>
+Thus, 2\(\small\mathtt{\beta} = \small\mathtt{\alpha}\), or the measure of the central angle is twice that of the measure of the inscribed angle.</td></tr>
+</table>
+
+</section>
+<br>
+<hr></hr>
+<section id="Finale">
+<h2>The Remaining Problem</h2>
+<img id="imgright" src="minor_arc.png" width="240" height="227" />
+<p>When you played with the inscribed angle on the Desmos graph above, you saw that there were situations when the inscribed angle was definitely not half the measure of the 
+
+central angle. This was when the inscribed angle was "facing toward" the central angle, as you can see at the right.</p>
+
+<p>You can see some of the more technical language for this exception <a href="http://www.mathopenref.com/arccentralangletheorem.html" target="blank">at this link</a>, where, 
+
+incidentally, the theorem is called the central angle theorem.</p>
+
+</article>
+<br><br>
+<hr></hr>
+</body>
+</html>
