@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content='Engagingly illustrated geometry proofs in narrative form.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<title>The Pythagollelogrammean Theorem (HSG.CO.C.10)</title>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none"
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+
+#euclid {
+   float:right; 
+   opacity:0.5; 
+   margin:15px 200px 30px 30px; 
+   border-radius:10px;
+   clip-path: circle(30px at 35px 35px);
+}
+
+
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+iframe {
+   display:block;
+   margin:30px auto 30px auto;
+   border:0px solid #ffffff; 
+   border-radius:5px;
+   box-shadow: 5px 5px 5px  #888888;"
+}
+
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+
+#Setup li {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:80px;
+   text-align:justify;
+   margin-right:100px;
+   margin-bottom:30px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+
+#blockquote {
+   float:left;
+   margin-top:0.5em;
+   margin-right:10em;
+   margin-bottom:1.4em;
+   margin-left:5em;
+   font-family:'Neucha';
+   text-align:justify;
+   font-size:1.6em;
+   line-height:1.2em;
+   box-shadow:1px 1px 1px 1px #f0f0f0;
+   border-left:4px solid #CC9900;
+   border-radius:5px;
+   padding:10px 20px 10px 20px;
+   -webkit-transition: all 0.5s linear;
+   -o-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+   transition: all 0.5s linear;
+}
+
+#blockquote:hover {
+   background-color:#f8f8f8;
+   padding:20px;
+   box-shadow:2px 2px 2px 1px #888888;
+   border-radius:10px;
+}
+
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+
+p::first-letter {
+   font-size:120%;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+}
+
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+
+hr {
+   margin-bottom:40px;
+   margin-right:200px;
+}
+
+h2 {
+   font-family:'Neucha';
+}
+
+#canvas1, #canvas2, #canvas3, #canvas4, #canvas5{
+   position:relative;
+   display:inline-block;
+   width:300px;
+   height:300px;
+   background:url(https://lh4.googleusercontent.com/-FMHQh3jc91k/VSXiL2nXMkI/AAAAAAAASA8/Uo6a8FboNGA/w800-h567-no/chalk.jpg);
+   box-shadow: 2px 2px 2px #888888;
+   border-radius:10px;
+   margin-left:30px;
+   margin-right:30px;
+   margin-bottom:30px;
+   margin-top:15px;
+}
+
+#canvas5:hover {
+   cursor:pointer;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home'>Home</a></li>
+</div>
+
+<body>
+
+<h1>The Pythagollelogrammean Theorem</h1>
+
+<article>
+<section id="Introduction">
+<img id='euclid' src='https://lh6.googleusercontent.com/-X2e_OAqNKqg/VSXiMrOI7DI/AAAAAAAAR-g/WFXRpEDpw0o/w257-h499-no/euclid.jpg' />
+<p>Well, we've reached the end of Book I of the Elements. We haven't covered every proof and construction in Book I, of course, but we've <a 
+
+href='http://goo.gl/BfPSbq' target='_blank'>talked about</a> 12 of them specifically, mostly from Book I, and have used or given honorable mention to 8 
+
+more.</p>
+
+<p>The last two theorems at the end of Book I involve proofs of the well known Pythagorean Theorem (I.47) and its converse (I.48). But there is a more 
+
+general theorem and proof from <a href='http://en.wikipedia.org/wiki/Pappus_of_Alexandria' target='_blank'>Pappus</a> given in the notes of Heath's 
+
+translation of the Elements, which shows that given any triangle with parallelograms constructed on two of its sides, one can identify a parallelogram 
+
+constructed on the third side which has an area equal to the sum of the areas of the other two parallelograms. The Pythagorean Theorem can be seen, 
+
+then, as a special case of this more general theorem.</p>
+
+</section>
+<br>
+<hr></hr>
+
+<section id="Setup">
+<h2>Pappus Shows Up the Goofy Pythagoreans</h2>
+
+<p>We start with any old triangle, \(\small\Delta\mathtt{ABC}\), and build any old parallelograms on any two of its sides&mdash;in this case, we build 
+
+parallelogram \(\small\mathtt{ADEB}\) on \(\small\overline{\mathtt{AB}}\) and parallelogram \(\small\mathtt{CFGB}\) on \(\small\overline{\mathtt
+
+{BC}}\).</p>
+
+<div style='width:750px; margin-left:auto; margin-right:auto;'>
+<canvas id='canvas1' width='300px' height='300px'>Canvas not supported.</canvas>
+<canvas id='canvas2' width='300px' height='300px'>Canvas not supported.</canvas>
+</div>
+
+<p>We then extend lines \(\small\mathtt{DE}\) and \(\small\mathtt{FG}\) to intersect at a point \(\small\mathtt{H}\). And then a bunch of other stuff. 
+
+Draw \(\small\overline{\mathtt{HK}}\) through point \(\small\mathtt{B}\) to intersect with side \(\small\mathtt{AC}\) at \(\small\mathtt{K}\). Finally, 
+
+construct \(\small\overline{\mathtt{AL}}\) and \(\small\overline{\mathtt{CM}}\) both parallel to \(\small\overline{\mathtt{HK}}\) and join \(\small
+
+\mathtt{L}\) and \(\small\mathtt{M}\) to then form quadrilateral \(\small\mathtt{ALMC}\).</p>
+
+<div style='width:750px; margin-left:auto; margin-right:auto;'>
+<canvas id='canvas3' width='300px' height='300px'>Canvas not supported.</canvas>
+<canvas id='canvas4' width='300px' height='300px'>Canvas not supported.</canvas>
+</div>
+
+<p>We know that \(\small\mathtt{ALHB}\) is a parallelogram, because we constructed its opposite sides to be parallel. So, using <a 
+
+href='http://goo.gl/hKr4rL' target='_blank'>Proposition 34 in Book I</a>, we know that \(\small\overline{\mathtt{AL}} \cong \overline{\mathtt{HB}}\). 
+
+Similarly, \(\small\mathtt{CMHB}\) is a parallelogram, so we know that \(\small\overline{\mathtt{CM}} \cong \overline{\mathtt{HB}}\). This means that 
+
+\(\small\overline{\mathtt{AL}}\) and \(\small\overline{\mathtt{CM}}\) are both congruent and parallel to each other, since they are both congruent and 
+
+parallel to \(\small\overline{\mathtt{HB}}\). Proposition 33, which we haven't discussed, tells us that lines connecting congruent parallel lines are 
+
+themselves congruent and parallel. So, \(\small\overline{\mathtt{LM}} \cong \overline{\mathtt{AC}}\) and \(\small\overline{\mathtt{LM}} \parallel 
+
+\overline{\mathtt{AC}}\), meaning that \(\small\mathtt{ALMC}\) is a parallelogram.</p>
+
+<canvas id='canvas5' width='300px' height='300px' style='float:right; margin-right:200px;'>Canvas not supported.</canvas>
+
+<p>Okey doke. More stuff we can know. Well, Proposition 36 (another one we haven't gone over) tells us that parallelograms that share a base and are 
+
+"in the same parallels" have equal areas. So parallelograms \(\small\mathtt{DABE}\) and \(\small\mathtt{LABH}\) have equal areas, since they share 
+
+\(\small\overline{\mathtt{AB}}\) as a base and are in the parallels \(\small\overleftrightarrow{\mathtt{AB}}\) and \(\small\overleftrightarrow{\mathtt
+
+{DH}}\).</p>
+
+<p>Interestingly, if we draw point \(\small\mathtt{N}\) at the intersection of \(\small\overline{\mathtt{HK}}\) and \(\small\overline{\mathtt{LM}}\), 
+
+we can deduce that parallelograms \(\small\mathtt{LABH}\) and \(\small\mathtt{LAKN}\) are also equal in area, since they share \(\small\overline
+
+{\mathtt{LA}}\) as a base and are in the parallels \(\small\overleftrightarrow{\mathtt{LA}}\) and \(\small\overleftrightarrow{\mathtt{HK}}\). You can 
+
+click to turn the chalkboard at the right if you want to get a good look at that.</p>
+
+<p>Well, since parallelograms \(\small\mathtt{DABE}\) and \(\small\mathtt{LABH}\) have equal areas, and parallelograms \(\small\mathtt{LABH}\) and 
+
+\(\small\mathtt{LAKN}\) are also equal in area, we can say that parallelograms \(\small\mathtt{DABE}\) and \(\small\mathtt{LAKN}\) are equal in 
+
+area.</p>
+
+
+</section>
+<br>
+<hr></hr>
+
+<section id="Finale">
+<h2>Pappus, Take Us Home</h2>
+
+<div id='blockquote'>For the same reason, the parallelogram \(\small\mathtt{BGFC}\) is equal to the parallelogram \(\small\mathtt{NKCM}\). Therefore 
+
+the sum of the parallelograms \(\small\mathtt{DABE}\), \(\small\mathtt{BGFC}\) is equal to the parallelogram \(\small\mathtt{LACM}\), that is, to the 
+
+parallelogram which is contained by \(\small\mathtt{AC}\), \(\small\mathtt{HB}\) in an angle \(\small\mathtt{LAC}\) which is equal to the sum of the 
+
+angles \(\small\mathtt{BAC}\), \(\small\mathtt{BHD}\).<br><br>
+And this is far more general than what is proved in the Elements about squares in the case of right-angled (triangles). [drops mic]</div>
+
+<p>If you're interested in more extensions of the Pythagorean Theorem, check out the "blob" extension below. And by all means, get your hands on a copy 
+
+of a translation of Euclid's Elements. It's great reading!</p>
+<div><iframe width="560" height="315" src="//www.youtube.com/embed/ItiFO5y36kw" frameborder="0" allowfullscreen></iframe></div>
+</section>
+<br>
+<hr></hr>
+
+<small style='font-family:Josefin Sans; margin-left:100px;'>Image credit: <a href="https://www.flickr.com/photos/garrettc/2335351649" title="Euclid by 
+
+Garrett Coakley, on Flickr">Garrett Coakley</a></small>
+</article>
+</body>
+
+
+<script>
+var canvas1 = document.getElementById('canvas1');
+var contxt1 = canvas1.getContext('2d');
+
+contxt1.beginPath();
+contxt1.strokeStyle = '#E3E8EF';
+contxt1.fillStyle = '#E3E8EF';
+contxt1.lineWidth = 1;
+contxt1.font = '14px Arial';
+
+contxt1.moveTo(60, 270);
+contxt1.lineTo(210, 270);
+contxt1.lineTo(160, 120);
+contxt1.lineTo(60, 270);
+contxt1.stroke();
+
+contxt1.fillText('A', 55, 285);
+contxt1.fillText('C', 205, 285);
+contxt1.fillText('B', 163, 115);
+</script>
+<script>
+var canvas2 = document.getElementById('canvas2');
+var contxt2 = canvas2.getContext('2d');
+
+contxt2.beginPath();
+contxt2.strokeStyle = '#E3E8EF';
+contxt2.fillStyle = '#E3E8EF';
+contxt2.lineWidth = 1;
+contxt2.font = '14px Arial';
+
+contxt2.moveTo(60, 270);
+contxt2.lineTo(210, 270);
+contxt2.lineTo(160, 120);
+contxt2.lineTo(60, 270);
+contxt2.stroke();
+
+contxt2.beginPath();
+contxt2.fillText('A', 55, 285);
+contxt2.fillText('C', 205, 285);
+contxt2.fillText('B', 163, 115);
+
+contxt2.beginPath();
+contxt2.strokeStyle = '#6fe7db';
+contxt2.fillStyle = 'rgba(111,231,219,0.1)';
+
+contxt2.moveTo(60, 270);
+contxt2.lineTo(40, 230);
+contxt2.lineTo(140, 80);
+contxt2.lineTo(160, 120);
+contxt2.stroke();
+contxt2.closePath();
+contxt2.fill();
+
+contxt2.beginPath();
+contxt2.moveTo(210, 270);
+contxt2.lineTo(260, 270);
+contxt2.lineTo(210, 120);
+contxt2.lineTo(160, 120);
+contxt2.stroke();
+contxt2.closePath();
+contxt2.fill();
+
+contxt2.beginPath();
+contxt2.font = '14px Arial';
+contxt2.fillStyle = '#E3E8EF';
+contxt2.fillText('D', 25, 235);
+contxt2.fillText('E', 130, 75);
+contxt2.fillText('G', 210, 115);
+contxt2.fillText('F', 260, 285);
+</script>
+<script>
+var canvas3 = document.getElementById('canvas3');
+var contxt3 = canvas3.getContext('2d');
+
+contxt3.beginPath();
+contxt3.strokeStyle = '#E3E8EF';
+contxt3.fillStyle = '#E3E8EF';
+contxt3.lineWidth = 1;
+contxt3.font = '14px Arial';
+
+contxt3.moveTo(60, 270);
+contxt3.lineTo(210, 270);
+contxt3.lineTo(160, 120);
+contxt3.lineTo(60, 270);
+contxt3.stroke();
+
+contxt3.beginPath();
+contxt3.fillText('A', 55, 285);
+contxt3.fillText('C', 205, 285);
+contxt3.fillText('B', 163, 115);
+
+contxt3.beginPath();
+contxt3.strokeStyle = '#6fe7db';
+contxt3.fillStyle = 'rgba(111,231,219,0.1)';
+
+contxt3.moveTo(60, 270);
+contxt3.lineTo(40, 230);
+contxt3.lineTo(140, 80);
+contxt3.lineTo(160, 120);
+contxt3.stroke();
+contxt3.closePath();
+contxt3.fill();
+
+contxt3.beginPath();
+contxt3.moveTo(210, 270);
+contxt3.lineTo(260, 270);
+contxt3.lineTo(210, 120);
+contxt3.lineTo(160, 120);
+contxt3.stroke();
+contxt3.closePath();
+contxt3.fill();
+
+contxt3.beginPath();
+contxt3.font = '14px Arial';
+contxt3.fillStyle = '#E3E8EF';
+contxt3.fillText('D', 25, 235);
+contxt3.fillText('E', 130, 75);
+contxt3.fillText('G', 210, 115);
+contxt3.fillText('F', 260, 285);
+
+contxt3.beginPath();
+contxt3.strokeStyle = 'rgba(111,231,219,0.8)';
+contxt3.setLineDash([3]);
+contxt3.moveTo(140, 80);
+contxt3.lineTo(200, 0);
+contxt3.moveTo(210, 120);
+contxt3.lineTo(170, 0);
+contxt3.stroke();
+
+contxt3.beginPath();
+contxt3.font = '14px Arial';
+contxt3.setLineDash([1, 0]);
+contxt3.fillStyle = 'rgb(111,231,219)';
+contxt3.arc(179, 28, 3, 0, Math.PI * 2);
+contxt3.fill();
+contxt3.fillText('H', 187, 33);
+</script>
+<script>
+var canvas4 = document.getElementById('canvas4');
+var contxt4 = canvas4.getContext('2d');
+
+contxt4.beginPath();
+contxt4.strokeStyle = '#E3E8EF';
+contxt4.fillStyle = '#E3E8EF';
+contxt4.lineWidth = 1;
+contxt4.font = '14px Arial';
+
+contxt4.moveTo(60, 270);
+contxt4.lineTo(210, 270);
+contxt4.lineTo(160, 120);
+contxt4.lineTo(60, 270);
+contxt4.stroke();
+
+contxt4.beginPath();
+contxt4.fillText('A', 55, 285);
+contxt4.fillText('C', 205, 285);
+contxt4.fillText('B', 163, 115);
+contxt4.fillText('L', 75, 163);
+contxt4.fillText('M', 230, 163);
+
+contxt4.beginPath();
+contxt4.strokeStyle = '#f2a3bd';
+contxt4.moveTo(179, 28);
+contxt4.lineTo(122, 304);
+contxt4.stroke();
+
+contxt4.beginPath();
+contxt4.fillStyle = '#f2a3bd';
+contxt4.arc(129.0217, 270, 3, 0, Math.PI * 2);
+contxt4.fill();
+contxt4.fillText('K', 129, 285);
+
+contxt4.beginPath();
+contxt4.strokeStyle = '#6fe7db';
+contxt4.fillStyle = 'rgba(111,231,219,0.1)';
+
+contxt4.moveTo(60, 270);
+contxt4.lineTo(40, 230);
+contxt4.lineTo(140, 80);
+contxt4.lineTo(160, 120);
+contxt4.stroke();
+contxt4.closePath();
+contxt4.fill();
+
+contxt4.beginPath();
+contxt4.moveTo(210, 270);
+contxt4.lineTo(260, 270);
+contxt4.lineTo(210, 120);
+contxt4.lineTo(160, 120);
+contxt4.stroke();
+contxt4.closePath();
+contxt4.fill();
+
+contxt4.beginPath();
+contxt4.font = '14px Arial';
+contxt4.fillStyle = '#E3E8EF';
+contxt4.fillText('D', 25, 235);
+contxt4.fillText('E', 130, 75);
+contxt4.fillText('G', 210, 115);
+contxt4.fillText('F', 260, 285);
+
+contxt4.beginPath();
+contxt4.strokeStyle = 'rgba(111,231,219,0.8)';
+contxt4.setLineDash([3]);
+contxt4.moveTo(140, 80);
+contxt4.lineTo(200, 0);
+contxt4.moveTo(210, 120);
+contxt4.lineTo(170, 0);
+contxt4.stroke();
+
+contxt4.beginPath();
+contxt4.setLineDash([1, 0]);
+contxt4.fillStyle = 'rgb(111,231,219)';
+contxt4.arc(179, 28, 3, 0, Math.PI * 2);
+contxt4.fill();
+contxt4.fillText('H', 187, 33);
+
+contxt4.beginPath();
+contxt4.strokeStyle = '#f2a3bd';
+contxt4.fillStyle = 'rgba(242,163,189,0.2)';
+contxt4.setLineDash([3]);
+contxt4.moveTo(60, 270);
+contxt4.lineTo(80.587, 170);
+contxt4.lineTo(226, 170);
+contxt4.lineTo(210, 270);
+contxt4.stroke();
+contxt4.closePath();
+contxt4.fill();
+</script>
+<script>
+
+var canvas5 = document.getElementById('canvas5');
+var contxt5 = canvas5.getContext('2d');
+
+var count = 0;
+
+contxt5.beginPath();
+contxt5.strokeStyle = '#E3E8EF';
+contxt5.fillStyle = '#E3E8EF';
+contxt5.lineWidth = 1;
+contxt5.font = '14px Arial';
+
+contxt5.moveTo(60, 270);
+contxt5.lineTo(210, 270);
+contxt5.lineTo(160, 120);
+contxt5.lineTo(60, 270);
+contxt5.stroke();
+
+contxt5.beginPath();
+contxt5.fillText('A', 55, 285);
+contxt5.fillText('C', 205, 285);
+contxt5.fillText('B', 163, 115);
+contxt5.fillText('L', 75, 163);
+contxt5.fillText('M', 230, 163);
+
+contxt5.beginPath();
+contxt5.strokeStyle = '#f2a3bd';
+contxt5.moveTo(179, 28);
+contxt5.lineTo(122, 304);
+contxt5.stroke();
+
+contxt5.beginPath();
+contxt5.fillStyle = '#f2a3bd';
+contxt5.arc(129.0217, 270, 3, 0, Math.PI * 2);
+contxt5.arc(150, 170, 3, 0, Math.PI * 2);
+contxt5.fill();
+contxt5.fillText('K', 129, 285);
+contxt5.fillText('N', 155, 185);
+
+
+contxt5.beginPath();
+contxt5.strokeStyle = '#6fe7db';
+contxt5.fillStyle = 'rgba(111,231,219,0.1)';
+
+contxt5.moveTo(60, 270);
+contxt5.lineTo(40, 230);
+contxt5.lineTo(140, 80);
+contxt5.lineTo(160, 120);
+contxt5.stroke();
+contxt5.closePath();
+contxt5.fill();
+
+contxt5.beginPath();
+contxt5.moveTo(210, 270);
+contxt5.lineTo(260, 270);
+contxt5.lineTo(210, 120);
+contxt5.lineTo(160, 120);
+contxt5.stroke();
+contxt5.closePath();
+contxt5.fill();
+
+contxt5.beginPath();
+contxt5.font = '14px Arial';
+contxt5.fillStyle = '#E3E8EF';
+contxt5.fillText('D', 25, 235);
+contxt5.fillText('E', 130, 75);
+contxt5.fillText('G', 210, 115);
+contxt5.fillText('F', 260, 285);
+
+contxt5.beginPath();
+contxt5.strokeStyle = 'rgba(111,231,219,0.8)';
+contxt5.setLineDash([3]);
+contxt5.moveTo(140, 80);
+contxt5.lineTo(200, 0);
+contxt5.moveTo(210, 120);
+contxt5.lineTo(170, 0);
+contxt5.stroke();
+
+contxt5.beginPath();
+contxt5.setLineDash([1, 0]);
+contxt5.fillStyle = 'rgb(111,231,219)';
+contxt5.arc(179, 28, 3, 0, Math.PI * 2);
+contxt5.fill();
+contxt5.fillText('H', 187, 33);
+
+contxt5.beginPath();
+contxt5.strokeStyle = '#f2a3bd';
+contxt5.fillStyle = 'rgba(242,163,189,0.2)';
+contxt5.setLineDash([3]);
+contxt5.moveTo(60, 270);
+contxt5.lineTo(80.587, 170);
+contxt5.lineTo(226, 170);
+contxt5.lineTo(210, 270);
+contxt5.stroke();
+contxt5.closePath();
+contxt5.fill();
+</script>
+</html>
