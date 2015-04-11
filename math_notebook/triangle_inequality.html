@@ -331,9 +331,7 @@ var open4 = false;
 function showFootnote1() {
    open1 = !open1;
    if (open1 === true) {
-      var text = "<span id='citation'>(From Heath\'s translation of the <em>Elements</em>, which we cited <a href='http://goo.gl/hUd0rS' target 
-
-='blank'>here</a>.)</span>";
+      var text = "<span id='citation'>(From Heath\'s translation of the <em>Elements</em>.)</span>";
       document.getElementById('footnote1').innerHTML = text;
    }
    else document.getElementById('footnote1').innerHTML = '*';
@@ -342,9 +340,7 @@ function showFootnote1() {
 function showFootnote2() {
     open2 = !open2;
     if (open2 === true) {
-        document.getElementById('footnote2').innerHTML = "<span id='citation'>(This comes from Proposition 5, the Isosceles Base Angle 
-
-Theorem.)</span>";
+        document.getElementById('footnote2').innerHTML = "<span id='citation'>(This comes from Proposition 5, the Isosceles Base Angle Theorem.)</span>";
     }
     else {
         document.getElementById('footnote2').innerHTML = '*';
