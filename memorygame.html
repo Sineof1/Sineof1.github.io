@@ -194,11 +194,18 @@ function goToNextStudy() {
    endTest1 = new Date().getTime();
    var evenList = [];
    var oddList = [];
+   var usedList = [];
    $('table[name="list2"] .list_inps:even').each(function() {evenList.push($.trim($(this).val().toLowerCase()));});
    $('table[name="list2"] .list_inps:odd').each(function() {oddList.push($.trim($(this).val().toLowerCase()));});
    for (var a = 0; a < 7; a++) {
-      if (evenList[a] in list1_dict && list1_dict[evenList[a]] === oddList[a]) res1KeyItem += 1;
-      else if (oddList[a] in list1_dict && list1_dict[oddList[a]] === evenList[a]) res1ItemKey += 1;
+      if (evenList[a] in list1_dict && list1_dict[evenList[a]] === oddList[a] && $.inArray(evenList[a], usedList) == -1) {
+         res1KeyItem += 1;
+         usedList.push(evenList[a]);
+      }
+      else if (oddList[a] in list1_dict && list1_dict[oddList[a]] === evenList[a] && $.inArray(oddList[a], usedList) == -1) {
+         res1ItemKey += 1;
+         usedList.push(oddList[a]);
+      }
    }
    $('#platform_IMG').css({
       "-webkit-animation-name": 'goNextStudy',
@@ -236,11 +243,18 @@ function goToResults() {
    endTest2 = new Date().getTime();
    var evenList = [];
    var oddList = [];
+   var usedList = [];
    $('table[name="list4"] .list_inps:even').each(function() {evenList.push($.trim($(this).val().toLowerCase()));});
    $('table[name="list4"] .list_inps:odd').each(function() {oddList.push($.trim($(this).val().toLowerCase()));});
    for (var a = 0; a < 7; a++) {
-      if (evenList[a] in list2_dict && list2_dict[evenList[a]] === oddList[a]) res2KeyItem += 1;
-      else if (oddList[a] in list2_dict && list2_dict[oddList[a]] === evenList[a]) res2ItemKey += 1;
+      if (evenList[a] in list2_dict && list2_dict[evenList[a]] === oddList[a] && $.inArray(evenList[a], usedList) == -1) {
+         res2KeyItem += 1;
+         usedList.push(evenList[a]);
+      }
+      else if (oddList[a] in list2_dict && list2_dict[oddList[a]] === evenList[a] && $.inArray(oddList[a], usedList) == -1) {
+         res2ItemKey += 1;
+         usedList.push(oddList[a]);
+      }
    }
    $('#platform_IMG').css({
       "-webkit-animation-name": 'goResults',
