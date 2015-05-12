@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content='Engagingly illustrated proofs from Euclid's Elements in narrative form.'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/javascript"src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+#Setup li {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:100px;
+   margin-bottom:30px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+.blockquote {
+   float:left;
+   margin-top:0.5em;
+   margin-right:10em;
+   margin-bottom:1.4em;
+   margin-left:5em;
+   font-family:'Neucha';
+   text-align:justify;
+   font-size:1.6em;
+   line-height:1.2em;
+   box-shadow:1px 1px 1px 1px #f0f0f0;
+   border-left:4px solid #CC9900;
+   border-radius:5px;
+   padding:10px 20px 10px 20px;
+   -webkit-transition: all 0.5s linear;
+   -o-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+   transition: all 0.5s linear;
+}
+.blockquote:hover {
+   background-color:#f8f8f8;
+   padding:20px;
+   box-shadow:2px 2px 2px 1px #888888;
+   border-radius:10px;
+}
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+p::first-letter {
+   font-size:120%;
+}
+
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+}
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+hr {
+   margin-bottom:40px;
+   margin-right:200px;
+}
+h2 {
+   font-family:'Neucha';
+}
+#circ_open {
+   display:block;
+   width:25%;
+   float:right;
+   opacity:0;
+   margin:15px 150px 15px 50px;
+}
+#svg_draw {
+   display:block;
+   margin-left:auto;
+   margin-right:auto;
+}
+#img_right {
+   float:right;
+   margin:15px 200px 15px 30px;
+   border-radius:10px;
+}
+
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home'>Home</a></li>
+</div>
+
+<body>
+
+<h1>Touching Circles</h1>
+<canvas id='circ_open'>Canvas not supported.</canvas>
+<article>
+<section id="Introduction">
+<p>The circles shown are drawn by your computer with more or less randomly placed center points (within the space at the right) and more or less
+random radii. The only mathematical condition is that each pair of circles touches (externally) at exactly one point.</p>
+
+<p>After the circles are drawn, a dashed line segment is drawn connecting the two circle centers. Does this segment always pass through the point at which the circles touch?</p>
+
+<p>Seems to. Almost seems like it's obvious that this would be true. Nevertheless, there is a proof composed by Euclid, which we'll take a look at below. But you should definitely take a crack at seeing how you would begin this proof&mdash;or go about completing it.</p>
+</section>
+<br>
+<hr></hr>
+
+<section id="Setup">
+<h2>Proof By Contradiction Again</h2>
+
+<p>Euclid starts with two circles, \(\small\mathtt{ABC}\) and \(\small\mathtt{ADE}\), with "centers" \(\small\mathtt{F}\) and \(\small\mathtt{G}\) as shown below.</p>
+<svg id='svg_draw' width='400px' height='200px' viewBox='0 0 400 200' style='stroke:black;fill:none;font-size:10pt;' xmlns='http://www.w3.org/2000/svg'>
+<circle cx='110' cy='100' r='90' />
+<circle cx='290' cy='100' r='90' />
+<circle cx='200' cy='100' r='2' style='fill:black;' />
+
+<circle cx='110' cy='123' r='2' />
+<circle cx='290' cy='123' r='2' />
+<circle cx='51' cy='32' r='2' style='fill:black;' />
+<circle cx='197' cy='123' r='2' style='fill:black;' />
+<circle cx='203' cy='123' r='2' style='fill:black;' />
+<circle cx='380' cy='100' r='2' style='fill:black;' />
+
+<text x='185' y='95' style='fill:black;'>A</text>
+<text x='36' y='27' style='fill:black;'>B</text>
+<text x='180' y='120' style='fill:black;'>C</text>
+<text x='215' y='120' style='fill:black;'>D</text>
+<text x='385' y='95' style='fill:black;'>E</text>
+<text x='95' y='118' style='fill:black;'>F</text>
+<text x='300' y='118' style='fill:black;'>G</text>
+</svg>
+<p>I put "centers" in quotes because the placement of these points is fudged a bit, although we're still technically thinking of these as the centers of the two circles. The reason for this is that Euclid supposes the opposite of what he's trying to prove&mdash;he imagines that the segment that connects the centers of the circles does NOT pass through the point where the circles touch (point \(\small\mathtt{A}\)).</p>
+
+<svg width='400px' height='200px' viewBox='0 0 400 200' style='stroke:black;fill:none;font-size:10pt;float:left;margin:15px 30px 15px 100px;' xmlns='http://www.w3.org/2000/svg'>
+<circle cx='110' cy='100' r='90' />
+<circle cx='290' cy='100' r='90' />
+<circle cx='200' cy='100' r='2' style='fill:black;' />
+
+<circle cx='110' cy='123' r='2' />
+<circle cx='290' cy='123' r='2' />
+<circle cx='51' cy='32' r='2' style='fill:black;' />
+<circle cx='197' cy='123' r='2' style='fill:black;' />
+<circle cx='203' cy='123' r='2' style='fill:black;' />
+<circle cx='380' cy='100' r='2' style='fill:black;' />
+
+<text x='185' y='95' style='fill:black;'>A</text>
+<text x='36' y='27' style='fill:black;'>B</text>
+<text x='180' y='120' style='fill:black;'>C</text>
+<text x='215' y='120' style='fill:black;'>D</text>
+<text x='385' y='95' style='fill:black;'>E</text>
+<text x='95' y='118' style='fill:black;'>F</text>
+<text x='300' y='118' style='fill:black;'>G</text>
+
+<line x1='112' y1='123' x2='287' y2='123' />
+<line x1='112' y1='123' x2='200' y2='100' stroke-dasharray='5, 5' />
+<line x1='200' y1='100' x2='289' y2='123' stroke-dasharray='5, 5' />
+
+</svg>
+<p>Instead, he supposes that this segment passes through points \(\small\mathtt{C}\) and \(\small\mathtt{D}\) to connect the two "centers" \(\small\mathtt{F}\) and \(\small\mathtt{G}\). Then he forms a triangle by drawing \(\small\mathtt{\overline{AF}}\) and \(\small\mathtt{\overline{AG}}\).</p>
+
+<p>Now we can do some deducing.</p>
+
+<p>We see that because they are supposedly radii of the same circle, \(\small\mathtt{m\overline{FA}}\) = \(\small\mathtt{m\overline{FC}}\). It would also be true, then, that \(\small\mathtt{m\overline{GA}}\) = \(\small\mathtt{m\overline{GD}}\) in the other circle. And this would mean that \(\small\mathtt{m\overline{FA}}\) + \(\small\mathtt{m\overline{GA}}\) = \(\small\mathtt{m\overline{FC}}\) + \(\small\mathtt{m\overline{GD}}\).</p>
+
+<p>Recall, though, the <a href='http://sineof1.github.io/math_notebook/triangle_inequality' target='_blank'>Triangle Inequality Theorem</a>, which tells us that the shortest distance between two sides in Euclidean geometry is a straight line. So, we know that side \(\small\mathtt{FG}\) must be shorter than \(\small\mathtt{FA}\) + \(\small\mathtt{AG}\). But according to our analysis above, side \(\small\mathtt{FG}\) comes out to be longer than \(\small\mathtt{FA}\) + \(\small\mathtt{AG}\)! Because its length is equal to \(\small\mathtt{FA}\) + \(\small\mathtt{AG}\), plus a little gap between points \(\small\mathtt{C}\) and \(\small\mathtt{D}\).</p>
+
+<p>Since this is a contradiction, the proposition that Euclid was "trying" to prove false is proven true: "If two circles touch one another externally, the straight line joining their centers will pass through the point of contact."</p>
+</section>
+<br>
+<hr></hr>
+
+<section id="Finale">
+<img id='img_right' src='https://lh4.googleusercontent.com/-6XSZV1OwW9Q/VVJ3pmIPcFI/AAAAAAAAShw/pG-BBk_lb9E/w870-h762-no/touching_circles.gif' width='367px' height='322px'>
+<h2>Just Because An "Expert" Said It . . .</h2>
+
+<p>. . . doesn't mean that anyone must or should shut off their brains to receive, uncorrupted, the wisdom from the player who currently occupies the stage. As we have <a href='http://sineof1.github.io/math_notebook/sas' target='_blank'>already seen with Euclid</a>, there are assumptions and imprecisions in these proofs. I'll leave you with this one from the notes in Book III (Proposition 12), which I am as of yet still wrapping my head around:</p>
+
+<div class='blockquote'>Euclid's proof is valid provided only that, if \(\small\mathtt{FG}\), joining the assumed centres, meets the circle with centre \(\small\mathtt{F}\) in \(\small\mathtt{C}\) and the other circle in \(\small\mathtt{D}\), \(\small\mathtt{C}\) is not within the circle \(\small\mathtt{ADE}\) and \(\small\mathtt{D}\) is not within the circle \(\small\mathtt{ABC}\) . . . Now, if \(\small\mathtt{C}\) is within the circle \(\small\mathtt{ADE}\) and \(\small\mathtt{D}\) within the circle \(\small\mathtt{ABC}\), the circles must have cut between \(\small\mathtt{A}\) and \(\small\mathtt{C}\) and between \(\small\mathtt{A}\) and \(\small\mathtt{D}\). Hence, as before, they must also have another corresponding point common on the other side of \(\small\mathtt{CD}\). That is, the circles must have three common points: which is impossible.</div>
+</section>
+<br>
+<hr></hr>
+
+<small style='font-family:Josefin Sans; margin-left:100px;'>Image credit: <a href="https://flic.kr/p/56m2Ke" title="circles by Miles Gehm, on Flickr">Miles Gehm</a></small>
+</article>
+</body>
+</html>
+
+<script>
+$('#circ_open').height($('#circ_open').width());
+$('#circ_open').prop({width : $('#circ_open').width(), height : $('#circ_open').height()});
+var canW = $('#circ_open').width();
+var canH = $('#circ_open').height();
+
+var canvas = document.getElementById('circ_open');
+var context = canvas.getContext('2d');
+
+function reDrawCanvas() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   var randCenterX1 = Math.floor(Math.random() * (canW - 50)) + 25;
+   var randCenterY1 = Math.floor(Math.random() * (canH - 50)) + 25;
+   var sideDistX1 = canW - randCenterX1;
+   var sideDistX2 = Math.abs(0 - randCenterX1);
+   var sideDistY1 = canH - randCenterY1;
+   var sideDistY2 = Math.abs(0 - randCenterY1);
+   var randRadius1 = Math.floor(Math.random() * (Math.min(sideDistX1, sideDistY1, sideDistX2, sideDistY2) - 25)) + 25;
+
+   var radius2, centerX2, centerY2;
+
+   var left1 = Math.abs(0 - (randCenterX1 - randRadius1));
+   var top1 = Math.abs(0 - (randCenterY1 - randRadius1));
+   var bottom1 = canH - (randCenterY1 + randRadius1);
+   var right1 = canW - (randCenterX1 + randRadius1);
+   var max_dist = Math.max(left1, right1, top1, bottom1);
+
+   if (left1 === max_dist) {
+      centerX2 = left1 / 2;
+      radius2 = left1 / 2;
+      centerY2 = randCenterY1;
+   }
+   else if (top1 === max_dist) {
+      centerX2 = randCenterX1;
+      centerY2 = top1 / 2;
+      radius2 = top1 / 2;
+   }
+   else if (right1 === max_dist) {
+      centerX2 = canW - (right1 / 2);
+      radius2 = right1 / 2;
+      centerY2 = randCenterY1;
+   }
+   else if (bottom1 === max_dist) {
+      centerX2 = randCenterX1;
+      centerY2 = canH - (bottom1 / 2);
+      radius2 = bottom1 / 2;
+   }
+   context.beginPath();
+   context.setLineDash([1, 0]);
+   context.strokeStyle = 'blue';
+   context.arc(randCenterX1, randCenterY1, randRadius1, 0, Math.PI * 2);
+   context.stroke();
+   context.beginPath();
+   context.strokeStyle = 'brown';
+   context.arc(centerX2, centerY2, radius2, 0, Math.PI * 2);
+   context.stroke();
+
+   context.beginPath();
+   context.arc(randCenterX1, randCenterY1, 2, 0, Math.PI * 2);
+   context.arc(centerX2, centerY2, 2, 0, Math.PI * 2);
+   context.fill();
+
+   context.beginPath();
+   context.setLineDash([3]);
+   context.strokeStyle = 'black';
+   context.moveTo(randCenterX1, randCenterY1); 
+   context.lineTo(centerX2, centerY2);
+   context.stroke();
+
+   var randRot = Math.floor(Math.random() * 360);
+   $('#circ_open').css({transform : 'rotate(' + randRot + 'deg)'});
+
+   $('#circ_open').fadeTo(500, 1);
+   $('#circ_open').fadeTo(4800, 0);
+}
+
+setInterval(reDrawCanvas, 6000);
+</script>
