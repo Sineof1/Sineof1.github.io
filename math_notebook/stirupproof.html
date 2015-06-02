@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content="Proof of 1.1 in Challenging Problems">
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/javascript"src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<title>Stirring Up a Proof</title>
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+#Setup li {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:100px;
+   margin-bottom:30px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+.blockquote {
+   float:left;
+   font-size:1.6em;
+   line-height:1.6em;
+   margin-top:20px;
+   margin-right:40px;
+   margin-bottom:45px;
+   margin-left:5em;
+   text-align:justify;
+   box-shadow:1px 1px 1px 1px #f0f0f0;
+   border-left:4px solid #CC9900;
+   border-radius:5px;
+   padding:10px 20px 10px 20px;
+   -webkit-transition: all 0.5s linear;
+   -o-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+   transition: all 0.5s linear;
+}
+.blockquote:hover {
+   background-color:#f8f8f8;
+   padding:20px;
+   box-shadow:2px 2px 2px 1px #888888;
+   border-radius:10px;
+}
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+p::first-letter {
+   font-size:120%;
+}
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+}
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+hr {
+   margin-bottom:40px;
+   margin-right:200px;
+}
+h2 {
+   font-family:'Neucha';
+}
+#circ_open {
+   display:block;
+   width:25%;
+   float:right;
+   opacity:0;
+   margin:15px 150px 15px 50px;
+}
+#svg_draw {
+   display:block;
+   margin-left:auto;
+   margin-right:auto;
+}
+#img_right {
+   float:right;
+   margin:20px 200px 15px 30px;
+   border-radius:10px;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home'>Home</a></li>
+</div>
+
+<body>
+
+<h1>Stirring Up a Proof</h1>
+
+<article>
+<section id="Introduction">
+<svg width='300' height='300' viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg' style='stroke:black;fill:black;float:right;margin:15px 200px 15px 35px;font-size:12px;box-shadow:0px 0px 30px #cccccc;padding:20px 0px 0px 30px;border-radius:8px;'>
+<line x1='5' y1='210' x2='160' y2='111' style='stroke:blue;' />
+<line x1='5' y1='210' x2='161' y2='171' style='stroke:blue; stroke-dasharray:5, 5;' />
+<line x1='5' y1='210' x2='109' y2='10' />
+<line x1='5' y1='210' x2='213' y2='210' style='stroke:blue;' />
+<line x1='109' y1='10' x2='213' y2='210' style='stroke:green;' />
+<line x1='109' y1='10' x2='134.5' y2='210' style='stroke:green;' />
+<line x1='109' y1='10' x2='161' y2='171' style='stroke:green; stroke-dasharray:5, 5;' />
+<circle cx='160' cy='111' r='2' />
+<circle cx='161' cy='171' r='2' />
+<circle cx='134.5' cy='210' r='2' />
+<text x='2' y='220'>A</text>
+<text x='213' y='220'>C</text>
+<text x='105' y='9'>B</text>
+<text x='165' y='108'>D</text>
+<text x='164' y='183'>F</text>
+<text x='138' y='220'>E</text>
+<text x='122' y='85' style='stroke:green;font-size:10px;stroke-width:0.5;'>y</text>
+<text x='137' y='85' style='stroke:green;font-size:10px;stroke-width:0.5;'>y</text>
+<text x='50' y='206' style='stroke:blue;font-size:10px;stroke-width:0.5;'>x</text>
+<text x='50' y='192' style='stroke:blue;font-size:10px;stroke-width:0.5;'>x</text>
+<text x='23' y='190' style='font-size:10px;stroke-width:0.5;'>a</text>
+<text x='200' y='206' style='font-size:10px;stroke-width:0.5;'>c</text>
+<text x='101' y='42' style='font-size:10px;stroke-width:0.5;'>b</text>
+<text x='150' y='110' style='font-size:10px;stroke-width:0.5;'>d</text>
+<text x='125' y='206' style='font-size:10px;stroke-width:0.5;'>e</text>
+<text x='148' y='169' style='font-size:10px;stroke-width:0.5;'>f</text>
+
+</svg>
+<p>I'll give you the problem first (from <a href='http://www.amazon.com/Challenging-Problems-Geometry-Dover-Mathematics/dp/0486691543' target='_blank'>here</a>), so you can run off and try to solve it before reading on. By all means, draw your own diagram as well, based only on the description provided. The extensive labeling in the diagram here is provided mostly as a key for the explanation below.</p>
+
+<p>In \(\small\Delta\mathtt{ABC}\), points \(\small\mathtt{D}\) and \(\small\mathtt{E}\) are interior points of \(\small\mathtt{\overline{BC}}\) and \(\small\mathtt{\overline{AC}}\), respectively. \(\small\mathtt{\overline{BF}}\) bisects \(\small\measuredangle\mathtt{CBE}\), and \(\small\mathtt{\overline{AF}}\) bisects \(\small\measuredangle\mathtt{DAC}\). Prove that \(\small\mathtt{m\measuredangle AEB} + \small\mathtt{m\measuredangle ADB} = \small\mathtt{2 \times m\measuredangle AFB}\).</p>
+
+</section>
+<br>
+
+<section id="Setup">
+<h2>Mixing and Matching Letters</h2>
+
+<p>The first thing I started doing here was to map <a href='http://sineof1.github.io/math_notebook/tri-180' target='_blank'>Euclid's I.32</a> wherever I could. It turned out that I didn't really have to reverse course after this. I saw various triangles as having angle measure sums of 180\(\small\mathtt{^\circ}\), and that was a good enough start. So, I noted for example, the following:
+
+<div class='blockquote'>\(\small\Delta\mathtt{ABC}\): \(\small\mathtt{2x + a + 2y + b + c = 180^\circ}\)<br>
+\(\small\Delta\mathtt{ABD}\): \(\small\mathtt{d + 2y + b + a = 180^\circ}\)<br>
+\(\small\Delta\mathtt{AFB}\): \(\small\mathtt{x + a + b + y + f = 180^\circ}\)<br>
+\(\small\Delta\mathtt{AEB}\): \(\small\mathtt{2x + a + b + e = 180^\circ}\)
+</div>
+<p>And we are looking to show that \(\small\mathtt{e + d = 2f}\). From the first two equations, I can work out that \(\small\mathtt{d = 2x + c}\), and from the first and last equations, I can work out that \(\small\mathtt{e = 2y + c}\). Finally, from the first and third equations, I've got \(\small\mathtt{f = x + y + c}\).</p>
+
+<p>We see that \(\small\mathtt{2y + c}\) + \(\small\mathtt{2x + c}\) =  \(\small\mathtt{2x + 2y + 2c}\) =  \(\small\mathtt{2(x + y + c)}\), which is in fact \(\small\mathtt{e + d = 2f}\).</p>
+
+</section>
+<br>
+<hr></hr>
+
+<section id="Finale">
+
+<h2>Proximity Is Positively Correlated with Mundaneness</h2>
+<img id='img_right' src='https://lh3.googleusercontent.com/vQbliBaH9NSzNv9v59qHPRZQSysQ6izC9ljQQ05Gci0G=w475-h598-no' width='400px' height='504px'>
+<p>It's worth noting what I used to work on this proof: the Angle Sum Theorem, some algebra (properties of equality, I guess), and one little bit of "insight." I recognized that when I was able to write four equations with all of the important variables and a lot of overlapping terms, I was probably going to be able to isolate what I wanted to know. In other words, I could trace every advantage I had in completing this proof to just long-term memory and practice.</p>
+
+<p>We sometimes get a little too worked up in mathematics education in particular. Of course, no, this isn't even close to being a difficult proof for most high school math teachers, I expect, but I also think if those teachers' tenth-graders were routinely working on proofs like this independently, they would have the sense that the future was going to be okay. And there would be many occasions for which nothing more would be required of these students, in general, than remembering stuff and practicing. Keep calm.</p>
+</section>
+<br>
+<hr></hr>
+</article>
+</body>
+</html>
