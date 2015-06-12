@@ -133,6 +133,7 @@ h1:before {
 </body>
 </html>
 <script>
+$(document).ready(function(){
 var canvas = document.getElementById('results_canvas_HelpMe');
 var context = canvas.getContext('2d');
 
@@ -173,9 +174,11 @@ function drawPercents() {
    setTimeout(function(){$('#results_canvas_HelpMe').css({'background' : '#fafafa'});}, 1000);
 }
 animate();
+});
 </script>
 
 <script>
+$(document).ready(function(){
 var canvas2 = document.getElementById('results2Help');
 var context2 = canvas2.getContext('2d');
 
@@ -213,4 +216,5 @@ function drawPercents1() {
    context2.fillText('Kids\' Top Struggles', canvas2.width / 2, 50);
 }
 setTimeout(function(){animate1();}, 500);
+});
 </script>
