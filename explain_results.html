@@ -104,11 +104,8 @@ h1:before {
    display:inline-block;
    margin-bottom:40px;
 }
-
 </style>
 <body>
-   <!-- Go to www.addthis.com/dashboard to customize your tools 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-556d04cc5bc8f00e" async="async"></script>-->
 <h1>Help Me Explain These Results</h1>
 
 <div id='normalbegin_HelpMe'><p><span id='firstChar_HelpMe'>T</span>wo questions from a survey I had in my research stash from a while ago (it was real; it just wasn't public): (1) What is your greatest challenge as a math educator? and (2) What do your students struggle with the most? Here is a visual for only 4 of the responses to each question:</p></div>
@@ -125,8 +122,25 @@ h1:before {
 <div id='normal_HelpMe'><p>P.S.: I was reminded just before posting this about the study explained in the video at the right. This quotation from the video seems to be related to the results above:</p></div>
 <br>
 <div id='callout_HelpMe'>As the percentage of students in the first grade classroom with math difficulties increased, teachers tended to increase their use of . . . movement or music to teach mathematics or increased use of manipulatives or calculators.</div>
-<div id='normal_HelpMe'><p><a id='link_HelpMe' href='https://plus.google.com/+JoshuaFisherD/posts/LGFs7uuwZVi' target='_blank'>Comments</a></p></div>
 <hr></hr>
+<p id='h2sec_HelpMe'>Reading Between the Lines</p>
+<div id='normal_HelpMe'><p>Frankly, these results make me worry. I worry because I think that while motivation is a potential problem for every student, it is a primary problem mostly for rich and otherwise well-resourced students. I've hinted at this <a id='link_HelpMe' href='http://www.textsavvy.blogspot.com/2015/02/intuition-and-domain-knowledge.html' target='_blank'>before</a>. And I'm not alone in this worry. Former teacher and administrator Eric Kalenze writes, in his book <a id='link_HelpMe' href='http://www.amazon.com/Education-Is-Upside-Down-Reframing-Problems/dp/1475809948' target='_blank'>Education Is Upside Down</a>:</p></div>
+
+<div id='callout_HelpMe'>The divide continues to grow. America's "have-not" students spend much of their school career being coaxed into engaging with learning (and not necessarily learning what will help them academically or institutionally), while the "have" students, pre-engaged in school tasks by virtue of birth into an alignment with mainstream institutional expectations, receive the academic rigor that will propel them into rewarding post-secondary study and lucrative careers.</div>
+
+<div id='normal_HelpMe'><p>Fifteen year veteran of the classroom and current dean of the School of Education at the University of Michigan has <a id='link_HelpMe' href='http://www-personal.umich.edu/~dball/presentations/041315_NCSM.pdf' target='_blank'>noticed too</a>. Her presentation at the 2015 meeting of the National Council of Supervisors of Mathematics implored educators to be explicit in their instruction for the sake of equity:</p></div>
+
+<div id='callout_HelpMe'><strong>Requesting</strong> is not the same as <strong>teaching</strong>; when rich mathematical tasks and situations are used and students are left to puzzle about them on their own, likely will privilege those who have had opportunities with "experimenting with possibilities" and overcoming "broader societal and cultural views of what mathematics is and who is good at it." [Slide 17]</div>
+
+<div id='normal_HelpMe'><p>And this post, <a id='link_HelpMe' href='http://blog.coreknowledge.org/2015/06/11/knowledge-equality/' target='_blank'>"Knowledge Equality"</a>, by Lisa Hansel from E.D. Hirsch's Core Knowledge Foundation makes a passionate call for an education system that prioritizes knowledge for all:</p></div>
+
+<div id='callout_HelpMe'>What I mean by knowledge equality is all children having equal opportunities to learn the academic knowledge that opens doors. The knowledge that really is power. The knowledge that represents the history of human accomplishment. The knowledge that stands the test of time because it is beautiful.<br><br>
+The knowledge that privileged children acquire at home, in libraries and museums, and in school.</div>
+
+<div id='normal_HelpMe'><p>While it certainly makes some sense for motivational techniques to be used to address deficits in foundational knowledge, it doesn't make that much sense. And I see in these results yet another indication of what my own observations and conversations with teachers and other education stakeholders both on and offline point to: that schooling as an institution is being pulled increasingly toward serving the needs of the few and well connected and away from serving the educational needs of the many. It's a view of education's priorities that is being <span id='emph_HelpMe'><b>sold</b></span> by business and technology <a id='linkHelpMe' href='https://educationrealist.wordpress.com/2013/08/01/dan-meyer-and-the-gatekeepers/' target='_blank'>"gatekeepers" and their accomplices</a> rather than demonstrated and proven by careful public scientific work.</p></div>
+
+<div id='normal_HelpMe'><p>For the next school year, and the one after that, administrators and policymakers should summon the courage to refocus the energy and resources of schools toward the "boring" technical work of building all students' foundational knowledge&mdash;and help their people develop an immunity to untested, unrealistic motivational jibber-jabber.</p></div>
+<div id='normal_HelpMe' style='text-align:right;'>--Josh Fisher</div>
 <div id='normal_HelpMe'><p>Image mask: <a href="https://www.flickr.com/photos/marc_smith/5527932608" title="20110314-NodeXL-Twitter-SxSW Graph by Marc Smith, on Flickr">Marc Smith</a></p></div>
 <br>
 <img src="https://lh3.googleusercontent.com/gR6dTby1JIvsMbrlYTw6tGQBX0tog7DvfOnMfGu36_i3=w640-h480-no" width="500" height="375" alt="20110314-NodeXL-Twitter-SxSW Graph" style='position:fixed;visibility:hidden;'>
@@ -136,10 +150,8 @@ h1:before {
 $(document).ready(function(){
 var canvas = document.getElementById('results_canvas_HelpMe');
 var context = canvas.getContext('2d');
-
 var y1 = canvas.height;var y2 = canvas.height;var y3 = canvas.height;var y4 = canvas.height;
 var reqAnimFrame1 = window.requestAnimationFrame;
-
 function animate() {
    while (y1 >= 220) {y1 -= 14; drawBars(y1, y2, y3, y4); reqAnimFrame1(animate);return;}
    while (y2 >= 160) {y2 -= 10; drawBars(y1, y2, y3, y4); reqAnimFrame1(animate);return;}
@@ -181,10 +193,8 @@ animate();
 $(document).ready(function(){
 var canvas2 = document.getElementById('results2Help');
 var context2 = canvas2.getContext('2d');
-
 var y1a = canvas2.height;var y2a = canvas2.height;var y3a = canvas2.height;var y4a = canvas2.height;
 var reqAnimFrame1a = window.requestAnimationFrame;
-
 function animate1() {
    while (y1a >= 291.6) {y1a -= 10; drawBars1(y1a, y2a, y3a, y4a); reqAnimFrame1a(animate1);return;}
    while (y2a >= 356) {y2a -= 10; drawBars1(y1a, y2a, y3a, y4a); reqAnimFrame1a(animate1);return;}
