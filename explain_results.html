@@ -92,15 +92,12 @@ h1:before {
    width:400px;
    height:400px;
    display:inline-block;
-   margin-left:200px;
    margin-bottom:40px;
    border-radius:5px;
 }
 #results2Help {
    width:370px;
    height:400px;
-   position:absolute;
-   left:400px;
    display:inline-block;
    margin-bottom:40px;
 }
@@ -181,8 +178,6 @@ function drawPercents() {
    context.fillText('Differentiation', 335, canvas.height - 5);
    context.font = '20px Verdana';
    context.fillText('Teachers\' Top Challenges', canvas.width / 2, 50);
-   $('#results_canvas_HelpMe').animate({'margin-left': '-=' + '200'}, 1000);
-   $('#results2Help').animate({'left': '+=' + '230'}, 1000);
    setTimeout(function(){$('#results_canvas_HelpMe').css({'background' : '#fafafa'});}, 1000);
 }
 animate();
