@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content="Proof of 1.13 in Challenging Problems">
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/javascript"src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<title>Perpendiculars and Diagonals</title>
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+#Setup li {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:100px;
+   margin-bottom:30px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+p::first-letter {
+   font-size:120%;
+}
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+}
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+hr {
+   margin-bottom:40px;
+   margin-right:200px;
+}
+h2 {
+   font-family:'Neucha';
+}
+#img_right {
+   float:right;
+   margin:20px 200px 15px 30px;
+   border-radius:10px;
+}
+#canvas {
+   width:453px;
+   height:300px;
+   display:block;
+   float:right;
+   margin:15px 200px 20px 40px;
+   box-shadow:0px 0px 30px #cccccc;
+   border-radius:5px;
+}
+#canvas2 {
+   width:453px;
+   height:300px;
+   display:block;
+   float:left;
+   margin:15px 40px 20px 100px;
+   box-shadow:0px 0px 30px #cccccc;
+   border-radius:5px;
+}
+#canvas3 {
+   width:453px;
+   height:300px;
+   display:block;
+   float:right;
+   margin:15px 200px 80px 40px;
+   box-shadow:0px 0px 30px #cccccc;
+   border-radius:5px;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home'>Home</a></li>
+</div>
+
+<body>
+<!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-556d04cc5bc8f00e" async="async"></script>-->
+
+<h1>Perpendiculars and Diagonals</h1>
+
+<article>
+<section id="Introduction">
+<canvas id='canvas' width='453px' height='300px'></canvas>
+<p>As always, if you want to run off and do this proof on your own, look at the statement below and then come back:</p>
+
+<p style='font-family:Neucha;'>Prove that the sum of the measures of the perpendiculars from any point on a side of a rectangle to the diagonals is constant.</p>
+
+<p>The animation on the right is a demonstration of what you're looking to prove (from <a href='http://www.amazon.com/Challenging-Problems-Geometry-Dover-Mathematics/dp/0486691543' target='_blank'>here</a>, once again). The red and blue segments show "all" the perpendiculars drawn to the diagonals of this rectangle as a point moves around the perimeter. The "scale" below the diagram represents the changing lengths of these perpendiculars. As you can see, the sum of these lengths is constant.</p>
+
+</section>
+
+<section id="Setup">
+<h2>A "Staring Out the Window" Kind of Proof</h2>
+
+<p>I'll start in the middle. No matter where I draw a point on a rectangle, I can draw two perpendiculars&mdash;one to each diagonal&mdash;so long as I'm cool with a perpendicular that has a length of 0 at each corner. </p>
+<canvas id='canvas2' width='453px' height='300px'></canvas>
+
+<p>And drawing that point also divides the side on which it is drawn into two segments, which I've labeled as \(\small\mathtt{w - b}\) and \(\small\mathtt{b}\) here, using \(\small\mathtt{w}\) for the width of the rectangle. </p>
+
+<p>Further, I always create two similar triangles. The two right triangles with sides P1 and P2 have another pair of corresponding congruent angles, \(\small\mathtt{a}\), and are thus similar by AA Similarity.</p>
+
+<p>Since this is the case, the ratios of the corresponding sides are equal, and so \(\mathtt{\frac{b}{w - b} = \frac{P1}{P2}}\). And quickly following from this, we have:
+
+\[\small\mathtt{(w - b)P1 = bP2}\]
+\[\small\mathtt{wP1 - bP1 = bP2}\]
+\[\small\mathtt{wP1 = bP1 + bP2}\]
+\[\small\mathtt{\color{purple}{w \cdot \frac{P1}{b} = P1 + P2}}\]
+</p>
+
+<p>This last equation can be written as \(\small\mathtt{w \cdot sin(a) = P1 + P2}\).</p>
+<canvas id='canvas3' width='453px' height='300px'></canvas>
+
+<p>Turning our attention to the height, \(\small\mathtt{h}\), of the rectangle, we can do almost exactly the same as we did with the width (and we'll reuse variables to do it). Here we've got \(\mathtt{\frac{b}{h - b} = \frac{P1}{P2}}\). This gives us, in turn, 
+\[\small\mathtt{(h - b)P1 = bP2}\]
+\[\small\mathtt{hP1 - bP1 = bP2}\]
+\[\small\mathtt{hP1 = bP1 + bP2}\]
+\[\small\mathtt{\color{purple}{h \cdot \frac{P1}{b} = P1 + P2}}\]</p>
+
+<p>Here, \(\mathtt{\frac{P1}{b}}\) is equal to sin(z), which is cos(a), since \(\small\mathtt{z}\) = 90\(\small\mathtt{^\circ - a}\). So, we can rewrite that last equation as \(\small\mathtt{h \cdot cos(a) = P1 + P2}\).</p>
+
+<p>Now we've got \(\small\mathtt{w \cdot sin(a) = P1 + P2}\) and \(\small\mathtt{h \cdot cos(a) = P1 + P2}\). And since \(\small\mathtt{w \cdot sin(a) = h \cdot cos(a)}\) (can you see how?), we see that \(\small\mathtt{P1 + P2}\) is constant all around the rectangle.</p>
+</section>
+<section id="Finale">
+<h2>What's Missing?</h2>
+<a href="https://www.flickr.com/photos/purzlbaum/131311993" title="Diagonally by Claudio Schwarz, on Flickr"><img id='img_right' src='https://lh3.googleusercontent.com/zLH31qmowAYKdzHA1k1TW07Peo5azs7ThgkDrqHGeQ-w=w640-h485-no' height='364px' width='480px' alt='Single car in row parked diagonally'></a>
+<p>There are some missing pieces, but that's okay. One of the reasons I started writing this notebook&mdash;and populating it with mostly proofs&mdash;is that I wanted to write (and write up) proofs in a way I wanted to read them: as narratives, as highly persuasive mathematical essays, in a sense. And good essays don't fill in every blank for you. No information does.</p>
+
+<p>My sense is that students would have a better time with them as well. If we asked them (occasionally, not wall-to-wall pedal-to-the-metal all-grades-everywhere) to "make a case" for one geometric relationship or another, we could bridge this divide between la la la la math on the one hand and ERMAHGERD PROOF! on the other. And thinking about the goal for "case making" in this way can help us focus on good reasons for getting kids to explain themselves in earlier grades.</p>
+</section>
+<br>
+<hr></hr>
+</article>
+</body>
+</html>
+
+<script>
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var loc = {x : 50, y : 50};
+var reqAnimFrame1 = window.requestAnimationFrame;
+function animate() {
+   if (loc.x === 50 && loc.y < 250) {loc.y += 1; drawRect();reqAnimFrame1(animate);}
+   else if (loc.x === 397 && loc.y > 50) {loc.y -= 1; drawRect();reqAnimFrame1(animate);}
+   else if (loc.y === 50 && loc.x > 50) {loc.x -= 1; drawRect();reqAnimFrame1(animate);}
+   else if (loc.y === 250 && loc.x < 397) {loc.x += 1; drawRect();reqAnimFrame1(animate);}
+}
+function drawRect() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.strokeStyle = 'black';
+   context.beginPath();
+   context.rect(50, 50, 347, 200);
+   context.stroke();
+
+   context.setLineDash([5, 5]);
+   context.beginPath();
+   context.moveTo(50, 50);
+   context.lineTo(397, 250);
+   context.stroke();
+   context.beginPath();
+   context.moveTo(50, 250);
+   context.lineTo(397, 50);
+   context.stroke();
+   context.setLineDash([0]);
+
+   if (loc.x === 50 && loc.y < 250) {
+      var xLoc1 = 50 + ((loc.y - 50) / 4) * Math.sqrt(3);
+      var yLoc1 = 50 + (loc.y - 50) / 4;
+      var xLoc2 = 50 + ((250 - loc.y) / 4 * Math.sqrt(3));
+      var yLoc2 = 250 - ((250 - loc.y) / 4);
+   }
+   else if (loc.y === 250) {
+      var xLoc1 = loc.x + (397 - loc.x) / 4;
+      var yLoc1 = 250 - (((397 - loc.x) / 4) * Math.sqrt(3));
+      var xLoc2 = loc.x - ((loc.x - 50) / 4);
+      var yLoc2 = 250 - ((loc.x - 50) / 4 * Math.sqrt(3));
+   }
+   else if (loc.x === 397 && loc.y < 250) {
+      var xLoc1 = 397 - ((250 - loc.y) / 4 * Math.sqrt(3));
+      var yLoc1 = 250 - ((250 - loc.y) / 4);
+      var xLoc2 = 397 - ((loc.y - 50) / 4 * Math.sqrt(3));
+      var yLoc2 = 50 + ((loc.y - 50) / 4);
+   }
+   else if (loc.y === 50) {
+      var xLoc2 = loc.x + (397 - loc.x) / 4;
+      var yLoc2 = 50 + (((397 - loc.x) / 4) * Math.sqrt(3));
+      var xLoc1 = loc.x - ((loc.x - 50) / 4);
+      var yLoc1 = 50 + ((loc.x - 50) / 4 * Math.sqrt(3));
+   }
+   context.beginPath();
+   context.strokeStyle = 'blue';
+   context.moveTo(loc.x, loc.y);
+   context.lineTo(xLoc1, yLoc1);
+   context.stroke();
+   context.beginPath();
+   context.strokeStyle = 'red';
+   context.moveTo(loc.x, loc.y);
+   context.lineTo(xLoc2, yLoc2);
+   context.stroke();
+
+   context.beginPath();
+   context.arc(loc.x, loc.y, 4, 0, Math.PI * 2);
+   context.fill();
+
+   context.strokeStyle = 'black';
+   context.beginPath();
+   context.arc(xLoc1, yLoc1, 3, 0, Math.PI * 2);
+   context.stroke();
+
+   context.beginPath();
+   context.arc(xLoc2, yLoc2, 3, 0, Math.PI * 2);
+   context.stroke();
+
+   context.beginPath();
+   context.strokeStyle = 'blue';
+   context.lineWidth = '4';
+   context.moveTo(125, 280);
+   context.lineTo(125 + Math.sqrt(Math.pow((xLoc1 - loc.x), 2) + Math.pow((yLoc1 - loc.y), 2)), 280);
+   context.stroke();
+
+   var endPoint = 125 + Math.sqrt(Math.pow((xLoc1 - loc.x), 2) + Math.pow((yLoc1 - loc.y), 2));
+   context.beginPath();
+   context.strokeStyle = 'red';
+   context.lineWidth = '4';
+   context.moveTo(endPoint, 280);
+   context.lineTo(endPoint + Math.sqrt(Math.pow((xLoc2 - loc.x), 2) + Math.pow((yLoc2 - loc.y), 2)), 280);
+   context.stroke();
+   context.lineWidth = '1';
+}
+animate();
+</script>
+
+<script>
+var canvas2 = document.getElementById('canvas2');
+var context2 = canvas2.getContext('2d');
+
+function drawRect2() {
+   context2.clearRect(0, 0, canvas.width, canvas.height);
+   context2.strokeStyle = 'black';
+   context2.beginPath();
+   context2.rect(50, 50, 347, 200);
+   context2.stroke();
+
+   context2.setLineDash([5, 5]);
+   context2.beginPath();
+   context2.moveTo(50, 50);
+   context2.lineTo(397, 250);
+   context2.stroke();
+   context2.beginPath();
+   context2.moveTo(50, 250);
+   context2.lineTo(397, 50);
+   context2.stroke();
+   context2.setLineDash([0]);
+
+   context2.strokeStyle = 'red';
+   context2.beginPath();
+   context2.moveTo(300, 50);
+   context2.lineTo(300 + 97/4, 50 + (97/4 * Math.sqrt(3)));
+   context2.stroke();
+
+   context2.strokeStyle = 'blue';
+   context2.beginPath();
+   context2.moveTo(300, 50);
+   context2.lineTo(300 - 250/4, 50 + (250/4 * Math.sqrt(3)));
+   context2.stroke();
+
+   context2.beginPath();
+   context2.arc(300, 50, 4, 0, Math.PI * 2);
+   context2.fill();
+
+   context2.font = '14px Arial';
+   context2.textAlign = 'center';
+   context2.fillText('b', 348, 40);
+   context2.fillText('w - b', 175, 40);
+   context2.fillText('P1', 328, 75);
+   context2.fillText('P2', 255, 100);
+
+   context2.font = '12px Arial';
+   context2.fillText('a', 360, 63);
+   context2.fillText('a', 87, 63);
+}
+drawRect2();
+</script>
+
+<script>
+var canvas3 = document.getElementById('canvas3');
+var context3 = canvas3.getContext('2d');
+
+function drawRect3() {
+   context3.clearRect(0, 0, canvas.width, canvas.height);
+   context3.strokeStyle = 'black';
+   context3.beginPath();
+   context3.rect(50, 50, 347, 200);
+   context3.stroke();
+
+   context3.setLineDash([5, 5]);
+   context3.beginPath();
+   context3.moveTo(50, 50);
+   context3.lineTo(397, 250);
+   context3.stroke();
+   context3.beginPath();
+   context3.moveTo(50, 250);
+   context3.lineTo(397, 50);
+   context3.stroke();
+   context3.setLineDash([0]);
+
+   context3.strokeStyle = 'red';
+   context3.beginPath();
+   context3.moveTo(300, 50);
+   context3.lineTo(300 + 97/4, 50 + (97/4 * Math.sqrt(3)));
+   context3.stroke();
+   context3.beginPath();
+   context3.moveTo(50, 180);
+   context3.lineTo(50 + 70/4 * Math.sqrt(3), 250 - (70/4));
+   context3.stroke();
+
+   context3.strokeStyle = 'blue';
+   context3.beginPath();
+   context3.moveTo(300, 50);
+   context3.lineTo(300 - 250/4, 50 + (250/4 * Math.sqrt(3)));
+   context3.stroke();
+   context3.beginPath();
+   context3.moveTo(50, 180);
+   context3.lineTo(50 + 130/4 * Math.sqrt(3), 50 + 130/4);
+   context3.stroke();
+
+   context3.beginPath();
+   context3.arc(300, 50, 4, 0, Math.PI * 2);
+   context3.fill();
+   context3.beginPath();
+   context3.arc(50, 180, 4, 0, Math.PI * 2);
+   context3.fill();
+
+   context3.font = '14px Arial';
+   context3.textAlign = 'center';
+   context3.fillText('b', 348, 40);
+   context3.fillText('w - b', 175, 40);
+   context3.fillText('b', 30, 115);
+   context3.fillText('h - b', 30, 215);
+   context3.fillText('P1', 328, 75);
+   context3.fillText('P1', 92, 140);
+   context3.fillText('P2', 255, 100);
+   context3.fillText('P2', 75, 200);
+
+   context3.font = '12px Arial';
+   context3.fillText('a', 360, 63);
+   context3.fillText('a', 87, 63);
+   context3.fillText('z', 58, 70);
+   context3.fillText('z', 58, 237);
+}
+drawRect3();
+</script>
