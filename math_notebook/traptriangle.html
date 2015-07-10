@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content="A theorem for you. And programming headaches.">
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { Augment: {Definitions: {macros: {
+          overparen: ['UnderOver','23DC'],
+          underparen: ['UnderOver','23DD']}}}}});
+</script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "all" } }});</script>
+<script type="text/javascript"src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<title>Trapped in a Triangle</title>
+<style>
+#nav {
+   width: 100%;
+   float: left;
+   margin: 0 0 3em 0;
+   padding: 0px;
+   list-style: none;
+}
+#nav li {
+   float: right;
+   padding-right:20px;
+}
+#nav li a {
+   font-family: 'Josefin Sans', sans-serif;
+   box-shadow: 1px 1px 1px #cccccc;
+   border-radius:5px;
+   font-variant:small-caps;
+   display: block;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+#nav li a:hover {
+   background-color: #f5f5f5;
+}
+#Setup li {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:100px;
+   margin-bottom:30px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+#Introduction p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+#Setup p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+#Finale p {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+   text-align:justify;
+   margin-right:200px;
+   font-size:1.6em;
+   line-height:1.6em;
+   font-weight:600;
+}
+p::first-letter {
+   font-size:120%;
+}
+h1, h2, hr {
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:100px;
+}
+h1 {
+   font-weight:600;
+   padding-bottom:10px;
+}
+hr {
+   margin-bottom:40px;
+   margin-right:200px;
+}
+h2 {
+   font-family:'Neucha';
+}
+#canvas {
+   display:block;
+   float:right;
+   margin:20px 200px 20px 40px;
+   width:400px;
+   height:300px;
+   border-radius:10px;
+   box-shadow:0px 0px 30px #cccccc;
+}
+#canvas2 {
+  display:block;
+  float:left;
+  margin:35px 40px 20px 100px;
+  width:400px;
+  height:300px;
+  border-radius:10px;
+  box-shadow:0px 0px 30px #cccccc;
+}
+.blockquote {
+   margin-top:0.5em;
+   margin-right:13em;
+   margin-bottom:1.4em;
+   margin-left:6em;
+   font-family:'Neucha';
+   text-align:justify;
+   font-size:1.6em;
+   line-height:1.2em;
+   box-shadow:1px 1px 1px 1px #f0f0f0;
+   border-left:4px solid #CC9900;
+   border-radius:5px;
+   padding:10px 20px 10px 20px;
+   -webkit-transition: all 0.5s linear;
+   -o-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+   transition: all 0.5s linear;
+}
+.blockquote:hover {
+   background-color:#f8f8f8;
+   padding:20px;
+   box-shadow:2px 2px 2px 1px #888888;
+   border-radius:10px;
+}
+#equ {
+   display:block;
+   width:50%
+   border:1px solid;
+   font-family: 'Josefin Sans', sans-serif;
+   margin-left:auto;
+   margin-right:auto;
+   text-align:justify;
+   font-size:1.2em;
+   line-height:1.6em;
+   font-weight:600;
+}
+</style>
+</head>
+
+<div id='nav'>
+<li><a href='http://sineof1.github.io/math_notebook/home'>Home</a></li>
+</div>
+
+<body>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-556d04cc5bc8f00e" async="async"></script>
+
+<h1>Trapped in a Triangle</h1>
+
+<article>
+<section id="Introduction">
+<canvas id='canvas' width='400px' height='300px'></canvas>
+<p>So <a href='http://www.amazon.com/Challenging-Problems-Geometry-Dover-Mathematics/dp/0486691543' target='_blank'>this</a> was a not-all-that interesting problem to me. I'll admit to having looked up the "answer" after getting nowhere with it for a while&mdash;I started down the brute-force path that was laid out in the Answers section but turned around too early, fully convinced that I was on the wrong path.</p>
+
+<p>Anyhoo, to make up for the small hit to my self-esteem, I made this animation hinting at the theorem referred to below. The problem reads as follows:</p>
+<div class='blockquote'>From point \(\small\mathtt{P}\) inside \(\small\Delta\mathtt{ABC}\), perpendiculars are drawn to the sides meeting \(\small\mathtt{BC}\), \(\small\mathtt{CA}\), and \(\small\mathtt{AB}\) at points \(\small\mathtt{D}\), \(\small\mathtt{E}\), and \(\small\mathtt{F}\) respectively. If \(\small\mathtt{BD}\) = 8, \(\small\mathtt{DC}\) = 14, \(\small\mathtt{CE}\) = 13, \(\small\mathtt{AF}\) = 12, and \(\small\mathtt{FB}\) = 6, find \(\small\mathtt{AE}\). Derive a general theorem, and then make use of it to solve this problem.</div>
+</section>
+
+<section id="Setup">
+<h2>So Many Equations</h2>
+
+<p>I'll skip some steps for your sanity:
+\[\small\mathtt{(BD)^2 + (PD)^2 = (FB)^2 + (PF)^2}\]
+\[\small\mathtt{(DC)^2 + (PD)^2 = (CE)^2 + (PE)^2}\]
+\[\small\mathtt{(EA)^2 + (PE)^2 = (AF)^2 + (PF)^2}\]
+</p><br>
+<canvas id='canvas2' width='400' height='300'></canvas>
+<p>I think you can fill in the missing links above. Then the idea is to subtract (2) from (1) and then subtract (3) from the result.</p>
+
+<p>The conclusion that pops out in the end&mdash;the general theorem you are supposed to derive&mdash;is that, having divided the perimeter of the triangle into 6 segments with the perpendiculars, the sum of the squares of every other side is equal to the sum of the squares of the remaining sides.</p>
+
+</section>
+<section id="Finale">
+<h2>Looking for a Real Math Headache? Learn Programming.</h2>
+
+<p>The most interesting part of putting any of these notebook entries together is the programming part. Right now, programming is without a doubt the best sandbox one could possibly have for learning mathematics. You've got application and exploration and, importantly, you sacrifice little in the way of abstraction in a programming environment.</p>
+
+<p>This, for example, is one of the equations I needed to do the animation above:</p>
+<p style='text-align:center;background:#e3e3e3;padding:15px;border-radius:10px;'>\(\small\mathtt{d = sin(\frac{60\pi}{180} - arcsin(\frac{230 - y}{\sqrt{(x + 100)^2 + (230 - y)^2}})) \cdot \sqrt{(x + 100)^2 + (230 - y)^2}}\)</p>
+<p>It's completely sloppy and inelegant, but it's what I could work out on paper as a first step to locating where the perpendiculars intersected the non-horizontal lines of the triangle. I <span style='text-decoration:underline;'>needed</span> those locations in order to know where to draw the colorful lines on the perimeter.</p>
+
+<p>The downside, of course, is that everyone needs to know a little programming first, before we can use it as an environment in which to play out mathematics learning. And that's hard.</p>
+
+<p>Philosophies cost money. Better to have a cheap one.</p>
+
+<p style='font-size:1.1em;'>Image mask: <a href="https://flic.kr/p/bVfePW" title="Triangle">Heather West</a></p>
+</section>
+<br>
+<hr></hr>
+</article>
+<img src='https://lh3.googleusercontent.com/ExVhRH2dwrw0511KXGK9LeVTCua3UWa1chVeiRwEZyXB=w640-h390-no' style='position:fixed;visibility:hidden;'>
+</body>
+</html>
+
+<script>
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var loc = {x : canvas.width / 2, y : canvas.height / 2};
+var changeX = 1;
+var changeY = 1;
+var count1 = 0;
+var count2 = 0;
+var randX = 1;
+var randY = 1;
+var zeroOne = [-1, 1];
+var changes = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2];
+
+var reqAnimFrame1 = window.requestAnimationFrame;
+function animate() {
+   count1 += 1;
+   count2 += 1;
+   if (count1 % 15 === 0) {randX = changes[Math.floor(Math.random() * changes.length)]; count1 = 0;}
+   if (count1 % 15 === 0) {randY = changes[Math.floor(Math.random() * changes.length)]; count1 = 0;}
+   if (loc.x <= (loc.y - 403) / -1.73 + 20) changeX = 1;
+   else if (loc.x >= (loc.y + 289) / 1.73 - 20) changeX = -1;
+   else if (count2 % 45 === 0) {changeX = zeroOne[Math.floor(Math.random() * zeroOne.length)]; count2 = 0;}
+   if (loc.y <= 86) changeY = 1;
+   else if (loc.y >= 220) changeY = -1;
+   else if (count2 % 45 === 0) {changeY = zeroOne[Math.floor(Math.random() * zeroOne.length)]; count2 = 0;}
+   loc.x += changeX * randX;
+   loc.y += changeY * randY;
+   drawPoint();
+   reqAnimFrame1(animate);
+}
+function drawPoint() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.beginPath();
+   context.fillStyle = '#bdbdbd';
+   context.moveTo(100, 230);
+   context.lineTo(200, 57);
+   context.lineTo(300, 230);
+   context.closePath();
+   context.fill();
+   context.beginPath();
+   context.fillStyle = 'white';
+   context.arc(loc.x, loc.y, 4, 0, Math.PI * 2);
+   context.fill();
+
+   context.fillStyle = 'black';
+   context.font = '14px Arial';
+   context.textAlign = 'center';
+   context.fillText('A', 200, 50);
+   context.fillText('B', 90, 235);
+   context.fillText('C', 310, 235);
+
+   context.strokeStyle = 'white';
+   context.beginPath();
+   context.moveTo(loc.x, loc.y);
+   context.lineTo((loc.y + 172.2) * -1.73, loc.x / -1.73 - 172.2);
+   context.stroke();
+   context.beginPath();
+   context.moveTo(loc.x, loc.y);
+   context.lineTo((loc.y + 697.9) * 1.73, loc.x / 1.73 - 697.9);
+   context.stroke();
+   context.beginPath();
+   context.moveTo(loc.x, loc.y);
+   context.lineTo(loc.x, 300);
+   context.stroke();
+
+   context.setLineDash([5, 5]);
+   context.beginPath();
+   context.moveTo(loc.x, loc.y);
+   context.lineTo(100, 230);
+   context.stroke();
+   context.beginPath();
+   context.moveTo(loc.x, loc.y);
+   context.lineTo(300, 230);
+   context.stroke();
+   context.beginPath();
+   context.moveTo(loc.x, loc.y);
+   context.lineTo(200, 57);
+   context.stroke();
+
+   var d = Math.sin(60 * Math.PI / 180 - (Math.asin((230 - loc.y) / Math.sqrt(Math.pow(loc.x + 100, 2) + Math.pow(230 - loc.y, 2))))) * Math.sqrt(Math.pow(loc.x + 100, 2) + Math.pow(230 - loc.y, 2));
+   var a = Math.sqrt(Math.pow(loc.x + 100, 2) + Math.pow(230 - loc.y, 2) - Math.pow(d, 2));
+   var newX = a / 2 + 50;
+   var newY = 403 - (newX * Math.sqrt(3));
+
+   context.beginPath();
+   context.strokeStyle = 'green';
+   context.setLineDash([0]);
+   context.lineWidth = 2;
+   context.moveTo(100, 230);
+   context.lineTo(newX, newY);
+   context.stroke();
+
+   context.fillStyle = 'black';
+   context.font = '14px Arial';
+   context.fillText('F', newX - 10, newY);
+
+   context.beginPath();
+   context.strokeStyle = 'blue';
+   context.moveTo(200, 57);
+   context.lineTo(newX, newY);
+   context.stroke();
+
+   context.beginPath();
+   context.strokeStyle = 'red';
+   context.moveTo(100, 230);
+   context.lineTo(loc.x, 230);
+   context.stroke();
+
+   context.fillStyle = 'black';
+   context.font = '14px Arial';
+   context.textAlign = 'center';
+   context.fillText('D', loc.x, 245);
+
+   context.beginPath();
+   context.strokeStyle = 'black';
+   context.moveTo(loc.x, 230);
+   context.lineTo(300, 230);
+   context.stroke();
+
+   var d1 = Math.sin(60 * Math.PI / 180 - (Math.asin((230 - loc.y) / Math.sqrt(Math.pow(300 - loc.x, 2) + Math.pow(230 - loc.y, 2))))) * Math.sqrt(Math.pow(300 - loc.x, 2) + Math.pow(230 - loc.y, 2));
+   var a1 = Math.sqrt(Math.pow(300 - loc.x, 2) + Math.pow(230 - loc.y, 2) - Math.pow(d1, 2));
+   var newX1 = 300 - (a1 / 2);
+   var newY1 = 230 - (a1 / 2 * Math.sqrt(3));
+
+   context.beginPath();
+   context.strokeStyle = 'orange';
+   context.moveTo(300, 230);
+   context.lineTo(newX1, newY1);
+   context.stroke();
+
+   context.fillStyle = 'black';
+   context.font = '14px Arial';
+   context.fillText('E', newX1 + 10, newY1);
+
+   context.beginPath();
+   context.strokeStyle = 'purple';
+   context.moveTo(200, 57);
+   context.lineTo(newX1, newY1);
+   context.stroke();
+
+   context.setLineDash([0]);
+   context.strokeStyle = 'black';
+   context.lineWidth = 1;
+}
+animate();
+</script>
+
+<script>
+var canvas2 = document.getElementById('canvas2');
+var context2 = canvas2.getContext('2d');
+var loc1 = {x : canvas2.width / 2, y : canvas2.height / 2};
+var changeX1 = 1;
+var changeY1 = 1;
+var count1_1 = 0;
+var count2_1 = 0;
+var randX1 = 1;
+var randY1 = 1;
+var zeroOne1 = [-1, 1];
+var changes1 = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2];
+
+function drawPoint1() {
+   context2.clearRect(0, 0, canvas2.width, canvas2.height);
+   context2.beginPath();
+   context2.fillStyle = '#bdbdbd';
+   context2.moveTo(100, 230);
+   context2.lineTo(200, 57);
+   context2.lineTo(300, 230);
+   context2.closePath();
+   context2.fill();
+   context2.beginPath();
+   context2.fillStyle = 'white';
+   context2.arc(loc1.x, loc1.y, 4, 0, Math.PI * 2);
+   context2.fill();
+
+   context2.fillStyle = 'black';
+   context2.font = '14px Arial';
+   context2.textAlign = 'center';
+   context2.fillText('A', 200, 50);
+   context2.fillText('B', 90, 235);
+   context2.fillText('C', 310, 235);
+   context2.fillText('P', canvas2.width / 2 + 7, canvas2.height / 2 + 20);
+
+   context2.strokeStyle = 'white';
+   context2.beginPath();
+   context2.moveTo(loc1.x, loc1.y);
+   context2.lineTo((loc1.y + 172.2) * -1.73, loc1.x / -1.73 - 172.2);
+   context2.stroke();
+   context2.beginPath();
+   context2.moveTo(loc1.x, loc1.y);
+   context2.lineTo((loc1.y + 697.9) * 1.73, loc1.x / 1.73 - 697.9);
+   context2.stroke();
+   context2.beginPath();
+   context2.moveTo(loc1.x, loc1.y);
+   context2.lineTo(loc1.x, 300);
+   context2.stroke();
+
+   context2.setLineDash([5, 5]);
+   context2.beginPath();
+   context2.moveTo(loc1.x, loc1.y);
+   context2.lineTo(100, 230);
+   context2.stroke();
+   context2.beginPath();
+   context2.moveTo(loc1.x, loc1.y);
+   context2.lineTo(300, 230);
+   context2.stroke();
+   context2.beginPath();
+   context2.moveTo(loc1.x, loc1.y);
+   context2.lineTo(200, 57);
+   context2.stroke();
+
+   var d = Math.sin(60 * Math.PI / 180 - (Math.asin((230 - loc1.y) / Math.sqrt(Math.pow(loc1.x + 100, 2) + Math.pow(230 - loc1.y, 2))))) * Math.sqrt(Math.pow(loc1.x + 100, 2) + Math.pow(230 - loc1.y, 2));
+   var a = Math.sqrt(Math.pow(loc1.x + 100, 2) + Math.pow(230 - loc1.y, 2) - Math.pow(d, 2));
+   var newX = a / 2 + 50;
+   var newY = 403 - (newX * Math.sqrt(3));
+
+   context2.beginPath();
+   context2.strokeStyle = 'green';
+   context2.setLineDash([0]);
+   context2.lineWidth = 2;
+   context2.moveTo(100, 230);
+   context2.lineTo(newX, newY);
+   context2.stroke();
+
+   context2.fillStyle = 'black';
+   context2.font = '14px Arial';
+   context2.fillText('F', newX - 10, newY);
+
+   context2.beginPath();
+   context2.strokeStyle = 'blue';
+   context2.moveTo(200, 57);
+   context2.lineTo(newX, newY);
+   context2.stroke();
+
+   context2.beginPath();
+   context2.strokeStyle = 'red';
+   context2.moveTo(100, 230);
+   context2.lineTo(loc1.x, 230);
+   context2.stroke();
+
+   context2.fillStyle = 'black';
+   context2.font = '14px Arial';
+   context2.textAlign = 'center';
+   context2.fillText('D', loc1.x, 245);
+
+   context2.beginPath();
+   context2.strokeStyle = 'black';
+   context2.moveTo(loc1.x, 230);
+   context2.lineTo(300, 230);
+   context2.stroke();
+
+   var d1 = Math.sin(60 * Math.PI / 180 - (Math.asin((230 - loc1.y) / Math.sqrt(Math.pow(300 - loc1.x, 2) + Math.pow(230 - loc1.y, 2))))) * Math.sqrt(Math.pow(300 - loc1.x, 2) + Math.pow(230 - loc1.y, 2));
+   var a1 = Math.sqrt(Math.pow(300 - loc1.x, 2) + Math.pow(230 - loc1.y, 2) - Math.pow(d1, 2));
+   var newX1 = 300 - (a1 / 2);
+   var newY1 = 230 - (a1 / 2 * Math.sqrt(3));
+
+   context2.beginPath();
+   context2.strokeStyle = 'orange';
+   context2.moveTo(300, 230);
+   context2.lineTo(newX1, newY1);
+   context2.stroke();
+
+   context2.fillStyle = 'black';
+   context2.font = '14px Arial';
+   context2.fillText('E', newX1 + 10, newY1);
+
+   context2.beginPath();
+   context2.strokeStyle = 'purple';
+   context2.moveTo(200, 57);
+   context2.lineTo(newX1, newY1);
+   context2.stroke();
+
+   context2.setLineDash([0]);
+   context2.strokeStyle = 'black';
+   context2.lineWidth = 1;
+}
+drawPoint1();
+</script>
