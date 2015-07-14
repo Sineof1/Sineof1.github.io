@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content="Red beads probability puzzle">
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<title>Red Beads</title>
+<style>
+#canvas {
+   display:block;
+   position:absolute;
+   right:0px;
+   top:0px;
+   width:400px;
+   height:300px;
+   box-shadow:0px 0px 30px #cccccc;
+   border-radius:10px;
+}
+body {
+   position:relative;
+   width:900px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:150px;
+}
+button {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display: inline-block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+   margin-left:10px;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+button:disabled {
+   background:#fdf5ef;
+}
+#buttonwrap {
+   width:290px;
+   position:absolute;
+   top:325px;
+   right:0px;
+}
+</style>
+<body>
+<iframe width="420" height="300" src="https://www.youtube.com/embed/1H7YKVjcUWk" frameborder="0" style='float:left;box-shadow:0px 0px 30px #cccccc;'></iframe>
+<canvas id='canvas' width='400px' height='300px'></canvas>
+<div id='buttonwrap'>
+<button id='1trial' onclick='oneTrialSet()'>3 picks</button>
+<button id='sOver' onclick='startOver()'>reset</button>
+</div>
+<img src='https://lh3.googleusercontent.com/DICQDk74kF39KoC1YSlcaoCiTDinfsjRX6RDMRDLPSRs=w640-h480-no' style='position:fixed;visibility:hidden;'>
+</body>
+<audio id='bleep'><source src="https://965c2f10f15d2a70d52c2be92df835885becba89.googledrive.com/host/0B9y9PCgl63o-fmJPMnZQWFZ5anRXQTFEdWEzUGR1dVRuQmtNeE1rOV9yQVNNdF9qM0RnNmM/bleep.mp3" type="audio/mpeg"></audio>
+<audio id='bloop'><source src="https://965c2f10f15d2a70d52c2be92df835885becba89.googledrive.com/host/0B9y9PCgl63o-fmJPMnZQWFZ5anRXQTFEdWEzUGR1dVRuQmtNeE1rOV9yQVNNdF9qM0RnNmM/bloop.mp3" type="audio/mpeg"></audio>
+</html>
+
+<script>
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var bead1 = {x : 80, col : 'red'};
+var bead2 = {x : 160, col : 'red'};
+var bead3 = {x : 240, col : 'green'};
+var bead4 = {x : 320, col : 'green'};
+var beads = [bead1, bead2, bead3, bead4];
+var intervalID;
+var count1 = 0;
+
+function reset() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.fillStyle = bead1.col;
+   context.beginPath();
+   context.arc(bead1.x, canvas.height / 2, 30, 0, Math.PI * 2);
+   context.fill();
+   context.stroke();
+   context.fillStyle = bead2.col;
+   context.beginPath();
+   context.arc(bead2.x, canvas.height / 2, 30, 0, Math.PI * 2);
+   context.fill();
+   context.stroke();
+   context.fillStyle = bead3.col;
+   context.beginPath();
+   context.arc(bead3.x, canvas.height / 2, 30, 0, Math.PI * 2);
+   context.fill();
+   context.stroke();
+   context.fillStyle = bead4.col;
+   context.beginPath();
+   context.arc(bead4.x, canvas.height / 2, 30, 0, Math.PI * 2);
+   context.fill();
+   context.stroke();
+}
+function oneTrialSet() {
+   intervalID = setInterval(function(){oneTrial();}, 750);
+   $('#1trial').attr('disabled', 'disabled');
+}
+function oneTrial() {
+   count1 += 1;
+   if (count1 === 4) {
+      window.clearInterval(intervalID);
+      count1 = 0;
+      return;
+   }
+   var bead = Math.floor(Math.random() * 4);
+   context.clearRect(beads[bead].x - 32, canvas.height / 2 - 32, 64, 64);
+   beads[bead].col = 'red';
+   setTimeout(function(){reset(); if (Math.floor(Math.random() * 4) < 2) {document.getElementById('bleep').play();} else {document.getElementById('bloop').play();}}, 400);
+}
+function startOver() {
+   count1 = 0;
+   intervalID = '';
+   bead1.col = 'red';
+   bead2.col = 'red';
+   bead3.col = 'green';
+   bead4.col = 'green';
+   $('#1trial').attr('disabled', false);
+   reset();
+}
+reset();
+</script>
