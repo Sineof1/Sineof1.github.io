@@ -1,0 +1,92 @@
+<style>
+#canvas_MtM {
+   float:left;
+   height:200px;
+   margin:20px 30px 0px 0px;
+}
+</style>
+<a href='http://sineof1.github.io/justsomemath/double_negatives.html' style='color:black;'><div class='post-title'>Double Negatives</div></a>
+<div class='post-body'>
+
+<p>There is a nice way for students to initially think about operating with negative numbers tucked away in part of <a href='http://goo.gl/SCWa5W' target='_blank'>this essay</a>, by mathematicians Eric Hsu and Emiliano G&oacute;mez:</p>
+
+<blockquote>The product of two negative numbers \(\small\mathtt{(0 - b)(0 - d)}\), where \(\small\mathtt{b}\), \(\small\mathtt{d}\) are (nonzero) natural numbers, is \(\small\mathtt{(0 + bd - (0 + 0)) = (bd - 0)}\), which is the natural number \(\small\mathtt{bd}\). Thus, the product of two negative numbers is positive.</blockquote>
+
+
+<p>One thing that's nice about this is the idea that every negative number is some positive value subtracted from 0; i.e., \(\small\mathtt{(0 - b)}\) or \(\small\mathtt{(0 - d)}\), giving us the \(\small\mathtt{-b}\) and \(\small\mathtt{-d}\) that we are familiar with.</p>
+
+<canvas id='canvas_MtM' height='200px'></canvas>
+
+<p><button onclick='rerun()' style='margin-left:auto;margin-right:auto;'>redraw</button></p>
+<p>The authors put this idea to work in the quotation above. The left side of the equation is found by multiplying the two expressions in parentheses: \(\small\mathtt{(0 - b)(0 - d)}\) = \(\small\mathtt{0 - 0d - 0b + bd}\), which yields \(\small\mathtt{0 + bd - (0 + 0)}\). Thus, we see algebraically why a negative times a negative is equal to a positive.</p>
+
+<p>Addition and subtraction are fairly straightforward too, if we start with this more algebraic foundation. Addition would be \(\small\mathtt{(0 - b) + (0 - d) = 0 + 0 - b - d}\). This simplifies to \(\small\mathtt{-b - d}\). (Keep in mind that \(\small\mathtt{b}\) and \(\small\mathtt{d}\) by themselves are positive.) And subtraction gives us \(\small\mathtt{(0 - b) - (0 - d) = 0 - 0 - b + d}\), which simplifies to \(\small\mathtt{-b + d}\). Division seems to require a little more oomph. We can set up the division and multiply numerator and denominator by \(\small\mathtt{0 - b}\) and then simplify:
+
+\[\small\mathtt{\frac{0 - b}{0 - d} = \color{blue}{\frac{0 - b}{0 - d} \cdot \frac{0 - b}{0 - b}} = \frac{b^2}{bd} = \frac{b}{d}}\]
+
+Since we already know how multiplication works, we know that the product of those negative b's in the numerator is the same as the product of two positive b's. And we've seen above what the product in the denominator should be. (But it's worth noting&mdash;although this has no sway at all when it comes to my thinking about appropriate sequencing&mdash;that simplifying exponent expressions is not "done" in CCSS until <a href='http://www.corestandards.org/Math/Content/8/EE/A/1/' target='_blank'>Grade 8</a>.)</p>
+</div>
+<img src='https://lh3.googleusercontent.com/kkUWADoCpJPW8knkl4pq_jqXLhFntibf4s6fJfWzbS9J=w640-h448-no' style='position:fixed;visibility:hidden;'>
+<script>
+$('#canvas_MtM').width(window.innerWidth * 0.4 * 0.6);
+var canvas = document.getElementById('canvas_MtM');
+var context = canvas.getContext('2d');
+
+var reqAnimFrame1 = window.requestAnimationFrame;
+var current = canvas.width - 10;
+var current1 = canvas.width - 10;
+var reach1 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
+var reach2 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
+
+function reset() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.strokeStyle = 'black';
+   context.lineWidth = 1;
+   context.beginPath();
+   context.moveTo(canvas.width - 10, canvas.height / 2 - 40);
+   context.lineTo(0, canvas.height / 2 - 40);
+   context.stroke();
+
+   context.beginPath();
+   context.moveTo(canvas.width - 10, canvas.height / 2 + 40);
+   context.lineTo(0, canvas.height / 2 + 40);
+   context.stroke();
+
+   context.font = '14px Arial';
+   context.fillStyle = 'black';
+   context.textAlign = 'center';
+   context.fillText('0', canvas.width - 10, canvas.height / 2 - 15);
+   context.fillText('0', canvas.width - 10, canvas.height / 2 + 65);
+}
+function animate() {
+   if (current > reach1) current -= 2;
+   if (current1 > reach2) current1 -= 2;
+   drawPaint(current, current1);
+   reqAnimFrame1(animate);
+}
+function drawPaint(crnt, crt) {
+   reset();
+   context.fillStyle = 'rgba(0, 255, 0, 0.3)';
+   context.beginPath();
+   context.rect(crnt, canvas.height / 2 - 50, (canvas.width - 10) - crnt, 20);
+   context.fill();
+   context.fillStyle = 'rgba(0, 0, 255, 0.3)';
+   context.beginPath();
+   context.rect(crt, canvas.height / 2 + 30, (canvas.width - 10) - crt, 20);
+   context.fill();
+   context.font = '14px Arial';
+   context.fillStyle = 'black';
+   context.textAlign = 'center';
+   context.fillText('-b', reach1, canvas.height / 2 - 55);
+   context.fillText('-d', reach2, canvas.height / 2 + 25);
+}
+function rerun() {
+   current = canvas.width - 10;
+   current1 = canvas.width - 10;
+   reach1 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
+   reach2 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
+   reset();
+}
+reset();
+setTimeout(function(){animate();}, 2000);
+</script>
