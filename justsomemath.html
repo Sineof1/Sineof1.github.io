@@ -48,6 +48,7 @@
 </html>
 
 <script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
    $.get("/justsomemath/neg-neg.html", function(data) {
    $(".post-wall").html(data);});
