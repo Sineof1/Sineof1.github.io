@@ -40,7 +40,7 @@ $(document).ready(function() {
    $.get("/justsomemath/neg-neg.html", function(data) {
       $(".post-wall").html(data);});
    $.get("/justsomemath/jsm_header.html", function(dat) {
-      $("head").html(dat);});
+      $("head").append(dat);});
 });
 </script>
 
