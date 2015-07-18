@@ -52,9 +52,9 @@
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
-   $.get( "/justsomemath/colb_prim.html", function(data) {
-      $(".post-wall").append(data);});
    $.get("/justsomemath/neg-neg.html", function(data) {
+      $(".post-wall").append(data);});
+   $.get( "/justsomemath/colb_prim.html", function(data) {
       $(".post-wall").append(data);});
 });
 </script>
