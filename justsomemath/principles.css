@@ -109,6 +109,6 @@ button:hover {
 }
 .post-footer {
    border-radius:2px;
-   box-shadow:0px 0px 30px #333300;
+   box-shadow:0px 0px 30px #cccccc;
    height:40px;
 }
