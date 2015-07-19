@@ -108,6 +108,7 @@ button:hover {
    font-weight:900;
 }
 .post-footer {
+   position:relative;
    border-radius:5px;
    box-shadow:0px 0px 30px #cccccc;
    height:40px;
