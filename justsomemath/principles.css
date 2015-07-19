@@ -110,4 +110,5 @@ button:hover {
 .post-footer {
    border-radius:2px;
    box-shadow:0px 0px 30px ##333300;
+   margin-top:10px;
 }
