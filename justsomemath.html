@@ -56,6 +56,8 @@ $(document).ready(function() {
       $(".post-wall").append(data);});
    $.get( "/justsomemath/colb_prim.html", function(data) {
       $(".post-wall").prepend(data);});
+   $.get( "mat-sold.html", function(data) {
+      $(".post-wall").prepend( data );});
 });
 </script>
 
