@@ -107,3 +107,7 @@ button:hover {
    font-size:22px;
    font-weight:900;
 }
+.post-footer {
+   border-radius:2px;
+   box-shadow:0px 0px 30px ##333300;
+}
