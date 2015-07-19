@@ -53,7 +53,7 @@
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
    $.get("/justsomemath/neg-neg.html", function(data) {
-      $(".post-wall").append(data);});
+      $(".post-wall").prepend(data);});
    $.get( "/justsomemath/colb_prim.html", function(data) {
       $(".post-wall").prepend(data);});
    $.get( "/justsomemath/mat-sold.html", function(data) {
