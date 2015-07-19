@@ -52,19 +52,12 @@
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
-   var post1;
-   var post2;
-   var post3;
-   $.get("/justsomemath/neg-neg.html", function(data) {
-      post1 = data;});
+   $.get( "/justsomemath/neg-neg.html", function(data) {
+      $(".post-wall").prepend( data );});
    $.get( "/justsomemath/colb_prim.html", function(data) {
-      post2 = data;});
+      $(".post-wall").prepend( data );});
    $.get( "/justsomemath/mat-sold.html", function(data) {
-      post3 = data;});
-      
-   $(".post-wall").prepend(post1);
-   $(".post-wall").prepend(post2);
-   $(".post-wall").prepend(post3);
+      $(".post-wall").prepend( data );});
 });
 </script>
 
