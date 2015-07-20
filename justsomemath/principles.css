@@ -120,6 +120,8 @@ button:hover {
 }
 #link-menu {
    position:fixed;
+   top:0px;
+   right:0px;
    display:none;
    width: 300px;
    font-size:18px;
