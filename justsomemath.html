@@ -48,6 +48,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post4'></div>
 <div id='post1'></div>
 <div id='post2'></div>
 <div id='post3'></div>
@@ -66,6 +67,8 @@ $(document).ready(function() {
       $("#post2").append(data);});
    $.get( "/justsomemath/mat-sold.html", function(data) {
       $("#post1").append(data);});
+   $.get( "/justsomemath/circ-elps.html", function(data) {
+      $("#post4").append(data);});
    $("#navbut1").click(
      function() {$("#link-menu").slideToggle(500);});
 });
