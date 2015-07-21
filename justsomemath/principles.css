@@ -128,3 +128,65 @@ button:hover {
    font-family:Open Sans Condensed, sans;
    box-shadow:0px 0px 15px #cccccc;
 }
+.goButton {
+   position:absolute;
+   right:0px;
+   bottom:0px;
+   width:28px;
+   height:100%;
+   background:rgba(0, 0, 0, 0.1);
+   border:none;
+   padding: 8px 8px;
+   box-shadow:0px 0px 0px 0px;
+}
+.goButton:hover {
+   cursor:pointer;
+   box-shadow:0px 0px 10px #cccccc;
+   background:black;
+}
+.math_1line {
+   position:relative;
+   width:94%;
+   padding:10px 35px 10px 20px;
+   border-left:5px solid #C65D57;
+   background-color:#fafafa;
+   margin-bottom:30px;
+   margin-top:20px;
+   font-family:Quicksand;
+   font-size:16px;
+   line-height:1.4em;
+}
+.partial {
+   display:inline-block;
+   border-bottom:1px solid black;
+   width:25px;
+   height:25px;
+   text-align:center;
+   font-size:1em;
+   vertical-align:-5px;
+   background:#E3D6E9;
+   text-indent:0px;
+   overflow:hidden;
+}
+.partial:focus {
+   outline:none;
+}
+.partial_wrap {
+   font-size:0.91em;
+   color:blue;
+}
+.long-partial {
+   display:inline-block;
+   border-bottom:1px solid black;
+   width:100px;
+   height:25px;
+   text-align:center;
+   font-size:1.35em;
+   vertical-align:-5px;
+   background:#E3D6E9;
+   text-indent:0px;
+   overflow:hidden;
+}
+.long-partial:focus {
+   outline:none;
+}
