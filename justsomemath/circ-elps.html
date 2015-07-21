@@ -1,0 +1,128 @@
+<a href='sineof1.github.io/justsomemath/circ_ellipse.html'><div class='post-title' style='color:black;'><div class='post-title'>Transformations of Circle Parts</div>
+<p class='math_1line'>The statement "a circle is an ellipse" is a
+<span class='partial_wrap' id='partial1_wrap'><span class='long-partial' id='partial1' contenteditable='true'></span></span> statement.<br><br>
+In "transformational form," \(\small\mathtt{g(x) = \color{green}{A}f(\color{purple}{B}(x - \color{brown}{C}) + \color{red}{D}}\), changing the A-value stretches or shrinks the graph <span class='partial_wrap' id='partial2_wrap'><span class='long-partial' id='partial2' contenteditable='true'></span></span>.
+
+<button name='but12' class='goButton' onclick='firs_ans()'></button>
+</p>
+<div class='post-body'>
+<canvas id='canvas_elps' height='300px'></canvas>
+<p>We can think about the circle at the left (<a href='https://trinket.io/html/1fdbed5f0d' target='_blank'>code</a>) as being created (traced) by the end of the black hypotenuse of the right triangle. That would mean that this hypotenuse segment has a constant length as the radius of the circle, \(\small\mathtt{r}\). If we imagine that this segment starts at the origin \(\small\mathtt{(0, 0)}\) then the end of the segment is given by \(\small\mathtt{\color{red}{x}^2 + \color{blue}{y}^2 = r^2}\).</p>
+
+<p>And lo, this is the formula for a circle, with the more general \(\small\mathtt{(x - h)^2 + (y - k)^2 = r^2}\) introducing \(\small\mathtt{h}\) and \(\small\mathtt{k}\) to represent offsets from the origin.</p>
+
+<p>Solving the equation \(\small\mathtt{x^2 + y^2 = r^2}\) for \(\small\mathtt{y}\) can help reveal two "pieces" of a circle, since the solution equation is a square root; so we have a "plus-or-minus" situation: \(\small\mathtt{y = \pm \sqrt{r^2 - x^2}}\). I've shown an example on the graph below. Here you've got a circle with a radius, \(\small\mathtt{r}\), currently set to 1 (though you can slide to change it). The top piece of the circle is a function whose graph is "above" the x-axis&mdash;which represents the positive square root&mdash;and the bottom piece, the negative square root, is a mirror-image function of the top piece reflected over the x-axis.</p>
+
+<div id="desmo_calc" style="height: 400px;margin-top:30px;margin-bottom:30px;"></div>
+
+<p class='h2-sec'>Now Let's Squish It!</p>
+
+<p>Now we want to stretch this graph horizontally and vertically because I told you we do. And we can think about doing this to each of the function pieces above. So, we can use what is maybe the greatest equation in all of K&ndash;12dom:
+
+\[\small\mathtt{g(x) = \color{green}{A}f(\color{purple}{B}(x - \color{brown}{C}) + \color{red}{D}}\]</p>
+
+<p>This equation appears in different disguises across different lessons, but most would call it "transformational form." Each of the capital letters on the right side of the equation has a special meaning related to transformations of the graph. There are more details to be had, but these are the basic ideas:
+
+<blockquote>
+<ul>
+<li style='margin-bottom:15px;'>Changing the value of \(\mathtt{\color{green}{A}}\) affects the vertical stretch of the graph.</li>
+<li style='margin-bottom:15px;'>Changing the value of \(\mathtt{\color{purple}{B}}\) affects the horizontal stretch of the graph.</li>
+<li style='margin-bottom:15px;'>Changing the value of \(\mathtt{\color{brown}{C}}\) affects the horizontal shift of the graph.</li>
+<li style='margin-bottom:15px;'>Changing the value of \(\mathtt{\color{red}{D}}\) affects the vertical shift of the graph.</li>
+</ul>
+</blockquote>
+
+<p>Our "top piece" function, which is written as \(\small\mathtt{y = \sqrt{r^2 - x^2}}\) in the graph above, we can write, in transformational form as \[\small\mathtt{y = \color{green}{1} \cdot \sqrt{\color{purple}{-1}(x^2 - \color{brown}{0}) + r^2} + \color{red}{0}}\]
+
+We start (ignoring signs) with \(\small\mathtt{A = \color{green}{1}}\), \(\small\mathtt{B = \color{purple}{1}}\), \(\small\mathtt{C = \color{brown}{0}}\), and \(\small\mathtt{D = \color{red}{0}}\). Type this function in on the graph above to play with how changing these values changes the graph. The B-value is kind of tricky. Whereas multiplying the A-value by 2 stretches the graph vertically by 2; the B-value is really the denominator of a unit fraction.</p>
+
+<p>Can you make a non-circular <a href='http://www.mathopenref.com/coordgeneralellipse.html' target='_blank'>ellipse</a> using these transformations?</p>
+</div>
+<div class='post-footer'><span style='position:absolute;right:20px;'>Comments</span></div>
+<audio id='blop'>
+  <source src="https://965c2f10f15d2a70d52c2be92df835885becba89.googledrive.com/host/0B9y9PCgl63o-fmJPMnZQWFZ5anRXQTFEdWEzUGR1dVRuQmtNeE1rOV9yQVNNdF9qM0RnNmM/blop.mp3" type="audio/ogg">
+</audio>
+
+<script>
+$('#canvas_elps').width(window.innerWidth * 0.4 * 0.6);
+$('#canvas_elps').height($('#canvas_elps').width());
+
+var canvas = document.getElementById('canvas_elps');
+var context = canvas.getContext('2d');
+var reqAnimFrame = window.requestAnimationFrame;
+var change = -1;
+
+var cX = canvas.width / 2;
+var cY = canvas.height / 2;
+var rad = (canvas.height - 10) / 2;
+var cosSeg = {x : cX + rad, y : cY, col : 'red'};
+var sinSeg = {x : cX + rad, y : cY, col : 'blue'};
+var hypSeg = {x : cX + rad, y : cY, col: 'black'};
+
+function animate() {
+   if (cosSeg.x > cX + rad || cosSeg.x < cX - rad) change *= -1;
+   cosSeg.x += change * 0.8;
+   sinSeg.x = cosSeg.x;
+   sinSeg.y = cY - (-change * Math.sqrt(Math.pow(rad, 2) - Math.pow(cosSeg.x - cX, 2)));
+   hypSeg.x = cosSeg.x;
+   hypSeg.y = sinSeg.y;
+   drawTriangle()
+   reqAnimFrame(animate);
+}
+function drawTriangle() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+
+   context.beginPath();
+   context.strokeStyle = 'gray';
+   context.setLineDash([5, 5]);
+   context.lineWidth = 0.5;
+   context.arc(cX, cY, rad, 0, Math.PI * 2);
+   context.stroke();
+
+   context.beginPath();
+   context.strokeStyle = cosSeg.col;
+   context.setLineDash([0]);
+   context.lineWidth = 1;
+   context.moveTo(cX, cY);
+   context.lineTo(cosSeg.x, cosSeg.y);
+   context.stroke();
+
+   context.beginPath();
+   context.strokeStyle = sinSeg.col;
+   context.moveTo(sinSeg.x, cY);
+   context.lineTo(sinSeg.x, sinSeg.y);
+   context.stroke();
+
+   context.beginPath();
+   context.strokeStyle = hypSeg.col;
+   context.moveTo(cX, cY);
+   context.lineTo(hypSeg.x, hypSeg.y);
+   context.stroke();
+}
+animate();
+</script>
+<script>
+var calc = document.getElementById('desmo_calc');
+var circGraph = Desmos.Calculator(calc);
+circGraph.setExpression({id:'graph1', latex:'y = (r^2 - x^2)^{1/2}'});
+circGraph.setExpression({id:'graph2', latex:'y = -(r^2 - x^2)^{1/2}'});
+circGraph.setExpression({id:'r-slider', latex:'r=1', hidden:true});
+circGraph.setViewport([-1.4, 1.4, -1.4, 1.4]);</script>
+
+<script>
+function firs_ans() {
+   var ans1 = $('#partial1').text();
+   var ans2 = $('#partial2').text();
+   if (ans1 === 'true' && ans2 === 'vertically') {
+      $('#partial1, #partial2').effect('explode');
+      $('#partial1_wrap').text(ans1);
+      $('#partial2_wrap').text(ans2);
+      $('button[name="but12"]').remove();
+      document.getElementById('blop').play();
+   }
+   else {
+      $('#partial1, #partial2').text('');
+      $('#partial1').focus();
+   }
+}
+</script>
