@@ -37,10 +37,10 @@ var context1 = canvas1.getContext('2d');
 var reqAnimFrame2 = window.requestAnimationFrame;
 var current = canvas1.width - 10;
 var current1 = canvas1.width - 10;
-var reach1 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
-var reach2 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
+var reach1 = Math.floor(Math.random() * Math.floor(canvas1.width - 20) + 5);
+var reach2 = Math.floor(Math.random() * Math.floor(canvas1.width - 20) + 5);
 
-function reset() {
+function reset1() {
    context1.clearRect(0, 0, canvas1.width, canvas1.height);
    context1.strokeStyle = 'black';
    context1.lineWidth = 1;
@@ -67,7 +67,7 @@ function animate1() {
    reqAnimFrame2(animate1);
 }
 function drawPaint(crnt, crt) {
-   reset();
+   reset1();
    context1.fillStyle = 'rgba(0, 255, 0, 0.3)';
    context1.beginPath();
    context1.rect(crnt, canvas1.height / 2 - 50, (canvas1.width - 10) - crnt, 20);
@@ -87,8 +87,8 @@ function rerun() {
    current1 = canvas1.width - 10;
    reach1 = Math.floor(Math.random() * Math.floor(canvas1.width - 20) + 5);
    reach2 = Math.floor(Math.random() * Math.floor(canvas1.width - 20) + 5);
-   reset();
+   reset1();
 }
-reset();
+reset1();
 setTimeout(function(){animate1();}, 2000);
 </script>
