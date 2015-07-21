@@ -137,6 +137,7 @@ button:hover {
    background:rgba(0, 0, 0, 0.1);
    border:none;
    box-shadow:0px 0px 0px 0px;
+   padding:0px 8px 0px 8px;
 }
 .goButton:hover {
    cursor:pointer;
