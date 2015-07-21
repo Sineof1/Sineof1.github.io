@@ -35,13 +35,13 @@ var canvas1 = document.getElementById('canvas_MtM');
 var context1 = canvas1.getContext('2d');
 
 var reqAnimFrame2 = window.requestAnimationFrame;
-var current = canvas.width - 10;
-var current1 = canvas.width - 10;
+var current = canvas1.width - 10;
+var current1 = canvas1.width - 10;
 var reach1 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
 var reach2 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
 
 function reset() {
-   context1.clearRect(0, 0, canvas.width, canvas.height);
+   context1.clearRect(0, 0, canvas1.width, canvas1.height);
    context1.strokeStyle = 'black';
    context1.lineWidth = 1;
    context1.beginPath();
@@ -79,8 +79,8 @@ function drawPaint(crnt, crt) {
    context1.font = '14px Arial';
    context1.fillStyle = 'black';
    context1.textAlign = 'center';
-   context.fillText('-b', reach1, canvas1.height / 2 - 55);
-   context.fillText('-d', reach2, canvas1.height / 2 + 25);
+   context1.fillText('-b', reach1, canvas1.height / 2 - 55);
+   context1.fillText('-d', reach2, canvas1.height / 2 + 25);
 }
 function rerun() {
    current = canvas1.width - 10;
