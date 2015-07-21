@@ -31,64 +31,64 @@ Since we already know how multiplication works, we know that the product of thos
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $('#canvas_MtM').width(window.innerWidth * 0.4 * 0.6);
-var canvas = document.getElementById('canvas_MtM');
-var context = canvas.getContext('2d');
+var canvas1 = document.getElementById('canvas_MtM');
+var context1 = canvas1.getContext('2d');
 
-var reqAnimFrame1 = window.requestAnimationFrame;
+var reqAnimFrame2 = window.requestAnimationFrame;
 var current = canvas.width - 10;
 var current1 = canvas.width - 10;
 var reach1 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
 var reach2 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
 
 function reset() {
-   context.clearRect(0, 0, canvas.width, canvas.height);
-   context.strokeStyle = 'black';
-   context.lineWidth = 1;
-   context.beginPath();
-   context.moveTo(canvas.width - 10, canvas.height / 2 - 40);
-   context.lineTo(0, canvas.height / 2 - 40);
-   context.stroke();
+   context1.clearRect(0, 0, canvas.width, canvas.height);
+   context1.strokeStyle = 'black';
+   context1.lineWidth = 1;
+   context1.beginPath();
+   context1.moveTo(canvas1.width - 10, canvas1.height / 2 - 40);
+   context1.lineTo(0, canvas1.height / 2 - 40);
+   context1.stroke();
 
-   context.beginPath();
-   context.moveTo(canvas.width - 10, canvas.height / 2 + 40);
-   context.lineTo(0, canvas.height / 2 + 40);
-   context.stroke();
+   context1.beginPath();
+   context1.moveTo(canvas1.width - 10, canvas1.height / 2 + 40);
+   context1.lineTo(0, canvas1.height / 2 + 40);
+   context1.stroke();
 
-   context.font = '14px Arial';
-   context.fillStyle = 'black';
-   context.textAlign = 'center';
-   context.fillText('0', canvas.width - 10, canvas.height / 2 - 15);
-   context.fillText('0', canvas.width - 10, canvas.height / 2 + 65);
+   context1.font = '14px Arial';
+   context1.fillStyle = 'black';
+   context1.textAlign = 'center';
+   context1.fillText('0', canvas1.width - 10, canvas1.height / 2 - 15);
+   context1.fillText('0', canvas1.width - 10, canvas1.height / 2 + 65);
 }
-function animate() {
+function animate1() {
    if (current > reach1) current -= 2;
    if (current1 > reach2) current1 -= 2;
    drawPaint(current, current1);
-   reqAnimFrame1(animate);
+   reqAnimFrame2(animate1);
 }
 function drawPaint(crnt, crt) {
    reset();
-   context.fillStyle = 'rgba(0, 255, 0, 0.3)';
-   context.beginPath();
-   context.rect(crnt, canvas.height / 2 - 50, (canvas.width - 10) - crnt, 20);
-   context.fill();
-   context.fillStyle = 'rgba(0, 0, 255, 0.3)';
-   context.beginPath();
-   context.rect(crt, canvas.height / 2 + 30, (canvas.width - 10) - crt, 20);
-   context.fill();
-   context.font = '14px Arial';
-   context.fillStyle = 'black';
-   context.textAlign = 'center';
-   context.fillText('-b', reach1, canvas.height / 2 - 55);
-   context.fillText('-d', reach2, canvas.height / 2 + 25);
+   context1.fillStyle = 'rgba(0, 255, 0, 0.3)';
+   context1.beginPath();
+   context1.rect(crnt, canvas1.height / 2 - 50, (canvas1.width - 10) - crnt, 20);
+   context1.fill();
+   context1.fillStyle = 'rgba(0, 0, 255, 0.3)';
+   context1.beginPath();
+   context1.rect(crt, canvas1.height / 2 + 30, (canvas1.width - 10) - crt, 20);
+   context1.fill();
+   context1.font = '14px Arial';
+   context1.fillStyle = 'black';
+   context1.textAlign = 'center';
+   context.fillText('-b', reach1, canvas1.height / 2 - 55);
+   context.fillText('-d', reach2, canvas1.height / 2 + 25);
 }
 function rerun() {
-   current = canvas.width - 10;
-   current1 = canvas.width - 10;
-   reach1 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
-   reach2 = Math.floor(Math.random() * Math.floor(canvas.width - 20) + 5);
+   current = canvas1.width - 10;
+   current1 = canvas1.width - 10;
+   reach1 = Math.floor(Math.random() * Math.floor(canvas1.width - 20) + 5);
+   reach2 = Math.floor(Math.random() * Math.floor(canvas1.width - 20) + 5);
    reset();
 }
 reset();
-setTimeout(function(){animate();}, 2000);
+setTimeout(function(){animate1();}, 2000);
 </script>
