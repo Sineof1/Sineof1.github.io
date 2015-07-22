@@ -69,6 +69,7 @@ var sinSeg = {x : cX + rad, y : cY, col : 'blue'};
 var hypSeg = {x : cX + rad, y : cY, col: 'black'};
 
 function animate_lp() {
+   console.log('Entered function.');
    if (cosSeg.x > cX + rad || cosSeg.x < cX - rad) change *= -1;
    cosSeg.x += change * 0.8;
    sinSeg.x = cosSeg.x;
