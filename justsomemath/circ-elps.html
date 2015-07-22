@@ -56,19 +56,19 @@ $('.goButton').html("<svg height='25px' width='25px' viewBox='0 0 25 25' xlmns='
 $('#canvas_elps').width(window.innerWidth * 0.4 * 0.6);
 $('#canvas_elps').height($('#canvas_elps').width());
 
-var canvas = document.getElementById('canvas_elps');
-var context = canvas.getContext('2d');
-var reqAnimFrame = window.requestAnimationFrame;
+var canvas_lp = document.getElementById('canvas_elps');
+var context_lp = canvas_lp.getContext('2d');
+var reqAnimFrame_lp = window.requestAnimationFrame;
 var change = -1;
 
-var cX = canvas.width / 2;
-var cY = canvas.height / 2;
-var rad = (canvas.height - 10) / 2;
+var cX = canvas_lp.width / 2;
+var cY = canvas_lp.height / 2;
+var rad = (canvas_lp.height - 10) / 2;
 var cosSeg = {x : cX + rad, y : cY, col : 'red'};
 var sinSeg = {x : cX + rad, y : cY, col : 'blue'};
 var hypSeg = {x : cX + rad, y : cY, col: 'black'};
 
-function animate() {
+function animate_lp() {
    if (cosSeg.x > cX + rad || cosSeg.x < cX - rad) change *= -1;
    cosSeg.x += change * 0.8;
    sinSeg.x = cosSeg.x;
@@ -76,39 +76,39 @@ function animate() {
    hypSeg.x = cosSeg.x;
    hypSeg.y = sinSeg.y;
    drawTriangle()
-   reqAnimFrame(animate);
+   reqAnimFrame_lp(animate_lp);
 }
 function drawTriangle() {
-   context.clearRect(0, 0, canvas.width, canvas.height);
+   context_lp.clearRect(0, 0, canvas_lp.width, canvas_lp.height);
 
-   context.beginPath();
-   context.strokeStyle = 'gray';
-   context.setLineDash([5, 5]);
-   context.lineWidth = 0.5;
-   context.arc(cX, cY, rad, 0, Math.PI * 2);
-   context.stroke();
+   context_lp.beginPath();
+   context_lp.strokeStyle = 'gray';
+   context_lp.setLineDash([5, 5]);
+   context_lp.lineWidth = 0.5;
+   context_lp.arc(cX, cY, rad, 0, Math.PI * 2);
+   context_lp.stroke();
 
-   context.beginPath();
-   context.strokeStyle = cosSeg.col;
-   context.setLineDash([0]);
-   context.lineWidth = 1;
-   context.moveTo(cX, cY);
-   context.lineTo(cosSeg.x, cosSeg.y);
-   context.stroke();
+   context_lp.beginPath();
+   context_lp.strokeStyle = cosSeg.col;
+   context_lp.setLineDash([0]);
+   context_lp.lineWidth = 1;
+   context_lp.moveTo(cX, cY);
+   context_lp.lineTo(cosSeg.x, cosSeg.y);
+   context_lp.stroke();
 
-   context.beginPath();
-   context.strokeStyle = sinSeg.col;
-   context.moveTo(sinSeg.x, cY);
-   context.lineTo(sinSeg.x, sinSeg.y);
-   context.stroke();
+   context_lp.beginPath();
+   context_lp.strokeStyle = sinSeg.col;
+   context_lp.moveTo(sinSeg.x, cY);
+   context_lp.lineTo(sinSeg.x, sinSeg.y);
+   context_lp.stroke();
 
-   context.beginPath();
-   context.strokeStyle = hypSeg.col;
-   context.moveTo(cX, cY);
-   context.lineTo(hypSeg.x, hypSeg.y);
-   context.stroke();
+   context_lp.beginPath();
+   context_lp.strokeStyle = hypSeg.col;
+   context_lp.moveTo(cX, cY);
+   context_lp.lineTo(hypSeg.x, hypSeg.y);
+   context_lp.stroke();
 }
-animate();
+animate_lp();
 </script>
 <script>
 var calc = document.getElementById('desmo_calc');
