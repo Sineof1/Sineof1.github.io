@@ -52,13 +52,13 @@ We start (ignoring signs) with \(\small\mathtt{A = \color{green}{1}}\), \(\small
 </audio>
 
 
-<script>
+<!--<script>
 var calc = document.getElementById('desmo_calc');
 var circGraph = Desmos.Calculator(calc);
 circGraph.setExpression({id:'graph1', latex:'y = (r^2 - x^2)^{1/2}'});
 circGraph.setExpression({id:'graph2', latex:'y = -(r^2 - x^2)^{1/2}'});
 circGraph.setExpression({id:'r-slider', latex:'r=1', hidden:true});
-circGraph.setViewport([-1.4, 1.4, -1.4, 1.4]);</script>
+circGraph.setViewport([-1.4, 1.4, -1.4, 1.4]);</script>-->
 
 <script>
 function firs_ans() {
@@ -80,7 +80,7 @@ function firs_ans() {
 
 <script>
 //MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-$('.goButton').html("<svg height='25px' width='25px' viewBox='0 0 25 25' xlmns='www.w3.org/2000/svg' style='text-align:center;text-align:-moz-center;stroke-linejoin:round;stroke:white;fill:white;stroke-width:1;vertical-align:middle;'><text x='0' y='20' font-family='Josefin Sans' font-size='1em'>&#x2713;</text></svg>");
+$('.goButton').html("<svg height='25px' width='25px' viewBox='0 0 25 25' xlmns='www.w3.org/2000/svg' style='text-align:center;stroke-linejoin:round;stroke:white;fill:white;stroke-width:1;vertical-align:middle;'><text x='0' y='20' font-family='Josefin Sans' font-size='1em'>&#x2713;</text></svg>");
 $('#canvas_elps').width(window.innerWidth * 0.4 * 0.6);
 $('#canvas_elps').height($('#canvas_elps').width());
 
