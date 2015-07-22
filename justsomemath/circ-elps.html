@@ -69,7 +69,6 @@ var sinSeg = {x : cX + rad, y : cY, col : 'blue'};
 var hypSeg = {x : cX + rad, y : cY, col: 'black'};
 
 function animate_lp() {
-   console.log('Entered function.');
    if (cosSeg.x > cX + rad || cosSeg.x < cX - rad) change *= -1;
    cosSeg.x += change * 0.8;
    sinSeg.x = cosSeg.x;
@@ -80,6 +79,7 @@ function animate_lp() {
    reqAnimFrame_lp(animate_lp);
 }
 function drawTriangle() {
+   console.log('Entered function draw triangle.')
    context_lp.clearRect(0, 0, canvas_lp.width, canvas_lp.height);
 
    context_lp.beginPath();
