@@ -14,6 +14,65 @@ In "transformational form," \(\small\mathtt{g(x) = \color{green}{A}f(\color{purp
 </p>
 <div class='post-body'>
 <canvas id='canvas_elps' height='300px'></canvas>
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+$('.goButton').html("<svg height='25px' width='25px' viewBox='0 0 25 25' xlmns='www.w3.org/2000/svg' style='text-align:center;text-align:-moz-center;stroke-linejoin:round;stroke:white;fill:white;stroke-width:1;vertical-align:middle;'><text x='0' y='20' font-family='Josefin Sans' font-size='1em'>&#x2713;</text></svg>");
+$('#canvas_elps').width(window.innerWidth * 0.4 * 0.6);
+$('#canvas_elps').height($('#canvas_elps').width());
+
+var canvas_lp = document.getElementById('canvas_elps');
+var context_lp = canvas_lp.getContext('2d');
+var reqAnimFrame_lp = window.requestAnimationFrame;
+var change = -1;
+
+var cX = canvas_lp.width / 2;
+var cY = canvas_lp.height / 2;
+var rad = (canvas_lp.height - 10) / 2;
+var cosSeg = {x : cX + rad, y : cY, col : 'red'};
+var sinSeg = {x : cX + rad, y : cY, col : 'blue'};
+var hypSeg = {x : cX + rad, y : cY, col: 'black'};
+
+function animate_lp() {
+   if (cosSeg.x > cX + rad || cosSeg.x < cX - rad) change *= -1;
+   cosSeg.x += change * 0.8;
+   sinSeg.x = cosSeg.x;
+   sinSeg.y = cY - (-change * Math.sqrt(Math.pow(rad, 2) - Math.pow(cosSeg.x - cX, 2)));
+   hypSeg.x = cosSeg.x;
+   hypSeg.y = sinSeg.y;
+   drawTriangle()
+   reqAnimFrame_lp(animate_lp);
+}
+function drawTriangle() {
+   context_lp.clearRect(0, 0, canvas_lp.width, canvas_lp.height);
+   context_lp.beginPath();
+   context_lp.strokeStyle = 'gray';
+   context_lp.setLineDash([5, 5]);
+   context_lp.lineWidth = 0.5;
+   context_lp.arc(cX, cY, rad, 0, Math.PI * 2);
+   context_lp.stroke();
+
+   context_lp.beginPath();
+   context_lp.strokeStyle = cosSeg.col;
+   context_lp.setLineDash([0]);
+   context_lp.lineWidth = 1;
+   context_lp.moveTo(cX, cY);
+   context_lp.lineTo(cosSeg.x, cosSeg.y);
+   context_lp.stroke();
+
+   context_lp.beginPath();
+   context_lp.strokeStyle = sinSeg.col;
+   context_lp.moveTo(sinSeg.x, cY);
+   context_lp.lineTo(sinSeg.x, sinSeg.y);
+   context_lp.stroke();
+
+   context_lp.beginPath();
+   context_lp.strokeStyle = hypSeg.col;
+   context_lp.moveTo(cX, cY);
+   context_lp.lineTo(hypSeg.x, hypSeg.y);
+   context_lp.stroke();
+}
+animate_lp();
+</script>
 <p>We can think about the circle at the left (<a href='https://trinket.io/html/1fdbed5f0d' target='_blank'>code</a>) as being created (traced) by the end of the black hypotenuse of the right triangle. That would mean that this hypotenuse segment has a constant length as the radius of the circle, \(\small\mathtt{r}\). If we imagine that this segment starts at the origin \(\small\mathtt{(0, 0)}\) then the end of the segment is given by \(\small\mathtt{\color{red}{x}^2 + \color{blue}{y}^2 = r^2}\).</p>
 
 <p>And lo, this is the formula for a circle, with the more general \(\small\mathtt{(x - h)^2 + (y - k)^2 = r^2}\) introducing \(\small\mathtt{h}\) and \(\small\mathtt{k}\) to represent offsets from the origin.</p>
@@ -50,67 +109,7 @@ We start (ignoring signs) with \(\small\mathtt{A = \color{green}{1}}\), \(\small
   <source src="https://965c2f10f15d2a70d52c2be92df835885becba89.googledrive.com/host/0B9y9PCgl63o-fmJPMnZQWFZ5anRXQTFEdWEzUGR1dVRuQmtNeE1rOV9yQVNNdF9qM0RnNmM/blop.mp3" type="audio/ogg">
 </audio>
 
-<script>
-MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-$('.goButton').html("<svg height='25px' width='25px' viewBox='0 0 25 25' xlmns='www.w3.org/2000/svg' style='text-align:center;text-align:-moz-center;stroke-linejoin:round;stroke:white;fill:white;stroke-width:1;vertical-align:middle;'><text x='0' y='20' font-family='Josefin Sans' font-size='1em'>&#x2713;</text></svg>");
-$('#canvas_elps').width(window.innerWidth * 0.4 * 0.6);
-$('#canvas_elps').height($('#canvas_elps').width());
 
-var canvas_lp = document.getElementById('canvas_elps');
-var context_lp = canvas_lp.getContext('2d');
-var reqAnimFrame_lp = window.requestAnimationFrame;
-var change = -1;
-
-var cX = canvas_lp.width / 2;
-var cY = canvas_lp.height / 2;
-var rad = (canvas_lp.height - 10) / 2;
-var cosSeg = {x : cX + rad, y : cY, col : 'red'};
-var sinSeg = {x : cX + rad, y : cY, col : 'blue'};
-var hypSeg = {x : cX + rad, y : cY, col: 'black'};
-
-function animate_lp() {
-   if (cosSeg.x > cX + rad || cosSeg.x < cX - rad) change *= -1;
-   cosSeg.x += change * 0.8;
-   sinSeg.x = cosSeg.x;
-   sinSeg.y = cY - (-change * Math.sqrt(Math.pow(rad, 2) - Math.pow(cosSeg.x - cX, 2)));
-   hypSeg.x = cosSeg.x;
-   hypSeg.y = sinSeg.y;
-   drawTriangle()
-   reqAnimFrame_lp(animate_lp);
-}
-function drawTriangle() {
-   console.log('Entered function draw triangle.')
-   context_lp.clearRect(0, 0, canvas_lp.width, canvas_lp.height);
-
-   context_lp.beginPath();
-   context_lp.strokeStyle = 'gray';
-   context_lp.setLineDash([5, 5]);
-   context_lp.lineWidth = 0.5;
-   context_lp.arc(cX, cY, rad, 0, Math.PI * 2);
-   context_lp.stroke();
-
-   context_lp.beginPath();
-   context_lp.strokeStyle = cosSeg.col;
-   context_lp.setLineDash([0]);
-   context_lp.lineWidth = 1;
-   context_lp.moveTo(cX, cY);
-   context_lp.lineTo(cosSeg.x, cosSeg.y);
-   context_lp.stroke();
-
-   context_lp.beginPath();
-   context_lp.strokeStyle = sinSeg.col;
-   context_lp.moveTo(sinSeg.x, cY);
-   context_lp.lineTo(sinSeg.x, sinSeg.y);
-   context_lp.stroke();
-
-   context_lp.beginPath();
-   context_lp.strokeStyle = hypSeg.col;
-   context_lp.moveTo(cX, cY);
-   context_lp.lineTo(hypSeg.x, hypSeg.y);
-   context_lp.stroke();
-}
-animate_lp();
-</script>
 <script>
 var calc = document.getElementById('desmo_calc');
 var circGraph = Desmos.Calculator(calc);
