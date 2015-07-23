@@ -49,6 +49,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post5'></div>
 <div id='post4'></div>
 <div id='post1'></div>
 <div id='post2'></div>
@@ -62,16 +63,12 @@
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
-   $.get( "/justsomemath/neg-neg.html", function(data) {
-      $("#post3").append(data);});
-   $.get( "/justsomemath/colb_prim.html", function(data) {
-      $("#post2").append(data);});
-   $.get( "/justsomemath/mat-sold.html", function(data) {
-      $("#post1").append(data);});
-   $.get( "/justsomemath/circ-elps.html", function(data) {
-      $("#post4").append(data);});
-   $("#navbut1").click(
-     function() {$("#link-menu").slideToggle(500);});
+   $.get( "/justsomemath/neg-neg.html", function(data) {$("#post3").append(data);});
+   $.get( "/justsomemath/colb_prim.html", function(data) {$("#post2").append(data);});
+   $.get( "/justsomemath/mat-sold.html", function(data) {$("#post1").append(data);});
+   $.get( "/justsomemath/circ-elps.html", function(data) {$("#post4").append(data);});
+   $.get( "/justsomemath/educ-convo.html", function(data) {$("#post5").append(data);});
+   $("#navbut1").click(function() {$("#link-menu").slideToggle(500);});
 });
 </script>
 
