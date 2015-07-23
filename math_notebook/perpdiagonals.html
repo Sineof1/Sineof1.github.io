@@ -240,7 +240,7 @@ function drawRect() {
    context.moveTo(50, 250);
    context.lineTo(397, 50);
    context.stroke();
-   context.setLineDash([0]);
+   context.setLineDash([1, 0]);
 
    if (loc.x === 50 && loc.y < 250) {
       var xLoc1 = 50 + ((loc.y - 50) / 4) * Math.sqrt(3);
@@ -329,7 +329,7 @@ function drawRect2() {
    context2.moveTo(50, 250);
    context2.lineTo(397, 50);
    context2.stroke();
-   context2.setLineDash([0]);
+   context2.setLineDash([1, 0]);
 
    context2.strokeStyle = 'red';
    context2.beginPath();
@@ -381,7 +381,7 @@ function drawRect3() {
    context3.moveTo(50, 250);
    context3.lineTo(397, 50);
    context3.stroke();
-   context3.setLineDash([0]);
+   context3.setLineDash([1, 0]);
 
    context3.strokeStyle = 'red';
    context3.beginPath();
