@@ -370,7 +370,7 @@ function drawPoint() {
    context.lineTo(newX1, newY1);
    context.stroke();
 
-   context.setLineDash([0]);
+   context.setLineDash([1, 0]);
    context.strokeStyle = 'black';
    context.lineWidth = 1;
 }
@@ -447,7 +447,7 @@ function drawPoint1() {
 
    context2.beginPath();
    context2.strokeStyle = 'green';
-   context2.setLineDash([0]);
+   context2.setLineDash([1, 0]);
    context2.lineWidth = 2;
    context2.moveTo(100, 230);
    context2.lineTo(newX, newY);
@@ -501,7 +501,7 @@ function drawPoint1() {
    context2.lineTo(newX1, newY1);
    context2.stroke();
 
-   context2.setLineDash([0]);
+   context2.setLineDash([1, 0]);
    context2.strokeStyle = 'black';
    context2.lineWidth = 1;
 }
