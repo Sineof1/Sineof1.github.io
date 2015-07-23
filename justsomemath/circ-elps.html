@@ -92,9 +92,9 @@ var change = -1;
 var cX = canvas_lp.width / 2;
 var cY = canvas_lp.height / 2;
 var rad = (canvas_lp.height - 10) / 2;
-var cosSeg = {x : cX + rad, y : cY, col : 'rgb(255, 0, 0)'};
-var sinSeg = {x : cX + rad, y : cY, col : 'rgb(0, 0, 255)'};
-var hypSeg = {x : cX + rad, y : cY, col: 'rgb(0, 0, 0)'};
+var cosSeg = {x : cX + rad, y : cY, col : 'gray'};
+var sinSeg = {x : cX + rad, y : cY, col : 'gray'};
+var hypSeg = {x : cX + rad, y : cY, col: 'gray'};
 
 function animate_lp() {
    if (cosSeg.x > cX + rad || cosSeg.x < cX - rad) change *= -1;
