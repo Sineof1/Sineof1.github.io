@@ -86,7 +86,7 @@ $('#canvas_elps').height($('#canvas_elps').width());
 
 var canvas_lp = document.getElementById('canvas_elps');
 var context_lp = canvas_lp.getContext('2d');
-var reqAnimFrame_lp = window.requestAnimationFrame;
+var reqAnimFrame_lp = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame;
 var change = -1;
 
 var cX = canvas_lp.width / 2;
