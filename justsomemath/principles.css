@@ -67,6 +67,10 @@
    letter-spacing:-1px;
    margin-bottom:40px;
 }
+.post-body p {
+   margin-right:0px;
+   padding-right:0px;
+}
 blockquote {
    font-family:Quicksand;
    font-size:18px;
