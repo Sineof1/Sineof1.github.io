@@ -35,14 +35,6 @@
 </div>
 </div>
 <div id='nav-banner'>
-<div class='nav-button' id='navbut1'>links</div>
-<div id='link-menu'>
-<ul id='links'>
-   <a id='menu-link' href='https://drive.google.com/file/d/0B9y9PCgl63o-QklfZjNEbXlsclk/view?usp=sharing' target='_blank'><li>Hardy: A Course of Pure Mathematics</li></a>
-<a id='menu-link' href='http://abstractmath.org/MM/MMTOC.htm' target='_blank'><li>Abstract Math</li></a>
-</ul>
-</div>
-<div class='nav-button' id='navbut2'>essays</div>
 <a href='http://sineof1.github.io/justsomemath.html'><div class='nav-button' id='navbut3'>home</div></a>
 </div>
 <!--############################ ALL POSTS ##################################################################-->
@@ -70,7 +62,6 @@ $(document).ready(function() {
    $.get( "/justsomemath/circ-elps.html", function(data) {$("#post4").append(data);});
    $.get( "/justsomemath/educ-convo.html", function(data) {$("#post5").append(data);});
    $.get( "/justsomemath/tao-sym.html", function(data) {$("#post6").append(data);});
-   $("#navbut1").click(function() {$("#link-menu").slideToggle(500);});
 });
 </script>
 
