@@ -64,6 +64,7 @@
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+var click_Drawer = 0;
 $(document).ready(function() {
    setTimeout(function(){$('.more-posts').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 1200);
    $.get( "/justsomemath/neg-neg.html", function(data) {$("#post3").append(data);});
@@ -73,17 +74,16 @@ $(document).ready(function() {
    $.get( "/justsomemath/educ-convo.html", function(data) {$("#post5").append(data);});
    $.get( "/justsomemath/tao-sym.html", function(data) {$("#post6").append(data);});
    
-   
    $('.more-posts').height(window.innerHeight);
-   $('.more-posts').click(function() {
-      var rt = ($(window).width() - ($(this).offset().left + $(this).outerWidth()));
-      if (rt === -90) {
-         $(this).animate({right: '+=90px'}, 800, 'easeInOutBack');
-         $('.blog-container').fadeIn(1000);
-      }
-      else {
+   $('#more-posts').click(function() {
+      click_Drawer += 1;
+      if (click_Drawer % 2 === 0) {
          $(this).animate({right: '-=90px'}, 800, 'easeInOutBack');
          $('.blog-container').fadeOut(500);
+      }
+      else {
+         $(this).animate({right: '+=90px'}, 800, 'easeInOutBack');
+         $('.blog-container').fadeIn(1000);
       }
    });
 });
