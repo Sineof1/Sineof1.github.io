@@ -78,7 +78,6 @@ $(document).ready(function() {
    $('#more-posts').height(window.innerHeight);
    $('#more-posts').click(function() {
       click_Drawer += 1;
-      console.log(click_Drawer);
       if (click_Drawer % 2 === 0) {
          $(this).animate({right: '-=90px'}, 800, 'easeInOutBack');
          $('.blog-container').fadeOut(500);
