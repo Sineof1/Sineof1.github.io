@@ -195,7 +195,7 @@ button:hover {
    right:-130px;
    top:0px;
    width:130px;
-   background:rgba(0, 0, 0, 0.5);
+   background:rgba(0, 0, 0, 0.7);
    -webkit-backface-visibility: hidden;
    z-index:1;
 }
