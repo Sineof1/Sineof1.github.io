@@ -62,6 +62,18 @@ $(document).ready(function() {
    $.get( "/justsomemath/circ-elps.html", function(data) {$("#post4").append(data);});
    $.get( "/justsomemath/educ-convo.html", function(data) {$("#post5").append(data);});
    $.get( "/justsomemath/tao-sym.html", function(data) {$("#post6").append(data);});
+   
+   $.get('http://gregashman.wordpress.com/', function(rss1_data) {
+      var newAshman1 = rss1_data.slice(rss1_data.indexOf('div class="post-'));
+      var newAshman2 = Ashman1.slice(Ashman1.indexOf('">') + 2, Ashman1.indexOf('</a>') + 1);
+      $('.more-posts').append(newAshman2);
+   });
+   $('.more-posts').height(window.innerHeight);
+   $('.more-posts').click(function() {
+      var rt = ($(window).width() - ($(this).offset().left + $(this).outerWidth()));
+      if (rt === -90) $(this).animate({right: '+=90px'}, 800, 'easeInOutBack');
+      else $(this).animate({right: '-=90px'}, 800, 'easeInOutBack');
+   });
 });
 </script>
 
