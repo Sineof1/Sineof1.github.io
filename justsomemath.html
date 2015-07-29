@@ -52,7 +52,14 @@
 </div>
 <img src='https://lh3.googleusercontent.com/JURL9MsUen7HUZ6kdLgOEYNCDodDaDErnJtuN4gN9CTW=w815-h809-no' style='position:fixed;visibility:hidden;'>
 </body>
-<div class='more-posts'></div>
+<div class='more-posts'>
+<div class='blog-container' style='border-bottom:none;background:none;margin-top:0px;margin-bottom:-30px;font-weight:900;font-variant:small-caps;font-size:1.2em;'>Good Sites</div>
+<a class='blog-link' href='https://mathmindsblog.wordpress.com/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>Math Minds</div></a>
+<a class='blog-link' href='https://gregashman.wordpress.com/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>Filling the Pail</div></a>
+<a class='blog-link' href='http://www.learningspy.co.uk/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>The Learning Spy</div></a>
+<a class='blog-link' href='http://www.megcraig.org/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>Meg Craig</div></a>
+<a class='blog-link' href='http://mrhonner.com/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>Mr Honner</div></a>
+</div>
 </html>
 
 <script>
@@ -70,8 +77,14 @@ $(document).ready(function() {
    $('.more-posts').height(window.innerHeight);
    $('.more-posts').click(function() {
       var rt = ($(window).width() - ($(this).offset().left + $(this).outerWidth()));
-      if (rt === -90) $(this).animate({right: '+=90px'}, 800, 'easeInOutBack');
-      else $(this).animate({right: '-=90px'}, 800, 'easeInOutBack');
+      if (rt === -90) {
+         $(this).animate({right: '+=90px'}, 800, 'easeInOutBack');
+         $('.blog-container').fadeIn(1000);
+      }
+      else {
+         $(this).animate({right: '-=90px'}, 800, 'easeInOutBack');
+         $('.blog-container').fadeOut(500);
+      }
    });
 });
 </script>
