@@ -219,3 +219,13 @@ button:hover {
 .blog-container:hover {
    background:rgba(255, 255, 255, 0.2);
 }
+#more_arrow {
+   display:block;
+   border-radius:50%;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:-20px;
+}
+#more_arrow:hover {
+   background:rgba(255,255,76,0.2);
+}
