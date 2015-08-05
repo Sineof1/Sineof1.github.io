@@ -68,7 +68,7 @@
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 var click_Drawer = 0;
 $(document).ready(function() {
-   setTimeout(function(){$('#more-posts').show(); $('#more-posts').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 4000);
+   setTimeout(function(){$('#more-posts').show(); $('#more-posts').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 5000);
    $.get( "/justsomemath/neg-neg.html", function(data) {$("#post3").append(data);});
    $.get( "/justsomemath/colb_prim.html", function(data) {$("#post2").append(data);});
    $.get( "/justsomemath/mat-sold.html", function(data) {$("#post1").append(data);});
