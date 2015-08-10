@@ -42,6 +42,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post8'></div>
 <div id='post7'></div>
 <div id='post6'></div>
 <div id='post5'></div>
@@ -76,6 +77,7 @@ $(document).ready(function() {
    $.get( "/justsomemath/educ-convo.html", function(data) {$("#post5").append(data);});
    $.get( "/justsomemath/tao-sym.html", function(data) {$("#post6").append(data);});
    $.get( "/justsomemath/op-connex.html", function(data) {$("#post7").append(data);});
+   $.get( "/justsomemath/comp-phob.html", function(data) {$("#post8").append(data);});
    
    $('#more-posts').height(window.innerHeight);
    $('#more-posts').click(function() {
