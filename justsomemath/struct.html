@@ -13,7 +13,7 @@
 
 <p class='h2-sec'>Flattening. And Bifurcation</p>
 
-<p>I'm also not interested in explaining the solution here, so I'll refer you to a pretty good explanation at <a href='http://betterexplained.com/articles/navigate-a-grid-using-combinations-and-permutations/' target='_blank'>Better Explained</a>. (One quibble, though, about the explanation there: my sense is that an opportunity for greater clarity is missed in Approach 1 by not pointing out that
+<p>I'm also not interested in explaining the solution here, so I'll refer you to a pretty good explanation at <a href='http://betterexplained.com/articles/navigate-a-grid-using-combinations-and-permutations/' target='_blank'>Better Explained</a>. One quibble, though, about the explanation there: my sense is that an opportunity for greater clarity is missed in Approach 1 by not pointing out that
 \[\small\mathtt{\dbinom{n}{k} = \dbinom{n}{n - k}}\]</p>
 <img src='https://lh3.googleusercontent.com/oys72SlWdMDC2wIQ9S7qIT0kBJ9USdjgFlNIZuuzaKav=w640-h427-no' width='356px' height='237px' style='float:left;margin:15px 20px 15px 0px;box-shadow:0 0 10px #cccccc;'>
 <p>Anyway, the move I like in the video (and at Better Explained) is the move that <strong>flattens</strong> the problem. For the example above, this involves perceiving that, however we get there, we have to make exactly 5 moves right (east) and exactly 6 moves down (south). We no longer have to deal with a two-dimensional problem, but a one-dimensional one; a list of moves: RRRRRDDDDDD (or EEEEESSSSSS). This is flatter.</p>
