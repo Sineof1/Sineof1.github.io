@@ -1,0 +1,39 @@
+<a href='http://sineof1.github.io/justsomemath/structure.html' style='color:black;'><div class='post-title'>Flattening Structures</div></a>
+<div class='post-body'>
+
+<p>This is a fun presentation by Po-Shen Loh, the coach of the winning 2015 U.S. Math Olympiad team, whom I mentioned <a href='http://sineof1.github.io/justsomemath/math_sold.html' target='_blank'>here</a>, and is primarily about the <a href='https://www.youtube.com/watch?v=m9Khxn2g-6w' target='_blank'>Catalan numbers</a>. It's not too advanced, but it's by no means a basic intro to these numbers. James Tanton's video explanation at the previous link is more straightforward if you're interested in seeing how the formula for these numbers can be conceptualized.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z_75zzqXVnM" frameborder="0" style='display:block;margin-left:auto;margin-right:auto;margin-top:25px;margin-bottom:25px;box-shadow:0 0 15px #cccccc;'></iframe>
+
+<p>Regardless, I am more interested in the little problem Loh's group goes through at the beginning of the presentation (and comes back to at the end) for the purposes of this post. The first part of it goes something like this:</p>
+
+<blockquote>Choose a point in the second quadrant of a coordinate plane, say (-2, 8). Choose another point in the fourth quadrant, say (3, -2). Making only right and down moves (east and south), one unit per move, how many possible ways are there to move from the first point to the second?</blockquote>
+
+<iframe width='100%' height='400px' src='http://www.opengraphingcalculator.com/?readType=full&%FF%00%5Cleft%28-2%2C%5C%208%5Cright%29&%FF%00%5Cleft%283%2C%5C%20-2%5Cright%29' style='margin-top:25px;box-shadow:0 0 15px #cccccc;'></iframe>
+
+<p>If you haven't seen a problem like that before and would like to think about it, also think about how you would interpret the CC standard for mathematical practice of <a href='http://www.corestandards.org/Math/Practice/MP7/' target='_blank'>looking for and making use of structure</a> in this problem.</p>
+
+<p class='h2-sec'>Flattening. And Bifurcation</p>
+
+<p>I'm also not interested in explaining the solution here, so I'll refer you to a pretty good explanation at <a href='http://betterexplained.com/articles/navigate-a-grid-using-combinations-and-permutations/' target='_blank'>Better Explained</a>. (One quibble, though, about the explanation there: my sense is that an opportunity for greater clarity is missed in Approach 1 by not pointing out that
+\[\small\mathtt{\dbinom{n}{k} = \dbinom{n}{n - k}}\]</p>
+<img src='https://lh3.googleusercontent.com/oys72SlWdMDC2wIQ9S7qIT0kBJ9USdjgFlNIZuuzaKav=w640-h427-no' width='356px' height='237px' style='float:left;margin:15px 20px 15px 0px;box-shadow:0 0 10px #cccccc;'>
+<p>Anyway, the move I like in the video (and at Better Explained) is the move that <strong>flattens</strong> the problem. For the example above, this involves perceiving that, however we get there, we have to make exactly 5 moves right (east) and exactly 6 moves down (south). We no longer have to deal with a two-dimensional problem, but a one-dimensional one; a list of moves: RRRRRDDDDDD (or EEEEESSSSSS). This is flatter.</p>
+
+<p>There is also a bifurcation here&mdash;a splitting into two&mdash;when we perceive the two components D and R as being the only two objects we really have to deal with. Although this is essentially given in the setup (we're told we can only make down and right moves), it requires a conscious effort on the part of novices to simplify in this way&mdash;to avoid seeing a mental mess of stairstep configurations from point \(\small\mathtt{A}\) to point \(\small\mathtt{B}\) as the structure of the problem. One can see this bifurcation in Tanton's explanation of Catalan numbers too.</p>
+
+<p class='h2-sec'>Tearing Down the Structure</p>
+
+<p>Just as with <a href='http://sineof1.github.io/justsomemath/tao_symmetry.html' target='_blank'>looking for symmetry</a>, flattening and splitting can be considered two general techniques that, in some sense, break down the structure of a problem rather than "make use of it"&mdash;they are <strong>different</strong> structures than the ones given by most problems. The authors of the Common Core no doubt meant "mathematical structure" when they wrote just "structure," but we should be careful to mean the same thing when we teach this practice.</p>
+
+<p>At any level. Consider this <a href='http://www.teach-nology.com/worksheets/math/Grade6/exp12.html' target='_blank'>6th grade proportion problem</a>:</p>
+
+<blockquote>For every 5 baseball cards that Mickey has, Mike has 3 baseball cards. If Mike has 72 baseball cards, how many baseball cards does Mickey have?</blockquote>
+
+<p>It might not seem to be worthy of the 10-dollar word "bifurcation" to see in this problem that there are just two groups of cards to consider&mdash;Mike's and Mickey's&mdash;but that simplification can be a useful and indeed powerful step for a student to whom the above is, at first glance, a salad of "Mik--", "baseball cards", and numbers. Mike has 72 on one side, and Mickey has we don't know on the other.</p>
+
+<p>The flattening here is harder, and it really needs to be taught. While there's nothing wrong with setting this up as the proportion \(\mathtt{\frac{5}{3} = \frac{x}{72}}\), we can flatten this to good effect if we see the <a href='http://www.textsavvy.blogspot.com/2015/05/a-meditation-on-ratio.html' target='_blank'>ratio comparison number</a> in the first sentence. Rather than 5 to 3, it's just that Mickey has \(\mathtt{\frac{5}{3}}\), or \(\mathtt{1\frac{2}{3}}\), times as many baseball cards as Mike. The resulting setup can even be <strong>literally</strong> flatter (and there may be no need for the variable): \(\small\mathtt{1.\overline{6} \cdot 72 = 120}\).</p>
+<hr></hr>
+<p>Image credit: <a href='https://flic.kr/p/88X85Q' target='_blank'>peasap</a>.</p>
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on August 14, 2015</span><span style='position:absolute;right:20px;'>Comments</span></div>
