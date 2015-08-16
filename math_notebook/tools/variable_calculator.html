@@ -19,7 +19,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <style></style>
 <script>$.get("variable_calculator.css", function(data) {$('style').append(data);});</script>
-<script>$.get("variable_calculator.js", function(data) {$('#calcScript').append(data);});</script>
+<script>$.getScript('variable_calculator.js');</script>
+</script>
 <title>Variable Calculator</title>
 </head>
 
@@ -59,4 +60,3 @@
 </body>
 
 </html>
-<script id='calcScript'></script>
