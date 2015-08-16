@@ -41,7 +41,7 @@ $(document).ready(function() {
     $(this).text('=');
     $('#result_window').empty();
     curStringResult = '';
-    $('.op-button').css({'pointer-events':'all'});
+    $('.op-button').css({'pointer-events':'none'});
     $('.op-button').removeClass('checked');
     $('.calc-button').css({'pointer-events':'all'});
     $('.calc-button').removeClass('checked');
