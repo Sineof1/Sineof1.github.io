@@ -96,12 +96,18 @@ function drawPoint(evt) {
    }
 }
 function drawLine(mid, slope) {
-   console.log(slope);
    context.beginPath();
    context.setLineDash([1, 0]);
-   context.moveTo(mid.x - canvas.width, mid.y - slope * canvas.width);
-   context.lineTo(mid.x + canvas.width, mid.y + slope * canvas.width);
-   context.stroke();
+   if (slope === Number.POSITIVE_INFINITY || slope === Number.NEGATIVE_INFINITY) {
+      context.moveTo(mid.x, 0);
+      context.lineTo(mid.x, canvas.height);
+      context.stroke();
+   }
+   else {
+      context.moveTo(mid.x - canvas.width, mid.y - slope * canvas.width);
+      context.lineTo(mid.x + canvas.width, mid.y + slope * canvas.width);
+      context.stroke();
+   }
 }
 canvas.addEventListener('click', drawPoint, true);
 clearCan();
