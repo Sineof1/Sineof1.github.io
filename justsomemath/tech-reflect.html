@@ -1,0 +1,107 @@
+<style>
+#geoTransform {
+   display:block;
+   width:400px;
+   height:350px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:30px;
+   margin-bottom:30px;
+   box-shadow:0 0 10px #cccccc;
+}
+#geoTransform:hover {
+   cursor:pointer;
+}
+button #clear {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+button #clear:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+</style>
+<a href='http://sineof1.github.io/justsomemath/structure.html' style='color:black;'><div class='post-title'>Reflecting on Tech</div></a>
+<div class='post-body'>
+<p>With the help of <a href='http://commoncoretools.me/2015/08/14/transformations-and-triangle-congruence-and-similarity-criteria/' target='_blank'>Bill McCallum</a>, I was led to this <a href='http://www.mathedpage.org/transformations/triangle-congruence-similarity-v2.pdf' target='_blank'>nice paper</a> by <a href='http://blog.mathedpage.org/' target='_blank'>Henri Picciotto</a> and Lew Douglas, fleshing out a way of studying triangle similarity and congruence based on geometric transformations, as outlined in notes within the Common Core State Standards:</p>
+
+<blockquote>The concepts of congruence, similarity, and symmetry can be understood from the perspective of geometric transformation. Fundamental are the rigid motions: translations, rotations, reflections, and combinations of these, all of which are here assumed to preserve distance and angles (and therefore shapes generally). Reflections and rotations each explain a particular type of symmetry, and the symmetries of an object offer insight into its attributes.</blockquote>
+
+<p><a href='http://sineof1.github.io/justsomemath/tao_symmetry.html' target='_blank'>Symmetry!</a> Excellent.</p>
+
+<p>Theorem 1 from the paper deals explicitly with reflectional symmetry (or, rather, it deals explicitly with reflections and implicitly with reflectional symmetry). It states that "there is a reflection that maps any given point \(\small\mathtt{P}\) into any given point \(\small\mathtt{Q}\)." Or, much more colloquially: if I indicate any two points on the plane, I can draw a line between them such that if I were to reflect the plane over that line, the two points would be at the same location.</p>
+
+<p>Click or tap to draw any two points in the space below. The line of reflection is then drawn between the points.</p>
+
+<canvas id='geoTransform' width='400px' height='350px'></canvas>
+<div style='display:flex;justify-content:center;margin-bottom:20px;'><button id='clear' onClick='clearCan()'>clear</button></div>
+
+<p class='h2-sec'>How the Tech Helps (a Little)</p>
+
+<p>It's tough to know what we want to be happening in students' minds when they cogitate on reflections like this in the context of problems (or in general). I would think that at some point, they should be absolutely positive that they can 'get to' one point 'from' another via just one reflection, without trying to visualize it. And they should know the "how" behind this certainty: a perpendicular bisector intersecting the segment connecting the two points can always be drawn (or better yet, exists, even if you can think of no earthly way to draw it).</p>
+
+<p>Wiring these two facts up to the prototypical 'understanding' gets tricky. The temptation is to do a lot of folding, which, although not harmful in reasonable doses, runs the risk of communicating that visualizing reflections is <strong>required</strong>&mdash;if I can't see it, it ain't there. This is where technology, when we think of it, steps in: as a replacement for the 'reification' process.</p>
+
+<p>Instead, the little applet (or whatever) above just helps a little with visualization. It simply demonstrates what the text is referring to, leaving many of the nagging questions and proofs to the side. That's the kind of stuff I like technology to help me with.</p>
+
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on August 18, 2015</span><span style='position:absolute;right:20px;'>Comments</span></div>
+
+<script>
+var canvas = document.getElementById('geoTransform');
+var context = canvas.getContext('2d');
+var count = 0;
+var firPoint = {};
+var secPoint = {};
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function clearCan() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   count = 0;
+   canvas.addEventListener('click', drawPoint, true);
+}
+function drawPoint(evt) {
+   if (count > 2) return;
+   count += 1;
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   context.beginPath();
+   context.arc(loc.x, loc.y, 3, 0, Math.PI * 2);
+   context.fill();
+   if (count === 1) {firPoint.x = loc.x; firPoint.y = loc.y;}
+   else if (count === 2) {
+      canvas.removeEventListener('click', drawPoint, true);
+      secPoint.x = loc.x; secPoint.y = loc.y;
+      var slope = -((secPoint.x - firPoint.x) / (secPoint.y - firPoint.y));
+      var mid = {x: (Math.abs(secPoint.x + firPoint.x)) / 2, y: (Math.abs(secPoint.y + firPoint.y)) / 2};
+      context.beginPath();
+      context.setLineDash([5, 5]);
+      context.moveTo(firPoint.x, firPoint.y);
+      context.lineTo(secPoint.x, secPoint.y);
+      context.stroke();
+      drawLine(mid, slope);
+   }
+}
+function drawLine(mid, slope) {
+   context.beginPath();
+   context.setLineDash([1, 0]);
+   context.moveTo(mid.x - canvas.width, mid.y - slope * canvas.width);
+   context.lineTo(mid.x + canvas.width, mid.y + slope * canvas.width);
+   context.stroke();
+}
+canvas.addEventListener('click', drawPoint, true);
+clearCan();
+</script>
