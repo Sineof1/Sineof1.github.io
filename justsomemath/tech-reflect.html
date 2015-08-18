@@ -96,6 +96,7 @@ function drawPoint(evt) {
    }
 }
 function drawLine(mid, slope) {
+   console.log(slope);
    context.beginPath();
    context.setLineDash([1, 0]);
    context.moveTo(mid.x - canvas.width, mid.y - slope * canvas.width);
