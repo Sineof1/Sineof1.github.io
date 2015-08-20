@@ -42,6 +42,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post11'></div>
 <div id='post10'></div>
 <div id='post9'></div>
 <div id='post8'></div>
@@ -72,6 +73,7 @@ MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 var click_Drawer = 0;
 $(document).ready(function() {
    setTimeout(function(){$('#more-posts').show(); $('#more-posts').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 5000);
+   $.get( "/justsomemath/vecs.html", function(data) {$("#post11").append(data);});
    $.get( "/justsomemath/tech-reflect.html", function(data) {$("#post10").append(data);});
    $.get( "/justsomemath/neg-neg.html", function(data) {$("#post3").append(data);});
    $.get( "/justsomemath/colb_prim.html", function(data) {$("#post2").append(data);});
