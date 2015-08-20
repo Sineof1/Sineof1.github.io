@@ -1,0 +1,61 @@
+<style>
+.vec-demo {
+   display:block;
+   margin-top:30px;
+   margin-bottom:30px;
+   border:none;
+}
+</style>
+<a href='http://sineof1.github.io/justsomemath/vectors.html' style='color:black;'><div class='post-title'>Vectors</div></a>
+<div class='post-body'>
+<p>I find that letting go is sometimes the real psychological trick to understanding levels of mathematics that you think are elevated above your current understanding. In the case of vectors, what you need to let go of is <strong>location</strong>&mdash;a vector does not have a unique location. But it still has a length and a direction.</p>
+
+<iframe class='vec-demo' src='https://www.desmos.com/calculator/gkjs9ud7na' width='100%' height='400px'></iframe>
+
+<p>In the graph above, I've plotted the points \(\small\mathtt{(4, -3)}\) and \(\small\mathtt{(1, 5)}\), and I've connected each point to the origin with a line segment. I can use the equations shown to determine the location of any point along those line segments. So, in some sense, I can determine the 'location' of each line segment. And the signs on the coordinates tell me the 'direction' of the segment (right and down, right and up).</p>
+
+<p>But what if I don't care that the line segments start at the origin and end at \(\small\mathtt{(4, -3)}\) and \(\small\mathtt{(1, 5)}\), but I still care about their lengths and directions? One way to handle this is to remove the axes and numbering, but still talk about the red segment as going right 4 and down 3 and the blue segment as going right 1 and up 5. That still gives me their directions, and I can calculate their lengths using the numbers, but now these segments can begin and end anywhere in the plane:</p>
+
+<iframe class='vec-demo' src='https://www.desmos.com/calculator/tdmogqws4e' width='100%' height='400px'></iframe>
+
+<p>I'll describe each red line segment as a vector with the notation \(\mathtt{\color{red}{\binom{\,\,4\,}{-3\,\,}}}\) and each blue segment as a vector with the notation \(\mathtt{\color{blue}{\binom{\,\,1\,}{\,\,5\,}}}\). To distinguish which is which, we'll use just a lowercase letter to name a vector. So, for example, \(\mathtt{a = \binom{\,\,4\,}{-3\,\,}}\) and \(\mathtt{b = \binom{\,\,4\,}{-3\,\,}}\). And \(\mathtt{c = \binom{\,\,1\,}{\,\,5\,}}\) and \(\mathtt{d = \binom{\,\,1\,}{\,\,5\,}}\).</p>
+
+<p>But something's missing! Even though the notation still tells me the directions of the vectors, I can't see this in the graph. We draw arrowheads on vectors to indicate their direction. Since I can't draw them in the graph above, tell me where they go:</p>
+
+<p class='math_1line'>For vectors \(\small\mathtt{a}\) and \(\small\mathtt{b}\), the arrowheads go on the 
+<span class='partial_wrap' id='partial3_wrap'><span class='long-partial' id='partial3' contenteditable='true'></span></span> side of the segments.<br><br>
+
+For vectors \(\small\mathtt{c}\) and \(\small\mathtt{d}\), the arrowheads go on the <span class='partial_wrap' id='partial4_wrap'><span class='long-partial' id='partial4' contenteditable='true'></span></span> side of the segments.
+
+<button name='but34' class='goButton' onclick='sec_ans()'></button>
+</p>
+
+<p class='h2-sec'>Working Definition of 'Vector'</p>
+
+<p>A little more formally, a vector isn't a drawing at all, but a list of numbers. For our purposes, a vector of size \(\small\mathtt{n}\) is a one-dimensional array of \(\small\mathtt{n}\) ordered numbers, where \(\small\mathtt{n}\) is finite. Below, \(\small\mathtt{x}\) is a vector, written vertically with square brackets (because I don't like giant parentheses): \[\small\mathtt{x =} \begin{bmatrix} \small\mathtt{\chi_0} \\ \small\mathtt{\chi_1} \\ \vdots \\ \chi_{n - 1} \end{bmatrix}\]</p>
+
+<p>The <strong>components</strong> (like coordinates) of vector \(\small\mathtt{x}\) are <span style='vertical-align:3px;'>\(\small\mathtt{\chi_0, \chi_1, \dotsc \chi_{n - 1}}\)</span>. Here, I'm using the Greek letter <span style='vertical-align:3px;'>\(\small\mathtt{\chi}\)</span> ("chi") for each component just because. We'll consider these components to be real numbers. To denote that a vector \(\small\mathtt{x}\) has a size of \(\small\mathtt{n}\) with real numbers as components, we'll write \(\small\mathtt{x \in \mathbb{R}^n}\). For our 2-D vectors above, we would write that \(\small\mathtt{a, b, c, d \in \mathbb{R}^2}\).</p>
+
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on August 20, 2015</span><span style='position:absolute;right:20px;'>Comments</span></div>
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+
+$('.goButton').html("<svg height='25px' width='25px' viewBox='0 0 25 25' xlmns='www.w3.org/2000/svg' style='text-align:center;stroke-linejoin:round;stroke:white;fill:white;stroke-width:1;vertical-align:middle;'><text x='0' y='20' font-family='Josefin Sans' font-size='1em'>&#x2713;</text></svg>");
+</script>
+<script>
+function sec_ans() {
+   var ans1 = $('#partial3').text();
+   var ans2 = $('#partial4').text();
+   if (ans1 === 'right' && ans2 === 'right') {
+      $('#partial3, #partial4').effect('explode');
+      $('#partial3_wrap').text(ans1);
+      $('#partial4_wrap').text(ans2);
+      $('button[name="but34"]').remove();
+   }
+   else {
+      $('#partial3, #partial4').text('');
+      $('#partial3').focus();
+   }
+}
+</script>
