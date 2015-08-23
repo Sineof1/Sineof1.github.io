@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content="How we represent mathematics knowledge is as important as having it.">
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/javascript"src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<title>Fractions as Magnitudes</title>
+<style>
+body {
+   width:800px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:200px;
+}
+h1 {
+   font-family:Josefin Sans;
+   font-size:30px;
+   font-weight:bold;
+   color:#069;
+}
+h1:before {
+   content:url(https://lh3.googleusercontent.com/nDzCgMyIxyQGB3DU7qTSgLniVhRaWuJbvuljDHxkBHbZ=w54-h34-no);
+   margin-right:10px;
+   vertical-align:-2px;
+}
+.emph_FracSieg {
+   font-family:'Neucha';
+   font-size:20px;
+   font-weight:bold;
+}
+#normalbegin_FracSieg {
+   font-family: 'Josefin Sans';
+   font-weight:600;
+   font-size:22px;
+   text-align:justify;
+   margin-top:-5px;
+}
+#normalbegin_FracSieg:first-line {
+   line-height:1.2em;
+}
+.normal_FracSieg {
+   font-family: 'Josefin Sans';
+   font-size:22px;
+   font-weight:600;
+   text-align:justify;
+}
+.h2sec_FracSieg {
+   font-size:24px;
+   font-family:'Neucha';
+   font-weight:900;
+}
+#firstChar_FracSieg {
+   font-family:Verdana;
+   font-size:50px;
+   color:gray;
+   margin-right:0px;
+}
+.link_FracSieg {
+   font-family:'Josefin Sans';
+   color:brown;
+   text-decoration:none;
+}
+.link_FracSieg:hover {
+  text-decoration:underline;
+}
+.callout_FracSieg {
+   font-family: 'Neucha';
+   font-size:20px;
+   line-height:20px;
+   text-align:justify;
+   box-shadow: 2px 2px 5px #888888;
+   border-radius:10px;
+   padding-left:15px;
+   padding-right:15px;
+   margin-bottom:35px;
+   margin-top:30px;
+   padding-bottom:10px;
+   padding-top:10px;
+   border-left:4px solid #CC9900;
+   -webkit-transition: all 0.5s linear;
+   -o-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+   transition: all 0.5s linear;
+}
+.callout_FracSieg:hover {
+   padding-top:20px;
+   padding-bottom:20px;
+   background-color:#f8f8f8;
+}
+.experiment {
+   display:block;
+   width:680px;
+   height:350px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:40px;
+   margin-bottom:40px;
+   box-shadow:0 0 15px #cccccc;
+}
+.experiment:hover {
+  cursor:crosshair;
+}
+#exp2 {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100px;
+}
+.exp2_choice {
+  width:80px;
+  height:80px;
+  border-radius:5px;
+  box-shadow:0 0 10px #cccccc;
+  text-align:center;
+  margin-right:40px;
+  font-size:5vmin;
+  box-sizing:border-box;
+  padding-top:20px;
+}
+.exp2_choice:hover {
+  background-color:#fafafa;
+  cursor:pointer;
+}
+</style>
+<body>
+<h1>Fractions as Magnitudes</h1>
+
+<div id='normalbegin_FracSieg'><p><span id='firstChar_FracSieg'>A</span> central point of <a class='link_FracSieg' href='https://plus.google.com/+JoshuaFisherD/posts/JQuEZGgXhV2' target='_blank'>this paper</a> is something close to my heart&mdash;the notion that <span class='emph_FracSieg'>how</span> one represents a certain piece of mathematics knowledge is often dramatically important. For this research in particular, the authors looked at fraction knowledge across three different countries: the U.S., Belgium, and China. (Emphasis below is mine.)</p></div>
+
+<div class='callout_FracSieg'>Despite country-specific differences in absolute level of fraction knowledge, 6th and 8th graders' fraction <span class='emph_FracSieg'>magnitude</span> understanding was positively related to their general mathematical achievement in all countries.</div>
+
+<div class='normal_FracSieg'><p>What is meant by "fraction magnitude understanding"? In short, it means to understand fractions as values that "can be located and ordered on number lines." But I think this wording deserves to emphasized a little more strongly (even if it goes beyond what the researchers seem to say), because the mention of number lines might trigger what Carl Bereiter has referred to as the <a class='link_FracSieg' href='https://goo.gl/mcYRks' target='_blank'>"We already do that" syndrome</a>. So: understanding fractions as magnitudes does <span class='emph_FracSieg'>not</span> mean just that a student <span class='emph_FracSieg'>can</span> translate her part-to-whole mental representation of fractions onto a number line. It means that, whatever else they could also be, fractions <span class='emph_FracSieg'>are</span> magnitudes to her&mdash;<a class='link_FracSieg' href='http://textsavvy.blogspot.com/2015/05/a-meditation-on-ratio.html' target='_blank'>singular values</a> which can be ordered along a number line.</p></div>
+
+<p class='h2sec_FracSieg'>Are You Smarter Than a Belgian 8th Grader?</p>
+
+<div class='normal_FracSieg'><p>I'll just briefly describe the methodology and results of this study here. I recommend the original paper (linked at the top) highly for its background discussion and detailed development.</p></div>
+
+<div class='normal_FracSieg'><p>The critical assessment used in the study was similar to the one I've created below. Researchers presented participants with 29 target fractions (centered above a number line) and asked them to "click the mouse on the correct location of the value of the fraction on the number line." Go ahead and try it! You don't need to be concerned with clicking right on the number line; only the horizontal position of the mouse in relation to the number line is recorded. Your score is recorded as a percentage of absolute error (PAE), so lower scores are better.</p></div>
+
+<canvas class='experiment' id='exp1' width='680px' height='350px'></canvas>
+
+<div class='normal_FracSieg'><p>Your PAE average is <span id='paescore' style='color:blue;'>0</span>, for <span id='trials' style='color:blue;'>0</span> trial(s). By way of comparison, the best averages for students in each of the three countries in the study were as follows: China (8th grade): 3.88, Belgium (8th grade): 5.05, U.S. (8th grade): 14.93.</p></div>
+
+<div class='normal_FracSieg'><p>A second task, which I've also simulated below, involved 12 fraction comparisons (with \(\mathtt{\frac{3}{5}}\) being the right-side number for every comparison). Students were asked to click on the lesser fraction for each trial. Scores were recorded as correct response percents. Give it a shot!</p></div>
+
+<div id='exp2'>
+<div class='exp2_choice' id='varchoice'></div>
+<div class='exp2_choice' id='conchoice'>\(\mathtt{\frac{3}{5}}\)</div>
+</div>
+
+<div class='normal_FracSieg'><p>Your percent correct is <span id='exp2correct' style='color:blue;'>0%</span>. The best scores for the three countries were China (8th grade): 88.46, Belgium (8th grade): 86.52, U.S. (8th grade): 76.81.</p></div>
+
+<div class='normal_FracSieg'><p>Finally, researchers also gave students two fraction arithmetic tasks, one addition and one division, using the exact same (4) pairs of fractions in each task. Students were allowed to use scratch paper and were not required to write their answers in simplest form. (Please, oh please, researchers, get with the times and stop saying "reduce" to "lowest form".) I did not simulate these tasks here, but the results (percent correct, 8th grade) for the three countries followed the same pattern as in the other tasks. Addition: 91.03, 86.76, 51.09; Division: 92.92, 84.56, 31.52<span style='color:blue;'><sup>*</sup></span>.</p></div>
+
+<p class='h2sec_FracSieg'>Magnitude Understanding Correlates Strongly</p>
+
+<div class='normal_FracSieg'><p>Across the three countries, student performance on the number line task was the most strongly predictive of overall mathematics achievement (as measured by country-specific standardized tests). Indeed, results on this task alone delivered a statistically significant correlation with general mathematics achievement in all three countries (emphasis mine again):</p></div>
+
+<div class='callout_FracSieg'>In all three countries, fraction magnitude understanding was the best predictor of mathematics achievement scores, even after controlling for variation in fraction arithmetic skill . . . Taken together, <span class='emph_FracSieg'>these results indicate that the relation between fraction magnitude understanding and mathematics achievement is not attributable to specifics of the U.S. educational system.</span> Instead, the strong relation between fraction magnitude understanding and mathematics achievement can be interpreted as a general cognitive characteristic of all students, regardless of their specific cultural and educational background.</div>
+
+<div class='normal_FracSieg'><p>The researchers also discuss some instructional implications, noting that improving understanding of whole numbers as magnitudes has been shown to have positive effects on mathematics learning. They also note studies by Gabriel, et al. and Fuchs, et al. which demonstrated similarly positive effects with fractions&mdash;the latter of which producing stronger results than an alternative approach emphasizing the part-to-whole perspective.</p></div>
+<img src='https://lh3.googleusercontent.com/SXkxVM5C5XSVlQoFz6mKvX0I3DMS8lMDJGaDj_cp6Fur=w1024-h878-no' style='position:fixed;visibility:hidden;'>
+<hr></hr>
+<span style='color:blue;'>*</span> OMFG<br><br>
+<span style="float:right; padding: 5px;margin-top:-10px;"><a href="http://www.researchblogging.org"><img alt="ResearchBlogging.org" src="http://www.researchblogging.org/public/citation_icons/rb2_mid.png" style="border:0;"/></a></span>
+<span class="Z3988" title="ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.jtitle=Learning+and+Instruction&rft_id=info%3Adoi%2F10.1016%2Fj.learninstruc.2014.03.002&rfr_id=info%3Asid%2Fresearchblogging.org&rft.atitle=Bridging+the+gap%3A+Fraction+understanding+is+central+to+mathematics+achievement+in+students+from+three+different+continents&rft.issn=09594752&rft.date=2015&rft.volume=37&rft.issue=&rft.spage=5&rft.epage=13&rft.artnum=http%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0959475214000255&rft.au=Torbeyns%2C+J.&rft.au=Schneider%2C+M.&rft.au=Xin%2C+Z.&rft.au=Siegler%2C+R.&rfe_dat=bpr3.included=1;bpr3.tags=Mathematics%2CPsychology%2CSocial+Science%2CEducation">Torbeyns, J., Schneider, M., Xin, Z., & Siegler, R. (2015). Bridging the gap: Fraction understanding is central to mathematics achievement in students from three different continents <span style="font-style: italic;">Learning and Instruction, 37</span>, 5-13 DOI: <a rev="review" href="http://dx.doi.org/10.1016/j.learninstruc.2014.03.002">10.1016/j.learninstruc.2014.03.002</a></span><br><br><br><br><br><br>
+</body>
+</html>
+
+<script>
+var exp2_fracs = {1: [1, 9],  2: [1, 4],  3: [2, 7],  4: [1, 3],
+                  5: [5, 9],  6: [4, 7],  7: [2, 3],  8: [4, 6],
+                  9: [7, 6], 10: [4, 3], 11: [7, 4], 12: [2, 1]};
+var exp2Trials = 0;
+var completed_fracs2 = [];
+var curfrac2;
+var curUserFrac2;
+var altAnswer;
+var numCorrect = 0;
+
+function startExp2() {
+  if (completed_fracs2.length < 12) {
+    var frac1 = Math.floor(Math.random() * 12) + 1;
+    while ($.inArray(frac1, completed_fracs2) !== -1) frac1 = Math.floor(Math.random() * 12) + 1;
+    completed_fracs2.push(frac1);
+    curfrac2 = frac1;
+    $('#varchoice').text('\\(\\mathtt{\\frac{' + exp2_fracs[frac1][0] + '}{' + exp2_fracs[frac1][1] + '}}\\)');
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"varchoice"]);
+  }
+  else $('#varchoice, #conchoice').css({'pointer-events': 'none'});
+}
+function processAnswer() {
+  if (curUserFrac2 < altAnswer) numCorrect += 1;
+  var percCorrect = numCorrect / exp2Trials * 100;
+  $('#exp2correct').text(percCorrect.toFixed(2) + '%');
+  startExp2();
+}
+function varChosen() {
+  exp2Trials += 1;
+  curUserFrac2 = exp2_fracs[curfrac2][0] / exp2_fracs[curfrac2][1];
+  altAnswer = 0.6;
+  processAnswer();
+}
+function conChosen() {
+  exp2Trials += 1;
+  curUserFrac2 = 0.6;
+  altAnswer = exp2_fracs[curfrac2][0] / exp2_fracs[curfrac2][1];
+  processAnswer();
+}
+startExp2();
+document.getElementById('varchoice').addEventListener('click', varChosen, true);
+document.getElementById('conchoice').addEventListener('click', conChosen, true);
+</script>
+<script>
+var expcanvas = document.getElementById('exp1');
+var expcontxt = expcanvas.getContext('2d');
+
+var exp1_fracs = {1: [0, 1],  2: [1, 9],  3: [1, 8],  4: [1, 7],
+                  5: [1, 6],  6: [1, 5],  7: [2, 9],  8: [1, 4],
+                  9: [2, 7], 10: [1, 3], 11: [3, 8], 12: [2, 5],
+                 13: [3, 7], 14: [4, 9], 15: [1, 2], 16: [5, 9],
+                 17: [4, 7], 18: [3, 5], 19: [5, 8], 20: [2, 3],
+                 21: [5, 7], 22: [3, 4], 23: [7, 9], 24: [4, 5],
+                 25: [5, 6], 26: [6, 7], 27: [7, 8], 28: [8, 9], 29: [1, 1]};
+
+var completed_fracs = [];
+var curfrac;
+var paes = 0;
+var trial_count = 0;
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function baseDraw_exp() {
+   expcontxt.clearRect(0, 0, expcanvas.width, expcanvas.height);
+   expcontxt.beginPath();
+   expcontxt.moveTo(20, expcanvas.height / 2);
+   expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+   expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 - 5);
+   expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 + 5);
+   expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+   expcontxt.stroke();
+   expcontxt.fill();
+
+   expcontxt.beginPath();
+   expcontxt.moveTo(20, expcanvas.height / 2);
+   expcontxt.lineTo(30, expcanvas.height / 2 - 5);
+   expcontxt.lineTo(30, expcanvas.height / 2 + 5);
+   expcontxt.lineTo(20, expcanvas.height / 2);
+   expcontxt.stroke();
+   expcontxt.fill();
+
+   expcontxt.beginPath();
+   expcontxt.moveTo(40, expcanvas.height / 2 - 20);
+   expcontxt.lineTo(40, expcanvas.height / 2 + 20);
+   expcontxt.stroke();
+   expcontxt.beginPath();
+   expcontxt.moveTo(expcanvas.width - 40, expcanvas.height / 2 - 20);
+   expcontxt.lineTo(expcanvas.width - 40, expcanvas.height / 2 + 20);
+   expcontxt.stroke();
+
+   expcontxt.font = '20px Arial';
+   expcontxt.textAlign = 'center';
+   expcontxt.fillText('0', 40, expcanvas.height / 2 + 45);
+   expcontxt.fillText('1', expcanvas.width - 40, expcanvas.height / 2 + 45);
+
+   if (completed_fracs.length < 29) {
+     var frac = Math.floor(Math.random() * 29) + 1;
+     while ($.inArray(frac, completed_fracs) !== -1) frac = Math.floor(Math.random() * 29) + 1;
+     completed_fracs.push(frac);
+     curfrac = frac;
+     expcontxt.fillText(exp1_fracs[frac][0], expcanvas.width / 2, 38);
+     expcontxt.fillText(exp1_fracs[frac][1], expcanvas.width / 2, 62);
+     expcontxt.beginPath();
+     expcontxt.moveTo(expcanvas.width / 2 - 15, 43);
+     expcontxt.lineTo(expcanvas.width / 2 + 15, 43);
+     expcontxt.stroke();
+   }
+   else expcanvas.removeEventListener('click', getAnswer, true);
+}
+function getAnswer(evt) {
+  var loc = windowToCanvas_mouse(expcanvas, evt.clientX, evt.clientY);
+  var userAnswer = (loc.x - 40) / 600;
+  trial_count += 1;
+  var actualAnswer = exp1_fracs[curfrac][0] / exp1_fracs[curfrac][1];
+  var PAE = 100 * (Math.abs(userAnswer - actualAnswer));
+  paes += PAE;
+  var pae_avg = paes / trial_count;
+  $('#paescore').text(pae_avg.toFixed(2));
+  $('#trials').text(trial_count);
+  baseDraw_exp();
+}
+
+baseDraw_exp();
+expcanvas.addEventListener('click', getAnswer, true);
+</script>
