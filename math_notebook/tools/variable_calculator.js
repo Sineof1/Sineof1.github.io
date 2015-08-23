@@ -31,7 +31,7 @@ $(document).ready(function() {
   if (curStringResult.indexOf('*') === -1 && curStringResult.indexOf('+') === -1
   && curStringResult.indexOf('-') === -1 && curStringResult.indexOf('/') === -1) return;
   var result = eval(curStringResult);
-  if (result === Number.POSITIVE_INFINITY || isNaN(result)) result = 'undefined';
+  if (result === Number.POSITIVE_INFINITY) result = 'undefined';
   $('#result_window').empty();
   $('#result_window').text(result);
   $('.op-button').css({'pointer-events':'none'});
@@ -46,4 +46,5 @@ $(document).ready(function() {
     $('.calc-button').css({'pointer-events':'all'});
     $('.calc-button').removeClass('checked');
   }});
+  $('#answer_window').focus();
 });
