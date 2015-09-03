@@ -190,18 +190,6 @@ button:hover {
 .long-partial:focus {
    outline:none;
 }
-#more-posts {
-   position:fixed;
-   right:-130px;
-   top:0px;
-   width:130px;
-   background:rgba(0, 0, 0, 0.8);
-   -webkit-backface-visibility: hidden;
-   z-index:1;
-}
-#more-posts:hover {
-   cursor:pointer;
-}
 .blog-container {
    display:none;
    width:100%;
@@ -218,14 +206,4 @@ button:hover {
 }
 .blog-container:hover {
    background:rgba(255, 255, 255, 0.2);
-}
-#more_arrow {
-   display:block;
-   border-radius:50%;
-   margin-left:auto;
-   margin-right:auto;
-   margin-top:-20px;
-}
-#more_arrow:hover {
-   background:rgba(255,255,76,0.2);
 }
