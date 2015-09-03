@@ -60,20 +60,10 @@
 </div>
 <img src='https://lh3.googleusercontent.com/JURL9MsUen7HUZ6kdLgOEYNCDodDaDErnJtuN4gN9CTW=w815-h809-no' style='position:fixed;visibility:hidden;'>
 </body>
-<div id='more-posts'>
-<div class='blog-container' style='border-bottom:none;background:none;margin-top:0px;margin-bottom:-30px;font-weight:900;font-variant:small-caps;font-size:1.2em;'>Good Sites</div>
-<a class='blog-link' href='https://mathmindsblog.wordpress.com/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>Math Minds</div></a>
-<a class='blog-link' href='https://gregashman.wordpress.com/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>Filling the Pail</div></a>
-<a class='blog-link' href='http://www.learningspy.co.uk/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>The Learning Spy</div></a>
-<a class='blog-link' href='http://www.megcraig.org/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>Meg Craig</div></a>
-<a class='blog-link' href='http://mrhonner.com/' target='_blank' style='text-decoration:none;color:white;'><div class='blog-container'>Mr Honner</div></a>
-<img id='more_arrow' src='https://lh3.googleusercontent.com/6qq2zQGjRjJwd8QAbvIrmguayXmqvwj22wSGt8-6F0ri=s512-no' width='40px' height='40px'>
-</div>
 </html>
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-var click_Drawer = 0;
 $(document).ready(function() {
    setTimeout(function(){$('#more-posts').show(); $('#more-posts').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 5000);
    $.get( "/justsomemath/scale-vecs.html", function(data) {$("#post14").append(data);});
@@ -90,22 +80,8 @@ $(document).ready(function() {
    $.get( "/justsomemath/op-connex.html", function(data) {$("#post7").append(data);});
    $.get( "/justsomemath/comp-phob.html", function(data) {$("#post8").append(data);});
    $.get( "/justsomemath/struct.html", function(data) {$("#post9").append(data);});
-   
-   $('#more-posts').height(window.innerHeight);
-   $('#more-posts').click(function() {
-      click_Drawer += 1;
-      if (click_Drawer % 2 === 0) {
-         $(this).animate({right: '-=90px'}, 800, 'easeInOutBack');
-         $('.blog-container').fadeOut(500);
-      }
-      else {
-         $(this).animate({right: '+=90px'}, 800, 'easeInOutBack');
-         $('.blog-container').fadeIn(1000);
-      }
-   });
 });
 </script>
-<script>window.scrollTo(0, 0);</script>
 <!--############## POST ONLY SCRIPT ##############-->
 
 <!--############## POST ONLY SCRIPT ##############-->
