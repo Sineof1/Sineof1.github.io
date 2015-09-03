@@ -42,6 +42,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post14'></div>
 <div id='post13'></div>
 <div id='post12'></div>
 <div id='post11'></div>
@@ -75,6 +76,7 @@ MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 var click_Drawer = 0;
 $(document).ready(function() {
    setTimeout(function(){$('#more-posts').show(); $('#more-posts').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 5000);
+   $.get( "/justsomemath/scale-vecs.html", function(data) {$("#post14").append(data);});
    $.get( "/justsomemath/thresh-cons.html", function(data) {$("#post13").append(data);});
    $.get( "/justsomemath/add-vecs.html", function(data) {$("#post12").append(data);});
    $.get( "/justsomemath/vecs.html", function(data) {$("#post11").append(data);});
