@@ -1,0 +1,227 @@
+<style>
+#vecDraw1 {
+   display:block;
+   width:350px;
+   height:350px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:30px;
+   margin-bottom:30px;
+   box-shadow:0 0 10px #cccccc;
+}
+#math_container1 {
+   margin-left:auto;
+   margin-right:auto;
+   width:350px;
+   height:40px;
+   text-align:center;
+   margin-bottom:30px;
+   font-size:1.2em;
+}
+#vecDraw1:hover {
+   cursor:pointer;
+}
+button #clear1 {
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+button #clear1:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+</style>
+<a href='http://sineof1.github.io/justsomemath/scaling_vectors.html' style='color:black;'><div class='post-title'>Scaling Vectors</div></a>
+<div class='post-body'>
+
+<p>Okay, so where were we? We <a href='http://sineof1.github.io/justsomemath/vectors.html' target='_blank'>introduced vectors</a>, and we <a href='http://sineof1.github.io/justsomemath/adding_vectors.html' target='_blank'>added with them</a>. Now we're going to scale vectors, or "stretch and shrink" them (which will involve multiplication).</p>
+
+<p>One way to see how scaling works is by adding two equal vectors. Try it with several on the grid below. What's the general rule for multiplying a vector \(\mathtt{h \in \mathbb{R}^2, h = }\begin{bmatrix} \small\mathtt{\eta_0} \\ \small\mathtt{\eta_1} \end{bmatrix}\) by 2?</p>
+
+<canvas id='vecDraw1' width='350px' height='350px'></canvas>
+<div id='math_container1'></div>
+<div style='display:flex;justify-content:center;margin-bottom:30px;margin-top:-25px;'><button id='clear1' onClick='resetVec1()'>clear</button></div>
+
+<p>You can probably guess, even if you didn't play with the grid, that the 2 distributes to each of the vectors components, which in general means that 
+
+\[\small\mathtt{\alpha \times} \begin{bmatrix} \small\mathtt{\eta_0} \\ \small\mathtt{\eta_1} \end{bmatrix} = \begin{bmatrix} \small\mathtt{\alpha \times \eta_0} \\ \small\mathtt{\alpha \times \eta_1} \end{bmatrix}\]</p>
+
+<p>The Greek letter &alpha; (\(\small\mathtt{\alpha \in \mathbb{R}}\)) is a <strong>scalar value</strong> (as are all the Greek letters we are using when talking about vectors). A scalar value, unlike a vector, does not have a direction. It is a number that refers only to a magnitude. If this immediately raises for you the question, How can a negative integer be a scalar and not a vector? then check out the discussion <a href='https://www.physicsforums.com/threads/how-can-a-scalar-be-negative.270612/' target='_blank'>here</a>.</p>
+
+<p class='h2-sec'>Reversing and Shrinking</p>
+
+<p>Multiplying a vector by a negative scalar not only scales the vector, but also reverses its direction. Multiplying by a positive scalar has no effect on the direction. Finally, scaling a vector by a number greater than 1 stretches the vector (increases its length, or magnitude) while scaling by a number between 0 and 1&mdash;not including either&mdash;shrinks the vector (decreases its length, or magnitude).</p>
+
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on September 3, 2015</span><span style='position:absolute;right:20px;'>Comments</span></div>
+
+<script>
+var veccanvas1 = document.getElementById('vecDraw1');
+var veccntxt1 = veccanvas1.getContext('2d');
+
+var MOUSEISDOWN1 = false;
+var VECDRAWN1 = false;
+var MOUSEMOVES1 = false;
+var startLoc1 = {};
+var endLoc1_1 = {};
+var endLoc2_1 = {};
+var comp1_1, comp2_1, comp3_1, comp4_1;
+var gridNums1 = [35, 70, 105, 140, 175, 210, 245, 280, 315];
+
+function windowToCanvas_mouse1(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function findClosest1(locXY) {
+   var checknum = 1000;
+   var testnum = 0;
+   var gridnum = 175;
+   for (var p = 0; p < gridNums1.length; p++) {
+      testnum = Math.abs(gridNums1[p] - locXY);
+      if (testnum < checknum) {checknum = testnum; gridnum = gridNums1[p];}
+   }
+   return gridnum;
+}
+function drawGrid1() {
+   veccntxt1.clearRect(0, 0, veccanvas1.width, veccanvas1.height);
+   veccntxt1.strokeStyle = '#dedede';
+   veccntxt1.setLineDash([1, 0]);
+   for (var a = 35; a <= 315; a += 35) {
+      veccntxt1.beginPath();
+      veccntxt1.moveTo(a, 0);
+      veccntxt1.lineTo(a, veccanvas1.height);
+      veccntxt1.stroke();
+      veccntxt1.beginPath();
+      veccntxt1.moveTo(0, a);
+      veccntxt1.lineTo(veccanvas1.width, a);
+      veccntxt1.stroke();}
+}
+function startVec1(evt) {
+   MOUSEISDOWN1 = true;
+   var loc = windowToCanvas_mouse1(veccanvas1, evt.clientX, evt.clientY);
+   if (VECDRAWN1 === false) {
+      startLoc1.x = findClosest1(loc.x);
+      startLoc1.y = findClosest1(loc.y);
+      endLoc1_1.x = findClosest1(loc.x);
+      endLoc1_1.y = findClosest1(loc.y);
+      veccntxt1.beginPath();
+      veccntxt1.fillStyle = 'blue';
+      veccntxt1.arc(startLoc1.x, startLoc1.y, 3, 0, Math.PI * 2);
+      veccntxt1.fill();
+      comp1_1 = String((endLoc1_1.x - startLoc1.x) / 35);
+      comp2_1 = String((startLoc1.y - endLoc1_1.y) / 35);
+      var firstVec = '<span style="color:blue;">[' + comp1_1 + ', ' + comp2_1 + ']</span>';
+      $('#math_container1').html(firstVec);
+   }
+   else {
+      endLoc2_1.x = findClosest1(loc.x);
+      endLoc2_1.y = findClosest1(loc.y);
+      comp3_1 = String((endLoc2_1.x - endLoc1_1.x) / 35);
+      comp4_1 = String((endLoc1_1.y - endLoc2_1.y) / 35);
+      var firstVec = '<span style="color:blue;">[' + comp1_1 + ', ' + comp2_1 + ']</span>';
+      var secVec = ' + <span style="color:green;">[' + comp3_1 + ', ' + comp4_1 + ']</span>';
+      $('#math_container1').html(firstVec + secVec);
+   }
+}
+function drawVec1(evt) {
+   MOUSEMOVES1 = true;
+   if (MOUSEISDOWN1 === false) return;
+   drawGrid1();
+   var loc = windowToCanvas_mouse1(veccanvas1, evt.clientX, evt.clientY);
+   veccntxt1.strokeStyle = 'blue';
+   veccntxt1.beginPath();
+   veccntxt1.arc(startLoc1.x, startLoc1.y, 3, 0, Math.PI * 2);
+   veccntxt1.fill();
+   if (VECDRAWN1 === false) {
+      veccntxt1.strokeStyle = 'blue';
+      veccntxt1.beginPath();
+      veccntxt1.moveTo(startLoc1.x, startLoc1.y);
+      veccntxt1.lineTo(findClosest1(loc.x), findClosest1(loc.y));
+      veccntxt1.stroke();
+      veccntxt1.beginPath();
+      veccntxt1.moveTo(startLoc1.x, startLoc1.y);
+      veccntxt1.lineTo(findClosest1(loc.x), findClosest1(loc.y));
+      veccntxt1.stroke();
+      endLoc1_1.x = findClosest1(loc.x);
+      endLoc1_1.y = findClosest1(loc.y);
+      comp1_1 = String((endLoc1_1.x - startLoc1.x) / 35);
+      comp2_1 = String((startLoc1.y - endLoc1_1.y) / 35);
+      var firstVec = '<span style="color:blue;">[' + comp1_1 + ', ' + comp2_1 + ']</span>';
+      $('#math_container1').html(firstVec);
+   }
+   else {
+      veccntxt1.beginPath();
+      veccntxt1.fillStyle = 'green';
+      veccntxt1.arc(endLoc1_1.x, endLoc1_1.y, 3, 0, Math.PI * 2);
+      veccntxt1.fill();
+      veccntxt1.strokeStyle = 'blue';
+      veccntxt1.beginPath();
+      veccntxt1.moveTo(startLoc1.x, startLoc1.y);
+      veccntxt1.lineTo(endLoc1_1.x, endLoc1_1.y);
+      veccntxt1.stroke();
+      veccntxt1.strokeStyle = 'green';
+      veccntxt1.beginPath();
+      veccntxt1.moveTo(endLoc1_1.x, endLoc1_1.y);
+      veccntxt1.lineTo(findClosest1(loc.x), findClosest1(loc.y));
+      veccntxt1.stroke();
+      endLoc2_1.x = findClosest1(loc.x);
+      endLoc2_1.y = findClosest1(loc.y);
+      comp3_1 = String((endLoc2_1.x - endLoc1_1.x) / 35);
+      comp4_1 = String((endLoc1_1.y - endLoc2_1.y) / 35);
+      var firstVec = '<span style="color:blue;">[' + comp1_1 + ', ' + comp2_1 + ']</span>';
+      var secVec = ' + <span style="color:green;">[' + comp3_1 + ', ' + comp4_1 + ']</span>';
+      $('#math_container1').html(firstVec + secVec);
+      veccntxt1.fillStyle = 'blue';
+   }
+}
+function endVec1(evt) {
+   MOUSEISDOWN1 = false;
+   if (VECDRAWN1 === true) {
+   var firstVec = '<span style="color:blue;">[' + comp1_1 + ', ' + comp2_1 + ']</span>';
+   var secVec = ' + <span style="color:green;">[' + comp3_1 + ', ' + comp4_1 + ']</span>';
+   var resVec = ' = [' + String(parseInt(comp1_1) + parseInt(comp3_1)) + ', ' + String(parseInt(comp2_1) + parseInt(comp4_1)) + ']';
+   $('#math_container1').html(firstVec + secVec + resVec);
+   veccntxt1.strokeStyle = 'black';
+   veccntxt1.beginPath();
+   veccntxt1.setLineDash([5, 5]);
+   veccntxt1.moveTo(startLoc1.x, startLoc1.y);
+   veccntxt1.lineTo(endLoc2_1.x, endLoc2_1.y);
+   veccntxt1.stroke();
+   veccanvas1.removeEventListener('mousedown', startVec1, true);
+   }
+   VECDRAWN1 = true;
+}
+function resetVec1() {
+   veccntxt1.clearRect(0, 0, veccanvas1.width, veccanvas1.height);
+   drawGrid1();
+   $('#math_container1').html('');
+   MOUSEISDOWN1 = false;
+   VECDRAWN1 = false;
+   MOUSEMOVES1 = false;
+   startLoc1 = {};
+   endLoc1_1 = {};
+   endLoc2_1 = {};
+   comp1_1 = '';
+   comp2_1 = '';
+   comp3_1 = '';
+   comp4_1 = '';
+   veccanvas1.addEventListener('mousedown', startVec1, true);
+   veccanvas1.addEventListener('mousemove', drawVec1, true);
+   veccanvas1.addEventListener('mouseup', endVec1, true);
+}
+
+drawGrid1();
+veccanvas1.addEventListener('mousedown', startVec1, true);
+veccanvas1.addEventListener('mousemove', drawVec1, true);
+veccanvas1.addEventListener('mouseup', endVec1, true);
+</script>
