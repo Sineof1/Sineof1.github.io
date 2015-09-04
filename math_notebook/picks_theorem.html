@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang = 'en'>
 <head>
@@ -7,8 +8,8 @@
 <meta name = 'author' content = 'Joshua D. Fisher'>
 
 <link rel='icon' href='https://lh4.googleusercontent.com/-KV4kSClOebQ/VSXiO563a4I/AAAAAAAAR_k/iAHD6fF42F0/s144-no/nbk_favicon.gif'>
-<link href='//fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
 <title>Pick's Theorem (HSG.CO.11)</title>
 
 <script type="text/x-mathjax-config">
@@ -21,9 +22,6 @@ MathJax.Hub.Config({
   src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
 
 <style>
 #nav {
@@ -33,19 +31,16 @@ MathJax.Hub.Config({
    padding: 0px;
    list-style: none;
 }
-
 #nav li {
    float: right;
    padding-right:20px;
 }
-
 #clear {
    width:60px;
    height:40px;
-   margin-left:620px;
+   margin-left:560px;
    margin-top:20px;
 }
-
 #nav li a {
    font-family: 'Josefin Sans', sans-serif;
    box-shadow: 1px 1px 1px #cccccc;
@@ -57,11 +52,9 @@ MathJax.Hub.Config({
    font-weight: bold;
    color: #069;
 }
-
 #nav li a:hover {
    background-color: #f5f5f5;
 }
-
 button {
    outline: 0 none;
    box-shadow: 1px 1px 1px #cccccc;
@@ -77,12 +70,10 @@ button {
    font-weight: bold;
    color: #069;
 }
-
 button:hover {
    background-color:#f5f5f5;
    cursor:pointer;
 }
-
 #blockquote {
    float:left;
    margin-top:0.5em;
@@ -102,124 +93,109 @@ button:hover {
    -moz-transition: all 0.5s linear;
    transition: all 0.5s linear;
 }
-
 #blockquote:hover {
    background-color:#f8f8f8;
    padding:20px;
    box-shadow:2px 2px 2px 1px #888888;
    border-radius:10px;
 }
-
 mark {
    background-color:#ffffcc;
 }
-
 #Introduction p {
    font-family: 'Josefin Sans', sans-serif;
-   margin-left:40px;
+   margin-left:100px;
    text-align:justify;
-   margin-right:100px;
+   margin-right:200px;
    font-size:1.6em;
    line-height:1.6em;
    font-weight:600;
 }
-
 #Setup p {
    font-family: 'Josefin Sans', sans-serif;
-   margin-left:40px;
+   margin-left:100px;
    text-align:justify;
-   margin-right:100px;
+   margin-right:200px;
    font-size:1.6em;
    line-height:1.6em;
    font-weight:600;
 }
-
 #Finale p {
    font-family: 'Josefin Sans', sans-serif;
-   margin-left:40px;
+   margin-left:100px;
    text-align:justify;
-   margin-right:100px;
+   margin-right:200px;
    font-size:1.6em;
    line-height:1.6em;
    font-weight:600;
 }
-
 p::first-letter {
    font-size:120%;
 }
-
 h1, h2, hr {
    font-family: 'Josefin Sans', sans-serif;
-   margin-left:40px;
+   margin-left:100px;
 }
-
+h2 {
+   font-family:'Neucha';
+}
 h1 {
    font-weight:600;
    padding-bottom:10px;
 }
-
 hr {
    margin-bottom:40px;
-    margin-right:100px;
+    margin-right:200px;
 }
-
 #imgnorm {
    border:2px solid black;
    border-radius:5px;
    box-shadow: 5px 5px 5px  #888888;
    margin-left:40px;
-   margin-right:100px;
+   margin-right:200px;
    margin-top:20px;
    margin-bottom:25px;
    float:right;
 }
-
 #imgright {
    border-radius:5px;
    float:left; 
-   margin-left:30px;
-   margin-right:100px;
+   margin-left:100px;
+   margin-right:40px;
    margin-top:15px;
    margin-bottom:10px;
    transition: opacity 2s;
 }
-
 #imgright:hover {
    opacity:0.6;
 }
-
 #imgnorm:hover {
    box-shadow: 5px 5px 5px  #996699;
 }
-
 #canvas {
-   cursor:pointer;
    padding:0px;
-   margin-left:155px;
-   margin-top:-90px;
+   margin-left:95px;
+   margin-top:-30px;
 }
-
+#canvas:hover {
+   cursor:pointer;
+}
 #footnote1, #footnote2, #footnote3, #footnote4 {
    color:blue; 
    font-size:1.2em;
 }
-
 #footnote1:hover {
    cursor:pointer;
 }
-
 #footnote2:hover {
    cursor:pointer;
 }
-
 #footnote3:hover {
    cursor:pointer;
 }
-
 #footnote4:hover {
    cursor:pointer;
 }
-
 #citation {
    color:brown; 
    margin-left:5px; 
@@ -236,20 +212,16 @@ hr {
 </div>
 
 <body>
-<h1>Pick's<br>Theorem</h1>
+<h1>Pick's Theorem</h1>
 <article>
 <section id="Introduction">
 <canvas id='canvas' width='900px' height='500px'>Canvas not supported.</canvas>
 <button id='clear' onclick='clearScreen()'>New</button>
 <p>So, Pick's Theorem involves some interesting terminology, like <em>lattice polygon</em>, that you don't hear in your typical geometry class. And it 
 
-can involve a neat methodology, mathematical induction, which isn't talked about enough, if at all, in high school--and which I won't talk about in 
+can involve a neat methodology, mathematical induction, which isn't talked about enough, if at all, in high school--and which I won't talk about in this installment.</p>
 
-this installment.</p>
-
-<p>At the moment, you can click and drag on the dot grid above to draw stuff and see the boundary points of your polygons circled, and in the future, 
-
-I'll hook this up with some more magic to highlight what Pick's theorem talks about. Play with it to see what makes it tick.</p>
+<p>At the moment, you can click and drag on the dot grid above to draw stuff and see the boundary points of your polygons circled, and in the future, I'll hook this up with some more magic to highlight what Pick's theorem talks about. Play with it to see what makes it tick.</p>
 
 <p>So, what does this theorem say? It says that when you draw any <a href='http://mathworld.wolfram.com/LatticePolygon.html' target='blank'>lattice 
 
@@ -285,7 +257,6 @@ simpler instances of the general case and don't tell anyone until you've solved 
 
 "any lattice rectangle."</p>
 <a href="https://flic.kr/p/bUPrcN" target="blank"><img id='imgnorm' src='https://lh6.googleusercontent.com/-
-
 tH5trjqFQcI/VSXiO_6lqmI/AAAAAAAASAI/nqu4BcDIkW8/w269-h180-no/lattice.jpg' width='400px' height='263px'></a>
 <p>How many interior points are there in any lattice rectangle? Well, if you draw a rectangle on the lattice above, you will see that the interior 
 
@@ -324,7 +295,6 @@ Theorem</a> with some nice explanations.
 
 <h2>Postscript</h2>
 <p>To my point above about mathematicians' silence on interim results and process, I came across <a href="http://www.vukutu.com/blog/2014/07/rigour-
-
 and-speculation-in-pure-math/" target="blank">this wonderful quotation by mathematician Alexander Grothendieck</a>, who passed away in November of 
 
 2014. Here he talks about 'speculation' in mathematics (in a <a href="http://permalink.gmane.org/gmane.science.mathematics.categories/3067" 
@@ -345,23 +315,18 @@ in writing, and preciously little even in oral communication.</div>
 </body>
 
 <script>
-
-
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
-
 var mouseIsDown = false;
 var mouseMoves = false;
 var begin, end;
 var lines = [];
 var boundary_points = [];
 var slope_list = [];
-
 function windowToCanvas(canvas, x, y) {
     var bbox = canvas.getBoundingClientRect();
     return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
 };
-
 function clearScreen() {
     lines = [];
     boundary_points = [];
@@ -373,7 +338,6 @@ function clearScreen() {
     canvas.addEventListener('mouseup', finishLine);
     canvas.addEventListener('mousemove', highlight);
 };
-
 function drawFigs(col) {
     if (!col) col = '#8b3a3a';
     var points = [];
@@ -401,7 +365,6 @@ function drawFigs(col) {
     context.fillRect(100, 5, canvas.width, 95);
     return points;
 };
-
 function match(point) {
    for (var p = 0; p < lattice_grid.length; p++) {
        if (point.x <= lattice_grid[p].x + 8 && point.x >= lattice_grid[p].x - 8
@@ -411,7 +374,6 @@ function match(point) {
    }
    return false;
 };
-
 function drawLine(evt) {
     evt.preventDefault();
     mouseMoves = true;
@@ -426,7 +388,6 @@ function drawLine(evt) {
     context.moveTo(lattice_grid[begin].x, lattice_grid[begin].y);
     context.lineTo(toLoc.x, toLoc.y);
     context.stroke();
-
     var p = match(toLoc);
     context.fillStyle = '#802a2a';
     context.strokeStyle = '#802a2a';
@@ -438,7 +399,6 @@ function drawLine(evt) {
         end = p;
     }
 };
-
 function highlight(evt) {
     mouseMoves = true;
     if (mouseIsDown === true) return;
@@ -459,7 +419,6 @@ function highlight(evt) {
         drawFigs();
     }
 };
-
 function startPoint(evt) {
     evt.preventDefault();
     var loc = windowToCanvas(canvas, evt.clientX, evt.clientY);
@@ -469,7 +428,6 @@ function startPoint(evt) {
         begin = match(loc);
     }
 };
-
 function finishLine(evt) {
     evt.preventDefault();
     mouseIsDown = false;
@@ -490,7 +448,6 @@ function finishLine(evt) {
         runPick();
     }
 };
-
 function checkClosure() {
     if (lines.length > 2) {
     var testsx = [];
@@ -513,7 +470,6 @@ function checkClosure() {
     return true;
     }
 };
-
 function runPick() {
     canvas.removeEventListener('mousemove', highlight);
     canvas.removeEventListener('mousedown', startPoint);
@@ -559,10 +515,8 @@ function runPick() {
             console.log(slope_list);
             for (var r = 0; r < lattice_grid.length; r++) {
                 if ((lattice_grid[r].y - cop1_bndpts[rep * (cop1_bndpts.length - 1)].y) / (lattice_grid[r].x - cop1_bndpts[rep * (cop1_bndpts.length - 
-
 1)].x) < slope_list[slope_list.length - 1]
                     && (lattice_grid[r].y - cop1_bndpts[rep * (cop1_bndpts.length - 1)].y) / (lattice_grid[r].x - cop1_bndpts[rep * (cop1_bndpts.length 
-
 - 1)].x) > slope_list[0]
                     && lattice_grid[r].x > cop1_bndpts[0].x && lattice_grid[r].x < cop1_bndpts[cop1_bndpts.length - 1].x
                     && lattice_grid[r].y > cop2_bndpts[0].y && lattice_grid[r].y < cop2_bndpts[cop2_bndpts.length - 1].y) {
@@ -585,7 +539,6 @@ function runPick() {
             context.stroke();
         }*/
 };
-
 var lattice_grid = drawFigs();
 canvas.addEventListener('mousedown', startPoint);
 canvas.addEventListener('mousemove', drawLine);
