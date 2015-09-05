@@ -203,3 +203,129 @@ differences across the categories and supports discrimination learning.</div>
 <span class="Z3988" title="ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.jtitle=Memory+%26+Cognition&rft_id=info%3Adoi%2F10.3758%2Fs13421-012-0272-7&rfr_id=info%3Asid%2Fresearchblogging.org&rft.atitle=Why+interleaving+enhances+inductive+learning%3A+The+roles+of+discrimination+and+retrieval&rft.issn=0090-502X&rft.date=2012&rft.volume=41&rft.issue=3&rft.spage=392&rft.epage=402&rft.artnum=http%3A%2F%2Flink.springer.com%2F10.3758%2Fs13421-012-0272-7&rft.au=Birnbaum%2C+M.&rft.au=Kornell%2C+N.&rft.au=Bjork%2C+E.&rft.au=Bjork%2C+R.&rfe_dat=bpr3.included=1;bpr3.tags=Mathematics%2CPsychology%2CSocial+Science%2CEducation">Birnbaum, M., Kornell, N., Bjork, E., & Bjork, R. (2012). Why interleaving enhances inductive learning: The roles of discrimination and retrieval <span style="font-style: italic;">Memory & Cognition, 41</span> (3), 392-402 DOI: <a rev="review" href="http://dx.doi.org/10.3758/s13421-012-0272-7">10.3758/s13421-012-0272-7</a></span>
 </body>
 </html>
+<script>
+var studyGroup;
+var randAssign = Math.floor(Math.random() * 2);
+if (randAssign === 0) {
+  studyGroup = nextBird;
+  $('#condition').text('interleaved');}
+else {
+  studyGroup = nextBird_grouped;
+  $('#condition').text('massed (non-interleaved)');}
+
+var canvas_birds = document.getElementById('test_canvas');
+var brdcntxt = canvas_birds.getContext('2d');
+
+var test_birds = ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/PUFIGlamor.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/golden_winged_warbler_glamor.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/white_breasted_nuthatch_7.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/barn_swallow_glamor.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/winter.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/clay_colored_sparrow_glamor_chris_wood.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/mountain_chickadee_glamour.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/wood_thrush_glamor.jpg'];
+
+var study_birds = {
+Swallow : ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/cliff.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/TreeSwallow-Vyn_090501_0005.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/vgswallow.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/nrws.jpg'],
+
+Finch : ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/american_goldfinch_glamour12.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/brosyfinch.jpg',
+'http://www.allaboutbirds.org/guide/PHOTO/LARGE/brorosyfinch.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/cassinsfinch.jpg'],
+
+Nuthatch : ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/bhnut.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/pygmy_nuthatch_glamor_lois_manowitz.jpg',
+'http://www.allaboutbirds.org/guide/PHOTO/LARGE/red_breasted_nuthatch_glamour1.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/white_breasted_nuthatch_glamour1.jpg'],
+
+Sparrow : ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/american_tree_sparrow_glamor.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/4965846387_b4119675ff_b.jpg',
+'http://www.allaboutbirds.org/guide/PHOTO/LARGE/BellGlamor.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/BRSP.jpg'],
+
+Wren : ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/bewicks_wren_glamor.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/CANW_glam.jpg',
+'http://www.allaboutbirds.org/guide/PHOTO/LARGE/carolina_wren_glamor.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/ROWR_glam.jpg'],
+
+Thrush : ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/swain.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/hermit_thrush_glamor.jpg',
+'http://www.allaboutbirds.org/guide/PHOTO/LARGE/gcthrush.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/119472435.0UUsyTqa.IMG_2753.JPG'],
+
+Warbler : ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/Black-throatedGreenWarbler-Vyn_090509_0008.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/black_and_white_warbler_glamor.jpg',
+'http://www.allaboutbirds.org/guide/PHOTO/LARGE/BABWAR_BillMajoros1.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/cape_may_warbler_chris_wood_glamor.jpg'],
+
+Chickadee : ['http://www.allaboutbirds.org/guide/PHOTO/LARGE/bcch.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/boreal_chickadee_glamor_chris_wood.jpg',
+'http://www.allaboutbirds.org/guide/PHOTO/LARGE/carolina_chickadee_glamour.jpg', 'http://www.allaboutbirds.org/guide/PHOTO/LARGE/chestnut_backed_chickadee_glamor.jpg']};
+
+var species = ['Swallow', 'Finch', 'Nuthatch', 'Sparrow', 'Wren', 'Thrush', 'Warbler', 'Chickadee'];
+var pic_count = -1;
+var test_count = -1;
+var species_count = 0;
+var birds_used = [];
+var intervalVar;
+var numCorrect = 0;
+
+brdcntxt.font = '18px Arial';
+brdcntxt.textAlign = 'center';
+
+function nextBird() {
+  brdcntxt.clearRect(0, 220, canvas_birds.width, 300);
+  var brd_species = species[Math.floor(Math.random() * 8)];
+  var brd_pic = Math.floor(Math.random() * 4);
+  while (birds_used.length < 32 && birds_used.indexOf(study_birds[brd_species][brd_pic]) !== -1) {
+    brd_species = species[Math.floor(Math.random() * 8)];
+    brd_pic = Math.floor(Math.random() * 4);}
+  if (birds_used.length < 32) {
+    var bird = new Image();
+    bird.onload = function() {brdcntxt.drawImage(bird, 12.5, 12.5);};
+    bird.src = study_birds[brd_species][brd_pic];
+    brdcntxt.fillText(brd_species, canvas_birds.width / 2, canvas_birds.height - 12);
+    birds_used.push(study_birds[brd_species][brd_pic]);}
+  else {
+    brdcntxt.clearRect(0, 0, canvas_birds.width, canvas_birds.height);
+    reset();
+    clearInterval(intervalVar);}
+}
+function nextBird_grouped() {
+  pic_count += 1;
+  if (pic_count >= 32) {
+    brdcntxt.clearRect(0, 0, canvas_birds.width, canvas_birds.height);
+    reset();
+    clearInterval(intervalVar);
+    return;}
+  if (pic_count !== 0 && pic_count % 4 === 0) species_count += 1;
+  brdcntxt.clearRect(0, 220, canvas_birds.width, 300);
+  var brd_species = species[species_count];
+  var brd_pic = pic_count % 4;
+  var bird = new Image();
+  bird.onload = function() {brdcntxt.drawImage(bird, 12.5, 12.5);};
+  bird.src = study_birds[brd_species][brd_pic];
+  brdcntxt.fillText(brd_species, canvas_birds.width / 2, canvas_birds.height - 12);
+}
+function startStudy() {
+  studyGroup();
+  intervalVar = setInterval(studyGroup, 4200);
+  $('#birdBut').css({'pointer-events' : 'none', 'display' : 'none'});
+  $('#testBut').css({'display' : 'block', 'visibility' : 'hidden'});
+}
+function reset() {
+  var bird = new Image();
+  bird.onload = function() {brdcntxt.drawImage(bird, 60, 60, 213, 135);};
+  bird.src = 'https://pixabay.com/static/uploads/photo/2014/03/25/16/34/bluebird-297423_640.png';
+  $('#testBut').css({'visibility' : 'visible'});
+}
+function startTest() {
+  test_count += 1;
+  brdcntxt.clearRect(0, 220, canvas_birds.width, 300);
+  var bird = new Image();
+  bird.onload = function() {brdcntxt.drawImage(bird, 12.5, 12.5, 275, 200);};
+  bird.src = test_birds[test_count];
+  $('#testBut').html('next');
+  $('#selections').fadeIn();
+  if (test_count === 1 && $('input[name="choices"]:checked').val() === 'finch') numCorrect += 1;
+  if (test_count === 2 && $('input[name="choices"]:checked').val() === 'warbler') numCorrect += 1;
+  if (test_count === 3 && $('input[name="choices"]:checked').val() === 'nuthatch') numCorrect += 1;
+  if (test_count === 4 && $('input[name="choices"]:checked').val() === 'swallow') numCorrect += 1;
+  if (test_count === 5 && $('input[name="choices"]:checked').val() === 'wren') numCorrect += 1;
+  if (test_count === 6 && $('input[name="choices"]:checked').val() === 'sparrow') numCorrect += 1;
+  if (test_count === 7 && $('input[name="choices"]:checked').val() === 'chickadee') numCorrect += 1;
+  if (test_count === 8 && $('input[name="choices"]:checked').val() === 'thrush') numCorrect += 1;
+  $('input[name="choices"]').prop('checked', false);
+  if (test_count >= 8) {
+    brdcntxt.clearRect(0, 0, canvas_birds.width, canvas_birds.height);
+    $('#testBut').css({'pointer-events' : 'none'});
+    reset();
+    $('#testBut, #selections').fadeOut();
+    $('#numberCorrect').text(numCorrect);
+    $('#hider').fadeIn();
+    return;}
+}
+var bird = new Image();
+bird.onload = function() {brdcntxt.drawImage(bird, 60, 60, 213, 135);};
+bird.src = 'https://pixabay.com/static/uploads/photo/2014/03/25/16/34/bluebird-297423_640.png';
+</script>
