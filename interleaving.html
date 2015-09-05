@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content="Blog post.">
+<meta name = 'author' content = 'Joshua D. Fisher'>
+
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<title>Interleaving</title>
+<style>
+body {
+   width:800px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:200px;
+}
+h1 {
+   font-family:Josefin Sans;
+   font-size:30px;
+   font-weight:bold;
+   color:#069;
+}
+h1:before {
+   content:url(https://lh3.googleusercontent.com/nDzCgMyIxyQGB3DU7qTSgLniVhRaWuJbvuljDHxkBHbZ=w54-h34-no);
+   margin-right:10px;
+   vertical-align:-2px;
+}
+.emph_interLV {
+   font-family:'Neucha';
+   font-size:20px;
+   font-weight:bold;
+}
+#normalbegin_interLV {
+   font-family: 'Quicksand';
+   font-weight:500;
+   font-size:18px;
+   text-align:justify;
+   margin-top:-5px;
+}
+#normalbegin_interLV:first-line {
+   line-height:1.2em;
+}
+.normal_interLV {
+   font-family: 'Quicksand';
+   font-size:18px;
+   font-weight:500;
+   text-align:justify;
+}
+.h2sec_interLV {
+   font-size:24px;
+   font-family:'Josefin Sans';
+   font-weight:900;
+}
+#firstChar_interLV {
+   font-family:Verdana;
+   font-size:40px;
+   color:gray;
+   margin-right:0px;
+   vertical-align:0px;
+}
+#link_interLV {
+   font-family:'Quicksand';
+   color:brown;
+   text-decoration:none;
+}
+#link_interLV:hover {
+  text-decoration:underline;
+}
+.callout_interLV {
+   font-family:Quicksand;
+   font-size:18px;
+   font-weight:600;
+   text-align:justify;
+   margin-left:50px;
+   margin-right:75px;
+   border-left:5px dotted #333300;
+   padding-left:25px;
+   color:#333300;
+}
+#test_canvas {
+   display:block;
+   width:300px;
+   height:250px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-bottom:40px;
+   margin-top:40px;
+   box-shadow:0 0 10px #cccccc;
+  background-color:rgb(191, 151, 107);
+}
+button {
+   display:block;
+   margin-left:auto;
+   margin-right:auto;
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+#selections {
+  display:none;
+  text-align:center;
+  margin-top:40px;
+  margin-bottom:40px;
+}
+#selections input {
+  margin-left:25px;
+  font-size:1.4em;
+  vertical-align:-2px;
+}
+</style>
+<body>
+<h1>Interleaving</h1>
+
+<div id='normalbegin_interLV'><p><span id='firstChar_interLV'>I</span>nductive teaching or learning, although it has a special name, happens all the time without our having to pay any attention to technique. It is basically learning through examples. As the authors of <a id='link_interLV' href='https://plus.google.com/+JoshuaFisherD/posts/EuJ1wa1DXzf' target='_blank'>the paper we're discussing here</a> indicate, through inductive learning:</p></div>
+
+<div class='callout_interLV'>Children . . . learn concepts such as 'boat' or 'fruit' by being exposed to exemplars of those categories and inducing the commonalities that define the concepts. . . . Such inductive learning is critical in making sense of events, objects, and actions&mdash;and, more generally, in structuring and understanding our world.</div>
+
+<div class='normal_interLV'><p>The paper describes three experiments conducted to further test the benefit of <a id='link_interLV' href='http://gocognitive.net/interviews/benefits-interleaving-practice' target='_blank'>interleaving</a> on inductive learning ("further" because an interleaving effect has been demonstrated in previous studies). Interleaving is one of a handful of powerful learning and practicing strategies mentioned throughout the book <a id='link_interLV' href='http://www.amazon.com/Make-It-Stick-Successful-Learning/dp/0674729013' target='_blank'>Make It Stick: The Science of Successful Learning</a>. In the book, the power of interleaving is highlighted by the following summary of another experiment involving determining volumes:</p></div>
+
+<div class='callout_interLV'>Two groups of college students were taught how to find the volumes of four obscure geometric solids (wedge, spheroid, spherical cone, and half cone). One group then worked a set of practice problems that were clustered by problem type . . . The other group worked the same practice problems, but the sequence was mixed (interleaved) rather than clustered by type of problem . . . During practice, the students who worked the problems in clusters (that is, massed) averaged 89 percent correct, compared to only 60 percent for those who worked the problems in a mixed sequence. But in the final test a week later, the students who had practiced solving problems clustered by type averaged only 20 percent correct, while the students whose practice was interleaved averaged 63 percent.</div>
+
+<div class='normal_interLV'><p>The research we look at in this post does not produce such stupendous results, but it is nevertheless an interesting validation of the interleaving effect. Although there are three experiments described, I'll summarize just the first one.</p></div>
+
+<p class='h2sec_interLV'>Discriminative-Contrast Hypothesis</p>
+
+<div class='normal_interLV'><p>But first, you can try out an experiment like the one reported in the paper. Click <span style='color:blue;font-variant:small-caps;'><strong>start</strong></span> to study pictures of different bird species below. There are 32 pictures, and each one is shown for 4 seconds. After this study period, you will be asked to try to identify 8 birds from pictures that were not shown during the study period, but which belong to one of the species you studied.</p></div>
+
+<canvas id='test_canvas' width='300px' height='250px'></canvas>
+<button id='birdBut' onclick='startStudy()'>start</button>
+<button id='testBut' onclick='startTest()' style='display:none;'>test</button>
+<div id='selections'>
+<input type='radio' name='choices' value='chickadee'>chickadee</input>
+<input type='radio' name='choices' value='finch'>finch</input>
+<input type='radio' name='choices' value='nuthatch'>nuthatch</input>
+<input type='radio' name='choices' value='sparrow'>sparrow</input>
+<input type='radio' name='choices' value='swallow'>swallow</input>
+<input type='radio' name='choices' value='thrush'>thrush</input>
+<input type='radio' name='choices' value='warbler'>warbler</input>
+<input type='radio' name='choices' value='wren'>wren</input>
+</div>
+<div class='normal_interLV' style='margin-top:40px;'><p>Once the study phase is over, click <span style='color:blue;font-variant:small-caps;'><strong>test</strong></span> to start the test and match each picture to a species name. There is no time limit on the test. Simply click <span style='color:blue;font-variant:small-caps;'><strong>next</strong></span> once you have selected each of your answers.</p></div>
+
+<div class='normal_interLV'><p id='hider' style='display:none;'>So, it looks like you were in the <span id='condition' style='color:blue;'></span> condition and got <strong><span id='numberCorrect' style='color:blue;'></span></strong> correct.</div>
+
+<div class='normal_interLV'><p>Based on previous research, one would predict that, in general, you would do better in the interleaved condition, where the species are mixed together in the study phase, than you would in the 'massed,' or grouped condition, where the pictures are presented in species groups. The question the researchers wanted to home in on in their first experiment was about the <strong>mechanism</strong> that made interleaved study more effective.</p></div>
+
+<div class='normal_interLV'><p>So, their experiment was conducted much like the one above, except with three groups, which all received the interleaved presentation. However, two of the groups were interrupted in their study by trivia questions in different ways. One group&mdash;the alternating trivia group&mdash;received a trivia question after every picture; the other group&mdash;the grouped trivia group&mdash;received 8 trivia questions after every group of 8 interleaved pictures. The third group&mdash;the contiguous group&mdash;received no interruption in their study.</p></div>
+
+<div class='normal_interLV'><p>What the researchers discovered is that while the contiguous group performed the best (of course), the grouped trivia group did not perform significantly worse, while the alternating trivia group <strong>did</strong> perform significantly worse than both the contiguous and grouped trivia groups. This was seen as providing some confirmation for the discriminative-contrast hypothesis:</p></div>
+
+<div class='callout_interLV'>Interleaved studying might facilitate noticing the differences that separate one category from
+another. In other words, perhaps interleaving is beneficial because it juxtaposes different categories, which then highlights
+differences across the categories and supports discrimination learning.</div>
+
+<div class='normal_interLV'><p>In the grouped trivia condition, participants were still able to take advantage of the interleaving effect because the disruptions (the trivia questions) had less of an effect when grouped in packs of 8. In the alternating trivia condition, however, a trivia question appeared after every picture, frustrating the discrimination mechanism that seems to help make the interleaving effect tick.</p></div>
+
+<p class='h2sec_interLV'>Takeaway Goodies (and Questions) for Instruction</p>
+
+<div class='normal_interLV'><p>The paper makes it clear that interleaving is not a slam dunk for instruction. Massed studying or practice might be more beneficial, for example, when the goal is to understand the similarities among the objects of study rather than the differences. Massed studying may also be preferred when the objects are 'highly discriminable' (easy to tell apart).</p></div>
+
+<div class='normal_interLV'><p>Yet, many of the misconceptions we deal with in mathematics education in particular can be seen as the result of dealing with objects of 'low discriminability' (objects that are hard to tell apart). In many cases, these objects really are hard to tell apart, and in others we simply make them hard through our sequencing. Consider some of the items listed in the NCTM's wonderful <a id='link_interLV' href='https://plus.google.com/+JoshuaFisherD/posts/cqDro2VFuM5' target='_blank'>13 Rules That Expire</a>, which students often misapply:</p></div>
+
+<div class='callout_interLV'>
+<ul style='line-height:1.6em;'>
+<li>When multiplying by ten, just add a zero to the end of the number.</li>
+<li>You cannot take a bigger number from a smaller number.</li>
+<li>Addition and multiplication make numbers bigger.</li>
+<li>You always divide the larger number by the smaller number.</li>
+</ul>
+</div>
+
+<div class='normal_interLV'><p>In some sense, these are problematic because they are like the sparrows and finches above when presented only in groups&mdash;they are harder to tell apart <strong>because</strong> we don't present them together, or interleave them. Appending a zero to a number to multiply by 10 does work on counting numbers but not on decimals; addition and multiplication do make counting numbers bigger until they don't always make fractions bigger. You cannot take a bigger counting number from a smaller one and get a counting number. For that, you need integers.</p></div>
+
+<div class='normal_interLV'><p>Notice any similarities above? Can we please talk about how we <a id='link_interLV' href='http://textsavvy.blogspot.com/2015/01/the-crooked-ladder.html' target='_blank'>keep kids trapped for too long in counting number land</a>? I've got this marvelous study to show you which might provides some good reasons to interleave different number systems throughout students' educations. It's linked above, and below.</p></div>
+
+<div class='normal_interLV'><p><small>Images credit: <a id='link_interLV' href='http://www.allaboutbirds.org/' target='_blank'>All About Birds</a></small></p></div>
+
+<hr style='margin-bottom:20px;'></hr>
+<span style="float: right; padding: 5px;margin-left:40px;margin-top:-10px;"><a href="http://www.researchblogging.org"><img alt="ResearchBlogging.org" src="http://www.researchblogging.org/public/citation_icons/rb2_mid.png" style="border:0;"/></a></span>
+
+<span class="Z3988" title="ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.jtitle=Memory+%26+Cognition&rft_id=info%3Adoi%2F10.3758%2Fs13421-012-0272-7&rfr_id=info%3Asid%2Fresearchblogging.org&rft.atitle=Why+interleaving+enhances+inductive+learning%3A+The+roles+of+discrimination+and+retrieval&rft.issn=0090-502X&rft.date=2012&rft.volume=41&rft.issue=3&rft.spage=392&rft.epage=402&rft.artnum=http%3A%2F%2Flink.springer.com%2F10.3758%2Fs13421-012-0272-7&rft.au=Birnbaum%2C+M.&rft.au=Kornell%2C+N.&rft.au=Bjork%2C+E.&rft.au=Bjork%2C+R.&rfe_dat=bpr3.included=1;bpr3.tags=Mathematics%2CPsychology%2CSocial+Science%2CEducation">Birnbaum, M., Kornell, N., Bjork, E., & Bjork, R. (2012). Why interleaving enhances inductive learning: The roles of discrimination and retrieval <span style="font-style: italic;">Memory & Cognition, 41</span> (3), 392-402 DOI: <a rev="review" href="http://dx.doi.org/10.3758/s13421-012-0272-7">10.3758/s13421-012-0272-7</a></span>
+</body>
+</html>
