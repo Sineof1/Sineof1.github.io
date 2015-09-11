@@ -205,7 +205,7 @@ function selectStart(evt) {
    context.fill();
    context.stroke();
 
-   canvas.addEventListener('click', commitStart, true);
+   canvas.addEventListener('mousedown', commitStart, true);
 }
 function commitStart() {
    startPoints[1] = tickmarks[temptick];
@@ -241,7 +241,7 @@ function drawVector(evt) {
          context.lineTo(loc.x - 10, canvas.height / 2 - 10);
       }
       context.fill();
-      canvas.removeEventListener('click', commitStart, true);
+      canvas.removeEventListener('mousedown', commitStart, true);
 
       var tempdif = 2000;
       for (var i in tickmarks) {
@@ -259,7 +259,7 @@ function drawVector(evt) {
          context.lineTo(tickmarks[temptick], canvas.height / 2 + 21);
          context.stroke();}
       firstNum = temptick - compTick1;
-      canvas.addEventListener('click', commitEnd, true);}
+      canvas.addEventListener('mousedown', commitEnd, true);}
 }
 function commitEnd(evt) {
    vecCount += 1;
