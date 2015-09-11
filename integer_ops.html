@@ -82,8 +82,6 @@ var bbox = canvas.getBoundingClientRect();
 return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};}
 
 function clearCanvas() {
-   $('#intopcanvas').off();
-   baseDraw();
    tickmarks = {};
    startPoints = {};
    vectors = {};
@@ -94,6 +92,8 @@ function clearCanvas() {
    compTick1 = undefined;
    compTick2 = undefined;
    answer = undefined;
+   $('#intopcanvas').off();
+   baseDraw();
    canvas.addEventListener('mousemove', selectStart, true);
 }
 function baseDraw() {
