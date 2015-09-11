@@ -269,10 +269,10 @@ function commitEnd(evt) {
    startPoints[2] = tickmarks[temptick];
    canvas.addEventListener('mousemove', drawVector2, true);
    canvas.removeEventListener('mousemove', drawVector, true);
-   canvas.removeEventListener('click', commitEnd, true);
+   canvas.removeEventListener('mousedown', commitEnd, true);
 }
 function drawVector2(evt) {
-   canvas.addEventListener('click', commitEnd2, true);
+   canvas.addEventListener('mousedown', commitEnd2, true);
    var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
    if (loc.x >= canvas.width / 15 && loc.x <= canvas.width * 14 / 15) {
       baseDraw();
@@ -325,7 +325,7 @@ function commitEnd2(evt) {
    answer = firstNum + secondNum;
    baseDraw();
    canvas.removeEventListener('mousemove', drawVector2, true);
-   canvas.removeEventListener('click', commitEnd2, true);
+   canvas.removeEventListener('mousedown', commitEnd2, true);
 }
 function drawLast() {
    context.strokeStyle = 'blue';
