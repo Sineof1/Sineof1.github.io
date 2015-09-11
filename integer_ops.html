@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/javascript"src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<title>Integers (+ and -)</title>
+<style>
+#intopcanvas {
+   display:block;
+   margin-top:70px;
+   margin-left:auto;
+   margin-right:auto;
+   box-shadow:0 0 20px #000;
+}
+#calc_probs {
+   width:60%;
+   margin-top:30px;
+   margin-left:auto;
+   margin-right:auto;
+   text-align:center;
+   font-size:30px;
+}
+button {
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:40px;
+   outline: 0 none;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   border-radius:5px;
+   display:block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div id='calc_probs'>Modeling Addition and Subtraction with Integers</div>
+<canvas id='intopcanvas'></canvas>
+<button onclick='clearCanvas()'>clear</button>
+</body>
+</html>
+
+<script>
+var canvas = document.getElementById('intopcanvas');
+var context = canvas.getContext('2d');
+
+var tickmarks = {};
+var startPoints = {};
+var vectors = {};
+var temptick;
+var vecCount = 0;
+var vecHeight = canvas.height / 2;
+var firstNum;
+var secondNum;
+var compTick1;
+var compTick2;
+var answer;
+
+function windowToCanvas_mouse(canvas, x, y) {
+var bbox = canvas.getBoundingClientRect();
+return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};}
+
+function clearCanvas() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   tickmarks = {};
+   startPoints = {};
+   vectors = {};
+   temptick = undefined;
+   vecCount = 0;
+   firstNum = undefined;
+   secondNum = undefined;
+   compTick1 = undefined;
+   compTick2 = undefined;
+   answer = undefined;
+   $('#intopcanvas').off();
+   canvas.addEventListener('mousemove', selectStart, true);
+   baseDraw();
+}
+function baseDraw() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.canvas.width = window.innerWidth * 0.9;
+   context.canvas.height = window.innerHeight * 0.6;
+   context.strokeStyle = 'black';
+   context.fillStyle = 'black';
+   context.lineWidth = 4;
+   context.setLineDash([1, 0]);
+   context.beginPath();
+   context.moveTo(0, canvas.height / 2);
+   context.lineTo(canvas.width, canvas.height / 2);
+   context.stroke();
+
+   for (var a = canvas.width / 15, p = 0; a <= canvas.width * 14 / 15 + 1; a += canvas.width / 15, p++) {
+      context.lineWidth = 2;
+      context.setLineDash([5, 5]);
+      context.beginPath();
+      context.moveTo(a, canvas.height / 2 - 20);
+      context.lineTo(a, canvas.height / 2 + 20);
+      context.stroke();
+
+      tickmarks[p] = a;
+   }
+   context.strokeStyle = 'black';
+   context.fillStyle = 'red';
+   context.setLineDash([1, 0]);
+   context.lineWidth = 1;
+   context.beginPath();
+   context.arc(startPoints[1], canvas.height / 2, 8, 0, Math.PI * 2);
+   context.fill();
+   context.stroke();
+
+   context.setLineDash([1, 0]);
+   context.lineWidth = 6;
+   context.beginPath();
+   context.strokeStyle = 'red';
+   if (vectors[0] < startPoints[1]) {
+     context.moveTo(startPoints[1] - 8.2, canvas.height / 2);
+     context.lineTo(vectors[0], canvas.height / 2);
+     context.stroke();
+     context.beginPath();
+     context.moveTo(vectors[0] + 10, canvas.height / 2 - 10);
+     context.lineTo(vectors[0] + 10, canvas.height / 2 + 10);
+     context.lineTo(vectors[0] - 3, canvas.height / 2);
+     context.lineTo(vectors[0] + 10, canvas.height / 2 - 10);
+   }
+   else if (vectors[0] > startPoints[1]) {
+     context.moveTo(startPoints[1] + 8.3, canvas.height / 2);
+     context.lineTo(vectors[0], canvas.height / 2);
+     context.stroke();
+     context.beginPath();
+     context.moveTo(vectors[0] - 10, canvas.height / 2 - 10);
+     context.lineTo(vectors[0] - 10, canvas.height / 2 + 10);
+     context.lineTo(vectors[0] + 3, canvas.height / 2);
+     context.lineTo(vectors[0] - 10, canvas.height / 2 - 10);
+   }
+   context.fill();
+   context.strokeStyle = 'black';
+   if (vecCount > 1) drawLast();
+
+   if (startPoints[1]) {
+     context.font = '20px Arial';
+     context.textAlign = 'center';
+     context.fillStyle = 'black';
+     context.fillText('0', startPoints[1], canvas.height / 2 + 40);
+   }
+   if (firstNum) {
+     context.font = '30px Arial';
+     context.textAlign = 'center';
+     context.fillStyle = 'red';
+     context.fillText(firstNum, canvas.width / 2 - 70, canvas.height - 50);
+     if (secondNum && secondNum < 0) {
+       context.fillStyle = 'blue';
+       context.fillText('–', canvas.width / 2 - 20, canvas.height - 50);
+       context.fillText(-secondNum, canvas.width / 2 + 30, canvas.height - 50);
+     }
+     else if (secondNum && secondNum > 0) {
+       context.fillStyle = 'blue';
+       context.fillText('+', canvas.width / 2 - 20, canvas.height - 50);
+       context.fillText(secondNum, canvas.width / 2 + 30, canvas.height - 50);
+     }
+     if (answer || answer === 0) {
+       context.fillStyle = 'black';
+       context.fillText('=', canvas.width / 2 + 80, canvas.height - 50);
+       context.fillText(answer, canvas.width / 2 + 130, canvas.height - 50);
+     }
+   }
+   context.fillStyle = 'red';
+}
+function selectStart(evt) {
+   baseDraw();
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   var tempdif = 2000;
+   for (var i in tickmarks) {
+      var tickdif = Math.abs(loc.x - tickmarks[i]);
+      if (tickdif <= tempdif) {
+         tempdif = tickdif;
+         temptick = i;}
+   }
+   context.fillStyle = 'red';
+   context.setLineDash([1, 0]);
+   context.lineWidth = 1;
+   context.beginPath();
+   context.arc(tickmarks[temptick], canvas.height / 2, 8, 0, Math.PI * 2);
+   context.fill();
+   context.stroke();
+
+   canvas.addEventListener('click', commitStart, true);
+}
+function commitStart() {
+   startPoints[1] = tickmarks[temptick];
+   compTick1 = temptick;
+   canvas.removeEventListener('mousemove', selectStart, true);
+   canvas.addEventListener('mousemove', drawVector, true);
+}
+function drawVector(evt) {
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   if (loc.x >= canvas.width / 15 && loc.x <= canvas.width * 14 / 15) {
+      baseDraw();
+      context.lineWidth = 6;
+      context.strokeStyle = 'red';
+      context.beginPath();
+      if (loc.x < startPoints[1]) {
+         context.moveTo(startPoints[1] - 8.2, canvas.height / 2);
+         context.lineTo(loc.x, canvas.height / 2);
+         context.stroke();
+         context.beginPath();
+         context.moveTo(loc.x + 10, canvas.height / 2 - 10);
+         context.lineTo(loc.x + 10, canvas.height / 2 + 10);
+         context.lineTo(loc.x - 5, canvas.height / 2);
+         context.lineTo(loc.x + 10, canvas.height / 2 - 10);
+      }
+      else if (loc.x > startPoints[1]) {
+         context.moveTo(startPoints[1] + 8.3, canvas.height / 2);
+         context.lineTo(loc.x, canvas.height / 2);
+         context.stroke();
+         context.beginPath();
+         context.moveTo(loc.x - 10, canvas.height / 2 - 10);
+         context.lineTo(loc.x - 10, canvas.height / 2 + 10);
+         context.lineTo(loc.x + 5, canvas.height / 2);
+         context.lineTo(loc.x - 10, canvas.height / 2 - 10);
+      }
+      context.fill();
+      canvas.removeEventListener('click', commitStart, true);
+
+      var tempdif = 2000;
+      for (var i in tickmarks) {
+         var tickdif = Math.abs(loc.x - tickmarks[i]);
+         if (tickdif <= tempdif) {
+            tempdif = tickdif;
+            temptick = i;}
+      }
+      if (tickmarks[temptick] !== startPoints[1]) {
+         context.strokeStyle = 'red';
+         context.setLineDash([1, 0]);
+         context.lineWidth = 3;
+         context.beginPath();
+         context.moveTo(tickmarks[temptick], canvas.height / 2 - 21);
+         context.lineTo(tickmarks[temptick], canvas.height / 2 + 21);
+         context.stroke();}
+      firstNum = temptick - compTick1;
+      canvas.addEventListener('click', commitEnd, true);}
+}
+function commitEnd(evt) {
+   vecCount += 1;
+   vectors[0] = tickmarks[temptick];
+   compTick2 = temptick;
+   baseDraw();
+   startPoints[2] = tickmarks[temptick];
+   canvas.addEventListener('mousemove', drawVector2, true);
+   canvas.removeEventListener('mousemove', drawVector, true);
+   canvas.removeEventListener('click', commitEnd, true);
+}
+function drawVector2(evt) {
+   canvas.addEventListener('click', commitEnd2, true);
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   if (loc.x >= canvas.width / 15 && loc.x <= canvas.width * 14 / 15) {
+      baseDraw();
+      context.lineWidth = 6;
+      context.strokeStyle = 'blue';
+      context.fillStyle = 'blue';
+      context.beginPath();
+      if (loc.x < startPoints[2]) {
+         context.moveTo(startPoints[2], canvas.height / 2 - 40);
+         context.lineTo(loc.x, canvas.height / 2 - 40);
+         context.stroke();
+         context.beginPath();
+         context.moveTo(loc.x + 10, canvas.height / 2 - 50);
+         context.lineTo(loc.x + 10, canvas.height / 2 - 30);
+         context.lineTo(loc.x - 5, canvas.height / 2 - 40);
+         context.lineTo(loc.x + 10, canvas.height / 2 - 50);
+      }
+      else if (loc.x > startPoints[2]) {
+         context.moveTo(startPoints[2], canvas.height / 2 - 40);
+         context.lineTo(loc.x, canvas.height / 2 - 40);
+         context.stroke();
+         context.beginPath();
+         context.moveTo(loc.x - 10, canvas.height / 2 - 50);
+         context.lineTo(loc.x - 10, canvas.height / 2 - 30);
+         context.lineTo(loc.x + 5, canvas.height / 2 - 40);
+         context.lineTo(loc.x - 10, canvas.height / 2 - 50);
+      }
+      context.fill();
+
+      var tempdif = 2000;
+      for (var i in tickmarks) {
+         var tickdif = Math.abs(loc.x - tickmarks[i]);
+         if (tickdif <= tempdif) {
+            tempdif = tickdif;
+            temptick = i;}
+      }
+      if (tickmarks[temptick] !== startPoints[2]) {
+         context.strokeStyle = 'blue';
+         context.setLineDash([1, 0]);
+         context.lineWidth = 3;
+         context.beginPath();
+         context.moveTo(tickmarks[temptick], canvas.height / 2 - 21);
+         context.lineTo(tickmarks[temptick], canvas.height / 2 + 21);
+         context.stroke();}}
+      secondNum = temptick - compTick2;
+}
+function commitEnd2(evt) {
+   vecCount += 1;
+   vectors[1] = tickmarks[temptick];
+   answer = firstNum + secondNum;
+   baseDraw();
+   canvas.removeEventListener('mousemove', drawVector2, true);
+   canvas.removeEventListener('click', commitEnd2, true);
+}
+function drawLast() {
+   context.strokeStyle = 'blue';
+   context.fillStyle = 'blue';
+   context.setLineDash([1, 0]);
+   context.lineWidth = 6;
+   context.beginPath();
+   if (vectors[1] < startPoints[2]) {
+      context.moveTo(startPoints[2], canvas.height / 2 - 40);
+      context.lineTo(vectors[1] + 5, canvas.height / 2 - 40);
+      context.stroke();
+      context.beginPath();
+      context.moveTo(vectors[1] + 10, canvas.height / 2 - 50);
+      context.lineTo(vectors[1] + 10, canvas.height / 2 - 30);
+      context.lineTo(vectors[1], canvas.height / 2 - 40);
+      context.lineTo(vectors[1] + 10, canvas.height / 2 - 50);
+   }
+   else if (vectors[1] > startPoints[2]) {
+      context.moveTo(startPoints[2], canvas.height / 2 - 40);
+      context.lineTo(vectors[1] - 5, canvas.height / 2 - 40);
+      context.stroke();
+      context.beginPath();
+      context.moveTo(vectors[1] - 10, canvas.height / 2 - 50);
+      context.lineTo(vectors[1] - 10, canvas.height / 2 - 30);
+      context.lineTo(vectors[1], canvas.height / 2 - 40);
+      context.lineTo(vectors[1] - 10, canvas.height / 2 - 50);
+   }
+   context.fill();
+}
+baseDraw();
+canvas.addEventListener('mousemove', selectStart, true);
+</script>
