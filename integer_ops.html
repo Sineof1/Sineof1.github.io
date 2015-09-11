@@ -92,7 +92,10 @@ function clearCanvas() {
    compTick1 = undefined;
    compTick2 = undefined;
    answer = undefined;
-   $('#intopcanvas').off();
+   canvas.removeEventListener('mousedown', commitStart, true);
+   canvas.removeEventListener('mousemove', drawVector, true);
+   canvas.removeEventListener('mousemove', drawVector2, true);
+   canvas.removeEventListener('mousemove', commitEnd2, true);
    baseDraw();
    canvas.addEventListener('mousemove', selectStart, true);
    console.log(tickmarks);
