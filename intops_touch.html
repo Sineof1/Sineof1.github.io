@@ -104,7 +104,7 @@ function clearCanvas() {
    compTick2 = undefined;
    answer = undefined;
    $('#intopcanvas').off();
-   canvas.addEventListener('touchstart', commitStart, true);
+   canvas.addEventListener('touchstart', commitStart, false);
    $('#clearBut').attr({'disabled': 'disabled'});
    baseDraw();
 }
@@ -218,12 +218,12 @@ function commitStart(evt) {
    context.stroke();
    startPoints[1] = tickmarks[temptick];
    compTick1 = temptick;
-   canvas.addEventListener('touchmove', drawVector, true);
+   canvas.addEventListener('touchmove', drawVector, false);
 }
 function commitStart2(evt) {
    baseDraw();
    var loc = windowToCanvas_touch(canvas, evt.changedTouches[0].pageX, evt.changedTouches[0].pageY);
-   canvas.addEventListener('touchmove', drawVector2, true);
+   canvas.addEventListener('touchmove', drawVector2, false);
 }
 function drawVector(evt) {
    var loc = windowToCanvas_touch(canvas, evt.changedTouches[0].pageX, evt.changedTouches[0].pageY);
@@ -253,7 +253,7 @@ function drawVector(evt) {
          context.lineTo(loc.x - 10, canvas.height / 2 - 10);
       }
       context.fill();
-      canvas.removeEventListener('touchstart', commitStart, true);
+      canvas.removeEventListener('touchstart', commitStart, false);
 
       var tempdif = 2000;
       for (var i in tickmarks) {
@@ -271,7 +271,7 @@ function drawVector(evt) {
          context.lineTo(tickmarks[temptick], canvas.height / 2 + 21);
          context.stroke();}
       firstNum = temptick - compTick1;
-      canvas.addEventListener('touchend', commitEnd, true);}
+      canvas.addEventListener('touchend', commitEnd, false);}
 }
 function commitEnd() {
    vecCount += 1;
@@ -280,13 +280,13 @@ function commitEnd() {
    baseDraw();
    startPoints[2] = tickmarks[temptick];
 
-   canvas.addEventListener('touchstart', commitStart2, true);
-   canvas.removeEventListener('touchend', commitEnd, true);
-   canvas.removeEventListener('touchmove', drawVector, true);
+   canvas.addEventListener('touchstart', commitStart2, false);
+   canvas.removeEventListener('touchend', commitEnd, false);
+   canvas.removeEventListener('touchmove', drawVector, false);
 }
 function drawVector2(evt) {
-   canvas.addEventListener('touchend', commitEnd2, true);
-   canvas.removeEventListener('touchstart', commitStart2, true);
+   canvas.addEventListener('touchend', commitEnd2, false);
+   canvas.removeEventListener('touchstart', commitStart2, false);
    var loc = windowToCanvas_touch(canvas, evt.changedTouches[0].pageX, evt.changedTouches[0].pageY);
    if (loc.x >= canvas.width / 15 && loc.x <= canvas.width * 14 / 15) {
       baseDraw();
@@ -338,8 +338,8 @@ function commitEnd2(evt) {
    vectors[1] = tickmarks[temptick];
    answer = firstNum + secondNum;
    baseDraw();
-   canvas.removeEventListener('touchmove', drawVector2, true);
-   canvas.removeEventListener('touchend', commitEnd2, true);
+   canvas.removeEventListener('touchmove', drawVector2, false);
+   canvas.removeEventListener('touchend', commitEnd2, false);
 }
 function drawLast() {
    context.strokeStyle = 'blue';
@@ -370,5 +370,5 @@ function drawLast() {
    context.fill();
 }
 baseDraw();
-canvas.addEventListener('touchstart', commitStart, true);
+canvas.addEventListener('touchstart', commitStart, false);
 </script>
