@@ -167,17 +167,17 @@ function baseDraw() {
      context.fillStyle = 'black';
      context.fillText('0', startPoints[1], canvas.height / 2 + 40);
    }
-   if (firstNum) {
+   if (firstNum !== 'undefined') {
      context.font = '30px Arial';
      context.textAlign = 'center';
      context.fillStyle = 'red';
      context.fillText(firstNum, canvas.width / 2 - 70, canvas.height - 50);
-     if (secondNum && secondNum < 0) {
+     if (secondNum !== 'undefined' && secondNum < 0) {
        context.fillStyle = 'blue';
        context.fillText('–', canvas.width / 2 - 20, canvas.height - 50);
        context.fillText(-secondNum, canvas.width / 2 + 30, canvas.height - 50);
      }
-     else if (secondNum && secondNum > 0) {
+     else if (secondNum !== 'undefined' && secondNum > 0) {
        context.fillStyle = 'blue';
        context.fillText('+', canvas.width / 2 - 20, canvas.height - 50);
        context.fillText(secondNum, canvas.width / 2 + 30, canvas.height - 50);
