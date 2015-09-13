@@ -199,6 +199,7 @@ function selectStart(evt) {
       if (tickdif <= tempdif) {
          tempdif = tickdif;
          temptick = i;}
+      if (temptick === 0) return;
    }
    context.fillStyle = 'red';
    context.setLineDash([1, 0]);
