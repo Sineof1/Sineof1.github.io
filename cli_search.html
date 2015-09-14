@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content="Book search for Carnegie Learning Inc.">
+<meta name = 'author' content = 'Josh Fisher'>
+<link rel='icon' href='https://lh3.googleusercontent.com/6nT7WSPwObW_Ypbwxtj_BohW0DpH9ouLiudTFrTOEd-3WC426hiTrEnrGbYUoP8HwmT9_5vQ4AXyMNwPvJ6uAxwuSnMFrTOtrUlcwahXuMmn89r-E3gj58M1AbyLEacujqAA0PaQj-yydrO8mtGUeT1pKcLtNC4Y-RyPW8QX-iJaq9UyeFXV91qybdQiY0J0r45JWW0EToHaG56bfRv-YmHPxQgk2OqbPww2ne1JEXfFsL8wGMpceh0DsHROnyZdjmP7BDzAmxZEVQ8XIOtWV3XjubqS1JKkjCtK6qk9hJMdeVLQOCOhwkVO6ZlbPMFzo7I7b92hLtHM4c-fVrr9KRx1HckbjFWeOVZvibgRqkL9lwsvg-zxqsUCBlgSTsQWOyTbRUfUUGAnQ6oqtyXiacH2g_u5J_6-MAz1m5zMEBW5yVsbBkoQx4KpEJTggMUnlgQTjeA3iKX7UCFd-TDwboFEiWcr-vDLiYwq1CfV5MgOpSmRXvRrDd3_4qjThl_FA5fM8wFGpA6eVMatFGnTCLujtu6MtStrCUoE-tAvjXeX=s402-no'>
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/javascript"src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="CLibrary.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src='https://github.com/Sineof1/Sineof1.github.io/blob/master/justsomemath/jquery.easing.1.3.js'></script>
+
+<title>CLIbrary Search</title>
+</head>
+
+<div id='navbar'>
+<img id='tab-pull' src='https://lh3.googleusercontent.com/hd5d0Y1ra68j0C1SfD6-4St4TKrgkzvAp8SJUPeieR-Xl0O7Ss8Um69qofqYgogQkPqPQjziiaobYGyhKa-iJY4AlNTMmJxAOYl-izBRDDkt3Gsnt4mB2Z1lHwhLmGOKnlhVJSn4ZQnHTK8cP-3U_4H9UzK1rMFiR3hd6Ci9s53uGYLiEEuosuMa22MQCBSVzEHZ8KNBELM6-qHJvhYdy9Z8fSSwyWte7ihTaX-DgGJWYd7RQCS85JhjIR8It-PY0oZz1WU0r1vQDrBVAfU-pzvmZVUGMv7pigStKGijNA1tX3fkzVnMy5smXywoYxLiI2SQZbatXDX8UOe2vp3XBetdIG9beIub67kZkt30J0gIqH9HO-wkeuvgUvdrVbAdSPIB_ZKrNFWiPNbDjQ6AN7NBMFEGm-vCGwGqzdIDF22ndvFn2wni2o2jIDAMQyUFK6Oa9ogqWPqh-79Jt7ZzgGxh8rON2q4FkJoVIeOJsNBhwh8lWaD07XqhXbcCECgQysp32PYbazAe-bkLR614zZXNVjYpQ-AVuH1fC5SXwUkz=w1000-h234-no' width='200px' height='47px'>
+</div>
+
+<div id='book-menu'>
+
+<div class='book-container'><img class='book-select' id='alg-2' src='https://lh3.googleusercontent.com/cYb4TbLo5s1XsQhJPwt2QWhZ_GF9p4SrtMkm_Cw3uYPm5fx57Uc1JZnQxa8tpMoovqhijRVBnjrWJ4pHw1XvFjqYlyOldha02MiMW7kLITTdy2G2dxUTKzuQCWJK-9vCrV28xpVwrBCDnon0dj5pGozkXsPr67KnPfyS4_sbeqnF7NHOUiC_lgF2qls7mUrai-C-ZYfAkleH1wzuH2hUl0qLmxEU69Q6sLa221hbzENhBJJJ4acZkEmNxqEdvWt4JE5W2fvaQAU-kBkyIIs8bY3VBc0RuDvtWbvgAXcL2mx-fUKiw_vz5RHkJORvXz6R9_VrH1XqfoNxcn-MqmKt_MbVwjVaZcfFDXncHgD127V1KEQoDEx0c7md7joSjN-Mt7F0IIx8hZgEd2uMGyPEVMXUI4giOhTVYnEtY4yY_RLtwZk3aN00rWxsokecKl3N9CPFUbXckFQWdBiCCk8hq2Hb5C2slJr2BCz1KHbjgnHnxL9ragU8DCGKdi-QfHNaAZwTXdbRszE3T2N4ENOjUxFTtsp9_dzHIdOSz4wOPpbW=w130-h166-no'></div>
+<div class='book-description'>CCSS Algebra II</div>
+<div class='book-container'><img class='book-select' id='geo-1' src='https://lh3.googleusercontent.com/OfhvwRzbMwVvuWuZ-J2BcwKpDvvXnYYspBSh-jx49OpAGjBPt9Bl8qdMXzH_PXAqJpi-kJAXVteRdGgZGJVhwBhdkWhLgcFotXjx-i51wVBM6egRvMLGtonXDQd_6YVemyNWr9kRGwR83ia8VeFhGF0NzID33jyhV5hNjhu99nu0xf3kRUz4yK1gH2d-7LKb4UvCdSLmR0QQRtGjU47xfU-k88UfpSeqMEE5mU-DhMO8OY5vrnb02UP-n8ZIaZrOVt4hWkVR6C4m6lvLSkC46yeDW5txShoaPE9PsBi1YpZjzw5iZmRPPuzu_wDl7aXhgbgOw18i8qD1aV3WjnWrXQPaoqkgIjUfbQXZlByprbnbsvaDgDgUj2ue-HnK0Ou1ebMR-hTclyHR6UoPJbB4phXt8Vw_a4Ia89GwR6MGwL245FBFuLkTq29SliBPaTVpYJvyXT-iFkmAMZe0kZvtnyZhmzwI_El2UqZYpnOhewT6PPsq8Mkfl1S7krBgxH2szpxlTRzx8SOVjvlbqCeOBz9xvR64lA5ZIn-j6CQ7m41G=w130-h166-no'></div>
+<div class='book-description'>CCSS Geometry</div>
+<div class='book-container'><img class='book-select' id='alg-1' src='https://lh3.googleusercontent.com/CABv4RBjcMQCzhUw_Vwai5rH6EBqu1e_pYoRQFyFO_W-zCCzTfylzhK-fBnaWsrX2HaQb7LH7BuEuSqhog3lhdV-98u5aEyaFHfb41-1q7Rq2dqCgml4FaOrVoqxaAjMtZqJw0rlpzXbSAUf0KcaoswDPPd0QVztVPW1TpmtxODPyFmvardnXys95qSF40V1ns1qAVKiIKq1DYWclgNIQEApGZveOkFfzoWDUCAkDdZx0VuDdO-bVqnE1dd9MJN1Krq4fB4QCVZGW80DgqsmNTMqAgAagzHboN1FapOu8r0F-ieLOWrHLCJlQlHhaCY1R32KZJrEKF4xmWEXhUEerURs88gVB1Tlk6e-VsIIcEsCyYY8fjLcMF4CwCoO6TZ0y9Cp1lhZh1aza6wg3fVkpCUeTw1DPBjjtjTTdCTA8vLahC2CDvug8-Vs_-pP9UhCBDFT-pAWd4vqzmgRmRF1qiS9EwXzeTHY7aHwJ4yjmxF8eLPRgvb_ZUo9w4hp7sXTNpHwoxg3B45Jlqdy15N5ww9N1OKqMHBzLeImruzNn1ck=w130-h166-no'></div>
+<div class='book-description'>CCSS Algebra I</div>
+<div class='book-container'><img class='book-select' id='crs-3' src='https://lh3.googleusercontent.com/ia5hYiuVu08XJmEkZiJkeW8ajt962BzYbPKR8cHyK5iZfRqYekBXJkg6lW4mD3y3Pwx9VEaAAEhyJHBsy_6YzHQtSdTIYlWx0bFOY6pijOqwYzPozd31HjNFbZG8C1SoCqvuvpdTNtt8yY3yfDzzGtMy-gjBtP-O8MznV5EzobWAUw6LtxgyfNzVO1Asd1KcoC19yNB2g4evSup-vDUC5SGU0vt80psYLtg5qK5S9Jgc8nWJOxEcMBz1xhFT8qpC7O3zG48EIoIDHUlOkcx74HeVeJomv6_z3xWFF1bJshm8XeT6j8AkEh1qrfTXVGC5AfR03SigTVhy216rorcUyxKhuIQJrVEnnTYJKcwt8mVrn3nPWxIJi8-V6NjtuVUqPk_60bh72Sr7HrVVeL1FW3ZPG1s_ZvOMcps_V8QTCoJwCKPFasu64JBxeFoUqbKvqqe8vbzn-mcBDt-0V0CLzwCLOLtuDx62gS1H6IOvF4lcyTsUWcgNQw_u0clMN5y2ceYNtqstmSmH-M_4ci-pjGctCa5oKy4AI2KxRCiDIb90=w130-h166-no'></div>
+<div class='book-description'>CCSS Course 3</div>
+<div class='book-container'><img class='book-select' id='crs-2' src='https://lh3.googleusercontent.com/cK5YDMmyUs-kkkwpntqw3MLM2RCx5Sdcnv_FC4hm17--fJPC3K-gPC7E2xhnWslZ2-YPCPYWUqdxSglcQ_DNCfzt2Vi3UTgVTWeSj5beN5ux4HHkwrTmsYEdRvBAAuOxkEBwlrqYANWFFOKi7hDy1yNTfaWw6KGqpLuB4aa-6LxNujg5WUkaM0_c0NiHkl8V3hJFZlNhHLLmKHHg0hBM-s2tKlNAXcR5sTNXDjkTS3oy6oD2yIh2prChCzKRa317cu4OqkYS7dKBeQUllR8RE2y_a1tdJIaWeSnb8WbTduC-FI7l_uk8hJ7bhdw4Nk6jcI1N3727U4uXGUR_boc8KThx6MtFwzai3JcjI0-3-1I3ueekj5SlvecUyBDqhWWDgNt76dTaPAR7kGr3kgnu2tCQ-XsNsilJVZxJ2pejKDW8ftPZPh5JxqnVI2xwjffibZ3Oxkrqtm4SBmlQ9D5V_XYXsQ88QO3TdA6D9MH3QjzbFeetPVBNR5YxRbcPIrDkAKlMy8AwRrM6ir0S3W9uUIxEtYMKaFvtjsOZ4KLQ7sno=w130-h166-no'></div>
+<div class='book-description'>CCSS Course 2</div>
+<div class='book-container'><img class='book-select' id='crs-1' src='https://lh3.googleusercontent.com/fhMU0_zCXDy24cSwC0V_gTa-YBqu7Hed1k4utWEoFOU8ZRH-cdE3F8oC2mDKBf9sznlNGqen9_JyWNhPk2rp0pck4wPu7F3iqTY4WHRfdnftwCy07bvK1HbBRmRU2nv_qbX7tOkanmACAOO45pRLy2qBc1VVHLugmKVGzvWi88SpNlWueOblXLHRkV6vipz1VdvT7LlBj1QJOJRIa6-SIkN4NIpD6dDKohLVBRq-rf68nMlIsGZuFWKdUDQyd_YGGF67S33cFYkj0WC3JwOKxGwCBP_g2Dqv5U3QVstMMpipBColiH2ZpLUAVGG0InJ0QWl6lV_peUvfs2BGejoPbS5eyhr-u4pcYiXfJ3_EXz0EQiWPZ2qCuMOjgJlIf1OzEM79JHVhOjnqc201Bdq1z2ortoYaw3hCb7Mkgw64G1gmWg1OXhcjlKhM17PvVG5weUYTDaePbzyHVgSKug2hskfKkTEBzJVLU5rAt9yWPtCGqMJGryPnZHRugLq2LqPDFGucoHm48tOJ8lRM8XCIDEWEssJ2ki4ZVNBi4vK0caL1=w130-h166-no'></div>
+<div class='book-description'>&nbsp;CCSS Course 1</div>
+<div class='book-container'></div>
+</div>
+
+<div id='page-display'></div>
+
+<body>
+<input type='text' id='searchbox' placeholder="Search"></div>
+</body>
+</html>
+<script src='CLIbrary.js' type='text/javascript'></script>
