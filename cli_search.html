@@ -48,6 +48,10 @@ body {
 #watermark {
    display:block;
    position:fixed;
+   top:50%;
+   left:50%;
+   margin-top:-255px;
+   margin-left:-205px;
    z-index:-1;
    opacity:0.2;
 }
@@ -144,7 +148,7 @@ body {
 <div id='page-display'></div>
 
 <body>
-<img id='watermark' src='https://lh3.googleusercontent.com/6nT7WSPwObW_Ypbwxtj_BohW0DpH9ouLiudTFrTOEd-3WC426hiTrEnrGbYUoP8HwmT9_5vQ4AXyMNwPvJ6uAxwuSnMFrTOtrUlcwahXuMmn89r-E3gj58M1AbyLEacujqAA0PaQj-yydrO8mtGUeT1pKcLtNC4Y-RyPW8QX-iJaq9UyeFXV91qybdQiY0J0r45JWW0EToHaG56bfRv-YmHPxQgk2OqbPww2ne1JEXfFsL8wGMpceh0DsHROnyZdjmP7BDzAmxZEVQ8XIOtWV3XjubqS1JKkjCtK6qk9hJMdeVLQOCOhwkVO6ZlbPMFzo7I7b92hLtHM4c-fVrr9KRx1HckbjFWeOVZvibgRqkL9lwsvg-zxqsUCBlgSTsQWOyTbRUfUUGAnQ6oqtyXiacH2g_u5J_6-MAz1m5zMEBW5yVsbBkoQx4KpEJTggMUnlgQTjeA3iKX7UCFd-TDwboFEiWcr-vDLiYwq1CfV5MgOpSmRXvRrDd3_4qjThl_FA5fM8wFGpA6eVMatFGnTCLujtu6MtStrCUoE-tAvjXeX=s402-no'>
+<img id='watermark' src='https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-RHZid2VnRGNfUzg/sunflower.png'>
 <input type='text' id='searchbox' placeholder="Search"></div>
 </body>
 </html>
@@ -169,7 +173,7 @@ $(document).ready(function() {
    $('.book-select').click(function() {
      var id = $(this).attr('id');
      $('#' + id).toggleClass('selected-book');});
-   $('#watermark').offset({top: window.innerHeight / 2 - 255, left: window.innerWidth / 2 - 205});
+   //$('#watermark').offset({top: window.innerHeight / 2 - 255, left: window.innerWidth / 2 - 205});
  });
 
  function slideResults() {
