@@ -16,9 +16,9 @@
 <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<link rel="stylesheet" href="https://github.com/Sineof1/Sineof1.github.io/blob/master/cli_search.css">
+<link rel="stylesheet" href="CLibrary.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script src='https://github.com/Sineof1/Sineof1.github.io/blob/master/justsomemath/jquery.easing.1.3.js'></script>
+<script src='jquery.easing.1.3.js'></script>
 
 <title>CLIbrary Search</title>
 <style>
@@ -120,7 +120,6 @@ body {
   height:240px;
   width:195px;
 }
-
 </style>
 </head>
 
@@ -153,9 +152,9 @@ body {
 </body>
 </html>
 <script>
+
 var click_Drawer = 0;
 var pg_imgs = ['https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-RHZid2VnRGNfUzg/CCAII_Page_0001.jpg', 'https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-RHZid2VnRGNfUzg/CCAII_Page_0003.jpg', 'https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-RHZid2VnRGNfUzg/CCAII_Page_0010.jpg'];
-
 $(document).ready(function() {
    setTimeout(function(){$('#book-menu').show(); $('#book-menu').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 1000);
    $('#book-menu').height(window.innerHeight);
@@ -174,8 +173,10 @@ $(document).ready(function() {
      var id = $(this).attr('id');
      $('#' + id).toggleClass('selected-book');});
  });
-
  function slideResults() {
+   $.get('TXAISE.txt', function(data) {
+     console.log(data[0]);
+   });
     for (var a = 0; a < pg_imgs.length; a++) {
       var i = $('<img>');
       i.attr({'src': pg_imgs[a], 'width': '195px', 'height': '240px'});
@@ -185,6 +186,5 @@ $(document).ready(function() {
       i.appendTo(x);}
       $('#page-display').animate({right: '+=100%'}, 2000, 'easeInOutBack');
       $('#searchbox').unbind('keypress');
-
  }
 </script>
