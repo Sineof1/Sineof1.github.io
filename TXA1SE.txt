@@ -1,0 +1,634 @@
+= Page 1 =
+
+1 
+
+
+
+1 
+Q u a n t i t i e s   a n d  
+R e l a t i o n s h i p s 
+
+1.1   A    P i c t u r e   I s   Wo r t h   a   T h o u s a n d   Wo r d s 
+Understanding Quantities and  
+Their Relationships 
+   . 
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 3 
+
+1.2   A    S o r t   o f   S o r t s 
+Analyzing and Sorting Graphs     .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 17 
+
+1.3   T  h e r e   A r e   M a n y   Wa y s   t o   R e p r e s e n t   F u n c t i o n s 
+Recognizing Algebraic and Graphical  
+Representations of Functions 
+   . 
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 45 
+
+1.4   F  u n c t i o n   F a m i l i e s   f o r   2 0 0 ,   A l e x … 
+Recognizing Functions by Characteristics    .   .  .  .  .  .  .  .  .  .  .  . 63 
+
+Skiers seek  
+soft, freshly fallen  
+snow because it gives a  
+smooth “floating” ride. Of  
+course, the ride up the  
+mountain isn’t nearly as much  
+fun—especially if the ski  
+lifts are on  
+the fritz! 
+
+
+
+= Page 1 =
+= Page 2 =
+
+
+
+2 
+
+
+
+= Page 2 =
+= Page 3 =
+
+A  
+person who weighs 100 pounds on Ear th would weigh only about 40 pounds on 
+the planet Mercur y and about 91 pounds on Venus. In fact, there are only three  
+planets in our solar system where a 100-pound person would weigh more than 100 
+pounds: Jupiter, Satur n, and Neptune. On Satur n, a 100-pound person would weigh 
+about 106 pounds, on Neptune, about 113 pounds, and on Jupiter, about 236 pounds! 
+On Pluto——which is no longer considered a planet—–a 100-pound person would 
+weigh less than 7 pounds.
+But what if a 100-pound person could stand on the sur face of the Sun? If that were 
+possible, then that person would weigh over 2700 pounds! More than a ton! What 
+causes these differences in weight? 
+
+
+
+In this lesson, you will: 
+•	 Write ratios as part-to-part and part-to-
+whole relationships 
+ . 
+  
+•	 Represent ratios using models  . 
+•	 Use models to determine equivalent ratios  .   
+
+3 
+
+5.1 
+
+Le AR n I ng  g o ALS Key Te  RM 
+
+•	 ratio 
+
+A   Tr i p   t o   t h e   M o o n 
+U s i n g   Ta b l e s   t o   R e p r e s e n t    
+e q 
+u i v a l e n t   R a t i o s 
+
+3 
+
+1.1 
+
+3 
+
+A   P i c t u r e   I s   Wo r t h   
+a   T h o u s a n d   Wo r d s 
+U n d e r s t a n d i n g   Q u a n t i t i e s   
+a n d   T h e i r   R e l a t i o n s h i p s 
+
+H 
+ow interesting would a website be without pictures or illustrations? Does an 
+inviting image on a magazine cover make you more likely to buy it? Pictures  
+and images aren’t just for drawing your attention, though. They also bring life to text 
+and stories.
+There is an old proverb that states that a picture is wor th a thousand words. There is 
+a lot of tr uth in this saying—and images have been used by humans for a long time to 
+communicate. Just think: would you rather post a stor y of your adventure on a social 
+media site, or post one picture to tell your thousand-word stor y in a glance? 
+
+In this lesson, you will: 
+•	 Understand quantities and their relationships with 
+each other  . 
+•	 Identify the independent and dependent quantities for 
+a problem situation 
+ . 
+•	 Match a graph with an appropriate problem situation  . 
+•	 Label the independent and dependent quantities on  
+a graph 
+ . 
+  
+•	 Review and analyze graphs  . 
+•	 Describe similarities and differences among graphs  . 
+
+Le AR n I ng  g o ALS Key Te  RMS 
+
+•	 dependent quantity 
+•	 independent quantity 
+
+
+
+
+
+= Page 3 =
+= Page 4 =
+
+
+
+4     Chapter 1    Quantities and Relationships 
+
+ 1 
+
+4     Chapter 1    Quantities and Relationships 
+
+Problem  1   What’s the Dependency? 
+
+Have you ever planned for a party? You may have purchased ice, gone grocery shopping, 
+selected music, made food, or even cleaned in preparation 
+ . 
+ Many times, these tasks depend  
+on another task being done first 
+
+ . 
+
+ For instance, you wouldn’t make food before grocery  
+shopping, now would you?
+Let’s consider the relationship between: 
+
+•   the number of hours worked and the money ear ned  . 
+
+•   your grade on a test and the number of hours you studied  . 
+
+•   the number of people working on a particular job and the time it takes to complete a job  . 
+
+•   the number of games played and the number of points scored  . 
+
+•   the speed of a car and how far the driver pushes down on the gas pedal  . 
+
+Ther 
+
+e are two quantities that are changing in each situation 
+
+ . 
+
+ When one quantity depends on  
+another in a problem situation, it is said to be the dependent quantity 
+
+ . 
+
+ The quantity that the  
+dependent quantity depends upon is called the independent quantity 
+
+ . 
+  
+
+  1. 
+
+  Cir 
+
+cle the independent quantity and underline the dependent quantity in  
+each statement 
+
+ . 
+
+  
+  
+
+  2. 
+
+  Describe how you can determine which quantity is the independent quantity and which 
+quantity is the dependent quantity in any pr 
+
+oblem situation 
+
+ . 
+The independent quantity is the quantity that stands alone and is not changed by  
+
+  
+the other quantities.
+The dependent quantity depends on the independent quantity. The independent 
+quantity causes a change in the dependent quantity. 
+
+600000_A1_TX_Ch01_001-084.indd   4 03/03/14   5:03 PM
+
+= Page 4 =
+= Page 5 =
+
+
+
+1 
+
+1.1   Understanding Quantities and Their Relationships      5 
+
+  3.    Read each scenario and then determine the independent and dependent quantities   .    
+Be sure to include the appropriate units of measure for each quantity  . 
+
+Something’s  Fishy 
+
+Candice is a building manager for the Crowley Enterprise office building  .  One of her  
+r 
+esponsibilities is cleaning the office building’s 200-gallon aquarium 
+ . 
+ For cleaning,   
+she must remove the fish from the aquarium and drain the water  . 
+
+ The water drains at a  
+constant rate of 10 gallons per minute 
+
+ . 
+
+•   independent quantity:
+time (minutes) 
+
+•   dependent quantity:
+water (gallons) 
+
+Smart  Phone,  but  Is  It  a  Smart  Deal? 
+
+You have had your eye on an upgraded smart phone  .  However, you currently do not have  
+the money to pur 
+chase it 
+ . 
+ Your cousin will provide the funding, as long as you pay him  
+interest 
+
+ . 
+
+ He tells you that you only need to pay $1 in interest initially, and then the interest will  
+double each week after that 
+
+ . 
+
+ You consider his offer and wonder: is this r eally a good deal? 
+
+•   independent quantity:
+time (weeks) 
+
+•   dependent quantity:
+interest (dollars) 
+
+Time (minutes) 
+
+Water (gallons) 
+
+x 
+
+y Graph H 
+
+Time (weeks) 
+
+Interest (dollars) 
+
+x 
+
+y Graph B 
+
+600000_A1_TX_Ch01_001-084.indd   5 03/03/14   5:03 PM
+
+= Page 5 =
+= Page 6 =
+
+
+
+6     Chapter 1    Quantities and Relationships 
+
+ 1 
+Can’t  Wait  to  Hit  the  Slopes! 
+
+Andrew loves skiing—he just hates the ski lift ride back up to the top of the hill  .  For some  
+r 
+eason the ski lift has been acting up today  . 
+ His last trip started fine 
+ . 
+ The ski lift traveled up  
+the mountain at a steady rate of about 83 feet per minute 
+
+ . 
+
+ Then all of a sudden it stopped  
+and Andrew sat there waiting for 10 minutes! Finally, the ski lift began to ascend up the 
+mountain to the top 
+
+ . 
+
+•   independent quantity:
+time (minutes) 
+
+•   dependent quantity:
+distance (feet) 
+
+It’s  Magic 
+
+The Amazing Aloysius is practicing one of his tricks  .  As part of this trick, he cuts a rope into  
+many pieces and then magically puts the pieces of r 
+ope back together  . 
+ He begins the trick  
+with a 20-foot rope and then cuts it in half 
+
+ . 
+
+ He then takes one of the halves and cuts that  
+piece in half 
+
+ . 
+
+ He repeats this process until he is left with a piece so small he can no longer  
+cut it 
+
+ . 
+
+ He wants to know how many total cuts he can make and the length of each remaining  
+piece of rope after the total number of cuts 
+
+ . 
+
+•   independent quantity:
+number of cuts 
+
+•   dependent quantity:
+length of each piece of rope (feet) 
+
+Time (minutes) 
+
+Distance (feet) 
+
+x 
+
+y Graph G 
+
+Number of Cuts 
+Length of Each Piece of Rope (feet) x 
+
+y Graph D 
+
+600000_A1_TX_Ch01_001-084.indd   6 03/03/14   5:03 PM
+
+= Page 6 =
+= Page 7 =
+
+
+
+1 
+
+1.1   Understanding Quantities and Their Relationships      7 
+
+Baton  Twirling 
+
+Jill is a drum major for the Altadena High School marching band  .  She has been practicing   
+for the band’ 
+s halftime performance 
+ . 
+ For the finale, Jill tosses her baton in the air so that it  
+reaches a maximum height of 22 feet 
+
+ . 
+
+ This gives her 2 seconds to twirl around twice and  
+catch the baton when it comes back down 
+
+ . 
+
+•   independent quantity:
+time (seconds) 
+
+•   dependent quantity:
+height of baton (feet) 
+
+Music  Club 
+
+Jermaine loves music  .  He can lip sync almost any song at a moment’s notice  .  He joined  
+Songs When I W 
+ant Them, an online music store 
+ . 
+ By becoming a member, Jermaine can  
+purchase just about any song he wants 
+
+ . 
+
+ Jermaine pays $1 per song 
+
+ . 
+
+•   independent quantity:
+number of songs 
+
+•   dependent quantity:
+cost (dollars) 
+
+Time (seconds) 
+
+Height of Baton (feet) 
+
+x 
+
+y Graph F 
+
+Number of Songs 
+
+Cost (dollars) 
+
+x 
+
+y Graph A 
+
+600000_A1_TX_Ch01_001-084.indd   7 03/03/14   5:03 PM
+
+= Page 7 =
+= Page 8 =
+
+
+
+8     Chapter 1    Quantities and Relationships 
+
+ 1 
+A  Trip  to  School 
+
+On Monday mor ning, Myra began her 1  . 3-mile walk to school  .  After a few minutes of  
+walking, she walked right into a spider’ 
+s web—and Myra hates spiders! She began running  
+until she ran into her friend Tanisha 
+
+ . 
+
+ She stopped and told Tanisha of her adventurous  
+mor ning and the icky spider’s web! Then they walked the rest of the way to school 
+
+ . 
+
+•   independent quantity:
+time (minutes) 
+
+•   dependent quantity:
+distance traveled (miles) 
+
+Jelly  Bean  Challenge 
+
+Mr  .   Wright judges the annual Jelly Bean Challenge at the summer fair  .   Every year, he  
+encourages the citizens in his town to guess the number of jelly beans in a jar  . 
+ He keeps   
+a record of everyone’s guesses and the number of jelly beans that each person’s guess  
+was off by  . 
+
+•   independent quantity:
+number of jelly beans guessed 
+
+•   dependent quantity:
+number of jelly beans the  
+guess is off by 
+  
+
+Time (minutes) 
+
+Distance Traveled (miles) 
+
+x 
+
+y Graph E 
+
+Number of Jelly Beans Guessed 
+
+Number of Jelly Beans the 
+
+Guess Is off By 
+
+x 
+
+y Graph C 
+
+600000_A1_TX_Ch01_001-084.indd   8 03/03/14   5:03 PM
+
+= Page 8 =
+= Page 9 =
+
+
+
+1 
+
+1.1   Understanding Quantities and Their Relationships      9 
+
+Problem  2   Matching  g raphs and Scenarios 
+
+While a person can describe the monthly cost to operate a business, or talk about a marathon 
+pace a runner ran to break a world record, graphs on a coordinate plane enable people to  see  
+the data  .   
+
+Graphs relay information about data in a visual way  .   
+
+If you read almost any  
+newspaper, especially in the business section, you will probably encounter graphs  . 
+
+  
+Points on a coordinate plane that are or are not connected with a line or smooth curve model, 
+or represent, a relationship in a problem situation  .   
+
+In some problem situations, all the points  
+on the coordinate plane will make sense  .   
+
+In other problem situations, not all the points will  
+make sense  .   
+
+So, when you model a relationship on a coordinate plane, it is up to you to  
+consider the situation and interpret the meaning of the data values shown  . 
+  1. 
+
+  Cut out each graph on the following pages 
+
+ . 
+
+ Then, analyze each graph, match it to a  
+scenario, and tape it next to the scenario it matches 
+
+ . 
+
+ For each graph, label the  x - and  
+y -axes with the appropriate quantity and unit of measure  .  T 
+
+hen, write the title of the  
+problem situation on each graph  . 
+  
+
+  
+    
+What strategies  
+will you use to match  
+each graph with one of the  
+eight scenarios? 
+
+600000_A1_TX_Ch01_001-084.indd   9 03/03/14   5:03 PM
+
+= Page 9 =
+= Page 10 =
+
+
+
+10     Chapter 1    Quantities and Relationships 
+
+ 1 
+
+600000_A1_TX_Ch01_001-084.indd   10 03/03/14   5:03 PM
+
+= Page 10 =
+= Page 11 =
+
+
+
+1 
+
+1.1   Understanding Quantities and Their Relationships      11 
+
+Number of Songs 
+
+Cost (dollars) 
+
+x 
+
+y 
+Graph A 
+Music Club 
+
+    
+
+Time (weeks) 
+
+Interest (dollars) 
+
+x 
+
+y 
+
+Graph B 
+Smart Phone, but Is It a Smart Deal 
+
+  
+
+Number of Jelly Beans Guessed 
+
+Number of Jelly Beans the 
+Guess Is off By 
+x 
+
+y 
+
+Graph C 
+Jelly Bean Challenge 
+
+    
+
+Number of Cuts 
+Length of Each Piece of Rope (feet) x 
+
+y 
+Graph D 
+It’s Magic 
+
+600000_A1_TX_Ch01_001-084.indd   11 03/03/14   5:03 PM
+
+= Page 11 =
+= Page 12 =
+
+
+
+12     Chapter 1    Quantities and Relationships 
+
+ 1 
+
+600000_A1_TX_Ch01_001-084.indd   12 03/03/14   5:03 PM
