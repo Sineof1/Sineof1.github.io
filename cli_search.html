@@ -155,8 +155,28 @@ body {
 
 var click_Drawer = 0;
 var pg_imgs = ['https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-RHZid2VnRGNfUzg/CCAII_Page_0001.jpg', 'https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-RHZid2VnRGNfUzg/CCAII_Page_0003.jpg', 'https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-RHZid2VnRGNfUzg/CCAII_Page_0010.jpg'];
+
+var click_Drawer = 0;
+var pg_imgs = ['https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-
+
+RHZid2VnRGNfUzg/CCAII_Page_0001.jpg', 
+
+'https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-
+
+RHZid2VnRGNfUzg/CCAII_Page_0003.jpg', 
+
+'https://40dc6dbaceb028f75a545cdf4808257850d5e965.googledrive.com/host/0B9y9PCgl63o-
+
+RHZid2VnRGNfUzg/CCAII_Page_0010.jpg'];
 $(document).ready(function() {
-   setTimeout(function(){$('#book-menu').show(); $('#book-menu').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 1000);
+
+   $.get('TXAISE.txt', function(data) {
+     console.log(data[0]);
+   });
+
+   setTimeout(function(){$('#book-menu').show(); $('#book-menu').animate({right: '+=40px'}, 800, 
+
+'easeInOutBack');}, 1000);
    $('#book-menu').height(window.innerHeight);
    $('#tab-pull').click(function() {
       click_Drawer += 1;
@@ -174,9 +194,6 @@ $(document).ready(function() {
      $('#' + id).toggleClass('selected-book');});
  });
  function slideResults() {
-   $.get('TXAISE.txt', function(data) {
-     console.log(data[0]);
-   });
     for (var a = 0; a < pg_imgs.length; a++) {
       var i = $('<img>');
       i.attr({'src': pg_imgs[a], 'width': '195px', 'height': '240px'});
