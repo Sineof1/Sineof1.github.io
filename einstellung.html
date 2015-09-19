@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Einstellung</title>
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content='Einstellung'>
+<meta name = 'author' content = 'Joshua D. Fisher'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<style>
+#jug_canvas {
+   position:relative;
+   width:500px;
+   height:250px;
+   background:rgb(51, 51, 51);
+   margin:50px auto 20px auto;
+   padding-top:20px;
+   overflow:hidden;
+   border-radius:20px;
+   box-shadow:0px 0px 30px #cccccc;
+}
+.jug {
+  position:absolute;
+  bottom:20px;
+  z-index:2;
+  opacity:0.8;
+}
+.amount {
+  position:absolute;
+  bottom:3px;
+  text-align:center;
+  width:125px;
+  color:white;
+  font-size:20px;
+}
+.label {
+  position:absolute;
+  bottom:185px;
+  text-align:center;
+  width:125px;
+  color:white;
+  font-size:20px;
+}
+.water-level {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  bottom:32px;
+  background-color:blue;
+  width:86px;
+  z-index:1;
+  border-bottom-right-radius:15px;
+  border-bottom-left-radius:15px;
+}
+#control-panel {
+  position:relative;
+  width:500px;
+  height:80px;
+  margin:0px auto 20px auto;
+}
+button {
+   position:absolute;
+   outline: 0 none;
+   width:80px;
+   height:40px;
+   box-shadow: 1px 1px 1px #cccccc;
+   border:0px;
+   background:#ffffff;
+   font-size:1em;
+   font-family: 'Josefin Sans', sans-serif;
+   border-radius:5px;
+   display: inline-block;
+   font-variant:small-caps;
+   padding: 8px 15px;
+   text-decoration: none;
+   font-weight: bold;
+   color: #069;
+   margin-left:10px;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div id='jug_canvas'>
+
+<div class='water-level' id='WLA' style='left:45px;height:0px;'></div>
+<div class='water-level' id='WLB' style='left:207.5px;height:0px;'></div>
+<div class='water-level' id='WLC' style='right:45px;height:0px;'></div>
+
+<div class='label' id='a-label' style='left:25px;'>A: 14</div>
+<div class='label' id='b-label' style='left:187.5px;'>B: 163</div>
+<div class='label' id='c-label' style='right:25px;'>C: 25</div>
+
+<div class='label' id='target-label' style='top:20px;left:190.5px;'>Target: 99</div>
+
+<div class='amount' id='amountA' style='left:25px;'>0</div>
+<div class='amount' id='amountB' style='left:187.5px;'>0</div>
+<div class='amount' id='amountC' style='right:25px;'>0</div>
+</div>
+
+<div id='control-panel'>
+<button id='fillButA' onclick='fillJug("A")' style='left:38.5px;top:5px;'>fill</button>
+<button id='fillButB' onclick='fillJug("B")' style='left:200px;top:5px;'>fill</button>
+<button id='fillButC' onclick='fillJug("C")' style='left:362px;top:5px;'>fill</button>
+
+<button onclick='pourJug("A", "B")' style='left:38.5px;top:55px;'>pour b</button>
+<button onclick='pourJug("A", "C")' style='left:38.5px;top:105px;'>pour c</button>
+
+<button onclick='pourJug("B", "A")' style='left:200px;top:55px;'>pour a</button>
+<button onclick='pourJug("B", "C")' style='left:200px;top:105px;'>pour c</button>
+
+<button onclick='pourJug("C", "A")' style='left:362px;top:55px;'>pour a</button>
+<button onclick='pourJug("C", "B")' style='left:362px;top:105px;'>pour b</button>
+
+<button onclick='emptyJug("A")' style='left:38.5px;top:155px;'>empty</button>
+<button onclick='emptyJug("B")' style='left:200px;top:155px;'>empty</button>
+<button onclick='emptyJug("C")' style='left:362px;top:155px;'>empty</button>
+
+<audio id='ding' source src='https://965c2f10f15d2a70d52c2be92df835885becba89.googledrive.com/host/0B9y9PCgl63o-fmJPMnZQWFZ5anRXQTFEdWEzUGR1dVRuQmtNeE1rOV9yQVNNdF9qM0RnNmM/ding.mp3'></audio>
+</div>
+</body>
+
+<script>
+var game = 1;
+var jugAmts = {1: {'A': [14, 0], 'B': [163, 0], 'C': [25, 0]}, 2: {'A': [18, 0], 'B': [43, 0], 'C': [10, 0]},
+               3: {'A': [9, 0], 'B': [42, 0], 'C': [6, 0]}, 4: {'A': [20, 0], 'B': [59, 0], 'C': [4, 0]},
+               5: {'A': [23, 0], 'B': [49, 0], 'C': [3, 0]}, 6: {'A': [15, 0], 'B': [39, 0], 'C': [3, 0]},
+               7: {'A': [28, 0], 'B': [76, 0], 'C': [3, 0]}, 8: {'A': [18, 0], 'B': [48, 0], 'C': [4, 0]},
+               9: {'A': [14, 0], 'B': [36, 0], 'C': [8, 0]}};
+function fillJug(jug) {
+  var remainder = jugAmts[game][jug][0] - jugAmts[game][jug][1];
+  $('#WL' + jug).animate({height:'+=' + (remainder / 1.1) + 'px'}, 1000);
+  $('#amount' + jug).text(jugAmts[game][jug][0]);
+  jugAmts[game][jug][1] = jugAmts[game][jug][0];
+  checkGame();
+}
+function pourJug(_from, _to) {
+  var start = jugAmts[game][_from][1];
+  var end = jugAmts[game][_to][0] - jugAmts[game][_to][1];
+  if (start < end) end = start;
+  $('#amount' + _from).text(start - end);
+  $('#amount' + _to).text(jugAmts[game][_to][1] + end);
+
+  $('#WL' + _from).animate({height:'-=' + (end / 1.1) + 'px'}, 1000);
+  $('#WL' + _to).animate({height:'+=' + (end / 1.1) + 'px'}, 1000);
+  jugAmts[game][_from][1] -= end;
+  jugAmts[game][_to][1] += end;
+  checkGame();
+}
+function emptyJug(jug) {
+  $('#WL' + jug).animate({height:'-=' + (jugAmts[game][jug][1] / 1.1) + 'px'}, 1000);
+  jugAmts[game][jug][1] = 0;
+  $('#amount' + jug).text(jugAmts[game][jug][1]);
+}
+function refresh() {
+  game++;
+  $('.amount').text('0');
+  $('#a-label').text('A: ' + jugAmts[game]['A'][0]);
+  $('#b-label').text('B: ' + jugAmts[game]['B'][0]);
+  $('#c-label').text('C: ' + jugAmts[game]['C'][0]);
+  $('.water-level').css({'height': '0px'});
+}
+function checkGame() {
+  switch (game) {
+    case 1:
+    if ($('#amountA').text() === '99' || $('#amountB').text() === '99' || $('#amountC').text() === '99'){
+      $('#ding')[0].play(); setTimeout(function(){$('#target-label').text('Target: 5'); refresh();}, 2000);}
+    break;
+
+    case 2:
+    if ($('#amountA').text() === '5' || $('#amountB').text() === '5' || $('#amountC').text() === '5'){
+      $('#ding')[0].play(); setTimeout(function(){$('#target-label').text('Target: 21'); refresh();}, 2000);}
+    break;
+
+    case 3:
+    if ($('#amountA').text() === '21' || $('#amountB').text() === '21' || $('#amountC').text() === '21'){
+      $('#ding')[0].play(); setTimeout(function(){$('#target-label').text('Target: 31'); refresh();}, 2000);}
+    break;
+
+    case 4:
+    if ($('#amountA').text() === '31' || $('#amountB').text() === '31' || $('#amountC').text() === '31'){
+      $('#ding')[0].play(); setTimeout(function(){$('#target-label').text('Target: 20'); refresh();}, 2000);}
+    break;
+
+    case 5:
+    if ($('#amountA').text() === '20' || $('#amountB').text() === '20' || $('#amountC').text() === '20'){
+      $('#ding')[0].play(); setTimeout(function(){$('#target-label').text('Target: 18'); refresh();}, 2000);}
+    break;
+
+    case 6:
+    if ($('#amountA').text() === '18' || $('#amountB').text() === '18' || $('#amountC').text() === '18'){
+      $('#ding')[0].play(); setTimeout(function(){$('#target-label').text('Target: 25'); refresh();}, 2000);}
+    break;
+
+    case 7:
+    if ($('#amountA').text() === '25' || $('#amountB').text() === '25' || $('#amountC').text() === '25'){
+      $('#ding')[0].play(); setTimeout(function(){$('#target-label').text('Target: 22'); refresh();}, 2000);}
+    break;
+
+    case 8:
+    if ($('#amountA').text() === '22' || $('#amountB').text() === '22' || $('#amountC').text() === '22'){
+      $('#ding')[0].play(); setTimeout(function(){$('#target-label').text('Target: 6'); refresh();}, 2000);}
+    break;
+
+    case 9:
+    if ($('#amountA').text() === '6' || $('#amountB').text() === '6' || $('#amountC').text() === '6'){
+      $('#ding')[0].play();}
+    break;
+  }
+}
+</script>
+</html>
