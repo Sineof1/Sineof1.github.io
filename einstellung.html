@@ -210,7 +210,8 @@ function checkGame() {
 
     case 9:
     if ($('#amountA').text() === '6' || $('#amountB').text() === '6' || $('#amountC').text() === '6'){
-      $('#ding')[0].play();}
+      $('#ding')[0].play();
+      $('button').prop('disabled', 'disabled');}
     break;
   }
 }
