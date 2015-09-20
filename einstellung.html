@@ -60,7 +60,7 @@
   height:80px;
   margin:0px auto 20px auto;
 }
-button {
+.ein-button {
    position:absolute;
    outline: 0 none;
    width:80px;
@@ -79,7 +79,7 @@ button {
    color: #069;
    margin-left:10px;
 }
-button:hover {
+.ein-button:hover {
    background-color:#f5f5f5;
    cursor:pointer;
 }
@@ -115,22 +115,22 @@ button:hover {
 </div>
 
 <div id='control-panel'>
-<button id='fillButA' onclick='fillJug("A")' style='left:38.5px;top:5px;'>fill</button>
-<button id='fillButB' onclick='fillJug("B")' style='left:200px;top:5px;'>fill</button>
-<button id='fillButC' onclick='fillJug("C")' style='left:362px;top:5px;'>fill</button>
+<button class='ein-button' id='fillButA' onclick='fillJug("A")' style='left:38.5px;top:5px;'>fill</button>
+<button class='ein-button' id='fillButB' onclick='fillJug("B")' style='left:200px;top:5px;'>fill</button>
+<button class='ein-button' id='fillButC' onclick='fillJug("C")' style='left:362px;top:5px;'>fill</button>
 
-<button onclick='pourJug("A", "B")' style='left:38.5px;top:55px;'>pour b</button>
-<button onclick='pourJug("A", "C")' style='left:38.5px;top:105px;'>pour c</button>
+<button class='ein-button' onclick='pourJug("A", "B")' style='left:38.5px;top:55px;'>pour b</button>
+<button class='ein-button' onclick='pourJug("A", "C")' style='left:38.5px;top:105px;'>pour c</button>
 
-<button onclick='pourJug("B", "A")' style='left:200px;top:55px;'>pour a</button>
-<button onclick='pourJug("B", "C")' style='left:200px;top:105px;'>pour c</button>
+<button class='ein-button' onclick='pourJug("B", "A")' style='left:200px;top:55px;'>pour a</button>
+<button class='ein-button' onclick='pourJug("B", "C")' style='left:200px;top:105px;'>pour c</button>
 
-<button onclick='pourJug("C", "A")' style='left:362px;top:55px;'>pour a</button>
-<button onclick='pourJug("C", "B")' style='left:362px;top:105px;'>pour b</button>
+<button class='ein-button' onclick='pourJug("C", "A")' style='left:362px;top:55px;'>pour a</button>
+<button class='ein-button' onclick='pourJug("C", "B")' style='left:362px;top:105px;'>pour b</button>
 
-<button onclick='emptyJug("A")' style='left:38.5px;top:155px;'>empty</button>
-<button onclick='emptyJug("B")' style='left:200px;top:155px;'>empty</button>
-<button onclick='emptyJug("C")' style='left:362px;top:155px;'>empty</button>
+<button class='ein-button' onclick='emptyJug("A")' style='left:38.5px;top:155px;'>empty</button>
+<button class='ein-button' onclick='emptyJug("B")' style='left:200px;top:155px;'>empty</button>
+<button class='ein-button' onclick='emptyJug("C")' style='left:362px;top:155px;'>empty</button>
 
 <audio id='ding' source src='https://965c2f10f15d2a70d52c2be92df835885becba89.googledrive.com/host/0B9y9PCgl63o-fmJPMnZQWFZ5anRXQTFEdWEzUGR1dVRuQmtNeE1rOV9yQVNNdF9qM0RnNmM/ding.mp3'></audio>
 </div>
