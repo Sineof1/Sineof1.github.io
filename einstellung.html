@@ -83,6 +83,12 @@ button:hover {
    background-color:#f5f5f5;
    cursor:pointer;
 }
+.fill-line {
+  position:absolute;
+  border-bottom:1px solid white;
+  width:86px;
+  bottom:32px;
+}
 </style>
 </head>
 
@@ -102,6 +108,10 @@ button:hover {
 <div class='amount' id='amountA' style='left:25px;'>0</div>
 <div class='amount' id='amountB' style='left:187.5px;'>0</div>
 <div class='amount' id='amountC' style='right:25px;'>0</div>
+
+<div class='fill-line' id='fillA' style='left:45px;bottom:45px;'></div>
+<div class='fill-line' id='fillB' style='left:207.5px;bottom:181px;'></div>
+<div class='fill-line' id='fillC' style='right:45px;bottom:54.73px;'></div>
 </div>
 
 <div id='control-panel'>
@@ -165,6 +175,9 @@ function refresh() {
   $('#b-label').text('B: ' + jugAmts[game]['B'][0]);
   $('#c-label').text('C: ' + jugAmts[game]['C'][0]);
   $('.water-level').css({'height': '0px'});
+  $('#fillA').css({'bottom': jugAmts[game]['A'][0] / 1.1 + 32});
+  $('#fillB').css({'bottom': jugAmts[game]['B'][0] / 1.1 + 32});
+  $('#fillC').css({'bottom': jugAmts[game]['C'][0] / 1.1 + 32});
 }
 function checkGame() {
   switch (game) {
