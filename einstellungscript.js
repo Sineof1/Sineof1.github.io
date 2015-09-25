@@ -25,7 +25,7 @@ function pourJug(_from, _to) {
   checkGame();
 }
 function emptyJug(jug) {
-  $('#WL' + jug).animate({height:'-=' + (jugAmts[game][jug][1] / 1.1) + 'px'}, 1000);
+  $('#WL' + jug).animate({height:'-=' + (0.5 + jugAmts[game][jug][1] / 1.1) + 'px'}, 1000);
   jugAmts[game][jug][1] = 0;
   $('#amount' + jug).text(jugAmts[game][jug][1]);
 }
