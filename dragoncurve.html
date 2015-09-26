@@ -101,7 +101,6 @@ function animate() {
   reqAnimFrame(animate);
 }
 function draw(x, y) {
-  context.strokeStyle = 'red';
   context.beginPath();
   context.moveTo(last_move.x, last_move.y);
   context.lineTo(last_move.x + x, last_move.y + y);
