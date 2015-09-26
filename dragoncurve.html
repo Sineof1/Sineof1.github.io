@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html {
+  background-color:black;
+}
+#canvas {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  width:1000px;
+  height:600px;
+}
+</style>
+</head>
+
+<body>
+<canvas id='canvas' width='1000px' height='600px'>Canvas not supported.</canvas>
+<img src='https://lh3.googleusercontent.com/3xWFi7dxLlOmdocExad-6x1Yl-L8jnTctq0Pnclv_PgIhFbJA6HaAEvfepTqc7B9-rNn8bMP4k4jsltZ0928RgVqDyA5skDQiH_fgkWFYEGhu-DmtqgcvaABbyMySNWTE0thAP1BYI7RPpgi1UnWU4L2F7b4YiijTLIpo63aLGGdgA4gXKoBQBgedlQxKaFEe9VEgHoK3Vrxe0diWE1Y4lxS7AMB3lQe6dGwuhu1HTH3yy6JMEiXc1974p-ijw5I2ZPlCh6tZ343LuA_N-d2UlrjVyRqpNT3sIC1WCs8h96WRB3LcThGfB1MrBEYn-h4cdXwN_f7EFkL9k73NmYgfUEnZsfAA8Cnp8NgeDDErG-wvBvB4tO5v6y0VGCG6pLaLrgNOlJ3uLFcwyi1OtUhcHhlXaIyQfxnijp9ZZtDt8pVzAoa7R0Z8phxbEJMb32P5Nqk30Sax79YDVcmmOwOn6qeakm4Wpk4_PJWLozABfYW9b5c793gJ9DrNc2msXeGjKYLnxbDkNcZWbnxDfcX9cFEV2NN7HME-yOxrEBSw0k0=w420-h499-no' style='position:fixed;visibility:hidden;'
+</body>
+
+<script>
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var reqAnimFrame = window.requestAnimationFrame;
+
+var move_list = ['R'];
+var move_index = 0;
+for (var p = 1; p <= 10; p++) {
+  var reverse_list = [];
+  for (var d = move_list.length - 1; d >= 0; d -= 1) reverse_list.push(move_list[d]);
+  for (var e = 0; e < reverse_list.length; e++) {
+  if (reverse_list[e] === 'R') reverse_list[e] = 'L';
+  else reverse_list[e] = 'R';}
+  move_list.push('R');
+  for (var f = 0; f < reverse_list.length; f++) move_list.push(reverse_list[f]);
+}
+var last_move = {turn: 'up', x: canvas.width / 2, y: 200};
+
+function animate() {
+  var newX = 0;
+  var newY = 0;
+  if (move_list[move_index] === 'R' && last_move.turn === 'up') {
+    newX += 5;
+    newY += 0;
+    last_move.turn = 'right';
+  }
+  else if (move_list[move_index] === 'R' && last_move.turn === 'right') {
+    newX += 0;
+    newY += 5;
+    last_move.turn = 'down';
+  }
+  else if (move_list[move_index] === 'R' && last_move.turn === 'left') {
+    newX += 0;
+    newY -= 5;
+    last_move.turn = 'up';
+  }
+  else if (move_list[move_index] === 'R' && last_move.turn === 'down') {
+    newX -= 5;
+    newY += 0;
+    last_move.turn = 'left';
+  }
+  else if (move_list[move_index] === 'L' && last_move.turn === 'up') {
+    newX -= 5;
+    newY += 0;
+    last_move.turn = 'left';
+  }
+  else if (move_list[move_index] === 'L' && last_move.turn === 'right') {
+    newX += 0;
+    newY -= 5;
+    last_move.turn = 'up';
+  }
+  else if (move_list[move_index] === 'L' && last_move.turn === 'left') {
+    newX += 0;
+    newY += 5;
+    last_move.turn = 'down';
+  }
+  else if (move_list[move_index] === 'L' && last_move.turn === 'down') {
+    newX += 5;
+    newY += 0;
+    last_move.turn = 'right';
+  }
+  draw(newX, newY);
+  reqAnimFrame(animate);
+}
+function draw(x, y) {
+  context.strokeStyle = 'red';
+  context.beginPath();
+  context.moveTo(last_move.x, last_move.y);
+  context.lineTo(last_move.x + x, last_move.y + y);
+  context.stroke();
+  last_move.x += x;
+  last_move.y += y;
+  move_index += 1;
+}
+animate();
+</script>
+</html>
