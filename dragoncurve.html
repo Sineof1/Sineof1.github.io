@@ -50,41 +50,49 @@ function animate() {
   var newX = 0;
   var newY = 0;
   if (move_list[move_index] === 'R' && last_move.turn === 'up') {
+    context.strokeStyle = 'yellow';
     newX += 5;
     newY += 0;
     last_move.turn = 'right';
   }
   else if (move_list[move_index] === 'R' && last_move.turn === 'right') {
+    context.strokeStyle = 'yellow';
     newX += 0;
     newY += 5;
     last_move.turn = 'down';
   }
   else if (move_list[move_index] === 'R' && last_move.turn === 'left') {
+    context.strokeStyle = 'yellow';
     newX += 0;
     newY -= 5;
     last_move.turn = 'up';
   }
   else if (move_list[move_index] === 'R' && last_move.turn === 'down') {
+    context.strokeStyle = 'yellow';
     newX -= 5;
     newY += 0;
     last_move.turn = 'left';
   }
   else if (move_list[move_index] === 'L' && last_move.turn === 'up') {
+    context.strokeStyle = 'white';
     newX -= 5;
     newY += 0;
     last_move.turn = 'left';
   }
   else if (move_list[move_index] === 'L' && last_move.turn === 'right') {
+    context.strokeStyle = 'white';
     newX += 0;
     newY -= 5;
     last_move.turn = 'up';
   }
   else if (move_list[move_index] === 'L' && last_move.turn === 'left') {
+    context.strokeStyle = 'white';
     newX += 0;
     newY += 5;
     last_move.turn = 'down';
   }
   else if (move_list[move_index] === 'L' && last_move.turn === 'down') {
+    context.strokeStyle = 'white';
     newX += 5;
     newY += 0;
     last_move.turn = 'right';
