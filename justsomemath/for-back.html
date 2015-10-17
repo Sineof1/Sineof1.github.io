@@ -1,0 +1,48 @@
+<a href='http://sineof1.github.io/justsomemath/forward-backward.html' style='color:black;'><div class='post-title'>The Forward-Backward Proof Method</div></a>
+<div class='post-body'>
+
+<p>I was able recently to apply a mini-technique called the Forward-Backward Method from <a href='http://goo.gl/nlatrB' target='_blank'>this book</a> to complete a geometry proof (presented as a challenge in <a href='http://goo.gl/LUrrGc' target='_blank'>this book</a>), and so I thought I'd share some observations about this method along with my proof.</p>
+<img src='https://lh3.googleusercontent.com/bqL8xP7NQvYC7WWELXVMzv8WDHsmj2rIsYKNx3dfpSznAZtiXnVyUlMPN1ch8jJGs-EfvR7ZYgUD4mCZ2pS7_u5aH-BLmU6twHHbU-QMz5mIKihsiXZhnubYeDW0IIdWyddlf9F2VowJgfLtsv_IgOeRrGNMPCIMEHG3LVRkjpxVI2nt8qd76FWjes_OoMi95cB25EnjKaeC8l3oXwSEPbkcUoIiXKY7MIFP7VSrXzqgrKYixdPuFKtPfpeDnIyue1jVEifPwvFvLKo-nHedz4-QX5T4DPcdRdLdp52eORZ93UsNTGscc6i8tpcleiiWlA8Njg8psKhYuMaCOpBJ4BI5eUohMO66uKE2rV_2HY24WWkGk_5fowjFLgs2So2mOuyBjH6RRzHcwX5GGTVXdlxTj_t9wVzUDdYUd_BsWh16v9w9G2NBW1OY1NYFyHkvSFTABakM1X1WEFbNfJLIujOLKT0nwb6C8Lbcvn0tX6xP0s5KisvLiCEG9mOBVjlXnoephl4gJ97fELgRfclA0uZJXQVNeRCUuh6vHrot-ZKQ=w116-h165-no' style='float:right;margin:0px 0px 15px 20px;'>
+<p>As always, go try it out yourself before reading on. Here's the challenge:</p>
+
+<blockquote>\(\small\mathtt{\overline{AB}}\) and \(\small\mathtt{\overline{AC}}\) are tangent to circle O at B and C, respectively, and \(\small\mathtt{\overline{CE}}\) is perpendicular to diameter \(\small\mathtt{\overline{BD}}\). Prove \(\small\mathtt{(BE)(BO) = (AB)(CE)}\).</blockquote>
+
+<p class='h2-sec'>Ask a Key Question</p>
+
+<p>In the Forward-Backward Method, you attack a proof in two directions: from the conclusion backward and from knowledge, definitions, and givens forward. The advice I have already found most helpful&mdash;and I would expect others to feel the same&mdash;is about the backward process, so I'll start there.</p>
+
+<p>To start backward, ask a <strong>key question</strong> about the conclusion you are trying to prove. There are many ways to ask this question, depending on the content, and some key questions may be completely unhelpful. But, critically, the key question is abstract and is of the form, "How can I conclude that the statement is true?"</p>
+
+<p>For our purposes, rather than ask "How can I show that (BE)(BO) = (AB)(CE)?"&mdash;which is just restating the challenge verbatim&mdash;we can ask, "How can I show that two products are equal?" Or perhaps, "How can I show that the product of two numbers is equal to the product of two other numbers?" The form of the key question that gave me a place to start was, "How can I show that \(\small\mathtt{ab = cd}\)?"</p>
+
+<p class='h2-sec'>Then Answer the Question and Repeat</p>
+
+<p>The next step in the backward process is to answer the key question. In my case, I can answer with, "I can show that \(\small\small\mathtt{ab = cd}\) by showing that \(\mathtt{\frac{a}{c} = \frac{d}{b}}\)." I can also answer with, "I can show that \(\small\mathtt{ab = cd}\) by showing that \(\mathtt{\frac{a}{d} = \frac{c}{b}}\)." Using the information from the diagram, my answer could be "I can show that \(\small\mathtt{(BE)(BO) = (AB)(CE)}\) by showing that \(\mathtt{\frac{BE}{CE} = \frac{BO}{AB}}\)." This answer immediately suggests another question-answer pair: "How can I show that side length ratios are equivalent?" "By showing that they are corresponding sides in similar triangles!"</p>
+
+<p>Pretty cool, right? We can infer a new goal: to show that \(\small\mathtt{\Delta ABO \sim \Delta BEC}\). This goal has more meat on it; it suggests more ways to move than does the goal of showing that side length products are equal. So, I'll draw the appropriate segments below and jump to the forward-moving part of completing this proof.</p>
+
+<p class='h2-sec'>Going Forward: Knowledge Is Good</p>
+<img src='https://lh3.googleusercontent.com/8RcEt2ncgj-qeBqq97WGb-VRmPsxVoBAp9Fk23HNlUx3t-FL8hYms8psp5mnfTEnknb3j38XSQAli2QKbz1AfiwVpkRSgqOAgpqbm2DklRv1od4GdSR7Vy5Ksd6XlyP41_6WNO_Vm1PF450_MwJXoeSRisLKpxEmmgOFVcZB3s471IqZzhLJew0Wsi6CNz6C-BIfBHFwDlyn90ECuXU9qLRml0kS3YhXNTqC9hjwaeJ92AZTCr69Hqoez1wElqyhvFvidLBrAW4swAcxSm2lPX0PCiulTOifDySVI8YbHZVjO1XTpANjwCFj14KjmPhwGG-GH5gZdTQSn7TIKZXshQEadkPj85r8CKzLbozClJg21SCru5IzfHC-IN0hF4UxLwYez2LV-l7RUpaHq55sZfHRW4XHKV4V_RDHVZNhe3fIigpsu4p5wAiGtvLflEExmWxtb-l_3ovoUvAdQUl7qi7uzFjNLm2uqYkhi_T4EhKv1cHexll8kBjDjmLgzcdtzLoxIafYcFTxM-pwZtryJX3WvCxemQmMXAZmGCa2m2qE=w116-h157-no' width='116px' height='165px' style='float:left;margin:20px 20px 0px 0px;'>
+<p>Knowing stuff is good in the backward process&mdash;thinking of the equation ab = cd cued my memory of proportions and then of similarity&mdash;but knowledge really helps in the forward process, as does logic of course. During the forward process, we are trying to make our way to where we left off in the backward process.</p><br>
+
+<blockquote>The forward process involves deriving from the statement A, which you assume is true, some other statement, A1, that you know is true as a result of A being true. It should be emphasized that the statements derived from A are not haphazard. Rather, they are directed toward linking up with the last statement obtained in the backward process.</blockquote>
+
+<p>I remembered, when doing the proof, that tangent segments to a common point outside a circle are congruent. This is called the <a href='http://www.regentsprep.org/regents/math/geometry/gp14/TanCircles.htm' target='_blank'>Tangent Segment Theorem</a>. So, \(\small\mathtt{\overline{AB} \cong \overline{AC}}\). And \(\small\mathtt{\overline{OB}}\) and \(\small\mathtt{\overline{OC}}\) are both radii of the circle, so they are congruent. This gives us congruent triangles (by <a href='http://www.mathopenref.com/congruentsss.html' target='_blank'>SSS</a>) \(\small\mathtt{ABO}\) and \(\small\mathtt{ACO}\). I also remembered that tangent segments are perpendicular to intersecting radii, so \(\small\mathtt{\measuredangle{ABO}}\) and \(\small\mathtt{\measuredangle{BEC}}\) are right angles.</p>
+
+<p>Let's go back to the backward process for a moment. (Another advantage of this method is that it gives you a way to change up your process a little if you get bored or just need a change of focus.) Our goal is still to show that \(\small\mathtt{\Delta ABO \sim \Delta BEC}\). And since we already know that \(\small\mathtt{\measuredangle{ABO}}\) and \(\small\mathtt{\measuredangle{BEC}}\) are right angles, we can be done if we can show that the angles in one of the other corresponding pairs are congruent (<a href='http://hotmath.com/hotmath_help/topics/aa-similarity.html' target='_blank'>AA Similarity</a>). So our next step 'backward' is to change the goal to show that \(\small\mathtt{\measuredangle{BAO} \cong \measuredangle{EBC}}\) or that \(\small\mathtt{\measuredangle{AOB} \cong \measuredangle{BCE}}\).</p>
+
+<p class='h2-sec'>Finally Meeting in the Middle</p>
+
+<p>Now we connect the two processes, forward and backward. Let \(\small\mathtt{m \measuredangle{BCE} = x}\) and let \(\small\mathtt{m \measuredangle{AOB} = y}\). These are the two angle measures we want to show as being congruent, according to the last step in our backward process. Looking at \(\small\mathtt{\Delta{BCE}}\), I can see that \(\small\mathtt{x + m \measuredangle{CBE} + 90 = 180^{\circ}}\). And if I label the point where \(\small\mathtt{\overline{AO}}\) and \(\small\mathtt{\overline{BC}}\) intersect as P, then \(\small\mathtt{y + m \measuredangle{CBE} + m \measuredangle{BPO} = 180^{\circ}}\).</p>
+
+<p>Okay, so new step backward: show that the measure of angle BPO is equal to 90 degrees. And new step forward: it is&mdash;there are more than a handful of ways you can take that last step.</p>
+
+<p class='h2-sec'>Down with Left-to-Rightism, Please!</p>
+
+<p>The greatest value, it seems to me, in the Forward-Backward Method lies in the "backward" part&mdash;simply because we are too used to thinking from left to right and are always at risk of missing opportunities presented by trying to think in reverse. But there is also an unconscious conspiracy among mathematicians and instructors to maintain this brittle left-to-right narrative. First, on the "mathematician" side, the jumpy, multi-directional thinking that goes into solutions is almost always re-sorted and linearized for public consumption; "instructors" then do the same, now with two strong rationales in their pockets: it's what the mathematicians do, and it's easier for students to understand.</p>
+
+<p>No matter what topic you're presenting to students, it seems to me to be very sound advice at this point to watch for ways to "go in reverse."</p>
+<hr></hr>
+<p>Image mask credit: <a href='https://flic.kr/p/3iW6n' target='_blank'>Carmen Kong</a></p>
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on October 17, 2015</span><span style='position:absolute;right:20px;'><a href='https://plus.google.com/+JoshuaFisherD/posts/MzKncjCZ65j' target='_blank'>Comments</a></span></div>
