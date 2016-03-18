@@ -4,7 +4,6 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.js'></script>
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 <style>
 #main_board {
@@ -13,6 +12,7 @@
    height:750px;
    margin-left:auto;
    margin-right:auto;
+   margin-top:100px;
    border:1px solid black;
    overflow:hidden;
 }
@@ -95,10 +95,12 @@
    overflow:hidden;
 }
 .xy_tile {
+   height:80px;
    background-color:pink;
    color:black;
 }
 .pvariableY_tile {
+   width:80px;
    background-color:gray;
 }
 .pvariable_tile2 {
@@ -141,13 +143,28 @@
    cursor:pointer;
 }
 #exp-output {
-   width:950px;
-   height:50px;
-   margin-right:auto;
-   margin-left:auto;
+   position:absolute;
+   bottom:10px;
+   left:0px;
+   width:100%;
    text-align:center;
-   margin-bottom:50px;
    font-family:Quicksand;
+   font-size:30px;
+   font-weight:600;
+   color:white;
+}
+#output-2 {
+   position:absolute;
+   top:10px;
+   left:0px;
+   width:100%;
+   text-align:center;
+}
+#unsim1, #unsim2, #unsim3, #unsim4, #unsim5,
+#unsim6, #unsim7, #unsim8, #unsim9, #unsim10 {
+   font-weight:600;
+   font-family:Quicksand;
+   color:white;
    font-size:30px;
 }
 </style>
@@ -155,18 +172,31 @@
 </head>
 <div id='WebGL-output' style='position:fixed;z-index:-1;background:transparent;'></div>
 <body>
-<div id='exp-output'></div>
 <div id='main_board'>
 <div class='comb-factors' id='factor1' ondrop="drop1(event)" ondragover="allowDrop(event)"></div>
 <div class='comb-factors' id='factor2' ondrop="drop2(event)" ondragover="allowDrop(event)"></div>
 <div class='comb-factors' id='factor3' ondrop="drop3(event)" ondragover="allowDrop(event)"></div>
 <div class='comb-factors' id='factor4' ondrop="drop4(event)" ondragover="allowDrop(event)"></div>
 <div class='comb-factors' id='factor5' ondrop="drop5(event)" ondragover="allowDrop(event)"></div>
-<div id='hor_factor' ondrop="drop0(event)" ondragover="allowDrop(event)"></div>
+<div id='hor_factor' ondrop="drop0(event)" ondragover="allowDrop(event)">
+<div id='exp-output'></div>
+<div id='output-2'>
+<span id='unsim1'></span>
+<span id='unsim2'></span>
+<span id='unsim3'></span>
+<span id='unsim4'></span>
+<span id='unsim5'></span>
+<span id='unsim6'></span>
+<span id='unsim7'></span>
+<span id='unsim8'></span>
+<span id='unsim9'></span>
+<span id='unsim10'></span>
+</div>
+</div>
 </div>
 
 <div id='tile_holder' style='z-index:99;'>
-<div class='pvariable_tile2' id='p2var1' draggable='true' ondragstart='drag(event)'>\(\mathtt{x^2}\)</div>
+<div class='pvariable_tile2' id='p2var1' draggable='true' ondragstart='drag(event)'>x<sup>2</sup></div>
 <div class='xy_tile' id='xy1' draggable="true" ondragstart="drag(event)">xy</div>
 <div class='pvariable_tile' id='pvar1' draggable="true" ondragstart="drag(event)">x</div>
 <div class='pvariableY_tile' id='pvarY1' draggable="true" ondragstart="drag(event)">y</div>
@@ -177,7 +207,10 @@
 
 <script>
 var step0 = 0;
-
+var terms = [$('#unsim1'), $('#unsim2'), $('#unsim3'), $('#unsim4'), $('#unsim5'), $('#unsim6'), $('#unsim7'), $('#unsim8'), $('#unsim9'), $('#unsim10')];
+var termnum = 0;
+var coeff = 0;
+var used_factors = {};
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -191,15 +224,30 @@ function drop0(ev) {
    if (data.indexOf('clone') !== -1) return;
    var nodeCopy = document.getElementById(data).cloneNode(true);
    nodeCopy.id = data + '_clone' + step0;
+   var oldDat = $('#hor_factor > div').last().attr('id').slice(0, 5);
    ev.target.appendChild(nodeCopy);
    $('#' + nodeCopy.id).css({'display' : 'inline-flex', 'margin-left' : 0, 'margin-right' : 0});
-   calculate();
+   calculate_unsimplified(oldDat, data + '_clone' + step0);
+}
+function calculate_unsimplified(oldDat, dat) {
+  var tiles = {'p2var' : 'x<sup>2</sup>', 'xy1_c' : 'xy', 'pvar1' : 'x', 'pvarY' : 'y', 'poson' : ''};
+  if (oldDat !== $('#' + dat).attr('id').slice(0, 5) && $('#hor_factor > div').length > 3) {
+    termnum += 1;
+    coeff = 1;
+    terms[termnum - 1].html(terms[termnum - 1].html() + ' + ');
+    terms[termnum].html(coeff + tiles[$('#' + dat).attr('id').slice(0, 5)]);}
+  else {
+    coeff += 1;
+    terms[termnum].html(coeff + tiles[$('#' + dat).attr('id').slice(0, 5)]);}
 }
 function drop1(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     if (data.indexOf('clone') === -1) return;
+    if ($('#factor1 > div').length > 0 && data.indexOf($('#factor1 div').first().attr('id').slice(0, 5)) === -1) return;
+    for (item in used_factors) {if (data.indexOf(used_factors[item]) !== -1 && item !== 'fac1') return;}
     ev.target.appendChild(document.getElementById(data));
+    if ($('#factor1 > div').length === 1) used_factors.fac1 = $('#factor1 div').first().attr('id').slice(0, 5);
     $('#' + data).css({'display' : 'flex', 'margin-left' : 'auto', 'margin-right' : 'auto'});
     calculate();
 }
@@ -207,7 +255,10 @@ function drop2(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     if (data.indexOf('clone') === -1) return;
+    if ($('#factor2 > div').length > 0 && data.indexOf($('#factor2 div').first().attr('id').slice(0, 5)) === -1) return;
+    for (item in used_factors) {if (data.indexOf(used_factors[item]) !== -1 && item !== 'fac2') return;}
     ev.target.appendChild(document.getElementById(data));
+    if ($('#factor2 > div').length === 1) used_factors.fac2 = $('#factor2 div').first().attr('id').slice(0, 5);
     $('#' + data).css({'display' : 'flex', 'margin-left' : 'auto', 'margin-right' : 'auto'});
     calculate();
 }
@@ -215,7 +266,10 @@ function drop3(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     if (data.indexOf('clone') === -1) return;
+    if ($('#factor3 > div').length > 0 && data.indexOf($('#factor3 div').first().attr('id').slice(0, 5)) === -1) return;
+    for (item in used_factors) {if (data.indexOf(used_factors[item]) !== -1 && item !== 'fac3') return;}
     ev.target.appendChild(document.getElementById(data));
+    if ($('#factor3 > div').length === 1) used_factors.fac3 = $('#factor3 div').first().attr('id').slice(0, 5);
     $('#' + data).css({'display' : 'flex', 'margin-left' : 'auto', 'margin-right' : 'auto'});
     calculate();
 }
@@ -223,7 +277,10 @@ function drop4(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     if (data.indexOf('clone') === -1) return;
+    if ($('#factor4 > div').length > 0 && data.indexOf($('#factor4 div').first().attr('id').slice(0, 5)) === -1) return;
+    for (item in used_factors) {if (data.indexOf(used_factors[item]) !== -1 && item !== 'fac4') return;}
     ev.target.appendChild(document.getElementById(data));
+    if ($('#factor4 > div').length === 1) used_factors.fac4 = $('#factor4 div').first().attr('id').slice(0, 5);
     $('#' + data).css({'display' : 'flex', 'margin-left' : 'auto', 'margin-right' : 'auto'});
     calculate();
 }
@@ -231,130 +288,150 @@ function drop5(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     if (data.indexOf('clone') === -1) return;
+    if ($('#factor5 > div').length > 0 && data.indexOf($('#factor5 div').first().attr('id').slice(0, 5)) === -1) return;
+    for (item in used_factors) {if (data.indexOf(used_factors[item]) !== -1 && item !== 'fac5') return;}
     ev.target.appendChild(document.getElementById(data));
+    if ($('#factor5 > div').length === 1) used_factors.fac5 = $('#factor5 div').first().attr('id').slice(0, 5);
     $('#' + data).css({'display' : 'flex', 'margin-left' : 'auto', 'margin-right' : 'auto'});
     calculate();
 }
 function calculate() {
+    var x2factr1 = $('#factor1 > .pvariable_tile2').length;
+    var xyfactr1 = $('#factor1 > .xy_tile').length;
     var xfactor1 = $('#factor1 > .pvariable_tile').length;
-    var negxfac1 = $('#factor1 > .negvariable_tile').length;
     var yfactor1 = $('#factor1 > .pvariableY_tile').length;
-    var negyfac1 = $('#factor1 > .negvariableY_tile').length;
     var pos1fac1 = $('#factor1 > .posone_tile').length;
-    var neg1fac1 = $('#factor1 > .negone_tile').length;
 
-    if (xfactor1 - negxfac1 === 0) var x1 = '';
-    else if (xfactor1 - negxfac1 < 0) var x1 = '&ndash;' + Math.abs(xfactor1 - negxfac1) + 'x';
-    else if (xfactor1 - negxfac1 > 0) var x1 = (xfactor1 - negxfac1) + 'x';
+    if (x2factr1 === 0) var x2_1 = '';
+    else var x2_1 = x2factr1 + 'x<sup>2</sup>';
 
-    if (yfactor1 - negyfac1 === 0) var y1 = '';
-    else if (yfactor1 - negyfac1 > 0 && x1 !== '') var y1 = ' + ' + (yfactor1 - negyfac1) + 'y';
-    else if (yfactor1 - negyfac1 > 0 && x1 === '') var y1 = (yfactor1 - negyfac1) + 'y';
-    else if (yfactor1 - negyfac1 < 0 && x1 !== '') var y1 = ' &ndash; ' + Math.abs(yfactor1 - negyfac1) + 'y';
-    else if (yfactor1 - negyfac1 < 0 && x1 === '') var y1 = '&ndash;' + Math.abs(yfactor1 - negyfac1) + 'y';
+    if (xyfactr1 === 0) var xy_1 = '';
+    else var xy_1 = xyfactr1 + 'xy';
 
-    if (pos1fac1 - neg1fac1 === 0) var o1 = '';
-    else if (pos1fac1 - neg1fac1 > 0 && (y1 !== '' || x1 !== '')) var o1 = ' + ' + (pos1fac1 - neg1fac1);
-    else if (pos1fac1 - neg1fac1 > 0 && y1 === '' && x1 === '') var o1 = (pos1fac1 - neg1fac1);
-    else if (pos1fac1 - neg1fac1 < 0 && (y1 !== '' || x1 !== '')) var o1 = ' &ndash; ' + Math.abs(pos1fac1 - neg1fac1);
-    else if (pos1fac1 - neg1fac1 < 0 && y1 === '' && x1 === '') var o1 = '&ndash;' + Math.abs(pos1fac1 - neg1fac1);
+    if (xfactor1 === 0) var x1 = '';
+    else var x1 = xfactor1 + 'x';
 
-    var fac1 = x1 + y1 + o1;
+    if (yfactor1 === 0) var y1 = '';
+    else var y1 = yfactor1 + 'y';
 
+    if (pos1fac1 === 0) var o1 = '';
+    else var o1 = pos1fac1;
+
+    var fac1 = x2_1 + xy_1 + x1 + y1 + o1;
+
+    var x2factr2 = $('#factor2 > .pvariable_tile2').length;
+    var xyfactr2 = $('#factor2 > .xy_tile').length;
     var xfactor2 = $('#factor2 > .pvariable_tile').length;
-    var negxfac2 = $('#factor2 > .negvariable_tile').length;
     var yfactor2 = $('#factor2 > .pvariableY_tile').length;
-    var negyfac2 = $('#factor2 > .negvariableY_tile').length;
     var pos1fac2 = $('#factor2 > .posone_tile').length;
-    var neg1fac2 = $('#factor2 > .negone_tile').length;
 
-    if (xfactor2 - negxfac2 === 0) var x2 = '';
-    else if (xfactor2 - negxfac2 < 0 && fac1 !== '') var x2 = ' &ndash; ' + Math.abs(xfactor2 - negxfac2) + 'x';
-    else if (xfactor2 - negxfac2 < 0) var x2 = '&ndash;' + Math.abs(xfactor2 - negxfac2) + 'x';
-    else if (xfactor2 - negxfac2 > 0 && fac1 !== '') var x2 = ' + ' + (xfactor2 - negxfac2) + 'x';
-    else if (xfactor2 - negxfac2 > 0) var x2 = (xfactor2 - negxfac2) + 'x';
+    if (x2factr2 === 0) var x2_2 = '';
+    else if (x2factr2 > 0 && $('#factor1 > *').length > 0) var x2_2 = ' + ' + x2factr2 + 'x<sup>2</sup>';
+    else var x2_2 = x2factr2 + 'x<sup>2</sup>';
 
-    if (yfactor2 - negyfac2 === 0) var y2 = '';
-    else if (yfactor2 - negyfac2 > 0 && x2 !== '') var y2 = ' + ' + (yfactor2 - negyfac2) + 'y';
-    else if (yfactor2 - negyfac2 > 0 && x2 === '' && fac1 === '') var y2 = (yfactor2 - negyfac2) + 'y';
-    else if (yfactor2 - negyfac2 > 0 && x2 === '' && fac1 !== '') var y2 = ' + ' + (yfactor2 - negyfac2) + 'y';
-    else if (yfactor2 - negyfac2 < 0 && x2 !== '') var y2 = ' &ndash; ' + Math.abs(yfactor2 - negyfac2) + 'y';
-    else if (yfactor2 - negyfac2 < 0 && x2 === '' && fac1 === '') var y2 = '&ndash;' + Math.abs(yfactor2 - negyfac2) + 'y';
-    else if (yfactor2 - negyfac2 < 0 && x2 === '' && fac1 !== '') var y2 = ' &ndash; ' + Math.abs(yfactor2 - negyfac2) + 'y';
+    if (xyfactr2 === 0) var xy_2 = '';
+    else if (xyfactr2 > 0 && $('#factor1 > *').length > 0) var xy_2 = ' + ' + xyfactr2 + 'xy';
+    else var xy_2 = xyfactr2 + 'xy';
 
-    if (pos1fac2 - neg1fac2 === 0) var o2 = '';
-    else if (pos1fac2 - neg1fac2 > 0 && (y2 !== '' || x2 !== '')) var o2 = ' + ' + (pos1fac2 - neg1fac2);
-    else if (pos1fac2 - neg1fac2 > 0 && y2 === '' && x2 === '' && fac1 === '') var o2 = (pos1fac2 - neg1fac2);
-    else if (pos1fac2 - neg1fac2 > 0 && y2 === '' && x2 === '' && fac1 !== '') var o2 = ' + ' + (pos1fac2 - neg1fac2);
-    else if (pos1fac2 - neg1fac2 < 0 && (y2 !== '' || x2 !== '')) var o2 = ' &ndash; ' + Math.abs(pos1fac2 - neg1fac2);
-    else if (pos1fac2 - neg1fac2 < 0 && y2 === '' && x2 === '' && fac1 === '') var o2 = '&ndash;' + Math.abs(pos1fac2 - neg1fac2);
-    else if (pos1fac2 - neg1fac2 < 0 && y2 === '' && x2 === '' && fac1 !== '') var o2 = ' &ndash; ' + Math.abs(pos1fac2 - neg1fac2);
+    if (xfactor2 === 0) var x2 = '';
+    else if (xfactor2 > 0 && $('#factor1 > *').length > 0) var x2 = ' + ' + xfactor2 + 'x';
+    else var x2 = xfactor2 + 'x';
 
-    var fac2 = x2 + y2 + o2;
+    if (yfactor2 === 0) var y2 = '';
+    else if (yfactor2 > 0 && $('#factor1 > *').length > 0) var y2 = ' + ' + yfactor2 + 'y';
+    else var y2 = yfactor2 + 'y';
 
+    if (pos1fac2 === 0) var o2 = '';
+    else if (pos1fac2 > 0 && $('#factor1 > *').length > 0) var o2 = ' + ' + pos1fac2;
+    else var o2 = pos1fac2;
+
+    var fac2 = x2_2 + xy_2 + x2 + y2 + o2;
+
+    var x2factr3 = $('#factor3 > .pvariable_tile2').length;
+    var xyfactr3 = $('#factor3 > .xy_tile').length;
     var xfactor3 = $('#factor3 > .pvariable_tile').length;
-    var negxfac3 = $('#factor3 > .negvariable_tile').length;
     var yfactor3 = $('#factor3 > .pvariableY_tile').length;
-    var negyfac3 = $('#factor3 > .negvariableY_tile').length;
     var pos1fac3 = $('#factor3 > .posone_tile').length;
-    var neg1fac3 = $('#factor3 > .negone_tile').length;
 
-    if (xfactor3 - negxfac3 === 0) var x3 = '';
-    else if (xfactor3 - negxfac3 < 0 && (fac1 !== '' || fac2 !== '')) var x3 = ' &ndash; ' + Math.abs(xfactor3 - negxfac3) + 'x';
-    else if (xfactor3 - negxfac3 < 0) var x3 = '&ndash;' + Math.abs(xfactor3 - negxfac3) + 'x';
-    else if (xfactor3 - negxfac3 > 0 && (fac1 !== '' || fac2 !== '')) var x3 = ' + ' + (xfactor3 - negxfac3) + 'x';
-    else if (xfactor3 - negxfac3 > 0) var x3 = (xfactor3 - negxfac3) + 'x';
+    if (x2factr3 === 0) var x2_3 = '';
+    else if (x2factr3 > 0 && ($('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var x2_3 = ' + ' + x2factr3 + 'x<sup>2</sup>';
+    else var x2_3 = x2factr3 + 'x<sup>2</sup>';
 
-    if (yfactor3 - negyfac3 === 0) var y3 = '';
-    else if (yfactor3 - negyfac3 > 0 && x3 !== '') var y3 = ' + ' + (yfactor3 - negyfac3) + 'y';
-    else if (yfactor3 - negyfac3 > 0 && x3 === '' && fac1 === '' && fac2 === '') var y3 = (yfactor3 - negyfac3) + 'y';
-    else if (yfactor3 - negyfac3 > 0 && x3 === '' && (fac1 !== '' || fac2 !== '')) var y3 = ' + ' + (yfactor3 - negyfac3) + 'y';
-    else if (yfactor3 - negyfac3 < 0 && x3 !== '') var y3 = ' &ndash; ' + Math.abs(yfactor3 - negyfac3) + 'y';
-    else if (yfactor3 - negyfac3 < 0 && x3 === '' && fac1 === '' && fac2 === '') var y3 = '&ndash;' + Math.abs(yfactor3 - negyfac3) + 'y';
-    else if (yfactor3 - negyfac3 < 0 && x3 === '' && (fac1 !== '' || fac2 !== '')) var y3 = ' &ndash; ' + Math.abs(yfactor3 - negyfac3) + 'y';
+    if (xyfactr3 === 0) var xy_3 = '';
+    else if (xyfactr3 > 0 && ($('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var xy_3 = ' + ' + xyfactr3 + 'xy';
+    else var xy_3 = xyfactr3 + 'xy';
 
-    if (pos1fac3 - neg1fac3 === 0) var o3 = '';
-    else if (pos1fac3 - neg1fac3 > 0 && (y3 !== '' || x3 !== '')) var o3 = ' + ' + (pos1fac3 - neg1fac3);
-    else if (pos1fac3 - neg1fac3 > 0 && y3 === '' && x3 === '' && fac1 === '' && fac2 === '') var o3 = (pos1fac3 - neg1fac3);
-    else if (pos1fac3 - neg1fac3 > 0 && y3 === '' && x3 === '' && (fac1 !== '' || fac2 !== '')) var o3 = ' + ' + (pos1fac3 - neg1fac3);
-    else if (pos1fac3 - neg1fac3 < 0 && (y3 !== '' || x3 !== '')) var o3 = ' &ndash; ' + Math.abs(pos1fac3 - neg1fac3);
-    else if (pos1fac3 - neg1fac3 < 0 && y3 === '' && x3 === '' && fac1 === '' && fac2 === '') var o3 = '&ndash;' + Math.abs(pos1fac3 - neg1fac3);
-    else if (pos1fac3 - neg1fac3 < 0 && y3 === '' && x3 === '' && (fac1 !== '' || fac2 !== '')) var o3 = ' &ndash; ' + Math.abs(pos1fac3 - neg1fac3);
+    if (xfactor3 === 0) var x3 = '';
+    else if (xfactor3 > 0 && ($('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var x3 = ' + ' + xfactor3 + 'x';
+    else var x3 = xfactor3 + 'x';
 
-    var fac3 = x3 + y3 + o3;
+    if (yfactor3 === 0) var y3 = '';
+    else if (yfactor3 > 0 && ($('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var y3 = ' + ' + yfactor3 + 'y';
+    else var y3 = yfactor3 + 'y';
 
+    if (pos1fac3 === 0) var o3 = '';
+    else if (pos1fac3 > 0 && ($('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var o3 = ' + ' + pos1fac3;
+    else var o3 = pos1fac3;
+
+    var fac3 = x2_3 + xy_3 + x3 + y3 + o3;
+
+    var x2factr4 = $('#factor4 > .pvariable_tile2').length;
+    var xyfactr4 = $('#factor4 > .xy_tile').length;
     var xfactor4 = $('#factor4 > .pvariable_tile').length;
-    var negxfac4 = $('#factor4 > .negvariable_tile').length;
     var yfactor4 = $('#factor4 > .pvariableY_tile').length;
-    var negyfac4 = $('#factor4 > .negvariableY_tile').length;
     var pos1fac4 = $('#factor4 > .posone_tile').length;
-    var neg1fac4 = $('#factor4 > .negone_tile').length;
 
-    if (xfactor4 - negxfac4 === 0) var x4 = '';
-    else if (xfactor4 - negxfac4 < 0 && (fac1 !== '' || fac2 !== '' || fac3 !== '')) var x4 = ' &ndash; ' + Math.abs(xfactor4 - negxfac4) + 'x';
-    else if (xfactor4 - negxfac4 < 0) var x4 = '&ndash;' + Math.abs(xfactor4 - negxfac4) + 'x';
-    else if (xfactor4 - negxfac4 > 0 && (fac1 !== '' || fac2 !== '' || fac3 !== '')) var x4 = ' + ' + (xfactor4 - negxfac4) + 'x';
-    else if (xfactor4 - negxfac4 > 0) var x4 = (xfactor4 - negxfac4) + 'x';
+    if (x2factr4 === 0) var x2_4 = '';
+    else if (x2factr4 > 0 && ($('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var x2_4 = ' + ' + x2factr4 + 'x<sup>2</sup>';
+    else var x2_4 = x2factr4 + 'x<sup>2</sup>';
 
-    if (yfactor4 - negyfac4 === 0) var y4 = '';
-    else if (yfactor4 - negyfac4 > 0 && x4 !== '') var y4 = ' + ' + (yfactor4 - negyfac4) + 'y';
-    else if (yfactor4 - negyfac4 > 0 && x4 === '' && fac1 === '' && fac2 === '' && fac3 === '') var y4 = (yfactor4 - negyfac4) + 'y';
-    else if (yfactor4 - negyfac4 > 0 && x4 === '' && (fac1 !== '' || fac2 !== '' || fac3 !== '')) var y4 = ' + ' + (yfactor4 - negyfac4) + 'y';
-    else if (yfactor4 - negyfac4 < 0 && x4 !== '') var y4 = ' &ndash; ' + Math.abs(yfactor4 - negyfac4) + 'y';
-    else if (yfactor4 - negyfac4 < 0 && x4 === '' && fac1 === '' && fac2 === '' && fac3 === '') var y4 = '&ndash;' + Math.abs(yfactor4 - negyfac4) + 'y';
-    else if (yfactor4 - negyfac4 < 0 && x4 === '' && (fac1 !== '' || fac2 !== '' || fac3 !== '')) var y4 = ' &ndash; ' + Math.abs(yfactor4 - negyfac4) + 'y';
+    if (xyfactr4 === 0) var xy_4 = '';
+    else if (xyfactr4 > 0 && ($('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var xy_4 = ' + ' + xyfactr4 + 'xy';
+    else var xy_4 = xyfactr4 + 'xy';
 
-    if (pos1fac4 - neg1fac4 === 0) var o4 = '';
-    else if (pos1fac4 - neg1fac4 > 0 && (y4 !== '' || x4 !== '')) var o4 = ' + ' + (pos1fac4 - neg1fac4);
-    else if (pos1fac4 - neg1fac4 > 0 && y4 === '' && x4 === '' && fac1 === '' && fac2 === '' && fac3 === '') var o4 = (pos1fac4 - neg1fac4);
-    else if (pos1fac4 - neg1fac4 > 0 && y4 === '' && x4 === '' && (fac1 !== '' || fac2 !== '' || fac3 !== '')) var o4 = ' + ' + (pos1fac4 - neg1fac4);
-    else if (pos1fac4 - neg1fac4 < 0 && (y4 !== '' || x4 !== '')) var o4 = ' &ndash; ' + Math.abs(pos1fac4 - neg1fac4);
-    else if (pos1fac4 - neg1fac4 < 0 && y4 === '' && x4 === '' && fac1 === '' && fac2 === '' && fac3 === '') var o4 = '&ndash;' + Math.abs(pos1fac4 - neg1fac4);
-    else if (pos1fac4 - neg1fac4 < 0 && y4 === '' && x4 === '' && (fac1 !== '' || fac2 !== '' || fac3 !== '')) var o4 = ' &ndash; ' + Math.abs(pos1fac4 - neg1fac4);
+    if (xfactor4 === 0) var x4 = '';
+    else if (xfactor4 > 0 && ($('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var x4 = ' + ' + xfactor4 + 'x';
+    else var x4 = xfactor4 + 'x';
 
-    var fac4 = x4 + y4 + o4;
+    if (yfactor4 === 0) var y4 = '';
+    else if (yfactor4 > 0 && ($('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var y4 = ' + ' + yfactor4 + 'y';
+    else var y4 = yfactor4 + 'y';
 
-    $('#exp-output').html(fac1 + fac2 + fac3 + fac4);
+    if (pos1fac4 === 0) var o4 = '';
+    else if (pos1fac4 > 0 && ($('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var o4 = ' + ' + pos1fac4;
+    else var o4 = pos1fac4;
+
+    var fac4 = x2_4 + xy_4 + x4 + y4 + o4;
+
+    var x2factr5 = $('#factor5 > .pvariable_tile2').length;
+    var xyfactr5 = $('#factor5 > .xy_tile').length;
+    var xfactor5 = $('#factor5 > .pvariable_tile').length;
+    var yfactor5 = $('#factor5 > .pvariableY_tile').length;
+    var pos1fac5 = $('#factor5 > .posone_tile').length;
+
+    if (x2factr5 === 0) var x2_5 = '';
+    else if (x2factr5 > 0 && ($('#factor4 > *').length > 0 || $('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var x2_5 = ' + ' + x2factr5 + 'x<sup>2</sup>';
+    else var x2_5 = x2factr5 + 'x<sup>2</sup>';
+
+    if (xyfactr5 === 0) var xy_5 = '';
+    else if (xyfactr5 > 0 && ($('#factor4 > *').length > 0 || $('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var xy_5 = ' + ' + xyfactr5 + 'xy';
+    else var xy_5 = xyfactr5 + 'xy';
+
+    if (xfactor5 === 0) var x5 = '';
+    else if (xfactor5 > 0 && ($('#factor4 > *').length > 0 || $('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var x5 = ' + ' + xfactor5 + 'x';
+    else var x5 = xfactor5 + 'x';
+
+    if (yfactor5 === 0) var y5 = '';
+    else if (yfactor5 > 0 && ($('#factor4 > *').length > 0 || $('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var y5 = ' + ' + yfactor5 + 'y';
+    else var y5 = yfactor5 + 'y';
+
+    if (pos1fac5 === 0) var o5 = '';
+    else if (pos1fac5 > 0 && ($('#factor4 > *').length > 0 || $('#factor3 > *').length > 0 || $('#factor2 > *').length > 0 || $('#factor1 > *').length > 0)) var o5 = ' + ' + pos1fac5;
+    else var o5 = pos1fac5;
+
+    var fac5 = x2_5 + xy_5 + x5 + y5 + o5;
+
+    $('#exp-output').html(fac1 + fac2 + fac3 + fac4 + fac5);
 }
 </script>
 
