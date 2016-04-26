@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+
+<title>Explore: Equation Balance</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<style>
+html {
+   height:100vh;
+   background-color:rgb(171, 231, 255);
+   background: -webkit-linear-gradient(rgb(171, 231, 255), white);
+   background: -o-linear-gradient(rgb(171, 231, 255), white);
+   background: -moz-linear-gradient(rgb(171, 231, 255), white);
+   background: linear-gradient(rgb(171, 231, 255), white);
+   overflow:hidden;
+}
+#canvas {
+   display:block;
+   margin-top:10px;
+   margin-left:auto;
+   margin-right:auto;
+}
+button {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   outline: 0 none;
+   box-shadow:1px 1px 1px #cccccc;
+   border:1px solid gray;
+   width:50px;
+   height:50px;
+   background:#ffffff;
+   border-radius:50%;;
+}
+button:hover {
+   background-color:#f5f5f5;
+   cursor:pointer;
+}
+.x-input {
+   position:absolute;
+   width:50px;
+   text-align:center;
+   background:transparent;
+   border:none;
+   outline:none;
+   font-size:2em;
+}
+.equation-input {
+   width:100px;
+   height:50px;
+   padding-left:5px;
+   padding-right:5px;
+   font-size:1.8rem;
+   margin-right:20px;
+   margin-left:20px;
+}
+#controls {
+   position:fixed;
+   bottom:0px;
+   left:0px;
+   height:80px;
+   width:100%;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   border-top:2px dashed #000;
+   margin-left:auto;
+   margin-right:auto;
+}
+</style>
+</head>
+
+<body>
+<div id='spinDiv' style='position:relative;width:100%;'>
+<canvas id='canvas'></canvas>
+</div>
+<div id='controls'><input class='equation-input' type='text' id='expLeft' style='text-align:right;'> <span style='font-size:1.5rem;'>=</span> <input class='equation-input' type='text' id='expRight'></div>
+<button id='reset' style='position:fixed;bottom:15px;right:20px;'><img src='undo.png' width='40' height='40'></button>
+</body>
+</html>
+
+<script>
+$('#canvas').css({width : window.innerWidth - 50, height : window.innerHeight - 50});
+$('#canvas').attr('width', window.innerWidth - 50 + 'px');
+$('#canvas').attr('height', window.innerHeight - 50 + 'px');
+
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+var seesaw = {left : {x : 50, y : canvas.height / 2}, right : {x : canvas.width - 50, y : canvas.height / 2}};
+var leftWeight = 0;
+var rightWeight = 0;
+var leftUpdate = 0;
+var rightUpdate = 0;
+var LLvar;
+var LRvar;
+var RLvar;
+var RRvar;
+
+var leftGrid = {firblocks : {'1' : {x : 60, y : canvas.height / 2 - 55, present : false},
+                             '2' : {x : 115, y : canvas.height / 2 - 55, present : false},
+                             '3' : {x : 60, y : canvas.height / 2 - 106, present : false},
+                             '4' : {x : 115, y : canvas.height / 2 - 106, present : false},
+                             '5' : {x : 60, y : canvas.height / 2 - 157, present : false},
+                             '6' : {x : 115, y : canvas.height / 2 - 157, present : false}},
+                secblocks : {'1' : {x : 180, y : canvas.height / 2 - 55, present : false},
+                             '2' : {x : 235, y : canvas.height / 2 - 55, present : false},
+                             '3' : {x : 180, y : canvas.height / 2 - 106, present : false},
+                             '4' : {x : 235, y : canvas.height / 2 - 106, present : false},
+                             '5' : {x : 180, y : canvas.height / 2 - 157, present : false},
+                             '6' : {x : 235, y : canvas.height / 2 - 157, present : false}}
+};
+var rightGrid ={firblocks : {'1' : {x : canvas.width - 285, y : canvas.height / 2 - 55, present : false},
+                             '2' : {x : canvas.width - 230, y : canvas.height / 2 - 55, present : false},
+                             '3' : {x : canvas.width - 285, y : canvas.height / 2 - 106, present : false},
+                             '4' : {x : canvas.width - 230, y : canvas.height / 2 - 106, present : false},
+                             '5' : {x : canvas.width - 285, y : canvas.height / 2 - 157, present : false},
+                             '6' : {x : canvas.width - 230, y : canvas.height / 2 - 157, present : false}},
+                secblocks : {'1' : {x : canvas.width - 165, y : canvas.height / 2 - 55, present : false},
+                             '2' : {x : canvas.width - 110, y : canvas.height / 2 - 55, present : false},
+                             '3' : {x : canvas.width - 165, y : canvas.height / 2 - 106, present : false},
+                             '4' : {x : canvas.width - 110, y : canvas.height / 2 - 106, present : false},
+                             '5' : {x : canvas.width - 165, y : canvas.height / 2 - 157, present : false},
+                             '6' : {x : canvas.width - 110, y : canvas.height / 2 - 157, present : false}}
+};
+function XBox(x, y, txt, id) {
+   this.x = x;
+   this.y = y;
+   this.width = 50;
+   this.height = 50;
+   this.txt = txt;
+   this.id = id;
+
+   this.draw = function() {
+   var loc = $('#canvas').offset();
+   context.beginPath();
+   context.strokeStyle = 'black';
+   context.fillStyle = 'yellow';
+   context.lineWidth = 1;
+   context.setLineDash([5, 5]);
+   context.fillRect(this.x, this.y, this.width, this.height);
+   context.strokeRect(this.x, this.y, this.width, this.height);
+   $('#spinDiv').append('<input type="text" class="x-input" maxlength="1" id="' + this.id + '" value="' + this.txt.toLowerCase() + '">');
+   $('#' + this.id).css({'top' : loc.top + this.y - 3, 'left' : loc.left + this.x - 8});
+   }
+   this.draw();
+}
+function OneBox(x, y) {
+   this.x = x;
+   this.y = y;
+   this.width = 50;
+   this.height = 50;
+   this.txt = '1';
+
+   this.draw = function() {
+   context.beginPath();
+   context.strokeStyle = 'black';
+   context.fillStyle = 'white';
+   context.lineWidth = 1;
+   context.setLineDash([1, 0]);
+   context.fillRect(this.x, this.y, this.width, this.height);
+   context.strokeRect(this.x, this.y, this.width, this.height);
+   context.fillStyle = 'black';
+   context.font = '28px Arial';
+   context.fillText('1', this.x + 17, this.y + 36);
+   context.strokeText('1', this.x + 17, this.y + 36);
+   }
+   this.draw();
+}
+function baseDraw() {
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.strokeStyle = 'brown';
+   context.lineWidth = 10;
+   context.setLineDash([1, 0]);
+   context.beginPath();
+   context.moveTo(seesaw.left.x, seesaw.left.y);
+   context.lineTo(seesaw.right.x, seesaw.right.y);
+   context.stroke();
+}
+function changeLeft(txt) {
+   if ($('#expLeft').val() === '') return;
+   var arr = txt.split('+');
+   for (var a = 0; a < arr.length; a++) {
+   arr[a] = $.trim(arr[a]);
+   }
+   if (parseInt(arr[0]) > 6) {$('#expLeft').val(''); return;}
+
+   if (arr[0].match(/\d+[a-z]{1}$/gi)) {
+   var numTerm = (arr[0].match(/\d+[a-z]{1}$/gi))[0][0];
+   var varTerm = (arr[0].match(/\d+[a-z]{1}$/gi))[0][1];
+   LLvar = varTerm;
+   for (var d = 0; d < parseInt(numTerm); d++) {
+   for (var item in leftGrid.firblocks) {
+   if (leftGrid.firblocks[item].present === false) {
+      new XBox(leftGrid.firblocks[item].x, leftGrid.firblocks[item].y, varTerm, 'xboxLL' + d);
+      leftGrid.firblocks[item].present = true;
+      break;
+   }
+   else continue;
+   }}
+   $('input[id*="xboxLL"]').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(varTerm);
+   $('input[id*="xboxLL"]').val($('#' + evt.target.id).val());
+   });
+   }
+
+   else if (isNaN(parseInt(arr[0]))) {
+   for (var item in leftGrid.firblocks) {
+   if (leftGrid.firblocks[item].present === false) {
+      new XBox(leftGrid.firblocks[item].x, leftGrid.firblocks[item].y, arr[0], 'xboxSingleLL');
+      leftGrid.firblocks[item].present = true;
+      break;
+   }
+   else continue;}
+   LLvar = arr[0];
+   $('#xboxSingleLL').keyup(function(evt) {
+   if ($('#xboxSingleLL').val() === '') $('#xboxSingleLL').val(arr[0]);});
+   }
+
+   else if (!isNaN(parseInt(arr[0]))) {
+   leftWeight += parseInt(arr[0]);
+   leftUpdate = leftWeight;
+   for (var c = 0; c < parseInt(arr[0]); c++) {
+   for (var item in leftGrid.firblocks) {
+   if (leftGrid.firblocks[item].present === false) {
+      new OneBox(leftGrid.firblocks[item].x, leftGrid.firblocks[item].y);
+      leftGrid.firblocks[item].present = true;
+      break;
+   }
+   else continue;
+   }}}
+
+   if (arr.length < 2) {
+   $('#expLeft').prop('disabled', true);
+   $('#expLeft').css({'background-color' : 'transparent', border : 'none'});
+   $('#expRight').focus();
+   $('input[id*="xboxLL"], #xboxSingleLL').keyup(function() {
+   var sum = 0;
+   $('input[id*="xboxLL"], #xboxSingleLL').each(function(){
+      if (!isNaN($(this).val())) sum += Number($(this).val());});
+   leftUpdate = sum + leftWeight;
+   rotateBalance(sum + leftWeight, rightUpdate);
+   });
+   if ($('#expLeft').prop('disabled') === false || $('#expRight').prop('disabled') === false) $('.x-input').prop('disabled', true);
+   else $('.x-input').prop('disabled', false);
+   return;
+   }
+
+   if (arr[1].match(/\d+[a-z]{1}$/gi)) {
+   var numTerm = (arr[1].match(/\d+[a-z]{1}$/gi))[0][0];
+   var varTerm = (arr[1].match(/\d+[a-z]{1}$/gi))[0][1];
+   LRvar = varTerm;
+   for (var e = 0; e < parseInt(numTerm); e++) {
+   for (var item in leftGrid.secblocks) {
+   if (leftGrid.secblocks[item].present === false) {
+      new XBox(leftGrid.secblocks[item].x, leftGrid.secblocks[item].y, varTerm, 'xboxRR' + e);
+      leftGrid.secblocks[item].present = true;
+      break;
+    }
+   else continue;
+   }}
+   if (LLvar === LRvar) {
+   $('input[id*="xboxLL"], input[id*="xboxRR"], #xboxSingleLL').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(varTerm);
+   $('input[id*="xboxLL"], input[id*="xboxRR"], #xboxSingleLL').val($('#' + evt.target.id).val());});}
+   else {
+   $('input[id*="xboxRR"]').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(varTerm);
+   $('input[id*="xboxRR"]').val($('#' + evt.target.id).val());});}
+   }
+
+   else if (isNaN(parseInt(arr[1]))) {
+   for (var item in leftGrid.secblocks) {
+   if (leftGrid.secblocks[item].present === false) {
+      new XBox(leftGrid.secblocks[item].x, leftGrid.secblocks[item].y, arr[1], 'xboxSingle1R');
+      leftGrid.secblocks[item].present = true;
+      break;
+   }
+   else continue;}
+   LRvar = arr[1];
+   if (LLvar === LRvar) {
+   $('input[id*="xboxLL"], #xboxSingle1R, #xboxSingleLL').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(arr[1]);
+   $('input[id*="xboxLL"], #xboxSingle1R, #xboxSingleLL').val($('#' + evt.target.id).val());});}
+   else {
+   $('#xboxSingle1R').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(arr[1]);});}
+   }
+
+   else if (!isNaN(parseInt(arr[1]))) {
+   leftWeight += parseInt(arr[1]);
+   leftUpdate = leftWeight;
+   for (var c = 0; c < parseInt(arr[1]); c++) {
+   for (var item in leftGrid.secblocks) {
+   if (leftGrid.secblocks[item].present === false) {
+      new OneBox(leftGrid.secblocks[item].x, leftGrid.secblocks[item].y);
+      leftGrid.secblocks[item].present = true;
+      break;
+   }
+   else continue;
+   }}}
+   $('#expLeft').prop('disabled', true);
+   $('#expLeft').css({'background-color' : 'transparent', border : 'none'});
+   $('#expRight').focus();
+
+   $('input[id*="xboxLL"], #xboxSingleLL, input[id*="xboxRR"], #xboxSingle1R').keyup(function() {
+   var sum = 0;
+   $('input[id*="xboxLL"], #xboxSingleLL, input[id*="xboxRR"], #xboxSingle1R').each(function(){
+      if (!isNaN($(this).val())) sum += Number($(this).val());});
+   leftUpdate = sum + leftWeight;
+   rotateBalance(sum + leftWeight, rightUpdate);
+   });
+
+   if ($('#expLeft').prop('disabled') === false || $('#expRight').prop('disabled') === false) $('.x-input').prop('disabled', true);
+   else $('.x-input').prop('disabled', false);
+}
+function changeRight(txt) {
+   if ($('#expRight').val() === '') return;
+   var arr = txt.split('+');
+   for (var a = 0; a < arr.length; a++) {
+   arr[a] = $.trim(arr[a]);
+   }
+   if (parseInt(arr[0]) > 6) {$('#expRight').val(''); return;}
+
+   if (arr[0].match(/\d+[a-z]{1}$/gi)) {
+   var numTerm = (arr[0].match(/\d+[a-z]{1}$/gi))[0][0];
+   var varTerm = (arr[0].match(/\d+[a-z]{1}$/gi))[0][1];
+   RLvar = varTerm;
+   for (var d = 0; d < parseInt(numTerm); d++) {
+   for (var item in rightGrid.firblocks) {
+   if (rightGrid.firblocks[item].present === false) {
+      new XBox(rightGrid.firblocks[item].x, rightGrid.firblocks[item].y, varTerm, 'xboxLR' + d);
+      rightGrid.firblocks[item].present = true;
+      break;
+   }
+   else continue;
+   }}
+   $('input[id*="xboxLR"]').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(varTerm);
+   $('input[id*="xboxLR"]').val($('#' + evt.target.id).val());});
+   }
+
+   else if (isNaN(parseInt(arr[0]))) {
+   for (var item in rightGrid.firblocks) {
+   if (rightGrid.firblocks[item].present === false) {
+      new XBox(rightGrid.firblocks[item].x, rightGrid.firblocks[item].y, arr[0], 'xboxSingleLR');
+      rightGrid.firblocks[item].present = true;
+      break;
+   }
+   else continue;}
+   RLvar = arr[0];
+   $('#xboxSingleLR').keyup(function(evt) {
+   if ($('#xboxSingleLR').val() === '') $('#xboxSingleLR').val(arr[0]);});
+   }
+
+   else if (!isNaN(parseInt(arr[0]))) {
+   rightWeight += parseInt(arr[0]);
+   rightUpdate = rightWeight;
+   for (var c = 0; c < parseInt(arr[0]); c++) {
+   for (var item in rightGrid.firblocks) {
+   if (rightGrid.firblocks[item].present === false) {
+      new OneBox(rightGrid.firblocks[item].x, rightGrid.firblocks[item].y);
+      rightGrid.firblocks[item].present = true;
+      break;
+   }
+   else continue;
+   }}}
+
+   if (arr.length < 2) {
+   $('#expRight').prop('disabled', true);
+   $('#expRight').css({'background-color' : 'transparent', border : 'none'});
+   $('#expLeft').focus();
+   $('input[id*="xboxLR"], #xboxSingleLR').keyup(function() {
+   var sum = 0;
+   $('input[id*="xboxLR"], #xboxSingleLR').each(function(){
+      if (!isNaN($(this).val())) sum += Number($(this).val());});
+   rightUpdate = sum + rightWeight;
+   rotateBalance(leftUpdate, sum + rightWeight);
+   });
+   if ($('#expLeft').prop('disabled') === false || $('#expRight').prop('disabled') === false) $('.x-input').prop('disabled', true);
+   else $('.x-input').prop('disabled', false);
+   return;
+   }
+
+   if (arr[1].match(/\d+[a-z]{1}$/gi)) {
+   var numTerm = (arr[1].match(/\d+[a-z]{1}$/gi))[0][0];
+   var varTerm = (arr[1].match(/\d+[a-z]{1}$/gi))[0][1];
+   RRvar = varTerm;
+   for (var e = 0; e < parseInt(numTerm); e++) {
+   for (var item in rightGrid.secblocks) {
+   if (rightGrid.secblocks[item].present === false) {
+      new XBox(rightGrid.secblocks[item].x, rightGrid.secblocks[item].y, varTerm, 'xboxLRR' + e);
+      rightGrid.secblocks[item].present = true;
+      break;
+    }
+   else continue;
+   }}
+   if (RLvar === RRvar) {
+   $('input[id*="xboxLRR"], input[id*="xboxLR"], #xboxSingleLR').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(varTerm);
+   $('input[id*="xboxLRR"], input[id*="xboxLR"], #xboxSingleLR').val($('#' + evt.target.id).val());});}
+   else {
+   $('input[id*="xboxLRR"]').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(varTerm);
+   $('input[id*="xboxLRR"]').val($('#' + evt.target.id).val());});}
+   }
+
+   else if (isNaN(parseInt(arr[1]))) {
+   for (var item in rightGrid.secblocks) {
+   if (rightGrid.secblocks[item].present === false) {
+      new XBox(rightGrid.secblocks[item].x, rightGrid.secblocks[item].y, arr[1], 'xboxSingle1LRR');
+      rightGrid.secblocks[item].present = true;
+      break;
+   }
+   else continue;}
+   RRvar = arr[1];
+   if (RLvar === RRvar) {
+   $('input[id*="xboxLRR"], #xboxSingle1LRR, #xboxSingleLR').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(arr[1]);
+   $('input[id*="xboxLRR"], #xboxSingle1LRR, #xboxSingleLR').val($('#' + evt.target.id).val());});}
+   else {
+   $('#xboxSingle1LRR').keyup(function(evt) {
+   if ($('#' + evt.target.id).val() === '') $('#' + evt.target.id).val(arr[1]);});}
+   }
+
+   else if (!isNaN(parseInt(arr[1]))) {
+   rightWeight += parseInt(arr[1]);
+   rightUpdate = rightWeight;
+   for (var c = 0; c < parseInt(arr[1]); c++) {
+   for (var item in rightGrid.secblocks) {
+   if (rightGrid.secblocks[item].present === false) {
+      new OneBox(rightGrid.secblocks[item].x, rightGrid.secblocks[item].y);
+      rightGrid.secblocks[item].present = true;
+      break;
+   }
+   else continue;
+   }}}
+   $('#expRight').prop('disabled', true);
+   $('#expRight').css({'background-color' : 'transparent', border : 'none'});
+   $('#expLeft').focus();
+
+   $('input[id*="xboxLR"], #xboxSingleLR, input[id*="xboxLRR"], #xboxSingle1LRR').keyup(function() {
+   var sum = 0;
+   $('input[id*="xboxLR"], #xboxSingleLR, input[id*="xboxLRR"], #xboxSingle1LRR').each(function(){
+      if (!isNaN($(this).val())) sum += Number($(this).val());});
+   rightUpdate = sum + rightWeight;
+   rotateBalance(leftUpdate, sum + rightWeight);
+   });
+
+   if ($('#expLeft').prop('disabled') === false || $('#expRight').prop('disabled') === false) $('.x-input').prop('disabled', true);
+   else $('.x-input').prop('disabled', false);
+}
+function rotateBalance(lft, rght) {
+   //console.log(lft, rght);
+   var rotWeight = 1.5 * (rght - lft);
+   $('#spinDiv').stop().animate({rotation: rotWeight}, {duration: 10000, easing: 'easeOutElastic', step: function(now, fx) {$(this).css({"transform": "rotate(" + now + "deg)"});}});
+}
+baseDraw();
+$('.equation-input').keyup(function(evt) {
+   if (evt.keyCode === 13) {
+   if (evt.target.id === 'expLeft') changeLeft($('#expLeft').val());
+   else changeRight($('#expRight').val());
+   if ($('#expLeft').prop('disabled') === true && $('#expRight').prop('disabled') === true) rotateBalance(leftWeight, rightWeight);
+   }
+   else return;
+});
+</script>
