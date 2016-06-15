@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/javascript"src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<title>Estimate with Rational Numbers</title>
+<style>
+@font-face {
+    font-family: 'proxima_nova';
+    src: url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.eot');
+    src: url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.woff') format('woff'),
+         url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.ttf') format('truetype'),
+         url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
+   width:800px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:50px;
+}
+.experiment {
+   display:block;
+   width:680px;
+   height:350px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:40px;
+   margin-bottom:40px;
+   box-shadow:0 0 15px #cccccc;
+}
+.experiment:hover {
+  cursor:crosshair;
+}
+</style>
+
+<body>
+<p style='font-size:19px;font-family:proxima_nova;'>Click on the number line to estimate the location of each number given.</p>
+<canvas class='experiment' id='exp1' width='680px' height='350px'></canvas>
+<p style='font-size:19px;font-family:proxima_nova;'>Your PAE average is <span id='paescore' style='color:blue;'>0</span>, for <span id='trials' style='color:blue;'>0</span> trial(s).</p>
+</body>
+
+<script>
+var exp2_fracs = {1: [1, 9],  2: [1, 4],  3: [2, 7],  4: [1, 3],
+                  5: [5, 9],  6: [4, 7],  7: [2, 3],  8: [4, 6],
+                  9: [7, 6], 10: [4, 3], 11: [7, 4], 12: [2, 1]};
+var exp2Trials = 0;
+var completed_fracs2 = [];
+var curfrac2;
+var curUserFrac2;
+var altAnswer;
+var numCorrect = 0;
+
+function startExp2() {
+  if (completed_fracs2.length < 12) {
+    var frac1 = Math.floor(Math.random() * 12) + 1;
+    while ($.inArray(frac1, completed_fracs2) !== -1) frac1 = Math.floor(Math.random() * 12) + 1;
+    completed_fracs2.push(frac1);
+    curfrac2 = frac1;
+    $('#varchoice').text('\\(\\mathtt{\\frac{' + exp2_fracs[frac1][0] + '}{' + exp2_fracs[frac1][1] + '}}\\)');
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"varchoice"]);
+  }
+  else $('#varchoice, #conchoice').css({'pointer-events': 'none'});
+}
+function processAnswer() {
+  if (curUserFrac2 < altAnswer) numCorrect += 1;
+  var percCorrect = numCorrect / exp2Trials * 100;
+  $('#exp2correct').text(percCorrect.toFixed(2) + '%');
+  startExp2();
+}
+function varChosen() {
+  exp2Trials += 1;
+  curUserFrac2 = exp2_fracs[curfrac2][0] / exp2_fracs[curfrac2][1];
+  altAnswer = 0.6;
+  processAnswer();
+}
+function conChosen() {
+  exp2Trials += 1;
+  curUserFrac2 = 0.6;
+  altAnswer = exp2_fracs[curfrac2][0] / exp2_fracs[curfrac2][1];
+  processAnswer();
+}
+startExp2();
+document.getElementById('varchoice').addEventListener('click', varChosen, true);
+document.getElementById('conchoice').addEventListener('click', conChosen, true);
+</script>
+<script>
+var expcanvas = document.getElementById('exp1');
+var expcontxt = expcanvas.getContext('2d');
+
+var exp1_fracs = {1: [0, 1],  2: [1, 9],  3: [1, 8],  4: [1, 7],
+                  5: [1, 6],  6: [1, 5],  7: [2, 9],  8: [1, 4],
+                  9: [2, 7], 10: [1, 3], 11: [3, 8], 12: [2, 5],
+                 13: [3, 7], 14: [4, 9], 15: [1, 2], 16: [5, 9],
+                 17: [4, 7], 18: [3, 5], 19: [5, 8], 20: [2, 3],
+                 21: [5, 7], 22: [3, 4], 23: [7, 9], 24: [4, 5],
+                 25: [5, 6], 26: [6, 7], 27: [7, 8], 28: [8, 9], 29: [1, 1]};
+
+var completed_fracs = [];
+var curfrac;
+var paes = 0;
+var trial_count = 0;
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function baseDraw_exp() {
+   expcontxt.clearRect(0, 0, expcanvas.width, expcanvas.height);
+   expcontxt.beginPath();
+   expcontxt.moveTo(20, expcanvas.height / 2);
+   expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+   expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 - 5);
+   expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 + 5);
+   expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+   expcontxt.stroke();
+   expcontxt.fill();
+
+   expcontxt.beginPath();
+   expcontxt.moveTo(20, expcanvas.height / 2);
+   expcontxt.lineTo(30, expcanvas.height / 2 - 5);
+   expcontxt.lineTo(30, expcanvas.height / 2 + 5);
+   expcontxt.lineTo(20, expcanvas.height / 2);
+   expcontxt.stroke();
+   expcontxt.fill();
+
+   expcontxt.beginPath();
+   expcontxt.moveTo(40, expcanvas.height / 2 - 20);
+   expcontxt.lineTo(40, expcanvas.height / 2 + 20);
+   expcontxt.stroke();
+   expcontxt.beginPath();
+   expcontxt.moveTo(expcanvas.width - 40, expcanvas.height / 2 - 20);
+   expcontxt.lineTo(expcanvas.width - 40, expcanvas.height / 2 + 20);
+   expcontxt.stroke();
+
+   expcontxt.font = '20px Arial';
+   expcontxt.textAlign = 'center';
+   expcontxt.fillText('0', 40, expcanvas.height / 2 + 45);
+   expcontxt.fillText('1', expcanvas.width - 40, expcanvas.height / 2 + 45);
+
+   if (completed_fracs.length < 29) {
+     var frac = Math.floor(Math.random() * 29) + 1;
+     while ($.inArray(frac, completed_fracs) !== -1) frac = Math.floor(Math.random() * 29) + 1;
+     completed_fracs.push(frac);
+     curfrac = frac;
+     expcontxt.fillText(exp1_fracs[frac][0], expcanvas.width / 2, 38);
+     expcontxt.fillText(exp1_fracs[frac][1], expcanvas.width / 2, 62);
+     expcontxt.beginPath();
+     expcontxt.moveTo(expcanvas.width / 2 - 15, 43);
+     expcontxt.lineTo(expcanvas.width / 2 + 15, 43);
+     expcontxt.stroke();
+   }
+   else expcanvas.removeEventListener('click', getAnswer, true);
+}
+function getAnswer(evt) {
+  var loc = windowToCanvas_mouse(expcanvas, evt.clientX, evt.clientY);
+  var userAnswer = (loc.x - 40) / 600;
+  trial_count += 1;
+  var actualAnswer = exp1_fracs[curfrac][0] / exp1_fracs[curfrac][1];
+  var PAE = 100 * (Math.abs(userAnswer - actualAnswer));
+  paes += PAE;
+  var pae_avg = paes / trial_count;
+  $('#paescore').text(pae_avg.toFixed(2));
+  $('#trials').text(trial_count);
+  baseDraw_exp();
+}
+
+baseDraw_exp();
+expcanvas.addEventListener('click', getAnswer, true);
+</script>
