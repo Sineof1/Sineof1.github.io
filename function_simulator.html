@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Function Simulator</title>
+<script src='jQuery/jquery-2.2.3.min.js'></script>
+<script src='jQueryUI/jquery-ui.js'></script>
+<style>
+@font-face {
+    font-family: 'proxima_nova';
+    src: url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.eot');
+    src: url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.woff') format('woff'),
+         url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.ttf') format('truetype'),
+         url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+   margin-bottom:100px;
+}
+#canvas {
+   display:block;
+   margin:50px auto 0 auto;
+   width:800px;
+   height:450px;
+   background-color:rgba(171, 221, 255, 0.6);
+   border-left:2px solid gray;
+   border-bottom:2px solid gray;
+}
+.scrubber {
+   margin:25px auto 0 auto;
+   width:800px;
+   height:45px;
+   border:1px solid gray;
+   cursor:pointer;
+}
+.scrubber-mark {
+   width:20px;
+   height:100%;
+}
+#scrub-mark-height {
+   background-color:rgba(0, 0, 255, 0.5);
+}
+#scrub-mark-distance {
+   background-color:rgba(255, 0, 0, 0.5);
+}
+#control-panel {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:800px;
+   height:100px;
+   margin:30px auto 0 auto;
+   box-shadow:0 0 10px #000;
+   font-family:proxima_nova;
+   font-size:19px;
+   padding-left:30px;
+   box-sizing:border-box;
+}
+.func-input {
+   height:40px;
+   margin-left:10px;
+   margin-right:50px;
+   font-family:proxima_nova;
+   font-size:19px;
+   padding-left:8px;
+   padding-right:8px;
+}
+.play-button {
+   display:inline-block;
+   height:25px;
+   width:25px;
+   border-radius:50%;
+   border:1px solid gray;
+   background-color:green;
+   cursor:pointer;
+   box-shadow:0 0 2px #000;
+}
+</style>
+</head>
+<body>
+<canvas id='canvas' width='800px' height='450px'></canvas>
+<div class='play-button' id='play-height'>
+<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px' style='fill:white;stroke:white;'>
+<path d='M 9 5 L 20 12.5 L 9 20 Z' />
+</svg>
+</div>
+<div class='play-button' id='play-distance'>
+<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px' style='fill:white;stroke:white;'>
+<path d='M 9 5 L 20 12.5 L 9 20 Z' />
+</svg>
+</div>
+<p id='height-before' style='font-size:30px;display:inline;'>h(</p>
+<p id='height-after' style='font-size:30px;display:inline;'>)</p>
+
+<p id='distance-before' style='font-size:30px;display:inline;'>d(</p>
+<p id='distance-after' style='font-size:30px;display:inline;'>)</p>
+
+<div class='scrubber' id='height-scrubber' style='margin-top:15px;'>
+<div class='scrubber-mark' id='scrub-mark-height'></div>
+</div>
+<div class='scrubber' id='distance-scrubber'>
+<div class='scrubber-mark' id='scrub-mark-distance'></div>
+</div>
+
+<div id='control-panel'>
+height h(x) = <input class='func-input' type='text' id='height-input'> distance d(x) = <input class='func-input' type='text' id='distance-input'>
+</div>
+</body>
+</html>
+
+<script>
+var canvas = document.getElementById('canvas');
+var contxt = canvas.getContext('2d');
+
+var planeImg;
+var planeLocX = 0;
+var planeLocY = 20;
+var coefD;
+var coefH;
+var incpD;
+var incpH;
+var MOUSEHEIGHT = false;
+var MOUSEDISTANCE = false;
+var HEIGHTFUNC = false;
+var DISTFUNC = false;
+
+function windowToCanvas_mouse(canvas, x, y) {
+   var bbox = canvas.getBoundingClientRect();
+   return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function setMouseHeight(evt) {MOUSEHEIGHT = true;}
+function doneMouseHeight(evt) {MOUSEHEIGHT = false;}
+function setMouseDistance(evt) {MOUSEDISTANCE = true;}
+function doneMouseDistance(evt) {MOUSEDISTANCE = false;}
+
+function dragHeight(evt) {
+   if (!MOUSEHEIGHT || !HEIGHTFUNC) return;
+   var locX = evt.clientX - 10;
+   if (locX < $('#height-scrubber').offset().left + $('#height-scrubber').width() - 20 && locX >= $('#height-scrubber').offset().left) {
+      $('#scrub-mark-height').offset({left : locX});
+   }
+   var input = $('#scrub-mark-height').offset().left - $('#height-scrubber').offset().left;
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * input + incpH));
+   contxt.strokeStyle = 'blue';
+   contxt.lineWidth = 0.5;
+   contxt.setLineDash([5, 5]);
+   contxt.beginPath();
+   contxt.moveTo(0, canvas.height - incpH);
+   contxt.lineTo(canvas.width, canvas.height - (coefH * canvas.width + incpH));
+   contxt.stroke();
+}
+function dragDistance(evt) {
+   if (!MOUSEDISTANCE || !DISTFUNC) return;
+   var locX = evt.clientX - 10;
+   if (locX < $('#distance-scrubber').offset().left + $('#distance-scrubber').width() - 20 && locX >= $('#distance-scrubber').offset().left) {
+      $('#scrub-mark-distance').offset({left : locX});
+   }
+   var input = $('#scrub-mark-distance').offset().left - $('#distance-scrubber').offset().left;
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.drawImage(planeImg, coefD * input + incpD, planeLocY);
+   contxt.strokeStyle = 'red';
+   contxt.lineWidth = 0.5;
+   contxt.setLineDash([5, 5]);
+   contxt.beginPath();
+   contxt.moveTo(0, canvas.height - incpD);
+   contxt.lineTo(canvas.width, canvas.height - (coefD * canvas.width + incpD));
+   contxt.stroke();
+}
+function baseDraw() {
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   $('#height-before').offset({left : $('#height-scrubber').offset().left - 25, top : $('#height-scrubber').offset().top + 2});
+   $('#height-after').offset({left : $('#height-scrubber').offset().left + 805, top : $('#height-scrubber').offset().top + 2});
+
+   $('#distance-before').offset({left : $('#distance-scrubber').offset().left - 25, top : $('#distance-scrubber').offset().top + 2});
+   $('#distance-after').offset({left : $('#distance-scrubber').offset().left + 805, top : $('#distance-scrubber').offset().top + 2});
+
+   $('#play-height').offset({left : $('#height-scrubber').offset().left - 65, top : $('#height-scrubber').offset().top + 10});
+   $('#play-distance').offset({left : $('#distance-scrubber').offset().left - 65, top : $('#distance-scrubber').offset().top + 10});
+   //txtDraw();
+}
+function txtDraw() {
+   contxt.font = '14px Arial';
+   contxt.fillStyle = 'gray';
+   contxt.fillText('30,000 ft', 5, 15);
+   contxt.fillText('250 mi', canvas.width - 55, canvas.height - 15);
+}
+function objectsStart() {
+   planeImg = new Image();
+   planeImg.onload = function(){contxt.drawImage(planeImg, planeLocX, planeLocY);};
+   planeImg.src = 'plane.png';
+}
+function drawHeightFunc() {
+   var func = $('#height-input').val();
+   if (!func) {HEIGHTFUNC = false; return;}
+   else HEIGHTFUNC = true;
+// linear functions
+   coefH = parseFloat(func.match(/(\-?[0-9]+\.?[0-9]*)x/));
+   incpH = parseFloat(func.match(/\s([0-9]+\.?[0-9]*$)/) || func.match(/^([0-9]+\.?[0-9]*\s)/) || 0) / 66;
+
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * planeLocX + incpH));
+   contxt.strokeStyle = 'blue';
+   contxt.lineWidth = 0.5;
+   contxt.setLineDash([5, 5]);
+   contxt.beginPath();
+   contxt.moveTo(0, canvas.height - incpH);
+   contxt.lineTo(canvas.width, canvas.height - (coefH * canvas.width + incpH));
+   contxt.stroke();
+   $('#scrub-mark-height').offset({left : $('#height-scrubber').offset().left});
+   //txtDraw();
+}
+function drawDistanceFunc() {
+   var func = $('#distance-input').val();
+   if (!func) {DISTFUNC = false; return;}
+   else DISTFUNC = true;
+// linear functions
+   coefD = parseFloat(func.match(/(\-?[0-9]+\.?[0-9]*)x/));
+   incpD = parseFloat(func.match(/\s([0-9]+\.?[0-9]*$)/) || func.match(/^([0-9]+\.?[0-9]*\s)/) || 0) / 0.3125;
+
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.drawImage(planeImg, coefD * planeLocX + incpD, planeLocY);
+   contxt.strokeStyle = 'red';
+   contxt.lineWidth = 0.5;
+   contxt.setLineDash([5, 5]);
+   contxt.beginPath();
+   contxt.moveTo(0, canvas.height - incpD);
+   contxt.lineTo(canvas.width, canvas.height - (coefD * canvas.width + incpD));
+   contxt.stroke();
+   $('#scrub-mark-distance').offset({left : $('#distance-scrubber').offset().left});
+   //txtDraw();
+}
+
+$('#height-scrubber').bind('mousedown', function(evt){setMouseHeight(evt);});
+$('#height-scrubber').bind('mousemove', function(evt){dragHeight(evt);});
+$('#height-scrubber').bind('mouseup', function(evt){doneMouseHeight(evt);});
+
+$('#distance-scrubber').bind('mousedown', function(evt){setMouseDistance(evt);});
+$('#distance-scrubber').bind('mousemove', function(evt){dragDistance(evt);});
+$('#distance-scrubber').bind('mouseup', function(evt){doneMouseDistance(evt);});
+
+$('#height-input').bind('keypress', function(evt) {if (evt.keyCode === 13) {drawHeightFunc();}});
+$('#distance-input').bind('keypress', function(evt) {if (evt.keyCode === 13) {drawDistanceFunc();}});
+window.addEventListener('resize', baseDraw, true);
+
+baseDraw();
+objectsStart();
+</script>
