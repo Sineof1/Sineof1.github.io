@@ -42,6 +42,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post16'></div>
 <div id='post15'></div>
 <div id='post14'></div>
 <div id='post13'></div>
@@ -62,13 +63,13 @@
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
    setTimeout(function(){$('#more-posts').show(); $('#more-posts').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 5000);
+   $.get( "/justsomemath/elv-matches.html", function(data) {$("#post16").append(data);});
    $.get( "/justsomemath/for-back.html", function(data) {$("#post15").append(data);});
    $.get( "/justsomemath/scale-vecs.html", function(data) {$("#post14").append(data);});
    $.get( "/justsomemath/thresh-cons.html", function(data) {$("#post13").append(data);});
    $.get( "/justsomemath/add-vecs.html", function(data) {$("#post12").append(data);});
    $.get( "/justsomemath/vecs.html", function(data) {$("#post11").append(data);});
    $.get( "/justsomemath/tech-reflect.html", function(data) {$("#post10").append(data);});
-   $.get( "/justsomemath/tao-sym.html", function(data) {$("#post6").append(data);});
    $.get( "/justsomemath/op-connex.html", function(data) {$("#post7").append(data);});
    $.get( "/justsomemath/comp-phob.html", function(data) {$("#post8").append(data);});
    $.get( "/justsomemath/struct.html", function(data) {$("#post9").append(data);});
