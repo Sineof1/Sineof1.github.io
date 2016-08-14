@@ -1,0 +1,43 @@
+<a href='http://sineof1.github.io/justsomemath/elv-matches.html' style='color:black;'><div class='post-title'>Eleven Matches</div></a>
+<div class='post-body'>
+
+<p>Here's an interesting problem, which I'll just work out as I write this. It's from <a href='https://www.amazon.com/Moscow-Puzzles-Mathematical-Recreations-Recreational-ebook/dp/B00TKQTMV8/ref=sr_1_1?s=digital-text&ie=UTF8&qid=1471108479&sr=1-1&keywords=moscow+puzzles#nav-subnav' target='_blank'>this book</a>:</p>
+
+<blockquote>On the table are 11 matches (or other objects). The first player picks up 1, 2, or 3 matches. The second player picks up 1, 2, or 3, and so on. The player who picks up the last match loses. (A) Can the first player always win? (B) Can he if there are 30 matches instead of 11? (C) Can he in general, with \(\mathtt{n}\) matches to be picked up 1 through \(\mathtt{p}\) at a time (\(\mathtt{p}\) not greater than \(\mathtt{n}\))?</blockquote>
+
+<iframe src="https://trinket.io/embed/python3/2b4d2f2f27?outputOnly=true&start=result" width="300" height="310" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen style='float:right;margin:8px 0 20px 30px;'></iframe>
+<p>My first thought was to play a little and see what I notice. So I cooked up a tiny program to simulate a single game&mdash;here, the choices made by each player are random whole numbers between 1 and 3 inclusive. You can press <strong>Run</strong> over and over to run several random games.</p>
+
+<p>It's not entirely random, of course. Players can't choose a number of matches greater than the current count. Also, a player can't deliberately lose the game by choosing all the remaining matches (if the number remaining exceeds 1).</p>
+
+<p class='h2-sec'>A Wishful-Thinking Simplification</p>
+
+<p>I'm not sure that did much good. But I got to see different games play out&mdash;get my head around the environment I'm dealing with. My next thought was to simplify things, a wishful-thinking simplification: as a player, I would want to be left with 4 matches. That's a sure win for me. Ah, but not just 4. Three or two would be a win as well&mdash;corresponding to \(\mathtt{m = 2}\) matches and \(\mathtt{m = 1}\) match (where 4 corresponds to \(\mathtt{m = 3}\) matches).</p>
+
+<p>Keep going by adding 4 to 4, 3, and 2. If I have 8, 7, or 6 matches in front of me, I can take 3, 2, or 1 to make it 5. My opponent must then take 3, 2, or 1 to leave me with 2, 3, or 4&mdash;the numbers that I have already decided are instant wins for me. Finally, one more round of adding 4: with 12, 11, or 10 matches, I can take 3, 2, or 1 to reduce the count to 9. And my opponent must reduce the number to 8, 7, or 6. With 11 matches, that means that I can always win by taking 2 to start and following the pattern above.</p>
+
+<p>So . . . what <strong>is</strong> the pattern? It seems that if I'm Player A I want my opponent to have something like \(\mathtt{4n + 1}\) matches. And I want \(\mathtt{4n}\) or \(\mathtt{4n - 1}\) or \(\mathtt{4n - 2}\). Let's focus on trying to control what my opponent gets.</p>
+
+<p class='h2-sec'>Algebraic Thinking</p>
+
+<p>Given that I'm dropped onto a random place on the number line, \(\mathtt{n}\), how do I get to the nearest multiple of 4 (plus 1) to the left of, or at, my location? Well, I take my location, \(\mathtt{n}\), and subtract \(\mathtt{(n \bmod 4) - 1}\), unless \(\mathtt{(n \bmod 4) - 1}\) is 0, in which case I just subtract 3. I'll explain this in the future, but for now let's change Player A's strategy to that and keep Player B's random to see if we can guarantee a win for Player A.</p>
+
+<iframe src="https://trinket.io/embed/python3/e35100aac7?outputOnly=true&start=result" width="300" height="300" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen style='float:right;margin:10px 0 20px 30px;'></iframe>
+<p>I think we nailed it in the code at the right. That answers Question A, probably a little more completely than we needed to, but it's still answered mostly experimentally. We can worry about elegance later. There is a way that Player A can always win, when starting with 11 matches. No matter what Player B plays, as long as Player A plays \(\mathtt{(n \bmod 4) - 1}\) (or 3, when \(\mathtt{(n \bmod 4) - 1}\) results in \(\mathtt{-1}\)), then Player A will win.</p>
+
+<p>Does the same strategy work when starting with 30 matches? My guess is that it should, since the rules haven't changed (each player can still only pick up 1, 2, or 3 matches) and we built our strategy up from the simplest case. Let's replicate the strategy in the code but change the count to start at 30 and see what we get.</p>
+
+<iframe src="https://trinket.io/embed/python3/39e25a0e74?start=result" width="100%" height="520" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<p class='h2-sec'>Question B and the Rest</p>
+
+<p>I think that answers Question B, mostly experimentally, just as we answered Question A. And, really, we can answer Question C too, at least partly and tentatively. And the answer is no. If we had to start with, say, 29 matches or 9 matches, our formula would tell us to play 0 on the first play. These are numbers that we want for our opponent, not for us, because they lead inexorably to a win for us, no matter what our opponent plays. So, starting off with \(\mathtt{4n + 1}\) matches, when picking up 1, 2, or 3 matches, does not guarantee a win.</p>
+
+<p>A good guess for a more general answer to Question C&mdash;given that the 4 in \(\mathtt{ \bmod 4}\) seems to be the maximum number of matches that can be picked up, \(\mathtt{m}\) plus 1&mdash;is that the game is not winnable if the starting number of matches is \(\mathtt{(m + 1)n + 1}\), where \(\mathtt{m}\) is the maximum number of matches that can be picked up and \(\mathtt{n}\) is the set of natural numbers, \(\mathtt{\{1, 2, 3,\dots\}}\).</p>
+
+<p>I'll leave it to the reader to poke holes in that if it's wrong or tighten the screws if it's essentially correct.</p>
+<img src='https://lh3.googleusercontent.com/g23D9SleB8HNc0ahR3BjasF1LZp12g-jjDTQXNG0RZ32hlh49_ECXdN5kxDjB2ErBkdQW_ryxoeq1Lc-TOnggnZlAMxONtMPLi14twA3UJHGOF7DrxPdaDfvGpEAv8k28AfHw-NFluE10tn1cIeeYEaFFnazwTVPNC_ZrKsio389t4VdX064PoMFyKhHFBB4FybRcVfc40VNcGzee_0TiEV43d3lcRmzA0ZlxJrJrkucZaVLd7Kt7m7-EgsNqUoPrz0LMm7bfv_VWJ4c_nzYdweCZgg8Y_hV0odeI6YqAu7PzhcvaAovF8EK_rwSESKNrw6AQCBVTkRFqXfKWStO8FpbstQTsqljOt1C_oM1owL4pylfhpMDc87QXMRI3fcDJBLoR7ZtaClU-LqOQMDfD0L2q0lwO_EODq0oVH6vH7ByLxenBAvqzrlD7mz_a9P-2HFaaXGA-J00KrCc11rZvwByzSeo0dfVoVWC_jr3Ygi49ySuqzqZIhPo4CwbPXzA8mgfIaZjhRShZtUjyKUhxneaWtYh3yTQTz5wx6JxPp2STtqh5qM3vXuLD0t7wXY9Pii3eLFwM9U06WLAhGhMsDtf8KnnWtCR=w1024-h656-no' style='position:fixed;visibility:hidden;' />
+<hr></hr>
+<p>Image mask credit: <a href='https://flic.kr/p/9LHYoU' target='_blank'>jaimilee090</a></p>
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on August 14, 2016</span><span style='position:absolute;right:20px;'><a href='https://plus.google.com/+JoshuaFisherD/posts/MzKncjCZ65j' target='_blank'>Comments</a></span></div>
