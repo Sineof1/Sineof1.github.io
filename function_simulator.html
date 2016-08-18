@@ -103,7 +103,10 @@ body {
 <div class='scrubber' id='height-scrubber' style='margin-top:15px;'>
 <div class='scrubber-mark' id='scrub-mark-height'></div>
 </div>
-<div class='scrubber' id='distance-scrubber'>
+<div class='scrubber' id='both-scrubber' style='margin-top:5px;margin-bottom:5px;'>
+<div class='scrubber-mark' id='scrub-mark-both'></div>
+</div>
+<div class='scrubber' id='distance-scrubber' style='margin-top:0px;'>
 <div class='scrubber-mark' id='scrub-mark-distance'></div>
 </div>
 
@@ -111,7 +114,6 @@ body {
 height h(x) = <input class='func-input' type='text' id='height-input'> distance d(x) = <input class='func-input' type='text' id='distance-input'>
 </div>
 </body>
-<img src='https://lh3.googleusercontent.com/KRuavVXnq0_kUP-IiCIlVrh44CXJQfuGXdR9ADfOLPnlsukq94iblzKZXcKwZbcoAVd8qRmReGXlI6pz4puNwF-3gsEDYJ9FFePE-AEwfPto6hqY2n4MWzLZfKI7L_GxrOafmBR9_LFBPSp2aj5tD4M3BOXY6o4QO-NMKlwn5eJGTVSVnL98i1fBnDD6oXRtV2KepAX8cp9UH_7n7p_jYexzrNoEbmWfBJdZS5hOcpbBuobzMCairSKxvleVH_Gc9WwpC7BGJhgG-wcEobH1I_VN8QHCs6nAT01O6xu_p9EUxJeN1WNYzmU2WLefcHpLCTaQ2jt_k_8NeHsXJPuR-IBnkU2yfuUihuBElkg-0VcOB0IOkNDt4ucpAvA4lzLT3BbFjxjeiWMm3-pR8jQn9RP3aq5NDBfCOkLGp9ZEcPYIebLzFdeXsZTcCYrhTAT5Eh4dWbLCAhSgWoG3R-WpQX9EepGNr6YN-4kQ1FYS_98AauASpGbqM1xnBXhMi40mfMqTqE3TBHzDp0eYZFr9ZgKJPLqJADjHPQDA-f-0Al8jqwm26AKy-p3mHLA2hSmgvWLwiv8QrdZhM0ln7nLZQGWKhDhcXjpM=w935-h785-no' style='position:fixed;visibility:hidden;' />
 </html>
 
 <script>
@@ -127,6 +129,7 @@ var incpD;
 var incpH;
 var MOUSEHEIGHT = false;
 var MOUSEDISTANCE = false;
+var MOUSEBOTH = false;
 var HEIGHTFUNC = false;
 var DISTFUNC = false;
 
@@ -138,6 +141,8 @@ function setMouseHeight(evt) {MOUSEHEIGHT = true;}
 function doneMouseHeight(evt) {MOUSEHEIGHT = false;}
 function setMouseDistance(evt) {MOUSEDISTANCE = true;}
 function doneMouseDistance(evt) {MOUSEDISTANCE = false;}
+function setMouseBoth(evt) {MOUSEBOTH = true;}
+function doneMouseBoth(evt) {MOUSEBOTH = false;}
 
 function dragHeight(evt) {
    if (!MOUSEHEIGHT || !HEIGHTFUNC) return;
@@ -147,14 +152,15 @@ function dragHeight(evt) {
    }
    var input = $('#scrub-mark-height').offset().left - $('#height-scrubber').offset().left;
    contxt.clearRect(0, 0, canvas.width, canvas.height);
-   contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * input + incpH));
-   contxt.strokeStyle = 'blue';
+   if (DISTFUNC) contxt.drawImage(planeImg, incpD, canvas.height - (coefH * input + incpH));
+   else contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * input + incpH));
+   /*contxt.strokeStyle = 'blue';
    contxt.lineWidth = 0.5;
    contxt.setLineDash([5, 5]);
    contxt.beginPath();
    contxt.moveTo(0, canvas.height - incpH);
    contxt.lineTo(canvas.width, canvas.height - (coefH * canvas.width + incpH));
-   contxt.stroke();
+   contxt.stroke();*/
 }
 function dragDistance(evt) {
    if (!MOUSEDISTANCE || !DISTFUNC) return;
@@ -164,14 +170,25 @@ function dragDistance(evt) {
    }
    var input = $('#scrub-mark-distance').offset().left - $('#distance-scrubber').offset().left;
    contxt.clearRect(0, 0, canvas.width, canvas.height);
-   contxt.drawImage(planeImg, coefD * input + incpD, planeLocY);
-   contxt.strokeStyle = 'red';
+   if (HEIGHTFUNC) contxt.drawImage(planeImg, coefD * input + incpD, canvas.height - incpH);
+   else contxt.drawImage(planeImg, coefD * input + incpD, planeLocY);
+   /*contxt.strokeStyle = 'red';
    contxt.lineWidth = 0.5;
    contxt.setLineDash([5, 5]);
    contxt.beginPath();
    contxt.moveTo(0, canvas.height - incpD);
    contxt.lineTo(canvas.width, canvas.height - (coefD * canvas.width + incpD));
-   contxt.stroke();
+   contxt.stroke();*/
+}
+function dragBoth(evt) {
+   if (!MOUSEBOTH || !DISTFUNC || !HEIGHTFUNC) return;
+   var locX = evt.clientX - 10;
+   if (locX < $('#both-scrubber').offset().left + $('#both-scrubber').width() - 20 && locX >= $('#both-scrubber').offset().left) {
+      $('#scrub-mark-both').offset({left : locX});
+   }
+   var input = $('#scrub-mark-both').offset().left - $('#both-scrubber').offset().left;
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.drawImage(planeImg, coefD * input + incpD, canvas.height - (coefH * input + incpH));
 }
 function baseDraw() {
    contxt.clearRect(0, 0, canvas.width, canvas.height);
@@ -183,18 +200,21 @@ function baseDraw() {
 
    $('#play-height').offset({left : $('#height-scrubber').offset().left - 65, top : $('#height-scrubber').offset().top + 10});
    $('#play-distance').offset({left : $('#distance-scrubber').offset().left - 65, top : $('#distance-scrubber').offset().top + 10});
-   //txtDraw();
-}
-function txtDraw() {
-   contxt.font = '14px Arial';
-   contxt.fillStyle = 'gray';
-   contxt.fillText('30,000 ft', 5, 15);
-   contxt.fillText('250 mi', canvas.width - 55, canvas.height - 15);
+
+   planeLocX = 0;
+   planeLocY = 20;
+   MOUSEHEIGHT = false;
+   MOUSEDISTANCE = false;
+   HEIGHTFUNC = false;
+   DISTFUNC = false;
+   objectsStart();
+   $('#height-input').val('');
+   $('#distance-input').val('');
 }
 function objectsStart() {
    planeImg = new Image();
    planeImg.onload = function(){contxt.drawImage(planeImg, planeLocX, planeLocY);};
-   planeImg.src = 'https://lh3.googleusercontent.com/1L7m2oWGC0SbM0U3IIyl5mwzZzOPe9iUVn8rMm7VzGXN16aeHAyIW_MKLQoqQHVy_UnuFP2oKDSD2ZzvG6oheOdhNyLhq94wIjupVUBeswtf1XOZo_mody5xQYucMF7qFnITR-YWBNQBYO9R7RcF7H4X21tl-g9e1GcNd_m0isCOVv3WsCO0hBkjFjie4rnUIBuFqKtDjPueRiLSFzwMEhQXPCFgpvMNWWB_FKFFFCbagHrjigHlBlWuECrWH4U_xhrlxgZ5BGVQr38dJbVzJl4C13wWDfOSj6m-T4f7rtd5nrFKXk-kGmY2nN8rC2J1AhROBlFZAn01MCRt8FyGL_raOJaxG3MY1D95qiNjUL7FBMopPd9zSFaE84b6UXGCtRt-6lu8KoisUHFjQqgOfTENGJWEXvpX8FaAurANvkgT03bw6517Du2Mx_LdOtbIyQXzdkhhwH2NExGIA4QkxrM7SgHQ_HTxWXNXLKwuibv_rI7bqj1Pfy5Ky8Sg6C2OygqaLVuhRJNiraa59pONru-tWiC_I-uUxt-n_h1EDsJVbC6dldaDnOKxOHwDaywCq0grbhiCig6ng3Tu-fsOSbn_INa2asu_=w100-h26-no';
+   planeImg.src = 'plane.png';
 }
 function drawHeightFunc() {
    var func = $('#height-input').val();
@@ -205,16 +225,18 @@ function drawHeightFunc() {
    incpH = parseFloat(func.match(/\s([0-9]+\.?[0-9]*$)/) || func.match(/^([0-9]+\.?[0-9]*\s)/) || 0) / 66;
 
    contxt.clearRect(0, 0, canvas.width, canvas.height);
-   contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * planeLocX + incpH));
-   contxt.strokeStyle = 'blue';
+   if (DISTFUNC) contxt.drawImage(planeImg, coefD * planeLocX + incpD, canvas.height - (coefH * planeLocX + incpH));
+   else {
+   contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * planeLocX + incpH));}
+   /*contxt.strokeStyle = 'blue';
    contxt.lineWidth = 0.5;
    contxt.setLineDash([5, 5]);
    contxt.beginPath();
    contxt.moveTo(0, canvas.height - incpH);
    contxt.lineTo(canvas.width, canvas.height - (coefH * canvas.width + incpH));
-   contxt.stroke();
+   contxt.stroke();*/
    $('#scrub-mark-height').offset({left : $('#height-scrubber').offset().left});
-   //txtDraw();
+   //}
 }
 function drawDistanceFunc() {
    var func = $('#distance-input').val();
@@ -225,16 +247,18 @@ function drawDistanceFunc() {
    incpD = parseFloat(func.match(/\s([0-9]+\.?[0-9]*$)/) || func.match(/^([0-9]+\.?[0-9]*\s)/) || 0) / 0.3125;
 
    contxt.clearRect(0, 0, canvas.width, canvas.height);
-   contxt.drawImage(planeImg, coefD * planeLocX + incpD, planeLocY);
-   contxt.strokeStyle = 'red';
+   if (HEIGHTFUNC) contxt.drawImage(planeImg, coefD * planeLocX + incpD, canvas.height - (coefH * planeLocX + incpH));
+   else {
+   contxt.drawImage(planeImg, coefD * planeLocX + incpD, planeLocY);}
+   /*contxt.strokeStyle = 'red';
    contxt.lineWidth = 0.5;
    contxt.setLineDash([5, 5]);
    contxt.beginPath();
    contxt.moveTo(0, canvas.height - incpD);
    contxt.lineTo(canvas.width, canvas.height - (coefD * canvas.width + incpD));
-   contxt.stroke();
+   contxt.stroke();*/
    $('#scrub-mark-distance').offset({left : $('#distance-scrubber').offset().left});
-   //txtDraw();
+   //}
 }
 
 $('#height-scrubber').bind('mousedown', function(evt){setMouseHeight(evt);});
@@ -244,6 +268,10 @@ $('#height-scrubber').bind('mouseup', function(evt){doneMouseHeight(evt);});
 $('#distance-scrubber').bind('mousedown', function(evt){setMouseDistance(evt);});
 $('#distance-scrubber').bind('mousemove', function(evt){dragDistance(evt);});
 $('#distance-scrubber').bind('mouseup', function(evt){doneMouseDistance(evt);});
+
+$('#both-scrubber').bind('mousedown', function(evt){setMouseBoth(evt);});
+$('#both-scrubber').bind('mousemove', function(evt){dragBoth(evt);});
+$('#both-scrubber').bind('mouseup', function(evt){doneMouseBoth(evt);});
 
 $('#height-input').bind('keypress', function(evt) {if (evt.keyCode === 13) {drawHeightFunc();}});
 $('#distance-input').bind('keypress', function(evt) {if (evt.keyCode === 13) {drawDistanceFunc();}});
