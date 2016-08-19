@@ -92,6 +92,11 @@ body {
 <path d='M 9 5 L 20 12.5 L 9 20 Z' />
 </svg>
 </div>
+<div class='play-button' id='play-both'>
+<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px' style='fill:white;stroke:white;'>
+<path d='M 9 5 L 20 12.5 L 9 20 Z' />
+</svg>
+</div>
 <div class='play-button' id='play-distance'>
 <svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px' style='fill:white;stroke:white;'>
 <path d='M 9 5 L 20 12.5 L 9 20 Z' />
@@ -157,13 +162,6 @@ function dragHeight(evt) {
    contxt.clearRect(0, 0, canvas.width, canvas.height);
    if (DISTFUNC) contxt.drawImage(planeImg, incpD, canvas.height - (coefH * input + incpH));
    else contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * input + incpH));
-   /*contxt.strokeStyle = 'blue';
-   contxt.lineWidth = 0.5;
-   contxt.setLineDash([5, 5]);
-   contxt.beginPath();
-   contxt.moveTo(0, canvas.height - incpH);
-   contxt.lineTo(canvas.width, canvas.height - (coefH * canvas.width + incpH));
-   contxt.stroke();*/
 }
 function dragDistance(evt) {
    if (!MOUSEDISTANCE || !DISTFUNC) return;
@@ -175,13 +173,6 @@ function dragDistance(evt) {
    contxt.clearRect(0, 0, canvas.width, canvas.height);
    if (HEIGHTFUNC) contxt.drawImage(planeImg, coefD * input + incpD, canvas.height - incpH);
    else contxt.drawImage(planeImg, coefD * input + incpD, planeLocY);
-   /*contxt.strokeStyle = 'red';
-   contxt.lineWidth = 0.5;
-   contxt.setLineDash([5, 5]);
-   contxt.beginPath();
-   contxt.moveTo(0, canvas.height - incpD);
-   contxt.lineTo(canvas.width, canvas.height - (coefD * canvas.width + incpD));
-   contxt.stroke();*/
 }
 function dragBoth(evt) {
    if (!MOUSEBOTH || !DISTFUNC || !HEIGHTFUNC) return;
@@ -203,6 +194,7 @@ function baseDraw() {
 
    $('#play-height').offset({left : $('#height-scrubber').offset().left - 65, top : $('#height-scrubber').offset().top + 10});
    $('#play-distance').offset({left : $('#distance-scrubber').offset().left - 65, top : $('#distance-scrubber').offset().top + 10});
+   $('#play-both').offset({left : $('#both-scrubber').offset().left - 65, top : $('#both-scrubber').offset().top + 10});
 
    planeLocX = 0;
    planeLocY = 20;
@@ -231,15 +223,9 @@ function drawHeightFunc() {
    if (DISTFUNC) contxt.drawImage(planeImg, coefD * planeLocX + incpD, canvas.height - (coefH * planeLocX + incpH));
    else {
    contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * planeLocX + incpH));}
-   /*contxt.strokeStyle = 'blue';
-   contxt.lineWidth = 0.5;
-   contxt.setLineDash([5, 5]);
-   contxt.beginPath();
-   contxt.moveTo(0, canvas.height - incpH);
-   contxt.lineTo(canvas.width, canvas.height - (coefH * canvas.width + incpH));
-   contxt.stroke();*/
    $('#scrub-mark-height').offset({left : $('#height-scrubber').offset().left});
-   //}
+   $('#scrub-mark-distance').offset({left : $('#distance-scrubber').offset().left});
+   $('#scrub-mark-both').offset({left : $('#both-scrubber').offset().left});
 }
 function drawDistanceFunc() {
    var func = $('#distance-input').val();
@@ -253,16 +239,60 @@ function drawDistanceFunc() {
    if (HEIGHTFUNC) contxt.drawImage(planeImg, coefD * planeLocX + incpD, canvas.height - (coefH * planeLocX + incpH));
    else {
    contxt.drawImage(planeImg, coefD * planeLocX + incpD, planeLocY);}
-   /*contxt.strokeStyle = 'red';
-   contxt.lineWidth = 0.5;
-   contxt.setLineDash([5, 5]);
-   contxt.beginPath();
-   contxt.moveTo(0, canvas.height - incpD);
-   contxt.lineTo(canvas.width, canvas.height - (coefD * canvas.width + incpD));
-   contxt.stroke();*/
+   $('#scrub-mark-height').offset({left : $('#height-scrubber').offset().left});
    $('#scrub-mark-distance').offset({left : $('#distance-scrubber').offset().left});
-   //}
+   $('#scrub-mark-both').offset({left : $('#both-scrubber').offset().left});
 }
+function animateMarkHeight() {
+   if (!HEIGHTFUNC) return;
+   var x = $('#scrub-mark-height').offset().left;
+   $('#scrub-mark-height').offset({left : x + 5});
+   animatePlaneHeight();
+   if ($('#scrub-mark-height').offset().left <= $('#height-scrubber').offset().left + $('#height-scrubber').width() - 25) {
+   window.requestAnimationFrame(animateMarkHeight);
+   }
+}
+function animateMarkDistance() {
+   if (!DISTFUNC) return;
+   var x = $('#scrub-mark-distance').offset().left;
+   $('#scrub-mark-distance').offset({left : x + 5});
+   animatePlaneDistance();
+   if ($('#scrub-mark-distance').offset().left <= $('#distance-scrubber').offset().left + $('#distance-scrubber').width() - 25) {
+   window.requestAnimationFrame(animateMarkDistance);
+   }
+}
+function animateMarkBoth() {
+   if (!HEIGHTFUNC || !DISTFUNC) return;
+   var x = $('#scrub-mark-both').offset().left;
+   $('#scrub-mark-both').offset({left : x + 5});
+   animatePlaneBoth();
+   if ($('#scrub-mark-both').offset().left <= $('#both-scrubber').offset().left + $('#both-scrubber').width() - 25) {
+   window.requestAnimationFrame(animateMarkBoth);
+   }
+}
+function animatePlaneHeight() {
+   if (!HEIGHTFUNC) return;
+   var input = $('#scrub-mark-height').offset().left - $('#height-scrubber').offset().left;
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   if (DISTFUNC) contxt.drawImage(planeImg, incpD, canvas.height - (coefH * input + incpH));
+   else contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * input + incpH));
+}
+function animatePlaneDistance() {
+   if (!DISTFUNC) return;
+   var input = $('#scrub-mark-distance').offset().left - $('#distance-scrubber').offset().left;
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   if (HEIGHTFUNC) contxt.drawImage(planeImg, coefD * input + incpD, canvas.height - incpH);
+   else contxt.drawImage(planeImg, coefD * input + incpD, planeLocY);
+}
+function animatePlaneBoth() {
+   if (!DISTFUNC || !HEIGHTFUNC) return;
+   var input = $('#scrub-mark-both').offset().left - $('#both-scrubber').offset().left;
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.drawImage(planeImg, coefD * input + incpD, canvas.height - (coefH * input + incpH));
+}
+$('#play-height').click(function() {animateMarkHeight();});
+$('#play-distance').click(function() {animateMarkDistance();});
+$('#play-both').click(function() {animateMarkBoth();});
 
 $('#height-scrubber').bind('mousedown', function(evt){setMouseHeight(evt);});
 $('#height-scrubber').bind('mousemove', function(evt){dragHeight(evt);});
