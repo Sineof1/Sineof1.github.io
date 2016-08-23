@@ -12,10 +12,10 @@
 <style>
 @font-face {
     font-family: 'proxima_nova';
-    src: url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.eot');
-    src: url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.woff') format('woff'),
-         url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.ttf') format('truetype'),
-         url('https://22e0ce9b2b0e4077ba2394c1ff0c4ad414a53721.googledrive.com/host/0B9y9PCgl63o-Y2tKdHh3dGRRQ1E/proxima_nova.svg') format('svg');
+    src: url('http://guzintamath.com/audio_fonts/proxima_nova.eot');
+    src: url('http://guzintamath.com/audio_fonts/proxima_nova.woff') format('woff'),
+         url('http://guzintamath.com/audio_fonts/proxima_nova.ttf') format('truetype'),
+         url('http://guzintamath.com/audio_fonts/proxima_nova.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -83,6 +83,17 @@ body {
    cursor:pointer;
    box-shadow:0 0 2px #000;
 }
+.func-x {
+   position:fixed;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:100px;
+   height:40px;
+   font-family:'proxima_nova';
+   font-size:19px;
+   z-index:-1;
+}
 </style>
 </head>
 <body>
@@ -92,7 +103,7 @@ body {
 <path d='M 9 5 L 20 12.5 L 9 20 Z' />
 </svg>
 </div>
-<div class='play-button' id='play-both'>
+<div class='play-button' id='play-both' style='background-color:gray;'>
 <svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px' style='fill:white;stroke:white;'>
 <path d='M 9 5 L 20 12.5 L 9 20 Z' />
 </svg>
@@ -110,9 +121,11 @@ body {
 
 <div class='scrubber' id='height-scrubber' style='margin-top:15px;'>
 <div class='scrubber-mark' id='scrub-mark-height'></div>
+<div class='func-x' id='height-x'>0</div>
 </div>
 <div class='scrubber' id='both-scrubber' style='margin-top:5px;margin-bottom:5px;'>
 <div class='scrubber-mark' id='scrub-mark-both'></div>
+<div class='func-x' id='distance-x'>0</div>
 </div>
 <div class='scrubber' id='distance-scrubber' style='margin-top:0px;'>
 <div class='scrubber-mark' id='scrub-mark-distance'></div>
@@ -159,6 +172,7 @@ function dragHeight(evt) {
       $('#scrub-mark-height').offset({left : locX});
    }
    var input = $('#scrub-mark-height').offset().left - $('#height-scrubber').offset().left;
+   $('#height-x').text((input - 1) * 66);
    contxt.clearRect(0, 0, canvas.width, canvas.height);
    if (DISTFUNC) contxt.drawImage(planeImg, incpD, canvas.height - (coefH * input + incpH));
    else contxt.drawImage(planeImg, planeLocX, canvas.height - (coefH * input + incpH));
@@ -170,6 +184,7 @@ function dragDistance(evt) {
       $('#scrub-mark-distance').offset({left : locX});
    }
    var input = $('#scrub-mark-distance').offset().left - $('#distance-scrubber').offset().left;
+   $('#distance-x').text((input - 1) * 0.3125);
    contxt.clearRect(0, 0, canvas.width, canvas.height);
    if (HEIGHTFUNC) contxt.drawImage(planeImg, coefD * input + incpD, canvas.height - incpH);
    else contxt.drawImage(planeImg, coefD * input + incpD, planeLocY);
@@ -195,6 +210,12 @@ function baseDraw() {
    $('#play-height').offset({left : $('#height-scrubber').offset().left - 65, top : $('#height-scrubber').offset().top + 10});
    $('#play-distance').offset({left : $('#distance-scrubber').offset().left - 65, top : $('#distance-scrubber').offset().top + 10});
    $('#play-both').offset({left : $('#both-scrubber').offset().left - 65, top : $('#both-scrubber').offset().top + 10});
+
+   $('#height-x').offset({left : $('#height-scrubber').offset().left + $('#height-scrubber').width() / 2 - 50, top : $('#height-scrubber').offset().top + 2.5});
+   $('#distance-x').offset({left : $('#height-scrubber').offset().left + $('#height-scrubber').width() / 2 - 50, top : $('#distance-scrubber').offset().top + 2.5});
+
+   $('#height-y').offset({left : $('#height-scrubber').offset().left + $('#height-scrubber').width() + 20, top : $('#height-scrubber').offset().top + 2.5});
+   $('#distance-y').offset({left : $('#height-scrubber').offset().left + $('#height-scrubber').width() + 20, top : $('#distance-scrubber').offset().top + 2.5});
 
    planeLocX = 0;
    planeLocY = 20;
@@ -226,6 +247,7 @@ function drawHeightFunc() {
    $('#scrub-mark-height').offset({left : $('#height-scrubber').offset().left});
    $('#scrub-mark-distance').offset({left : $('#distance-scrubber').offset().left});
    $('#scrub-mark-both').offset({left : $('#both-scrubber').offset().left});
+   $('#height-x').text(0);
 }
 function drawDistanceFunc() {
    var func = $('#distance-input').val();
@@ -242,6 +264,7 @@ function drawDistanceFunc() {
    $('#scrub-mark-height').offset({left : $('#height-scrubber').offset().left});
    $('#scrub-mark-distance').offset({left : $('#distance-scrubber').offset().left});
    $('#scrub-mark-both').offset({left : $('#both-scrubber').offset().left});
+   $('#distance-x').text(0);
 }
 function animateMarkHeight() {
    if (!HEIGHTFUNC) return;
@@ -249,6 +272,8 @@ function animateMarkHeight() {
    $('#scrub-mark-height').offset({left : x + 5});
    animatePlaneHeight();
    if ($('#scrub-mark-height').offset().left <= $('#height-scrubber').offset().left + $('#height-scrubber').width() - 25) {
+   var input = $('#scrub-mark-height').offset().left - $('#height-scrubber').offset().left;
+   $('#height-x').text((input - 1) * 66);
    window.requestAnimationFrame(animateMarkHeight);
    }
 }
@@ -258,6 +283,8 @@ function animateMarkDistance() {
    $('#scrub-mark-distance').offset({left : x + 5});
    animatePlaneDistance();
    if ($('#scrub-mark-distance').offset().left <= $('#distance-scrubber').offset().left + $('#distance-scrubber').width() - 25) {
+   var input = $('#scrub-mark-distance').offset().left - $('#distance-scrubber').offset().left;
+   $('#distance-x').text((input - 1) * 0.3125);
    window.requestAnimationFrame(animateMarkDistance);
    }
 }
