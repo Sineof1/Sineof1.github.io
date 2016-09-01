@@ -336,7 +336,10 @@ $('#both-scrubber').bind('mouseup', function(evt){doneMouseBoth(evt);});
 $('#height-input').bind('keypress', function(evt) {if (evt.keyCode === 13) {drawHeightFunc();}});
 $('#distance-input').bind('keypress', function(evt) {if (evt.keyCode === 13) {drawDistanceFunc();}});
 window.addEventListener('resize', baseDraw, true);
-
+window.scroll(function() {
+   $('#height-x').offset({left : $('#height-scrubber').offset().left + $('#height-scrubber').width() / 2 - 50, top : $('#height-scrubber').offset().top + 2.5});
+   $('#distance-x').offset({left : $('#height-scrubber').offset().left + $('#height-scrubber').width() / 2 - 50, top : $('#distance-scrubber').offset().top + 2.5});
+});
 baseDraw();
 objectsStart();
 </script>
