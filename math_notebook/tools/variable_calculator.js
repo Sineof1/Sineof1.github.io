@@ -11,6 +11,7 @@ $(document).ready(function() {
   if (key !== '*' && key !== '+'
   && key !== '-' && key !== '/') calcKeys[key] = Math.floor(Math.random() * 20);
   }
+  console.log(calcKeys);
   $('.op-button').css({'pointer-events':'none'});
 
   $('.calc-button').bind('click', function(evt) {
