@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+<title>Line of Best Fit Explore</title>
+</head>
+
+<style>
+table {
+   border-collapse:collapse;
+}
+#wrapper {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   margin-top:50px;
+}
+#data-table {
+   display:inline-block;
+   margin-right:100px;
+   height:500px;
+   width:250px;
+}
+#data-table th {
+   background-color:aliceblue;
+   font-family:'Arimo';
+   padding:8px;
+}
+#data-table tr {
+   height:45px;
+}
+#data-table td {
+   width:125px;
+   min-width:125px;
+   max-width:125px;
+   text-align:center;
+   padding:8px;
+   font-family:'Arimo';
+   outline:none;
+   overflow:hidden;
+}
+button {
+   position:fixed;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:285px;
+   height:40px;
+   font-family:Arimo;
+   font-size:1.5em;
+   font-variant:small-caps;
+   outline:none;
+   border:none;
+   border-radius:2px;
+   cursor:pointer;
+}
+td + td,
+th + th { border-left: 1px solid gray; }
+tr + tr { border-top: 1px solid gray; }
+#lobf_map {
+   position:relative;
+   display:inline-block;
+   width:500px;
+   height:500px;
+   border-left:3px solid gray;
+   border-bottom:3px solid gray;
+   box-shadow:0 0 3px #ccc;
+}
+#lobf_canvas {
+   position:absolute;
+   left:0;
+   bottom:0;
+   width:500px;
+   height:500px;
+   cursor:pointer;
+   z-index:99;
+}
+#xmax, #xmin, #ymax, #ymin {
+   position:fixed;
+   width:100px;
+   height:50px;
+   color:gray;
+}
+#regression-equation {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:500px;
+   height:40px;
+   font-family:Arimo;
+   font-size:1.2em;
+}
+</style>
+
+<body>
+<div id='wrapper'>
+<table id='data-table'>
+<tr><th>x</th><th>y</th></tr>
+<tr><td contenteditable="true" class='x-values' id='x1'></td><td contenteditable="true" class='y-values' id='y1'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x2'></td><td contenteditable="true" class='y-values' id='y2'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x3'></td><td contenteditable="true" class='y-values' id='y3'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x4'></td><td contenteditable="true" class='y-values' id='y4'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x5'></td><td contenteditable="true" class='y-values' id='y5'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x6'></td><td contenteditable="true" class='y-values' id='y6'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x7'></td><td contenteditable="true" class='y-values' id='y7'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x8'></td><td contenteditable="true" class='y-values' id='y8'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x9'></td><td contenteditable="true" class='y-values' id='y9'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x10'></td><td contenteditable="true" class='y-values' id='y10'></td></tr>
+</table>
+<div id='lobf_map'><canvas id='lobf_canvas' width='500' height='500'></canvas></div>
+</div>
+<div id='ymin'></div>
+<div id='ymax'></div>
+<div id='xmin'></div>
+<div id='xmax'></div>
+<button id='udpate_plot'>update</button>
+<div id='regression-equation'></div>
+</body>
+
+</html>
+
+<script>
+$('#xmax').offset({left: $('#lobf_map').offset().left + 500, top: $('#lobf_map').offset().top + 510});
+$('#xmin').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top + 510});
+$('#ymax').offset({left: $('#lobf_map').offset().left - 30, top: $('#lobf_map').offset().top - 10});
+$('#ymin').offset({left: $('#lobf_map').offset().left - 30, top: $('#lobf_map').offset().top + 490});
+$('button').offset({left: $('#data-table').offset().left + 5, top: $('#lobf_map').offset().top + 520});
+$('#regression-equation').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top + 530});
+
+var canvas = document.getElementById('lobf_canvas');
+var contxt = canvas.getContext('2d');
+
+var xVals = [];
+var xMin  =  0;
+var xMax  =  0;
+var yVals = [];
+var yMin  =  0;
+var yMax  =  0;
+var plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}};
+var lastPlot = {lineintc: undefined, lineEnd: undefined};
+var point;
+
+var MOUSEDOWN = false;
+
+$('button').click(function(){updateXAxis(); updateYAxis(); plotPoints(); bestFitPlot();});
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function updateXAxis() {
+   xVals = [];
+   $('.x-values').each(function() {
+   var xNum;
+   if ($(this).text() !== '' && typeof(parseFloat($(this).text())) == 'number') {
+   xNum = parseFloat($(this).text());
+   xVals.push(xNum);
+   
+   xMax = Math.ceil(Math.max.apply(null, xVals) / 10) * 10 + 5;
+   if (xMax !== xMin) {
+      $('#xmax').text(xMax);
+      $('#xmin').text(xMin);
+   }}});
+}
+function updateYAxis() {
+   yVals = [];
+   $('.y-values').each(function() {
+   var yNum;
+   if ($(this).text() !== '' && typeof(parseFloat($(this).text())) == 'number') {
+   yNum = parseFloat($(this).text());
+   yVals.push(yNum);
+   
+   yMax = Math.ceil(Math.max.apply(null, yVals) / 10) * 10 + 5;
+   if (yMax !== yMin) {
+      $('#ymax').text(yMax);
+      $('#ymin').text(yMin);
+   }}});
+}
+function bestFitPlot() {
+   var xSum = 0;
+   var ySum = 0;
+   var xMean = 0;
+   var yMean = 0;
+   var numerator = 0;
+   var denominator = 0;
+   xVals.forEach(function(xval){xSum += xval;});
+   yVals.forEach(function(yval){ySum += yval;});
+   xMean = xSum / xVals.length;
+   yMean = ySum / yVals.length;
+   xVals.forEach(function(xval, inx){numerator += (xval - xMean) * (yVals[inx] - yMean);});
+   xVals.forEach(function(xval){denominator += (xval - xMean) * (xval - xMean);});
+   var slope = numerator / denominator;
+   var yintc = yMean - (slope * xMean);
+   var lineslope = (slope * -xMax) / yMax;
+   var lineintc = 500 - ((yintc * 500) / yMax);
+   var lineEnd = lineslope * 500 + lineintc;
+   lastPlot.lineintc = lineintc;
+   lastPlot.lineEnd = lineEnd;
+   plotPoints();
+   contxt.strokeStyle = 'orange';
+   contxt.beginPath();
+   contxt.moveTo(0, lineintc);
+   contxt.lineTo(500, lineEnd);
+   contxt.stroke();
+   contxt.strokeStyle = 'blue';
+   $('#regression-equation').text('f(x) = ' + slope.toFixed(2) + 'x + ' + yintc.toFixed(2));
+}
+function plotPoints() {
+   if (xVals.length !== yVals.length) return;
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.strokeStyle = 'orange';
+   contxt.beginPath();
+   contxt.moveTo(0, lastPlot.lineintc);
+   contxt.lineTo(500, lastPlot.lineEnd);
+   contxt.stroke();
+   contxt.strokeStyle = 'blue';
+   contxt.fillStyle = 'white';
+   var x1 = parseFloat($('#x1').text()) / xMax * 500;
+   var y1 = 500 - (parseFloat($('#y1').text()) / yMax * 500);
+   if (x1 && y1) {
+      contxt.beginPath();
+      contxt.arc(x1, y1, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p1.x = x1;
+      plottedPoints.p1.y = y1;
+   }
+   var x2 = parseFloat($('#x2').text()) / xMax * 500;
+   var y2 = 500 - (parseFloat($('#y2').text()) / yMax * 500);
+   if (x2 && y2) {
+      contxt.beginPath();
+      contxt.arc(x2, y2, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p2.x = x2;
+      plottedPoints.p2.y = y2;
+   }
+   var x3 = parseFloat($('#x3').text()) / xMax * 500;
+   var y3 = 500 - (parseFloat($('#y3').text()) / yMax * 500);
+   if (x3 && y3) {
+      contxt.beginPath();
+      contxt.arc(x3, y3, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p3.x = x3;
+      plottedPoints.p3.y = y3;
+   }
+   var x4 = parseFloat($('#x4').text()) / xMax * 500;
+   var y4 = 500 - (parseFloat($('#y4').text()) / yMax * 500);
+   if (x4 && y4) {
+      contxt.beginPath();
+      contxt.arc(x4, y4, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p4.x = x4;
+      plottedPoints.p4.y = y4;
+   }
+   var x5 = parseFloat($('#x5').text()) / xMax * 500;
+   var y5 = 500 - (parseFloat($('#y5').text()) / yMax * 500);
+   if (x5 && y5) {
+      contxt.beginPath();
+      contxt.arc(x5, y5, 4, 0, Math.PI * 2);
+      contxt.fill();
+      contxt.stroke();
+      plottedPoints.p5.x = x5;
+      plottedPoints.p5.y = y5;
+   }
+   var x6 = parseFloat($('#x6').text()) / xMax * 500;
+   var y6 = 500 - (parseFloat($('#y6').text()) / yMax * 500);
+   if (x6 && y6) {
+      contxt.beginPath();
+      contxt.arc(x6, y6, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p6.x = x6;
+      plottedPoints.p6.y = y6;
+   }
+   var x7 = parseFloat($('#x7').text()) / xMax * 500;
+   var y7 = 500 - (parseFloat($('#y7').text()) / yMax * 500);
+   if (x7 && y7) {
+      contxt.beginPath();
+      contxt.arc(x7, y7, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p7.x = x7;
+      plottedPoints.p7.y = y7;
+   }
+   var x8 = parseFloat($('#x8').text()) / xMax * 500;
+   var y8 = 500 - (parseFloat($('#y8').text()) / yMax * 500);
+   if (x8 && y8) {
+      contxt.beginPath();
+      contxt.arc(x8, y8, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p8.x = x8;
+      plottedPoints.p8.y = y8;
+   }
+   var x9 = parseFloat($('#x9').text()) / xMax * 500;
+   var y9 = 500 - (parseFloat($('#y9').text()) / yMax * 500);
+   if (x9 && y9) {
+      contxt.beginPath();
+      contxt.arc(x9, y9, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p9.x = x9;
+      plottedPoints.p9.y = y9;
+   }
+   var x10 = parseFloat($('#x10').text()) / xMax * 500;
+   var y10 = 500 - (parseFloat($('#y10').text()) / yMax * 500);
+   if (x10 && y10) {
+      contxt.beginPath();
+      contxt.arc(x10, y10, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p10.x = x10;
+      plottedPoints.p10.y = y10;
+   }
+}
+function startMouse() {MOUSEDOWN = true;}
+function endMouse() {
+   MOUSEDOWN = false;
+   $('.x-values').css({'background-color': 'white'});
+   $('.y-values').css({'background-color': 'white'});
+}
+function dragPoint(evt) {
+   if (!MOUSEDOWN) return;
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   for (var pt in plottedPoints) {
+      if (loc.x <= plottedPoints[pt].x + 5 && loc.x >= plottedPoints[pt].x - 5
+       && loc.y <= plottedPoints[pt].y + 5 && loc.y >= plottedPoints[pt].y - 5) {point = pt; break;}
+   }
+   var xinx = xVals.indexOf(xVals.find(function(el){return el == parseFloat($('#x' + point.slice(1)).text());}));
+   var yinx = yVals.indexOf(yVals.find(function(el){return el == parseFloat($('#y' + point.slice(1)).text());}));
+   var newX = loc.x / 500 * xMax;
+   var newY = (500 - loc.y) * yMax / 500;
+   xVals[xinx] = parseFloat(newX.toFixed(2));
+   yVals[yinx] = parseFloat(newY.toFixed(2));
+   $('#x' + point.slice(1)).text(newX.toFixed(2));
+   $('#y' + point.slice(1)).text(newY.toFixed(2));
+   plotPoints();
+   bestFitPlot();
+   $('#x' + point.slice(1)).css({'background-color': '#fafafa'});
+   $('#y' + point.slice(1)).css({'background-color': '#fafafa'});
+}
+
+$('#lobf_canvas').bind('mousedown', startMouse);
+$('#lobf_canvas').bind('mouseup', endMouse);
+$('#lobf_canvas').bind('mousemove', dragPoint);
+</script>
