@@ -157,7 +157,7 @@ function updateXAxis() {
    xNum = parseFloat($(this).text());
    xVals.push(xNum);
    
-   xMax = Math.ceil(Math.max.apply(null, xVals) / 10) * 10 + 5;
+   xMax = Math.ceil(Math.max.apply(null, xVals) / 10) * 10 + 10;
    if (xMax !== xMin) {
       $('#xmax').text(xMax);
       $('#xmin').text(xMin);
@@ -171,7 +171,7 @@ function updateYAxis() {
    yNum = parseFloat($(this).text());
    yVals.push(yNum);
    
-   yMax = Math.ceil(Math.max.apply(null, yVals) / 10) * 10 + 5;
+   yMax = Math.ceil(Math.max.apply(null, yVals) / 10) * 10 + 10;
    if (yMax !== yMin) {
       $('#ymax').text(yMax);
       $('#ymin').text(yMin);
