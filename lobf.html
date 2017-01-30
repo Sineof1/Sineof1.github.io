@@ -40,20 +40,25 @@ table {
    outline:none;
    overflow:hidden;
 }
-button {
-   position:fixed;
-   display:flex;
-   align-items:center;
-   justify-content:center;
-   width:285px;
-   height:40px;
+.update-plot {
+   display:inline-block;
+   width:135px;
+   height:50px;
    font-family:Arimo;
    font-size:1.5em;
    font-variant:small-caps;
    outline:none;
    border:none;
    border-radius:2px;
+   box-sizing:border-box;
+   padding-top:3px;
    cursor:pointer;
+}
+.update-plot:hover {
+   background-color:#ccc;
+}
+.update-plot:active {
+   background-color:#bbb;
 }
 td + td,
 th + th { border-left: 1px solid gray; }
@@ -66,6 +71,7 @@ tr + tr { border-top: 1px solid gray; }
    border-left:3px solid gray;
    border-bottom:3px solid gray;
    box-shadow:0 0 3px #ccc;
+   z-index:98;
 }
 #lobf_canvas {
    position:absolute;
@@ -73,10 +79,19 @@ tr + tr { border-top: 1px solid gray; }
    bottom:0;
    width:500px;
    height:500px;
+   background-color:white;
    cursor:pointer;
    z-index:99;
 }
-#xmax, #xmin, #ymax, #ymin {
+#canvas1 {
+   position:fixed;
+   width:500px;
+   height:500px;
+   visibility:hidden;
+   cursor:crosshair;
+   z-index:100;
+}
+#xmax, #xmin, #ymax, #ymin, #ylab, #xlab {
    position:fixed;
    width:100px;
    height:50px;
@@ -91,10 +106,46 @@ tr + tr { border-top: 1px solid gray; }
    font-family:Arimo;
    font-size:1.2em;
 }
+.side-button {
+   position:fixed;
+   display:flex;
+   align-items:center;
+   justify-content:flex-end;
+   box-sizing:border-box;
+   padding-right:8px;
+   width:40px;
+   height:60px;
+   background-color:#fafafa;
+   border-top-right-radius:12px;
+   border-bottom-right-radius:12px;
+   box-shadow:1px 0 3px #ccc;
+   z-index:0;
+   cursor:pointer;
+}
+#clearButton {
+   position:fixed;
+   bottom:10px;
+   right:10px;
+   width:60px;
+   height:60px;
+   background-color:#fafafa;
+   box-shadow:1px 1px 3px #ccc;
+   border-radius:5px;
+   content:url('http://guzintamath.com/blog/wp-content/uploads/2017/01/undo.png');
+   cursor:pointer;
+}
+#clearButton:hover {
+   background-color:#ccc;
+}
+#clearButton:active {
+   background-color:#bbb;
+}
 </style>
 
 <body>
+<canvas id='canvas1' width='500' height='500'></canvas>
 <div id='wrapper'>
+<div id='table-n-update' style='width:325px;margin-right:80px;'>
 <table id='data-table'>
 <tr><th>x</th><th>y</th></tr>
 <tr><td contenteditable="true" class='x-values' id='x1'></td><td contenteditable="true" class='y-values' id='y1'></td></tr>
@@ -108,25 +159,53 @@ tr + tr { border-top: 1px solid gray; }
 <tr><td contenteditable="true" class='x-values' id='x9'></td><td contenteditable="true" class='y-values' id='y9'></td></tr>
 <tr><td contenteditable="true" class='x-values' id='x10'></td><td contenteditable="true" class='y-values' id='y10'></td></tr>
 </table>
+<button class='update-plot' id='update-points'>
+<img src='http://guzintamath.com/blog/wp-content/uploads/2017/01/points_icon.png' style='width:35%;' />
+</button>
+<button class='update-plot' id='update-line' style='margin-left:10px;'>
+<img src='http://guzintamath.com/blog/wp-content/uploads/2017/01/line_icon.png' style='width:35%;' />
+</button>
+</div>
+
+<div class='side-button' id='draw-tab'><img src='http://guzintamath.com/blog/wp-content/uploads/2017/01/draw.png' style='width:60%;'></div>
 <div id='lobf_map'><canvas id='lobf_canvas' width='500' height='500'></canvas></div>
 </div>
+<div id='ylab'>y</div>
 <div id='ymin'></div>
 <div id='ymax'></div>
 <div id='xmin'></div>
 <div id='xmax'></div>
-<button id='udpate_plot'>update</button>
+<div id='xlab'>x</div>
+
 <div id='regression-equation'></div>
+<div id='clearButton'></div>
 </body>
 
 </html>
+<script src='canvas_script.js' type='text/javascript'></script>
 
 <script>
+var tabClick = 1;
+$('.x-values, .y-values').keypress(function(e){if (e.keyCode == '13' || e.keyCode == '10') e.preventDefault();});
+$('#draw-tab').click(function(){
+   tabClick += 1;
+   if (tabClick % 2 == 0) {$(this).css({'background-color': 'rgba(165, 42, 42, 0.6)'}); $('#canvas1').css({'visibility' : 'visible'});}
+   else {
+   context.clearRect(0, 0, canvas1.width, canvas1.height);
+   $(this).css({'background-color': '#fafafa'});
+   $('#canvas1').css({'visibility' : 'hidden'});}
+   });
+
+$('#canvas1').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top});
 $('#xmax').offset({left: $('#lobf_map').offset().left + 500, top: $('#lobf_map').offset().top + 510});
 $('#xmin').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top + 510});
 $('#ymax').offset({left: $('#lobf_map').offset().left - 30, top: $('#lobf_map').offset().top - 10});
 $('#ymin').offset({left: $('#lobf_map').offset().left - 30, top: $('#lobf_map').offset().top + 490});
-$('button').offset({left: $('#data-table').offset().left + 5, top: $('#lobf_map').offset().top + 520});
+$('#ylab').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top - 30});
+$('#xlab').offset({left: $('#lobf_map').offset().left + 520, top: $('#lobf_map').offset().top + 490});
 $('#regression-equation').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top + 530});
+$('#draw-tab').offset({left: $('#lobf_map').offset().left + 495, top: $('#lobf_map').offset().top + 50});
+
 
 var canvas = document.getElementById('lobf_canvas');
 var contxt = canvas.getContext('2d');
@@ -143,11 +222,26 @@ var point;
 
 var MOUSEDOWN = false;
 
-$('button').click(function(){updateXAxis(); updateYAxis(); plotPoints(); bestFitPlot();});
+$('#update-points').click(function(){updateXAxis(); updateYAxis(); plotPoints();});
+$('#update-line').click(function(){bestFitPlot();});
+$('#clearButton').click(function(){clearAll();});
 
 function windowToCanvas_mouse(canvas, x, y) {
     var bbox = canvas.getBoundingClientRect();
     return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function clearAll() {
+   $('.x-values, .y-values').each(function(elt) {$(this).text('');});
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   xVals = [];
+   xMin  =  0;
+   xMax  =  0;
+   yVals = [];
+   yMin  =  0;
+   yMax  =  0;
+   plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}};
+   lastPlot = {lineintc: undefined, lineEnd: undefined};
+   $('#regression-equation').text('');
 }
 function updateXAxis() {
    xVals = [];
@@ -204,7 +298,10 @@ function bestFitPlot() {
    contxt.lineTo(500, lineEnd);
    contxt.stroke();
    contxt.strokeStyle = 'blue';
-   $('#regression-equation').text('f(x) = ' + slope.toFixed(2) + 'x + ' + yintc.toFixed(2));
+   if (xVals.length > 1 && yVals.length > 1) {
+      $('#regression-equation').text('f(x) = ' + slope.toFixed(2) + 'x + ' + yintc.toFixed(2));
+   }
+   else $('#regression-equation').text('');
 }
 function plotPoints() {
    if (xVals.length !== yVals.length) return;
@@ -316,6 +413,7 @@ function endMouse() {
 }
 function dragPoint(evt) {
    if (!MOUSEDOWN) return;
+   if (xVals.length == 0 || yVals.length == 0) return;
    var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
    for (var pt in plottedPoints) {
       if (loc.x <= plottedPoints[pt].x + 5 && loc.x >= plottedPoints[pt].x - 5
