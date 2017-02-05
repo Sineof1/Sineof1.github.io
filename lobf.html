@@ -7,6 +7,7 @@
 </head>
 
 <style>
+body {margin:0; padding:0;}
 table {
    border-collapse:collapse;
 }
@@ -141,6 +142,23 @@ tr + tr { border-top: 1px solid gray; }
 #clearButton:active {
    background-color:#bbb;
 }
+.anscombe {
+   width:50px;
+   height:50px;
+   background-color:#fafafa;
+   border-radius:100%;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-family:Arimo;
+   font-size:1.2em;
+   color:blue;
+   box-shadow:0 0 3px #ccc;
+   cursor:pointer;
+   margin-bottom:-50px;
+}
+.anscombe:hover {background-color:#ccc;}
+.anscombe:active {background-color:#bbb;};
 </style>
 
 <body>
@@ -180,6 +198,10 @@ tr + tr { border-top: 1px solid gray; }
 <div id='xlab'>x</div>
 
 <div id='regression-equation'></div>
+<div class='anscombe' id='anscombe1'>I</div>
+<div class='anscombe' id='anscombe2'>II</div>
+<div class='anscombe' id='anscombe3'>III</div>
+<div class='anscombe' id='anscombe4'>IV</div>
 <div id='clearButton'></div>
 </body>
 
@@ -205,8 +227,12 @@ $('#ymax').offset({left: $('#lobf_map').offset().left - 30, top: $('#lobf_map').
 $('#ymin').offset({left: $('#lobf_map').offset().left - 30, top: $('#lobf_map').offset().top + 490});
 $('#ylab').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top - 30});
 $('#xlab').offset({left: $('#lobf_map').offset().left + 520, top: $('#lobf_map').offset().top + 490});
-$('#regression-equation').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top + 530});
+$('#regression-equation').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top + 510});
 $('#draw-tab').offset({left: $('#lobf_map').offset().left + 495, top: $('#lobf_map').offset().top + 50});
+$('#anscombe1').offset({left: $('#lobf_map').offset().left + 25, top: $('#lobf_map').offset().top + 575});
+$('#anscombe2').offset({left: $('#lobf_map').offset().left + 100, top: $('#lobf_map').offset().top + 575});
+$('#anscombe3').offset({left: $('#lobf_map').offset().left + 175, top: $('#lobf_map').offset().top + 575});
+$('#anscombe4').offset({left: $('#lobf_map').offset().left + 250, top: $('#lobf_map').offset().top + 575});
 
 
 var canvas = document.getElementById('lobf_canvas');
@@ -444,8 +470,44 @@ function dragPoint(evt) {
    $('#x' + point.slice(1)).css({'background-color': '#fafafa'});
    $('#y' + point.slice(1)).css({'background-color': '#fafafa'});
 }
+function populate(evt) {
+   clearAll();
+   if (evt.target.id === 'anscombe1' || evt.target.id === 'anscombe2' || evt.target.id === 'anscombe3') {
+      $('#x1').text('10.0');$('#x2').text('8.0');$('#x3').text('13.0');$('#x4').text('9.0');$('#x5').text('11.0');
+      $('#x6').text('14.0');$('#x7').text('6.0');$('#x8').text('4.0');$('#x9').text('12.0');$('#x10').text('7.0');
+      $('#x11').text('5.0');
+      }
+   else if (evt.target.id === 'anscombe4') {
+      $('#x1, #x2, #x3, #x4, #x5, #x6, #x7, #x9, #x10, #x11').text('8.0');
+      $('#x8').text('19.0');
+      
+      $('#y1').text('6.58');$('#y2').text('5.76');$('#y3').text('7.71');$('#y4').text('8.84');$('#y5').text('8.47');
+      $('#y6').text('7.04');$('#y7').text('5.25');$('#y8').text('12.50');$('#y9').text('5.56');$('#y10').text('7.91');
+      $('#y11').text('6.89');
+      }
+   if (evt.target.id === 'anscombe1') {    
+      $('#y1').text('8.04');$('#y2').text('6.95');$('#y3').text('7.58');$('#y4').text('8.81');$('#y5').text('8.33');
+      $('#y6').text('9.96');$('#y7').text('7.24');$('#y8').text('4.26');$('#y9').text('10.84');$('#y10').text('4.82');
+      $('#y11').text('5.68');
+      }
+   else if (evt.target.id === 'anscombe2') {    
+      $('#y1').text('9.14');$('#y2').text('8.14');$('#y3').text('8.74');$('#y4').text('8.77');$('#y5').text('9.26');
+      $('#y6').text('8.10');$('#y7').text('6.13');$('#y8').text('3.10');$('#y9').text('9.13');$('#y10').text('7.26');
+      $('#y11').text('4.74');
+      }
+   else if (evt.target.id === 'anscombe3') {    
+      $('#y1').text('7.46');$('#y2').text('6.77');$('#y3').text('12.74');$('#y4').text('7.11');$('#y5').text('7.81');
+      $('#y6').text('8.84');$('#y7').text('6.08');$('#y8').text('5.39');$('#y9').text('8.15');$('#y10').text('6.42');
+      $('#y11').text('5.73');
+      }
+   updateXAxis();
+   updateYAxis();
+   plotPoints();
+   bestFitPlot();
+}
 
 $('#lobf_canvas').bind('mousedown', startMouse);
 $('#lobf_canvas').bind('mouseup', endMouse);
 $('#lobf_canvas').bind('mousemove', dragPoint);
+$('.anscombe').bind('click', populate);
 </script>
