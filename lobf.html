@@ -107,6 +107,7 @@ tr + tr { border-top: 1px solid gray; }
    height:40px;
    font-family:Arimo;
    font-size:1.2em;
+   color:#8A2BE2;
 }
 .side-button {
    position:fixed;
@@ -247,6 +248,7 @@ var yMax  =  0;
 var plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}, p11: {}};
 var lastPlot = {lineintc: undefined, lineEnd: undefined};
 var point;
+var TWOPRESSED = false;
 
 var MOUSEDOWN = false;
 
@@ -294,7 +296,8 @@ function updateYAxis() {
    yNum = parseFloat($(this).text());
    yVals.push(yNum);
    
-   yMax = Math.ceil(Math.max.apply(null, yVals) / 10) * 10 + 10;
+   if (TWOPRESSED) yMax = 30;
+   else yMax = Math.ceil(Math.max.apply(null, yVals) / 10) * 10 + 10;
    if (yMax !== yMin) {
       $('#ymax').text(yMax);
       $('#ymin').text(yMin);
@@ -321,12 +324,12 @@ function bestFitPlot() {
    lastPlot.lineintc = lineintc;
    lastPlot.lineEnd = lineEnd;
    plotPoints();
-   contxt.strokeStyle = 'orange';
+   contxt.strokeStyle = '#8A2BE2';
    contxt.beginPath();
    contxt.moveTo(0, lineintc);
    contxt.lineTo(500, lineEnd);
    contxt.stroke();
-   contxt.strokeStyle = 'blue';
+   contxt.strokeStyle = 'black';
    if (xVals.length > 1 && yVals.length > 1) {
       $('#regression-equation').text('f(x) = ' + slope.toFixed(2) + 'x + ' + yintc.toFixed(2));
    }
@@ -335,12 +338,12 @@ function bestFitPlot() {
 function plotPoints() {
    if (xVals.length !== yVals.length) return;
    contxt.clearRect(0, 0, canvas.width, canvas.height);
-   contxt.strokeStyle = 'orange';
+   contxt.strokeStyle = '#8A2BE2';
    contxt.beginPath();
    contxt.moveTo(0, lastPlot.lineintc);
    contxt.lineTo(500, lastPlot.lineEnd);
    contxt.stroke();
-   contxt.strokeStyle = 'blue';
+   contxt.strokeStyle = 'black';
    contxt.fillStyle = 'white';
    var x1 = parseFloat($('#x1').text()) / xMax * 500;
    var y1 = 500 - (parseFloat($('#y1').text()) / yMax * 500);
@@ -490,7 +493,8 @@ function populate(evt) {
       $('#y6').text('9.96');$('#y7').text('7.24');$('#y8').text('4.26');$('#y9').text('10.84');$('#y10').text('4.82');
       $('#y11').text('5.68');
       }
-   else if (evt.target.id === 'anscombe2') {    
+   else if (evt.target.id === 'anscombe2') {
+      TWOPRESSED = true;
       $('#y1').text('9.14');$('#y2').text('8.14');$('#y3').text('8.74');$('#y4').text('8.77');$('#y5').text('9.26');
       $('#y6').text('8.10');$('#y7').text('6.13');$('#y8').text('3.10');$('#y9').text('9.13');$('#y10').text('7.26');
       $('#y11').text('4.74');
@@ -504,6 +508,7 @@ function populate(evt) {
    updateYAxis();
    plotPoints();
    bestFitPlot();
+   TWOPRESSED = false;
 }
 
 $('#lobf_canvas').bind('mousedown', startMouse);
