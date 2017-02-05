@@ -158,6 +158,7 @@ tr + tr { border-top: 1px solid gray; }
 <tr><td contenteditable="true" class='x-values' id='x8'></td><td contenteditable="true" class='y-values' id='y8'></td></tr>
 <tr><td contenteditable="true" class='x-values' id='x9'></td><td contenteditable="true" class='y-values' id='y9'></td></tr>
 <tr><td contenteditable="true" class='x-values' id='x10'></td><td contenteditable="true" class='y-values' id='y10'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x11'></td><td contenteditable="true" class='y-values' id='y11'></td></tr>
 </table>
 <button class='update-plot' id='update-points'>
 <img src='http://guzintamath.com/blog/wp-content/uploads/2017/01/points_icon.png' style='width:35%;' />
@@ -216,7 +217,7 @@ var xMax  =  0;
 var yVals = [];
 var yMin  =  0;
 var yMax  =  0;
-var plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}};
+var plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}, p11: {}};
 var lastPlot = {lineintc: undefined, lineEnd: undefined};
 var point;
 
@@ -239,7 +240,7 @@ function clearAll() {
    yVals = [];
    yMin  =  0;
    yMax  =  0;
-   plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}};
+   plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}, p11: {}};
    lastPlot = {lineintc: undefined, lineEnd: undefined};
    $('#regression-equation').text('');
    $('#xmin, #xmax, #ymin, #ymax').text('');
@@ -404,6 +405,15 @@ function plotPoints() {
       contxt.stroke();
       plottedPoints.p10.x = x10;
       plottedPoints.p10.y = y10;
+   }
+   var x11 = parseFloat($('#x11').text()) / xMax * 500;
+   var y11 = 500 - (parseFloat($('#y11').text()) / yMax * 500);
+   if (x11 && y11) {
+      contxt.beginPath();
+      contxt.arc(x11, y11, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p11.x = x11;
+      plottedPoints.p11.y = y11;
    }
 }
 function startMouse() {MOUSEDOWN = true;}
