@@ -19,10 +19,12 @@
 }
 #canvas_projectile {
    display:block;
-   margin:50px auto;
+   margin:0 auto 80px auto;
    width:450px;
    height:450px;
    box-shadow:0 0 5px #ccc;
+   background-color:white;
+   z-index:98;
 }
 #control_panel {
    position:relative;
@@ -95,11 +97,58 @@
    outline:none;
    cursor:pointer;
 }
+#canvas1 {
+   position:fixed;
+   width:450px;
+   height:450px;
+   visibility:hidden;
+   cursor:crosshair;
+   z-index:100;
+}
+.side-button {
+   position:fixed;
+   display:flex;
+   align-items:center;
+   justify-content:flex-end;
+   box-sizing:border-box;
+   padding-right:8px;
+   width:40px;
+   height:60px;
+   background-color:#fafafa;
+   border-top-right-radius:12px;
+   border-bottom-right-radius:12px;
+   box-shadow:1px 0 3px #ccc;
+   z-index:1;
+   cursor:pointer;
+}
+#wrapper {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   margin-top:50px;
+}
+.grid-label {
+   position:fixed;
+   width:80px;
+   height:25px;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-family:Arimo;
+   font-size:0.9em;
+   color:#ccc;
+}
 </style>
 
 <body>
+<div id='wrapper'>
+<div class='grid-label' id='min'>0</div>
+<div class='grid-label' id='xmax'>450</div>
+<div class='grid-label' id='ymax'>450</div>
+<div class='side-button' id='draw-tab'><img src='http://guzintamath.com/blog/wp-content/uploads/2017/01/draw.png' style='width:60%;'></div>
+<canvas id='canvas1' width='450' height='450'></canvas>
 <canvas id='canvas_projectile' width='450' height='450'></canvas>
-
+</div>
 <div id='control_panel'>
 
 <div id='vertex' style='border-right:1px solid white;'>
@@ -129,19 +178,39 @@
 </body>
 <img src='http://guzintamath.com/blog/wp-content/uploads/2017/02/projectile.png' style='position:fixed;visibility:hidden;' />
 </html>
+<script src='canvas_script.js' type='text/javascript'></script>
 
 <script>
+$('#draw-tab').click(function(){
+   tabClick += 1;
+   if (tabClick % 2 == 0) {$(this).css({'background-color': 'rgba(165, 42, 42, 0.6)'}); $('#canvas1').css({'visibility' : 'visible'});}
+   else {
+   context.clearRect(0, 0, canvas1.width, canvas1.height);
+   $(this).css({'background-color': '#fafafa'});
+   $('#canvas1').css({'visibility' : 'hidden'});}
+   });
+   
 var canvas = document.getElementById('canvas_projectile');
 var contxt = canvas.getContext('2d');
 
+var tabClick = 1;
 var x2_coeff, x_coeff, constant;
 var dX = 0;
 var anim;
 var points = [];
+var graphmax = 455.625;
 
 var punkin = new Image();
 punkin.onload = function() {contxt.drawImage(punkin, 0, canvas.height, 31.68, 30);};
 punkin.src = 'http://guzintamath.com/blog/wp-content/uploads/2017/02/punkin.gif';
+
+$('#canvas1').offset({left: $('#canvas_projectile').offset().left, top: $('#canvas_projectile').offset().top});
+$('#y-axis').offset({left: $('#canvas_projectile').offset().left - 50, top: $('#canvas_projectile').offset().top - 5});
+$('#x-axis').offset({left: $('#canvas_projectile').offset().left - 5, top: $('#canvas_projectile').offset().top + 460});
+$('#draw-tab').offset({left: $('#canvas_projectile').offset().left + 445, top: $('#canvas_projectile').offset().top + 50});
+$('#min').offset({left: $('#canvas_projectile').offset().left - 60, top: $('#canvas_projectile').offset().top + 450});
+$('#xmax').offset({left: $('#canvas_projectile').offset().left + 420, top: $('#canvas_projectile').offset().top + 450});
+$('#ymax').offset({left: $('#canvas_projectile').offset().left - 60, top: $('#canvas_projectile').offset().top - 10});
 
 function windowToCanvas_mouse(canvas, x, y) {
    var bbox = canvas.getBoundingClientRect();
@@ -150,7 +219,22 @@ function windowToCanvas_mouse(canvas, x, y) {
 function getArc(a) {
    return x2_coeff * ((a * a) - (x_coeff * a) + (constant * constant));
 }
-
+function gridDraw() {
+   for (var a = 50; a < 450; a += 50) {
+   contxt.beginPath();
+   contxt.strokeStyle = 'gray';
+   contxt.lineWidth = 0.5;
+   contxt.moveTo(a, 0);
+   contxt.lineTo(a, canvas.height);
+   contxt.stroke();
+   contxt.beginPath();
+   contxt.moveTo(0, a);
+   contxt.lineTo(canvas.width, a);
+   contxt.stroke();
+   }
+   contxt.strokeStyle = 'black';
+   contxt.lineWidth = 1;
+}
 function drawArc() {
    x2_coeff = -parseFloat($('#x-squared-coeff').val());
    x_coeff = parseFloat($('#x-coeff').val()) / x2_coeff;
@@ -161,6 +245,7 @@ function drawArc() {
    punkinChunk();
 }
 function drawDots() {
+   gridDraw();
    contxt.fillStyle = 'orange';
    for (var p = 0; p < points.length; p++) {
    contxt.beginPath();
@@ -204,6 +289,8 @@ function calcForms(evt) {
       var vertexmax = (max1 * max1 * -parseFloat(x2factor)).toFixed(3);
       $('#vertex-axis').val(vertexaxis);
       $('#vertex-max').val(vertexmax);
+      
+      graphmax = parseFloat(vertexmax);
    }
    else if (evt.keyCode === 13 && (evt.target.id).slice(0, 6) === 'vertex') {
       var x2vertex = parseFloat($('#vertex-x2-coeff').val()).toFixed(3);
@@ -221,9 +308,10 @@ function calcForms(evt) {
       $('#x-coeff').val(xcoeff);
       $('#constant').val(constant);
       
+      graphmax = parseFloat(vertexmax);
    }
 }
 $('#launch').bind('click', function(){drawArc();});
 $('.entry').bind('keyup', function(evt){calcForms(evt);});
-
+gridDraw();
 </script>
