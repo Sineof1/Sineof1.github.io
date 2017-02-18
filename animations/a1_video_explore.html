@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<title>Quantities</title>
+</head>
+<style>
+#vid {
+   display:block;
+   margin:0 auto;
+   box-shadow:0 0 5px #ccc;
+   border-radius:8px;
+   margin-bottom:15px;
+}
+#controls {
+   display:flex;
+   flex-direction:row;
+   align-items:center;
+   width:640px;
+   height:50px;
+   margin:0 auto;
+   box-sizing:border-box;
+   border-top:1px solid rgb(236, 242, 176);
+   border-bottom:1px solid rgb(236, 242, 176);
+   padding:5px;
+}
+.question {
+   margin-left:20px;
+   font-family:sans-serif;
+   font-size:1em;
+   font-weight:900;
+   color:blue;
+   display:none;
+}
+img {cursor:pointer;}
+</style>
+
+<body>
+<div style='margin-top:80px;'>
+<video id='vid' src='a1_quantities.mp4' width='640px' height='360px' poster='vid-poster-a1-quantities.PNG'></video>
+<div id='controls'>
+<div style='border-right:1px solid gray;height:100%;'><img id='pause' src='pause.png' height='100%' style='margin:0 10px;' /></div>
+<div style='border-right:1px solid gray;height:100%;'><img id='play' src='play.png' height='100%' style='margin:0 10px;' /></div>
+<div style='border-right:1px solid gray;height:100%;'><img id='stop' src='stop.png' height='100%' style='margin:0 10px;' /></div>
+
+<div class='question' id='q1'>As the quantity "time" <select id='timeQ'><option value='0'></option><option value='1'>increases</option><option value='2'>decreases</option></select> , the quantity "elevation" decreases.</div>
+<div class='question' id='q2'>Time is the <select id='indQ'><option value='0'></option><option value='1'>independent quantity</option><option value='2'>dependent quantity</option></select> , and elevation is the <select id='depQ'><option value='0'></option><option value='1'>independent quantity</option><option value='2'>dependent quantity</option></select> .</div>
+</div>
+</div>
+</body>
+</html>
+
+<script>
+var SKIP1 = false;
+var SKIP2 = false;
+
+$('#play').bind('click', function(){document.getElementById('vid').play();});
+$('#pause').bind('click', function(){document.getElementById('vid').pause();});
+$('#stop').bind('click', function(){
+   document.getElementById('vid').pause();
+   document.getElementById('vid').load();
+   $('.question').css({'display':'none'});
+   $('#play').css({'pointer-events' : 'all'});
+   SKIP1 = false;
+   SKIP2 = false;
+   $('#timeQ, #indQ, #depQ').val('0');
+   });
+
+$('#vid').bind('timeupdate', function(){qPause1();});
+$('#timeQ').bind('change', function(){checkAnswers1();});
+$('#indQ, #depQ').bind('change', function(){checkAnswers2();});
+
+function qPause1() {
+   if (SKIP1) qPause2();
+   else {
+   var vid = document.getElementById('vid');
+   if (vid.currentTime >= 24) {
+      document.getElementById('vid').pause();
+      $('#play').css({'pointer-events' : 'none'});
+      $('#q1').fadeIn();}
+   }
+}
+function qPause2() {
+   if (SKIP2) return;
+   var vid = document.getElementById('vid');
+   if (vid.currentTime >= 34.1) {
+      document.getElementById('vid').pause();
+      $('#play').css({'pointer-events' : 'none'});
+      $('#q2').fadeIn();
+   }
+}
+function checkAnswers1() {
+   var ans1 = $('#timeQ').val();
+   if (ans1 == 1) {
+      $('#timeQ').attr('disabled', 'disabled');
+      document.getElementById('vid').play();
+      $('#play').css({'pointer-events' : 'all'});
+      SKIP1 = true;
+      setTimeout(function(){$('#q1').fadeOut();}, 5500);
+   }
+}
+function checkAnswers2() {
+   var ans1 = $('#indQ').val();
+   var ans2 = $('#depQ').val();
+   if (ans1 == 1 && ans2 == 2) {
+      $('#indQ, #depQ').attr('disabled', 'disabled');
+      document.getElementById('vid').play();
+      $('#play').css({'pointer-events' : 'all'});
+      setTimeout(function(){$('#q2').fadeOut();}, 10000);
+      SKIP2 = true;
+   }
+}
+</script>
