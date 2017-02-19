@@ -66,6 +66,7 @@ $('#stop').bind('click', function(){
    SKIP1 = false;
    SKIP2 = false;
    $('#timeQ, #indQ, #depQ').val('0');
+   $('#timeQ, #indQ, #depQ').attr('disabled', 'false');
    });
 
 $('#vid').bind('timeupdate', function(){qPause1();});
