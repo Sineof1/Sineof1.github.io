@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name='description' content='An interactive tool to explore changes in scale.'>
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<title>Changing Scales</title>
+</head>
+
+<style>
+#scale-wrapper {
+   width:810px;
+   margin:50px auto 0 auto;
+}
+.scale-canvas {
+   display:inline-block;
+   width:400px;
+   height:500px;
+   box-shadow:0 0 5px #ccc;
+   margin:0 auto;
+   cursor:pointer;
+   background-color:transparent;
+   z-index:99;
+}
+#scale2 {
+   cursor:default;
+}
+#control-panel {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:810px;
+   height:100px;
+   font-family:sans-serif;
+   font-size:1em;
+   font-weight:900;
+}
+.scale-input {
+   width:100px;
+   height:40px;
+   margin:0 8px;
+   font-family:sans-serif;
+   font-size:2em;
+   color:gray;
+   text-align:center;
+   outline:none;
+}
+#scale2num {
+   margin-left:175px;
+}
+.grid-canvas {
+   position:fixed;
+   background-color:transparent;
+   z-index:-1;
+}
+</style>
+
+<body>
+<div id='scale-wrapper'>
+<canvas class='scale-canvas' id='scale1' width='400' height='500'></canvas>
+<canvas class='scale-canvas' id='scale2' width='400' height='500'></canvas>
+<canvas class='grid-canvas' id='grid1' width='400' height='500'></canvas>
+<canvas class='grid-canvas' id='grid2' width='400' height='500'></canvas>
+
+<div id='control-panel'>
+<input id='scale1num' type='text' class='scale-input' value='1' /> : <input id='scale1denom' type='text' class='scale-input' value='1' />
+<input id='scale2num' type='text' class='scale-input' value='1' /> : <input id='scale2denom' type='text' class='scale-input' value='1' />
+</div>
+</div>
+<img src='change_scale.PNG' style='position:fixed;visibility:hidden;' />
+</body>
+<script src='canvas_script1.js' type='text/javascript'></script>
+</html>
+
+<script>
+var canvas3 = document.getElementById('grid1');
+var contxt3 = canvas3.getContext('2d');
+var canvas4 = document.getElementById('grid2');
+var contxt4 = canvas4.getContext('2d');
+
+$('.scale-input').bind('keyup', function(){getVals();});
+$('#grid1').offset({left: $('#scale1').offset().left, top: $('#scale1').offset().top});
+$('#grid2').offset({left: $('#scale2').offset().left, top: $('#scale2').offset().top});
+
+var scl1num, scl1denom, scl2num, scl2denom;
+var curScale = 1;
+
+function drawGrids() {
+   contxt3.clearRect(0, 0, canvas3.width, canvas3.height);
+   contxt4.clearRect(0, 0, canvas4.width, canvas4.height);
+   contxt3.strokeStyle = 'gray';
+   contxt3.lineWidth = 0.4;
+   contxt4.strokeStyle = 'gray';
+   contxt4.lineWidth = 0.4;
+   
+   for (var a = 0; a < 400; a += 20) {
+   contxt3.beginPath();
+   contxt3.moveTo(a, 0);
+   contxt3.lineTo(a, canvas3.height);
+   contxt3.stroke();
+   contxt4.beginPath();
+   contxt4.moveTo(a, 0);
+   contxt4.lineTo(a, canvas4.height);
+   contxt4.stroke();
+   }
+   for (var b = 0; b < 500; b += 20) {
+   contxt3.beginPath();
+   contxt3.moveTo(0, b);
+   contxt3.lineTo(canvas3.width, b);
+   contxt3.stroke();
+   contxt4.beginPath();
+   contxt4.moveTo(0, b);
+   contxt4.lineTo(canvas4.width, b);
+   contxt4.stroke();
+   }
+}
+function getVals() {
+   scl1num =   parseFloat($('#scale1num').val());
+   scl1denom = parseFloat($('#scale1denom').val());
+   scl2num =   parseFloat($('#scale2num').val());
+   scl2denom = parseFloat($('#scale2denom').val());
+   
+   if (scl1num && scl1denom && scl2num && scl2denom) {
+      context1.clearRect(0, 0, canvas1.width, canvas1.height);
+      context2.clearRect(0, 0, canvas2.width, canvas2.height);
+      context2.scale(1 / curScale, 1 / curScale);
+      curScale = (scl2num / scl2denom) / (scl1num / scl1denom);
+      context2.scale(curScale, curScale);
+   }
+}
+getVals();
+drawGrids();
+</script>
