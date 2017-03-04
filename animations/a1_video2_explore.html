@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta class='description' content='Sample Video Explore'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<title>Quantities II</title>
+</head>
+<style>
+#vid {
+   display:block;
+   margin:0 auto;
+   box-shadow:0 0 5px #ccc;
+   border-radius:8px;
+   margin-bottom:15px;
+}
+#controls {
+   display:flex;
+   flex-direction:row;
+   align-items:center;
+   width:640px;
+   height:50px;
+   margin:0 auto;
+   box-sizing:border-box;
+   border-top:1px solid rgb(236, 242, 176);
+   border-bottom:1px solid rgb(236, 242, 176);
+   padding:5px;
+}
+.question {
+   margin-left:20px;
+   font-family:sans-serif;
+   font-size:1em;
+   font-weight:900;
+   color:blue;
+   display:none;
+}
+img {cursor:pointer;}
+</style>
+
+<body>
+<div style='margin-top:80px;'>
+<video id='vid' src='a1_quantities2.mp4' width='640px' height='360px' poster='vid-poster-a1-2-quantities.PNG'></video>
+<div id='controls'>
+<div style='border-right:1px solid gray;height:100%;'><img id='pause' src='pause.png' height='100%' style='margin:0 10px;' /></div>
+<div style='border-right:1px solid gray;height:100%;'><img id='play' src='play.png' height='100%' style='margin:0 10px;' /></div>
+<div style='border-right:1px solid gray;height:100%;'><img id='stop' src='stop.png' height='100%' style='margin:0 10px;' /></div>
+</div>
+</div>
+</body>
+<img src='vid-poster-a1-2-quantities.PNG' style='position:fixed;visibility:hidden;' />
+</html>
+
+<script>
+$('#play').bind('click', function(){document.getElementById('vid').play();});
+$('#pause').bind('click', function(){document.getElementById('vid').pause();});
+$('#stop').bind('click', function(){
+   document.getElementById('vid').pause();
+   document.getElementById('vid').load();
+   $('.question').css({'display':'none'});
+   $('#play').css({'pointer-events' : 'all'});
+   });
+</script>
