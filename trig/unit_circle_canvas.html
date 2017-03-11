@@ -190,6 +190,8 @@ $('#pau').bind('click', function(){
    PLAY = false;
    window.cancelAnimationFrame(anim);
    if (theta >= 2 * Math.PI) {theta = theta % (2 * Math.PI); thetaGoal = theta;}
+   var newTheta = Math.round((theta * 180) / Math.PI);
+   $('#theta').val(newTheta);
    baseDraw();
    $('#theta').prop('disabled', false);
    });
