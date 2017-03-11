@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+<link href="https://guzintamath.com/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<title>Trig Unit Circle</title>
+</head>
+
+<style>
+#canvas {
+   display:block;
+   width:450px;
+   height:450px;
+   margin:50px auto;
+}
+#control-panel {
+   position:relative;
+   width:450px;
+   height:80px;
+   margin:0 auto;
+   box-sizing:border-box;
+   padding:20px 8px;
+   font-family:Arimo;
+   font-size:22px;
+   border:1px dashed gray;
+}
+#theta {
+   margin-left:9px;
+   width:55px;
+   height:35px;
+   font-family:Arimo;
+   font-size:22px;
+   padding:0 5px;
+   outline:none;
+}
+#trig-chooser {
+   display:inline-block;
+   float:right;
+   margin-top:-10px;
+   width:100px;
+   height:50px;
+   font-size:12px;
+}
+.trig-choose-check {
+   vertical-align:-3px;
+}
+#playAnim {
+   display:inline-flex;
+   position:absolute;
+   top:20px;
+   left:175px;
+   align-items:center;
+   justify-content:center;
+   width:100px;
+}
+#play, #pau {
+   cursor:pointer;
+}
+</style>
+
+<body>
+<canvas id='canvas' width='450' height='450'></canvas>
+<div id='control-panel'>
+&theta; = <input id='theta' type='text' maxlength='3' value='60' />&deg;
+<div id='playAnim'><img src='play.png' id='play' style='width:40px;' /><img src='pause.png' id='pau' style='width:35px;margin-left:10px;' /></div>
+<div id='trig-chooser'>
+<input class='trig-choose-check' id='sincos' type='checkbox' checked='checked'> cos-sin-1<br/>
+<input class='trig-choose-check' id='tansec' type='checkbox'> 1-tan-sec<br/>
+<input class='trig-choose-check' id='cotcsc' type='checkbox'> cot-1-csc
+</div>
+</div>
+</body>
+</html>
+
+<script>
+var canvas = document.getElementById('canvas');
+var contxt = canvas.getContext('2d')
+
+var theta = Math.PI / 3;
+var thetaGoal = theta;
+var travelpt = {x: 150 * Math.cos(theta) + 225, y: 450 - (150 * Math.sin(theta) + 225)};
+var anim;
+var PLAY = false;
+
+function baseDraw() {
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   var pts = [{x1: 375, x2: 375, y1: 0, y2: 450}, {x1: 0, x2: 450, y1: 375, y2: 375},
+              {x1: 75, x2: 75, y1: 0, y2: 450}, {x1: 0, x2: 450, y1: 75, y2: 75}, {x1:0, x2:450, y1:225, y2:225},
+              {x1:225, x2:225, y1:0, y2:450}];
+   
+   travelpt.x = 150 * Math.cos(theta) + 225;
+   travelpt.y = 450 - (150 * Math.sin(theta) + 225);
+   
+   contxt.lineWidth = '0.5';
+   contxt.strokeStyle = '#ccc';
+   contxt.setLineDash([5, 5]);
+   for (var a = 0; a < 6; a++) {
+   contxt.beginPath();
+   contxt.moveTo(pts[a].x1, pts[a].y1);
+   contxt.lineTo(pts[a].x2, pts[a].y2);
+   contxt.stroke();
+   }
+   
+   if ($('#sincos').is(':checked') || $('#tansec').is(':checked') || $('#cotcsc').is(':checked')) {
+       contxt.strokeStyle = 'blue';
+       contxt.setLineDash([1, 0]);
+       contxt.beginPath();
+       contxt.arc(225, 225, 10, 0, -theta, true);
+       contxt.stroke();
+   }
+   contxt.lineWidth = 3;
+   contxt.setLineDash([1, 0]);
+   contxt.strokeStyle = 'brown';
+   contxt.beginPath();
+   contxt.arc(225, 225, 150, 0, Math.PI * 2);
+   contxt.stroke();
+   
+   contxt.fillStyle = 'blue';
+   contxt.beginPath();
+   contxt.arc(travelpt.x, travelpt.y, 3, 0, Math.PI * 2);
+   contxt.fill();
+   
+   if ($('#sincos').is(':checked')) {
+       contxt.fillStyle = 'rgba(255, 0, 0, 0.1)';
+       contxt.beginPath();
+       contxt.moveTo(225, 225);
+       contxt.lineTo(travelpt.x, travelpt.y);
+       contxt.lineTo(travelpt.x, 225);
+       contxt.fill();
+   }
+   
+   if ($('#tansec').is(':checked')) {
+       contxt.fillStyle = 'rgba(0, 0, 255, 0.1)';
+       contxt.beginPath();
+       contxt.moveTo(225, 225);
+       contxt.lineTo(375, 450 - (150 * Math.tan(theta) + 225));
+       contxt.lineTo(375, 225);
+       contxt.fill();
+   }
+   
+   if ($('#cotcsc').is(':checked')) {
+       contxt.fillStyle = 'rgba(0, 255, 0, 0.1)';
+       contxt.beginPath();
+       contxt.moveTo(225, 225);
+       contxt.lineTo(150 * (1 / Math.tan(theta)) + 225, 75);
+       contxt.lineTo(150 * (1 / Math.tan(theta)) + 225, 225);
+       contxt.fill();
+   }
+   contxt.strokeStyle = 'gray';
+   contxt.lineWidth = 1;
+   contxt.beginPath();
+   contxt.moveTo(225, 225);
+   contxt.lineTo(travelpt.x, travelpt.y);
+   contxt.stroke();
+   
+   contxt.fillStyle = 'black';
+   contxt.beginPath();
+   contxt.arc(225, 225, 3, 0, Math.PI * 2);
+   contxt.fill();
+}
+function animateTheta() {
+   if (PLAY) thetaGoal += 0.01;
+   if (Math.abs(theta - thetaGoal) > 0.0005) {
+   theta += ((thetaGoal - theta) / 28); 
+   baseDraw();
+   anim = window.requestAnimationFrame(animateTheta); 
+   }
+   else window.cancelAnimationFrame(anim);
+}
+baseDraw();
+$('#theta').bind('keypress', function(evt){
+   if (evt.keyCode === 13) {
+      var deg = parseFloat($(this).val());
+      thetaGoal = deg * Math.PI / 180;
+      animateTheta();
+   }});
+
+$('.trig-choose-check').bind('change', function(){baseDraw();});
+$('#play').bind('click', function(){
+   PLAY = true;
+   $('#theta').val('');
+   $('#theta').prop('disabled', true);
+   animateTheta();
+   });
+$('#pau').bind('click', function(){
+   PLAY = false;
+   window.cancelAnimationFrame(anim);
+   if (theta >= 2 * Math.PI) {theta = theta % (2 * Math.PI); thetaGoal = theta;}
+   baseDraw();
+   $('#theta').prop('disabled', false);
+   });
+</script>
