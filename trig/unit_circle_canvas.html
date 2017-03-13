@@ -159,6 +159,13 @@ function baseDraw() {
    contxt.arc(225, 225, 150, 0, Math.PI * 2);
    contxt.stroke();
    
+   contxt.strokeStyle = 'gray';
+   contxt.lineWidth = 1;
+   contxt.beginPath();
+   contxt.moveTo(225, 225);
+   contxt.lineTo(travelpt.x, travelpt.y);
+   contxt.stroke();
+   
    contxt.fillStyle = 'blue';
    contxt.beginPath();
    contxt.arc(travelpt.x, travelpt.y, 3, 0, Math.PI * 2);
@@ -190,13 +197,7 @@ function baseDraw() {
        contxt.lineTo(150 * (1 / Math.tan(theta)) + 225, 225);
        contxt.fill();
    }
-   contxt.strokeStyle = 'gray';
-   contxt.lineWidth = 1;
-   contxt.beginPath();
-   contxt.moveTo(225, 225);
-   contxt.lineTo(travelpt.x, travelpt.y);
-   contxt.stroke();
-   
+
    contxt.fillStyle = 'black';
    contxt.beginPath();
    contxt.arc(225, 225, 3, 0, Math.PI * 2);
