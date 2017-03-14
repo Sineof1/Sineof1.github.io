@@ -136,6 +136,18 @@ function baseDraw() {
    travelpt.y = 450 - (150 * Math.sin(theta) + 225);
    
    contxt.lineWidth = '0.5';
+   contxt.strokeStyle = '#eee';
+   for (var q = 15; q < 450; q += 15) {
+   contxt.beginPath();
+   contxt.moveTo(0, q);
+   contxt.lineTo(canvas.width, q);
+   contxt.stroke();
+   contxt.beginPath();
+   contxt.moveTo(q, 0);
+   contxt.lineTo(q, canvas.height);
+   contxt.stroke();
+   }
+   
    contxt.strokeStyle = '#ccc';
    contxt.setLineDash([5, 5]);
    for (var a = 0; a < 6; a++) {
