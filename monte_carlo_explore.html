@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name='description' content='Monte Carlo method for exploring probabilities.'>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+<link href="https://guzintamath.com/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<title>Probability Explore</title>
+</head>
+
+<style>
+#canvas {
+   display:block;
+   width:450px;
+   height:450px;
+   background-color:white;
+   box-shadow:0 0 2px #ccc;
+}
+
+#wrapper {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   margin-top:50px;
+}
+#control-panel {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   flex-direction:column;
+   margin:20px auto;
+   width:450px;
+   height:120px;
+   font-family:Arimo;
+   border-top:1px solid #ccc;
+}
+#inside, #inside1, #inside2, #inside3, #inside4, #both1 {
+   position:fixed;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:80px;
+   height:40px;
+}
+#outside1, #outside2 {
+   position:fixed;
+   width:80px;
+   height:40px;
+}
+.prob-button {
+   position:fixed;
+   width:80px;
+   height:80px;
+   overflow:hidden;
+   border-radius:8px;
+   box-shadow:0 0 4px #ccc;
+   cursor:pointer;
+}
+.prob-button:hover {background-color:#fafafa;}
+#drop1, #drop1000 {
+   width:80px;
+   height:40px;
+   margin:0;
+   font-variant:small-caps;
+   font-family:Arimo;
+   text-align:center;
+   outline:none;
+   background-color:white;
+   cursor:pointer;
+   box-shadow:0 0 0 #fff;
+   border:2px solid gray;
+   border-radius:8px;
+}
+#svg1, #svg2, #svg3 {
+   border:1px solid #ccc;
+}
+</style>
+
+<body>
+
+<div id='wrapper'><canvas id='canvas' width='450' height='450'></canvas></div>
+    
+<div id='control-panel'>
+<div id='wrapper1'>
+<div id='outside1' style='color:red;'>0</div>
+<div id='inside'>0</div>
+<svg width='180px' height='100px' id='svg1' style='position:fixed;'>
+<circle cx='90' cy='50' r='40' style='fill:rgba(0, 0, 255, 0.1)';></circle>
+</svg>
+</div>
+
+<div id='wrapper2'>
+<div id='outside2' style='color:red;'>0</div>
+<div id='inside1' style='color:blue;'>0</div>
+<div id='inside2' style='color:green;'>0</div>
+<div id='both1'>0</div>
+<svg width='180px' height='100px' id='svg2' style='position:fixed;'>
+<circle cx='70' cy='50' r='40' style='fill:rgba(0, 0, 255, 0.1)';></circle>
+<circle cx='110' cy='50' r='40' style='fill:rgba(255, 0, 0, 0.1)';></circle>
+</svg>
+</div>
+
+<div id='wrapper3'>
+<div id='inside3' style='color:blue;'>0</div>
+<div id='inside4'>0</div>
+<svg width='180px' height='100px' id='svg3' style='position:fixed;'>
+<circle cx='90' cy='50' r='40' style='fill:rgba(0, 0, 255, 0.1)';></circle>
+<circle cx='100' cy='60' r='17.6' style='fill:rgba(255, 0, 0, 0.1)';></circle>
+</svg>
+</div>
+</div>
+
+<div class='prob-button' id='button1'>
+<svg width='80px' height='100px'>
+<circle cx='40' cy='40' r='30' style='fill:rgba(0, 0, 255, 0.1)';></circle>
+</svg>
+</div>
+    
+<div class='prob-button' id='button2'>
+<svg width='80px' height='80px'>
+<circle cx='25' cy='40' r='25' style='fill:rgba(0, 0, 255, 0.1)';></circle>
+<circle cx='55' cy='40' r='25' style='fill:rgba(255, 0, 0, 0.1)';></circle>
+</svg>
+</div>
+
+<div class='prob-button' id='button3'>
+<svg width='80px' height='80px'>
+<circle cx='40' cy='40' r='30' style='fill:rgba(0, 0, 255, 0.1)';></circle>
+<circle cx='50' cy='50' r='10' style='fill:rgba(255, 0, 0, 0.1)';></circle>
+</svg>
+</div>
+
+<button id='drop1'>drop 1</button>
+<button id='drop1000'>drop 1000</button>
+
+<img src='montecarloimage1.PNG' style='position:fixed;visibility:hidden;' alt='monte carlo probability' />
+<img src='montecarloimage2.PNG' style='position:fixed;visibility:hidden;' alt='monte carlo probability' />
+</body>
+</html>
+
+<script>
+$('#svg1, #svg2, #svg3').offset({top: $('#control-panel').offset().top + 20, left: $('#control-panel').offset().left + 145});
+$('#inside').offset({top: $('#svg1').offset().top + 30, left: $('#svg1').offset().left + 50});
+$('#outside1, #outside2').offset({top: $('#svg1').offset().top + 75, left: $('#svg1').offset().left + 10});
+
+$('#inside1').offset({top: $('#svg2').offset().top + 30, left: $('#svg2').offset().left + 10});
+$('#inside2').offset({top: $('#svg2').offset().top + 30, left: $('#svg2').offset().left + 90});
+$('#both1').offset({top: $('#svg2').offset().top + 45, left: $('#svg2').offset().left + 50});
+
+$('#inside3').offset({top: $('#svg3').offset().top + 15, left: $('#svg3').offset().left + 50});
+$('#inside4').offset({top: $('#svg3').offset().top + 40, left: $('#svg3').offset().left + 61});
+
+$('#button1').offset({top: $('#canvas').offset().top, left: $('#canvas').offset().left - 95});
+$('#button2').offset({top: $('#canvas').offset().top + 95, left: $('#canvas').offset().left - 95});
+$('#button3').offset({top: $('#canvas').offset().top + 190, left: $('#canvas').offset().left - 95});
+$('#button4').offset({top: $('#canvas').offset().top + 285, left: $('#canvas').offset().left - 95});
+
+$('#drop1').offset({top: $('#canvas').offset().top + 360, left: $('#canvas').offset().left - 95});
+$('#drop1000').offset({top: $('#canvas').offset().top + 410, left: $('#canvas').offset().left - 95});
+$('#wrapper2, #wrapper3').css({'display': 'none'});
+
+var canvas = document.getElementById('canvas');
+var contxt = canvas.getContext('2d')
+var counter = 0;
+var anim;
+var inside = 0, inside1 = 0, both1 = 0, inside2 = 0, inside3 = 0, inside4 = 0, outside1 = 0, outside2 = 0, outside3 = 0;
+
+function baseDraw1() {
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.strokeStyle = '#ccc';
+   contxt.lineWidth = 0.5;
+   for (var a = 0; a < 450; a += 10) {
+   contxt.beginPath();
+   contxt.moveTo(0, a);
+   contxt.lineTo(canvas.width, a);
+   contxt.stroke();
+   contxt.beginPath();
+   contxt.moveTo(a, 0);
+   contxt.lineTo(a, canvas.height);
+   contxt.stroke();
+   }
+
+   contxt.fillStyle = 'rgba(0, 0, 255, 0.1)';
+   contxt.beginPath();
+   contxt.arc(225, 225, 225, 0, 2 * Math.PI);
+   contxt.fill();
+}
+function baseDraw2() {
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.strokeStyle = '#ccc';
+   contxt.lineWidth = 0.5;
+   for (var a = 0; a < 450; a += 10) {
+   contxt.beginPath();
+   contxt.moveTo(0, a);
+   contxt.lineTo(canvas.width, a);
+   contxt.stroke();
+   contxt.beginPath();
+   contxt.moveTo(a, 0);
+   contxt.lineTo(a, canvas.height);
+   contxt.stroke();
+   }
+
+   contxt.fillStyle = 'rgba(0, 0, 255, 0.1)';
+   contxt.beginPath();
+   contxt.arc(150, 225, 150, 0, 2 * Math.PI);
+   contxt.fill();
+   contxt.fillStyle = 'rgba(255, 0, 0, 0.1)';
+   contxt.beginPath();
+   contxt.arc(300, 225, 150, 0, 2 * Math.PI);
+   contxt.fill();
+}
+function baseDraw3() {
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.strokeStyle = '#ccc';
+   contxt.lineWidth = 0.5;
+   for (var a = 0; a < 450; a += 10) {
+   contxt.beginPath();
+   contxt.moveTo(0, a);
+   contxt.lineTo(canvas.width, a);
+   contxt.stroke();
+   contxt.beginPath();
+   contxt.moveTo(a, 0);
+   contxt.lineTo(a, canvas.height);
+   contxt.stroke();
+   }
+
+   contxt.fillStyle = 'rgba(0, 0, 255, 0.1)';
+   contxt.beginPath();
+   contxt.arc(225, 225, 225, 0, 2 * Math.PI);
+   contxt.fill();
+   contxt.fillStyle = 'rgba(255, 0, 0, 0.1)';
+   contxt.beginPath();
+   contxt.arc(300, 300, 100, 0, 2 * Math.PI);
+   contxt.fill();
+}
+function dropPoints1() {
+   if (counter < 1000) {
+      counter += 1;
+      var x = Math.round(Math.random() * 450);
+      var y = Math.round(Math.random() * 450);
+      var f = Math.pow((x - 225), 2) + Math.pow((225 - y), 2);
+      if (f <= 50625.0) {contxt.fillStyle = 'black'; inside += 1;}
+      else if (f > 50625.0) {contxt.fillStyle = 'red'; outside1 += 1;}
+      contxt.beginPath();
+      contxt.arc(x, y, 1, 0, Math.PI * 2);
+      contxt.fill();
+      $('#inside').text(inside);
+      $('#outside1').text(outside1);
+      anim = window.requestAnimationFrame(dropPoints1);
+   }
+   else {
+       counter = 0;
+       window.cancelAnimationFrame(anim);
+       $('#drop1000').prop('disabled', false);
+   }
+}
+function dropPoints1_1() {
+   var x = Math.round(Math.random() * 450);
+   var y = Math.round(Math.random() * 450);
+   var f = Math.pow((x - 225), 2) + Math.pow((225 - y), 2);
+   if (f <= 50625.0) {contxt.fillStyle = 'black'; inside += 1;}
+   else if (f > 50625.0) {contxt.fillStyle = 'red'; outside1 += 1;}
+   contxt.beginPath();
+   contxt.arc(x, y, 1, 0, Math.PI * 2);
+   contxt.fill();
+   $('#inside').text(inside);
+   $('#outside1').text(outside1);
+}
+function dropPoints2() {
+   if (counter < 1000) {
+      counter += 1;
+      var x = Math.round(Math.random() * 450);
+      var y = Math.round(Math.random() * 450);
+      var f = Math.pow((x - 150), 2) + Math.pow((225 - y), 2);
+      var g = Math.pow((x - 300), 2) + Math.pow((225 - y), 2);
+      if (f <= 22500.0 && g > 22500.0) {contxt.fillStyle = 'blue'; inside1 += 1;}
+      else if (g <= 22500.0 && f > 22500.0) {contxt.fillStyle = 'green'; inside2 += 1;}
+      else if (f <= 22500.0 && g <= 22500.0) {contxt.fillStyle = 'black'; both1 += 1;}
+      else {contxt.fillStyle = 'red'; outside2 += 1;}
+      contxt.beginPath();
+      contxt.arc(x, y, 1, 0, Math.PI * 2);
+      contxt.fill();
+      $('#inside1').text(inside1);
+      $('#inside2').text(inside2);
+      $('#both1').text(both1);
+      $('#outside2').text(outside2);
+      anim = window.requestAnimationFrame(dropPoints2);
+   }
+   else {
+       counter = 0;
+       window.cancelAnimationFrame(anim);
+       $('#drop1000').prop('disabled', false);
+   }
+}
+function dropPoints2_1() {
+   var x = Math.round(Math.random() * 450);
+   var y = Math.round(Math.random() * 450);
+   var f = Math.pow((x - 150), 2) + Math.pow((225 - y), 2);
+   var g = Math.pow((x - 300), 2) + Math.pow((225 - y), 2);
+   if (f <= 22500.0 && g > 22500.0) {contxt.fillStyle = 'blue'; inside1 += 1;}
+   else if (g <= 22500.0 && f > 22500.0) {contxt.fillStyle = 'green'; inside2 += 1;}
+   else if (f <= 22500.0 && g <= 22500.0) {contxt.fillStyle = 'black'; both1 += 1;}
+   else {contxt.fillStyle = 'red'; outside2 += 1;}
+   contxt.beginPath();
+   contxt.arc(x, y, 1, 0, Math.PI * 2);
+   contxt.fill();
+   $('#inside1').text(inside1);
+   $('#inside2').text(inside2);
+   $('#both1').text(both1);
+   $('#outside2').text(outside2);
+}
+function dropPoints3() {
+   if (counter < 1000) {
+      var x = Math.round(Math.random() * 450);
+      var y = Math.round(Math.random() * 450);
+      var f = Math.pow((x - 225), 2) + Math.pow((225 - y), 2);
+      var g = Math.pow((x - 300), 2) + Math.pow((300 - y), 2);
+      if (f <= 50625.0 && g > 10000) {contxt.fillStyle = 'blue'; inside3 += 1; counter += 1;}
+      else if (f <= 50625.0 && g <= 10000) {contxt.fillStyle = 'black'; inside4 += 1; counter += 1;}
+      else contxt.fillStyle = 'rgba(255, 255, 255, 0)';
+      contxt.beginPath();
+      contxt.arc(x, y, 1, 0, Math.PI * 2);
+      contxt.fill();
+      $('#inside3').text(inside3);
+      $('#inside4').text(inside4);
+      anim = window.requestAnimationFrame(dropPoints3);
+   }
+   else {
+       counter = 0;
+       window.cancelAnimationFrame(anim);
+       $('#drop1000').prop('disabled', false);
+   }
+}
+function dropPoints3_1() {
+      var x = Math.round(Math.random() * 450);
+      var y = Math.round(Math.random() * 450);
+      var f = Math.pow((x - 225), 2) + Math.pow((225 - y), 2);
+      var g = Math.pow((x - 300), 2) + Math.pow((300 - y), 2);
+      while (f > 50625.0) {
+         x = Math.round(Math.random() * 450);
+         y = Math.round(Math.random() * 450);
+         f = Math.pow((x - 225), 2) + Math.pow((225 - y), 2);
+      }
+      if (f <= 50625.0 && g > 10000) {contxt.fillStyle = 'blue'; inside3 += 1;}
+      else if (f <= 50625.0 && g <= 10000) {contxt.fillStyle = 'black'; inside4 += 1;}
+      contxt.beginPath();
+      contxt.arc(x, y, 1, 0, Math.PI * 2);
+      contxt.fill();
+      $('#inside3').text(inside3);
+      $('#inside4').text(inside4);
+}
+function reset1() {
+   $('#wrapper2').hide();
+   $('#wrapper3').hide();
+   $('#wrapper1').show();
+}
+function reset2() {
+   $('#wrapper1').hide();
+   $('#wrapper3').hide();
+   $('#wrapper2').show();
+}
+function reset3() {
+   $('#wrapper1').hide();
+   $('#wrapper2').hide();
+   $('#wrapper3').show();
+}
+$('#drop1').bind('click', function(){dropPoints1_1();});
+$('#drop1000').bind('click', function(){
+    dropPoints1();
+    $('#drop1000').prop('disabled', 'disabled');
+});
+$('#button1').bind('click', function(){
+    counter = 0;
+    inside = 0;
+    outside1 = 0;
+    $('#inside').text(inside);
+    $('#outside1').text(outside1);
+    baseDraw1();
+    window.cancelAnimationFrame(anim);
+    $('#drop1').unbind();
+    $('#drop1').bind('click', function(){dropPoints1_1();});
+    $('#drop1000').unbind();
+    $('#drop1000').bind('click', function(){dropPoints1(); $('#drop1000').prop('disabled', 'disabled');});
+    reset1();
+});
+$('#button2').bind('click', function(){
+    counter = 0;
+    inside1 = 0;
+    inside2 = 0;
+    both1 = 0;
+    outside2 = 0;
+    $('#inside1, #inside2').text('0');
+    $('#both1').text(both1);
+    $('#outside2').text(outside2);
+    baseDraw2();
+    window.cancelAnimationFrame(anim);
+    $('#drop1').unbind();
+    $('#drop1').bind('click', function(){dropPoints2_1();});
+    $('#drop1000').unbind();
+    $('#drop1000').bind('click', function(){dropPoints2(); $('#drop1000').prop('disabled', 'disabled');});
+    reset2();
+});
+$('#button3').bind('click', function(){
+    counter = 0;
+    inside3 = 0;
+    inside4 = 0;
+    $('#inside3, #inside4').text('0');
+    baseDraw3();
+    window.cancelAnimationFrame(anim);
+    $('#drop1').unbind();
+    $('#drop1').bind('click', function(){dropPoints3_1();});
+    $('#drop1000').unbind();
+    $('#drop1000').bind('click', function(){dropPoints3(); $('#drop1000').prop('disabled', 'disabled');});
+    reset3();
+});
+
+baseDraw1();
+</script>
