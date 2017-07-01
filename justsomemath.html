@@ -42,6 +42,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post17'></div>
 <div id='post16'></div>
 <div id='post15'></div>
 <div id='post14'></div>
@@ -52,7 +53,6 @@
 <div id='post9'></div>
 <div id='post8'></div>
 <div id='post7'></div>
-<div id='post6'></div>
 <!--############ END POST ONLY ############-->
 </div>
 <img src='https://lh3.googleusercontent.com/JURL9MsUen7HUZ6kdLgOEYNCDodDaDErnJtuN4gN9CTW=w815-h809-no' style='position:fixed;visibility:hidden;'>
@@ -62,7 +62,7 @@
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
-   setTimeout(function(){$('#more-posts').show(); $('#more-posts').animate({right: '+=40px'}, 800, 'easeInOutBack');}, 5000);
+   $.get( "/justsomemath/chg-readings.html", function(data) {$("#post17").append(data);});
    $.get( "/justsomemath/elv-matches.html", function(data) {$("#post16").append(data);});
    $.get( "/justsomemath/for-back.html", function(data) {$("#post15").append(data);});
    $.get( "/justsomemath/scale-vecs.html", function(data) {$("#post14").append(data);});
