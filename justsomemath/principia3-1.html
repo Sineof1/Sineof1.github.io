@@ -1,0 +1,110 @@
+<a href='http://sineof1.github.io/justsomemath/principia_problem3_part1.html' style='color:black;'><div class='post-title'>Principia, Problem 3, Part 1</div></a>
+<div class='post-body'>
+<p>Let's just start on the inside and move outward, and then back. We'll start with almost no context at all&mdash;no apples, no Kepler, no Newton. Just this ellipse:</p>
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse1'>
+<ellipse cx='252.5' cy='152.5' rx='250' ry='150' style='fill:none;stroke:black;stroke-width:2;' />
+<circle cx='52.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point S-->
+<circle cx='452.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point H-->
+<circle cx='252.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point C-->
+
+<text x='35' y='150' style='font-family:sans-serif;font-size:16px;'>S</text>
+<text x='257' y='150' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='440' y='40' style='font-family:sans-serif;font-size:16px;'>P</text>
+<text x='378' y='12' style='font-family:sans-serif;font-size:16px;'>R</text>
+<text x='490' y='75' style='font-family:sans-serif;font-size:16px;'>Z</text>
+<text x='76' y='35' style='font-family:sans-serif;font-size:16px;'>D</text>
+<text x='429' y='280' style='font-family:sans-serif;font-size:16px;'>K</text>
+<text x='189' y='105' style='font-family:sans-serif;font-size:16px;'>E</text>
+<text x='487' y='150' style='font-family:sans-serif;font-size:16px;'>A</text>
+<text x='325' y='70' style='font-family:serif;font-size:16px;'>I</text>
+
+<circle cx='430' cy='46.87' r='3' style='fill:none;stroke:black;' /> <!--Planet P-->
+<line x1='0' y1='-211' x2='505' y2='91.847' style='stroke:black;stroke-width:1;' />
+<circle cx='368' cy='9.689' r='3' />
+<circle cx='498' cy='87.649' r='3' />
+<circle cx='76' cy='45.9' r='3' />
+<circle cx='429' cy='259' r='3' />
+<circle cx='189.4' cy='114.342' r='2' /> <!--Point E-->
+<circle cx='502.5' cy='152.5' r='2' /> <!--Point A-->
+
+
+<line x1='0' y1='0' x2='505' y2='305' style='stroke:black;stroke-width:1;' />
+
+<line x1='2.5' y1='152.5' x2='502.5' y2='152.5' style='stroke:black;stroke-width:1;' /> <!--Major axis-->
+<line x1='252.5' y1='2.5' x2='252.5' y2='302.5' style='stroke:black;stroke-width:1;' /> <!--Minor axis-->
+</g>
+<line x1='52.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--Force line-->
+<text x='435' y='150' style='font-family:sans-serif;font-size:16px;'>H</text>
+</svg>
+
+<p>Point S is where the Sun is, and point P is a planet. (There's some context.) The center of the ellipse is at C, and DK, which goes through point C, is parallel to RZ. Line segment RZ is tangent to the ellipse at point P. The sun at point S and the point at H are focii of the ellipse. They are the same distance from the center.</p>
+
+<p class='h2-sec'>\(\mathtt{\overline{EP} \cong \overline{AC}}\)</p>
+
+<p>The first thing Newton does (okay, there's some more context) is to show that \(\mathtt{\overline{EP}}\) is congruent to \(\mathtt{\overline{AC}}\). To do this, he starts by constructing another line segment parallel to DK, connecting point H and the line segment SP. Call this point <span style='font-family:serif;'>I</span>.</p>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse2'>
+<use href='#ellipse1' />
+<circle cx='325.241' cy='76.183' r='2' /> <!--Point I-->
+<line x1='452.5' y1='152.5' x2='325.241' y2='76.183' style='stroke:blue;stroke-width:1;' />
+<path d='M 52.5 152.5 L 325.241 76.183 L 452.5 152.5 Z' style='fill:rgba(0, 0, 255, 0.3);stroke:none;' />
+<line x1='152.5' y1='147.5' x2='152.5' y2='157.5' style='stroke:blue;' />
+<line x1='157.5' y1='147.5' x2='157.5' y2='157.5' style='stroke:blue;' />
+<line x1='352.5' y1='147.5' x2='352.5' y2='157.5' style='stroke:blue;' />
+<line x1='357.5' y1='147.5' x2='357.5' y2='157.5' style='stroke:blue;' />
+</g>
+<line x1='52.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--Force line-->
+<text x='435' y='168' style='font-family:sans-serif;font-size:16px;'>H</text>
+</svg>
+
+<p>This creates a triangle, as shown. Because this is an ellipse, the distance from C to S is the same as the distance from C to H. And the <a href='https://guzintamath.com/theorems/tri_proportion.html' target='_blank'>Triangle Proportionality Theorem</a> tells us that since \(\mathtt{\overline{EC} \parallel \overline{IH}}\), it divides the two sides \(\mathtt{\overline{SI}}\) and \(\mathtt{\overline{SH}}\) in the same ratio. But it divides SH into two segments which are equal (a 1 : 1 ratio), so it must divide SI into two congruent segments also. Therefore, \(\mathtt{\overline{SE} \cong \overline{EI}}\).</p>
+
+<p>We can use this congruence. Let's use the variable \(\mathtt{a}\) to represent the length of ES or EI, since they're congruent. And we'll use \(\mathtt{b}\) to represent the length of IP. Then, \(\mathtt{m\overline{EP} = a + b}\) and \(\mathtt{m\overline{PS} + m\overline{PI}= b + 2a + b}\), or \(\mathtt{2(a + b)}\). Thus, we now know that \(\mathtt{m\overline{EP} = \frac{1}{2}(m\overline{PS} + m\overline{PI})}\).</p>
+
+<p>Almost there. We now show that PI = PH. You can see the alternate interior angles below, which are congruent: \(\mathtt{\angle{RPI} \cong \angle{PIH}}\) and \(\mathtt{\angle{ZPH} \cong \angle{PHI}}\).</p>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse3'>
+<use href='#ellipse2' />
+<line x1='430' y1='46.87' x2='452.5' y2='152.5' style='stroke:blue;stroke-width:1;' />
+<path d='M 416 39.026 L 430 46.87 L 415 51.067 Z' style='fill:rgba(255,165,0, 0.5);stroke:none;' />
+<path d='M 340 72.053 L 325.241 76.183 L 340 85.034 Z' style='fill:rgba(255,165,0, 0.5);stroke:none;' />
+<path d='M 436 142.605 L 452.5 152.5 L 449 136.069 Z' style='fill:rgba(0,255,0, 0.5);stroke:none;' />
+<path d='M 443 54.666 L 430 46.87 L 433 60.954 Z' style='fill:rgba(0,255,0, 0.5);stroke:none;' />
+</g>
+<line x1='52.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--Force line-->
+<text x='435' y='168' style='font-family:sans-serif;font-size:16px;'>H</text>
+</svg>
+
+<p></p>
+
+<p>But because this is an ellipse, the angles formed by the tangent and the focal line segments (\(\mathtt{\angle{RPI}}\) and \(\mathtt{\angle{ZPH}}\)) <a href='http://www.mathopenref.com/ellipsetangent.html' target='_blank'>are congruent</a>. This means that angles I and H are congruent, which means that <a href='https://gradestack.com/CBSE-Class-9th-Complete/Triangles/Angles-Opposite-to-Equal/14901-2953-3986-study-wtw' target='_blank'>PI and PH are congruent</a>.</p>
+
+<p>Remember that we showed above that \(\mathtt{m\overline{EP} = \frac{1}{2}(m\overline{PS} + m\overline{PI})}\). Now we can substitute PH for PI to get \(\mathtt{m\overline{EP} = \frac{1}{2}(m\overline{PS} + m\overline{PH})}\). We can stop here, knowing that, in an ellipse, the sum PS + PH (the sum of the distances from a point to the focii) <a href='https://math.stackexchange.com/questions/336622/analytic-geometry-high-school-why-is-the-sum-of-the-distances-from-any-point' target='_blank'>is equal to 2AC</a>, and therefore, since \(\mathtt{m\overline{EP} = \frac{1}{2}(m\overline{PS} + m\overline{PH})}\), and PS + PH = 2AC, we have 2EP = 2AC, or EP = AC. But, if you want to keep reading . . .</p>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse4'>
+<use href='#ellipse3' />
+<line x1='52.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--Force line-->
+<text x='435' y='168' style='font-family:sans-serif;font-size:16px;'>H</text>
+<circle cx='2.5' cy='152.5' r='2' />
+<text x='5' y='150' style='font-family:sans-serif;font-size:16px;'>A'</text>
+</g>
+</svg>
+
+<p>Line segment AC is called a semi-major axis, and it is half the length of the major axis AA' and thus congruent to A'C. This makes AH congruent to A'S, because SC and CH are congruent. And, in an ellipse, the sum of the distances from any point on the ellipse to each of the focii is constant. So, the sum \(\mathtt{m\overline{PS} + m\overline{PH}}\) is the same no matter where P is.</p>
+
+<p>So, if we move point P to A, we'll see that \(\mathtt{m\overline{PS} + m\overline{PH}}\) is equal to \(\mathtt{m\overline{AS} + m\overline{AH}}\). And what is that? Well, AH is equal to A'S, so \(\mathtt{m\overline{AS} + m\overline{AH} = m\overline{AS} + m\overline{A'S}}\), which is the whole major axis, or 2AC. Thus, \(\mathtt{m\overline{PS} + m\overline{PH} = 2 \cdot m\overline{AC}}\), and since \(\mathtt{m\overline{EP} = \frac{1}{2}(m\overline{PS} + m\overline{PH})}\), we get \(\mathtt{m\overline{EP} = m\overline{AC}}\).</p>
+
+<p>Or, \(\mathtt{\overline{EP} \cong \overline{AC}}\).</p>
+
+
+<img src='https://guzintamath.com/images/principia_part1.PNG' style='position:fixed;visibility:hidden;' />
+<hr />
+
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on July 14, 2017</span><span style='position:absolute;right:20px;'><a href='https://plus.google.com/+JoshuaFisherD/posts/MzKncjCZ65j' target='_blank'>Comments</a></span></div>
+
+<meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Just Some Math" /><meta name="twitter:title" content="Principia, Problem 3, Part 1" /><meta name="twitter:description" content="A walkthrough for the first part of Newton's famous solution to the Kepler problem of elliptical orbits." /><meta name="twitter:image" content="https://guzintamath.com/images/principia_part1.PNG" />
