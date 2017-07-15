@@ -43,6 +43,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post19'></div>
 <div id='post18'></div>
 <div id='post17'></div>
 <div id='post15'></div>
@@ -61,6 +62,7 @@
 <script>
 //MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
+   $.get( "/justsomemath/principia3-2.html", function(data) {$("#post19").append(data);});
    $.get( "/justsomemath/principia3-1.html", function(data) {$("#post18").append(data);});
    $.get( "/justsomemath/chg-readings.html", function(data) {$("#post17").append(data);});
    $.get( "/justsomemath/for-back.html", function(data) {$("#post15").append(data);});

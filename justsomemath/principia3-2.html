@@ -1,0 +1,129 @@
+<a href='http://sineof1.github.io/justsomemath/principia_problem3_part2.html' style='color:black;'><div class='post-title'>Principia, Problem 3, Part 2</div></a>
+<div class='post-body'>
+<p>Okay, so <a href='http://sineof1.github.io/justsomemath/principia_problem3_part1.html' target='_blank'>last time</a> we worked out that \(\mathtt{\overline{EP} \cong \overline{AC}}\). This next part is a little less fun&mdash;some grunt work and algebraic manipulations. At the beginning of this part, however, we identify \(\mathtt{\overline{QT}}\) and \(\mathtt{\overline{QR}}\), which are two of the most important measures in this whole argument.</p>
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse1'>
+<ellipse cx='252.5' cy='152.5' rx='250' ry='150' style='fill:none;stroke:black;stroke-width:2;' />
+<circle cx='52.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point S-->
+<circle cx='452.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point H-->
+<circle cx='252.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point C-->
+
+<text x='35' y='150' style='font-family:sans-serif;font-size:16px;'>S</text>
+<text x='440' y='40' style='font-family:sans-serif;font-size:16px;'>P</text>
+<text x='378' y='12' style='font-family:sans-serif;font-size:16px;'>R</text>
+<text x='490' y='75' style='font-family:sans-serif;font-size:16px;'>Z</text>
+<text x='76' y='35' style='font-family:sans-serif;font-size:16px;'>D</text>
+<text x='429' y='280' style='font-family:sans-serif;font-size:16px;'>K</text>
+<text x='189' y='105' style='font-family:sans-serif;font-size:16px;'>E</text>
+<text x='487' y='150' style='font-family:sans-serif;font-size:16px;'>A</text>
+<text x='335' y='30' style='font-family:sans-serif;font-size:16px;'>Q</text>
+<text x='343' y='64' style='font-family:sans-serif;font-size:16px;'>T</text>
+<text x='435' y='150' style='font-family:sans-serif;font-size:16px;'>H</text>
+<text x='405' y='47' style='font-family:sans-serif;font-size:12px;'>X</text>
+
+<circle cx='430' cy='46.87' r='3' style='fill:none;stroke:black;' /> <!--Point P-->
+<line x1='0' y1='-211' x2='505' y2='91.847' style='stroke:black;stroke-width:1;' />
+<circle cx='368' cy='9.689' r='3' /> <!--Point R-->
+<circle cx='498' cy='87.649' r='3' /> <!--Point Z-->
+<circle cx='76' cy='45.9' r='3' /> <!--Point D-->
+<circle cx='429' cy='259' r='3' /> <!--Point K-->
+<circle cx='189.4' cy='114.342' r='2' /> <!--Point E-->
+<circle cx='502.5' cy='152.5' r='2' /> <!--Point A-->
+<circle cx='350.65' cy='14.544' r='3' /> <!--Point Q-->
+<circle cx='364.8' cy='65.114' r='3' /> <!--Point T-->
+<circle cx='412.649' cy='51.275' r='2' /> <!--Point X-->
+<circle cx='417.228' cy='54.471' r='2' /> <!--Point V-->
+
+<line x1='0' y1='0' x2='505' y2='305' style='stroke:black;stroke-width:1;' />
+
+<line x1='2.5' y1='152.5' x2='502.5' y2='152.5' style='stroke:black;stroke-width:1;' /> <!--Major axis-->
+<line x1='252.5' y1='2.5' x2='252.5' y2='302.5' style='stroke:black;stroke-width:1;' /> <!--Minor axis-->
+<line x1='350.65' y1='14.544' x2='364.8' y2='65.114' style='stroke:black;stroke-width:1;' /> <!--QT-->
+<line x1='350.65' y1='14.544' x2='417.228' y2='54.471' style='stroke:black;stroke-width:0.75;' /> <!--QV-->
+<line x1='350.65' y1='14.544' x2='368' y2='9.689' style='stroke:black;stroke-width:1;' /> <!--QR-->
+<line x1='52.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--Force line-->
+</g>
+<line x1='252.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--PC-->
+<text x='237' y='170' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='423' y='63' style='font-family:sans-serif;font-size:12px;'>V</text>
+</svg>
+
+<p>Point Q is placed on the ellipse such that \(\mathtt{\overline{QR} \parallel \overline{SP}}\). Draw \(\mathtt{\overline{QT}}\) perpendicular to \(\mathtt{\overline{SP}}\). We also draw \(\mathtt{\overline{PC}}\) which forms Triangle PCE, and we draw \(\mathtt{\overline{QV}}\) parallel to DK (which is also parallel to the tangent segment RZ). The line segment \(\mathtt{\overline{QV}}\) intersects Triangle PCE on two sides, at the teeny tiny points X and V. The quadrilateral \(\mathtt{QRPX}\) is a parallelogram.</p>
+
+<p class='h2-sec'>Setting Up Some Ratios</p>
+<a href='http://image.mathcaptain.com/cms/images/67/latus-rectum-of-conic-section.png'><img src='http://image.mathcaptain.com/cms/images/67/latus-rectum-of-conic-section.png' style='float:right;width:35%;margin:10px 0 20px 30px;' alt='latus rectum' /></a>
+<p>What we want in this part is to set up a bunch of equivalences that will come into play in the finale. Newton starts by assigning to the (constant) measure of the <a href='http://www.math-only-math.com/latus-rectum-of-the-ellipse.html' target='_blank'>latus rectum</a> of the ellipse the letter L. The latus rectum of an ellipse is a chord of the ellipse extending through one of the focii (so there are 2 latus recta) perpendicular to the major axis. The 2 latus recta of an ellipse are congruent. We don't need to know anything about L at this point (except that it is constant in an ellipse). Newton uses the measure as part of that algebraic manipulation I mentioned above.</p>
+
+<p>Next, he shows that \(\mathtt{\frac{L \cdot QR}{L \cdot PV} = \frac{AC}{PC}}\) How? Well, Triangles PXV and PEC are similar, so \(\mathtt{\frac{PX}{PV} = \frac{PE}{PC}}\).</p>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<use href='#ellipse1' />
+<line x1='252.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--PC-->
+<text x='237' y='170' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='423' y='63' style='font-family:sans-serif;font-size:12px;'>V</text>
+</svg>
+
+<p>But we demonstrated <a href='http://sineof1.github.io/justsomemath/principia_problem3_part1.html' target='_blank'>last time</a> that \(\mathtt{\overline{EP} \cong \overline{AC}}\). And because \(\mathtt{QRPX}\) is a parallelogram, \(\mathtt{m\overline{QR} = m\overline{PX}}\). Substituting in the equal measures, we get \(\mathtt{\frac{QR}{PV} = \frac{AC}{PC}}\). Multiplying the numerator and denominator of \(\mathtt{\frac{QR}{PV}}\) by L doesn't change the equivalence. He has his reasons for including L (the latus rectum measure), which we'll see.</p>
+
+<p>Next up, Newton uses a result from Apollonius's Treatise on Conics (Proposition 15, Book 1) to explain why this monstrosity is true: \[\mathtt{\frac{GV \cdot VP}{QV^2} = \frac{PC^2}{DC^2}}\] Let's unpack Proposition 15, which tells us that:</p>
+
+<blockquote>Any chord parallel to a diameter of an ellipse is bisected by the conjugate diameter and, moreover, its square is equal to the product of the portions of the conjugate diameter.</blockquote>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse3'>
+<use href='#ellipse1' />
+<line x1='75' y1='258.13' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--PG-->
+<line x1='417.228' y1='54.471' x2='482.378' y2='93.541' style='stroke:black;stroke-width:0.75;' /> <!--VV'-->
+<text x='237' y='174' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='65' y='280' style='font-family:sans-serif;font-size:16px;'>G</text>
+<text x='463' y='106' style='font-family:sans-serif;font-size:16px;'>Q'</text>
+<circle cx='75' cy='258.13' r='3' /> <!--Point G-->
+<circle cx='482.378' cy='93.541' r='3' /> <!--Point Q'-->
+</g>
+<text x='413' y='70' style='font-family:sans-serif;font-size:12px;'>V</text>
+</svg>
+
+<p>We extend \(\mathtt{\overline{PC}}\) to form \(\mathtt{\overline{PG}}\) above. And we extend \(\mathtt{\overline{QV}}\) to form \(\mathtt{\overline{QQ'}}\). The segments \(\mathtt{\overline{PG}}\) and \(\mathtt{\overline{DK}}\) are <a href='https://en.wikipedia.org/wiki/Conjugate_diameters' target='_blank'>conjugate diameters</a> because "the tangent line [RZ] to the ellipse at an endpoint of [diameter PG] is parallel to the other diameter [DK]."</p>
+
+<p>So, according to Proposition 15 in the blockquote above, the chord parallel to \(\mathtt{DK}\), which is \(\mathtt{QQ'}\), is bisected by diameter \(\mathtt{PG}\). Thus, \(\mathtt{QQ' = (QV)^2}\). And \(\mathtt{(QV)^2 = GV \cdot VP}\). We can repeat this reasoning: \(\mathtt{DK}\) is a chord and it is parallel to itself, so it too is bisected by \(\mathtt{PG}\). Thus, \(\mathtt{DK = (DC)^2}\). And \(\mathtt{PG}\) is a chord which is parallel to itself, so it is bisected by conjugate diameter \(\mathtt{DK}\). Thus, \(\mathtt{PG = (PC)^2}\). And also \(\mathtt{(PC)^2 = (DC)^2}\).</p>
+
+
+<p>You may have to read the above a few times to let it sink in. But, in the end, the proportion \(\mathtt{\frac{GV \cdot VP}{QV^2} = \frac{PC^2}{DC^2}}\) is equivalent to 1 = 1.</p>
+
+<p class='h2-sec'>Running Out of Letters, But You Can Do It!</p>
+
+<p>We drop yet another perpendicular, this time from point P to point F on DK. We've created two similar triangles. Let's see how.</p>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse4'>
+<use href='#ellipse3' />
+<line x1='336.459' y1='203' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' />
+<text x='418' y='70' style='font-family:sans-serif;font-size:12px;'>V</text>
+<text x='318' y='213' style='font-family:sans-serif;font-size:16px;'>F</text>
+<circle cx='336.459' cy='203' r='2' /> <!--Point F-->
+<path d='M 336.459 203 L 189.4 114.342 L 430 46.87 Z' style='stroke:none;fill:rgba(255, 0, 0, 0.5);' />
+<path d='M 350.65 14.544 L 364.8 65.114 L 412.649 51.275 Z' style='stroke:none;fill:rgba(255, 0, 0, 0.2);' />
+</g>
+<path d='M 400 44.139 L 412.649 51.275 L 400 55.264 Z' style='stroke:none;fill:blue;' />
+<path d='M 202 110.668 L 189.4 114.342 L 200 121.016' style='stroke:none;fill:blue;' />
+</svg>
+
+<p>We have \(\mathtt{\Delta QTX \sim \Delta PFE}\). They're both right triangles, because angles T (QTX) and F (PFE) are right angles. And because \(\mathtt{\overline{DK} \parallel \overline{QQ'}}\), we get congruent alternate interior angles in angles X (QXT) and E (PEF).</p>
+<p>Because of this similarity, \(\mathtt{\frac{QX}{QT} = \frac{EP}{EF}}\). Squaring the measures has no effect on the equivalence, so we can also say that \(\mathtt{\frac{(QX)^2}{(QT)^2} = \frac{(EP)^2}{(EF)^2}}\).</p>
+
+<p class='h2-sec'>To Recap</p>
+
+<p>We have almost all of the dominoes set up. Here are the important ones that we have worked out, along with two (purple) that Newton puts in as part of the algebraic manipulation sneakiness mentioned above:</p>
+<table col='50% 50%' border style='width:500px;height:150px;border-collapse:collapse;text-align:center;margin:0 auto;'><tr><td>\(\small\mathtt{\overline{EP} \cong \overline{AC}}\)</td><td>\(\mathtt{\frac{L \cdot QR}{L \cdot PV} = \frac{AC}{PC}}\)</td></tr>
+<tr><td>\(\mathtt{\frac{GV \cdot VP}{QV^2} = \frac{PC^2}{DC^2}}\)</td><td>\(\mathtt{\frac{(QX)^2}{(QT)^2} = \frac{(EP)^2}{(EF)^2}}\)</td></tr>
+<tr><td style='background-color:rgba(128, 0, 128, 0.5)'>\(\mathtt{\frac{L \cdot PV}{GV \cdot VP} = \frac{L}{GV}}\)</td><td style='background-color:rgba(128, 0, 128, 0.5)'>\(\mathtt{\frac{(QV)^2}{(QX)^2} = \frac{M}{N}}\)</td></tr>
+</table>
+
+<p>The proportion \(\mathtt{\frac{L \cdot PV}{GV \cdot VP} = \frac{L}{GV}}\) is trivially true, and the other is just an arbitrary equation set up for the punchline, which comes later.</p>
+
+
+<img src='https://guzintamath.com/images/principia_part2.PNG' style='position:fixed;visibility:hidden;' />
+<hr />
+
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on July 15, 2017</span><span style='position:absolute;right:20px;'><a href='https://plus.google.com/+JoshuaFisherD/posts/MzKncjCZ65j' target='_blank'>Comments</a></span></div>
