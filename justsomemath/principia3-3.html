@@ -1,0 +1,142 @@
+<a href='http://sineof1.github.io/justsomemath/principia_problem3_part3.html' style='color:black;'><div class='post-title'>Principia, Problem 3, Conclusion</div></a>
+<div class='post-body'>
+<a href='http://publishing.cdlib.org/ucpressebooks/data/13030/zn/ft4489n8zn/figures/ft4489n8zn_00062.gif'><img src='http://publishing.cdlib.org/ucpressebooks/data/13030/zn/ft4489n8zn/figures/ft4489n8zn_00062.gif' style='width:45%;float:right;margin:10px 0 20px 30px;' alt='principia' /></a>
+<p>We'll recap in a sec, but let's get this Lemma 1 out of the way. The image for this comes from the excellent book on which all of these notes are based, called <a href='https://www.amazon.com/Key-Newtons-Dynamics-Problem-Principia-ebook/dp/B003AU4FJO/ref=mt_kindle?_encoding=UTF8&me=' target='_blank'>The Key to Newton's Dynamics</a>.</p>
+
+<p>In Lemma 1, Newton shows that the area of Parallelogram A, \(\mathtt{2 \cdot m\overline{AC} \times 2 \cdot m\overline{BC} = 4(AC)(BC)}\) is equal to the area of Parallelogram B, \(\mathtt{2 \cdot m\overline{CD} \times 2 \cdot m\overline{PF} = 4(CD)(PF)}\). This means that \(\color{blue}{\mathtt{\frac{CA}{PF} = \frac{CD}{CB}}}\).</p>
+
+<p>Now let's recall the table of ratios and congruences we had worked out so far.</p>
+<table col='50% 50%' border style='width:400px;height:150px;border-collapse:collapse;text-align:center;float:left;margin:0 30px 20px 0;'><tr><td>\(\small\mathtt{\overline{EP} \cong \overline{AC}}\)</td><td>\(\mathtt{\frac{L \cdot QR}{L \cdot PV} = \frac{AC}{PC}}\)</td></tr>
+<tr><td>\(\mathtt{\frac{GV \cdot VP}{QV^2} = \frac{(PC)^2}{(DC)^2}}\)</td><td style='background-color:rgba(0, 0, 255, 0.2);'>\(\mathtt{\frac{(QX)^2}{(QT)^2} = \frac{(EP)^2}{(PF)^2}}\)</td></tr>
+<tr><td>\(\mathtt{\frac{L \cdot PV}{GV \cdot VP} = \frac{L}{GV}}\)</td><td>\(\mathtt{\frac{(QV)^2}{(QX)^2} = \frac{M}{N}}\)</td></tr>
+</table>
+<table col='50% 50%' border style='width:400px;height:150px;border-collapse:collapse;text-align:center;float:left;margin:0 30px 20px 0;'><tr><td>\(\small\mathtt{\overline{EP} \cong \overline{AC}}\)</td><td>\(\mathtt{\frac{L \cdot QR}{L \cdot PV} = \frac{AC}{PC}}\)</td></tr>
+<tr><td>\(\mathtt{\frac{GV \cdot VP}{QV^2} = \frac{(PC)^2}{(DC)^2}}\)</td><td style='background-color:rgba(0, 0, 255, 0.2);'>\(\mathtt{\frac{(QX)^2}{(QT)^2} = \frac{(CD)^2}{(CB)^2}}\)</td></tr>
+<tr><td>\(\mathtt{\frac{L \cdot PV}{GV \cdot VP} = \frac{L}{GV}}\)</td><td>\(\mathtt{\frac{(QV)^2}{(QX)^2} = \frac{M}{N}}\)</td></tr>
+</table>
+<p>Since \(\mathtt{\overline{EP} \cong \overline{AC}}\), substituting EP for CA in the blue ratio above gives us \(\mathtt{\frac{EP}{PF} = \frac{CD}{CB}}\). But according to the 2nd column, 2nd row of the table, these two ratios are also equal to \(\mathtt{\frac{QX}{QT}}\).</p>
+<p>Thus, we can write \(\mathtt{\frac{(QX)^2}{(QT)^2} = \frac{(CD)^2}{(CB)^2}}\). And we'll replace that 2nd row, 2nd column proportion with this new one, as the final domino to be set up before multiplying and simplifying.</p>
+
+<p>We're inches away.</p>
+
+<br />
+<p class='h2-sec'>Knock 'Em Down</p>
+
+<p>We have 5 equivalent ratios above. We can multiply all the left-hand sides and set the product equal to the product of all the right-hand sides: \[\mathtt{\frac{(L \cdot QR) \times (GV \cdot VP) \times (QX)^2 \times (L \cdot PV) \times (QV)^2}{(L \cdot PV) \times (QV)^2 \times (QT)^2 \times (GV \cdot VP) \times (QX)^2} = \frac{AC \times (PC)^2 \times (CD)^2 \times L \times M}{PC \times (DC)^2 \times (CB)^2 \times GV \times N}}\]</p>
+
+<p>The left-hand side simplifies nicely to \(\mathtt{\frac{L \cdot QR}{(QT)^2}}\). For the right-hand side, immediately we have only \(\mathtt{(CD)^2}\) and \(\mathtt{(DC)^2}\) canceling, and the PC terms simplifying. But this looks nicer already: \[\mathtt{\frac{L \cdot QR}{(QT)^2} = \frac{AC \times PC \times L \times M}{(CB)^2 \times GV \times N}}\]</p>
+
+<p>The latus rectum, \(\mathtt{L}\), which we looked at <a href='http://sineof1.github.io/justsomemath/principia_problem3_part2.html' target='_blank'>last time</a>, has a constant length of \(\mathtt{\frac{2 \cdot (BC)^2}{AC}}\), which means that \(\mathtt{L \times AC = (BC)^2}\).</p>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:none;margin:25px auto;'>
+<g id='ellipse1'>
+<ellipse cx='252.5' cy='152.5' rx='250' ry='150' style='fill:none;stroke:black;stroke-width:2;' />
+<circle cx='52.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point S-->
+<circle cx='452.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point H-->
+<circle cx='252.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point C-->
+
+<text x='35' y='150' style='font-family:sans-serif;font-size:16px;'>S</text>
+<text x='440' y='40' style='font-family:sans-serif;font-size:16px;'>P</text>
+<text x='378' y='12' style='font-family:sans-serif;font-size:16px;'>R</text>
+<text x='490' y='75' style='font-family:sans-serif;font-size:16px;'>Z</text>
+<text x='76' y='35' style='font-family:sans-serif;font-size:16px;'>D</text>
+<text x='429' y='280' style='font-family:sans-serif;font-size:16px;'>K</text>
+<text x='189' y='105' style='font-family:sans-serif;font-size:16px;'>E</text>
+<text x='487' y='150' style='font-family:sans-serif;font-size:16px;'>A</text>
+<text x='335' y='30' style='font-family:sans-serif;font-size:16px;'>Q</text>
+<text x='343' y='64' style='font-family:sans-serif;font-size:16px;'>T</text>
+<text x='435' y='150' style='font-family:sans-serif;font-size:16px;'>H</text>
+<text x='405' y='47' style='font-family:sans-serif;font-size:12px;'>X</text>
+
+<circle cx='430' cy='46.87' r='3' style='fill:none;stroke:black;' /> <!--Point P-->
+<line x1='0' y1='-211' x2='505' y2='91.847' style='stroke:black;stroke-width:1;' />
+<circle cx='368' cy='9.689' r='3' /> <!--Point R-->
+<circle cx='498' cy='87.649' r='3' /> <!--Point Z-->
+<circle cx='76' cy='45.9' r='3' /> <!--Point D-->
+<circle cx='429' cy='259' r='3' /> <!--Point K-->
+<circle cx='189.4' cy='114.342' r='2' /> <!--Point E-->
+<circle cx='502.5' cy='152.5' r='2' /> <!--Point A-->
+<circle cx='350.65' cy='14.544' r='3' /> <!--Point Q-->
+<circle cx='364.8' cy='65.114' r='3' /> <!--Point T-->
+<circle cx='412.649' cy='51.275' r='2' /> <!--Point X-->
+<circle cx='417.228' cy='54.471' r='2' /> <!--Point V-->
+
+<line x1='0' y1='0' x2='505' y2='305' style='stroke:black;stroke-width:1;' />
+
+<line x1='2.5' y1='152.5' x2='502.5' y2='152.5' style='stroke:black;stroke-width:1;' /> <!--Major axis-->
+<line x1='252.5' y1='2.5' x2='252.5' y2='302.5' style='stroke:black;stroke-width:1;' /> <!--Minor axis-->
+<line x1='350.65' y1='14.544' x2='364.8' y2='65.114' style='stroke:black;stroke-width:1;' /> <!--QT-->
+<line x1='350.65' y1='14.544' x2='417.228' y2='54.471' style='stroke:black;stroke-width:0.75;' /> <!--QV-->
+<line x1='350.65' y1='14.544' x2='368' y2='9.689' style='stroke:black;stroke-width:1;' /> <!--QR-->
+<line x1='52.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--Force line-->
+</g>
+<line x1='252.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--PC-->
+<text x='237' y='170' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='423' y='63' style='font-family:sans-serif;font-size:12px;'>V</text>
+</svg>
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:none;margin:25px auto;'>
+<use href='#ellipse1' />
+<line x1='252.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--PC-->
+<text x='237' y='170' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='423' y='63' style='font-family:sans-serif;font-size:12px;'>V</text>
+</svg>
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:none;margin:25px auto;'>
+<g id='ellipse3'>
+<use href='#ellipse1' />
+<line x1='75' y1='258.13' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--PG-->
+<line x1='417.228' y1='54.471' x2='482.378' y2='93.541' style='stroke:black;stroke-width:0.75;' /> <!--VV'-->
+<text x='237' y='174' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='65' y='280' style='font-family:sans-serif;font-size:16px;'>G</text>
+<text x='463' y='106' style='font-family:sans-serif;font-size:16px;'>Q'</text>
+<circle cx='75' cy='258.13' r='3' /> <!--Point G-->
+<circle cx='482.378' cy='93.541' r='3' /> <!--Point Q'-->
+</g>
+<text x='413' y='70' style='font-family:sans-serif;font-size:12px;'>V</text>
+</svg>
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse4'>
+<use href='#ellipse3' />
+<line x1='336.459' y1='203' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' />
+<text x='418' y='70' style='font-family:sans-serif;font-size:12px;'>V</text>
+<text x='318' y='213' style='font-family:sans-serif;font-size:16px;'>F</text>
+<text x='240' y='18' style='font-family:sans-serif;font-size:16px;'>B</text>
+<circle cx='336.459' cy='203' r='2' /> <!--Point F-->
+<circle cx='252.5' cy='2.5' r='2' /> <!--Point B-->
+</g>
+</svg>
+
+<p>So, we can simplify even further: \[\mathtt{\frac{L \cdot QR}{(QT)^2} = \frac{2 \times PC \times M}{GV \times N} = \frac{2(PC)}{GV} \times \frac{M}{N}}\]</p>
+
+<p class='h2-sec'>Finally, the Limit</p>
+
+<p>Newton's mathematical analysis wants to highlight what happens right at point P (the planet). The line segment \(\mathtt{QR}\) is one part of the force that Newton is trying to describe. Instead of barreling off on the tangent \(\mathtt{\overrightarrow{PR}}\), as it is inclined to do (by Newton's first assumption, or <a href='http://teachertech.rice.edu/Participants/louviere/Newton/law1.html' target='_blank'>first law</a>, whatever), the planet at point P deviates from that tangential path due to a mysterious force thought to emanate from the Sun. The strength of this force is something that Newton knows from Galileo: the force is proportional to the displacement \(\mathtt{QR}\) divided by the time squared. The time is equal to the area of \(\mathtt{\Delta SPQ}\) highlighted in yellow below (I'll come back to show this in a later post). Because this is a proportional relationship, we can ignore the one-half for the area of SPQ, and conclude that the force is proportional to \(\mathtt{\frac{QR}{(SP)^2 \cdot (QT)^2}}\).</p>
+
+<p>But \(\mathtt{QR}\) is the deviation after a bit of time, not right when the planet is at point \(\mathtt{P}\). The point \(\mathtt{Q}\) is actually the planet at point \(\mathtt{P}\) after it has spent time traveling more around its orbit. So, to know what happens at point \(\mathtt{P}\), we have to inch point \(\mathtt{Q}\) back along the ellipse toward point \(\mathtt{P}\). What happens to all our mathematical work when we do this? How does our diagram change?</p>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse4'>
+<path d='M 52.5 152.5 L 430 46.87 L 350.65 14.544 Z' style='fill:yellow;fill-opacity:0.5;stroke:none;' />
+<use href='#ellipse3' />
+<line x1='336.459' y1='203' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' />
+<text x='418' y='70' style='font-family:sans-serif;font-size:12px;'>V</text>
+<text x='318' y='213' style='font-family:sans-serif;font-size:16px;'>F</text>
+<text x='240' y='18' style='font-family:sans-serif;font-size:16px;'>B</text>
+<circle cx='336.459' cy='203' r='2' /> <!--Point F-->
+<circle cx='252.5' cy='2.5' r='2' /> <!--Point B-->
+</g>
+</svg>
+
+<p>Try to imagine it on the diagram. \(\mathtt{QQ'}\) gets shorter and moves closer to point \(\mathtt{P}\). Same goes for the teeny tiny line segment \(\mathtt{XV}\).</p>
+
+<p>Newton saw that as Q approaches P, the line segment \(\mathtt{GV}\) becomes equal to \(\mathtt{PG}\), which is equal to \(\mathtt{2 \cdot PC}\) (remember that?). Thus, the ratio above, \(\mathtt{\frac{2(PC)}{GV}}\), becomes 1. The same goes for \(\mathtt{\frac{M}{N}}\), which you might remember (it's in the table above) is equal to \(\mathtt{\frac{(QV)^2}{(QX)^2}}\). This ratio goes to 1 as well when point Q approaches infinitesimally close to point P. So, our equation becomes: \[\mathtt{\frac{L \cdot QR}{(QT)^2} = 1 \rightarrow \frac{QR}{(QT)^2} = \frac{1}{L}}\]</p>
+
+<p>If we multiply that second equation through by \(\mathtt{\frac{1}{(SP)^2}}\), we get \[\mathtt{\frac{QR}{(SP)^2 \cdot (QT)^2} = \frac{1}{L \cdot (SP)^2}}\]</p>
+
+<p>And we know from Galileo above that the left side of that equation is proportional to the force, or \(\mathtt{F \propto \frac{QR}{(SP)^2 \cdot (QT)^2}}\). So now we know that it is proportional to the right side as well. This means that \(\mathtt{F \propto \frac{1}{L \cdot (SP)^2}}\). And because \(\mathtt{L}\) is a constant, we can throw it out. Which leaves us with the grand finale, that the force is proportional to the inverse square of the distance from the Sun to the planet: \[\mathtt{F \propto \frac{1}{(SP)^2}}\]</p>
+
+
+<img src='https://guzintamath.com/images/principia_part3.PNG' style='position:fixed;visibility:hidden;' />
+<hr />
+
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on July 16, 2017</span><span style='position:absolute;right:20px;'><a href='https://plus.google.com/+JoshuaFisherD/posts/MzKncjCZ65j' target='_blank'>Comments</a></span></div>

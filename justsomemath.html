@@ -43,6 +43,7 @@
 <body>
 <div class='post-wall'>
 <!--############## POST ONLY ##############-->
+<div id='post20'></div>
 <div id='post19'></div>
 <div id='post18'></div>
 <div id='post17'></div>
@@ -52,7 +53,6 @@
 <div id='post12'></div>
 <div id='post10'></div>
 <div id='post9'></div>
-<div id='post8'></div>
 <!--############ END POST ONLY ############-->
 </div>
 <img src='https://lh3.googleusercontent.com/JURL9MsUen7HUZ6kdLgOEYNCDodDaDErnJtuN4gN9CTW=w815-h809-no' style='position:fixed;visibility:hidden;'>
@@ -62,6 +62,7 @@
 <script>
 //MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 $(document).ready(function() {
+   $.get( "/justsomemath/principia3-3.html", function(data) {$("#post20").append(data);});
    $.get( "/justsomemath/principia3-2.html", function(data) {$("#post19").append(data);});
    $.get( "/justsomemath/principia3-1.html", function(data) {$("#post18").append(data);});
    $.get( "/justsomemath/chg-readings.html", function(data) {$("#post17").append(data);});
@@ -70,7 +71,6 @@ $(document).ready(function() {
    $.get( "/justsomemath/thresh-cons.html", function(data) {$("#post13").append(data);});
    $.get( "/justsomemath/add-vecs.html", function(data) {$("#post12").append(data);});
    $.get( "/justsomemath/tech-reflect.html", function(data) {$("#post10").append(data);});
-   $.get( "/justsomemath/comp-phob.html", function(data) {$("#post8").append(data);});
    $.get( "/justsomemath/struct.html", function(data) {$("#post9").append(data);});
 });
 </script>
