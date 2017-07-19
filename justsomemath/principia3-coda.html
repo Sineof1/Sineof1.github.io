@@ -1,0 +1,115 @@
+<a href='http://sineof1.github.io/justsomemath/principia_problem3_part3.html' style='color:black;'><div class='post-title'>Principia, Problem 3, Coda</div></a>
+<div class='post-body'>
+
+<p>So, we took a bit of a backwards trip through Newton's famous solution of the elliptical orbit&mdash;backwards in the sense that we didn't reprise the typical explication, which generally begins with a mountain of foreign context that no one relates to (Newton was born in . . . ) and then whizzes past the juicy mathematical details at the end.</p>
+
+<p>Instead, we <a href='http://sineof1.github.io/justsomemath/principia_problem3_part1.html' target='_blank'>started</a> with just the mathematical details, without context, which was continued into <a href='http://sineof1.github.io/justsomemath/principia_problem3_part2.html' target='_blank'>Part 2</a> and even into <a href='http://sineof1.github.io/justsomemath/principia_problem3_part3.html' target='_blank'>the conclusion</a>, where we finally whizzed past some of the important overhead context that makes the solution so important.</p>
+
+<p>This part will focus on some of that context.</p>
+
+<p class='h2-sec'>The Planets Are Falling</p>
+
+<p>What can be seen at the end of the mathematical work of Newton's solution is the idea that the force which causes planets to orbit is mathematically similar to the force which pulls us down on Earth. (Here's where the apocryphal 'apple' story comes in.)</p>
+
+<p>We know, for example, that the force that pulls us down on Earth is proportional to the acceleration (\(\mathtt{F = ma}\)). And acceleration is just change in velocity over time, and velocity is just change in position (displacement) over time. So, acceleration is displacement over time over time, or displacement over time squared.</p>
+
+<p>In the diagram below, the planet P which is now at Q has "fallen" from its tangent by a deviation measure, or displacement, of \(\mathtt{\overline{QR}}\).</p>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:none;margin:25px auto;'>
+<g id='ellipse1'>
+<ellipse cx='252.5' cy='152.5' rx='250' ry='150' style='fill:none;stroke:black;stroke-width:2;' />
+<circle cx='52.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point S-->
+<circle cx='452.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point H-->
+<circle cx='252.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point C-->
+
+<text x='35' y='150' style='font-family:sans-serif;font-size:16px;'>S</text>
+<text x='440' y='40' style='font-family:sans-serif;font-size:16px;'>P</text>
+<text x='378' y='12' style='font-family:sans-serif;font-size:16px;'>R</text>
+<text x='490' y='75' style='font-family:sans-serif;font-size:16px;'>Z</text>
+<text x='76' y='35' style='font-family:sans-serif;font-size:16px;'>D</text>
+<text x='429' y='280' style='font-family:sans-serif;font-size:16px;'>K</text>
+<text x='189' y='105' style='font-family:sans-serif;font-size:16px;'>E</text>
+<text x='487' y='150' style='font-family:sans-serif;font-size:16px;'>A</text>
+<text x='335' y='30' style='font-family:sans-serif;font-size:16px;'>Q</text>
+<text x='343' y='64' style='font-family:sans-serif;font-size:16px;'>T</text>
+<text x='435' y='150' style='font-family:sans-serif;font-size:16px;'>H</text>
+<text x='405' y='47' style='font-family:sans-serif;font-size:12px;'>X</text>
+
+<circle cx='430' cy='46.87' r='3' style='fill:none;stroke:black;' /> <!--Point P-->
+<line x1='0' y1='-211' x2='505' y2='91.847' style='stroke:black;stroke-width:1;' />
+<circle cx='368' cy='9.689' r='3' /> <!--Point R-->
+<circle cx='498' cy='87.649' r='3' /> <!--Point Z-->
+<circle cx='76' cy='45.9' r='3' /> <!--Point D-->
+<circle cx='429' cy='259' r='3' /> <!--Point K-->
+<circle cx='189.4' cy='114.342' r='2' /> <!--Point E-->
+<circle cx='502.5' cy='152.5' r='2' /> <!--Point A-->
+<circle cx='350.65' cy='14.544' r='3' /> <!--Point Q-->
+<circle cx='364.8' cy='65.114' r='3' /> <!--Point T-->
+<circle cx='412.649' cy='51.275' r='2' /> <!--Point X-->
+<circle cx='417.228' cy='54.471' r='2' /> <!--Point V-->
+
+<line x1='0' y1='0' x2='505' y2='305' style='stroke:black;stroke-width:1;' />
+
+<line x1='2.5' y1='152.5' x2='502.5' y2='152.5' style='stroke:black;stroke-width:1;' /> <!--Major axis-->
+<line x1='252.5' y1='2.5' x2='252.5' y2='302.5' style='stroke:black;stroke-width:1;' /> <!--Minor axis-->
+<line x1='350.65' y1='14.544' x2='364.8' y2='65.114' style='stroke:black;stroke-width:1;' /> <!--QT-->
+<line x1='350.65' y1='14.544' x2='417.228' y2='54.471' style='stroke:black;stroke-width:0.75;' /> <!--QV-->
+<line x1='350.65' y1='14.544' x2='368' y2='9.689' style='stroke:black;stroke-width:1;' /> <!--QR-->
+<line x1='52.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--Force line-->
+</g>
+<line x1='252.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--PC-->
+<text x='237' y='170' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='423' y='63' style='font-family:sans-serif;font-size:12px;'>V</text>
+</svg>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:none;margin:25px auto;'>
+<g id='ellipse3'>
+<use href='#ellipse1' />
+<line x1='75' y1='258.13' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--PG-->
+<line x1='417.228' y1='54.471' x2='482.378' y2='93.541' style='stroke:black;stroke-width:0.75;' /> <!--VV'-->
+<text x='237' y='174' style='font-family:sans-serif;font-size:16px;'>C</text>
+<text x='65' y='280' style='font-family:sans-serif;font-size:16px;'>G</text>
+<text x='463' y='106' style='font-family:sans-serif;font-size:16px;'>Q'</text>
+<circle cx='75' cy='258.13' r='3' /> <!--Point G-->
+<circle cx='482.378' cy='93.541' r='3' /> <!--Point Q'-->
+</g>
+<text x='413' y='70' style='font-family:sans-serif;font-size:12px;'>V</text>
+</svg>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
+<g id='ellipse4'>
+<path d='M 52.5 152.5 L 430 46.87 L 350.65 14.544 Z' style='fill:yellow;fill-opacity:0.5;stroke:none;' />
+<use href='#ellipse3' />
+<line x1='336.459' y1='203' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' />
+<text x='418' y='70' style='font-family:sans-serif;font-size:12px;'>V</text>
+<text x='318' y='213' style='font-family:sans-serif;font-size:16px;'>F</text>
+<text x='240' y='18' style='font-family:sans-serif;font-size:16px;'>B</text>
+<circle cx='336.459' cy='203' r='2' /> <!--Point F-->
+<circle cx='252.5' cy='2.5' r='2' /> <!--Point B-->
+</g>
+</svg>
+
+<p>And since Kepler tells us that the planet sweeps out equal areas in equal times as it orbits, the area that it sweeps out, \(\mathtt{\frac{1}{2}(SP)(QT)}\) can serve as the measure of time. So, our time squared becomes \(\mathtt{\frac{1}{4}(SP)^2(QT)^2}\), and since we are dealing with proportions (force is proportional to displacement over time squared, not equal to it), we can throw away the \(\mathtt{\frac{1}{4}}\). If the force is proportional to \(\mathtt{\frac{QR}{\frac{1}{4}(SP)^2(QT)^2}}\), it's also proportional to just \(\mathtt{\frac{QR}{(SP)^2(QT)^2}}\).</p>
+
+<p>As you can see, though, the highlighted triangle doesn't quite match up to the arc formed by the planet's "fall," so its area is a little less than the "area swept out by the planet." However, if we inch Q back closer to P, so that it is only a tiny bit away, the area of the triangle becomes a more perfect representation of the time.</p>
+
+<p class='h2-sec'>To the Limit</p>
+
+<p>This inching Q back to P provides the key to solving the puzzle. Not only do we get a more perfect triangle to match Kepler's observation about equal areas in equal times, Newton also finds a way to match Galileo's observation that the acceleration is constant. When he moves Q back to P, he puts together what is probably the best expression of the whole work: \(\mathtt{\frac{QR}{(QT)^2} = \frac{1}{L}}\).</p>
+
+<p>When we multiply through by \(\mathtt{\frac{1}{(SP)^2}}\), then the left-hand side becomes the familiar force we were looking for. The famous conclusion, covered in Part 3, is expressed by the right-hand side of the equation.</p>
+
+<p>You can see that all of that work we went through in Parts 1 and 2 had as its end goal to fix \(\mathtt{\frac{QR}{(QT)^2}}\) as a constant. Newton showed that it was equal to a constant. The inverse square law literally falls out of that work, which is really cool once you've seen how the mathematical sausage is made.</p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+
+<img src='https://guzintamath.com/images/principia_part3.PNG' style='position:fixed;visibility:hidden;' />
+<hr />
+
+</div>
+<div class='post-footer'><span style='position:absolute;left:20px;'>Posted on July 18, 2017</span><span style='position:absolute;right:20px;'><a href='https://plus.google.com/+JoshuaFisherD/posts/MzKncjCZ65j' target='_blank'>Comments</a></span></div>
