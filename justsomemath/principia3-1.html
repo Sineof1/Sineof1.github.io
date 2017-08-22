@@ -2,7 +2,7 @@
 <div class='post-body'>
 <p>Let's just start on the inside and move outward, and then back. We'll start with almost no context at all&mdash;no apples, no Kepler, no Newton. Just this ellipse:</p>
 <svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
-<g id='ellipse1'>
+<g id='ellipse8'>
 <ellipse cx='252.5' cy='152.5' rx='250' ry='150' style='fill:none;stroke:black;stroke-width:2;' />
 <circle cx='52.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point S-->
 <circle cx='452.5' cy='152.5' r='2' style='fill:black;stroke:none;' /> <!--Point H-->
@@ -45,8 +45,8 @@
 <p>The first thing Newton does (okay, there's some more context) is to show that \(\mathtt{\overline{EP}}\) is congruent to \(\mathtt{\overline{AC}}\). To do this, he starts by constructing another line segment parallel to DK, connecting point H and the line segment SP. Call this point <span style='font-family:serif;'>I</span>.</p>
 
 <svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
-<g id='ellipse2'>
-<use href='#ellipse1' />
+<g id='ellipse9'>
+<use href='#ellipse8' />
 <circle cx='325.241' cy='76.183' r='2' /> <!--Point I-->
 <text x='325' y='70' style='font-family:serif;font-size:16px;'>I</text>
 <line x1='452.5' y1='152.5' x2='325.241' y2='76.183' style='stroke:blue;stroke-width:1;' />
@@ -66,8 +66,8 @@
 <p>Almost there. We now show that PI = PH. You can see the alternate interior angles below, which are congruent: \(\mathtt{\angle{RPI} \cong \angle{PIH}}\) and \(\mathtt{\angle{ZPH} \cong \angle{PHI}}\).</p>
 
 <svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
-<g id='ellipse3'>
-<use href='#ellipse2' />
+<g id='ellipse10'>
+<use href='#ellipse9' />
 <line x1='430' y1='46.87' x2='452.5' y2='152.5' style='stroke:blue;stroke-width:1;' />
 <path d='M 416 39.026 L 430 46.87 L 415 51.067 Z' style='fill:rgba(255,165,0, 0.5);stroke:none;' />
 <path d='M 340 72.053 L 325.241 76.183 L 340 85.034 Z' style='fill:rgba(255,165,0, 0.5);stroke:none;' />
@@ -84,8 +84,8 @@
 <p>Remember that we showed above that \(\mathtt{m\overline{EP} = \frac{1}{2}(m\overline{PS} + m\overline{PI})}\). Now we can substitute PH for PI to get \(\mathtt{m\overline{EP} = \frac{1}{2}(m\overline{PS} + m\overline{PH})}\). We can stop here, knowing that, in an ellipse, the sum PS + PH (the sum of the distances from a point to the focii) <a href='https://math.stackexchange.com/questions/336622/analytic-geometry-high-school-why-is-the-sum-of-the-distances-from-any-point' target='_blank'>is equal to 2AC</a>, and therefore, since \(\mathtt{m\overline{EP} = \frac{1}{2}(m\overline{PS} + m\overline{PH})}\), and PS + PH = 2AC, we have 2EP = 2AC, or EP = AC. But, if you want to keep reading . . .</p>
 
 <svg xmlns='http://www.w3.org/2000/svg' width='505' height='305' style='display:block;margin:25px auto;'>
-<g id='ellipse4'>
-<use href='#ellipse3' />
+<g id='ellipse11'>
+<use href='#ellipse10' />
 <line x1='52.5' y1='152.5' x2='430' y2='46.87' style='stroke:black;stroke-width:1;' /> <!--Force line-->
 <text x='435' y='168' style='font-family:sans-serif;font-size:16px;'>H</text>
 <circle cx='2.5' cy='152.5' r='2' />
