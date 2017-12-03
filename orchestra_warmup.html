@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src='https://guzintamath.com/textsavvy/scripts/tone.js'></script>
+
+<title>Musical Ratios</title>
+<style>
+
+body {
+   width:780px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:200px;
+}
+h1 {
+   font-family:'Open Sans';
+}
+h1:before {
+   content:url('https://guzintamath.com/textsavvy/wp-content/uploads/2017/12/text_savvy_guzinta.png');
+   vertical-align:-3px;
+   margin-right:20px;
+}
+#normalbegin_GuzBlog {
+   font-family:'Open Sans';
+   font-weight:500;
+   font-size:17px;
+   text-align:justify;
+   line-height:22px;
+}
+.normal_GuzBlog {
+   font-family:'Open Sans';
+   font-size:17px;
+   text-align:justify;
+   line-height:22px;
+}
+.h2sec_GuzBlog {
+   font-size:22px;
+   font-family:'Open Sans';
+   font-weight:900;
+}
+#firstChar_GuzBlog {
+   font-family:'Open Sans';
+   font-size:40px;
+   color:gray;
+   margin-right:-2px;
+   vertical-align:0px;
+   font-weight:600;
+}
+.link_GuzBlog {
+   font-family:'Open Sans';
+   color:brown;
+   text-decoration:none;
+}
+.link_GuzBlog:hover {
+  text-decoration:underline;
+}
+.link__GuzBlog:visited {
+   color:brown;
+}
+.callout_GuzBlog {
+   font-family:'Open Sans';
+   font-size:17px;
+   font-weight:600;
+   text-align:justify;
+   margin-left:50px;
+   margin-right:75px;
+   border-left:5px dotted #333300;
+   padding-left:25px;
+   color:#333300;
+}
+#research {
+   position:absolute;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-family:'Open Sans';
+   font-weight:bold;
+   padding:5px;
+   top:15px;
+   right:0px;
+   width:160px;
+   height:25px;
+   background:green;
+   color:white;
+   font-variant:small-caps;
+}
+#synth {
+   position:relative;
+   width:500px;
+   height:500px;
+   margin:-50px auto 45px auto;
+   overflow:hidden;
+}
+.ratioline {shape-rendering:crispEdges;}
+.wnote, .bnote {shape-rendering:crispEdges;}
+#keyboard {cursor:pointer;}
+button {
+   display:block;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:10px;
+   outline:0 none;
+   border:none;
+   font-size:1.5em;
+   font-family:proxima_nova;
+   border-radius:5px;
+   background:#fff;
+   font-variant:small-caps;
+   padding:8px 15px;
+   text-decoration:none;
+   font-weight:bold;
+   color:#069;
+   z-index:2;
+}
+button:hover {
+   cursor:pointer;
+}
+</style>
+<body>
+<h1>Musical Ratios</h1>
+
+<div id='normalbegin_GuzBlog'><p><span id='firstChar_GuzBlog'>T</span>he crowd waits silently&mdash;almost silently&mdash;in the dark hall while the orchestra begins its warmup. One of the oboists plays a single note, an A note, three times. The rest of the orchestra then uses this note to tune their instruments.</p></div>
+
+<div class='normal_GuzBlog'><p>Let's warm up with the orchestra. Press the Warm-Up button below. Then press the orange squares or the keys on the keyboard below to hear if the orchestra is in tune.</p></div>
+
+<button id='orch_audio' style='box-shadow:0 0 3px #ccc;font-size:20px;'>warm-up</button>
+
+<div class='normal_GuzBlog'><p>The tuning note played by the oboe, A, is a sound wave that vibrates at a certain frequency. This frequency is given in a special unit called Hertz. The A note vibrates at 440 Hertz.</p></div>
+
+<div id='synth'></div>
+
+<div class='normal_GuzBlog'><p>I mentioned recently on Twitter that I was bummed that, while on a bit of a Thanksgiving vacation slash in-law wedding anniversary slash actual vacation, I realized that during some recent work on exponential functions I just completed, I had forgotten about a nice connection to the musical scale. So I made a thing. (Thanks to Tone.js, and you'll need audio for the thing above.) In modern music, when the frequency at each half step of a musical scale is multiplied by the 12th root of 2, you get the frequency for the next note.</p></div>
+
+<div class='normal_GuzBlog'><p>I'm nearing the end of my first pass through the <a class='link_GuzBlog' href='https://guzintamath.com/' target='_blank'>middle school lesson apps</a>. As of tomorrow (I hope), I'll have a set of 31 for Grades 6, 7, and 8.</p></div>
+
+<div class='normal_GuzBlog'><p>So now begins the second major pass through everything. In this pass I hope to (1) add some kind of more open-ended, enigmatical, module (which is what the above will be when it's merged with some good questions) to each lesson app, (2) add a more technical, misconception-handling, prerequisite-tightening module to each, (3) add randomized practice problems of all varieties which will begin after first use, so that students don't come back to the exact same material every time, and (4) package the lessons all together for each grade level (15, 8, and 8) and for all OS, away from the Chrome app store.</p></div>
+
+<div class='normal_GuzBlog'><p>That'll probably keep me busy for a while.</p></div>
+   </body>
+<img src='https://guzintamath.com/textsavvy/wp-content/uploads/2017/12/musical_ratios.png' style='position:fixed;visibility:hidden;' />
+
+<audio id='orchestra_audio'><source src='https://guzintamath.com/blogstuff/orchestra.mp3' /></audio>
+<script src='https://guzintamath.com/textsavvy/scripts/musical_ratios.js'></script>
+<hr />
+<!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-556d04cc5bc8f00e"></script> 
+   
+<meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="Musical Ratios" /><meta name="twitter:description" content="An interactive tools for exploring ratios in the form of musical intervals." /><meta name="twitter:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2017/12/musical_ratios.png" />
