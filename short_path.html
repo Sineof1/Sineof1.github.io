@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr Barton's Book">
+<meta property="og:description" content="A review of How I Wish I'd Taught Maths by Craig Barton.">
+<meta property="og:image" content='http://www.johncattbookshop.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/9/7/9781911382492_2.jpg'>
+<meta property="fb:app_id" content="2117346108485381" />
+<meta property="og:url" content="https://guzintamath.com/TechPosts/longdiv/longdiv.html">
+<meta property="og:site_name" content="Guzinta Math"/>
+<meta name="description" content="6th, 7th, and 8th grade math lesson apps for supplemental teaching at school and home.">
+<link rel="apple-touch-icon" href="https://guzintamath.com/images/guzintamath_ad.jpg">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,500" rel="stylesheet">
+<link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<title>Taking the Shortest Path</title>
+</head>
+<style>
+
+body {
+   width:780px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:200px;
+}
+h1 {
+   font-family:'Open Sans';
+}
+#normalbegin_GuzBlog {
+   font-family:'Open Sans';
+   font-weight:500;
+   font-size:17px;
+   text-align:justify;
+   line-height:21px;
+}
+.normal_GuzBlog {
+   font-family:'Open Sans';
+   font-size:17px;
+   text-align:justify;
+   line-height:22px;
+}
+.h2sec_GuzBlog {
+   font-size:22px;
+   font-family:'Open Sans';
+   font-weight:900;
+}
+#firstChar_GuzBlog {
+   font-family:'Open Sans';
+   font-size:40px;
+   color:gray;
+   margin-right:0px;
+   vertical-align:0px;
+   font-weight:600;
+}
+.link_GuzBlog {
+   font-family:'Open Sans';
+   color:brown;
+   text-decoration:none;
+}
+.link_GuzBlog:hover {
+  text-decoration:underline;
+}
+.link__GuzBlog:visited {
+   color:brown;
+}
+.callout_GuzBlog {
+   font-family:'Open Sans';
+   font-size:17px;
+   font-weight:600;
+   text-align:justify;
+   margin-left:50px;
+   margin-right:75px;
+   border-left:5px dotted #333300;
+   padding-left:20px;
+   color:#333300;
+}
+#research {
+   position:absolute;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-family:'Open Sans';
+   font-weight:bold;
+   padding:5px;
+   top:15px;
+   right:0px;
+   width:160px;
+   height:25px;
+   background:green;
+   color:white;
+   font-variant:small-caps;
+}
+li {
+   margin-bottom:15px;
+}
+</style>
+
+<body>
+<h1>Taking the Shortest Path</h1>
+
+<div id='normalbegin_GuzBlog' style='margin-bottom:25px;'><p><span id='firstChar_GuzBlog'>I</span> have a quick and painless math question for you to start.</p></div>
+
+<div class='normal_GuzBlog' style='box-shadow:0 0 3px #ccc;padding:10px 40px;box-sizing:border-box;width:80%;margin:0 auto 30px auto;border-radius:8px;background-color:#fafafa;'><p>You are at point A and you want to walk to point C. Which path shown should you choose from A to C to cover the least distance?
+<br /><br />
+<svg xmlns='http://www.w3.org/2000/svg' style='width:320px;height:210px;stroke:brown;fill:none;stroke-width:2px;display:block;margin:0 auto;'>
+<path d='M 20 20 L 60 190 L 290 190 L 20 20 Z' />
+<text x='6' y='18' style='font-family:sans-serif;font-size:15px;fill:black;stroke:none;'>A</text>
+<text x='43' y='200' style='font-family:sans-serif;font-size:15px;fill:black;stroke:none;'>B</text>
+<text x='295' y='200' style='font-family:sans-serif;font-size:15px;fill:black;stroke:none;'>C</text>
+</svg>
+</p></div>
+
+<div class='normal_GuzBlog'><p>It's not a trick question. We're using plain old Euclidean geometry here, where all the lines are straight and everything is on flat planes. You will, of course, travel the least distance between A and C if you walk along <span style='text-decoration:overline;'>AC</span>.</p></div>
+
+<div class='h2sec_GuzBlog'><p>Multiple Methods</p></div>
+
+<div class='normal_GuzBlog'><p>This "problem" probably didn't feel like a problem to you at all. That's because finding the shortest distance between two points is an ability we (and even other animals) are probably born with, or learn at a very young age.</p><p>But this tendency can also probably explain, in part, why many of us didn't have a positive first reaction to studying multiple methods in math class. If I know a really quick path, like <span style='text-decoration:overline;'>AC</span>, and it gets me from A to C every time, and I'm pretty sure I'll never have to use any other path, why should I be <strong>forced</strong> to know another way to get to the same place?</p></div>
+
+<div class='normal_GuzBlog'><p>People have asked this question enough that we educators now have a stockpile of answers ready to go, most of which we have heard before. So, let me try to answer it a little differently.</p></div>
+
+<div class='normal_GuzBlog'><p>First, multiple methods are not an absolute good in math class. That is, if you told me that some topic was taught one way in a first class, but in a second class they taught it two ways, I can't assume that the second class has it right just because they use multiple methods. What are those methods? What is the topic? What prior knowledge are the students, in general, bringing to the table? Questions like that (and many more) have to be answered and the contexts worked out before we can make a judgement about multiple methods.</p></div>
+
+<div class='normal_GuzBlog'><p>Second, there are methods in math that are more efficient than others. Not all ways of looking at a problem are created equal. This is not to say that there is necessarily some rigid hierarchy of methods, from best to worst. But it is also not the case that every method is equally deserving of our and our students' valuable time and attention.</p></div>
+
+<div class='normal_GuzBlog'><p>Finally, having said all that, we have to be careful. We adults grew up with math mostly being about using methods to solve problems. So, when we hear "multiple methods," we might naturally assume that what is meant is that our students will be using multiple methods to solve problems. But math has more than just this one purpose&mdash;of applying techniques to solve problems. Mathematics is also useful for gaining new insights into natural and other mathematical phenomena. And often the way we arrive at these insights is to analyze these phenomena using multiple methods&mdash;or, consider them from multiple perspectives.</p></div>
+
+<div class='h2sec_GuzBlog'><p>Multiple Perspectives</p></div>
+
+<div class='normal_GuzBlog'><p>As an example of this, consider the three segments shown below. Will they form a triangle? What about <strong>any</strong> three segments? How can we tell if they will form a triangle?</p></div>
+
+<div class='normal_GuzBlog'><p>Well, let's try to think about this question from a different perspective&mdash;one we have already seen above. Think about drawing a line segment on a piece of paper, from a starting point to an ending point. Now place your pencil on the starting point and think about all the ways you could draw straight segment paths to get you from the starting point to the ending point without going along your original path. You will have to draw triangles. And, since you started by drawing the shortest path between two points, the two other side paths you draw must be longer than the first path!</p></div>
+
+<img src='tri_inequality.PNG' style='float:right;margin:10px 0 20px 30px;width:50%;' />
+<div class='normal_GuzBlog'><p>The switch in perspective here is to think about the sides of a triangle not as sides but as paths that we can walk along. We know that any segment on a triangle is the shortest path between its two endpoints, so the sum of the lengths of the other two sides&mdash;<strong>any</strong> other two sides that form a triangle&mdash;must be greater than the side we want to walk along. For the triangles on the right, this means that the distance AC + CB must be greater than the distance AB and the distance BA + AC must be greater than the distance BC. And so on.</p></div>
+
+<div class='normal_GuzBlog'><p>What we have just seen&mdash;that, for any side of a triangle, the sum of the lengths of the two other sides must be greater&mdash;is one way of stating what's called the Triangle Inequality Theorem. Notice how we can get there using multiple perspectives: by thinking about the triangle's sides both as sides and as paths, and then using what we intuitively know about the shortest distance between two points. That's pretty cool!</p></div>
+
+<div class='normal_GuzBlog'><p>Getting used to looking at things from multiple perspectives is a powerful habit of mind that can serve you well when learning mathematics. Doing so often takes you off the shortest path, but going a longer way is often worth it.</p></div>
+
+
+<hr />
+</body>
