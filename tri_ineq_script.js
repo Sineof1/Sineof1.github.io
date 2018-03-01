@@ -4,7 +4,8 @@ $('#svgAnimInsert').empty();
 var svgTriIneq = d3.select('#svgAnimInsert')
                    .append('svg')
                    .attr('width', 300)
-                   .attr('height', 200);
+                   .attr('height', 200)
+                   .attr('transform', 'scale(2, 2)');
 
 svgTriIneq.append('line')
           .attr('x1', 40)
