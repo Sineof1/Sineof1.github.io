@@ -5,7 +5,6 @@ var svgTriIneq = d3.select('#svgAnimInsert')
                    .append('svg')
                    .attr('width', 300)
                    .attr('height', 200)
-                   .style('background-image', 'url(paperbgrnd.png)')
                    .attr('transform', 'translate(175,50) scale(2, 2)');
 
 svgTriIneq.append('line')
