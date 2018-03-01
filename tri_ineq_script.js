@@ -5,7 +5,6 @@ var svgTriIneq = d3.select('#svgAnimInsert')
                    .append('svg')
                    .attr('width', 300)
                    .attr('height', 200)
-                   .style('shape-rendering', 'crispEdges')
                    .attr('transform', 'translate(160,100) scale(2, 2)');
 
 svgTriIneq.append('line')
@@ -118,7 +117,7 @@ svgTriIneq.append('circle')
           .transition()
           .delay(2800)
           .duration(500)
-          .attr('r', 3);
+          .attr('r', 1.5);
 }
 
 animateSVG();
