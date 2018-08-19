@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2018/08/geo_transform_img.png'>
+<link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<title>Geo Transforms</title>
+</head>
+
+<style>
+body {
+   text-align:center;
+}
+#transform_frame {
+   display:inline-block;
+   margin:35px auto 0 auto;
+   width:750px;
+   height:500px;
+   border:10px ridge rgb(100, 211, 254);
+   border-radius:8px;
+   background-color:beige;
+   overflow:hidden;
+}
+#shapes_frame {
+   position:relative;
+   display:inline-block;
+   width:150px;
+   height:500px;
+   border:10px ridge rgb(100, 211, 254);
+   border-radius:8px;
+   background-color:black;
+   overflow-y:scroll;
+   overflow-x:hidden;
+}
+#shapes_frame::-webkit-scrollbar {
+    display: none;
+}
+.shape-button {
+   text-align:center;
+   width:144px;
+   height:89px;
+   background-color:black;
+   margin-bottom:5.5px;
+   cursor:pointer;
+}
+.shape-button:hover {
+   background-color:black;
+}
+#control-box {
+   display:inline-block;
+   position:relative;
+   margin:0 175px 0 auto;
+   width:750px;
+   height:150px;
+   border:10px ridge rgb(100, 211, 254);
+   border-radius:8px;
+   background-color:white;
+   overflow:hidden;
+}
+.transform-box {
+   position:absolute;
+   display:inline-flex;
+   align-items:center;
+   justify-content:center;
+   width:375px;
+   height:75px;
+   background-color:black;
+   box-sizing:border-box;
+   padding:5px;
+   color:white;
+   font-family:sans-serif;
+   font-size:20px;
+   font-variant:small-caps;
+   pointer-events:none;
+   opacity:0.5;
+}
+.transform-input {
+   width:67.5px;
+   height:45px;
+   font-family:sans-serif;
+   font-size:20px;
+   outline:none;
+   padding:2.5px;
+   text-align:center;
+}
+.tool_hint {
+   position:fixed;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:200px;
+   height:150px;
+   background-color:rgba(0, 0, 255, 0.5);
+   color:white;
+   font-size:22px;
+   font-family:sans-serif;
+   opacity:0;
+   border-radius:8px;
+   padding:5px;
+   box-sizing:border-box;
+}
+</style>
+
+<body>
+<div class='tool_hint' id='shape_hint' style='top:45px;right:8px;height:75px;'><span>Click to add a figure.</span></div>
+<div class='tool_hint' id='transform_hint' style='bottom:50px;left:8px;'><span>Type in transformations and press Enter.<br />Or click for reflections.</span></div>
+<div id='transform_frame'></div>
+<div id='shapes_frame'>
+<div class='shape-button' id='button1'><img src='smiley.png' style='height:90%;margin-top:7px;'></div>
+<div class='shape-button' id='button2'><img src='moon.png' style='height:85%;margin-top:7px;'></div>
+<div class='shape-button' id='button3'><img src='letter_a.png' style='height:85%;margin-top:11px;'></div>
+<div class='shape-button' id='button4'><img src='star.png' style='height:90%;margin-top:7px;'></div>
+<div class='shape-button' id='button5'><img src='runner.png' style='height:90%;margin-top:7px;'></div>
+<div class='shape-button' id='button6'><img src='hexagon.png' style='height:95%;margin-top:7px;'></div>
+</div>
+<div id='control-box'>
+<div class='transform-box' id='dilation-box' style='top:0px;left:0px;border-right:1px solid white;border-bottom:1px solid white;'>
+<span style='position:absolute;bottom:5px;left:8px;font-size:18px;'>dilation</span> &times;&nbsp; <input class='transform-input' id='scalefactor' type='text' maxlength='4' />
+</div>
+<div class='transform-box' id='reflection-box' style='top:0px;left:375px;height:150px;width:187.5px;border-right:1px solid white;'>
+<span style='position:absolute;bottom:5px;left:43px;font-size:18px;'>reflection</span>
+<div id='reflect-mapH' style='display:inline;width:67.5px;height:47.5px;background-color:black;padding:2.5px;cursor:pointer;margin-right:10px;text-align:center;border: 3px groove rgb(46, 69, 124);border-radius:5px;overflow:hidden;'>
+<img id='reflectH' src='reflectH.PNG' style='height:140%;margin-top:-10px;' />
+</div>
+<div id='reflect-mapV' style='display:inline;width:67.5px;height:47.5px;background-color:black;padding:2.5px;cursor:pointer;text-align:center;border: 3px groove rgb(46, 69, 124);border-radius:5px;overflow:hidden;'>
+<img id='reflectV' src='reflectV.png' style='height:118%;margin-top:-4px;' />
+</div>
+</div>
+<div class='transform-box' id='rotation-box' style='bottom:0px;left:0px;border-right:1px solid white;'>
+<span style='position:absolute;bottom:5px;left:8px;font-size:18px;'>rotation</span> <span style='visibility:hidden;'> &times;&nbsp;&thinsp;&thinsp; </span>
+<input class='transform-input' id='rotatedegree' type='text' maxlength='4' />&deg;</span>
+</div>
+<div class='transform-box' id='translation-box' style='top:0px;right:0px;height:150px;width:187.5px'>
+<span style='position:absolute;bottom:5px;left:40px;font-size:18px;'>translation</span>
+&lt;<input class='transform-input' id='translationX' type='text' maxlength='4' value='x' /> &nbsp;
+<input class='transform-input' id='translationY' type='text' maxlength='4' value='y' />&gt;
+</div>
+</div>
+</body>
+
+<meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="Geometric Transformations" /><meta name="twitter:description" content="Dilations, rotations, reflections, and translations." /><meta name="twitter:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2018/08/geo_transform_img.png" />
+</html>
+
+<script>
+var visitLog = localStorage.getItem('visit1');
+if (visitLog === null) {
+   setTimeout(function(){$('#shape_hint').animate({'opacity' : '+=1'}, 800);}, 1000);
+}
+
+var circles = [{x : 365, y : 250, col: 'purple', id : 'pointofRot'}, {x : 385, y : 250, col: 'green', id : 'pointofDil'}];
+var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 = 1;
+var curTransX = 0; var curTransY = 0; var curSclFac = 1; var curRotDegree = 0; var reflectStartX; var reflectStartY; var curScaleH = 1; var curScaleV = 1;
+var ISFLIPPEDH = false; var ISFLIPPEDV = false;
+
+var svg = d3.select('#transform_frame').append('svg').attr('width', 750).attr('height', 500);
+
+$('.shape-button').bind('click', function() {
+   $('.transform-input').val('');
+   curTransX = 0;
+   curTransY = 0;
+   curSclFac = 1;
+   curRotDegree = 0;
+   curScaleH = 1;
+   curScaleV = 1;
+   ISFLIPPEDH = false;
+   ISFLIPPEDV = false;
+   $('#shape_hint').fadeOut(800);
+   if (localStorage.getItem('visit1') === null) {
+      setTimeout(function(){$('#transform_hint').animate({'opacity' : '+=1'}, 800);}, 1000);
+      localStorage.setItem('visit1', 'yes');
+   }
+});
+$('#button1').bind('click', function(){
+   but1 += 1;
+   but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1;
+   svg.selectAll("*").remove();
+   if (but1 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "smiley.png")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
+$('#button2').bind('click', function(){
+   but2 += 1;
+   but1 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1;
+   svg.selectAll("*").remove();
+   if (but2 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "moon.png")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
+$('#button3').bind('click', function(){
+   but3 += 1;
+   but1 = 1; but2 = 1; but4 = 1; but5 = 1; but6 = 1;
+   svg.selectAll("*").remove();
+   if (but3 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "letter_a.png")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
+$('#button4').bind('click', function(){
+   but4 += 1;
+   but1 = 1; but2 = 1; but3 = 1; but5 = 1; but6 = 1;
+   svg.selectAll("*").remove();
+   if (but4 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "star.png")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
+$('#button5').bind('click', function(){
+   but5 += 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but6 = 1;
+   svg.selectAll("*").remove();
+   if (but5 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "runner.png")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
+$('#button6').bind('click', function(){
+   but6 += 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1;
+   svg.selectAll("*").remove();
+   if (but6 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "hexagon.png")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
+$('.transform-input').bind('keyup', function(evt) {
+   if (evt.key !== 'Enter') return;
+   $('#transform_hint').fadeOut(800);
+   if (evt.target.id === 'translationX' || evt.target.id === 'translationY') translate();
+   else if (evt.target.id === 'scalefactor') dilate();
+   else if (evt.target.id === 'rotatedegree') rotateFig();
+});
+
+function translate() {
+   if (isNaN(Number($('#translationX').val())) || isNaN(Number($('#translationY').val()))) return;
+   var x = String(Number($('#translationX').val()) + curTransX);
+   var y = String(-Number($('#translationY').val()) + curTransY);
+   svg.select('#curTransformFig').transition()
+   .duration(1200)
+   .ease(d3.easeCubicInOut)
+   .attr('transform', 'translate('+x+', '+y+')'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
+   curTransX = Number(x);
+   curTransY = Number(y);
+}
+function dilate() {
+   if (isNaN(Number($('#scalefactor').val()))) return;
+   var scalefactor = String(Number($('#scalefactor').val()) * curSclFac);
+   svg.select('#curTransformFig').style('transform-origin', '50% 50%')
+      .transition()
+      .duration(1200)
+      .ease(d3.easeCubicInOut)
+      .attr('transform', 'translate('+String(curTransX)+ ', '+String(curTransY)+')'+'scale('+String(curScaleH * scalefactor)+', '+String(curScaleV * scalefactor) + ') rotate(' + String(curRotDegree) + ')');
+   curSclFac = Number(scalefactor);
+}
+function rotateFig() {
+ if (isNaN(Number($('#rotatedegree').val()))) return;
+ if ((ISFLIPPEDH === true && ISFLIPPEDV === false) || (ISFLIPPEDV === true && ISFLIPPEDH === false)) var sign = 1;
+ else var sign = -1;
+ var rotDegree = String(sign * Number($('#rotatedegree').val()) + curRotDegree);
+ var o='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+curRotDegree+')';
+ var n='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+rotDegree+')';
+ svg.select('#curTransformFig').style('transform-origin', '50% 50%')
+ .transition()
+ .duration(1200)
+ .ease(d3.easeCubicInOut)
+ .attrTween("transform", function(interpolate) {return d3.interpolate(o, n);});
+ curRotDegree = Number(rotDegree);
+}
+$('#reflectH').bind('click', function() {
+   $('#transform_hint').fadeOut(800);
+   var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
+   var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(-1 * curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
+   if (ISFLIPPEDH === false) ISFLIPPEDH = true;
+   else ISFLIPPEDH = false;
+   svg.select('#curTransformFig').style('transform-origin', '50% 50%')
+   .transition()
+   .duration(1200)
+   .ease(d3.easeCubicInOut)
+   .attrTween("transform", function(interpolate) {return d3.interpolate(origScale, newbScale);});
+   curScaleH *= -1;
+});
+$('#reflectV').bind('click', function() {
+   $('#transform_hint').fadeOut(800);
+   var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
+   var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(-1 * curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
+   if (ISFLIPPEDV === false) ISFLIPPEDV = true;
+   else ISFLIPPEDV = false;
+   svg.select('#curTransformFig').style('transform-origin', '50% 50%')
+   .transition()
+   .duration(1200)
+   .ease(d3.easeCubicInOut)
+   .attrTween("transform", function(interpolate) {return d3.interpolate(origScale, newbScale);});
+   curScaleV *= -1;
+});
+</script>
