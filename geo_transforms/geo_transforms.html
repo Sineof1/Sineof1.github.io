@@ -154,7 +154,7 @@ if (visitLog === null) {
 var circles = [{x : 365, y : 250, col: 'purple', id : 'pointofRot'}, {x : 385, y : 250, col: 'green', id : 'pointofDil'}];
 var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 = 1;
 var curTransX = 0; var curTransY = 0; var curSclFac = 1; var curRotDegree = 0; var reflectStartX; var reflectStartY; var curScaleH = 1; var curScaleV = 1;
-var ISFLIPPEDH = false; var ISFLIPPEDV = false;
+var ISFLIPPEDH = false; var ISFLIPPEDV = false; var reflectHCount = 1; var reflectVCount = 1;
 
 var svg = d3.select('#transform_frame').append('svg').attr('width', 750).attr('height', 500);
 
@@ -296,6 +296,9 @@ function rotateFig() {
  curRotDegree = Number(rotDegree);
 }
 $('#reflectH').bind('click', function() {
+   reflectHCount += 1;
+   if (reflectHCount % 2 === 0) $('#reflect-mapH').css({'border' : '3px groove pink'});
+   else $('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'});
    $('#transform_hint').fadeOut(800);
    var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(-1 * curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
@@ -309,6 +312,9 @@ $('#reflectH').bind('click', function() {
    curScaleH *= -1;
 });
 $('#reflectV').bind('click', function() {
+   reflectVCount += 1;
+   if (reflectVCount % 2 === 0) $('#reflect-mapV').css({'border' : '3px groove pink'});
+   else $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
    $('#transform_hint').fadeOut(800);
    var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(-1 * curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
