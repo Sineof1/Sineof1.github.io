@@ -103,9 +103,16 @@ body {
    padding:5px;
    box-sizing:border-box;
 }
+#canvas1 {
+   position:fixed;
+   width:750px;
+   height:500px;
+   cursor:pointer;
+}
 </style>
 
 <body>
+<canvas id='canvas1' width='750' height='500'></canvas>
 <div class='tool_hint' id='shape_hint' style='top:45px;right:8px;height:75px;'><span>Click to add a figure.</span></div>
 <div class='tool_hint' id='transform_hint' style='bottom:50px;left:8px;'><span>Type in transformations and press Enter.<br />Or click for reflections.</span></div>
 <div id='transform_frame'></div>
@@ -141,6 +148,8 @@ body {
 <input class='transform-input' id='translationY' type='text' maxlength='4' value='y' />&gt;
 </div>
 </div>
+   
+<script src='canvas_script.js'></script>
 </body>
 
 <meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="Geometric Transformations" /><meta name="twitter:description" content="Dilations, rotations, reflections, and translations." /><meta name="twitter:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2018/08/geo_transform_image-1.png" />
@@ -335,4 +344,8 @@ $('#reflectV').bind('click', function() {
    .attrTween("transform", function(interpolate) {return d3.interpolate(origScale, newbScale);});
    curScaleV *= -1;
 });
+   
+$('#canvas1').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top});
+$('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});
+$(window).resize(function(){$('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});});
 </script>
