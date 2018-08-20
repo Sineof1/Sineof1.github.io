@@ -319,6 +319,9 @@ function rotateFig() {
  curRotDegree = Number(rotDegree);
 }
 $('#reflectH').bind('click', function() {
+   reflectHCount += 1;
+   if (reflectHCount % 2 === 0) $('#reflect-mapH').css({'border' : '3px groove pink'});
+   else $('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'});
    $('#transform_hint').fadeOut(800);
    var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(-1 * curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
@@ -332,6 +335,9 @@ $('#reflectH').bind('click', function() {
    curScaleH *= -1;
 });
 $('#reflectV').bind('click', function() {
+   reflectVCount += 1;
+   if (reflectVCount % 2 === 0) $('#reflect-mapV').css({'border' : '3px groove pink'});
+   else $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
    $('#transform_hint').fadeOut(800);
    var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(-1 * curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
@@ -347,5 +353,11 @@ $('#reflectV').bind('click', function() {
    
 $('#canvas1').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top});
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});
-$(window).resize(function(){$('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});});
+$('#shape_hint').offset({left: $('#shapes_frame').offset().left + 175, top: $('#shapes_frame').offset().top});
+$('#transform_hint').offset({left: $('#control-box').offset().left - 210, top: $('#control-box').offset().top + 10});
+$(window).resize(function(){
+   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});
+   $('#shape_hint').offset({left: $('#shapes_frame').offset().left + 175, top: $('#shapes_frame').offset().top});
+   $('#transform_hint').offset({left: $('#control-box').offset().left - 210, top: $('#control-box').offset().top + 10});
+});
 </script>
