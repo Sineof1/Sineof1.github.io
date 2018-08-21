@@ -122,6 +122,7 @@ body {
 <div class='shape-button' id='button1'><img src='smiley.png' style='height:90%;margin-top:7px;'></div>
 <div class='shape-button' id='button2'><img src='moon.png' style='height:85%;margin-top:7px;'></div>
 <div class='shape-button' id='button3'><img src='letter_a.png' style='height:85%;margin-top:11px;'></div>
+<div class='shape-button' id='button8'><img src='leaf.png' style='height:90%;margin-top:5px;'></div>
 <div class='shape-button' id='button4'><img src='star.png' style='height:90%;margin-top:7px;'></div>
 <div class='shape-button' id='button5'><img src='runner.png' style='height:90%;margin-top:7px;'></div>
 <div class='shape-button' id='button6'><img src='hexagon.png' style='height:95%;margin-top:7px;'></div>
@@ -164,7 +165,7 @@ if (visitLog === null) {
 }
 
 var circles = [{x : 365, y : 250, col: 'purple', id : 'pointofRot'}, {x : 385, y : 250, col: 'green', id : 'pointofDil'}];
-var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 = 1; var but7 = 1;
+var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 = 1; var but7 = 1; var but8 = 1;
 var curTransX = 0; var curTransY = 0; var curSclFac = 1; var curRotDegree = 0; var reflectStartX; var reflectStartY; var curScaleH = 1; var curScaleV = 1; var reflectHCount = 1; var reflectVCount = 1;
 var ISFLIPPEDH = false; var ISFLIPPEDV = false;
 
@@ -188,7 +189,7 @@ $('.shape-button').bind('click', function() {
 });
 $('#button1').bind('click', function(){
    but1 += 1;
-   but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1;
+   but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1;
    svg.selectAll("*").remove();
    if (but1 % 2 === 0) {
    svg.append('svg:image')
@@ -201,7 +202,7 @@ $('#button1').bind('click', function(){
 });
 $('#button2').bind('click', function(){
    but2 += 1;
-   but1 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1;
+   but1 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1;
    svg.selectAll("*").remove();
    if (but2 % 2 === 0) {
    svg.append('svg:image')
@@ -214,7 +215,7 @@ $('#button2').bind('click', function(){
 });
 $('#button3').bind('click', function(){
    but3 += 1;
-   but1 = 1; but2 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1;
+   but1 = 1; but2 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1;
    svg.selectAll("*").remove();
    if (but3 % 2 === 0) {
    svg.append('svg:image')
@@ -227,7 +228,7 @@ $('#button3').bind('click', function(){
 });
 $('#button4').bind('click', function(){
    but4 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but5 = 1; but6 = 1; but7 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1;
    svg.selectAll("*").remove();
    if (but4 % 2 === 0) {
    svg.append('svg:image')
@@ -240,7 +241,7 @@ $('#button4').bind('click', function(){
 });
 $('#button5').bind('click', function(){
    but5 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but6 = 1; but7 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but6 = 1; but7 = 1; but8 = 1;
    svg.selectAll("*").remove();
    if (but5 % 2 === 0) {
    svg.append('svg:image')
@@ -253,7 +254,7 @@ $('#button5').bind('click', function(){
 });
 $('#button6').bind('click', function(){
    but6 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but7 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but7 = 1; but8 = 1;
    svg.selectAll("*").remove();
    if (but6 % 2 === 0) {
    svg.append('svg:image')
@@ -266,11 +267,24 @@ $('#button6').bind('click', function(){
 });
 $('#button7').bind('click', function(){
    but7 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but8 = 1;
    svg.selectAll("*").remove();
    if (but7 % 2 === 0) {
    svg.append('svg:image')
    .attr("xlink:href", "gear.png")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
+$('#button8').bind('click', function(){
+   but8 += 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1;
+   svg.selectAll("*").remove();
+   if (but8 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "leaf.png")
    .attr('id', 'curTransformFig')
    .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
