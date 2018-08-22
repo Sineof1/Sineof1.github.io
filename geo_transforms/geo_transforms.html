@@ -206,6 +206,8 @@ $('.shape-button').bind('click', function() {
    ISFLIPPEDV = false;
    $('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'});
    $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
+   reflectHCount = 1;
+   reflectVCount = 1;
    $('#shape_hint').fadeOut(800);
    if (localStorage.getItem('visit1') === null) {
       setTimeout(function(){$('#transform_hint').animate({'opacity' : '+=1'}, 800);}, 1000);
