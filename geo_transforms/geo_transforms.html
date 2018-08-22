@@ -301,6 +301,7 @@ $('.transform-input').bind('keyup', function(evt) {
 
 function translate() {
    if (isNaN(Number($('#translationX').val())) || isNaN(Number($('#translationY').val()))) return;
+   if ($('#translationX').val() === '' || $('#translationY').val() === '') return;
    var x = String(Number($('#translationX').val()) + curTransX);
    var y = String(-Number($('#translationY').val()) + curTransY);
    svg.select('#curTransformFig').transition()
