@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2018/08/quad_squad_img.png'>
+<link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
+<title>Quad Squad</title>
+
+<style>
+#quadSquadPlatform {
+   width:450px;
+   height:450px;
+   margin:50px auto;
+   background-color:beige;
+   border-radius:10px;
+   border:2px solid slate;
+   overflow:hidden;
+}
+#reset {
+   position:fixed;
+   width:100px;
+   height:40px;
+   font-family:sans-serif;
+   font-size:24px;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-variant:small-caps;
+   outline:none;
+   border:none;
+   border-radius:5px;
+   color:blue;
+   cursor:pointer;
+   background-color:white;
+}
+#reset:hover {
+   background-color:#fafafa;
+}
+.circVertices {
+   cursor:pointer;
+}
+</style>
+
+<body>
+<div id='quadSquadPlatform'></div>
+<button id='reset'>reset</button>
+</body>
+</html>
+
+<script>
+var circVertices = [{x : 225, y : 25, id : '225_25', slctd : false}, {x : 225, y : 75, id : '225_75', slctd : false},
+                    {x : 225, y : 425, id : '225_425', slctd : false}, {x : 225, y : 375, id : '225_375', slctd : false},
+                    {x : 425, y : 225, id : '425_225', slctd : false}, {x : 375, y : 225, id : '375_225', slctd : false},
+                    {x : 25, y : 225, id : '25_225', slctd : false}, {x : 75, y : 225, id : '75_225', slctd : false},
+                    {x : 200 * Math.cos(-Math.PI / 4) + 225, y : 200 * Math.sin(-Math.PI / 4) + 225, id : '200_-pi/4', slctd : false},
+                    {x : 150 * Math.cos(-Math.PI / 4) + 225, y : 150 * Math.sin(-Math.PI / 4) + 225, id : '150_-pi/4', slctd : false},
+                    {x : 200 * Math.cos(3 * Math.PI / 4) + 225, y : 200 * Math.sin(3 * Math.PI / 4) + 225, id : '200_3pi/4', slctd : false},
+                    {x : 150 * Math.cos(3 * Math.PI / 4) + 225, y : 150 * Math.sin(3 * Math.PI / 4) + 225, id : '150_3pi/4', slctd : false},
+                    {x : 200 * Math.cos(-3 * Math.PI / 4) + 225, y : 200 * Math.sin(-3 * Math.PI / 4) + 225, id : '200_-3pi/4', slctd : false},
+                    {x : 150 * Math.cos(-3 * Math.PI / 4) + 225, y : 150 * Math.sin(-3 * Math.PI / 4) + 225, id : '150_-3pi/4', slctd : false},
+                    {x : 200 * Math.cos(Math.PI / 4) + 225, y : 200 * Math.sin(Math.PI / 4) + 225, id : '200_pi/4', slctd : false},
+                    {x : 150 * Math.cos(Math.PI / 4) + 225, y : 150 * Math.sin(Math.PI / 4) + 225, id : '150_pi/4', slctd : false}];
+
+var slctdNodes = [];
+
+svg = d3.select('#quadSquadPlatform')
+        .append('svg')
+        .attr('width', 450).attr('height', 450);
+
+svg.append('path')
+   .attr('d', 'M 225 215 L 235 215 L 235 225')
+   .style('stroke', 'gray').style('stroke-width', 1).style('fill', 'none');
+
+svg.append('line')
+   .attr('x1', 225).attr('y1', 0).attr('x2', 225).attr('y2', 450)
+   .style('stroke', 'gray').style('stroke-width', 1);
+
+svg.append('line')
+   .attr('x1', 0).attr('y1', 225).attr('x2', 450).attr('y2', 225)
+   .style('stroke', 'gray').style('stroke-width', 1);
+
+svg.append('line')
+   .attr('x1', 450).attr('y1', 0).attr('x2', 0).attr('y2', 450)
+   .style('stroke', 'gray').style('stroke-width', 1);
+
+svg.append('line')
+   .attr('x1', 450).attr('y1', 450).attr('x2', 0).attr('y2', 0)
+   .style('stroke', 'gray').style('stroke-width', 1);
+
+svg.append('circle')
+   .attr('cx', 225).attr('cy', 225).attr('r', 4)
+   .style('stroke', 'none').style('fill', 'black');
+
+svg.append('circle')
+   .attr('cx', 225).attr('cy', 225).attr('r', 200)
+   .style('stroke', 'gray').style('stroke-width', 2).style('stroke-dasharray', '5, 5')
+   .style('fill', 'none');
+
+svg.append('circle')
+   .attr('cx', 225).attr('cy', 225).attr('r', 150)
+   .style('stroke', 'gray').style('stroke-width', 2).style('stroke-dasharray', '5, 5')
+   .style('fill', 'none');
+
+svg.selectAll('.circVertices')
+   .data(circVertices)
+   .enter()
+   .append('circle')
+   .attr('class', 'circVertices')
+   .attr('id', function(d){return d.id;})
+   .attr('cx', function(d){return d.x;})
+   .attr('cy', function(d){return d.y;})
+   .attr('r', 8)
+   .style('stroke', 'white').style('fill', 'blue').style('stroke-width', 2)
+   .on('mouseover', handleMouseOver)
+   .on('mouseout', handleMouseOut)
+   .on('click', handleClick);
+
+function handleMouseOver(d, i) {
+   d3.select(this)
+     .transition()
+     .duration(500)
+     .ease(d3.easeQuad)
+     .attr('r', 12).style('fill', 'red');
+}
+function handleMouseOut(d, i) {
+   d3.select(this)
+     .transition()
+     .duration(800)
+     .ease(d3.easeBackOut.overshoot(8))
+     .attr('r', 8).style('fill', 'blue').style('stroke', 'white');
+}
+function handleClick(d, i) {
+   d3.select(this).style('stroke', 'blue');
+   d3.select(this).on('mouseout', null);
+   d.slctd = true;
+   slctdNodes.push({x : d.x, y : d.y});
+   if (slctdNodes.length % 2 === 0 && slctdNodes.length > 0) {
+   svg.append('line')
+      .attr('x1', slctdNodes[slctdNodes.length - 2].x)
+      .attr('y1', slctdNodes[slctdNodes.length - 2].y)
+      .attr('x2', slctdNodes[slctdNodes.length - 2].x)
+      .attr('y2', slctdNodes[slctdNodes.length - 2].y)
+      .style('stroke', 'red').style('stroke-width', 2)
+      .transition()
+      .delay(500)
+      .duration(1200)
+      .attr('x2', d.x).attr('y2', d.y);
+   d3.selectAll('.circVertices').transition().delay(1500).duration(500).style('stroke', 'white');
+   }
+}
+
+$('#reset').click(function() {
+   svg.selectAll('*').remove();
+   slctdNodes = [];
+
+   svg.append('path')
+      .attr('d', 'M 225 215 L 235 215 L 235 225')
+      .style('stroke', 'gray').style('stroke-width', 1).style('fill', 'none');
+
+   svg.append('line')
+      .attr('x1', 225).attr('y1', 0).attr('x2', 225).attr('y2', 450)
+      .style('stroke', 'gray').style('stroke-width', 1);
+
+   svg.append('line')
+      .attr('x1', 0).attr('y1', 225).attr('x2', 450).attr('y2', 225)
+      .style('stroke', 'gray').style('stroke-width', 1);
+
+   svg.append('line')
+      .attr('x1', 450).attr('y1', 0).attr('x2', 0).attr('y2', 450)
+      .style('stroke', 'gray').style('stroke-width', 1);
+
+   svg.append('line')
+      .attr('x1', 450).attr('y1', 450).attr('x2', 0).attr('y2', 0)
+      .style('stroke', 'gray').style('stroke-width', 1);
+
+   svg.append('circle')
+      .attr('cx', 225).attr('cy', 225).attr('r', 4)
+      .style('stroke', 'none').style('fill', 'black');
+
+   svg.append('circle')
+      .attr('cx', 225).attr('cy', 225).attr('r', 200)
+      .style('stroke', 'gray').style('stroke-width', 2).style('stroke-dasharray', '5, 5')
+      .style('fill', 'none');
+
+   svg.append('circle')
+      .attr('cx', 225).attr('cy', 225).attr('r', 150)
+      .style('stroke', 'gray').style('stroke-width', 2).style('stroke-dasharray', '5, 5')
+      .style('fill', 'none');
+
+   svg.selectAll('.circVertices')
+      .data(circVertices)
+      .enter()
+      .append('circle')
+      .attr('class', 'circVertices')
+      .attr('id', function(d){return d.id;})
+      .attr('cx', function(d){return d.x;})
+      .attr('cy', function(d){return d.y;})
+      .attr('r', 8)
+      .style('stroke', 'white').style('fill', 'blue').style('stroke-width', 2)
+      .on('mouseover', handleMouseOver)
+      .on('mouseout', handleMouseOut)
+      .on('click', handleClick);
+});
+$('#reset').offset({'top' : $('#quadSquadPlatform').offset().top + 480, 'left' : $('#quadSquadPlatform').offset().left + 350});
+$(window).bind('resize', function() {
+$('#reset').offset({'top' : $('#quadSquadPlatform').offset().top + 480, 'left' : $('#quadSquadPlatform').offset().left + 350});
+});
+</script>
