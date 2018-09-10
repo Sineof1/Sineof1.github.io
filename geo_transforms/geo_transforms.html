@@ -438,6 +438,7 @@ function dilate() {
 }
 function rotateFig() {
  if (isNaN(Number($('#rotatedegree').val()))) return;
+ if (($('#rotatedegree').val()).length < 1) return;
  if ((ISFLIPPEDH === true && ISFLIPPEDV === false) || (ISFLIPPEDV === true && ISFLIPPEDH === false)) var sign = 1;
  else var sign = -1;
  var rotDegree = String(sign * Number($('#rotatedegree').val()) + curRotDegree);
