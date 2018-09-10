@@ -427,7 +427,7 @@ function translate() {
    curTransY = Number(y);
 }
 function dilate() {
-   if (isNaN(Number($('#scalefactor').val()))) return;
+   if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
    if (($('#scalefactor').val()).length < 1) return;
    var scalefactor = String(Number($('#scalefactor').val()) * curSclFac);
    svg.select('#curTransformFig').style('transform-origin', '50% 50%')
