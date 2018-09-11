@@ -21,7 +21,7 @@ body {
    display:inline-block;
    margin:35px auto 0 auto;
    width:750px;
-   height:500px;
+   height:400px;
    border:10px ridge rgb(100, 211, 254);
    border-radius:8px;
    background-color:beige;
@@ -31,7 +31,7 @@ body {
    position:relative;
    display:inline-block;
    width:150px;
-   height:500px;
+   height:400px;
    border:10px ridge rgb(100, 211, 254);
    border-radius:8px;
    background-color:black;
@@ -123,6 +123,8 @@ body {
 
 <body>
 <div id='challenge'><img src='leaf_outline.png' style='width:95%;' /></div>
+<div class='tool_hint' id='shape_hint' style='top:45px;right:8px;height:75px;'><span>Click to add a figure.</span></div>
+<div class='tool_hint' id='transform_hint' style='bottom:50px;left:8px;'><span>Type in transformations and press Enter.<br />Or click for reflections.</span></div>
 <div id='transform_frame'></div>
 <div id='shapes_frame'>
 <div class='shape-button' id='button1'><img src='smiley.png' style='height:90%;margin-top:7px;'></div>
@@ -165,20 +167,19 @@ body {
 </html>
 
 <script>
-var outline_leafs = [{tranx : -200, trany : -140, sclx: -0.3, scly: 0.3, rot: 125}, {tranx : 250, trany : 75, sclx: 1.4, scly: -1.4, rot: -75},
-                     {tranx : -150, trany : 35, sclx: 0.8, scly: 0.8, rot: -100}, {tranx : 300, trany : -200, sclx: 0.25, scly: 0.25, rot: 90}];
-var outline_smile = [{tranx : 0, trany : -180, sclx: 0.5, scly: 0.5, rot: 45}, {tranx : 250, trany : 80, sclx: -1.1, scly: -1.1, rot: 110},
+var outline_leafs = [{tranx : -200, trany : -140, sclx: -0.3, scly: 0.3, rot: 125}, {tranx : 250, trany : 25, sclx: 1.4, scly: -1.4, rot: -75},
+                     {tranx : -150, trany : 35, sclx: 0.8, scly: 0.8, rot: -100}, {tranx : 300, trany : -100, sclx: 0.25, scly: 0.25, rot: 90}];
+var outline_smile = [{tranx : 0, trany : -150, sclx: 0.5, scly: 0.5, rot: 45}, {tranx : 250, trany : 50, sclx: -1.1, scly: -1.1, rot: 110},
                      {tranx : -240, trany : 60, sclx: 1.25, scly: 1.25, rot: 0}];
-var outline_moons = [{tranx : -200, trany : -100, sclx: 1, scly: 1, rot: 180}, {tranx : 210, trany : -120, sclx: -1.2, scly: -1.2, rot: 75},
-                     {tranx : -200, trany : 100, sclx: 0.9, scly: -0.9, rot: 25}, {tranx : 50, trany : 100, sclx: 1, scly: 1, rot: -135}];
-var outline_ltrAs = [{tranx : 0, trany : -160, sclx: 0.65, scly: 0.65, rot: 180}, {tranx : 210, trany : -100, sclx: -1.2, scly: -1.2, rot: 90},
+var outline_moons = [{tranx : -200, trany : -100, sclx: 1, scly: 1, rot: 180}, {tranx : 210, trany : -50, sclx: -1.2, scly: -1.2, rot: 75}];
+var outline_ltrAs = [{tranx : 0, trany : -50, sclx: 0.65, scly: 0.65, rot: 180}, {tranx : 210, trany : -100, sclx: -1.2, scly: -1.2, rot: 90},
                      {tranx : -170, trany : -70, sclx: 0.5, scly: -0.5, rot: 65}, {tranx : 0, trany : 30, sclx: 1.35, scly: -1.35, rot: 180}];
 var outline_stars = [{tranx : 200, trany : 105, sclx: 0.45, scly: -0.45, rot: 80}, {tranx : 230, trany : -100, sclx: 1.2, scly: -1.2, rot: -75},
                      {tranx : -275, trany : -50, sclx: -0.95, scly: -0.95, rot: 150}, {tranx : -200, trany : 160, sclx: -0.4, scly: 0.4, rot: 190}];
-var outline_runrs = [{tranx : 200, trany : 100, sclx: 1, scly: -1, rot: 10}, {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -90},
-                     {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 150}, {tranx : -200, trany : 160, sclx: -0.4, scly: 0.4, rot: 0}];
+var outline_runrs = [{tranx : 200, trany : 0, sclx: 1, scly: -1, rot: 10}, {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -90},
+                     {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 150}, {tranx : -200, trany : 110, sclx: -0.4, scly: 0.4, rot: 0}];
 var outline_hexns = [{tranx : 200, trany : 100, sclx: 1.75, scly: -1.75, rot: 180}, {tranx : 230, trany : -100, sclx: 1.25, scly: -1.25, rot: -90},
-                     {tranx : -250, trany : -50, sclx: 2.5, scly: 2.5, rot: 150}, {tranx : -200, trany : 160, sclx: 1, scly: 1, rot: 0}];
+                     {tranx : -250, trany : -80, sclx: 2.5, scly: 2.5, rot: 150}, {tranx : -200, trany : 160, sclx: 1, scly: 1, rot: 0}];
 var outline_gears = [{tranx : 200, trany : 140, sclx: 1, scly: -1, rot: 50}, {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -180},
                      {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 100}, {tranx : -200, trany : 160, sclx: -0.8, scly: 0.8, rot: 25}];
 
@@ -192,7 +193,7 @@ var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 =
 var curTransX = 0; var curTransY = 0; var curSclFac = 1; var curRotDegree = 0; var reflectStartX; var reflectStartY; var curScaleH = 1; var curScaleV = 1; var reflectHCount = 1; var reflectVCount = 1; var CHALLENGEON = false; var challengeCount = 1;
 var ISFLIPPEDH = false; var ISFLIPPEDV = false;
 
-var svg = d3.select('#transform_frame').append('svg').attr('width', 750).attr('height', 500);
+var svg = d3.select('#transform_frame').append('svg').attr('width', 750).attr('height', 400);
 
 $('.shape-button').bind('click', function() {
    $('.transform-input').val('');
@@ -222,7 +223,7 @@ $('#button1').bind('click', function(){
    svg.append('svg:image')
    .attr("xlink:href", "smiley.png")
    .attr('id', 'curTransformFig')
-   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
 
    if (CHALLENGEON === true) {
@@ -232,7 +233,7 @@ $('#button1').bind('click', function(){
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
       .attr("xlink:href", "smiley_outline.png")
-      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150)
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
    }
    }
@@ -246,7 +247,7 @@ $('#button2').bind('click', function(){
    svg.append('svg:image')
    .attr("xlink:href", "moon.png")
    .attr('id', 'curTransformFig')
-   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
 
    if (CHALLENGEON === true) {
@@ -256,7 +257,7 @@ $('#button2').bind('click', function(){
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
       .attr("xlink:href", "moon_outline.png")
-      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150)
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
    }
    }
@@ -270,7 +271,7 @@ $('#button3').bind('click', function(){
    svg.append('svg:image')
    .attr("xlink:href", "letter_a.png")
    .attr('id', 'curTransformFig')
-   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
 
    if (CHALLENGEON === true) {
@@ -280,7 +281,7 @@ $('#button3').bind('click', function(){
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
       .attr("xlink:href", "letter_a_outline.png")
-      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150)
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
    }
    }
@@ -294,7 +295,7 @@ $('#button4').bind('click', function(){
    svg.append('svg:image')
    .attr("xlink:href", "star.png")
    .attr('id', 'curTransformFig')
-   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
 
    if (CHALLENGEON === true) {
@@ -304,7 +305,7 @@ $('#button4').bind('click', function(){
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
       .attr("xlink:href", "star_outline.png")
-      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150)
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
    }
    }
@@ -318,7 +319,7 @@ $('#button5').bind('click', function(){
    svg.append('svg:image')
    .attr("xlink:href", "runner.png")
    .attr('id', 'curTransformFig')
-   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
 
    if (CHALLENGEON === true) {
@@ -328,7 +329,7 @@ $('#button5').bind('click', function(){
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
       .attr("xlink:href", "runner_outline.png")
-      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150)
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
    }
    }
@@ -342,7 +343,7 @@ $('#button6').bind('click', function(){
    svg.append('svg:image')
    .attr("xlink:href", "hexagon.png")
    .attr('id', 'curTransformFig')
-   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
 
    if (CHALLENGEON === true) {
@@ -352,7 +353,7 @@ $('#button6').bind('click', function(){
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
       .attr("xlink:href", "hexagon_outline.png")
-      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150)
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
    }
    }
@@ -366,7 +367,7 @@ $('#button7').bind('click', function(){
    svg.append('svg:image')
    .attr("xlink:href", "gear.png")
    .attr('id', 'curTransformFig')
-   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
 
    if (CHALLENGEON === true) {
@@ -376,7 +377,7 @@ $('#button7').bind('click', function(){
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
       .attr("xlink:href", "gear_outline.png")
-      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150)
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
    }
    }
@@ -390,7 +391,7 @@ $('#button8').bind('click', function(){
    svg.append('svg:image')
    .attr("xlink:href", "leaf.png")
    .attr('id', 'curTransformFig')
-   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150);
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
    if (CHALLENGEON === true) {
    svg.selectAll('.outline_img')
@@ -399,7 +400,7 @@ $('#button8').bind('click', function(){
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
       .attr("xlink:href", "leaf_outline.png")
-      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 150)
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
    }
    }
@@ -412,8 +413,7 @@ $('.transform-input').bind('keyup', function(evt) {
    if (evt.target.id === 'translationX' || evt.target.id === 'translationY') translate();
    else if (evt.target.id === 'scalefactor') dilate();
    else if (evt.target.id === 'rotatedegree') rotateFig();
-});
-*/
+});*/
 $('.transform-input').bind('keypress', function(evt) {
    if (evt.keyCode !== 13) return;
    $('#transform_hint').fadeOut(800);
@@ -421,6 +421,7 @@ $('.transform-input').bind('keypress', function(evt) {
    else if (evt.target.id === 'scalefactor') dilate();
    else if (evt.target.id === 'rotatedegree') rotateFig();
 });
+
 function translate() {
    if (($('#translationX').val()).length < 1) $('#translationX').val('0');
    if (($('#translationY').val()).length < 1) $('#translationY').val('0');
@@ -503,20 +504,14 @@ $('#challenge').bind('click', function(){
    CHALLENGEON = false;
    }
 })
-$('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});
-$('#shape_hint').offset({left: $('#shapes_frame').offset().left + 175, top: $('#shapes_frame').offset().top});
-$('#transform_hint').offset({left: $('#control-box').offset().left - 210, top: $('#control-box').offset().top + 10});
+$('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
 $('#challenge').offset({left : $('body').offset().left, top : $('body').offset().top + 10});
 $(window).resize(function(){
-   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});
-   $('#shape_hint').offset({left: $('#shapes_frame').offset().left + 175, top: $('#shapes_frame').offset().top});
-   $('#transform_hint').offset({left: $('#control-box').offset().left - 210, top: $('#control-box').offset().top + 10});
+   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('body').offset().left, top : $('body').offset().top + 10});
 });
 $(window).scroll(function(){
-   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});
-   $('#shape_hint').offset({left: $('#shapes_frame').offset().left + 175, top: $('#shapes_frame').offset().top});
-   $('#transform_hint').offset({left: $('#control-box').offset().left - 210, top: $('#control-box').offset().top + 10});
+   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('body').offset().left, top : $('body').offset().top + 10});
 });
 </script>
