@@ -513,4 +513,10 @@ $(window).resize(function(){
    $('#transform_hint').offset({left: $('#control-box').offset().left - 210, top: $('#control-box').offset().top + 10});
    $('#challenge').offset({left : $('body').offset().left, top : $('body').offset().top + 10});
 });
+$(window).scroll(function(){
+   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 530});
+   $('#shape_hint').offset({left: $('#shapes_frame').offset().left + 175, top: $('#shapes_frame').offset().top});
+   $('#transform_hint').offset({left: $('#control-box').offset().left - 210, top: $('#control-box').offset().top + 10});
+   $('#challenge').offset({left : $('body').offset().left, top : $('body').offset().top + 10});
+});
 </script>
