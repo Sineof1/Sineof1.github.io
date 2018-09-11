@@ -407,7 +407,7 @@ $('#button8').bind('click', function(){
    }
    else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
 });
-   
+/*
 $('.transform-input').bind('keyup', function(evt) {
    if (evt.key !== 'Enter') return;
    $('#transform_hint').fadeOut(800);
@@ -415,7 +415,14 @@ $('.transform-input').bind('keyup', function(evt) {
    else if (evt.target.id === 'scalefactor') dilate();
    else if (evt.target.id === 'rotatedegree') rotateFig();
 });
-
+*/
+$('.transform-input').bind('keypress', function(evt) {
+   if (evt.keyCode !== 13) return;
+   $('#transform_hint').fadeOut(800);
+   if (evt.target.id === 'translationX' || evt.target.id === 'translationY') translate();
+   else if (evt.target.id === 'scalefactor') dilate();
+   else if (evt.target.id === 'rotatedegree') rotateFig();
+});
 function translate() {
    if (($('#translationX').val()).length < 1) $('#translationX').val('0');
    if (($('#translationY').val()).length < 1) $('#translationY').val('0');
