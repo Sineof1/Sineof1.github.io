@@ -417,6 +417,8 @@ $('.transform-input').bind('keyup', function(evt) {
 });
 
 function translate() {
+   if (($('#translationX').val()).length < 1) $('#translationX').val('0');
+   if (($('#translationY').val()).length < 1) $('#translationY').val('0');
    if (isNaN(Number($('#translationX').val())) || isNaN(Number($('#translationY').val()))) return;
    if ($('#translationX').val() === '' || $('#translationY').val() === '') return;
    var x = String(Number($('#translationX').val()) + curTransX);
