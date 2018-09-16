@@ -246,7 +246,7 @@ $('#button1').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "smiley_outline.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -271,7 +271,7 @@ $('#button2').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "moon_outline.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -296,7 +296,7 @@ $('#button3').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "letter_a_outline.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -321,7 +321,7 @@ $('#button4').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "star_outline.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -346,7 +346,7 @@ $('#button5').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "runner_outline.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -371,7 +371,7 @@ $('#button6').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "hexagon_outline.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -396,7 +396,7 @@ $('#button7').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "gear_outline.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -420,7 +420,7 @@ $('#button8').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "leaf_outline.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -444,7 +444,7 @@ $('#button9').bind('click', function(evt){
       .enter()
       .append('svg:image')
       .style('-webkit-transform-origin', '50% 50%')
-      .style('-ms-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
       .attr("xlink:href", "breakdance_boy.png")
       .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
       .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
@@ -479,7 +479,7 @@ function dilate() {
    if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
    if (($('#scalefactor').val()).length < 1) return;
    var scalefactor = String(Number($('#scalefactor').val()) * curSclFac);
-   svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('-ms-transform-origin', '50% 50%')
+   svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('transform-origin', 'center')
       .transition()
       .duration(1200)
       .ease(d3.easeCubicInOut)
@@ -493,7 +493,7 @@ function rotateFig() {
  var rotDegree = String(sign * Number($('#rotatedegree').val()) + curRotDegree);
  var o='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+curRotDegree+')';
  var n='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+rotDegree+')';
- svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('-ms-transform-origin', '50% 50%')
+ svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('transform-origin', 'center')
  .transition()
  .duration(1200)
  .ease(d3.easeCubicInOut)
@@ -509,7 +509,7 @@ $('#reflectH').bind('click', function(evt){
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(-1 * curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    if (ISFLIPPEDH === false) ISFLIPPEDH = true;
    else ISFLIPPEDH = false;
-   svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('-ms-transform-origin', '50% 50%')
+   svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('transform-origin', 'center')
    .transition()
    .duration(1200)
    .ease(d3.easeCubicInOut)
@@ -525,7 +525,7 @@ $('#reflectV').bind('click', function(evt){
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(-1 * curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    if (ISFLIPPEDV === false) ISFLIPPEDV = true;
    else ISFLIPPEDV = false;
-   svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('-ms-transform-origin', '50% 50%')
+   svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('transform-origin', 'center')
    .transition()
    .duration(1200)
    .ease(d3.easeCubicInOut)
