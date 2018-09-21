@@ -16,6 +16,7 @@ body {
    text-align:center;
    margin:0 auto;
    width:1000px;
+   height:95vh;
 }
 #transform_frame {
    position:relative;
@@ -64,7 +65,7 @@ body {
    background-color:white;
    overflow:hidden;
 }
-#grid-box, #challenge {
+#grid-box, #challenge, #demo-box, #resetMat {
    display:inline:block;
    width:75px;
    height:75px;
@@ -76,6 +77,11 @@ body {
    align-items:center;
    justify-content:center;
    opacity:0.5;
+   font-family:sans-serif;
+   font-size:24px;
+   font-variant:small-caps;
+   font-weight:700;
+   color:teal;
 }
 #challenge {
    opacity:0.5;
@@ -125,6 +131,7 @@ body {
 </style>
 
 <body>
+<canvas id='movie_canvas' style='position:fixed;top:0;left:0;width:100%;height:100vh;background-color:rgb(0, 0, 0);opacity:0;'></canvas>
 <div id='challenge'><img src='leaf_outline.png' style='width:95%;' /></div>
 <div id='transform_frame'></div>
 <div id='shapes_frame'>
@@ -164,6 +171,9 @@ body {
 </div>
 </div>
 <div id='grid-box' style='overflow:hidden;'><img src='grid_icon.svg' style='width:110%;' /></div>
+<div id='demo-box'>demo</div>
+
+<audio id='narration'><source src='narration.mp3'></audio>
 </body>
 
 <meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="Geometric Transformations" /><meta name="twitter:description" content="Dilations, rotations, reflections, and translations." /><meta name="twitter:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2018/08/geo_transform_image-1.png" />
@@ -197,6 +207,9 @@ var grid_svg = d3.select('#transform_frame').append('svg').attr('width', 750).at
                                                           .style('position', 'absolute').style('top', 0).style('left', 0);
 var svg = d3.select('#transform_frame').append('svg').attr('width', 750).attr('height', 400)
                                                      .style('position', 'absolute').style('top', 0).style('left', 0);
+var movie_svg = d3.select('body').append('svg')
+                  .attr('width', '100%').attr('height', '100vh')
+                  .style('position', 'fixed').style('top', 0).style('left', 0).style('z-index', -999);
 
 $('#grid-box').bind('click', function(evt) {
    gridClick += 1;
@@ -455,7 +468,6 @@ $('#button9').bind('mousedown', function(evt){
 
 $('.transform-input').bind('keypress', function(evt) {
    if (evt.keyCode !== 13) return;
-   $('#transform_hint').fadeOut(800);
    if (evt.target.id === 'translationX' || evt.target.id === 'translationY') translate();
    else if (evt.target.id === 'scalefactor') dilate();
    else if (evt.target.id === 'rotatedegree') rotateFig();
@@ -500,11 +512,63 @@ function rotateFig() {
  .attrTween("transform", function(interpolate) {return d3.interpolate(o, n);});
  curRotDegree = Number(rotDegree);
 }
+function start_demo() {
+   movie_svg.style('z-index', 999);
+   var aud = document.getElementById('narration');
+   aud.play();
+   var cursor = movie_svg.append('svg:image').attr("xlink:href", "cursor.svg")
+                         .attr('x', window.innerWidth / 2).attr('y', window.innerHeight / 2).attr('width', 25).attr('height', 40.84)
+                         .style('opacity', 0).style('z-index', 101);
+   cursor.transition()
+         .delay(800)
+         .duration(1000)
+         .style('opacity', 1)
+         .transition()
+         .delay(1000)
+         .duration(3000)
+         .ease(d3.easeCubicInOut)
+         .attr('x', $('#button1').offset().left + 75).attr('y', $('#button1').offset().top + 45);
+   setTimeout(function(){$('#button1').trigger('mousedown');}, 6000);
+
+   cursor.transition()
+         .delay(6800)
+         .duration(3000)
+         .attr('x', $('#scalefactor').offset().left + 63).attr('y', $('#dilation-box').offset().top + 20);
+   setTimeout(function(){$('#scalefactor').focus();}, 10000);
+   setTimeout(function(){$('#scalefactor').val('1')}, 12000);
+   setTimeout(function(){$('#scalefactor').val('1.')}, 12800);
+   setTimeout(function(){$('#scalefactor').val('1.5')}, 13600);
+   setTimeout(function() {var e = $.Event('keypress'); e.keyCode = 13; $('#scalefactor').trigger(e);}, 14500);
+
+   setTimeout(function() {var e = $.Event('keypress'); e.keyCode = 13; $('#scalefactor').trigger(e);}, 19500);
+
+   cursor.transition()
+         .delay(20500)
+         .duration(2000)
+         .attr('x', $('#reflect-mapH').offset().left + 40).attr('y', $('#reflect-mapH').offset().top + 20);
+   setTimeout(function(){$('#reflectH').trigger('click');}, 23000);
+   setTimeout(function(){$('#movie_canvas').animate({'opacity' : '-=0.7'}, 2000);}, 26000);
+   setTimeout(function(){svg.transition().duration(1000).style('opacity', 0);}, 27000);
+   setTimeout(function(){
+   svg.selectAll('*').remove();
+   movie_svg.selectAll('*').remove();
+   movie_svg.style('z-index', -999);
+   $('.transform-input').val('');
+   $('#reflect-mapH').css({'border' : '3px solid rgb(46, 69, 124)'});
+   reflectHCount = 1;
+   ISFLIPPEDH = false;
+   curScaleH = 1;
+   $('#button1').trigger('mousedown');
+   $('.transform-input').blur();
+   svg.style('opacity', 1);
+   aud.pause();
+   aud.currentTime = 0;
+   }, 29000);
+}
 $('#reflectH').bind('click', function(evt){
    reflectHCount += 1;
    if (reflectHCount % 2 === 0) $('#reflect-mapH').css({'border' : '3px groove pink'});
    else $('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'});
-   $('#transform_hint').fadeOut(800);
    var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(-1 * curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    if (ISFLIPPEDH === false) ISFLIPPEDH = true;
@@ -520,7 +584,6 @@ $('#reflectV').bind('click', function(evt){
    reflectVCount += 1;
    if (reflectVCount % 2 === 0) $('#reflect-mapV').css({'border' : '3px groove pink'});
    else $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
-   $('#transform_hint').fadeOut(800);
    var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(-1 * curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    if (ISFLIPPEDV === false) ISFLIPPEDV = true;
@@ -543,17 +606,21 @@ $('#challenge').bind('click', function(evt){
    CHALLENGEON = false;
    }
 });
+$('#demo-box').bind('click', function(){$('#movie_canvas').animate({'opacity' : '+=0.7'}, 2000); start_demo();});
 
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
 $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
+$('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
 $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
 $(window).resize(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
+   $('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
 });
 $(window).scroll(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
+   $('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
 });
