@@ -606,7 +606,18 @@ $('#challenge').bind('click', function(evt){
    CHALLENGEON = false;
    }
 });
-$('#demo-box').bind('click', function(){$('#movie_canvas').animate({'opacity' : '+=0.7'}, 2000); start_demo();});
+$('#demo-box').bind('click', function(){
+   svg.selectAll('*').remove();
+   $('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1;
+   curTransX = 0; curTransY = 0; curSclFac = 1; curRotDegree = 0; reflectStartX; reflectStartY; curScaleH = 1; curScaleV = 1;
+   reflectHCount = 1; reflectVCount = 1; CHALLENGEON = false; challengeCount = 1;
+   ISFLIPPEDH = false; ISFLIPPEDV = false;
+   gridClick = 1;
+   $('.transform-input').val('');
+   $('#movie_canvas').animate({'opacity' : '+=0.7'}, 2000);
+   start_demo();
+});
 
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
 $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
