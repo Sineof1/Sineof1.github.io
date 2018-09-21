@@ -470,11 +470,12 @@ function translateX() {
    if (($('#translationX').val()).length < 1) $('#translationX').val('0');
    if (isNaN(Number($('#translationX').val()))) return;
    if ($('#translationX').val() === '') return;
+   curTransX = 0;
    var x = String(Number($('#translationX').val()) + curTransX);
    svg.select('#curTransformFig').transition()
    .duration(1200)
    .ease(d3.easeCubicInOut)
-   .attr('transform', 'translate('+x+', 0)'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
+   .attr('transform', 'translate('+x+', '+0+')'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
    curTransX = Number(x);
 }
 function translateY() {
