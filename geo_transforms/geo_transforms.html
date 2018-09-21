@@ -158,8 +158,8 @@ body {
 <span style='position:absolute;top:25px;left:48px;font-size:18px;font-variant:none;'>x</span>
 <span style='position:absolute;top:25px;left:130px;font-size:18px;font-variant:none;'>y</span>
 <span style='position:absolute;bottom:5px;left:40px;font-size:18px;'>translation</span>
-&lt;<input class='transform-input' id='translationX' type='text' maxlength='4' /> &nbsp;
-<input class='transform-input' id='translationY' type='text' maxlength='4' />&gt;
+<input class='transform-input' id='translationX' type='text' maxlength='4' /> &nbsp;
+<input class='transform-input' id='translationY' type='text' maxlength='4' />
 </div>
 </div>
 <div id='grid-box' style='overflow:hidden;'><img src='grid_icon.svg' style='width:110%;' /></div>
@@ -460,23 +460,32 @@ $('#button9').bind('mousedown', function(evt){
 
 $('.transform-input').bind('keypress', function(evt) {
    if (evt.keyCode !== 13) return;
-   if (evt.target.id === 'translationX' || evt.target.id === 'translationY') translate();
+   if (evt.target.id === 'translationX') translateX();
+   else if (evt.target.id === 'translationY') translateY();
    else if (evt.target.id === 'scalefactor') dilate();
    else if (evt.target.id === 'rotatedegree') rotateFig();
 });
 
-function translate() {
+function translateX() {
    if (($('#translationX').val()).length < 1) $('#translationX').val('0');
-   if (($('#translationY').val()).length < 1) $('#translationY').val('0');
-   if (isNaN(Number($('#translationX').val())) || isNaN(Number($('#translationY').val()))) return;
-   if ($('#translationX').val() === '' || $('#translationY').val() === '') return;
+   if (isNaN(Number($('#translationX').val()))) return;
+   if ($('#translationX').val() === '') return;
    var x = String(Number($('#translationX').val()) + curTransX);
+   svg.select('#curTransformFig').transition()
+   .duration(1200)
+   .ease(d3.easeCubicInOut)
+   .attr('transform', 'translate('+x+', 0)'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
+   curTransX = Number(x);
+}
+function translateY() {
+   if (($('#translationY').val()).length < 1) $('#translationY').val('0');
+   if (isNaN(Number($('#translationY').val()))) return;
+   if ($('#translationY').val() === '') return;
    var y = String(-Number($('#translationY').val()) + curTransY);
    svg.select('#curTransformFig').transition()
    .duration(1200)
    .ease(d3.easeCubicInOut)
-   .attr('transform', 'translate('+x+', '+y+')'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
-   curTransX = Number(x);
+   .attr('transform', 'translate('+0+', '+y+')'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
    curTransY = Number(y);
 }
 function dilate() {
