@@ -470,7 +470,6 @@ function translateX() {
    if (($('#translationX').val()).length < 1) $('#translationX').val('0');
    if (isNaN(Number($('#translationX').val()))) return;
    if ($('#translationX').val() === '') return;
-   curTransX = 0;
    var x = String(Number($('#translationX').val()) + curTransX);
    var y = curTransY;
    svg.select('#curTransformFig').transition()
