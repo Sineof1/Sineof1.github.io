@@ -626,6 +626,8 @@ $('#demo-box').bind('click', function(){
    $('#movie_canvas').animate({'opacity' : '+=0.7'}, 2000);
    start_demo();
 });
+$('#translationX').bind('focus', function(){$('#translationY').val('');});
+$('#translationY').bind('focus', function(){$('#translationX').val('');});
 
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
 $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
