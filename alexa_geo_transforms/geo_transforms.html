@@ -171,30 +171,6 @@ var grid_svg = d3.select('#transform_frame').append('svg').attr('width', 750).at
 var svg = d3.select('#transform_frame').append('svg').attr('width', 750).attr('height', 300)
                                                      .style('position', 'absolute').style('top', 0).style('left', 0);
 
-
-var interim_transcript = '';
-var final_transcript = '';
-
-var recognition = new webkitSpeechRecognition();
-recognition.continuous = false;
-recognition.lang = 'en-US';
-recognition.start();
-
-recognition.onstart = function() { }
-recognition.onresult = function(event) {
-    interim_transcript = '';
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-    if (event.results[i].isFinal) final_transcript = event.results[i][0].transcript;
-    else interim_transcript += event.results[i][0].transcript;
-    }
-    var command = final_transcript.split(' ');
-    if (command[0] == 'rotate') {
-    $('#rotatedegree').val(command[1]);
-    (function() {var e = $.Event('keypress'); e.keyCode = 13; $('#rotatedegree').trigger(e);})();
-    }
-}
-
-
 $('#grid-box').bind('click', function(evt) {
    gridClick += 1;
    if (gridClick % 2 === 0) {
