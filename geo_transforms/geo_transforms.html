@@ -7,7 +7,8 @@
 <link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script> var TogetherJSConfig_dontShowClicks = true;</script>
+<script src="https://togetherjs.com/togetherjs-min.js"></script></script>
 <title>Geo Transforms</title>
 </head>
 
@@ -65,7 +66,7 @@ body {
    background-color:white;
    overflow:hidden;
 }
-#grid-box, #challenge, #demo-box, #resetMat {
+#grid-box, #challenge, #demo-box, #pair-box {
    display:inline:block;
    width:75px;
    height:75px;
@@ -86,7 +87,7 @@ body {
 #challenge {
    opacity:0.5;
 }
-#grid-box:hover, #challenge:hover, #demo-box:hover {
+#grid-box:hover, #challenge:hover, #demo-box:hover, #pair-box:hover {
    box-shadow:0 0 6px #22C7FA;
 }
 .transform-box {
@@ -625,6 +626,10 @@ $('#demo-box').bind('click', function(){
    $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
    $('#movie_canvas').animate({'opacity' : '+=0.7'}, 2000);
    start_demo();
+});
+$('#pair-box').bind('click', function() {
+   TogetherJS(this);
+   return false;
 });
 $('#translationX').bind('focus', function(){$('#translationY').val('');});
 $('#translationY').bind('focus', function(){$('#translationX').val('');});
