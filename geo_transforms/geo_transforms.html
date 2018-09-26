@@ -7,8 +7,6 @@
 <link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
-<script> var TogetherJSConfig_dontShowClicks = true;</script>
-<script src="https://togetherjs.com/togetherjs-min.js"></script>
 <title>Geo Transforms</title>
 </head>
 
@@ -66,7 +64,7 @@ body {
    background-color:white;
    overflow:hidden;
 }
-#grid-box, #challenge, #demo-box, #pair-box {
+#grid-box, #challenge, #demo-box {
    display:inline:block;
    width:75px;
    height:75px;
@@ -87,7 +85,7 @@ body {
 #challenge {
    opacity:0.5;
 }
-#grid-box:hover, #challenge:hover, #demo-box:hover, #pair-box:hover {
+#grid-box:hover, #challenge:hover, #demo-box:hover {
    box-shadow:0 0 6px #22C7FA;
 }
 .transform-box {
@@ -166,7 +164,6 @@ body {
 </div>
 <div id='grid-box' style='overflow:hidden;'><img src='grid_icon.svg' style='width:110%;' /></div>
 <div id='demo-box'>demo</div>
-<div id='pair-box'><img src='pair_icon.png' style='width:95%;' /></div>
 
 <audio id='narration'><source src='narration.mp3'></audio>
 </body>
@@ -628,10 +625,6 @@ $('#demo-box').bind('click', function(){
    $('#movie_canvas').animate({'opacity' : '+=0.7'}, 2000);
    start_demo();
 });
-$('#pair-box').bind('click', function() {
-   TogetherJS(this);
-   return false;
-});
 $('#translationX').bind('focus', function(){$('#translationY').val('');});
 $('#translationY').bind('focus', function(){$('#translationX').val('');});
 
@@ -639,19 +632,16 @@ $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#
 $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
 $('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
 $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
-$('#pair-box').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top + 88});
 $(window).resize(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
    $('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
-   $('#pair-box').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top + 88});
 });
 $(window).scroll(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
    $('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
-   $('#pair-box').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top + 88});
 });
 </script>
