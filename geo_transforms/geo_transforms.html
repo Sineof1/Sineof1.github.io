@@ -123,11 +123,12 @@ body {
 </style>
 
 <body>
-<canvas id='movie_canvas' style='position:fixed;top:0;left:0;width:100%;height:100vh;background-color:rgb(0, 0, 0);opacity:0;'></canvas>
 <div id='challenge'><img src='leaf_outline.png' style='width:95%;' /></div>
 <div id='transform_frame'></div>
 <div id='shapes_frame'>
 <div class='shape-button' id='button1'><img src='smiley.png' style='height:90%;margin-top:7px;'></div>
+<div class='shape-button' id='button10'><img src='8g1_rect.svg' style='height:90%;margin-top:7px;'></div>
+<div class='shape-button' id='button11'><img src='skier.svg' style='height:90%;margin-top:15px;'></div>
 <div class='shape-button' id='button2'><img src='moon.png' style='height:85%;margin-top:7px;'></div>
 <div class='shape-button' id='button9'><img src='breakdance_boy.svg' style='height:85%;margin-top:7px;'></div>
 <div class='shape-button' id='button3'><img src='letter_a.png' style='height:85%;margin-top:11px;'></div>
@@ -163,22 +164,12 @@ body {
 </div>
 </div>
 <div id='grid-box' style='overflow:hidden;'><img src='grid_icon.svg' style='width:110%;' /></div>
-<div id='demo-box'>demo</div>
-
-<audio id='narration'><source src='narration.mp3'></audio>
 </body>
 
 <meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="Geometric Transformations" /><meta name="twitter:description" content="Dilations, rotations, reflections, and translations." /><meta name="twitter:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2018/08/geo_transform_image-1.png" />
 </html>
 
 <script>
-/*
-function runTogether() {
-   TogetherJS(this);
-   return false;
-}
-runTogether();
-*/
 var outline_leafs = [{tranx : -200, trany : -140, sclx: -0.3, scly: 0.3, rot: 125}, {tranx : 250, trany : 25, sclx: 1.4, scly: -1.4, rot: -75},
                      {tranx : -150, trany : 35, sclx: 0.8, scly: 0.8, rot: -100}, {tranx : 300, trany : -100, sclx: 0.25, scly: 0.25, rot: 90}];
 var outline_smile = [{tranx : 0, trany : -150, sclx: 0.5, scly: 0.5, rot: 45}, {tranx : 250, trany : 50, sclx: -1.1, scly: -1.1, rot: 110},
@@ -196,8 +187,11 @@ var outline_gears = [{tranx : 200, trany : 140, sclx: 1, scly: -1, rot: 50}, {tr
                      {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 100}, {tranx : -200, trany : 160, sclx: -0.8, scly: 0.8, rot: 25}];
 var outline_dncb1 = [{tranx : 200, trany : 75, sclx: 1, scly: -1, rot: 10}, {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -90},
                      {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 150}, {tranx : -200, trany : 110, sclx: -0.4, scly: 0.4, rot: 0}];
+var outline_trins = [{tranx : 240, trany : -50, sclx: 1, scly: 1, rot: 20}, {tranx : -250, trany : 70, sclx: 1, scly: -1, rot: 180}];
+var outline_skier = [{tranx : 0, trany : -150, sclx: 0.5, scly: 0.5, rot: 45}, {tranx : 250, trany : 50, sclx: -1.1, scly: -1.1, rot: 110},
+                     {tranx : -240, trany : 60, sclx: 1.25, scly: 1.25, rot: 0}];
 
-var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 = 1; var but7 = 1; var but8 = 1; var but9 = 1;
+var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 = 1; var but7 = 1; var but8 = 1; var but9 = 1; var but10 = 1; but11 = 1;
 var curTransX = 0; var curTransY = 0; var curSclFac = 1; var curRotDegree = 0; var reflectStartX; var reflectStartY; var curScaleH = 1; var curScaleV = 1; var reflectHCount = 1; var reflectVCount = 1; var CHALLENGEON = false; var challengeCount = 1;
 var ISFLIPPEDH = false; var ISFLIPPEDV = false;
 var gridClick = 1;
@@ -243,7 +237,7 @@ $('.shape-button').bind('click', function(evt) {
 });
 $('#button1').bind('mousedown', function(evt){
    but1 += 1;
-   but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1;
+   but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but1 % 2 === 0) {
    svg.append('svg:image')
@@ -268,7 +262,7 @@ $('#button1').bind('mousedown', function(evt){
 });
 $('#button2').bind('mousedown', function(evt){
    but2 += 1;
-   but1 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1;
+   but1 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but2 % 2 === 0) {
    svg.append('svg:image')
@@ -293,7 +287,7 @@ $('#button2').bind('mousedown', function(evt){
 });
 $('#button3').bind('mousedown', function(evt){
    but3 += 1;
-   but1 = 1; but2 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1;
+   but1 = 1; but2 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but3 % 2 === 0) {
    svg.append('svg:image')
@@ -318,7 +312,7 @@ $('#button3').bind('mousedown', function(evt){
 });
 $('#button4').bind('mousedown', function(evt){
    but4 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but4 % 2 === 0) {
    svg.append('svg:image')
@@ -343,7 +337,7 @@ $('#button4').bind('mousedown', function(evt){
 });
 $('#button5').bind('mousedown', function(evt){
    but5 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but5 % 2 === 0) {
    svg.append('svg:image')
@@ -368,7 +362,7 @@ $('#button5').bind('mousedown', function(evt){
 });
 $('#button6').bind('mousedown', function(evt){
    but6 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but7 = 1; but8 = 1; but9 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but6 % 2 === 0) {
    svg.append('svg:image')
@@ -393,7 +387,7 @@ $('#button6').bind('mousedown', function(evt){
 });
 $('#button7').bind('mousedown', function(evt){
    but7 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but8 = 1; but9 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but7 % 2 === 0) {
    svg.append('svg:image')
@@ -418,7 +412,7 @@ $('#button7').bind('mousedown', function(evt){
 });
 $('#button8').bind('mousedown', function(evt){
    but8 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but9 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but8 % 2 === 0) {
    svg.append('svg:image')
@@ -442,7 +436,7 @@ $('#button8').bind('mousedown', function(evt){
 });
 $('#button9').bind('mousedown', function(evt){
    but9 += 1;
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
    if (but9 % 2 === 0) {
    svg.append('svg:image')
@@ -464,7 +458,54 @@ $('#button9').bind('mousedown', function(evt){
    }
    else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
 });
-
+$('#button10').bind('mousedown', function(evt){
+   but10 += 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but11 = 1;
+   svg.selectAll("*").remove();
+   if (but10 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "8g1_rect.svg")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   if (CHALLENGEON === true) {
+   svg.selectAll('.outline_img')
+      .data(outline_trins)
+      .enter()
+      .append('svg:image')
+      .style('-webkit-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
+      .attr("xlink:href", "rect_outline.svg")
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
+      .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
+   }
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
+$('#button11').bind('mousedown', function(evt){
+   but11 += 1;
+   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1;
+   svg.selectAll("*").remove();
+   if (but11 % 2 === 0) {
+   svg.append('svg:image')
+   .attr("xlink:href", "skier.svg")
+   .attr('id', 'curTransformFig')
+   .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
+   $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
+   if (CHALLENGEON === true) {
+   svg.selectAll('.outline_img')
+      .data(outline_skier)
+      .enter()
+      .append('svg:image')
+      .style('-webkit-transform-origin', '50% 50%')
+      .style('transform-origin', 'center')
+      .attr("xlink:href", "skier_outline.svg")
+      .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100)
+      .attr('transform', function(d){return 'translate(' + d.tranx + ', ' + d.trany + ') scale(' + d.sclx + ', ' + d.scly + ') rotate(' + d.rot + ')'});
+   }
+   }
+   else {$('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});}
+});
 $('.transform-input').bind('keypress', function(evt) {
    if (evt.keyCode !== 13) return;
    if (evt.target.id === 'translationX') translateX();
@@ -472,7 +513,6 @@ $('.transform-input').bind('keypress', function(evt) {
    else if (evt.target.id === 'scalefactor') dilate();
    else if (evt.target.id === 'rotatedegree') rotateFig();
 });
-
 function translateX() {
    if (($('#translationX').val()).length < 1) $('#translationX').val('0');
    if (isNaN(Number($('#translationX').val()))) return;
@@ -524,59 +564,6 @@ function rotateFig() {
  .attrTween("transform", function(interpolate) {return d3.interpolate(o, n);});
  curRotDegree = Number(rotDegree);
 }
-function start_demo() {
-   movie_svg.style('z-index', 999);
-   var aud = document.getElementById('narration');
-   aud.play();
-   var cursor = movie_svg.append('svg:image').attr("xlink:href", "cursor.svg")
-                         .attr('x', window.innerWidth / 2).attr('y', window.innerHeight / 2).attr('width', 25).attr('height', 40.84)
-                         .style('opacity', 0).style('z-index', 101);
-   cursor.transition()
-         .delay(800)
-         .duration(1000)
-         .style('opacity', 1)
-         .transition()
-         .delay(1000)
-         .duration(3000)
-         .ease(d3.easeCubicInOut)
-         .attr('x', $('#button1').offset().left + 75).attr('y', $('#button1').offset().top + 45);
-   setTimeout(function(){$('#button1').trigger('mousedown');}, 6000);
-
-   cursor.transition()
-         .delay(6800)
-         .duration(3000)
-         .attr('x', $('#scalefactor').offset().left + 63).attr('y', $('#dilation-box').offset().top + 20);
-   setTimeout(function(){$('#scalefactor').focus();}, 10000);
-   setTimeout(function(){$('#scalefactor').val('1')}, 12000);
-   setTimeout(function(){$('#scalefactor').val('1.')}, 12800);
-   setTimeout(function(){$('#scalefactor').val('1.5')}, 13600);
-   setTimeout(function() {var e = $.Event('keypress'); e.keyCode = 13; $('#scalefactor').trigger(e);}, 14500);
-
-   setTimeout(function() {var e = $.Event('keypress'); e.keyCode = 13; $('#scalefactor').trigger(e);}, 19500);
-
-   cursor.transition()
-         .delay(20500)
-         .duration(2000)
-         .attr('x', $('#reflect-mapH').offset().left + 40).attr('y', $('#reflect-mapH').offset().top + 20);
-   setTimeout(function(){$('#reflectH').trigger('click');}, 23000);
-   setTimeout(function(){$('#movie_canvas').animate({'opacity' : '-=0.7'}, 2000);}, 26000);
-   setTimeout(function(){svg.transition().duration(1000).style('opacity', 0);}, 27000);
-   setTimeout(function(){
-   svg.selectAll('*').remove();
-   movie_svg.selectAll('*').remove();
-   movie_svg.style('z-index', -999);
-   $('.transform-input').val('');
-   $('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'});
-   reflectHCount = 1;
-   ISFLIPPEDH = false;
-   curScaleH = 1;
-   $('#button1').trigger('mousedown');
-   $('.transform-input').blur();
-   svg.style('opacity', 1);
-   aud.pause();
-   aud.currentTime = 0;
-   }, 29000);
-}
 $('#reflectH').bind('click', function(evt){
    reflectHCount += 1;
    if (reflectHCount % 2 === 0) $('#reflect-mapH').css({'border' : '3px groove pink'});
@@ -618,36 +605,19 @@ $('#challenge').bind('click', function(evt){
    CHALLENGEON = false;
    }
 });
-$('#demo-box').bind('click', function(){
-   svg.selectAll('*').remove();
-   $('.transform-box').css({'opacity' : 0.5, 'pointer-events' : 'none'});
-   but1 = 1; but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1;
-   curTransX = 0; curTransY = 0; curSclFac = 1; curRotDegree = 0; reflectStartX; reflectStartY; curScaleH = 1; curScaleV = 1;
-   reflectHCount = 1; reflectVCount = 1; CHALLENGEON = false; challengeCount = 1;
-   ISFLIPPEDH = false; ISFLIPPEDV = false;
-   $('.transform-input').val('');
-   $('#challenge').css({'background-color' : 'white'});
-   $('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'});
-   $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
-   $('#movie_canvas').animate({'opacity' : '+=0.7'}, 2000);
-   start_demo();
-});
 $('#translationX').bind('focus', function(){$('#translationY').val('');});
 $('#translationY').bind('focus', function(){$('#translationX').val('');});
 
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
 $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
-$('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
 $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
 $(window).resize(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
-   $('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
 });
 $(window).scroll(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
-   $('#demo-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
 });
