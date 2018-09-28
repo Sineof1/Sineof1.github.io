@@ -200,10 +200,7 @@ var grid_svg = d3.select('#transform_frame').append('svg').attr('width', 750).at
                                                           .style('position', 'absolute').style('top', 0).style('left', 0);
 var svg = d3.select('#transform_frame').append('svg').attr('width', 750).attr('height', 400)
                                                      .style('position', 'absolute').style('top', 0).style('left', 0);
-var movie_svg = d3.select('body').append('svg')
-                  .attr('width', '100%').attr('height', '100vh')
-                  .style('position', 'fixed').style('top', 0).style('left', 0).style('z-index', -999);
-
+   
 $('#grid-box').bind('click', function(evt) {
    gridClick += 1;
    if (gridClick % 2 === 0) {
