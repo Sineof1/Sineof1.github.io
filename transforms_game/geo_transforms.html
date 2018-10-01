@@ -747,7 +747,7 @@ function handleMessage(message) {
    else if (message.butn === 'player1Taken') setStatus2();
    else if (message.butn === 'clearInterval') {
       clearInterval(play1Signal);
-      $('#startGame').html('<p>You are Player 1. Go first. Take turns and work together with Player 2 to match all the transformations of this shape:</p><img src="leaf.png" style="display:block;margin:-8px auto 0 auto;width75px;height:75px;" /><button id="closeIntro" onclick="closeIntro()" style="position:absolute;width:100px;height:50px;left:125px;bottom:10px;border:1px solid white;background-color:black;color:white;border-radius:5px;cursor:pointer;">Close</button>');
+      $('#startGame').html('<p>Let\'s go! You are Player 1. Go first. Take turns and work together with Player 2 to match all the transformations of this shape:</p><img src="leaf.png" style="display:block;margin:-8px auto 0 auto;width75px;height:75px;" /><button id="closeIntro" onclick="closeIntro()" style="position:absolute;width:100px;height:50px;left:125px;bottom:10px;border:1px solid white;background-color:black;color:white;border-radius:5px;cursor:pointer;">Close</button>');
       $('#startGame').fadeIn();
    }
    else if (message.butn === 'unload') playerRefresh();
@@ -777,7 +777,7 @@ function setStatus2() {
    playerNum = 2;
    clearInterval(play1Signal);
    socket.send(JSON.stringify({butn: 'clearInterval'}));
-   $('#startGame').html('<p>You are Player 2. Take turns and work together with Player 1 to match all the transformations of this shape:</p><img src="leaf.png" style="display:block;margin:-8px auto 0 auto;width75px;height:75px;" /><button id="closeIntro" onclick="closeIntro()" style="position:absolute;width:100px;height:50px;left:125px;bottom:10px;border:1px solid white;background-color:black;color:white;border-radius:5px;cursor:pointer;">Close</button>');
+   $('#startGame').html('<p>Let\'s go! You are Player 2. Take turns and work together with Player 1 to match all the transformations of this shape:</p><img src="leaf.png" style="display:block;margin:-8px auto 0 auto;width75px;height:75px;" /><button id="closeIntro" onclick="closeIntro()" style="position:absolute;width:100px;height:50px;left:125px;bottom:10px;border:1px solid white;background-color:black;color:white;border-radius:5px;cursor:pointer;">Close</button>');
    $('#sheath').show();
    $('#startGame').fadeIn();
 }
