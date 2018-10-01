@@ -133,7 +133,7 @@ body {
 <div class='shape-button' id='button9'><img src='breakdance_boy.svg' style='height:85%;margin-top:7px;'></div>
 <div class='shape-button' id='button3'><img src='letter_a.png' style='height:85%;margin-top:11px;'></div>
 <div class='shape-button' id='button8'><img src='leaf.png' style='height:90%;margin-top:5px;'></div>
-<div class='shape-button' id='button4'><img src='star.png' style='height:90%;margin-top:7px;'></div>
+<div class='shape-button' id='button4'><img src='star.svg' style='height:90%;margin-top:7px;'></div>
 <div class='shape-button' id='button5'><img src='runner.png' style='height:90%;margin-top:7px;'></div>
 <div class='shape-button' id='button6'><img src='hexagon.png' style='height:95%;margin-top:7px;'></div>
 <div class='shape-button' id='button7'><img src='gear.png' style='height:90%;margin-top:5px;'></div>
@@ -315,7 +315,7 @@ $('#button4').bind('mousedown', function(evt){
    svg.selectAll("*").remove();
    if (but4 % 2 === 0) {
    svg.append('svg:image')
-   .attr("xlink:href", "star.png")
+   .attr("xlink:href", "star.svg")
    .attr('id', 'curTransformFig')
    .attr('width', 200).attr('height', 200).attr('x', 275).attr('y', 100);
    $('.transform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
