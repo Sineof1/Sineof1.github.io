@@ -64,7 +64,7 @@ body {
    background-color:white;
    overflow:hidden;
 }
-#grid-box, #challenge, #demo-box {
+#grid-box, #challenge, #demo-box, #reset-box {
    display:inline:block;
    width:75px;
    height:75px;
@@ -85,7 +85,10 @@ body {
 #challenge {
    opacity:0.5;
 }
-#grid-box:hover, #challenge:hover, #demo-box:hover {
+#reset-box {
+   width:150px;
+}
+#grid-box:hover, #challenge:hover, #demo-box:hover, #reset-box:hover {
    box-shadow:0 0 6px #22C7FA;
 }
 .transform-box {
@@ -166,34 +169,50 @@ body {
 </div>
 </div>
 <div id='grid-box' style='overflow:hidden;'><img src='grid_icon.svg' style='width:110%;' /></div>
+<div id='reset-box'>reset</div>
 </body>
 
 <meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="Geometric Transformations" /><meta name="twitter:description" content="Dilations, rotations, reflections, and translations." /><meta name="twitter:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2018/08/geo_transform_image-1.png" />
 </html>
 
 <script>
-var outline_leafs = [{tranx : -200, trany : -140, sclx: -0.3, scly: 0.3, rot: 125}, {tranx : 250, trany : 25, sclx: 1.4, scly: -1.4, rot: -75},
-                     {tranx : -150, trany : 35, sclx: 0.8, scly: 0.8, rot: -100}, {tranx : 300, trany : -100, sclx: 0.25, scly: 0.25, rot: 90}];
-var outline_smile = [{tranx : 0, trany : -150, sclx: 0.5, scly: 0.5, rot: 45}, {tranx : 250, trany : 50, sclx: -1.1, scly: -1.1, rot: 110},
+var outline_leafs = [{tranx : -200, trany : -140, sclx: -0.3, scly: 0.3, rot: 125},
+                     {tranx : 250, trany : 25, sclx: 1.4, scly: -1.4, rot: -75},
+                     {tranx : -150, trany : 35, sclx: 0.8, scly: 0.8, rot: -100},
+                     {tranx : 300, trany : -100, sclx: 0.25, scly: 0.25, rot: 90}];
+var outline_smile = [{tranx : 0, trany : -150, sclx: 0.5, scly: 0.5, rot: 45},
+                     {tranx : 250, trany : 50, sclx: -1.1, scly: -1.1, rot: 110},
                      {tranx : -240, trany : 60, sclx: 1.25, scly: 1.25, rot: 0}];
-var outline_moons = [{tranx : -200, trany : -100, sclx: 1, scly: 1, rot: 180}, {tranx : 210, trany : -50, sclx: -1.2, scly: -1.2, rot: 75}];
-var outline_ltrAs = [{tranx : 0, trany : -50, sclx: 0.65, scly: 0.65, rot: 180}, {tranx : 210, trany : -100, sclx: -1.2, scly: -1.2, rot: 90},
-                     {tranx : -170, trany : -70, sclx: 0.5, scly: -0.5, rot: 65}, {tranx : 0, trany : 30, sclx: 1.35, scly: -1.35, rot: 180}];
-var outline_stars = [{tranx : 200, trany : 105, sclx: 0.45, scly: -0.45, rot: 80}, {tranx : 230, trany : -100, sclx: 1.2, scly: -1.2, rot: -75},
-                     {tranx : -275, trany : -50, sclx: -0.95, scly: -0.95, rot: 150}, {tranx : -200, trany : 160, sclx: -0.4, scly: 0.4, rot: 190}];
-var outline_runrs = [{tranx : 200, trany : 75, sclx: 1, scly: -1, rot: 10}, {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -90},
-                     {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 150}, {tranx : -200, trany : 110, sclx: -0.4, scly: 0.4, rot: 0}];
-var outline_hexns = [{tranx : 200, trany : 100, sclx: 1.75, scly: -1.75, rot: 180}, {tranx : 230, trany : -100, sclx: 1.25, scly: -1.25, rot: -90},
-                     {tranx : -250, trany : -80, sclx: 2.5, scly: 2.5, rot: 150}, {tranx : -200, trany : 160, sclx: 1, scly: 1, rot: 0}];
-var outline_gears = [{tranx : 200, trany : 140, sclx: 1, scly: -1, rot: 50}, {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -180},
-                     {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 100}, {tranx : -200, trany : 160, sclx: -0.8, scly: 0.8, rot: 25}];
-var outline_dncb1 = [{tranx : 200, trany : 75, sclx: 1, scly: -1, rot: 10}, {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -90},
-                     {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 150}, {tranx : -200, trany : 110, sclx: -0.4, scly: 0.4, rot: 0}];
+var outline_moons = [{tranx : -200, trany : -100, sclx: 1, scly: 1, rot: 180},
+                     {tranx : 210, trany : -50, sclx: -1.2, scly: -1.2, rot: 75}];
+var outline_ltrAs = [{tranx : 0, trany : -50, sclx: 0.65, scly: 0.65, rot: 180},
+                     {tranx : 210, trany : -100, sclx: -1.2, scly: -1.2, rot: 90},
+                     {tranx : -170, trany : -70, sclx: 0.5, scly: -0.5, rot: 65},
+                     {tranx : 0, trany : 30, sclx: 1.35, scly: -1.35, rot: 180}];
+var outline_stars = [{tranx : 200, trany : 100, sclx: 0.5, scly: 0.5, rot: 90}];
+var outline_runrs = [{tranx : 200, trany : 75, sclx: 1, scly: -1, rot: 10},
+                     {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -90},
+                     {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 150},
+                     {tranx : -200, trany : 110, sclx: -0.4, scly: 0.4, rot: 0}];
+var outline_hexns = [{tranx : 200, trany : 100, sclx: 1.75, scly: -1.75, rot: 180},
+                     {tranx : 230, trany : -100, sclx: 1.25, scly: -1.25, rot: -90},
+                     {tranx : -250, trany : -80, sclx: 2.5, scly: 2.5, rot: 150},
+                     {tranx : -200, trany : 160, sclx: 1, scly: 1, rot: 0}];
+var outline_gears = [{tranx : 200, trany : 140, sclx: 1, scly: -1, rot: 50},
+                     {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -180},
+                     {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 100},
+                     {tranx : -200, trany : 160, sclx: -0.8, scly: 0.8, rot: 25}];
+var outline_dncb1 = [{tranx : 200, trany : 75, sclx: 1, scly: -1, rot: 10},
+                     {tranx : 230, trany : -100, sclx: 1.15, scly: -1.15, rot: -90},
+                     {tranx : -250, trany : -50, sclx: 0.75, scly: 0.75, rot: 150},
+                     {tranx : -200, trany : 110, sclx: -0.4, scly: 0.4, rot: 0}];
 var outline_trins = [{tranx : 240, trany : -50, sclx: 1, scly: 1, rot: 20}, {tranx : -250, trany : 70, sclx: 1, scly: -1, rot: 180}];
-var outline_skier = [{tranx : 0, trany : -150, sclx: 0.5, scly: 0.5, rot: 45}, {tranx : 250, trany : 50, sclx: -1.1, scly: -1.1, rot: 110},
+var outline_skier = [{tranx : 0, trany : -150, sclx: 0.5, scly: 0.5, rot: 45},
+                     {tranx : 250, trany : 50, sclx: -1.1, scly: -1.1, rot: 110},
                      {tranx : -240, trany : 60, sclx: 1.25, scly: 1.25, rot: 0}];
 
-var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 = 1; var but7 = 1; var but8 = 1; var but9 = 1; var but10 = 1; but11 = 1;
+var but1 = 1; var but2 = 1; var but3 = 1; var but4 = 1; var but5 = 1; var but6 = 1; var but7 = 1;
+var but8 = 1; var but9 = 1; var but10 = 1; but11 = 1;
 var curTransX = 0; var curTransY = 0; var curSclFac = 1; var curRotDegree = 0; var reflectStartX; var reflectStartY; var curScaleH = 1; var curScaleV = 1; var reflectHCount = 1; var reflectVCount = 1; var CHALLENGEON = false; var challengeCount = 1;
 var ISFLIPPEDH = false; var ISFLIPPEDV = false;
 var gridClick = 1;
@@ -202,7 +221,8 @@ var grid_svg = d3.select('#transform_frame').append('svg').attr('width', 750).at
                                                           .style('position', 'absolute').style('top', 0).style('left', 0);
 var svg = d3.select('#transform_frame').append('svg').attr('width', 750).attr('height', 400)
                                                      .style('position', 'absolute').style('top', 0).style('left', 0);
-   
+
+$('#reset-box').bind('click', function(){window.location.reload();});
 $('#grid-box').bind('click', function(evt) {
    gridClick += 1;
    if (gridClick % 2 === 0) {
@@ -610,14 +630,17 @@ $('#translationY').bind('focus', function(){$('#translationX').val('');});
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
 $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
 $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
+$('#reset-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
 $(window).resize(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
+   $('#reset-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
 });
 $(window).scroll(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
+   $('#reset-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
 });
 </script>
