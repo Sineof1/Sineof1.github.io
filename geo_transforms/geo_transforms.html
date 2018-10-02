@@ -634,7 +634,7 @@ function dilate() {
       .attr('transform', 'translate('+String(curTransX)+ ', '+String(curTransY)+')'+'scale('+String(curScaleH * scalefactor)+', '+String(curScaleV * scalefactor) + ') rotate(' + String(curRotDegree) + ')');
    curSclFac = Number(scalefactor);
    var dilHis = Number($('#dilhis').text());
-   var entered = scalefactor;
+   var entered = Number(scalefactor);
    $('#dilhis').text(String((dilHis * entered).toFixed(2)));
 }
 function rotateFig() {
