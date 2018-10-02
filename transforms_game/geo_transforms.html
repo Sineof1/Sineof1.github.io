@@ -65,7 +65,7 @@ body {
    background-color:white;
    overflow:hidden;
 }
-#grid-box, #challenge, #demo-box, #player1 {
+#grid-box, #challenge, #demo-box, #player1, #score {
    display:inline:block;
    width:75px;
    height:75px;
@@ -89,7 +89,7 @@ body {
 #grid-box:hover, #challenge:hover, #demo-box:hover, #player1:hover, #closeIntro:hover {
    box-shadow:0 0 6px #22C7FA;
 }
-#player1, #score {
+#player1 {
    position:fixed;
    top:-5px;
    left:20px;
@@ -715,18 +715,21 @@ $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#
 $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
 $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
 $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
+$('#score').offset({left : window.innerWidth - 75}); 
 
 $(window).resize(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
    $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
+   $('#score').offset({left : window.innerWidth - 75}); 
 });
 $(window).scroll(function(){
    $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
    $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
+   $('#score').offset({left : window.innerWidth - 75}); 
 });
 
 $(window).unload(function(evt) {
