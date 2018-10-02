@@ -619,7 +619,7 @@ function translateY() {
 }
 function dilate() {
    if (($('#scalefactor').val()).length < 1) return;
-   var regex = new RegExp('/^\d+\/\d+$/g');
+   var regex = /^\d+\/\d+$/g;
    if (($('#scalefactor').val()).match(regex)) {
    var scalefactor = (($('#scalefactor').val()).split('/'))[0] / (($('#scalefactor').val()).split('/'))[1] * curSclFac;
    console.log(scalefactor);
