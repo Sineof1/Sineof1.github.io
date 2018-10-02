@@ -622,7 +622,6 @@ function dilate() {
    var regex = /^\d+\/\d+$/g;
    if (($('#scalefactor').val()).match(regex)) {
    var scalefactor = (($('#scalefactor').val()).split('/'))[0] / (($('#scalefactor').val()).split('/'))[1] * curSclFac;
-   console.log(scalefactor);
    }
    else {
    if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
