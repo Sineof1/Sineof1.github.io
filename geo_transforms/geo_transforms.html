@@ -634,8 +634,8 @@ function dilate() {
       .duration(1200)
       .ease(d3.easeCubicInOut)
       .attr('transform', 'translate('+String(curTransX)+ ', '+String(curTransY)+')'+'scale('+String(curScaleH * scalefactor)+', '+String(curScaleV * scalefactor) + ') rotate(' + String(curRotDegree) + ')');
+   var dilHis = curSclFac;
    curSclFac = Number(scalefactor);
-   var dilHis = Number($('#dilhis').text());
    if (frac === 1) var entered = (($('#scalefactor').val()).split('/'))[0] / (($('#scalefactor').val()).split('/'))[1];
    else var entered = Number($('#scalefactor').val());
    $('#dilhis').text(String((dilHis * entered).toFixed(2)));
