@@ -17,7 +17,7 @@ body {
    width:1000px;
    height:95vh;
 }
-#transform_frame {
+#transform_frame, #history_frame {
    position:relative;
    display:inline-block;
    margin:0 auto;
@@ -26,6 +26,17 @@ body {
    border:10px ridge rgb(100, 211, 254);
    border-radius:8px;
    background-color:beige;
+   overflow:hidden;
+}
+#history_frame {
+   position:fixed;
+   bottom:-15px;
+   right:-15px;
+   width:200px;
+   height:300px;
+   font-family:sans-serif;
+   font-size:22px;
+   color:teal;
    overflow:hidden;
 }
 #shapes_frame {
@@ -170,6 +181,13 @@ body {
 </div>
 <div id='grid-box' style='overflow:hidden;'><img src='grid_icon.svg' style='width:110%;' /></div>
 <div id='reset-box'>reset</div>
+
+<div id='history_frame'>
+<p style='text-align:center;'>History</p>
+<p>Translation (x): <span id='tranxhis'></span></p>
+<p>Translation (y): <span id='tranyhis'></span></p>
+<p>&nbsp;&nbsp;&nbsp;Rotation: <span id='rothis'></span></p>
+</div>
 </body>
 
 <meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="Geometric Transformations" /><meta name="twitter:description" content="Dilations, rotations, reflections, and translations." /><meta name="twitter:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2018/08/geo_transform_image-1.png" />
