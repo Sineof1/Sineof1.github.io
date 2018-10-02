@@ -566,6 +566,9 @@ function translateX() {
    .ease(d3.easeCubicInOut)
    .attr('transform', 'translate('+x+', '+y+')'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
    curTransX = Number(x);
+   var tranXHis = Number($('#tranxhis').text());
+   var entered = Number($('#translationX').val());
+   $('#tranxhis').text(String(tranXHis + entered));
 }
 function translateY() {
    if (($('#translationY').val()).length < 1) $('#translationY').val('0');
@@ -579,6 +582,9 @@ function translateY() {
    .ease(d3.easeCubicInOut)
    .attr('transform', 'translate('+x+', '+y+')'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
    curTransY = Number(y);
+   var tranYHis = Number($('#tranyhis').text());
+   var entered = Number($('#translationY').val());
+   $('#tranyhis').text(String(tranYHis + entered));
 }
 function dilate() {
    if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
@@ -604,6 +610,9 @@ function rotateFig() {
  .ease(d3.easeCubicInOut)
  .attrTween("transform", function(interpolate) {return d3.interpolate(o, n);});
  curRotDegree = Number(rotDegree);
+ var rotHis = Number($('#rothis').text());
+ var entered = Number($('#rotatedegree').val());
+ $('#rothis').text(String(rotHis + entered));
 }
 $('#reflectH').bind('click', function(evt){
    reflectHCount += 1;
