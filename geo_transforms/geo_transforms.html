@@ -625,8 +625,8 @@ function dilate() {
    console.log(scalefactor);
    }
    else {
-      if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
-      var scalefactor = String(Number($('#scalefactor').val()) * curSclFac);
+   if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
+   var scalefactor = String(Number($('#scalefactor').val()) * curSclFac);
    }
    svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('transform-origin', 'center')
       .transition()
@@ -635,7 +635,7 @@ function dilate() {
       .attr('transform', 'translate('+String(curTransX)+ ', '+String(curTransY)+')'+'scale('+String(curScaleH * scalefactor)+', '+String(curScaleV * scalefactor) + ') rotate(' + String(curRotDegree) + ')');
    curSclFac = Number(scalefactor);
    var dilHis = Number($('#dilhis').text());
-   var entered = Number($('#scalefactor').val());
+   var entered = scalefactor;
    $('#dilhis').text(String((dilHis * entered).toFixed(2)));
 }
 function rotateFig() {
