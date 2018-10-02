@@ -139,6 +139,20 @@ body {
    border:1px solid #1eb4e1;
    box-shadow:0 0 6px rgba(0,0,0,0.16);
 }
+.fraction, .top, .bottom {
+    padding: 0 4px;
+    font-size:18px;
+}
+.fraction {
+    display: inline-block;
+    text-align: center;
+    vertical-align:-12px;
+}
+.bottom {
+    border-top: 1px solid #000;
+    display: block;
+    padding:0 5px;
+}
 </style>
 
 <body>
@@ -203,7 +217,7 @@ Gear
 <p style='text-align:left;'>Translation (x): <span id='tranxhis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>0</span></p>
 <p style='text-align:left;'>Translation (y): <span id='tranyhis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>0</span></p>
 <p style='text-align:left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;Rotation: <span id='rothis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>0</span><span style='color:black;'>&deg;</span></p>
-<p style='text-align:left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&#8202;Dilation: <span id='dilhis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>1.00</span></p>
+<p style='text-align:left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&#8202;Dilation: <span id='dilhis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>1</span></p>
 </div>
 </body>
 
@@ -291,7 +305,7 @@ $('.shape-button').bind('click', function(evt) {
    $('#tranxhis').text('0');
    $('#tranyhis').text('0');
    $('#rothis').text('0');
-   $('#dilhis').text('1.00');
+   $('#dilhis').text('1');
 });
 $('#button1').bind('mousedown', function(evt){
    but1 += 1;
@@ -606,7 +620,11 @@ function translateY() {
 function dilate() {
    if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
    if (($('#scalefactor').val()).length < 1) return;
-   var scalefactor = String(Number($('#scalefactor').val()) * curSclFac);
+   var regex = /[0-9]+\/[0-9]+/;
+   if (($('#scalefactor').val()).match(regex)) {
+   var scalefactor = (($('#scalefactor').val()).split('/'))[0] / (($('#scalefactor').val()).split('/'))[1];
+   }
+   else var scalefactor = String(Number($('#scalefactor').val()) * curSclFac);
    svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('transform-origin', 'center')
       .transition()
       .duration(1200)
@@ -694,4 +712,13 @@ $(window).scroll(function(){
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
    $('#reset-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
 });
+   
+function setFractions() {
+   $('.fraction').each(function(key, value) {
+   $this = $(this);
+   var split = $this.html().split("/");
+   $this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')
+   });
+}
+setFractions();
 </script>
