@@ -600,7 +600,7 @@ function dilate() {
    curSclFac = Number(scalefactor);
    var dilHis = Number($('#dilhis').text());
    var entered = Number($('#scalefactor').val());
-   $('#dilhis').text((String(dilHis * entered)).toFixed(2));
+   $('#dilhis').text(String((dilHis * entered).toFixed(2)));
 }
 function rotateFig() {
  if (isNaN(Number($('#rotatedegree').val()))) return;
