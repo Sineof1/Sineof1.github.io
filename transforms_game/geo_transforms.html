@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js'></script>
-<title>Geo Transforms</title>
+<title>Transforms Game</title>
 </head>
 
 <style>
@@ -18,7 +18,7 @@ body {
    width:1000px;
    height:95vh;
 }
-#transform_frame {
+#transform_frame, #history_frame {
    position:relative;
    display:inline-block;
    margin:0 auto;
@@ -28,6 +28,18 @@ body {
    border-radius:8px;
    background-color:beige;
    overflow:hidden;
+}
+#history_frame {
+   position:fixed;
+   bottom:-15px;
+   right:-25px;
+   width:195px;
+   height:250px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:teal;
+   overflow:hidden;
+   padding-left:8px;
 }
 #shapes_frame {
    position:relative;
@@ -242,6 +254,13 @@ body {
 
 <div id='startGame'></div>
 <textarea id='chatWindow'></textarea>
+<div id='history_frame'>
+<p style='text-align:center;'>History</p>
+<p style='text-align:left;'>Translation (x): <span id='tranxhis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>0</span></p>
+<p style='text-align:left;'>Translation (y): <span id='tranyhis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>0</span></p>
+<p style='text-align:left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;Rotation: <span id='rothis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>0</span><span style='color:black;'>&deg;</span></p>
+<p style='text-align:left;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&#8202;Dilation: <span id='dilhis' style='color:black;font-weight:900;vertical-align:-1px;font-size:18px;'>1</span></p>
+</div>
 </body>
 
 <meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="Geometric Transformations: The Game" /><meta name="twitter:description" content="Dilations, rotations, reflections, and translations." /><meta name="twitter:image" content="https://guzintamath.com/images/transformsgame.png" />
@@ -320,6 +339,10 @@ $('.shape-button').bind('click', function(evt) {
    $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
    reflectHCount = 1;
    reflectVCount = 1;
+   $('#tranxhis').text('0');
+   $('#tranyhis').text('0');
+   $('#rothis').text('0');
+   $('#dilhis').text('1');
    socket.send(JSON.stringify({butn: 'shape'}));
 });
 $('#button1').bind('mousedown', function(evt){
@@ -628,6 +651,9 @@ function translateX() {
    .ease(d3.easeCubicInOut)
    .attr('transform', 'translate('+x+', '+y+')'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
    curTransX = Number(x);
+   var tranXHis = Number($('#tranxhis').text());
+   var entered = Number($('#translationX').val());
+   $('#tranxhis').text(String(tranXHis + entered));
 }
 function translateY() {
    if (($('#translationY').val()).length < 1) $('#translationY').val('0');
@@ -641,17 +667,32 @@ function translateY() {
    .ease(d3.easeCubicInOut)
    .attr('transform', 'translate('+x+', '+y+')'+'scale('+String(curScaleH * curSclFac)+ ', ' + String(curScaleV * curSclFac) + ') rotate(' + curRotDegree + ')');
    curTransY = Number(y);
+   var tranYHis = Number($('#tranyhis').text());
+   var entered = Number($('#translationY').val());
+   $('#tranyhis').text(String(tranYHis + entered));
 }
 function dilate() {
-   if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
    if (($('#scalefactor').val()).length < 1) return;
+   var regex = /^\d+\/\d+$/g;
+   if (($('#scalefactor').val()).match(regex)) {
+   var frac = 1;
+   var scalefactor = (($('#scalefactor').val()).split('/'))[0] / (($('#scalefactor').val()).split('/'))[1] * curSclFac;
+   }
+   else {
+   if (isNaN(Number($('#scalefactor').val())) || Number($('#scalefactor').val()) < 0) return;
+   var frac = 0;
    var scalefactor = String(Number($('#scalefactor').val()) * curSclFac);
+   }
    svg.select('#curTransformFig').style('-webkit-transform-origin', '50% 50%').style('transform-origin', 'center')
       .transition()
       .duration(1200)
       .ease(d3.easeCubicInOut)
       .attr('transform', 'translate('+String(curTransX)+ ', '+String(curTransY)+')'+'scale('+String(curScaleH * scalefactor)+', '+String(curScaleV * scalefactor) + ') rotate(' + String(curRotDegree) + ')');
+   var dilHis = curSclFac;
    curSclFac = Number(scalefactor);
+   if (frac === 1) var entered = (($('#scalefactor').val()).split('/'))[0] / (($('#scalefactor').val()).split('/'))[1];
+   else var entered = Number($('#scalefactor').val());
+   $('#dilhis').text(String((dilHis * entered).toFixed(2)));
 }
 function rotateFig() {
  if (isNaN(Number($('#rotatedegree').val()))) return;
@@ -666,6 +707,9 @@ function rotateFig() {
  .ease(d3.easeCubicInOut)
  .attrTween("transform", function(interpolate) {return d3.interpolate(o, n);});
  curRotDegree = Number(rotDegree);
+ var rotHis = Number($('#rothis').text());
+ var entered = Number($('#rotatedegree').val());
+ $('#rothis').text(String(rotHis + entered));
 }
 $('#reflectH').bind('click', function(evt){
    reflectHCount += 1;
