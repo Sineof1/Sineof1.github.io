@@ -717,13 +717,4 @@ $(window).scroll(function(){
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
    $('#reset-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
 });
-   
-function setFractions() {
-   $('.fraction').each(function(key, value) {
-   $this = $(this);
-   var split = $this.html().split("/");
-   $this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')
-   });
-}
-setFractions();
 </script>
