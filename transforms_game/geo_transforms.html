@@ -330,7 +330,7 @@ $('#submit').bind('keypress', function(evt) {
    var msg = $('#submit').val();
    $('#chatWindow').append('<p class="message-p" style="background-color:rgba(160,82,45,0.5);">' + msg + '</p>');
    socket.send(JSON.stringify({butn: 'text', msg : msg}));
-   $('#submit').value('');
+   $('#submit').val('');
 });
 $('#grid-box').bind('click', function(evt) {
    gridClick += 1;
