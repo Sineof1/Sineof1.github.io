@@ -321,6 +321,12 @@ $(document).bind('mousemove', function(evt) {
    var y = evt.clientY - $('#transform_frame').offset().top;
    socket.send(JSON.stringify({butn: 'mouse', xloc : x, yloc : y}));
 });
+$('#submit').bind('keypress', function() {
+   var msg = $('#submit').val();
+   $('#chatWindow').append('<p>' + msg + '</p>');
+   socket.send(JSON.stringify({butn: 'text', msg : msg}));
+   $('#submit').val('');
+});
 $('#grid-box').bind('click', function(evt) {
    gridClick += 1;
    if (gridClick % 2 === 0) {
@@ -827,6 +833,7 @@ function handleMessage(message) {
    }
    else if (message.butn === 'unload') playerRefresh();
    else if (message.butn === 'moveMade') moveMade();
+   else if (message.butn === 'text') handleText(message);
 }
 function handleMouse(msg) {
    if (playerNum === 1) var cursor = '#cursororange';
@@ -837,7 +844,10 @@ function handleMouse(msg) {
 }
 function moveMade() {
    if (playerNum) $('#sheath').hide();
-} 
+}
+function handleText(msg) {
+   $('#chatWindow').append('<p>' + msg + '</p>');
+}
 function focusInput(msg) {$('#' + msg.input).val('');}
 function playerRefresh() {location.reload();}
 function inputEntered(msg) {
