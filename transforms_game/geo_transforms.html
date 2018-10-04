@@ -186,7 +186,7 @@ body {
    height:calc(100vh - 100px);
    background-color:#fafafa;
    font-family:sans-serif;
-   font-size:14px;
+   font-size:16px;
    border-top:none;
    border-bottom:none;
    border-left:none;
@@ -203,7 +203,6 @@ body {
    left:5px;
    width:185px;
    height:75px;
-   font-variant:small-caps;
    font-family:sans-serif;
    font-size:20px;
    resize:none;
@@ -325,7 +324,7 @@ $(document).bind('mousemove', function(evt) {
 $('#submit').bind('keypress', function(evt) {
    if (evt.keyCode !== 13) return;
    var msg = $('#submit').val();
-   $('#chatWindow').append('<p>' + msg + '</p>');
+   $('#chatWindow').append('<p style="background-color:lightbrown;">' + msg + '</p>');
    socket.send(JSON.stringify({butn: 'text', msg : msg}));
    $('#submit').val('');
 });
@@ -848,7 +847,7 @@ function moveMade() {
    if (playerNum) $('#sheath').hide();
 }
 function handleText(msge) {
-   $('#chatWindow').append('<p>' + msge.msg + '</p>');
+   $('#chatWindow').append('<p style="background-color:lightorange;">' + msge.msg + '</p>');
 }
 function focusInput(msg) {$('#' + msg.input).val('');}
 function playerRefresh() {location.reload();}
