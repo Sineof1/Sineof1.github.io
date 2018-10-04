@@ -321,7 +321,8 @@ $(document).bind('mousemove', function(evt) {
    var y = evt.clientY - $('#transform_frame').offset().top;
    socket.send(JSON.stringify({butn: 'mouse', xloc : x, yloc : y}));
 });
-$('#submit').bind('keypress', function() {
+$('#submit').bind('keypress', function(evt) {
+   if (evt.keyCode !== 13) return;
    var msg = $('#submit').val();
    $('#chatWindow').append('<p>' + msg + '</p>');
    socket.send(JSON.stringify({butn: 'text', msg : msg}));
