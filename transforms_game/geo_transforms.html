@@ -195,6 +195,7 @@ body {
    box-sizing:border-box;
    padding:10px;
    overflow:hidden;
+   text-align:left;
 }
 #submit {
    position:fixed;
@@ -846,8 +847,8 @@ function handleMouse(msg) {
 function moveMade() {
    if (playerNum) $('#sheath').hide();
 }
-function handleText(msg) {
-   $('#chatWindow').append('<p>' + msg + '</p>');
+function handleText(msge) {
+   $('#chatWindow').append('<p>' + msge.msg + '</p>');
 }
 function focusInput(msg) {$('#' + msg.input).val('');}
 function playerRefresh() {location.reload();}
