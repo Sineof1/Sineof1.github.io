@@ -328,7 +328,7 @@ $(document).bind('mousemove', function(evt) {
 $('#submit').bind('keypress', function(evt) {
    if (evt.keyCode !== 13) return;
    var msg = $('#submit').val();
-   $('#chatWindow').append('<p style="background-color:rgba(160,82,45,0.5);">' + msg + '</p>');
+   $('#chatWindow').append('<p class="message-p" style="background-color:rgba(160,82,45,0.5);">' + msg + '</p>');
    socket.send(JSON.stringify({butn: 'text', msg : msg}));
    $('#submit').val('');
 });
@@ -851,7 +851,7 @@ function moveMade() {
    if (playerNum) $('#sheath').hide();
 }
 function handleText(msge) {
-   $('#chatWindow').append('<p style="background-color:rgba(255,165,0,0.5);">' + msge.msg + '</p>');
+   $('#chatWindow').append('<p class="message-p" style="background-color:rgba(255,165,0,0.5);">' + msge.msg + '</p>');
 }
 function focusInput(msg) {$('#' + msg.input).val('');}
 function playerRefresh() {location.reload();}
