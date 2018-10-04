@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<title>Tri Prism Explore</title>
+</head>
+<body>
+<div style='margin:0 auto;width:550px;height:550px;' />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340"><defs><style>.cls-1,.cls-2,.cls-4{fill:#1b9ec4;}.cls-1,.cls-2,.cls-3,.cls-4{stroke:#000;stroke-linecap:round;stroke-linejoin:round;}.cls-2{stroke-width:0.5px;}.cls-3{fill:#126b84;}.cls-3,.cls-4{stroke-width:0.75px;}</style></defs>
+<text x='230' y='115' style='font-family:sans-serif;font-size:15px;stroke:none;fill:gray;'>F</text>
+<text x='157' y='61' style='font-family:sans-serif;font-size:15px;stroke:none;fill:gray;'>C</text>
+<text x='53' y='210' style='font-family:sans-serif;font-size:15px;stroke:none;fill:gray;'>A</text>
+<text x='130' y='278' style='font-family:sans-serif;font-size:15px;stroke:none;fill:gray;'>D</text>
+<text x='315' y='278' style='font-family:sans-serif;font-size:15px;stroke:none;fill:gray;'>E</text>
+<text x='220' y='210' style='font-family:sans-serif;font-size:15px;stroke:none;fill:gray;'>B</text>
+<g id="back_face"><polygon class="face cls-1" points="152.75 62.83 66.5 211.23 239 211.23 152.75 62.83"/></g>
+<g id="bottom_face"><polygon class="face cls-2 bf" points="238.5 211.5 66.5 211.5 139.5 265.5 311.5 265.5 238.5 211.5"/></g>
+<g id="right_face"><polygon class="face cls-2 bf" points="152.5 62.5 238.5 211.5 311.5 265.5 225.5 116.5 152.5 62.5"/></g>
+<g id="left_face"><polygon class="face cls-3" points="152.5 62.5 66.5 211.5 139.5 265.5 225.5 116.5 152.5 62.5"/></g>
+<g id="front_face"><polygon class="face cls-4" points="225.75 116.74 139.5 265.14 312 265.14 225.75 116.74"/></g>
+</svg>
+</div>
+<input id='slider' type='range' min='0' max='1' value='0.5' step='0.01' style='width:550px;display:block;margin:0 auto;' />
+</body>
+</html>
+
+<script>
+$(document).on('input change', '#slider', function() {
+   $('.face').css({'fill-opacity' : $(this).val()});
+   if ($(this).val() < 0.85) $('.cls-1, .bf').css({'stroke-dasharray' : '5,5'});
+   else $('.cls-1, .bf').css({'stroke-dasharray' : '1,0'});
+   $('.face').css({'stroke' : 'rgba(100,100,100,' + String(1 - $(this).val()) + ')'});
+});
+$('.face').css({'stroke' : 'rgba(100,100,100,0.5)'});
+$('.face').css({'fill-opacity' : 0.5});
+$('.cls-1, .bf').css({'stroke-dasharray' : '5,5'});
+</script>
