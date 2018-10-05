@@ -100,6 +100,12 @@ body {
 }
 #challenge {
    opacity:0.5;
+   position:absolute;
+   top:5px;
+}
+#grid-box {
+   position:absolute;
+   top:60px;
 }
 #grid-box:hover, #challenge:hover, #demo-box:hover, #player1:hover, #closeIntro:hover {
    box-shadow:0 0 6px #22C7FA;
@@ -221,7 +227,6 @@ body {
 <span id='scoreNum' style='position:absolute;width:100px;bottom:0;left:25px;text-align:center;'>0</span>
 </div>
 <canvas id='sheath'></canvas>
-<div id='challenge'><img src='leaf_outline.png' style='width:95%;' /></div>
 <div id='transform_frame'></div>
 <div id='shapes_frame'>
 <div class='shape-button' id='button1'><img src='smiley.png' style='height:90%;margin-top:7px;'></div>
@@ -261,8 +266,11 @@ body {
 <span style='position:absolute;bottom:5px;left:40px;font-size:18px;'>translation</span>
  &nbsp;
 </div>
-</div>
+<div class='transform-box' style='width:125px;height:150px;left:625px;>
 <div id='grid-box' style='overflow:hidden;'><img src='grid_icon.svg' style='width:110%;' /></div>
+<div id='challenge'><img src='leaf_outline.png' style='width:95%;' /></div>
+</div>
+</div>
 <div id='user-box'></div>
 <div id='player1'>start</div>
 <img id='cursorblue' style='width:20px;height:20px;position:fixed;display:none;' src='cursorblue.svg' />
@@ -753,22 +761,16 @@ $('#challenge').bind('click', function(evt){
 $('.transform-input').bind('focus', function(evt){$('#' + evt.target.id).val(''); socket.send(JSON.stringify({butn: 'focus', input : evt.target.id}));});
 
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
-$('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
-$('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
 $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
 $('#player1, #score').offset({left : (window.innerWidth / 2) - 75});
 
 $(window).resize(function(){
-   $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
-   $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
    $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
    $('#player1, #score').offset({left : (window.innerWidth / 2) - 75});
 });
 $(window).scroll(function(){
-   $('#grid-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top});
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
-   $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
    $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
    $('#player1, #score').offset({left : (window.innerWidth / 2) - 75});
 });
