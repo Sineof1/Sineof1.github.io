@@ -168,7 +168,7 @@ Skier
 <div class='shape-button' id='button2'><img src='moon.png' style='height:85%;margin-top:7px;'></div>
 Moon
 <div class='shape-button' id='button9'><img src='breakdance_boy.svg' style='height:85%;margin-top:7px;'></div>
-Boy
+Child
 <div class='shape-button' id='button3'><img src='letter_a.png' style='height:85%;margin-top:11px;'></div>
 Letter A
 <div class='shape-button' id='button8'><img src='leaf.png' style='height:90%;margin-top:5px;'></div>
@@ -202,11 +202,10 @@ Gear
 <input class='transform-input' id='rotatedegree' type='text' maxlength='4' />&deg;</span>
 </div>
 <div class='transform-box' id='translation-box' style='top:0px;right:0px;height:150px;width:187.5px'>
-<span style='position:absolute;top:25px;left:48px;font-size:18px;font-variant:none;'>x</span>
-<span style='position:absolute;top:25px;left:130px;font-size:18px;font-variant:none;'>y</span>
+<span style='position:absolute;top:25px;left:48px;font-size:18px;font-variant:none;'>x <input class='transform-input' id='translationX' type='text' maxlength='4' /></span>
+<span style='position:absolute;top:85px;left:48px;font-size:18px;font-variant:none;'>y <input class='transform-input' id='translationY' type='text' maxlength='4' /></span>
 <span style='position:absolute;bottom:5px;left:40px;font-size:18px;'>translation</span>
-<input class='transform-input' id='translationX' type='text' maxlength='4' /> &nbsp;
-<input class='transform-input' id='translationY' type='text' maxlength='4' />
+ &nbsp;
 </div>
 </div>
 <div id='grid-box' style='overflow:hidden;'><img src='grid_icon.svg' style='width:110%;' /></div>
@@ -659,8 +658,8 @@ function rotateFig() {
 }
 $('#reflectH').bind('click', function(evt){
    reflectHCount += 1;
-   if (reflectHCount % 2 === 0) $('#reflect-mapH').css({'border' : '3px groove pink'});
-   else $('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'});
+   if (reflectHCount % 2 === 0) {$('#reflect-mapH').css({'border' : '3px groove pink'}); $('#reflxhis').text('Yes');}
+   else {$('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'}); $('#reflxhis').text('No');}
    var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(-1 * curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    if (ISFLIPPEDH === false) ISFLIPPEDH = true;
@@ -674,8 +673,8 @@ $('#reflectH').bind('click', function(evt){
 });
 $('#reflectV').bind('click', function(evt){
    reflectVCount += 1;
-   if (reflectVCount % 2 === 0) $('#reflect-mapV').css({'border' : '3px groove pink'});
-   else $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
+   if (reflectVCount % 2 === 0) {$('#reflect-mapV').css({'border' : '3px groove pink'}); $('#reflyhis').text('Yes');}
+   else {$('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'}); $('#reflyhis').text('No');}
    var origScale='translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    var newbScale = 'translate('+String(curTransX)+', '+String(curTransY)+')'+'scale('+String(curScaleH*curSclFac)+', '+String(-1 * curScaleV*curSclFac)+')'+'rotate('+ curRotDegree+')';
    if (ISFLIPPEDV === false) ISFLIPPEDV = true;
