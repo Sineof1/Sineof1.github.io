@@ -230,9 +230,13 @@ body {
    outline:none;
    box-sizing:border-box;
    padding:10px;
-   overflow:hidden;
+   overflow-y:scroll;
+   overflow-x:hidden;
    text-align:left;
    z-index:1000;
+}
+#chatWindow::-webkit-scrollbar {
+    display: none;
 }
 #submit {
    position:fixed;
@@ -372,7 +376,7 @@ $(document).bind('mousemove', function(evt) {
    socket.send(JSON.stringify({butn: 'mouse', xloc : x, yloc : y}));
 });
 $('#submit').bind('keypress', function(evt) {
-   if (evt.keyCode !== 13) return;
+   if (evt.keyCode !== 13 || $(this).val() === '') return;
    var msg = $('#submit').val();
    $('#chatWindow').prepend('<p class="message-p" style="background-color:#ded5da;">' + msg + '</p>');
    socket.send(JSON.stringify({butn: 'text', msg : msg}));
