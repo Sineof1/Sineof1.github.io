@@ -780,6 +780,7 @@ $('.transform-input').bind('focus', function(evt){$('#' + evt.target.id).val('')
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 410});
 $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
 $('#player1, #score').offset({left : (window.innerWidth / 2) - 75});
+$('#shapes_frame').offset({top : $('#transform_frame').offset().top});
 
 $(window).resize(function(){
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 410});
