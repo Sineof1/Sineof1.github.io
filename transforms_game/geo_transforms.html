@@ -18,7 +18,7 @@ body {
    width:1000px;
    height:95vh;
 }
-#transform_frame, #history_frame {
+#history_frame {
    position:relative;
    display:inline-block;
    margin:0 auto;
@@ -28,6 +28,31 @@ body {
    border-radius:8px;
    background-color:beige;
    overflow:hidden;
+}
+#transform_frame {
+  position:relative;
+  display:inline-block;
+  margin:0 auto;
+  width:750px;
+  height:400px;
+  overflow:hidden;
+  background:-moz-radial-gradient(50% 50%, circle farthest-corner,
+             rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 4.87%, rgba(245, 245, 220, 1) 99.44%);
+  background:-webkit-radial-gradient(50% 50%, circle farthest-corner, rgba(255, 255, 255, 0.5) 0%,
+             rgba(255, 255, 255, 0.5) 4.87%, rgba(245, 245, 220, 1) 99.44%);
+  background:-webkit-gradient(radial,50% 50% ,0 , 50% 50%, 300.52 ,color-stop(0,rgba(255, 255, 255, 0.5) ),
+             color-stop(0.0487,rgba(255, 255, 255, 0.5) ),color-stop(0.9944,rgba(245, 245, 220, 1) ));
+  background:-o-radial-gradient(50% 50%, circle farthest-corner, rgba(255, 255, 255, 0.5) 0%,
+             rgba(255, 255, 255, 0.5) 4.87%, rgba(245, 245, 220, 1) 99.44%);
+  background:-ms-radial-gradient(50% 50%, circle farthest-corner, rgba(255, 255, 255, 0.5) 0%,
+             rgba(255, 255, 255, 0.5) 4.87%, rgba(245, 245, 220, 1) 99.44%);
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Stlye=2);"
+  background:radial-gradient(50% 50%, circle farthest-corner, rgba(255, 255, 255, 0.5) 0%,
+             rgba(255, 255, 255, 0.5) 4.87%, rgba(245, 245, 220, 1) 99.44%);
+  border-radius:8px;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+  filter:progid:DXImageTransform.Microsoft.Alpha(Stlye=2);
 }
 #history_frame {
    position:fixed;
