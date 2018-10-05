@@ -131,8 +131,8 @@ body {
    top:79px;
    background-image:url(grid_icon.svg);
 }
-#grid-box:hover, #challenge:hover, #demo-box:hover, #player1:hover, #closeIntro:hover {
-   box-shadow:0 0 6px #22C7FA;
+#grid-box:hover, #challenge:hover, #player1:hover, #closeIntro:hover {
+   box-shadow:0 0 6px #8e627b;
 }
 #player1, #score {
    position:fixed;
@@ -389,8 +389,8 @@ $('.shape-button').bind('click', function(evt) {
    curScaleV = 1;
    ISFLIPPEDH = false;
    ISFLIPPEDV = false;
-   $('#reflect-mapH').css({'border' : '3px groove rgb(46, 69, 124)'});
-   $('#reflect-mapV').css({'border' : '3px groove rgb(46, 69, 124)'});
+   $('#reflect-mapH').css({'border' : '3px groove #a8889a'});
+   $('#reflect-mapV').css({'border' : '3px groove #a8889a'});
    reflectHCount = 1;
    reflectVCount = 1;
    socket.send(JSON.stringify({butn: 'shape'}));
