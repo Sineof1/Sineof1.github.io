@@ -350,6 +350,7 @@ $('#player1').bind('click', function(evt) {
    playerNum = 1;
    $('#score').fadeIn(1000);
 });
+$('.opentransform-box').css({'opacity' : 1, 'pointer-events' : all});
 $(document).bind('mousemove', function(evt) {
    var x = evt.clientX - $('#transform_frame').offset().left;
    var y = evt.clientY - $('#transform_frame').offset().top;
