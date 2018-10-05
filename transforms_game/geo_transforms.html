@@ -48,7 +48,7 @@ body {
    position:relative;
    display:inline-block;
    width:150px;
-   height:400px;
+   height:560px;
    border:7px solid #b1a87a;
    border-radius:8px;
    background-color:black;
@@ -777,17 +777,17 @@ $('#challenge').bind('click', function(evt){
 });
 $('.transform-input').bind('focus', function(evt){$('#' + evt.target.id).val(''); socket.send(JSON.stringify({butn: 'focus', input : evt.target.id}));});
 
-$('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
+$('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 410});
 $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
 $('#player1, #score').offset({left : (window.innerWidth / 2) - 75});
 
 $(window).resize(function(){
-   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
+   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 410});
    $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
    $('#player1, #score').offset({left : (window.innerWidth / 2) - 75});
 });
 $(window).scroll(function(){
-   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 430});
+   $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 410});
    $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
    $('#player1, #score').offset({left : (window.innerWidth / 2) - 75});
 });
