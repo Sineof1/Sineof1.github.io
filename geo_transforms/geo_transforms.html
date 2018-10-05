@@ -305,6 +305,8 @@ $('.shape-button').bind('click', function(evt) {
    $('#tranyhis').text('0');
    $('#rothis').text('0');
    $('#dilhis').text('1');
+   $('#reflxhis').text('No');
+   $('#reflyhis').text('No');
 });
 $('#button1').bind('mousedown', function(evt){
    but1 += 1;
@@ -654,7 +656,7 @@ function rotateFig() {
  curRotDegree = Number(rotDegree);
  var rotHis = Number($('#rothis').text());
  var entered = Number($('#rotatedegree').val());
- $('#rothis').text(String(rotHis + entered));
+ $('#rothis').text(String((rotHis + entered) % 360));
 }
 $('#reflectH').bind('click', function(evt){
    reflectHCount += 1;
