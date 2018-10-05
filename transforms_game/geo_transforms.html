@@ -378,9 +378,9 @@ $(document).bind('mousemove', function(evt) {
 $('#submit').bind('keypress', function(evt) {
    if (evt.keyCode !== 13 || $(this).val() === '') return;
    var msg = $('#submit').val();
+   $('#submit').val('');
    $('#chatWindow').prepend('<p class="message-p" style="background-color:#ded5da;">' + msg + '</p>');
    socket.send(JSON.stringify({butn: 'text', msg : msg}));
-   $('#submit').val('');
 });
 $('#grid-box').bind('click', function(evt) {
    gridClick += 1;
