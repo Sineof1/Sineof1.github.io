@@ -18,10 +18,16 @@ body {
    width:1000px;
    height:95vh;
 }
+#wrapper {
+   position:relative;
+   width:1000px;
+   height:575px;
+   margin:75px auto 0 auto;
+   }
 #transform_frame {
-  position:relative;
-  display:inline-block;
-  margin:-125px auto 0 auto;
+  position:absolute;
+  top:0;
+  left:0;
   width:750px;
   height:400px;
   overflow:hidden;
@@ -71,8 +77,9 @@ body {
 }
 #control-box {
    display:inline-block;
-   position:relative;
-   margin:0 175px 0 auto;
+   position:absolute;
+   top:415px;
+   left:0;
    width:750px;
    height:150px;
    border:7px solid #b1a87a;
@@ -243,6 +250,7 @@ body {
 <span id='scoreNum' style='position:absolute;width:100px;bottom:0;left:25px;text-align:center;'>0</span>
 </div>
 <canvas id='sheath'></canvas>
+<div id='wrapper'>
 <div id='transform_frame'></div>
 <div id='shapes_frame'>
 <div class='shape-button' id='button1'><img src='smiley.png' style='height:90%;margin-top:7px;'></div>
@@ -286,7 +294,8 @@ body {
 <div id='grid-box' style='overflow:hidden;'></div>
 <div id='challenge'><img src='leaf_outline.png' style='width:95%;' /></div>
 </div>
-</div>                                                                  
+</div>
+</div>
 
 <div id='user-box'></div>
 <div id='player1'>start</div>
