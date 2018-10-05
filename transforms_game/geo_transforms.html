@@ -238,6 +238,7 @@ body {
    font-family:sans-serif;
    font-size:20px;
    resize:none;
+   z-index:1000;
 }
 .message-p {
    box-sizing:border-box;
@@ -349,7 +350,7 @@ $('#player1').bind('click', function(evt) {
    playerNum = 1;
    $('#score').fadeIn(1000);
    $('#challenge').trigger('click');
-   $('#button8').trigger('keydown');
+   $('#button8').trigger('mousedown');
 });
 $('.opentransform-box').css({'opacity' : 1, 'pointer-events' : 'all'});
 $(document).bind('mousemove', function(evt) {
