@@ -22,7 +22,7 @@ body {
    position:relative;
    width:950px;
    height:575px;
-   margin:75px auto 0 auto;
+   margin:90px auto 0 auto;
    border:1px solid red;
    }
 #transform_frame {
@@ -52,8 +52,9 @@ body {
   filter:progid:DXImageTransform.Microsoft.Alpha(Stlye=2);
 }
 #shapes_frame {
-   position:relative;
-   display:inline-block;
+   position:absolute;
+   top:0;
+   left:770px;
    width:150px;
    height:562px;
    border:7px solid #b1a87a;
@@ -790,7 +791,6 @@ $('.transform-input').bind('focus', function(evt){$('#' + evt.target.id).val('')
 $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 418});
 $('#startGame').offset({left : $('#transform_frame').offset().left + 200, top : $('#transform_frame').offset().top + 50});
 $('#player1, #score').offset({left : (window.innerWidth / 2) - 75});
-$('#shapes_frame').offset({top : $('#transform_frame').offset().top});
 
 $(window).resize(function(){
    $('#control-box').offset({left : $('#transform_frame').offset().left, top : $('#transform_frame').offset().top + 418});
