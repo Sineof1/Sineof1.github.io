@@ -98,13 +98,29 @@ body {
    font-weight:700;
    color:teal;
 }
-#challenge {
-   opacity:0.5;
+#grid-box, #challenge {
+   display:inline:block;
    position:absolute;
+   width:50px;
+   height:50px;
+   border:2px solid rgb(100, 211, 254);
+   border-radius:8px;
+   background-color:white;
+   cursor:pointer;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   opacity:0.5;
+   font-family:sans-serif;
+   font-size:24px;
+   font-variant:small-caps;
+   font-weight:700;
+   color:teal;
+}
+#challenge {
    top:5px;
 }
 #grid-box {
-   position:absolute;
    top:60px;
 }
 #grid-box:hover, #challenge:hover, #demo-box:hover, #player1:hover, #closeIntro:hover {
