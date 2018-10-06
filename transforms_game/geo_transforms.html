@@ -832,7 +832,7 @@ $(window).unload(function(evt) {
 });
 
 var socket = new WebSocket("wss://node2.wsninja.io");
-socket.addEventListener('open', function(event) {socket.send(JSON.stringify({ guid: "111650ac-dbfc-4682-9e43-ec1d71c9fb2f" }));});
+socket.addEventListener('open', function(event) {socket.send(JSON.stringify({ guid: "test" }));});
 socket.addEventListener('message', function(event) {handleMessage(JSON.parse(event.data));});
 
 function handleMessage(message) {
