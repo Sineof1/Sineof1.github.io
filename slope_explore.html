@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2018/10/slope_explore.png'>
+<link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
+<title>Slope Explore</title>
+</head>
+
+<style>
+#slope_explore, #readout {
+   position:relative;
+   display:block;
+   margin:50px auto 0 auto;
+   width:500px;
+   height:500px;
+   border-radius:5px;
+   background-color:beige;
+   box-shadow:0 0 5px #ccc;
+}
+#readout {
+   height:150px;
+   background-color:rgb(59, 101, 61);
+   margin:15px auto 0 auto;
+   color:white;
+   font-family:sans-serif;
+   font-size:22px;
+   box-sizing:border-box;
+   padding:15px 8px 15px 15px;
+   text-align:center;
+}
+.fraction, .top, .bottom {
+    padding:0 4px;
+    font-size:22px;
+}
+.fraction {
+    display:inline-block;
+    text-align:center;
+    vertical-align:-12px;
+}
+.bottom {
+    border-top:1px solid white;
+    display:block;
+    padding:0 5px;
+}
+#leftEndPnt2, #rghtEndPnt2 {
+   z-index:-1;
+}
+</style>
+
+<body>
+<div id='slope_explore'></div>
+<div id='readout'>
+<span id='1X' class='fraction'>9/x</span> = <span id='1Y' class='fraction'>0/y</span> <span style='vertical-align:1px;'>&#10143;</span><span id='1Eqn'> 9y = 0x </span>&#10143; <span id='1SlpInt'> y =<span class='fraction' id='slpintfrac'>0/9</span>x</span>
+<hr style='margin-left:-8px;' />
+<span id='2X' class='fraction'>2/x</span> = <span id='2Y' class='fraction'>0/y</span> <span style='vertical-align:1px;'>&#10143;</span><span id='2Eqn'> 2y = 0x </span>&#10143; <span id='2SlpInt'> y =<span class='fraction' id='slpintfrac2'>0/2</span>x</span>
+</div>
+</body>
+<img src='https://guzintamath.com/textsavvy/wp-content/uploads/2018/10/slope_explore.png' style='position:fixed;visibility:hidden;' />
+</html>
+
+<script>
+var grid_svg = d3.select('#slope_explore').append('svg').attr('width', 500).attr('height', 500)
+                                                        .style('position', 'absolute').style('top', 0).style('left', 0);
+     var svg = d3.select('#slope_explore').append('svg').attr('width', 500).attr('height', 500)
+                                                        .style('position', 'absolute').style('top', 0).style('left', 0);
+
+var endpoints = [{name : 'left1', cx : 25, cy : 250, id : 'leftEndPnt1'}, {name : 'rght1', cx : 475, cy : 250, id : 'rghtEndPnt1'},
+                 {name : 'left2',cx : 200, cy : 250, id : 'leftEndPnt2'}, {name : 'rght2',cx : 300, cy : 250, id : 'rghtEndPnt2'}];
+var slopedLine = svg.append('line')
+                    .attr('id', 'slopedLine')
+                    .attr('x1', 25).attr('y1', 250).attr('x2', 475).attr('y2', 250)
+                    .style('stroke', 'brown').style('stroke-width', 2);
+var slopedLine2 = svg.append('line')
+                    .attr('id', 'slopedLine2')
+                    .attr('x1', 200).attr('y1', 250).attr('x2', 300).attr('y2', 250)
+                    .style('stroke', 'brown').style('stroke-width', 2);
+
+svg.selectAll('circle')
+   .data(endpoints)
+   .enter()
+   .append('circle')
+   .attr('id', function(d){return d.id;})
+   .attr('cx', function(d){return d.cx;})
+   .attr('cy', function(d){return d.cy;})
+   .attr('r', 6)
+   .style('stroke', 'white').style('fill', function(d){if (d.name.slice(4, 5) === '1') return 'brown'; else return 'blue';})
+   .style('stroke-width', 2).style('cursor', 'pointer')
+   .call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
+
+function showGrid() {
+   for (var a = 25; a < 500; a += 25) {
+   var color = 'lightgray';
+   if (a === 250) continue;
+   grid_svg.append('line')
+           .attr('x1', a).attr('y1', 0).attr('x2', a).attr('y2', 500).style('stroke', color).style('stroke-width', 1);
+   grid_svg.append('line')
+           .attr('x1', 0).attr('y1', a).attr('x2', 500).attr('y2', a).style('stroke', color).style('stroke-width', 1);
+   if (a % 50 === 0) {
+   if (a / 25 - 10 < 0) var tanchor = 'middle';
+   else var tanchor = 'start';
+   grid_svg.append('text')
+           .attr('x', a - 3).attr('y', 271).style('font-family', 'sans-serif').attr('text-anchor', tanchor)
+           .style('font-size', '14px').style('fill', 'gray').text((String(a / 25 - 10)).replace('-', '–'));
+   grid_svg.append('text')
+           .attr('x', 236).attr('y', 500 - a + 5).style('font-family', 'sans-serif').attr('text-anchor', tanchor)
+           .style('font-size', '14px').style('fill', 'gray').text((String(a / 25 - 10)).replace('-', '–'));
+   }
+   }
+   var color = 'black';
+   grid_svg.append('line')
+           .attr('x1', 0).attr('y1', 250).attr('x2', 500).attr('y2', 250).style('stroke', color).style('stroke-width', 1);
+   grid_svg.append('line')
+           .attr('x1', 250).attr('y1', 0).attr('x2', 250).attr('y2', 500).style('stroke', color).style('stroke-width', 1);
+}
+function dragstarted(d) {
+   d3.select(this).raise().classed("active", true);
+}
+function dragged(d) {
+   svg.selectAll('path').remove();
+   svg.append('path').style('stroke', 'none').style('fill', 'rgba(0, 0, 255, 0.1)')
+      .attr('d', 'M 250 250 L ' + String(endpoints[0].cx) + ' 250' + 'L ' + String(endpoints[0].cx) + ' ' + String(endpoints[0].cy) + 'Z');
+   svg.append('path').style('stroke', 'none').style('fill', 'rgba(255, 0, 0, 0.1)')
+      .attr('d', 'M 250 250 L ' + String(endpoints[1].cx) + ' 250' + 'L ' + String(endpoints[1].cx) + ' ' + String(endpoints[1].cy) + 'Z');
+   svg.append('path').style('stroke', 'none').style('fill', 'rgba(0, 255, 0, 0.1)')
+      .attr('d', 'M 250 250 L ' + String(endpoints[2].cx) + ' 250' + 'L ' + String(endpoints[2].cx) + ' ' + String(endpoints[2].cy) + 'Z');
+   svg.append('path').style('stroke', 'none').style('fill', 'rgba(255, 165, 0, 0.1)')
+      .attr('d', 'M 250 250 L ' + String(endpoints[3].cx) + ' 250' + 'L ' + String(endpoints[3].cx) + ' ' + String(endpoints[3].cy) + 'Z');
+
+   d3.select(this).attr('cx', d.cx = parseInt(Math.floor(d3.event.x / 25) * 25)).attr('cy', d.cy = parseInt(Math.floor(d3.event.y / 25) * 25));
+   if (d3.select(this).attr('id') === 'rghtEndPnt1') {
+      d3.select('#leftEndPnt1')
+        .attr('cy', endpoints[0].cy = 250 + (250 - d3.select('#rghtEndPnt1').attr('cy')))
+        .attr('cx', endpoints[0].cx = 500 - d3.select('#rghtEndPnt1').attr('cx'));
+   }
+   else if (d3.select(this).attr('id') === 'leftEndPnt1') {
+      d3.select('#rghtEndPnt1')
+        .attr('cy', endpoints[1].cy = 250 + (250 - d3.select('#leftEndPnt1').attr('cy')))
+        .attr('cx', endpoints[1].cx = 500 - d3.select('#leftEndPnt1').attr('cx'));
+   }
+   else if (d3.select(this).attr('id') === 'rghtEndPnt2') {
+      d3.select('#leftEndPnt2')
+        .attr('cy', endpoints[2].cy = 250 + (250 - d3.select('#rghtEndPnt2').attr('cy')))
+        .attr('cx', endpoints[2].cx = 500 - d3.select('#rghtEndPnt2').attr('cx'));
+   }
+   else if (d3.select(this).attr('id') === 'leftEndPnt2') {
+      d3.select('#rghtEndPnt2')
+        .attr('cy', endpoints[3].cy = 250 + (250 - d3.select('#leftEndPnt2').attr('cy')))
+        .attr('cx', endpoints[3].cx = 500 - d3.select('#leftEndPnt2').attr('cx'));
+   }
+   d3.select('#slopedLine')
+     .attr('x1', endpoints[0].cx).attr('y1', endpoints[0].cy)
+     .attr('x2', endpoints[1].cx).attr('y2', endpoints[1].cy);
+   d3.select('#slopedLine2')
+     .attr('x1', endpoints[2].cx).attr('y1', endpoints[2].cy)
+     .attr('x2', endpoints[3].cx).attr('y2', endpoints[3].cy);
+
+   $('#1X').text(String((d3.select('#rghtEndPnt1').attr('cx')) / 25 - 10) + '/x');
+   $('#1Y').text(String((d3.select('#rghtEndPnt1').attr('cy')) / -25 + 10) + '/y');
+   $('#2X').text(String((d3.select('#rghtEndPnt2').attr('cx')) / 25 - 10) + '/x');
+   $('#2Y').text(String((d3.select('#rghtEndPnt2').attr('cy')) / -25 + 10) + '/y');
+   var split1 = $('#1X').html().split("/");
+   var split2 = $('#1Y').html().split("/");
+   var split3 = $('#2X').html().split("/");
+   var split4 = $('#2Y').html().split("/");
+   $('#1X').html('<span class="top">'+ split1[0].replace('-', '–') + '</span><span class="bottom">' + split1[1] + '</span>');
+   $('#1Y').html('<span class="top">'+ split2[0].replace('-', '–') + '</span><span class="bottom">' + split2[1] + '</span>');
+   $('#1Eqn').html(' ' + split1[0].replace('-', '–') + 'y = ' + split2[0].replace('-', '–') + 'x ');
+   $('#slpintfrac').html('<span class="top">'+ split2[0].replace('-', '–') + '</span><span class="bottom">' + split1[0].replace('-', '–') + '</span>');
+
+   $('#2X').html('<span class="top">'+ split3[0].replace('-', '–') + '</span><span class="bottom">' + split3[1] + '</span>');
+   $('#2Y').html('<span class="top">'+ split4[0].replace('-', '–') + '</span><span class="bottom">' + split4[1] + '</span>');
+   $('#2Eqn').html(' ' + split3[0].replace('-', '–') + 'y = ' + split4[0].replace('-', '–') + 'x ');
+   $('#slpintfrac2').html('<span class="top">'+ split4[0].replace('-', '–') + '</span><span class="bottom">' + split3[0].replace('-', '–') + '</span>');
+
+}
+function dragended(d) {
+   d3.select(this).classed("active", false);
+}
+showGrid();
+
+$('.fraction').each(function(key, value) {
+  $this = $(this);
+  var split = $this.html().split("/");
+  $this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')
+});
+</script>
