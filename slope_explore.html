@@ -54,9 +54,9 @@
 <body>
 <div id='slope_explore'></div>
 <div id='readout'>
-<span id='1X' class='fraction'>9/x</span> = <span id='1Y' class='fraction'>0/y</span> <span style='vertical-align:1px;'>&#10143;</span><span id='1Eqn'> 9y = 0x </span>&#10143; <span id='1SlpInt'> y =<span class='fraction' id='slpintfrac'>0/9</span>x</span>
+<span id='neg1X' style='vertical-align:2px;visibility:hidden;'>&ndash;</span><span id='1X' class='fraction'>9/x</span>&nbsp; = <span id='neg1Y' style='vertical-align:2px;visibility:hidden;'>&ndash;</span><span id='1Y' class='fraction'>0/y</span> <span style='vertical-align:1px;'>&nbsp;&#10143;&nbsp;</span><span id='1Eqn'> 9y = 0x </span>&nbsp;&#10143;&nbsp;<span id='1SlpInt'> y &nbsp;= <span id='neg1Slp' style='vertical-align:2px;visibility:hidden;'>&ndash;</span><span class='fraction' id='slpintfrac'>0/9</span>x</span>
 <hr style='margin-left:-8px;' />
-<span id='2X' class='fraction'>2/x</span> = <span id='2Y' class='fraction'>0/y</span> <span style='vertical-align:1px;'>&#10143;</span><span id='2Eqn'> 2y = 0x </span>&#10143; <span id='2SlpInt'> y =<span class='fraction' id='slpintfrac2'>0/2</span>x</span>
+<span id='neg2X' style='vertical-align:2px;visibility:hidden;'>&ndash;</span><span id='2X' class='fraction'>2/x</span>&nbsp; = <span id='neg2Y' style='vertical-align:2px;visibility:hidden;'>&ndash;</span><span id='2Y' class='fraction'>0/y</span> <span style='vertical-align:1px;'>&nbsp;&#10143;&nbsp;</span><span id='2Eqn'> 2y = 0x </span>&nbsp;&#10143;&nbsp;<span id='2SlpInt'> y &nbsp;= <span id='neg2Slp' style='vertical-align:2px;visibility:hidden;'>&ndash;</span><span class='fraction' id='slpintfrac2'>0/2</span>x</span>
 </div>
 </body>
 <img src='https://guzintamath.com/textsavvy/wp-content/uploads/2018/10/slope_explore.png' style='position:fixed;visibility:hidden;' />
@@ -166,16 +166,62 @@ function dragged(d) {
    var split2 = $('#1Y').html().split("/");
    var split3 = $('#2X').html().split("/");
    var split4 = $('#2Y').html().split("/");
-   $('#1X').html('<span class="top">'+ split1[0].replace('-', '–') + '</span><span class="bottom">' + split1[1] + '</span>');
-   $('#1Y').html('<span class="top">'+ split2[0].replace('-', '–') + '</span><span class="bottom">' + split2[1] + '</span>');
+
+   if (split1[0].match('-')) {
+   $('#neg1X').css({'visibility' : 'visible'});
+   $('#1X').html('<span class="top">'+ split1[0].replace('-', '') + '</span><span class="bottom">' + split1[1] + '</span>');
+   }
+   else {
+   $('#neg1X').css({'visibility' : 'hidden'});
+   $('#1X').html('<span class="top">'+ split1[0] + '</span><span class="bottom">' + split1[1] + '</span>');
+   }
+   if (split2[0].match('-')) {
+   $('#neg1Y').css({'visibility' : 'visible'});
+   $('#1Y').html('<span class="top">'+ split2[0].replace('-', '') + '</span><span class="bottom">' + split2[1] + '</span>');
+   }
+   else {
+   $('#neg1Y').css({'visibility' : 'hidden'});
+   $('#1Y').html('<span class="top">'+ split2[0] + '</span><span class="bottom">' + split2[1] + '</span>');
+   }
+
    $('#1Eqn').html(' ' + split1[0].replace('-', '–') + 'y = ' + split2[0].replace('-', '–') + 'x ');
-   $('#slpintfrac').html('<span class="top">'+ split2[0].replace('-', '–') + '</span><span class="bottom">' + split1[0].replace('-', '–') + '</span>');
 
-   $('#2X').html('<span class="top">'+ split3[0].replace('-', '–') + '</span><span class="bottom">' + split3[1] + '</span>');
-   $('#2Y').html('<span class="top">'+ split4[0].replace('-', '–') + '</span><span class="bottom">' + split4[1] + '</span>');
+   if ((split1[0].match('-') && !split2[0].match('-')) || (!split1[0].match('-') && split2[0].match('-'))) {
+   $('#neg1Slp').css({'visibility' : 'visible'});
+   $('#slpintfrac').html('<span class="top">'+ split2[0].replace('-', '') + '</span><span class="bottom">' + split1[0].replace('-', '') + '</span>');
+   }
+   else {
+   $('#neg1Slp').css({'visibility' : 'hidden'});
+   $('#slpintfrac').html('<span class="top">'+ split2[0].replace('-', '') + '</span><span class="bottom">' + split1[0].replace('-', '') + '</span>');
+   }
+
+   if (split3[0].match('-')) {
+   $('#neg2X').css({'visibility' : 'visible'});
+   $('#2X').html('<span class="top">'+ split3[0].replace('-', '') + '</span><span class="bottom">' + split3[1] + '</span>');
+   }
+   else {
+   $('#neg2X').css({'visibility' : 'hidden'});
+   $('#2X').html('<span class="top">'+ split3[0] + '</span><span class="bottom">' + split3[1] + '</span>');
+   }
+   if (split4[0].match('-')) {
+   $('#neg2Y').css({'visibility' : 'visible'});
+   $('#2Y').html('<span class="top">'+ split4[0].replace('-', '') + '</span><span class="bottom">' + split4[1] + '</span>');
+   }
+   else {
+   $('#neg2Y').css({'visibility' : 'hidden'});
+   $('#2Y').html('<span class="top">'+ split4[0] + '</span><span class="bottom">' + split4[1] + '</span>');
+   }
+
    $('#2Eqn').html(' ' + split3[0].replace('-', '–') + 'y = ' + split4[0].replace('-', '–') + 'x ');
-   $('#slpintfrac2').html('<span class="top">'+ split4[0].replace('-', '–') + '</span><span class="bottom">' + split3[0].replace('-', '–') + '</span>');
 
+   if ((split3[0].match('-') && !split4[0].match('-')) || (!split3[0].match('-') && split4[0].match('-'))) {
+   $('#neg2Slp').css({'visibility' : 'visible'});
+   $('#slpintfrac2').html('<span class="top">'+ split4[0].replace('-', '') + '</span><span class="bottom">' + split3[0].replace('-', '') + '</span>');
+   }
+   else {
+   $('#neg2Slp').css({'visibility' : 'hidden'});
+   $('#slpintfrac2').html('<span class="top">'+ split4[0].replace('-', '') + '</span><span class="bottom">' + split3[0].replace('-', '') + '</span>');
+   }
 }
 function dragended(d) {
    d3.select(this).classed("active", false);
