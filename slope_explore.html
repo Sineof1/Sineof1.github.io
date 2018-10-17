@@ -102,12 +102,6 @@ function showGrid() {
    if (a % 50 === 0) {
    if (a / 25 - 10 < 0) var tanchor = 'middle';
    else var tanchor = 'start';
-   grid_svg.append('text')
-           .attr('x', a - 3).attr('y', 271).style('font-family', 'sans-serif').attr('text-anchor', tanchor)
-           .style('font-size', '14px').style('fill', 'gray').text((String(a / 25 - 10)).replace('-', '–'));
-   grid_svg.append('text')
-           .attr('x', 236).attr('y', 500 - a + 5).style('font-family', 'sans-serif').attr('text-anchor', tanchor)
-           .style('font-size', '14px').style('fill', 'gray').text((String(a / 25 - 10)).replace('-', '–'));
    }
    }
    var color = 'black';
