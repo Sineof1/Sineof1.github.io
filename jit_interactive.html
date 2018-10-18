@@ -23,6 +23,7 @@ slider.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dra
 function dragstarted(d) {d3.select(this).raise().classed("active", true);}
 function dragended(d) {d3.select(this).classed("active", false);}
 function dragged(d) {
+   if (d3.event.y > 390 || d3.event.y < 10) return;
    d3.select(this).attr('cy', d3.event.y);
    d3.select('#textbox').attr('y', d3.event.y + 5);
    d3.select('#textbox').text('y-intercept: (0, ' + ((200 - d3.event.y + 4).toFixed(0)).replace('-', '–') + ')');
