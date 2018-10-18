@@ -22,9 +22,9 @@ var slider = document.getElementById('sliderButton');
 var svg = document.getElementById('mainsvg');
 var textbox = document.getElementById('textbox');
 var funcLine = document.getElementById('funcLine');
-window.addEventListener('mousedown', function(){MOUSEDOWN = true;});
-window.addEventListener('mouseup', function(){MOUSEDOWN = false;});
-window.addEventListener('mousemove', dragged, true);
+svg.addEventListener('mousedown', function(){MOUSEDOWN = true;});
+svg.addEventListener('mouseup', function(){MOUSEDOWN = false;});
+svg.addEventListener('mousemove', dragged, true);
 function windowToCanvas_mouse(canvas, x, y) {
     var bbox = canvas.getBoundingClientRect();
     return {x: (x - bbox.left), y: (y - bbox.top)};
