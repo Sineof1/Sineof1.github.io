@@ -14,21 +14,14 @@
 </g>
 <g id='jit_canvas'>
 <line id='funcLine' x1='0' y1='-96' x2='400' y2='304' style='stroke:black;stroke-width:1;' />
-<text  id='textbox' x='45' y='105' style='font-family:sans-serif;fill:blue;'>y-intercept: (0, y)</text>
+<text  id='textbox' x='41' y='105' style='font-family:sans-serif;fill:blue;'>y-intercept: (0, y)</text>
 <circle id='sliderButton' cx='195.6' cy='100' r='6' style='fill:blue;stroke:black;cursor:pointer;' />
 </g>
 <script>
-var MOUSEDOWN = false;
-var jitcanvas = d3.select('#jit_canvas');
 var slider = d3.select('#sliderButton');
-d3.select('#textbox')
 slider.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
-function dragstarted(d) {
-   d3.select(this).raise().classed("active", true);
-}
-function dragended(d) {
-   d3.select(this).classed("active", false);
-}
+function dragstarted(d) {d3.select(this).raise().classed("active", true);}
+function dragended(d) {d3.select(this).classed("active", false);}
 function dragged(d) {
    d3.select(this).attr('cy', d3.event.y);
    d3.select('#textbox').attr('y', d3.event.y + 5);
