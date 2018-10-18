@@ -3,31 +3,42 @@
 <head>
 <meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2018/10/intJITimg.png'>
 <link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
 <title>JIT Interactive</title>
 </head>
 
 <body>
-<svg id='mainsvg' xmlns='http://www.w3.org/2000/svg' style='width:400px;height:400px;box-sizing:border-box;padding-top:3px;display:block;margin:50px auto;'>
+<svg id='mainsvg' xmlns='http://www.w3.org/2000/svg' style='width:400px;height:400px;box-sizing:border-box;padding-top:3px;display:block;margin:50px auto;cursor:pointer;'>
 <g id='axes'>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320.22 322.06"><defs><style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>Jit Interactive</title><line class="cls-1" x1="156.5" y1="15.59" x2="156.5" y2="315.54"/><path d="M170,20.46l2.88,1.75.07-.1-1.87-4.7L170,12.5l-1.08,4.91-1.87,4.7,0,.1Z" transform="translate(-13.5 -3.44)"/><path d="M170,317.54l2.88-1.75.07.1-1.87,4.7L170,325.5l-1.08-4.91-1.87-4.7,0-.1Z" transform="translate(-13.5 -3.44)"/><line class="cls-1" x1="306.48" y1="166.56" x2="6.52" y2="166.56"/><path d="M318.54,170l-1.75,2.88.1.07,4.7-1.87L326.5,170l-4.91-1.08-4.7-1.87-.1,0Z" transform="translate(-13.5 -3.44)"/><path d="M21.46,170l1.75,2.88-.1.07-4.7-1.87L13.5,170l4.91-1.08,4.7-1.87.1,0Z" transform="translate(-13.5 -3.44)"/><path d="M167.49,3.44h.87l1.17,3.05A11.08,11.08,0,0,1,170,8h0c0-.17.13-.45.26-.85s.58-1.64,1.33-3.71h.87l-2.3,6.09a3,3,0,0,1-.8,1.28,1.71,1.71,0,0,1-1.12.38,3.55,3.55,0,0,1-.73-.08v-.65a2.77,2.77,0,0,0,.6.06,1.24,1.24,0,0,0,1.19-.94l.3-.76Z" transform="translate(-13.5 -3.44)"/><path d="M330.83,170.19,329,167.58h.92l1.41,2,1.41-2h.91l-1.86,2.61,2,2.74h-.92l-1.5-2.17-1.51,2.17h-.92Z" transform="translate(-13.5 -3.44)"/><path d="M144.63,178.73a7.62,7.62,0,0,1,.37-2.42,6.16,6.16,0,0,1,1.1-2h.79a7,7,0,0,0-1.06,2.07,7.59,7.59,0,0,0-.35,2.32,7.41,7.41,0,0,0,.36,2.29,6.78,6.78,0,0,0,1,2h-.78a5.7,5.7,0,0,1-1.1-1.94A7.37,7.37,0,0,1,144.63,178.73Z" transform="translate(-13.5 -3.44)"/><path d="M152.4,177.89a5.18,5.18,0,0,1-.58,2.76,2.15,2.15,0,0,1-3.54,0,5.11,5.11,0,0,1-.6-2.74,5.29,5.29,0,0,1,.58-2.77,2.16,2.16,0,0,1,3.54,0A5.12,5.12,0,0,1,152.4,177.89Zm-3.9,0a5.31,5.31,0,0,0,.37,2.27,1.31,1.31,0,0,0,2.34,0,7.24,7.24,0,0,0,0-4.51,1.31,1.31,0,0,0-2.34,0A5.22,5.22,0,0,0,148.5,177.89Z" transform="translate(-13.5 -3.44)"/><path d="M154.61,180.31l.07.11a11,11,0,0,1-.36,1.14c-.16.43-.33.83-.5,1.2h-.61c.09-.34.18-.76.29-1.26s.18-.89.22-1.19Z" transform="translate(-13.5 -3.44)"/><path d="M163.17,177.89a5.18,5.18,0,0,1-.58,2.76,2,2,0,0,1-1.79.92,1.94,1.94,0,0,1-1.75-.94,5.11,5.11,0,0,1-.6-2.74,5.2,5.2,0,0,1,.58-2.77,2.16,2.16,0,0,1,3.54,0A5.12,5.12,0,0,1,163.17,177.89Zm-3.9,0a5.16,5.16,0,0,0,.37,2.27,1.22,1.22,0,0,0,1.16.71,1.24,1.24,0,0,0,1.18-.72,7.24,7.24,0,0,0,0-4.51,1.24,1.24,0,0,0-1.18-.72,1.22,1.22,0,0,0-1.16.71A5.08,5.08,0,0,0,159.27,177.89Z" transform="translate(-13.5 -3.44)"/><path d="M166.23,178.73a7.39,7.39,0,0,1-.38,2.39,5.8,5.8,0,0,1-1.09,1.93H164a7,7,0,0,0,1-2,7.41,7.41,0,0,0,.36-2.29,7.6,7.6,0,0,0-.36-2.32,6.74,6.74,0,0,0-1.05-2.07h.79a5.91,5.91,0,0,1,1.09,2A7.56,7.56,0,0,1,166.23,178.73Z" transform="translate(-13.5 -3.44)"/></svg>
 </g>
 <g id='jit_canvas'>
 <line id='funcLine' x1='0' y1='-96' x2='400' y2='304' style='stroke:black;stroke-width:1;' />
-<text  id='textbox' x='39' y='105' style='font-family:sans-serif;fill:blue;'>y-intercept: (0, y)</text>
-<circle id='sliderButton' cx='195.6' cy='100' r='6' style='fill:blue;stroke:black;cursor:pointer;' />
+<text id='textbox' x='39' y='105' style='font-family:sans-serif;fill:blue;-webkit-user-select:none;-moz-user-select: none;-ms-user-select: none;user-select: none;'>y-intercept: (0, y)</text>
+<circle id='sliderButton' cx='195.6' cy='100' r='6' style='fill:blue;stroke:black;' />
 </g>
 <script>
-var slider = d3.select('#sliderButton');
-slider.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
-function dragstarted(d) {d3.select(this).raise().classed("active", true);}
-function dragended(d) {d3.select(this).classed("active", false);}
-function dragged(d) {
-   if (d3.event.y > 390 || d3.event.y < 10) return;
-   d3.select(this).attr('cy', d3.event.y);
-   d3.select('#textbox').attr('y', d3.event.y + 5);
-   d3.select('#textbox').text('y-intercept: (0, ' + ((200 - d3.event.y + 4).toFixed(0)).replace('-', '–') + ')');
-   d3.select('#funcLine').attr('y1', -(200 - d3.event.y) + 4).attr('y2', 400 - (200 - d3.event.y) + 4);
+var MOUSEDOWN = false;
+var slider = document.getElementById('sliderButton');
+var svg = document.getElementById('mainsvg');
+var textbox = document.getElementById('textbox');
+var funcLine = document.getElementById('funcLine');
+window.addEventListener('mousedown', function(){MOUSEDOWN = true;});
+window.addEventListener('mouseup', function(){MOUSEDOWN = false;});
+window.addEventListener('mousemove', dragged, true);
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left), y: (y - bbox.top)};
+}
+function dragged(evt) {
+   if (!MOUSEDOWN) return;
+   var loc = windowToCanvas_mouse(svg, evt.clientX, evt.clientY);
+   if (loc.y > 390 || loc.y < 10) return;
+   slider.setAttribute('cy', loc.y);
+   textbox.setAttribute('y', loc.y + 5);
+   textbox.textContent = 'y-intercept: (0, ' + ((200 - loc.y + 4).toFixed(0)).replace('-', '–') + ')';
+   evt.preventDefault();
+   funcLine.setAttribute('y1', -(200 - loc.y) + 4);
+   funcLine.setAttribute('y2', 400 - (200 - loc.y) + 4);
 }
 </script>
 </svg>
