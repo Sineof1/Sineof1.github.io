@@ -227,13 +227,12 @@ Gear
 
 <script>
 var recognition = new webkitSpeechRecognition();
-var transcript = '';
 recognition.continuous = true;
 recognition.interimResults = true;
 recognition.onresult = function(evt) {
    var interim_transcript = '';
    for (var i = evt.resultIndex; i < evt.results.length; ++i) {
-   interim_transcript = evt.results[i][0].transcript;
+   interim_transcript += evt.results[i][0].transcript;
    }
    if (((interim_transcript).split(' '))[0] === 'translate') {
    $('#translateX').val((interim_transcript.split(' '))[1]);
