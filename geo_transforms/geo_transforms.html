@@ -309,6 +309,7 @@ $('.shape-button').bind('click', function(evt) {
    $('#reflyhis').text('No');
 });
 $('#button1').bind('mousedown', function(evt){
+   recognition.start();
    but1 += 1;
    but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
@@ -743,5 +744,4 @@ recognition.onresult = function(event) {
    final_transcript = '';
    }
 }
-recognition.start();
 </script>
