@@ -316,8 +316,9 @@ function unclickDot(d) {
    else endpns[ind].segclass += 1;
    }}}
    drawSegments();
-   var dot = d3.select(this).attr('cx');
-   cirpns = cirpns.filter(function(val, inx, arr){if (val.centerX != dot) return val;});
+   var dotX = d3.select(this).attr('cx');
+   var dotY = d3.select(this).attr('cy');
+   cirpns = cirpns.filter(function(val, inx, arr){if (val.centerX != dotX || val.centerY != dotY) return val;});
    drawCircles();
    }
 }
