@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2018/10/grapherimg1.png'>
+<link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<title>Simple Grapher</title>
+</head>
+
+<style>
+#grapher_window {
+   position:relative;
+   width:450px;
+   height:450px;
+   margin:50px auto;
+   box-shadow:0 0 5px #ccc;
+   border:1px solid teal;
+   border-radius:5px;
+   overflow:hidden;
+   cursor:pointer;
+   -webkit-tap-highlight-color:rgba(255, 255, 255, 0);
+}
+#xAxis {
+   width:475px;
+   height:50px;
+   margin:-44px auto;
+   color:gray;
+   padding:0;
+}
+#yAxis {
+   display:flex;
+   flex-direction:column;
+   position:fixed;
+   width:50px;
+   height:450px;
+   margin:50px 0 0 0;
+   text-align:right;
+   color:gray;
+}
+.negX {
+   margin-right:5px;
+}
+.posX {
+   margin-left:9px;
+}
+.inviS {
+   visibility:hidden;
+}
+.negY {
+   margin-top:4px;
+}
+.posY {
+   margin-top:5px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 34px;
+  outline:none;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  outline:none;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  outline:none;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  outline:none;
+}
+input:checked + .slider {
+  background-color: #2196F3;
+  outline:none;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(65px);
+  -ms-transform: translateX(65px);
+  transform: translateX(65px);
+}
+.slider.round {
+  border-radius: 34px;
+  outline:none;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+#toolbar {
+   position:relative;
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+   width:150px;
+   height:452px;
+   background-color:#e4e4a1;
+   border-radius:8px;
+}
+#plus_minus {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   position:absolute;
+   bottom:0;
+   left:0;
+   width:100%;
+   height:75px;
+   border-bottom-right-radius:8px;
+   border-bottom-left-radius:8px;
+   background-color:black;
+   border-top:1px solid white;
+}
+.chgBut {
+   display:inline-flex;
+   align-items:center;
+   justify-content:center;
+   height:45px;
+   width:45px;
+   margin-left:10px;
+   margin-right:10px;
+   border-radius:50%;
+   border:2px solid white;
+   background-color:blue;
+   color:white;
+   font-family:sans-serif;
+   font-size:36px;
+   cursor:pointer;
+}
+#parallel, #perpendicular, #intersection {
+   display:inline-flex;
+   align-items:center;
+   justify-content:center;
+   position:absolute;
+   top:0;
+   left:0;
+   width:35px;
+   height:60px;
+   font-family:sans-serif;
+   font-size:36px;
+   cursor:pointer;
+   color:orange;
+   overflow:hidden;
+   border-radius:5px;
+   padding-left:5px;
+   padding-right:5px;
+   box-sizing:border-box;
+}
+</style>
+
+<body style='height:500px;'>
+<div id='yAxis'><span class='negY inviS'>&nbsp;9</span> <span class='negY' style='margin-top:0px;margin-bottom:2px;'>&nbsp;8</span> <span class='negY inviS'>&nbsp;7</span> <span class='negY' style='margin-top:6px;'>&nbsp;6</span> <span class='negY inviS'>&nbsp;5</span> <span class='negY' style='margin-top:8px;'>&nbsp;4</span> <span class='negY inviS'>&nbsp;3</span> <span class='negY' style='margin-top:10px;'>&nbsp;2</span> <span class='negY inviS'>&nbsp;1</span> <span class='posY' style='margin-top:10px;'>0</span> <span class='posY inviS'>&ndash;1</span> <span class='posY' style='margin-top:8px;'>&ndash;2</span> <span class='posY inviS' style='margin-top:7px;'>&ndash;3</span> <span class='posY'>&ndash;4</span> <span class='posY inviS'>&ndash;5</span> <span class='posY' style='margin-top:8px;margin-bottom:2px;'>&ndash;6</span> <span class='posY inviS'>&ndash;7</span> <span class='posY'>&ndash;8</span> <span class='posY inviS'>&ndash;9</span></div></div>
+<div id='grapher_window'></div>
+<div id='xAxis'><span class='negX inviS'>&ndash;9</span> <span class='negX'>&ndash;8</span> <span class='negX inviS'>&ndash;7</span> <span class='negX'>&ndash;6</span> <span class='negX inviS'>&ndash;5</span> <span class='negX'>&ndash;4</span> <span class='negX inviS'>&ndash;3</span> <span class='negX'>&ndash;2</span> <span class='negX inviS'>&ndash;1</span> <span class='posX'>0</span> <span class='posX inviS'>&nbsp;1</span> <span class='posX'>&nbsp;2</span> <span class='posX inviS'>&nbsp;3</span> <span class='posX'>&nbsp;4</span> <span class='posX inviS'>&nbsp;5</span> <span class='posX'>&nbsp;6</span> <span class='posX inviS'>&nbsp;7</span> <span class='posX'>&nbsp;8</span> <span class='posX inviS'>&nbsp;9</span></div>
+
+<div id='toolbar'>
+<img src='segicon.svg' style='display:block;width:100px;height:100px;margin-bottom:-30px;' />
+<label class="switch"><input type="checkbox" id='segSlider'><span class="slider round"></span></label>
+<hr style='border:1px solid white;width:100%;margin-top:10px;' />
+<img src='circle.svg' style='display:block;width:100px;height:100px;margin-bottom:15px;margin-top:10px;' />
+<label class="switch"><input type="checkbox" id='circSlider'><span class="slider round"></span></label>
+<hr style='border:1px solid white;width:100%;margin-top:10px;' />
+
+<div style='width:150px;height:50px;position:relative;'><div id='parallel' style='left:10px;font-size:30px;'>|&thinsp;|</div><div id='perpendicular' style='left:57px;padding-left:10px;padding-right:10px;'><img src='perpicon.svg' style='width:30px;height:25px;padding-top:5px;' /></div><div id='intersection' style='left:105px;font-size:44px;padding-top:7px;'><img src='intscticon.svg' style='width:30px;height:25px;' /></div></div>
+<div id='plus_minus'><div class='chgBut' id='plusBut'>+</div> <div class='chgBut' id='minsBut' style='background-color:white;color:black;'>&ndash;</div></div>
+</div>
+</body>
+
+<div id='blocker' style='position:fixed;bottom:0px;left:0px;width:200px;height:100vh;background-color:white;z-index:999;'></div>
+<img src='https://guzintamath.com/textsavvy/wp-content/uploads/2018/10/grapherimg1.png' style='position:fixed;visibility:hidden;'
+</html>
+
+<script>
+var csvg= d3.select('#grapher_window')
+            .append('svg').attr('id', 'circSVG')
+            .attr('width', 450).attr('height', 450)
+            .style('position', 'absolute').style('top', 0).style('left', 0).style('background-color', 'black');
+var svg = d3.select('#grapher_window')
+            .append('svg').attr('id', 'grapherSVG')
+            .attr('width', 450).attr('height', 450)
+            .style('position', 'absolute').style('top', 0).style('left', 0).style('background-color', 'transparent');
+
+var points = [];
+var endpns = [];
+var cirpns = [];
+var lindat = [];
+var intpnts = [];
+var cirintpnts = [];
+var circirpnts = [];
+var SEGMENTS = false;
+var SEGCLASSCOUNTER = 0;
+var CIRCLE = false;
+var MOUSEDOWN = false;
+var CIRCLEON = false;
+var COUNTER = 0;
+var PERPON = false;
+var PLLELON = false;
+var INTERSECTON = false;
+var colors = ['#f58231', '#f032e6', '#e6194B', '#469990', '#9A6324', '#800000', '#000075', '#3cb44b', '#aaffc3', '#e6beff', '#fabebe', '#a9a9a9'];
+
+function windowToCanvas_mouse(x, y) {
+    var canvas = document.getElementById('grapherSVG');
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left), y: (y - bbox.top)};
+}
+function initGrid() {
+  for (var a = 25; a < 450; a += 25) {
+     svg.append('line')
+        .attr('x1', a).attr('y1', 0).attr('x2', a).attr('y2', 450)
+        .style('stroke', 'rgba(255, 255, 255, 0.6)').style('stroke-width', 0.75);
+
+     svg.append('line')
+        .attr('x1', 0).attr('y1', a).attr('x2', 450).attr('y2', a)
+        .style('stroke', 'rgba(255, 255, 255, 0.6)').style('stroke-width', 0.75);
+
+     for (var b = 25; b < 450; b += 25) points.push({x : a, y : b});
+  }
+  svg.append('line')
+     .attr('id', 'xaxis')
+     .attr('x1', 0).attr('y1', 225).attr('x2', 450).attr('y2', 225)
+     .style('stroke', 'rgba(255, 255, 255, 0.6)').style('stroke-width', 2);
+  svg.append('line')
+     .attr('id', 'yaxis')
+     .attr('x1', 225).attr('y1', 0).attr('x2', 225).attr('y2', 450)
+     .style('stroke', 'rgba(255, 255, 255, 0.6)').style('stroke-width', 2);
+
+   svg.selectAll('circle')
+      .data(points)
+      .enter().append('circle')
+      .attr('class', 'unclickedDot')
+      .attr('cx', function(d){return d.x;})
+      .attr('cy', function(d){return d.y;})
+      .attr('r', 7.5)
+      .style('opacity', 0)
+      .style('fill', 'rgba(255, 255, 255, 0.5)').style('stroke', 'none')
+      .on('mouseenter', hoverInDot)
+      .on('mouseout', hoverOutDot)
+      .on('click', clickDot)
+      .on('contextmenu', unclickDot)
+      .on('touch', clickDot);
+}
+function hoverInDot(d) {
+   if (d3.select(this).attr('class') === 'clickedDot') return;
+   if (CIRCLE == true) return;
+   d3.select(this)
+     .transition()
+     .duration(50)
+     .style('opacity', 1);
+}
+function hoverOutDot(d) {
+   if (d3.select(this).attr('class') === 'clickedDot') return;
+   if (CIRCLE == true) return;
+   d3.select(this)
+     .transition()
+     .duration(200)
+     .style('opacity', 0);
+}
+function clickDot(d) {
+   d3.event.preventDefault();
+   PERPON = false;
+   PLLELON = false;
+   $('#parallel').css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   $('#perpendicular').css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   if (d3.select(this).attr('class') === 'unclickedDot') {
+   d3.select(this)
+     .attr('class', 'clickedDot')
+     .style('fill', 'rgba(255, 255, 255, 1)');
+   }
+   if ($('#circSlider').prop('checked') == true) {
+   CIRCLE = true;
+   cirpns.push({x : d3.select(this).attr('cx'), y : d3.select(this).attr('cy')});
+   }
+   if (SEGMENTS == false) return;
+   if (endpns.length > 0 && endpns[endpns.length - 1].x === d3.select(this).attr('cx') && endpns[endpns.length - 1].y === d3.select(this).attr('cy') &&
+       endpns[endpns.length - 1].segclass === SEGCLASSCOUNTER) return;
+   endpns.push({'x' : d3.select(this).attr('cx'), 'y' : d3.select(this).attr('cy'), 'segclass' : SEGCLASSCOUNTER});
+   drawSegments();
+}
+function unclickDot(d) {
+   d3.event.preventDefault();
+   PERPON = false;
+   PLLELON = false;
+   $('#parallel').css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   $('#perpendicular').css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   if (d3.select(this).attr('class') === 'clickedDot') {
+   d3.select(this)
+     .attr('class', 'unclickedDot')
+     .style('fill', 'rgba(255, 255, 255, 0.5)')
+     .style('opacity', 0);
+   for (var inx in endpns) {
+   if (endpns[inx].x === d3.select(this).attr('cx') && endpns[inx].y === d3.select(this).attr('cy')) {
+   endpns.splice(inx, 1);
+   for (ind in endpns) {
+   if (ind < inx) endpns[ind].segclass -= 1;
+   else endpns[ind].segclass += 1;
+   }}}
+   drawSegments();
+   var dot = d3.select(this).attr('cx');
+   cirpns = cirpns.filter(function(val, inx, arr){if (val.centerX != dot) return val;});
+   drawCircles();
+   }
+}
+function drawSegments() {
+   d3.selectAll('.lineSeg').remove();
+   lindat = [];
+   for (var a = 0; a <= endpns.length - 2; a++) {
+   COUNTER += 1;
+   if (endpns[a].segclass === endpns[a + 1].segclass) {
+    svg.append('line')
+       .attr('class', 'lineSeg')
+       .attr('id', 'lineSeg' + String(COUNTER))
+       .attr('x1', endpns[a].x)
+       .attr('y1', endpns[a].y)
+       .attr('x2', endpns[a + 1].x)
+       .attr('y2', endpns[a + 1].y)
+       .style('stroke', 'white').style('fill', 'white').style('stroke-width', 3)
+       .style('stroke-linejoin', 'round').style('stroke-linecap', 'round')
+       .on('mouseenter', hoverInLine)
+       .on('mouseleave', hoverOutLine);
+   var slp = (endpns[a + 1].y - endpns[a].y) / (endpns[a + 1].x - endpns[a].x);
+   if (slp == Infinity) slp = -Infinity;
+   lindat.push({id : 'lineSeg' + String(COUNTER), slope : -slp});
+   }}
+}
+function drawCircles() {
+   d3.selectAll('.pastCircle').remove();
+   cirpns = cirpns.filter(function(val, inx, arr){if (val.x) /*pass*/; else return val;});
+   for (var a = 0; a < cirpns.length; a++) {
+   csvg.append('circle')
+       .attr('cx', cirpns[a].centerX)
+       .attr('cy', cirpns[a].centerY)
+       .attr('r', cirpns[a].radius)
+       .attr('class', 'pastCircle')
+       .style('fill', 'none').style('stroke', 'white').style('stroke-width', 3);
+   }
+}
+function dragCircle(evt) {
+   if (MOUSEDOWN == false) return;
+   if (CIRCLE == false || SEGMENTS == true) return;
+   csvg.selectAll('.drawnCircle').remove();
+   csvg.selectAll('.pastCircle').remove();
+   for (var a = 0; a < cirpns.length; a++) {
+   csvg.append('circle')
+       .attr('cx', cirpns[a].centerX)
+       .attr('cy', cirpns[a].centerY)
+       .attr('r', cirpns[a].radius)
+       .attr('class', 'pastCircle')
+       .style('fill', 'none').style('stroke', 'white').style('stroke-width', 3);
+   }
+   var loc = windowToCanvas_mouse(evt.clientX, evt.clientY);
+   var centerX = cirpns[cirpns.length - 1].x;
+   var centerY = cirpns[cirpns.length - 1].y;
+   var radius = Math.sqrt(Math.pow(loc.x - centerX, 2) + Math.pow(loc.y - centerY, 2));
+   csvg.append('circle')
+       .attr('class', 'drawnCircle')
+       .attr('cx', centerX).attr('cy', centerY).attr('r', radius - (radius % 25))
+       .style('fill', 'none').style('stroke', 'white').style('stroke-width', 3);
+}
+function hoverInLine() {
+   if (PERPON == false && PLLELON == false) return;
+   else if (PERPON == true) hoverInPerp(this);
+   else if (PLLELON == true) hoverInPllel(this);
+}
+function hoverOutLine() {
+   d3.selectAll('.lineSeg')
+     .transition()
+     .duration(1000)
+     .style('stroke', 'white').style('fill', 'white');
+   d3.selectAll('.clickedDot')
+     .transition()
+     .duration(1000)
+     .style('fill', 'white');
+}
+function hoverInPllel(d) {
+   var id1 = d3.select(d).attr('id');
+   var slp1;
+   for (var a = 0; a < lindat.length; a++) {
+      if (lindat[a].id == id1) {
+      slp1 = lindat[a].slope;
+      break;
+      }
+   }
+   for (var a = 0; a < lindat.length; a++) {
+   var slp2 = lindat[a].slope;
+   if (slp1 == slp2) {
+   d3.select(d).transition()
+     .duration(800)
+     .style('stroke', 'orange').style('fill', 'orange');
+   d3.select('#' + lindat[a].id).transition()
+      .duration(800)
+      .style('stroke', 'orange').style('fill', 'orange');
+   }}
+   d3.selectAll('.clickedDot')
+     .transition()
+     .duration(800)
+     .style('fill', 'salmon');
+}
+function hoverInPerp(d) {
+   var vec1 = [d3.select(d).attr('x2') - d3.select(d).attr('x1'), d3.select(d).attr('y2') - d3.select(d).attr('y1')];
+   for (var a = 0; a < lindat.length; a++) {
+   var id = d3.select('#' + lindat[a].id);
+   var vec2 = [id.attr('x2') - id.attr('x1'), id.attr('y2') - id.attr('y1')];
+   var dot = (vec1[0] * vec2[0]) + (vec1[1] * vec2[1]);
+   if (dot == 0) {
+   d3.select(d).transition()
+     .duration(800)
+     .style('stroke', 'orange').style('fill', 'orange');
+   id.transition()
+     .duration(800)
+     .style('stroke', '#f032e6').style('fill', '#f032e6');
+   }}
+   d3.selectAll('.clickedDot')
+     .transition()
+     .duration(800)
+     .style('fill', 'salmon');
+}
+
+initGrid();
+
+$('#yAxis').offset({'top' : $('#grapher_window').offset().top - 3, 'left' : $('#grapher_window').offset().left - 53});
+$('#toolbar').offset({'top' : $('#grapher_window').offset().top, 'left' : $('#grapher_window').offset().left + 475});
+$('#grapherSVG').bind('mousedown', function(){MOUSEDOWN = true;});
+$('#grapherSVG').bind('mousemove', dragCircle);
+$('#grapherSVG').bind('mouseup', function(){
+   MOUSEDOWN = false;
+   if (CIRCLE == false) return;
+   for (var a = 0; a < (d3.selectAll('.drawnCircle')._groups[0]).length; a++) {
+   var circ = d3.selectAll('.drawnCircle')._groups[0][a];
+   d3.select(circ).attr('class', 'pastCircle');
+   cirpns.push({centerX : d3.select(circ).attr('cx'), centerY : d3.select(circ).attr('cy'), radius : d3.select(circ).attr('r')});
+   }
+   CIRCLE = false;
+});
+$('#segSlider').bind('click', function(){
+   if (SEGMENTS == true) SEGMENTS = false;
+   else {
+   SEGMENTS = true;
+   SEGCLASSCOUNTER += 1;
+   if (CIRCLEON == true) $('#circSlider').prop('checked', false);
+   CIRCLE = false;
+   CIRCLEON = false;
+   }
+});
+$('#circSlider').bind('click', function(){
+   if (CIRCLE == true) {CIRCLE = false; CIRCLEON = false}
+   else {
+   if (SEGMENTS == true) $('#segSlider').prop('checked', false);
+   SEGMENTS = false;
+   CIRCLEON = true;
+   }
+});
+$('#minsBut').bind('click', function() {
+   $(this).css({'background-color' : 'red', 'color' : 'white'});
+   $('#plusBut').css({'background-color' : 'white', 'color' : 'black'});
+   svg.selectAll('circle').on('click', unclickDot);
+});
+$('#plusBut').bind('click', function() {
+   $(this).css({'background-color' : 'blue', 'color' : 'white'});
+   $('#minsBut').css({'background-color' : 'white', 'color' : 'black'});
+   svg.selectAll('circle').on('click', clickDot);
+});
+$('#parallel').bind('click', function() {
+   if (PLLELON == false) {
+   PLLELON = true;
+   $(this).css({'background-color' : 'rgb(250, 250, 250)'});
+   PERPON = false;
+   $('#perpendicular').css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   }
+   else {
+   PLLELON = false;
+   $(this).css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   }
+});
+$('#perpendicular').bind('click', function() {
+   if (PERPON == false) {
+   PERPON = true;
+   $(this).css({'background-color' : 'rgb(250, 250, 250)'});
+   PLLELON = false;
+   $('#parallel').css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   }
+   else {
+   PERPON = false;
+   $(this).css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   }
+});
+$('#intersection').bind('click', function() {
+   var linesegs = d3.selectAll('.lineSeg')._groups[0];
+   var pastcirs = d3.selectAll('.pastCircle')._groups[0];
+   if (linesegs.length + pastcirs.length < 2) return;
+   if (INTERSECTON == false) {
+   INTERSECTON = true;
+   $(this).css({'background-color' : 'rgb(250, 250, 250)'});
+   }
+   else {
+   INTERSECTON = false;
+   $(this).css({'background-color' : 'rgba(0, 0, 0, 0)'});
+   }
+   if (INTERSECTON == true) {
+   intpnts = [];
+   cirintpnts = [];
+   circirpnts = [];
+   for (ind in lindat) {
+   for (inx in lindat) {
+   if (ind == inx) continue;
+   var slope1 = lindat[ind].slope;
+   var slope2 = lindat[inx].slope;
+
+   var x1 = Number(d3.select('#' + lindat[ind].id).attr('x1'));
+   var y1 = Number(d3.select('#' + lindat[ind].id).attr('y1'));
+   var lin1x2 = Number(d3.select('#' + lindat[ind].id).attr('x2'));
+   var lin1y2 = Number(d3.select('#' + lindat[ind].id).attr('y2'));
+
+   var lin1xMax = Math.max(x1, lin1x2);
+   var lin1xMin = Math.min(x1, lin1x2);
+   var lin1yMax = Math.max(y1, lin1y2);
+   var lin1yMin = Math.min(y1, lin1y2);
+
+   var x2 = Number(d3.select('#' + lindat[inx].id).attr('x1'));
+   var y2 = Number(d3.select('#' + lindat[inx].id).attr('y1'));
+   var lin2x2 = Number(d3.select('#' + lindat[inx].id).attr('x2'));
+   var lin2y2 = Number(d3.select('#' + lindat[inx].id).attr('y2'));
+
+   var lin2xMax = Math.max(x2, lin2x2);
+   var lin2xMin = Math.min(x2, lin2x2);
+   var lin2yMax = Math.max(y2, lin2y2);
+   var lin2yMin = Math.min(y2, lin2y2);
+
+   if ((slope1 == 0 && (slope2 == -Infinity || slope2 == Infinity))) {
+      var intPntY = Number(d3.select('#' + lindat[ind].id).attr('y1'));
+      var intPntX = Number(d3.select('#' + lindat[inx].id).attr('x1'));
+   }
+   else if ((slope2 == 0 && (slope1 == -Infinity || slope1 == Infinity))) {
+      var intPntY = Number(d3.select('#' + lindat[inx].id).attr('y1'));
+      var intPntX = Number(d3.select('#' + lindat[ind].id).attr('x1'));
+   }
+   else if (slope1 == slope2) continue;
+   else if (slope1 == Infinity || slope1 == -Infinity) {
+   var intPntX = Number(d3.select('#' + lindat[ind].id).attr('x1'));
+   var intPntY = -slope2 * (intPntX - x2) + y2;
+   }
+   else if (slope2 == Infinity || slope2 == -Infinity) {
+   var intPntX = Number(d3.select('#' + lindat[inx].id).attr('x1'));
+   var intPntY = -slope1 * (intPntX - x1) + y1;
+   }
+   else {
+   var intPntX = ((slope2 * x2) + y2 + (-slope1 * x1) - y1) / (-slope1 - -slope2);
+   var intPntY = (-slope1 * (intPntX - x1)) + y1;
+   }
+
+   if (slope1 == 0 && (intPntX > lin1xMax || intPntX < lin1xMin)) continue;
+   else if (slope2 == 0 && (intPntX > lin2xMax || intPntX < lin2xMin)) continue;
+   else if (slope1 == 0 && (intPntY > lin2yMax || intPntY < lin2yMin)) continue;
+   else if (slope2 == 0 && (intPntY > lin1yMax || intPntY < lin1yMin)) continue;
+   else if ((slope1 == Infinity || slope1 == -Infinity) && (intPntX < lin2xMin || intPntX > lin2xMax)) continue;
+   else if ((slope2 == Infinity || slope2 == -Infinity) && (intPntX < lin1xMin || intPntX > lin1xMax)) continue;
+   else if ((intPntX > lin1xMax || intPntX < lin1xMin) || (intPntX > lin2xMax || intPntX < lin2xMin) ||
+            (intPntY > lin1yMax || intPntY < lin1yMin) || (intPntY > lin2yMax || intPntY < lin2yMin)) continue;
+   intpnts.push({x : intPntX, y : intPntY, label : [Math.round(((intPntX - 225) / 25) * 100) / 100, Math.round(((225 - intPntY) / 25) * 100) / 100]});
+   }}
+   for (var i = 0; i < intpnts.length - 1; i++) {
+   for (var j = 1; j < intpnts.length; j++) {
+   if ((Math.round(intpnts[i].x * 100) / 100) == (Math.round(intpnts[j].x * 100) / 100) &&
+       (Math.round(intpnts[i].y * 100) / 100) == (Math.round(intpnts[j].y * 100) / 100) && i !== j) intpnts.splice(j, 1);
+   }
+   svg.append('circle')
+      .attr('class', 'interDot')
+      .attr('cx', intpnts[i].x).attr('cy', intpnts[i].y).attr('r', 0)
+      .attr('data-labelX', intpnts[i].label[0]).attr('data-labelY', intpnts[i].label[1])
+      .style('fill', '#f032e6').style('stroke', 'none')
+      .on('mouseenter', showInterDotInfo)
+      .on('mouseleave', endInfo)
+      .transition()
+      .ease(d3.easeBackOut)
+      .delay(200)
+      .duration(800)
+      .attr('r', 7.5);
+   }
+   if (cirpns.length > 0 && lindat.length > 0) {
+   cirpns = cirpns.filter(function(val, inx, arr){if (val.x) /*pass*/; else return val;});
+   for (i in cirpns) {
+   for (j in lindat) {
+   var result = interceptCircleLineSeg(cirpns[i], lindat[j]);
+   for (item in result) {
+   result[item].label = [Math.round(((result[item].x - 225) / 25) * 100) / 100, Math.round(((225 - result[item].y) / 25) * 100) / 100];
+   cirintpnts.push(result[item]);
+   }}}
+   for (var i = 0; i < cirintpnts.length; i++) {
+   svg.append('circle')
+      .attr('class', 'interDot')
+      .attr('cx', cirintpnts[i].x).attr('cy', cirintpnts[i].y).attr('r', 0)
+      .attr('data-labelX', cirintpnts[i].label[0]).attr('data-labelY', cirintpnts[i].label[1])
+      .style('fill', '#f032e6').style('stroke', 'none')
+      .on('mouseenter', showInterDotInfo)
+      .on('mouseleave', endInfo)
+      .transition()
+      .ease(d3.easeBackOut)
+      .delay(200)
+      .duration(800)
+      .attr('r', 7.5);
+   }
+   }
+   if (cirpns.length > 1) {
+   cirpns = cirpns.filter(function(val, inx, arr){if (val.x) /*pass*/; else return val;});
+   for (i in cirpns) {
+   for (j in cirpns) {
+   if (i == j || j < i) continue;
+   var result = circleCircle(cirpns[i], cirpns[j]);
+   if (result.length < 1) return;
+   for (item in result) {
+   result[item].label = [Math.round(((result[item].x - 225) / 25) * 100) / 100, Math.round(((225 - result[item].y) / 25) * 100) / 100];
+   circirpnts.push(result[item]);
+   }}}
+   for (var i = 0; i < circirpnts.length; i++) {
+   svg.append('circle')
+      .attr('class', 'interDot')
+      .attr('cx', circirpnts[i].x).attr('cy', circirpnts[i].y).attr('r', 0)
+      .attr('data-labelX', circirpnts[i].label[0]).attr('data-labelY', circirpnts[i].label[1])
+      .style('fill', '#f032e6').style('stroke', 'none')
+      .on('mouseenter', showInterDotInfo)
+      .on('mouseleave', endInfo)
+      .transition()
+      .ease(d3.easeBackOut)
+      .delay(200)
+      .duration(800)
+      .attr('r', 7.5);
+   }}}
+   else if (INTERSECTON == false) {
+   d3.selectAll('.interDot')
+     .transition()
+     .ease(d3.easeBackIn)
+     .duration(800)
+     .attr('r', 0);
+   setTimeout(function(){d3.selectAll('.interDot').remove();}, 1000);
+   }
+});
+
+function showInterDotInfo() {
+   svg.append('text')
+      .attr('class', 'infoText')
+      .attr('x', 20)
+      .attr('y', 20)
+      .style('fill', 'white')
+      .style('font-family', 'sans-serif').style('font-size', '15px')
+      .text('(' + (d3.select(this).attr('data-labelX')).replace('-', '–') + ', ' + (d3.select(this).attr('data-labelY')).replace('-', '–') + ')');
+}
+function endInfo() {
+   d3.selectAll('.infoText').remove();
+}
+function isMult(arr, inx) {
+   var item = arr[inx];
+   for (var ind in arr) {
+   if (arr[ind].slope == item.slope && ind != inx) return true;
+   }
+   return false;
+}
+function interceptCircleLineSeg(circle, line){
+    var a, b, c, d, u1, u2, ret, retP1, retP2, v1, v2;
+    v1 = {};
+    v2 = {};
+    v1.x = Number(d3.select('#' + line.id).attr('x2')) - Number(d3.select('#' + line.id).attr('x1'));
+    v1.y = Number(d3.select('#' + line.id).attr('y2')) - Number(d3.select('#' + line.id).attr('y1'));
+    v2.x = Number(d3.select('#' + line.id).attr('x1')) - circle.centerX;
+    v2.y = Number(d3.select('#' + line.id).attr('y1')) - circle.centerY;
+    b = (v1.x * v2.x + v1.y * v2.y);
+    c = 2 * (v1.x * v1.x + v1.y * v1.y);
+    b *= -2;
+    d = Math.sqrt(b * b - 2 * c * (v2.x * v2.x + v2.y * v2.y - circle.radius * circle.radius));
+    if(isNaN(d)){
+        return [];
+    }
+    u1 = (b - d) / c;
+    u2 = (b + d) / c;
+    retP1 = {};
+    retP2 = {}
+    ret = [];
+    if(u1 <= 1 && u1 >= 0){
+        retP1.x = Number(d3.select('#' + line.id).attr('x1')) + v1.x * u1;
+        retP1.y = Number(d3.select('#' + line.id).attr('y1')) + v1.y * u1;
+        ret[0] = retP1;
+    }
+    if(u2 <= 1 && u2 >= 0){
+        retP2.x = Number(d3.select('#' + line.id).attr('x1')) + v1.x * u2;
+        retP2.y = Number(d3.select('#' + line.id).attr('y1')) + v1.y * u2;
+        ret[ret.length] = retP2;
+    }
+    return ret;
+}
+function circleCircle(a, b) {
+  var R = Number(a.radius),
+      r = Number(b.radius),
+      dx = Number(b.centerX) - Number(a.centerX),
+      dy = Number(b.centerY) - Number(a.centerY),
+      d = Math.sqrt(dx * dx + dy * dy),
+      x = (d * d - r * r + R * R) / (2 * d),
+      y = Math.sqrt(R * R - x * x);
+  dx /= d;
+  dy /= d;
+  var chk = [Number(a.centerX) + dx * x - dy * y, Number(a.centerY) + dy * x + dx * y, Number(a.centerX) + dx * x + dy * y, Number(a.centerY) + dy * x - dx * y];
+  if (chk.some(function(q){return isNaN(q);})) return [];
+  else return [
+    {x : Number(a.centerX) + dx * x - dy * y, y : Number(a.centerY) + dy * x + dx * y},
+    {x : Number(a.centerX) + dx * x + dy * y, y : Number(a.centerY) + dy * x - dx * y}
+  ];
+}
+</script>
