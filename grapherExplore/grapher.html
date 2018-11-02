@@ -508,7 +508,6 @@ $('#perpendicular').bind('click', function() {
 $('#intersection').bind('click', function() {
    var linesegs = d3.selectAll('.lineSeg')._groups[0];
    var pastcirs = d3.selectAll('.pastCircle')._groups[0];
-   if (linesegs.length + pastcirs.length < 2) return;
    if (INTERSECTON == false) {
    INTERSECTON = true;
    $(this).css({'background-color' : 'rgb(250, 250, 250)'});
@@ -518,6 +517,7 @@ $('#intersection').bind('click', function() {
    $(this).css({'background-color' : 'rgba(0, 0, 0, 0)'});
    }
    if (INTERSECTON == true) {
+   if (linesegs.length + pastcirs.length < 2) return;
    intpnts = [];
    cirintpnts = [];
    circirpnts = [];
