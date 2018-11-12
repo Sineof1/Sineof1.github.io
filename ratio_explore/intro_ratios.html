@@ -228,13 +228,13 @@ circle.view = new Image();
 circle.view.src = 'soccerball.png';
 physicsLab.add(circle);
 
-$('#colon_num_left').text(String(sballs));
-$('#word_num_left').text(String(sballs));
-$('#colon_denom_rght').text(String(sballs));
-$('#word_denom_rght').text(String(sballs));
+$('#colon_num_left').text(String(sballs) + ' ⚽');
+$('#word_num_left').text(String(sballs) + ' ⚽');
+$('#colon_denom_rght').text(String(sballs) + ' ⚽');
+$('#word_denom_rght').text(String(sballs) + ' ⚽');
 
-$('#fraction_left').text(String(sballs) + '/' + String(bballs));
-$('#fraction_rght').text(String(sballs) + '/' + String(bballs));
+$('#fraction_left').text(String(sballs) + ' ⚽' + '/' + String(bballs) + ' 🏀');
+$('#fraction_rght').text(String(sballs) + ' ⚽' + '/' + String(bballs) + ' 🏀');
 runFractionLeft();
 runFractionRight();
 });
@@ -248,13 +248,13 @@ circle.view = new Image();
 circle.view.src = 'basketball.png';
 physicsLab2.add(circle);
 
-$('#colon_num_rght').text(String(bballs));
-$('#word_num_rght').text(String(bballs));
-$('#colon_denom_left').text(String(bballs));
-$('#word_denom_left').text(String(bballs));
+$('#colon_num_rght').text(String(bballs) + ' 🏀');
+$('#word_num_rght').text(String(bballs) + ' 🏀');
+$('#colon_denom_left').text(String(bballs) + ' 🏀');
+$('#word_denom_left').text(String(bballs) + ' 🏀');
 
-$('#fraction_rght').text(String(sballs) + '/' + String(bballs));
-$('#fraction_left').text(String(sballs) + '/' + String(bballs));
+$('#fraction_left').text(String(sballs) + ' ⚽' + '/' + String(bballs) + ' 🏀');
+$('#fraction_rght').text(String(sballs) + ' ⚽' + '/' + String(bballs) + ' 🏀');
 runFractionLeft();
 runFractionRight();
 });
