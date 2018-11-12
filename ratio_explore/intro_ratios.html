@@ -235,7 +235,7 @@ $('#colon_num_left').text(String(colonnumL));
 $('#word_num_left').text(String(colonnumL));
 $('#colon_denom_rght').text(String(colonnumL));
 $('#word_denom_rght').text(String(colonnumL));
-if (colondnmL < 10) var fractiondenomL = ($('#fraction_left').text())[1];
+if (colondnmL < 10 && colonnumR < 10) var fractiondenomL = ($('#fraction_left').text())[1];
 else var fractiondenomL = ($('#fraction_left').text()).slice(1, 3);
 if (colonnumR < 10) var fractionnumR = ($('#fraction_rght').text())[0];
 else var fractionnumR = ($('#fraction_rght').text()).slice(0, 2);
