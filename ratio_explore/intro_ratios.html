@@ -217,6 +217,7 @@ $('#clearButton').bind('click', function(evt) {
 });
 $('#resetButton').bind('click', function(){location.reload();})
 $('#hole_left').bind('click', function(evt) {
+evt.preventDefault();
 if (Number($('#colon_num_left').text()) == 40) return;
 var circle = Physics.body('circle', {x : 75, y : -10, vx : -0.1, vy : 0.1, radius : 15, cof : 0.8, mass : 0.09, restitution : 0.9, name : 'sball'});
 circle.view = new Image();
@@ -239,6 +240,7 @@ runFractionRight();
 });
 
 $('#hole_right').bind('click', function(evt) {
+evt.preventDefault();
 if (Number($('#colon_num_rght').text()) == 40) return;
 var circle = Physics.body('circle', {x : 155, y : -10, vx : 0.1, vy : 0.1, radius : 16.5, cof : 0.8, mass : 0.13, restitution : 0.99, name : 'bball'});
 circle.view = new Image();
