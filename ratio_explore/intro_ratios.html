@@ -215,7 +215,8 @@ $('#clearButton').bind('click', function(evt) {
    $('#fraction_rght').text('1/1');
    runFractionRight();
 });
-$('#resetButton').bind('click', function(){location.reload();})
+$('#resetButton').bind('click', function(){location.reload();});
+   
 $('#hole_left').bind('click', function(evt) {
 evt.preventDefault();
 if (Number($('#colon_num_left').text()) == 40) return;
@@ -224,15 +225,20 @@ circle.view = new Image();
 circle.view.src = 'soccerball.png';
 physicsLab.add(circle);
 var colonnumL = Number($('#colon_num_left').text());
+var colonnumR = Number($('#colon_num_rght').text());
+var colondnmL = Number($('#colon_denom_left').text());
 var colondnmR = Number($('#colon_denom_rght').text());
+
 colonnumL += 1;
 colondnmR += 1;
 $('#colon_num_left').text(String(colonnumL));
 $('#word_num_left').text(String(colonnumL));
 $('#colon_denom_rght').text(String(colonnumL));
 $('#word_denom_rght').text(String(colonnumL));
-var fractiondenomL = ($('#fraction_left').text())[1];
-var fractionnumR = ($('#fraction_rght').text())[0];
+if (colondnmL < 10) var fractiondenomL = ($('#fraction_left').text())[1];
+else var fractiondenomL = ($('#fraction_left').text()).slice(1, 3);
+if (colonnumR < 10) var fractionnumR = ($('#fraction_rght').text())[0];
+else var fractionnumR = ($('#fraction_rght').text()).slice(0, 2);
 $('#fraction_left').text(String(colonnumL) + '/' + fractiondenomL);
 $('#fraction_rght').text(fractionnumR + '/' + String(colonnumL));
 runFractionLeft();
