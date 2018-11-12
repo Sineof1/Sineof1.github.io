@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='physicsjs-full.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<title>Intro to Ratios Explore</title>
+</head>
+
+<style>
+#vidwrapper {
+   display:block;
+   margin:35px auto;
+   width:448px;
+   height:253.125px;
+   border-left:1px dashed gray;
+   border-right:1px dashed gray;
+   border-top:1px dashed gray;
+}
+#buckets_container {
+   position:relative;
+   margin:-35px auto 0 auto;
+   width:450px;
+   height:260px;
+   border-bottom:1px solid gray;
+   box-shadow:inset 0 0 5px rgba(0, 0, 255, 0.2);
+   cursor:pointer;
+   z-index:10;
+}
+.ratio_bucket {
+   position:absolute;
+   display:inline;
+   width:50%;
+   height:260px;
+}
+#numbers_wrapper {
+   position:relative;
+   margin:0 auto;
+   width:450px;
+   height:150px;
+   background-color:rgba(0, 0, 255, 0.1);
+}
+.numbers {
+   position:absolute;
+   display:inline-flex;
+   flex-direction:column;
+   align-items:center;
+   justify-content:center;
+   width:50%;
+   height:150px;
+   font-family:sans-serif;
+   font-size:24px;
+   box-shadow:inset 0 0 2px #fff;
+}
+.fraction, .top, .bottom {
+   padding:0 4px;
+   font-size:18px;
+}
+.fraction {
+   display:inline-block;
+   text-align:center;
+   vertical-align:-12px;
+   margin-top:20px;
+   margin-bottom:20px;
+}
+.bottom{
+   border-top:1px solid #000;
+   display:block;
+   padding:0 5px;
+}
+#label_wrapper {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:450px;
+   height:40px;
+   margin:0 auto;
+   font-family:sans-serif;
+   font-size:20px;
+   font-variant:small-caps;
+   background-color:rgba(0, 0, 255, 0.2);
+}
+.hole {
+   position:absolute;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:75px;
+   height:13px;
+   top:-20px;
+   z-index:2;
+   cursor:pointer;
+   background-color:white;
+   border-left:1px solid rgba(0, 0, 255, 0.2);
+   border-right:1px solid rgba(0, 0, 255, 0.2);
+}
+#hole_left {
+   left:35px;
+   border-top:10px groove rgb(9,118,221);
+}
+#hole_right {
+   right:35px;
+   border-top:10px groove #D67338;
+}
+#playButton, #resetButton, #clearButton {
+   position:fixed;
+   width:50px;
+   height:50px;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   border-radius:50%;
+   box-shadow:0 0 5px #ccc;
+   font-variant:small-caps;
+   font-family:sans-serif;
+   font-size:16px;
+   background-color:lightgreen;
+   border:1px solid gray;
+   color:white;
+   text-shadow:0 0 2px #000;
+   cursor:pointer;
+   z-index:99;
+}
+#clearButton {
+   background-color:red;
+}
+#resetButton {
+   background-color:brown;
+}
+</style>
+
+<body>
+<video id='vidwrapper' src='ratio_explore_vid.mp4'></video>
+<div id='buckets_container'>
+<div class='hole' id='hole_left'></div>
+<div class='hole' id='hole_right'></div>
+<div class='ratio_bucket' id='bucket_left' style='border-right:1px dashed gray;'></div>
+<div class='ratio_bucket' id='bucket_rght' style='left:225px;'></div>
+</div>
+<div id='label_wrapper'>⚽ to 🏀 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🏀 to ⚽</div>
+<div id='numbers_wrapper'>
+<div class='numbers' id='numbers_left'>
+<div><span id='colon_num_left'>1</span>&nbsp;:&nbsp;<span id='colon_denom_left'>1</span></div>
+<div><span class='fraction' id='fraction_left'>1/1</span></div>
+<div><span id='word_num_left'>1</span> to <span id='word_denom_left'>1</span></div>
+</div>
+<div class='numbers' id='numbers_right' style='left:225px;'>
+<div><span id='colon_num_rght'>1</span>&nbsp;:&nbsp;<span id='colon_denom_rght'>1</span></div>
+<div><span class='fraction' id='fraction_rght'>1/1</span></div>
+<div><span id='word_num_rght'>1</span> to <span id='word_denom_rght'>1</span></div>
+</div>
+</div>
+<div id='playButton'>play</div>
+<div id='clearButton'>clear</div>
+<div id='resetButton'>reset</div>
+</body>
+<script src='physics_left.js'></script>
+<script src='physics_right.js'></script>
+</html>
+
+<script>
+var timer;
+$('#playButton').bind('click', function(evt) {
+   evt.preventDefault();
+   var removes = physicsLab.find(function(b) {return b.name == 'sball' || b.name == 'bball';});
+   for (var a = 0; a < removes.length - 1; a++) physicsLab.remove(removes[a]);
+   var removes = physicsLab2.find(function(b) {return b.name == 'sball' || b.name == 'bball';});
+   for (var a = 0; a < removes.length - 1; a++) physicsLab2.remove(removes[a]);
+   $('#colon_num_left').text('1');
+   $('#colon_denom_left').text('1');
+   $('#word_num_left').text('1');
+   $('#word_denom_left').text('1');
+   $('#fraction_left').text('1/1');
+   runFractionLeft();
+   $('#colon_num_rght').text('1');
+   $('#colon_denom_rght').text('1');
+   $('#word_num_rght').text('1');
+   $('#word_denom_rght').text('1');
+   $('#fraction_rght').text('1/1');
+   runFractionRight();
+   var vid1 = document.getElementById('vidwrapper');
+   vid1.currentTime = 0;
+   vid1.play();
+   timer = setInterval(function(){
+      var vid = document.getElementById('vidwrapper');
+      if (vid.currentTime >= 20) {
+      $('#hole_left, #hole_right, #playButton, #clearButton').css({'pointer-events' : 'all'});
+      clearInterval(timer);
+      }
+   }, 500);
+   setTimeout(function(){$('#hole_right').trigger('click');}, 16000);
+   $('#playButton').css({'pointer-events' : 'none'});
+   $('#clearButton').css({'pointer-events' : 'none'});
+   $('#hole_left').css({'pointer-events' : 'none'});
+   $('#hole_right').css({'pointer-events' : 'none'});
+});
+$('#clearButton').bind('click', function(evt) {
+   var removes = physicsLab.find(function(b) {return b.name == 'sball' || b.name == 'bball';});
+   for (var a = 0; a < removes.length - 1; a++) physicsLab.remove(removes[a]);
+   var removes = physicsLab2.find(function(b) {return b.name == 'sball' || b.name == 'bball';});
+   for (var a = 0; a < removes.length - 1; a++) physicsLab2.remove(removes[a]);
+   $('#colon_num_left').text('1');
+   $('#colon_denom_left').text('1');
+   $('#word_num_left').text('1');
+   $('#word_denom_left').text('1');
+   $('#fraction_left').text('1/1');
+   runFractionLeft();
+   $('#colon_num_rght').text('1');
+   $('#colon_denom_rght').text('1');
+   $('#word_num_rght').text('1');
+   $('#word_denom_rght').text('1');
+   $('#fraction_rght').text('1/1');
+   runFractionRight();
+});
+$('#resetButton').bind('click', function(){location.reload();})
+$('#hole_left').bind('click', function(evt) {
+var circle = Physics.body('circle', {x : 75, y : -10, vx : -0.1, vy : 0.1, radius : 15, cof : 0.8, mass : 0.09, restitution : 0.9, name : 'sball'});
+circle.view = new Image();
+circle.view.src = 'soccerball.png';
+physicsLab.add(circle);
+var colonnumL = Number($('#colon_num_left').text());
+var colondnmR = Number($('#colon_denom_rght').text());
+colonnumL += 1;
+colondnmR += 1;
+$('#colon_num_left').text(String(colonnumL));
+$('#word_num_left').text(String(colonnumL));
+$('#colon_denom_rght').text(String(colonnumL));
+$('#word_denom_rght').text(String(colonnumL));
+var fractiondenomL = ($('#fraction_left').text())[1];
+var fractionnumR = ($('#fraction_rght').text())[0];
+$('#fraction_left').text(String(colonnumL) + '/' + fractiondenomL);
+$('#fraction_rght').text(fractionnumR + '/' + String(colonnumL));
+runFractionLeft();
+runFractionRight();
+});
+
+$('#hole_right').bind('click', function(evt) {
+var circle = Physics.body('circle', {x : 155, y : -10, vx : 0.1, vy : 0.1, radius : 16.5, cof : 0.8, mass : 0.13, restitution : 0.99, name : 'bball'});
+circle.view = new Image();
+circle.view.src = 'basketball.png';
+physicsLab2.add(circle);
+var colonnumR = Number($('#colon_num_rght').text());
+var colondnmL = Number($('#colon_denom_left').text());
+colonnumR += 1;
+colondnmL += 1;
+$('#colon_num_rght').text(String(colonnumR));
+$('#word_num_rght').text(String(colonnumR));
+$('#colon_denom_left').text(String(colonnumR));
+$('#word_denom_left').text(String(colonnumR));
+var fractiondenomR = ($('#fraction_rght').text())[1];
+var fractionnumL = ($('#fraction_left').text())[0];
+$('#fraction_rght').text(String(colonnumR) + '/' + fractiondenomR);
+$('#fraction_left').text(fractionnumL + '/' + String(colonnumR));
+runFractionLeft();
+runFractionRight();
+});
+
+$('.fraction').each(function(key, value) {
+$this = $(this);
+var split = $this.html().split("/");
+$this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')});
+
+function runFractionLeft() {
+$('#fraction_left').each(function(key, value) {
+$this = $(this);
+var split = $this.html().split("/");
+$this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')});
+}
+function runFractionRight() {
+$('#fraction_rght').each(function(key, value) {
+$this = $(this);
+var split = $this.html().split("/");
+$this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')});
+}
+
+$('#playButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left - 55});
+$('#clearButton').css({'top' : $('#numbers_wrapper').offset().top - 25, 'left' : $('#numbers_right').offset().left - 25});
+$('#resetButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left + 5});
+$(window).bind('resize', function() {
+   $('#playButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left - 55});
+   $('#clearButton').css({'top' : $('#numbers_wrapper').offset().top - 25, 'left' : $('#numbers_right').offset().left - 25});
+   $('#resetButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left + 5});
+});
+
+</script>
