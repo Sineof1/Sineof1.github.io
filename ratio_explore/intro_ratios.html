@@ -287,6 +287,10 @@ $(window).bind('resize', function() {
    $('#clearButton').css({'top' : $('#numbers_wrapper').offset().top - 25, 'left' : $('#numbers_right').offset().left - 25});
    $('#resetButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left + 5});
 });
-
-$(window).bind('dblclick', function(evt) {evt.preventDefault();});
+$(window).bind('scroll', function() {
+   $('#playButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left - 55});
+   $('#clearButton').css({'top' : $('#numbers_wrapper').offset().top - 25, 'left' : $('#numbers_right').offset().left - 25});
+   $('#resetButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left + 5});
+});
+$(window).bind('dblclick', function(evt) {evt.preventDefault(); return false;});
 </script>
