@@ -188,7 +188,7 @@ $('#playButton').bind('click', function(evt) {
    vid1.play();
    timer = setInterval(function(){
       var vid = document.getElementById('vidwrapper');
-      if (vid.currentTime >= 20) {
+      if (vid.currentTime >= 35) {
       $('#hole_left, #hole_right, #playButton, #clearButton').css({'pointer-events' : 'all'});
       clearInterval(timer);
       }
