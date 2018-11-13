@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2018/02/fracdiv.png'>
+<link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<title>Fraction by Fraction Division</title>
+</head>
+
+<style>
+@font-face {
+    font-family: "Product Sans";
+    src: url(GoogleSans-Regular.ttf) format("truetype");
+}
+.fracInputNum, .fracInputDenom {
+   width:40px;
+   height:33px;
+   outline:none;
+   border:none;
+   box-shadow:0 0 1px #000;
+   font-family:'Product Sans';
+   font-size:20px;
+   text-align:center;
+   margin-right:35px;
+}
+.fracInputNum {
+   border-bottom:1px solid gray;
+   vertical-align:10px;
+}
+#fracControl {
+   position:relative;
+   text-align:center;
+   width:95%;
+   height:150px;
+   margin:0 auto;
+   text-align:center;
+   font-family:'Product Sans';
+   font-size:20px;
+   box-sizing:border-box;
+   padding-top:5px;
+}
+</style>
+
+<body>
+<div id='module4' style='margin:0 auto;'>
+<div style='width:90%;height:540px;visibility:hidden;'></div>
+<div id='fracControl'>
+<span style='position:absolute;left:48.3%;top:17%;'>&divide;</span>
+<input class='fracInputNum' id='fracdividendnum' type='text' maxlength='1' /><input class='fracInputNum' id='fracdivisornum' type='text' maxlength='1' /><br /><input class='fracInputDenom' id='fracdividenddenom' type='text' maxlength='1' /><input class='fracInputDenom' id='fracdivisordenom' type='text' maxlength='1' />
+</div>
+</body>
+</html>
+
+<script src='fracbyfrac.js'></script>
