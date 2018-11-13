@@ -256,10 +256,10 @@ var split = $this.html().split("/");
 $this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')});
 }
 
-$('#playButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left - 55});
+$('#playButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left - 25});
 $('#resetButton').css({'top' : $('#numbers_wrapper').offset().top - 25, 'left' : $('#numbers_right').offset().left - 25});
 $(window).bind('resize', function() {
-   $('#playButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left - 55});
+   $('#playButton').css({'top' : $('#buckets_container').offset().top - 25, 'left' : $('#bucket_rght').offset().left - 25});
    $('#resetButton').css({'top' : $('#numbers_wrapper').offset().top - 25, 'left' : $('#numbers_right').offset().left - 25});
 });
 $(window).bind('touchmove', function() {
