@@ -831,10 +831,10 @@ $(window).unload(function(evt) {
    socket.send(JSON.stringify({butn: 'unload'}));
 });
 
-var socket = new WebSocket("wss://node2.wsninja.io");
+//var socket = new WebSocket("wss://node2.wsninja.io");
 //var socket = new WebSocket('ws://achex.ca:4010');
-socket.addEventListener('open', function(event) {socket.send(JSON.stringify({ guid: "test" }));});
-socket.addEventListener('message', function(event) {handleMessage(JSON.parse(event.data));});
+//socket.addEventListener('open', function(event) {socket.send(JSON.stringify({ guid: "test" }));});
+//socket.addEventListener('message', function(event) {handleMessage(JSON.parse(event.data));});
 
 function handleMessage(message) {
         if (message.butn === 'mouse') handleMouse(message);
