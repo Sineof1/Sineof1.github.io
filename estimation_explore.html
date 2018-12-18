@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:image" content=''>
+<link rel="icon" href="https://guzintamath.com/images/guzintafish128.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js"></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<title>Estimation Explore</title>
+</head>
+
+<style>
+#estimation_box, #problem_box {
+   width:750px;
+   height:300px;
+   border-radius:5px;
+   margin:0 auto;
+   cursor:none;
+   padding-left:10px;
+   padding-right:10px;
+   position:relative;
+}
+#problem_box {
+   box-shadow:0 0 5px #ccc;
+   height:100px;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-family:sans-serif;
+   font-size:30px;
+   background-color:teal;
+   color:white;
+   cursor:auto;
+}
+.scaleInput {
+   display:inline;
+   position:absolute;
+   top:162.5px;
+   height:75px;
+   width:75px;
+   outline:none;
+   font-family:sans-serif;
+   font-size:35px;
+   border-radius:5px;
+   box-shadow:0 0 3px brown;
+   border:none;
+   text-align:center;
+   z-index:1;
+}
+.label {
+   width:77px;
+   height:40px;
+   display:inline-flex;
+   align-items:center;
+   justify-content:center;
+   background-color:brown;
+   color:white;
+   font-family:sans-serif;
+   font-size:22px;
+   z-index:0;
+   border-bottom-left-radius:5px;
+   border-bottom-right-radius:5px;
+   font-variant:small-caps;
+}
+</style>
+
+<body>
+<input class='scaleInput' id='scaleInputL' type='text' value='0' maxlength='3'></input>
+<p class='label' id='startLabel'>start</p>
+<div id='estimation_box'></div>
+<input class='scaleInput' id='scaleInputR' type='text' value='750' maxlength='3'></input>
+<p class='label' id='endLabel'>end</p>
+<div id='problem_box'>2 + 2</div>
+</body>
+
+</html>
+
+<script>
+var curLBound = 0;
+var curRBound = 750;
+var curAnswer = Math.sqrt(2) * Math.sqrt(3);
+$('#scaleInputL').offset({'left' : $('#estimation_box').offset().left - 80});
+$('#scaleInputR').offset({'left' : $('#estimation_box').offset().left + 775});
+$('#startLabel').offset({'top' : $('#scaleInputL').offset().top + 74, 'left' : $('#scaleInputL').offset().left - 1});
+$('#endLabel').offset({'top' : $('#scaleInputR').offset().top + 74, 'left' : $('#scaleInputR').offset().left - 1});
+var scale = d3.scaleLinear()
+              .domain([curLBound, curRBound])
+              .range([curLBound, curRBound]);
+var axisT = d3.axisTop(scale)
+              .tickSize(5)
+              .ticks(10);
+var axisB = d3.axisBottom(scale)
+              .tickSize(5)
+              .ticks(10);
+
+var svg = d3.select('#estimation_box')
+            .append('svg')
+            .attr('id', 'controlSVG')
+            .attr('width', 750).attr('height', 300)
+            .style('position', 'absolute');
+
+svg.append('g')
+   .attr('id', 'controlT')
+   .attr('transform', 'translate(5, 30)')
+   .call(axisT);
+svg.append('g')
+   .attr('id', 'controlB')
+   .attr('transform', 'translate(5, 270)')
+   .call(axisB);
+
+svg.on('mousemove', function() {
+   svg.selectAll('#scrollLine').remove();
+   svg.append('line')
+      .attr('id', 'scrollLine')
+      .attr('x1', d3.mouse(this)[0]).attr('y1', 33)
+      .attr('x2', d3.mouse(this)[0]).attr('y2', 268)
+      .style('stroke', 'rgba(160, 82, 45, 0.5)').style('stroke-width', 5)
+      .style('stroke-linecap', 'round').style('stroke-linejoin', 'round');
+});
+svg.on('mouseleave', function() {svg.selectAll('#scrollLine').remove();});
+svg.on('click', function(evt) {
+   if (curAnswer > curRBound || curAnswer < curLBound) return;
+   var range = curRBound - curLBound;
+   var loc = (d3.mouse(this)[0] / 750) * range + curLBound - (5/750 * range);
+   var gold = Math.abs(curAnswer - loc) < range / 100;
+   var purple = Math.abs(curAnswer - loc) < range / 20;
+   var red = Math.abs(curAnswer - loc) < range / 10;
+   var green = Math.abs(curAnswer - loc) < range / 4;
+   if (gold) var lineColor = 'rgba(255, 215, 0, 0.65)';
+   else if (purple) var lineColor = 'rgba(255, 0, 255, 0.3)';
+   else if (red) var lineColor = 'rgba(255, 0, 0, 0.3)';
+   else if (green) var lineColor = 'rgba(0, 255, 0, 0.3)';
+   else var lineColor = 'rgba(0, 0, 255, 0.3)';
+   svg.append('line')
+      .attr('class', 'markerLine')
+      .attr('x1', d3.mouse(this)[0]).attr('y1', 33)
+      .attr('x2', d3.mouse(this)[0]).attr('y2', 268)
+      .style('stroke', lineColor).style('stroke-width', 5);
+});
+
+$('#scaleInputL').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var num = parseFloat($(this).val());
+   if (isNaN(num)) return;
+   curLBound = num;
+   scale.domain([curLBound, curRBound]);
+   d3.select('#controlSVG').select('#controlT').call(axisT);
+   d3.select('#controlSVG').select('#controlB').call(axisB);
+   svg.selectAll('.markerLine').remove();
+});
+$('#scaleInputR').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var num = parseFloat($(this).val());
+   if (isNaN(num)) return;
+   curRBound = num;
+   scale.domain([curLBound, curRBound]);
+   d3.select('#controlSVG').select('#controlT').call(axisT);
+   d3.select('#controlSVG').select('#controlB').call(axisB);
+   svg.selectAll('.markerLine').remove();
+});
+
+katex.render("\\mathtt{\\sqrt{2}\\cdot\\sqrt{3}}", problem_box);
+</script>
