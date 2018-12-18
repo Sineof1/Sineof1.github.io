@@ -216,8 +216,8 @@ function newGraph() {
       .attr('id', 'transLine')
       .attr('x1', function(d){return d.x1;}).attr('y1', function(d){return d.y1;})
       .attr('x2', function(d){return d.x2;}).attr('y2', function(d){return d.y2;})
-      .style('stroke', 'aqua').style('stroke-width', 5).style('opacity', 0)
-      .style('stroke-dasharray', '10,5');
+      .style('stroke', 'rgba(255, 0, 255, 0.75)').style('stroke-width', 5).style('opacity', 0)
+      .style('stroke-dasharray', '10,6').style('stroke-linecap', 'round');
    svg.selectAll('.axes')
       .data(xandyaxes)
       .enter()
