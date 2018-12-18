@@ -163,4 +163,11 @@ $('#scaleInputR').bind('keyup', function(evt) {
 });
 
 katex.render("\\mathtt{\\sqrt{2}\\cdot\\sqrt{3}}", problem_box);
+   
+$(window).resize(function() {
+   $('#scaleInputL').offset({'left' : $('#estimation_box').offset().left - 80});
+   $('#scaleInputR').offset({'left' : $('#estimation_box').offset().left + 775});
+   $('#startLabel').offset({'top' : $('#scaleInputL').offset().top + 74, 'left' : $('#scaleInputL').offset().left - 1});
+   $('#endLabel').offset({'top' : $('#scaleInputR').offset().top + 74, 'left' : $('#scaleInputR').offset().left - 1});
+});
 </script>
