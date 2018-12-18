@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='icon' href='cl_logo.JPG'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css'>
+<script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
+<title>CLI Problem Prototype</title>
+</head>
+
+<style>
+@font-face {
+    font-family: 'Product Sans';
+    src: url(GoogleSans-Regular.ttf) format('truetype');
+}
+html, body {
+  height:100%;
+  font-family:'Product Sans';
+  padding:0;
+  margin:0;
+  overflow:auto;
+  background:rgb(28, 85, 105);
+}
+.page-container {
+  margin:50px;
+}
+.panel-container {
+  display:flex;
+  flex-direction:row;
+  border:1px solid silver;
+  overflow:hidden;
+  xtouch-action:none;
+  border-radius:10px;
+}
+.panel-left {
+  flex:0 0 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:75vh;
+  min-height:200px;
+  white-space:pre-wrap;
+  background-color:#fafafa;
+  color:black;
+}
+.splitter {
+  flex:0 0 auto;
+  width:18px;
+  background:url(vsizegrip.png) center center no-repeat #eaeaea;
+  min-height:200px;
+  cursor:col-resize;
+}
+.panel-right {
+  flex:1 1 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:75vh;
+  min-height:200px;
+  color:black;
+  background-color:white;
+}
+label {
+  font-size:1.2em;
+  display:block;
+  font-weight:bold;
+  margin:30px 0 10px;
+}
+#demo_grapher {
+  width:625px;
+  height:71.25vh;
+  border:1px solid blue;
+  overflow:hidden;
+}
+.fraction, .top, .bottom {
+    padding: 0 4px;
+    font-size:18px;
+}
+.fraction {
+    display: inline-block;
+    text-align: center;
+    vertical-align:-12px;
+}
+.bottom{
+    border-top: 1px solid #000;
+    display: block;
+    padding:0 5px;
+}
+input {
+   margin-left:5px;
+   width:75px;
+   height:45px;
+   border:none;
+   border-radius:5px;
+   box-shadow:0 0 3px #ccc;
+   text-align:center;
+   font-size:18px;
+   font-family:sans-serif;
+}
+</style>
+
+<body>
+<body>
+<div class='page-container'>
+<div class='panel-container'>
+<div class='panel-left'>
+<p id='intro_text'><span id='math1'></span> is similar to <span id='math2'></span>.</p>
+<p id='disclose1'>Enter the slope of <span id='math3'></span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' id='slope1' /></p>
+<p id='disclose2' style='opacity:0;'>Enter the slope of <span id='math4'></span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' id='slope2' /></p>
+<p id='disclose3' style='opacity:0;'>Enter the slope of the line: &nbsp;&nbsp;&nbsp;<input type='text' id='slope3' /></p>
+<p id='disclose4' style='opacity:0;'>Enter the y-intercept: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' id='y-intercept' /></p>
+<p id='disclose5' style='opacity:0;'>Enter an equation for the line: y = <input type='text' id='equation1' />&thinsp;x + <input type='text' id='equation2' /></p>
+</div>
+<div class='splitter'></div>
+<div class='panel-right'>
+<div id='demo_grapher'></div>
+</div>
+</div>
+</div>
+</body>
+
+</html>
+<script src='resizable.js'></script>
+<script>
+$('.panel-left').resizable({
+   handleSelector: '.splitter',
+   resizeHeight: false
+ });
+ $('.panel-top').resizable({
+   handleSelector: '.splitter-horizontal',
+   resizeWidth: false
+ });
+
+katex.render('\\mathtt{\\Delta{ABC}}', math1);
+katex.render('\\mathtt{\\Delta{DEF}}', math2);
+katex.render('\\mathtt{\\overline{DF}}', math3);
+katex.render('\\mathtt{\\overline{AC}}', math4);
+</script>
+
+<script>
+var triangles = [{points : 'M 125 350 L 425 350 L 425 200 Z', color : 'orange'}, {points : 'M 225 300 L 325 300 L 325 250 Z', color : 'teal'}];
+var highlghts = [{x1 : 225, x2 : 325, y1 : 300, y2 : 250}, {x1 : 125, x2 : 425, y1 : 350, y2 : 200}];
+var trilabels = [{x : 125, y : 365, label : 'A'}, {x : 425, y : 365, label : 'B'}, {x : 425, y : 196, label : 'C'}, {x : 225, y : 315, label : 'D'},
+                 {x : 325, y : 315, label : 'E'}, {x : 325, y : 245, label : 'F'}];
+var fullLines = ['M -25 425 L 625 100'];
+var xandyaxes = [{x : 175, y : 325}];
+
+var svg = d3.select('#demo_grapher')
+            .append('svg')
+            .attr('width', '100%').attr('height', '100%');
+function newGraph() {
+   d3.select('#demo_grapher').selectAll('svg').remove();
+   var svg = d3.select('#demo_grapher')
+               .append('svg')
+               .attr('width', '100%').attr('height', '100%');
+   for (var a = 25; a < 625; a += 25) {
+      svg.append('line')
+         .attr('x1', a).attr('y1', 0).attr('x2', a).attr('y2', 600).attr('class', 'gridLine')
+         .style('stroke', 'gray').style('stroke-width', 0.5).style('opacity', 1);
+      svg.append('line')
+         .attr('x1', 0).attr('y1', a).attr('x2', 625).attr('y2', a).attr('class', 'gridLine')
+         .style('stroke', 'gray').style('stroke-width', 0.5).style('opacity', 1);
+   }
+   svg.selectAll('path')
+      .data(triangles)
+      .enter()
+      .append('path')
+      .attr('class', 'triangle')
+      .attr('d', function(d){return d.points;})
+      .style('stroke', 'black').style('fill', function(d){return d.color;})
+      .style('fill-opacity', 0.5).style('opacity', 1);
+   svg.selectAll('text')
+      .data(trilabels)
+      .enter()
+      .append('text')
+      .attr('class', 'tritext')
+      .attr('x', function(d){return d.x;})
+      .attr('y', function(d){return d.y;})
+      .text(function(d){return d.label;})
+      .style('font-size', '14px').style('font-family', 'sans-serif')
+      .style('fill', 'black').style('stroke', 'none').style('opacity', 1);
+   svg.append('line')
+      .attr('id', 'highlightLine1')
+      .attr('x1', highlghts[0].x1).attr('y1', highlghts[0].y1)
+      .attr('x2', highlghts[0].x2).attr('y2', highlghts[0].y2)
+      .style('stroke', 'aqua').style('stroke-width', 5).style('stroke-linecap', 'round')
+      .style('opacity', 1);
+   svg.append('line')
+      .attr('id', 'highlightLine2')
+      .attr('x1', highlghts[1].x1).attr('y1', highlghts[1].y1)
+      .attr('x2', highlghts[1].x2).attr('y2', highlghts[1].y2)
+      .style('stroke', 'aqua').style('stroke-width', 5).style('stroke-linecap', 'round')
+      .style('opacity', 0);
+   svg.selectAll('#fullLine')
+      .data(fullLines)
+      .enter()
+      .append('path')
+      .attr('id', 'fullLine')
+      .attr('d', function(d){return d;})
+      .style('stroke', 'aqua').style('stroke-width', 5).style('opacity', 0);
+   svg.selectAll('.axes')
+      .data(xandyaxes)
+      .enter()
+      .append('line')
+      .attr('class', 'axis').attr('id', 'yaxis')
+      .attr('x1', function(d){return d.x;}).attr('x2', function(d){return d.x;})
+      .attr('y1', 0).attr('y2', 625)
+      .style('stroke', 'black').style('stroke-width', 3).style('opacity', 0);
+   svg.selectAll('.axes')
+      .data(xandyaxes)
+      .enter()
+      .append('line')
+      .attr('class', 'axis').attr('id', 'xaxis')
+      .attr('y1', function(d){return d.y;}).attr('y2', function(d){return d.y;})
+      .attr('x1', 0).attr('x2', 625)
+      .style('stroke', 'black').style('stroke-width', 3).style('opacity', 0);
+}
+
+$('#slope1').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 0.5) {
+   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
+   d3.select('#highlightLine1')
+     .transition()
+     .duration(1000)
+     .style('opacity', 0);
+   d3.select('#highlightLine2')
+     .transition()
+     .duration(1000)
+     .style('opacity', 1);
+   $('#slope2').focus();
+   }
+});
+$('#slope2').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 0.5) {
+   $('#disclose3').animate({'opacity' : '+=1'}, 1000);
+   d3.select('#highlightLine2')
+     .transition()
+     .duration(1000)
+     .style('opacity', 0);
+   d3.select('#fullLine')
+     .transition()
+     .duration(1000)
+     .style('opacity', 1);
+   d3.selectAll('.gridLine')
+     .transition()
+     .duration(1000)
+     .style('opacity', 0);
+   d3.selectAll('.tritext')
+     .transition()
+     .duration(1000)
+     .style('opacity', 0);
+   $('#slope3').focus();
+   }
+});
+$('#slope3').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 0.5) {
+   $('#disclose4').animate({'opacity' : '+=1'}, 1000);
+   d3.selectAll('.axis')
+     .transition()
+     .duration(1000)
+     .style('opacity', 1);
+   d3.selectAll('.gridLine')
+     .transition()
+     .duration(2500)
+     .style('opacity', 1);
+   d3.selectAll('.triangle')
+     .transition()
+     .duration(2500)
+     .style('opacity', 0);
+   $('#y-intercept').focus();
+   }
+});
+$('#y-intercept').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var answer = Number($(this).val());
+   if (answer === 0) {
+   $('#disclose5').animate({'opacity' : '+=1'}, 1000);
+   $('#equation1').focus();
+   }
+});
+newGraph();
+</script>
+
+<script>
+$('.fraction').each(function(key, value) {
+  $this = $(this);
+  var split = $this.html().split("/");
+  $this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')
+});
+</script>
