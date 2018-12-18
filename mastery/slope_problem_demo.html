@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2018/12/slope_demo.png'>
 <meta charset = 'utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<link rel='icon' href='cl_logo.jpg'>
+<link rel='icon' href='cl_logo.JPG'>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css'>
 <script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
-<title>Slope (8-EE.6)</title>
+<title>CLI Problem Prototype</title>
 </head>
 
 <style>
@@ -78,6 +77,20 @@ label {
   border:1px solid blue;
   overflow:hidden;
 }
+.fraction, .top, .bottom {
+    padding: 0 4px;
+    font-size:18px;
+}
+.fraction {
+    display: inline-block;
+    text-align: center;
+    vertical-align:-12px;
+}
+.bottom{
+    border-top: 1px solid #000;
+    display: block;
+    padding:0 5px;
+}
 input {
    margin-left:5px;
    width:75px;
@@ -89,6 +102,9 @@ input {
    font-size:18px;
    font-family:sans-serif;
 }
+p {
+   margin-top:5px;
+}
 </style>
 
 <body>
@@ -97,11 +113,11 @@ input {
 <div class='panel-container'>
 <div class='panel-left'>
 <p id='intro_text'><span id='math1'></span> is similar to <span id='math2'></span>.</p>
-<p id='disclose1'>Enter the slope of <span id='math3'></span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' id='slope1' /></p>
-<p id='disclose2' style='opacity:0;'>Enter the slope of <span id='math4'></span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' id='slope2' /></p>
-<p id='disclose3' style='opacity:0;'>Enter the slope of the line: &nbsp;&nbsp;&nbsp;<input type='text' id='slope3' /></p>
-<p id='disclose4' style='opacity:0;'>Enter the y-intercept: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' id='y-intercept' /></p>
-<p id='disclose5' style='opacity:0;'>Enter an equation for the line: y = <input type='text' id='equation1' />&thinsp;x + <input type='text' id='equation2' /></p>
+<p id='disclose1'>Enter the slope of <span id='math3'></span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&#8202;<input type='text' id='slope1' /></p>
+<p id='disclose2' style='opacity:0;'>Enter the slope of <span id='math4'></span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&#8202;<input type='text' id='slope2' /></p>
+<p id='disclose3' style='opacity:0;'>Enter the slope of the line: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&#8202;<input type='text' id='slope3' /></p>
+<p id='disclose4' style='opacity:0;'>Enter an equation for the line:&nbsp;&nbsp;&nbsp;&nbsp;<span id='math5'></span><input type='text' id='equation1' />&thinsp;<span id='math6'></span></p>
+<p id='disclose5' style='opacity:0;'>Enter an equation for the line if it is translated up 5 units: <br /><br /><div id='equation' style='text-align:center;opacity:0;'>y = <input type='text' id='equation2' />&thinsp;x + <input type='text' id='equation3' /></div></p>
 </div>
 <div class='splitter'></div>
 <div class='panel-right'>
@@ -109,7 +125,6 @@ input {
 </div>
 </div>
 </div>
-<img src='https://guzintamath.com/textsavvy/wp-content/uploads/2018/12/slope_demo.png' style='position:fixed;visibility:hidden;' />
 </body>
 
 </html>
@@ -128,6 +143,8 @@ katex.render('\\mathtt{\\Delta{ABC}}', math1);
 katex.render('\\mathtt{\\Delta{DEF}}', math2);
 katex.render('\\mathtt{\\overline{DF}}', math3);
 katex.render('\\mathtt{\\overline{AC}}', math4);
+katex.render('\\mathtt{y=}', math5);
+katex.render('\\mathtt{x}', math6);
 </script>
 
 <script>
@@ -136,6 +153,7 @@ var highlghts = [{x1 : 225, x2 : 325, y1 : 300, y2 : 250}, {x1 : 125, x2 : 425, 
 var trilabels = [{x : 125, y : 365, label : 'A'}, {x : 425, y : 365, label : 'B'}, {x : 425, y : 196, label : 'C'}, {x : 225, y : 315, label : 'D'},
                  {x : 325, y : 315, label : 'E'}, {x : 325, y : 245, label : 'F'}];
 var fullLines = ['M -25 425 L 625 100'];
+var transline = [{x1 : -25, y1 : 425, x2 : 625, y2 : 100}];
 var xandyaxes = [{x : 175, y : 325}];
 
 var svg = d3.select('#demo_grapher')
@@ -191,6 +209,15 @@ function newGraph() {
       .attr('id', 'fullLine')
       .attr('d', function(d){return d;})
       .style('stroke', 'aqua').style('stroke-width', 5).style('opacity', 0);
+   svg.selectAll('#transLine')
+      .data(transline)
+      .enter()
+      .append('line')
+      .attr('id', 'transLine')
+      .attr('x1', function(d){return d.x1;}).attr('y1', function(d){return d.y1;})
+      .attr('x2', function(d){return d.x2;}).attr('y2', function(d){return d.y2;})
+      .style('stroke', 'aqua').style('stroke-width', 5).style('opacity', 0)
+      .style('stroke-dasharray', '10,5');
    svg.selectAll('.axes')
       .data(xandyaxes)
       .enter()
@@ -269,15 +296,33 @@ $('#slope3').bind('keyup', function(evt) {
      .transition()
      .duration(2500)
      .style('opacity', 0);
-   $('#y-intercept').focus();
+   $('#equation1').focus();
    }
 });
-$('#y-intercept').bind('keyup', function(evt) {
+$('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
-   var answer = Number($(this).val());
-   if (answer === 0) {
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 0.5) {
    $('#disclose5').animate({'opacity' : '+=1'}, 1000);
-   $('#equation1').focus();
+   $('#equation').animate({'opacity' : '+=1'}, 1000);
+   $('#equation2').focus();
+   d3.select('#transLine')
+     .transition()
+     .duration(500)
+     .style('opacity', 1)
+     .transition()
+     .duration(1000)
+     .attr('y1', function(d){return d.y1 - 125;})
+     .attr('y2', function(d){return d.y2 - 125;});
+   }
+});
+$('#equation2').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 0.5) {
+   $('#equation3').focus();
    }
 });
 newGraph();
