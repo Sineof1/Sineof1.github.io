@@ -105,6 +105,16 @@ input {
 p {
    margin-top:5px;
 }
+#nextProblem {
+   position:fixed;
+   bottom:20px;
+   right:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
 </style>
 
 <body>
@@ -125,6 +135,7 @@ p {
 </div>
 </div>
 </div>
+<div id='nextProblem'>next</div>
 </body>
 
 </html>
@@ -238,9 +249,10 @@ function newGraph() {
 
 $('#slope1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
-   if (answer === 0.5) {
+   if (answer === 0.5 || norm_response === '0.5' || norm_response === '.5') {
    $('#disclose2').animate({'opacity' : '+=1'}, 1000);
    d3.select('#highlightLine1')
      .transition()
@@ -329,9 +341,7 @@ newGraph();
 </script>
 
 <script>
-$('.fraction').each(function(key, value) {
-  $this = $(this);
-  var split = $this.html().split("/");
-  $this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')
+$('#nextProblem').bind('click', function() {
+   window.location.href = 'slope_problem_demo2.html';
 });
 </script>
