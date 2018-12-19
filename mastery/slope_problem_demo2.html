@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='icon' href='cl_logo.jpg'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css'>
+<script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
+<title>CLI Problem Prototype</title>
+</head>
+
+<style>
+@font-face {
+    font-family: 'Product Sans';
+    src: url(GoogleSans-Regular.ttf) format('truetype');
+}
+html, body {
+  height:100%;
+  font-family:'Product Sans';
+  padding:0;
+  margin:0;
+  overflow:auto;
+  background:rgb(28, 85, 105);
+}
+.page-container {
+  margin:50px;
+}
+.panel-container {
+  display:flex;
+  flex-direction:row;
+  border:1px solid silver;
+  overflow:hidden;
+  xtouch-action:none;
+  border-radius:10px;
+  width:1250px;
+  height:620px;
+  margin:0 auto;
+}
+.panel-left {
+  flex:0 0 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  white-space:pre-wrap;
+  background-color:#fafafa;
+  color:black;
+}
+.splitter {
+  flex:0 0 auto;
+  width:18px;
+  background:url(vsizegrip.png) center center no-repeat #eaeaea;
+  min-height:200px;
+  cursor:col-resize;
+}
+.panel-right {
+  flex:1 1 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  color:black;
+  background-color:white;
+}
+label {
+  font-size:1.2em;
+  display:block;
+  font-weight:bold;
+  margin:30px 0 10px;
+}
+#demo_grapher {
+  width:625px;
+  height:550px;
+  border:1px solid blue;
+  overflow:hidden;
+}
+.fraction, .top, .bottom {
+    padding: 0 4px;
+    font-size:18px;
+}
+.fraction {
+    display: inline-block;
+    text-align: center;
+    vertical-align:-12px;
+}
+.bottom{
+    border-top: 1px solid #000;
+    display: block;
+    padding:0 5px;
+}
+input {
+   margin-left:5px;
+   width:75px;
+   height:45px;
+   border:none;
+   border-radius:5px;
+   box-shadow:0 0 3px #ccc;
+   text-align:center;
+   font-size:18px;
+   font-family:sans-serif;
+}
+p {
+   margin-top:5px;
+}
+#previousProblem {
+   position:fixed;
+   bottom:20px;
+   left:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
+</style>
+
+<body>
+<body>
+<div class='page-container'>
+<div class='panel-container'>
+<div class='panel-left'>
+<p id='intro_text'><span id='math1'></span> is similar to <span id='math2'></span>.</p>
+<p id='disclose1'>Enter the slope of <span id='math3'></span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;&#8202;&#8202;<input type='text' id='slope1' /></p>
+<p id='disclose2' style='opacity:0;'>Enter the slope of <span id='math4'></span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;&#8202;&#8202;<input type='text' id='slope2' /></p>
+<p id='disclose3' style='opacity:0;'>Enter the slope of both lines: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;<input type='text' id='slope3' /></p>
+<p id='disclose4' style='opacity:0;'>Enter an equation for line m:&nbsp;&nbsp;&nbsp;&nbsp;<span id='math5'></span><input type='text' id='equation1' />&thinsp;<span id='math6'></span></p>
+<p id='disclose5' style='opacity:0;'>Enter an equation for line n:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;<span id='math7'></span><input type='text' id='equation2' />&thinsp;<span id='math8'></span> + <input type='text' id='equation3' /></p>
+</div>
+<div class='splitter'></div>
+<div class='panel-right'>
+<div id='demo_grapher'></div>
+</div>
+</div>
+</div>
+<div id='previousProblem'>previous</div>
+</body>
+
+</html>
+<script src='resizable.js'></script>
+<script>
+$('.panel-left').resizable({
+   handleSelector: '.splitter',
+   resizeHeight: false
+ });
+ $('.panel-top').resizable({
+   handleSelector: '.splitter-horizontal',
+   resizeWidth: false
+ });
+
+katex.render('\\mathtt{\\Delta{PQR}}', math1);
+katex.render('\\mathtt{\\Delta{STV}}', math2);
+katex.render('\\mathtt{\\overline{SV}}', math3);
+katex.render('\\mathtt{\\overline{PR}}', math4);
+katex.render('\\mathtt{y=}', math5);
+katex.render('\\mathtt{x}', math6);
+katex.render('\\mathtt{y=}', math7);
+katex.render('\\mathtt{x}', math8);
+</script>
+
+<script>
+var triangles = [{points : 'M 125 350 L 250 350 L 250 100 Z', color : 'orange'}, {points : 'M 225 400 L 300 400 L 300 250 Z', color : 'teal'}];
+var highlghts = [{x1 : 225, x2 : 300, y1 : 400, y2 : 250}, {x1 : 125, x2 : 250, y1 : 350, y2 : 100}];
+var trilabels = [{x : 125, y : 365, label : 'P'}, {x : 235, y : 345, label : 'Q'}, {x : 250, y : 95, label : 'R'}, {x : 225, y : 415, label : 'S'},
+                 {x : 300, y : 415, label : 'T'}, {x : 300, y : 245, label : 'V'}];
+var linlabels = [{x : 435, y : 12, label : 'm'}, {x : 310, y : 12, label : 'n'}];
+var fullLines = ['M 150 550 L 425 0', 'M 25 550 L 300 0'];
+var transline = [{x1 : -25, y1 : 425, x2 : 625, y2 : 100}];
+var xandyaxes = [{x : 225, y : 400}];
+
+var svg = d3.select('#demo_grapher')
+            .append('svg')
+            .attr('width', '100%').attr('height', '100%');
+function newGraph() {
+   d3.select('#demo_grapher').selectAll('svg').remove();
+   var svg = d3.select('#demo_grapher')
+               .append('svg')
+               .attr('width', '100%').attr('height', '100%');
+   for (var a = 25; a < 625; a += 25) {
+      svg.append('line')
+         .attr('x1', a).attr('y1', 0).attr('x2', a).attr('y2', 600).attr('class', 'gridLine')
+         .style('stroke', 'gray').style('stroke-width', 0.5).style('opacity', 1);
+      svg.append('line')
+         .attr('x1', 0).attr('y1', a).attr('x2', 625).attr('y2', a).attr('class', 'gridLine')
+         .style('stroke', 'gray').style('stroke-width', 0.5).style('opacity', 1);
+   }
+   svg.selectAll('path')
+      .data(triangles)
+      .enter()
+      .append('path')
+      .attr('class', 'triangle')
+      .attr('d', function(d){return d.points;})
+      .style('stroke', 'black').style('fill', function(d){return d.color;})
+      .style('fill-opacity', 0.5).style('opacity', 1);
+   svg.selectAll('text')
+      .data(trilabels)
+      .enter()
+      .append('text')
+      .attr('class', 'tritext')
+      .attr('x', function(d){return d.x;})
+      .attr('y', function(d){return d.y;})
+      .text(function(d){return d.label;})
+      .style('font-size', '14px').style('font-family', 'sans-serif')
+      .style('fill', 'black').style('stroke', 'none').style('opacity', 1);
+   svg.append('line')
+      .attr('id', 'highlightLine1')
+      .attr('x1', highlghts[0].x1).attr('y1', highlghts[0].y1)
+      .attr('x2', highlghts[0].x2).attr('y2', highlghts[0].y2)
+      .style('stroke', 'aqua').style('stroke-width', 5).style('stroke-linecap', 'round')
+      .style('opacity', 1);
+   svg.append('line')
+      .attr('id', 'highlightLine2')
+      .attr('x1', highlghts[1].x1).attr('y1', highlghts[1].y1)
+      .attr('x2', highlghts[1].x2).attr('y2', highlghts[1].y2)
+      .style('stroke', 'aqua').style('stroke-width', 5).style('stroke-linecap', 'round')
+      .style('opacity', 0);
+   svg.selectAll('.fullLine')
+      .data(fullLines)
+      .enter()
+      .append('path')
+      .attr('class', 'fullLine')
+      .attr('id', function(d, i){return 'fullLine' + String(i + 1);})
+      .attr('d', function(d){return d;})
+      .style('stroke', 'aqua').style('stroke-width', 5).style('opacity', 0);
+   svg.selectAll('#transLine')
+      .data(transline)
+      .enter()
+      .append('line')
+      .attr('id', 'transLine')
+      .attr('x1', function(d){return d.x1;}).attr('y1', function(d){return d.y1;})
+      .attr('x2', function(d){return d.x2;}).attr('y2', function(d){return d.y2;})
+      .style('stroke', 'rgba(255, 0, 255, 0.75)').style('stroke-width', 5).style('opacity', 0)
+      .style('stroke-dasharray', '10,6').style('stroke-linecap', 'round');
+   svg.selectAll('.axes')
+      .data(xandyaxes)
+      .enter()
+      .append('line')
+      .attr('class', 'axis').attr('id', 'yaxis')
+      .attr('x1', function(d){return d.x;}).attr('x2', function(d){return d.x;})
+      .attr('y1', 0).attr('y2', 625)
+      .style('stroke', 'black').style('stroke-width', 3).style('opacity', 0);
+   svg.selectAll('.axes')
+      .data(xandyaxes)
+      .enter()
+      .append('line')
+      .attr('class', 'axis').attr('id', 'xaxis')
+      .attr('y1', function(d){return d.y;}).attr('y2', function(d){return d.y;})
+      .attr('x1', 0).attr('x2', 625)
+      .style('stroke', 'black').style('stroke-width', 3).style('opacity', 0);
+   svg.selectAll('.lintext')
+      .data(linlabels)
+      .enter()
+      .append('text')
+      .attr('class', 'lintext')
+      .attr('x', function(d){return d.x;})
+      .attr('y', function(d){return d.y;})
+      .text(function(d){return d.label;})
+      .style('font-size', '14px').style('font-family', 'sans-serif')
+      .style('fill', 'black').style('stroke', 'none').style('opacity', 0);
+}
+
+$('#slope1').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 2 || norm_response === '2') {
+   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
+   d3.select('#highlightLine1')
+     .transition()
+     .duration(1000)
+     .style('opacity', 0);
+   d3.select('#highlightLine2')
+     .transition()
+     .duration(1000)
+     .style('opacity', 1);
+   $('#slope2').focus();
+   }
+});
+$('#slope2').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 2 || norm_response === '2') {
+   $('#disclose3').animate({'opacity' : '+=1'}, 1000);
+   d3.select('#highlightLine2')
+     .transition()
+     .duration(1000)
+     .style('opacity', 0);
+   d3.selectAll('.fullLine')
+     .transition()
+     .duration(1000)
+     .style('opacity', 1);
+   d3.selectAll('.gridLine')
+     .transition()
+     .duration(1000)
+     .style('opacity', 0);
+   d3.selectAll('.tritext')
+     .transition()
+     .duration(1000)
+     .style('opacity', 0);
+   $('#slope3').focus();
+   }
+});
+$('#slope3').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 2 || norm_response === '2') {
+   $('#disclose4').animate({'opacity' : '+=1'}, 1000);
+   d3.selectAll('.axis')
+     .transition()
+     .duration(1000)
+     .style('opacity', 1);
+   d3.selectAll('.gridLine')
+     .transition()
+     .duration(2500)
+     .style('opacity', 1);
+   d3.selectAll('.triangle')
+     .transition()
+     .duration(2500)
+     .style('opacity', 0);
+   $('#equation1').focus();
+   d3.selectAll('.lintext')
+     .transition()
+     .duration(2500)
+     .style('opacity', 1);
+   $('#equation1').focus();
+   }
+});
+$('#equation1').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 2 || norm_response === '2') {
+   $('#disclose5').animate({'opacity' : '+=1'}, 1000);
+   $('#equation').animate({'opacity' : '+=1'}, 1000);
+   $('#equation2').focus();
+   }
+});
+$('#equation2').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 2 || norm_response === '2') {
+   $('#equation3').focus();
+   }
+});
+newGraph();
+</script>
+
+<script>
+$('#previousProblem').bind('click', function() {
+   window.location.href = 'slope_problem_demo.html';
+});
+</script>
