@@ -115,6 +115,16 @@ p {
    font-variant:small-caps;
    cursor:pointer;
 }
+#nextProblem {
+   position:fixed;
+   bottom:20px;
+   right:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
 </style>
 
 <body>
@@ -135,6 +145,7 @@ p {
 </div>
 </div>
 </div>
+<div id='nextProblem'>next</div>
 <div id='previousProblem'>previous</div>
 </body>
 
@@ -358,5 +369,8 @@ newGraph();
 <script>
 $('#previousProblem').bind('click', function() {
    window.location.href = 'slope_problem_demo.html';
+});
+$('#nextProblem').bind('click', function() {
+   window.location.href = 'slope_problem_demo3.html';
 });
 </script>
