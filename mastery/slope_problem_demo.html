@@ -415,6 +415,7 @@ $('#slope3').bind('keyup', function(evt) {
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
    if (answer === 0.5 || norm_response === '0.5' || norm_response === '.5') {
+   $(this).val('1/2');
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    d3.selectAll('.axis')
      .transition()
