@@ -77,20 +77,6 @@ label {
   border:1px solid blue;
   overflow:hidden;
 }
-.fraction, .top, .bottom {
-    padding: 0 4px;
-    font-size:18px;
-}
-.fraction {
-    display: inline-block;
-    text-align: center;
-    vertical-align:-12px;
-}
-.bottom{
-    border-top: 1px solid #000;
-    display: block;
-    padding:0 5px;
-}
 input {
    margin-left:5px;
    width:75px;
@@ -115,9 +101,114 @@ p {
    font-variant:small-caps;
    cursor:pointer;
 }
+.hintbox {
+   position:fixed;
+   display:relative;
+   width:350px;
+   height:150px;
+   border-radius:2px;
+   background-color:teal;
+   box-shadow:0 0 5px #000;
+   opacity:0;
+}
+.hintwrapper {
+   position:absolute;
+   top:10px;
+   left:10px;
+   width:330px;
+   height:130px;
+   background-color:white;
+   font-family:sans-serif;
+   font-size:16px;
+   box-sizing:border-box;
+   padding:10px;
+   overflow-x:hidden;
+   overflow-y:scroll;
+}
+.hint {
+   height:110px;
+   box-sizing:border-box;
+   padding-top:5px;
+   padding-left:5px;
+   border-bottom:1px solid black;
+}
 </style>
 
 <body>
+<div class='hintbox' id='hint1'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<img src='slopehintimg1.PNG' style='float:right;margin:5px 0 0 10px;width:50%;' />
+<p id='hintText1'>The slope of a line segment or line is the ratio of the rise to the run.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<img src='slopehintimg2.PNG' style='float:right;margin:5px 0 0 10px;width:40%;' />
+<p id='hintText2'>Count the units of rise for <span id='math7'></span>. Then count the units of run. The slope is the ratio <span id='math8'></span>.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>The slope of <span id='math9'></span> is <mark><span id='math10'></span></mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<img src='slopehintimg1.PNG' style='float:right;margin:5px 0 0 10px;width:50%;' />
+<p id='hintText4'>The slope of a line segment or line is the ratio of the rise to the run.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<img src='slopehintimg3.PNG' style='float:right;margin:5px 0 0 10px;width:40%;' />
+<p id='hintText5'>Count the units of rise for <span id='math11'></span>. Then count the units of run. The slope is the ratio <span id='math12'></span>.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText6'>The slope of <span id='math13'></span> is <mark><span id='math14'></span></mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint3'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText7'>The slope of a line is the same between any two points on the line.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText8'>The slope of the line is the same as the slope of <span id='math17'></span> and the slope of <span id='math18'></span>.
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText9'>The slope of the line is <span id='math15'></span> <mark><span id='math16'></span></mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint4'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText10'>A straight line that passes through the origin has the equation <span id='math19'></span>, where <span id='math20'></span> represents the slope.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText11'>Enter the slope of the line as the coefficient of <span id='math21'></span>.
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText12'>The equation for the line is <span id='math22'></span> <mark><span id='math23'></span></mark><span id='math24'></span>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint5'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText13'>A line that does NOT pass through the origin has the equation <span id='math25'></span>, where <span id='math26'></span> is the slope and <span id='math27'></span> is the translation of the line up or down.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText14'>Enter the slope of the line as the coefficient of <span id='math28'></span>. How much is the line translated up or down from the origin? Add this amount to the equation.
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText15'>The equation for the line is <span id='math29'></span> <mark><span id='math30'></span></mark><span id='math31'></span> + <mark><span id='math32'></span></mark>.</p>
+</div>
+</div>
+</div>
+
 <div class='page-container'>
 <div class='panel-container'>
 <div class='panel-left'>
@@ -155,6 +246,32 @@ katex.render('\\mathtt{\\overline{DF}}', math3);
 katex.render('\\mathtt{\\overline{AC}}', math4);
 katex.render('\\mathtt{y=}', math5);
 katex.render('\\mathtt{x}', math6);
+katex.render('\\mathtt{\\overline{DF}}', math7);
+katex.render('\\mathtt{\\frac{\\text{rise}}{\\text{run}}}', math8);
+katex.render('\\mathtt{\\overline{DF}}', math9);
+katex.render('\\mathtt{\\frac{2}{4}}', math10);
+katex.render('\\mathtt{\\overline{AC}}', math11);
+katex.render('\\mathtt{\\frac{\\text{rise}}{\\text{run}}}', math12);
+katex.render('\\mathtt{\\overline{AC}}', math13);
+katex.render('\\mathtt{\\frac{6}{12}}', math14);
+katex.render('\\mathtt{\\frac{2}{4}=\\frac{6}{12}=}', math15);
+katex.render('\\mathtt{\\frac{1}{2}}', math16);
+katex.render('\\mathtt{\\overline{DF}}', math17);
+katex.render('\\mathtt{\\overline{AC}}', math18);
+katex.render('\\mathtt{y=mx}', math19);
+katex.render('\\mathtt{m}', math20);
+katex.render('\\mathtt{x}', math21);
+katex.render('\\mathtt{y=}', math22);
+katex.render('\\mathtt{\\frac{1}{2}}', math23);
+katex.render('\\mathtt{x}', math24);
+katex.render('\\mathtt{y=mx+b}', math25);
+katex.render('\\mathtt{m}', math26);
+katex.render('\\mathtt{b}', math27);
+katex.render('\\mathtt{x}', math28);
+katex.render('\\mathtt{y=}', math29);
+katex.render('\\mathtt{\\frac{1}{2}}', math30);
+katex.render('\\mathtt{x}', math31);
+katex.render('\\mathtt{5}', math32);
 </script>
 
 <script>
@@ -262,13 +379,15 @@ $('#slope1').bind('keyup', function(evt) {
      .duration(1000)
      .style('opacity', 1);
    $('#slope2').focus();
+   $('#hint1').animate({'opacity' : '-=1'}, 1000);
    }
 });
 $('#slope2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
-   if (answer === 0.5) {
+   if (answer === 0.5 || norm_response === '0.5' || norm_response === '.5') {
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
    d3.select('#highlightLine2')
      .transition()
@@ -287,13 +406,15 @@ $('#slope2').bind('keyup', function(evt) {
      .duration(1000)
      .style('opacity', 0);
    $('#slope3').focus();
+   $('#hint2').animate({'opacity' : '-=1'}, 1000);
    }
 });
 $('#slope3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
-   if (answer === 0.5) {
+   if (answer === 0.5 || norm_response === '0.5' || norm_response === '.5') {
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    d3.selectAll('.axis')
      .transition()
@@ -308,16 +429,20 @@ $('#slope3').bind('keyup', function(evt) {
      .duration(2500)
      .style('opacity', 0);
    $('#equation1').focus();
+   $('#hint3').animate({'opacity' : '-=1'}, 1000);
    }
 });
 $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
-   if (answer === 0.5) {
+   if (answer === 0.5 || norm_response === '0.5' || norm_response === '.5') {
    $('#disclose5').animate({'opacity' : '+=1'}, 1000);
    $('#equation').animate({'opacity' : '+=1'}, 1000);
    $('#equation2').focus();
+   $('#hint4').animate({'opacity' : '-=1'}, 1000);
+   setTimeout(function() {
    d3.select('#transLine')
      .transition()
      .duration(500)
@@ -326,15 +451,43 @@ $('#equation1').bind('keyup', function(evt) {
      .duration(1000)
      .attr('y1', function(d){return d.y1 - 125;})
      .attr('y2', function(d){return d.y2 - 125;});
+   }, 1000);
    }
 });
 $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
-   if (answer === 0.5) {
+   if (answer === 0.5 || norm_response === '0.5' || norm_response === '.5') {
    $('#equation3').focus();
+   $('#hint5').animate({'opacity' : '-=1'}, 1000);
    }
+});
+$('#equation3').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = Number($(this).val());
+   if (norm_response === 5) {
+   $('#hint5').animate({'opacity' : '-=1'}, 1000);
+   }
+});
+$('input').bind('keyup', function(evt) {
+   if (evt.keyCode !== 39) return;
+   var elem = evt.target.id;
+   if (elem === 'slope1') $('#hint1').animate({'opacity' : '+=1'}, 1000);
+   else if (elem === 'slope2') $('#hint2').animate({'opacity' : '+=1'}, 1000);
+   else if (elem === 'slope3') $('#hint3').animate({'opacity' : '+=1'}, 1000);
+   else if (elem === 'equation1') $('#hint4').animate({'opacity' : '+=1'}, 1000);
+   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').animate({'opacity' : '+=1'}, 1000);
+});
+$('input').bind('keyup', function(evt) {
+   if (evt.keyCode !== 37) return;
+   var elem = evt.target.id;
+   if (elem === 'slope1') $('#hint1').animate({'opacity' : '-=1'}, 1000);
+   else if (elem === 'slope2') $('#hint2').animate({'opacity' : '-=1'}, 1000);
+   else if (elem === 'slope3') $('#hint3').animate({'opacity' : '-=1'}, 1000);
+   else if (elem === 'equation1') $('#hint4').animate({'opacity' : '-=1'}, 1000);
+   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').animate({'opacity' : '-=1'}, 1000);
 });
 newGraph();
 </script>
@@ -343,4 +496,9 @@ newGraph();
 $('#nextProblem').bind('click', function() {
    window.location.href = 'slope_problem_demo2.html';
 });
+$('#hint1').offset({'left' : $('#slope1').offset().left + 90, 'top' : $('#slope1').offset().top - 52.5});
+$('#hint2').offset({'left' : $('#slope2').offset().left + 90, 'top' : $('#slope2').offset().top - 52.5});
+$('#hint3').offset({'left' : $('#slope3').offset().left + 100, 'top' : $('#slope3').offset().top - 52.5});
+$('#hint4').offset({'left' : $('#equation1').offset().left + 120, 'top' : $('#equation1').offset().top - 52.5});
+$('#hint5').offset({'left' : $('#equation3').offset().left + 130, 'top' : $('#equation3').offset().top - 52.5});
 </script>
