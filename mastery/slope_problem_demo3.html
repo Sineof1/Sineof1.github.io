@@ -104,13 +104,13 @@ p {
 }
 .hintbox {
    position:fixed;
-   display:relative;
    width:350px;
    height:150px;
    border-radius:2px;
    background-color:teal;
    box-shadow:0 0 5px #000;
    opacity:0;
+   z-index:1000;
 }
 .hintwrapper {
    position:absolute;
@@ -275,7 +275,7 @@ $('#equation1').bind('keyup', function(evt) {
    if (answer === 0.75 || norm_response === '0.75') {
    $('#disclose2').animate({'opacity' : '+=1'}, 1000);
    $('#equation3').focus();
-   $('#hint1').animate({'opacity' : '-=1'}, 1000);
+   $('#hint1').fadeOut(1000);
    }
 });
 $('#equation3').bind('keyup', function(evt) {
@@ -285,27 +285,27 @@ $('#equation3').bind('keyup', function(evt) {
    var answer = Number(response[0]) / Number(response[1]);
    if (answer === 0.75 || norm_response === '0.75') {
    $('#equation4').focus();
-   $('#hint2').animate({'opacity' : '-=1'}, 1000);
+   $('#hint2').fadeOut(1000);
    }
 });
 $('#equation4').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    var norm_response = Number($(this).val());
    if (norm_response === -4) {
-   $('#hint2').animate({'opacity' : '-=1'}, 1000);
+   $('#hint2').fadeOut(1000);
    }
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
    var elem = evt.target.id;
-   if (elem === 'equation1' || elem === 'equation2') $('#hint1').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'equation3' || elem === 'equation4') $('#hint2').animate({'opacity' : '+=1'}, 1000);
+   if (elem === 'equation1' || elem === 'equation2') $('#hint1').fadeIn(1000);
+   else if (elem === 'equation3' || elem === 'equation4') $('#hint2').fadeIn(1000);
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
    var elem = evt.target.id;
-   if (elem === 'equation1' || elem === 'equation2') $('#hint1').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'equation3' || elem === 'equation4') $('#hint2').animate({'opacity' : '-=1'}, 1000);
+   if (elem === 'equation1' || elem === 'equation2') $('#hint1').fadeOut(1000);
+   else if (elem === 'equation3' || elem === 'equation4') $('#hint2').fadeOut(1000);
 });
 
 newGraph();
