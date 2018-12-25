@@ -394,7 +394,7 @@ $('#slope1').bind('keyup', function(evt) {
      .duration(1000)
      .style('opacity', 1);
    $('#slope2').focus();
-   $('#hint1').animate({'opacity' : '-=1'}, 1000);
+   $('#hint1').fadeOut(1000);
    }
 });
 $('#slope2').bind('keyup', function(evt) {
@@ -421,7 +421,7 @@ $('#slope2').bind('keyup', function(evt) {
      .duration(1000)
      .style('opacity', 0);
    $('#slope3').focus();
-   $('#hint2').animate({'opacity' : '-=1'}, 1000);
+   $('#hint2').fadeOut(1000);
    }
 });
 $('#slope3').bind('keyup', function(evt) {
@@ -450,7 +450,7 @@ $('#slope3').bind('keyup', function(evt) {
      .duration(2500)
      .style('opacity', 1);
    $('#equation1').focus();
-   $('#hint3').animate({'opacity' : '-=1'}, 1000);
+   $('#hint3').fadeOut(1000);
    }
 });
 $('#equation1').bind('keyup', function(evt) {
@@ -462,7 +462,7 @@ $('#equation1').bind('keyup', function(evt) {
    $('#disclose5').animate({'opacity' : '+=1'}, 1000);
    $('#equation').animate({'opacity' : '+=1'}, 1000);
    $('#equation2').focus();
-   $('#hint4').animate({'opacity' : '-=1'}, 1000);
+   $('#hint4').fadeOut(1000);
    }
 });
 $('#equation2').bind('keyup', function(evt) {
@@ -472,7 +472,7 @@ $('#equation2').bind('keyup', function(evt) {
    var answer = Number(response[0]) / Number(response[1]);
    if (answer === 2 || norm_response === '2') {
    $('#equation3').focus();
-   $('#hint5').animate({'opacity' : '-=1'}, 1000);
+   $('#hint5').fadeOut(1000);
    }
 });
 $('input').bind('keyup', function(evt) {
