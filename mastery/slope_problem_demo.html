@@ -476,20 +476,20 @@ $('#equation3').bind('keyup', function(evt) {
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
    var elem = evt.target.id;
-   if (elem === 'slope1') {$('#hint1').fadeIn(1000); $('#hint1').css({'display' : 'relative'});}
-   else if (elem === 'slope2') {$('#hint2').fadeIn(1000); $('#hint2').css({'display' : 'relative'});}
-   else if (elem === 'slope3') {$('#hint3').fadeIn(1000); $('#hint3').css({'display' : 'relative'});}
-   else if (elem === 'equation1') {$('#hint4').fadeIn(1000); $('#hint4').css({'display' : 'relative'});}
-   else if (elem === 'equation2' || elem === 'equation3') {$('#hint5').fadeIn(1000); $('#hint5').css({'display' : 'relative'});}
+   if (elem === 'slope1') $('#hint1').fadeIn(1000);
+   else if (elem === 'slope2') $('#hint2').fadeIn(1000);
+   else if (elem === 'slope3') $('#hint3').fadeIn(1000);
+   else if (elem === 'equation1') $('#hint4').fadeIn(1000);
+   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').fadeIn(1000);
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
    var elem = evt.target.id;
-   if (elem === 'slope1') $('#hint1').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'slope2') $('#hint2').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'slope3') $('#hint3').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'equation1') $('#hint4').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').animate({'opacity' : '-=1'}, 1000);
+   if (elem === 'slope1') $('#hint1').fadeOut(1000);
+   else if (elem === 'slope2') $('#hint2').fadeOut(1000);
+   else if (elem === 'slope3') $('#hint3').fadeOut(1000);
+   else if (elem === 'equation1') $('#hint4').fadeOut(1000);
+   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').fadeOut(1000);
 });
 newGraph();
 </script>
