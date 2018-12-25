@@ -114,13 +114,13 @@ p {
 }
 .hintbox {
    position:fixed;
-   display:relative;
    width:350px;
    height:150px;
    border-radius:2px;
    background-color:teal;
    box-shadow:0 0 5px #000;
    opacity:0;
+   z-index:1000;
 }
 .hintwrapper {
    position:absolute;
@@ -478,20 +478,20 @@ $('#equation2').bind('keyup', function(evt) {
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
    var elem = evt.target.id;
-   if (elem === 'slope1') $('#hint1').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'slope2') $('#hint2').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'slope3') $('#hint3').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'equation1') $('#hint4').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').animate({'opacity' : '+=1'}, 1000);
+   if (elem === 'slope1') $('#hint1').fadeIn(1000);
+   else if (elem === 'slope2') $('#hint2').fadeIn(1000);
+   else if (elem === 'slope3') $('#hint3').fadeIn(1000);
+   else if (elem === 'equation1') $('#hint4').fadeIn(1000);
+   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').fadeIn(1000);
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
    var elem = evt.target.id;
-   if (elem === 'slope1') $('#hint1').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'slope2') $('#hint2').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'slope3') $('#hint3').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'equation1') $('#hint4').animate({'opacity' : '-=1'}, 1000);
-   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').animate({'opacity' : '-=1'}, 1000);
+   if (elem === 'slope1') $('#hint1').fadeOut(1000);
+   else if (elem === 'slope2') $('#hint2').fadeOut(1000);
+   else if (elem === 'slope3') $('#hint3').fadeOut(1000);
+   else if (elem === 'equation1') $('#hint4').fadeOut(1000);
+   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').fadeOut(1000);
 });
 newGraph();
 </script>
