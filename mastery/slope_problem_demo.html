@@ -104,13 +104,12 @@ p {
 }
 .hintbox {
    position:fixed;
-   display:relative;
+   display:none;
    width:350px;
    height:150px;
    border-radius:2px;
    background-color:teal;
    box-shadow:0 0 5px #000;
-   opacity:0;
 }
 .hintwrapper {
    position:absolute;
@@ -476,11 +475,11 @@ $('#equation3').bind('keyup', function(evt) {
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
    var elem = evt.target.id;
-   if (elem === 'slope1') $('#hint1').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'slope2') $('#hint2').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'slope3') $('#hint3').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'equation1') $('#hint4').animate({'opacity' : '+=1'}, 1000);
-   else if (elem === 'equation2' || elem === 'equation3') $('#hint5').animate({'opacity' : '+=1'}, 1000);
+   if (elem === 'slope1') {$('#hint1').fadeIn(1000); $('#hint1').css({'display' : 'relative'});}
+   else if (elem === 'slope2') {$('#hint2').fadeIn(1000); $('#hint2').css({'display' : 'relative'});}
+   else if (elem === 'slope3') {$('#hint3').fadeIn(1000); $('#hint3').css({'display' : 'relative'});}
+   else if (elem === 'equation1') {$('#hint4').fadeIn(1000); $('#hint4').css({'display' : 'relative'});}
+   else if (elem === 'equation2' || elem === 'equation3') {$('#hint5').fadeIn(1000); $('#hint5').css({'display' : 'relative'});}
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
