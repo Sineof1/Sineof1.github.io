@@ -163,6 +163,8 @@ var bballs = 1;
 var sballs = 1;
 $('#playButton').bind('click', function(evt) {
    evt.preventDefault();
+   bballs = 1;
+   sballs = 1;
    var removes = physicsLab.find(function(b) {return b.name == 'sball' || b.name == 'bball';});
    for (var a = 0; a < removes.length - 1; a++) physicsLab.remove(removes[a]);
    var removes = physicsLab2.find(function(b) {return b.name == 'sball' || b.name == 'bball';});
