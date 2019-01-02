@@ -200,7 +200,7 @@ $('#resetButton').bind('click', function(){location.reload();});
 $('#hole_left').bind('click', function(evt) {
 evt.preventDefault();
 sballs += 1;
-if (sballs >= 40) return;
+if (sballs >= 31) return;
 var circle = Physics.body('circle', {x : 75, y : -10, vx : -0.1, vy : 0.1, radius : 15, cof : 0.8, mass : 0.09, restitution : 0.9, name : 'sball'});
 circle.view = new Image();
 circle.view.src = 'soccerball.png';
@@ -220,7 +220,7 @@ runFractionRight();
 $('#hole_right').bind('click', function(evt) {
 evt.preventDefault();
 bballs += 1;
-if (bballs >= 40) return;
+if (bballs >= 31) return;
 var circle = Physics.body('circle', {x : 155, y : -10, vx : 0.1, vy : 0.1, radius : 16.5, cof : 0.8, mass : 0.13, restitution : 0.99, name : 'bball'});
 circle.view = new Image();
 circle.view.src = 'basketball.png';
