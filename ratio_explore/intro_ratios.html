@@ -179,6 +179,7 @@ $('#playButton').bind('click', function(evt) {
    $('#word_denom_rght').text('1');
    $('#fraction_rght').text('1/1');
    runFractionRight();
+   clearInterval(timer);
    var vid1 = document.getElementById('vidwrapper');
    vid1.currentTime = 0;
    vid1.play();
