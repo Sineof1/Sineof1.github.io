@@ -275,4 +275,17 @@ $(window).scroll(function() {
    $('#resetButton').css({'top' : $('#numbers_wrapper').offset().top - 25 - $(document).scrollTop(), 'left' : $('#numbers_right').offset().left - 25});
 });
 $(window).bind('dblclick', function(evt) {evt.preventDefault(); return false;});
+$(window).bind('keyup', function(evt) {
+   for (var a = 0; a < world.bodies.length; a++) {
+   for (var b = 0; b < 16; b++) {
+   if (world.bodies[a].vertices[b].x < -5 || world.bodies[a].vertices[b].x > 230 || world.bodies[a].vertices[b].y < -5 || 
+       world.bodies[a].vertices[b].y > 265) {
+       World.remove(world, bodies[a]);
+       var sball = Bodies.circle(75, 30, 15, {density : 0.0005, frictionAir : 0.001, restitution : 0.55, friction : 0.1, render : 
+                                             {sprite : {texture : 'soccerball.png'}}});
+       World.add(world, sball);
+   }
+   }
+   }
+});
 </script>
