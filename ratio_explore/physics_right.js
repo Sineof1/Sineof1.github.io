@@ -1,38 +1,27 @@
-var physicsLab2 = new Physics.world();
-var gravity2 = Physics.behavior('constant-acceleration');
-var bounds2 =  Physics.aabb(0, 0, 220, 259);
-var renderer2 = Physics.renderer('canvas', {
-                  el : 'bucket_rght',
-                  width: 225, height: 260, autoResize : false,
-                  styles : {
-                  'rectangle' : {
-                  strokeStyle : 'hsla(0, 0%, 0%, 1)',
-                  fillStyle : 'hsla(15, 76%, 50%, 0.4)',
-                  lineWidth : 1,
-                  angleIndicator : false
-                  }}
-                });
+var Engine2 = Matter.Engine, Render2 = Matter.Render, Runner2 = Matter.Runner, MouseConstraint2 = Matter.MouseConstraint, Mouse2 = Matter.Mouse, World2 = Matter.World, Bodies2 = Matter.Bodies;
 
-physicsLab2.add(renderer2);
-physicsLab2.render();
-Physics.util.ticker.on(function(time, dt) {physicsLab2.step(time);});
-Physics.util.ticker.start();
-physicsLab2.on('step', function() {physicsLab2.render();});
-var interact = Physics.behavior('interactive', {el : 'bucket_rght', maxVel : {x : 0.5, y : 0.5}, minVel : {x : -0.5, y : -0.5}});
-physicsLab2.add(gravity2);
-physicsLab2.add(Physics.behavior('edge-collision-detection', {aabb : bounds, restitution : 0.7}));
-physicsLab2.add(Physics.behavior('body-impulse-response'));
-physicsLab2.add(Physics.behavior('body-collision-detection'));
-physicsLab2.add(Physics.behavior('sweep-prune'));
-physicsLab2.add(interact);
+var engine2 = Engine2.create();
+var world2 = engine2.world;
+var render2 = Render2.create({element : bucket_rght, engine : engine2, options : {width : 225, height : 260, showAngleIndicator : false, background : 'transparent', wireframes : false}});
+Render2.run(render2);
+var runner2 = Runner2.create();
+Runner2.run(runner2, engine2);
 
-physicsLab2.on('interact:move', function(d) {
-   var moveables = physicsLab2.find(function(b) {return b.name != 'no_move' && b.name != 'no_move_div';});
-   interact.applyTo(moveables);
-});
-setTimeout(function(){
-  var circle2 = Physics.body('circle', {x : 155, y : -10, vx : 0, vy : 0.1, radius : 16.5, cof : 0.8, mass : 0.13, restitution : 0.99, name : 'bball'});
-  circle2.view = new Image();
-  circle2.view.src = 'basketball.png';
-  physicsLab2.add(circle2);
-}, 800);
+var options2 = {isStatic : true};
+world2.bodies = [];
+
+World2.add(world2, [
+  Bodies2.rectangle(0, 0.5, 450, 1, options2),
+  Bodies2.rectangle(225, 0, 1, 520, options2),
+  Bodies2.rectangle(0, 260.5, 450, 1, options2),
+  Bodies2.rectangle(0.5, 0, 1, 520, options2),
+])
+
+var bball = Bodies2.circle(150, 30, 15, {density : 0.0005, frictionAir : 0.001, restitution : 0.8, friction : 0.1, render : {sprite : {texture : 'basketball.png'}}});
+World2.add(world2, bball);
+
+var mouse2 = Mouse2.create(render2.canvas);
+var mouseConstraint2 = MouseConstraint2.create(engine2, {mouse: mouse2, constraint: {stiffness: 0.2, render: {visible: false}}});
+World2.add(world2, mouseConstraint2);
+
+render2.mouse = mouse2;
