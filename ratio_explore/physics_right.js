@@ -21,7 +21,7 @@ var bball = Bodies2.circle(150, 30, 15, {density : 0.0005, frictionAir : 0.001, 
 World2.add(world2, bball);
 
 var mouse2 = Mouse2.create(render2.canvas);
-var mouseConstraint2 = MouseConstraint2.create(engine2, {mouse: mouse2, constraint: {stiffness: 0.2, render: {visible: false}}});
+var mouseConstraint2 = MouseConstraint2.create(engine2, {mouse: mouse2, constraint: {stiffness: 1, render: {visible: false}}});
 World2.add(world2, mouseConstraint2);
 
 render2.mouse = mouse2;
