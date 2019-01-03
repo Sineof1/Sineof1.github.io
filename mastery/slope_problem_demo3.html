@@ -298,13 +298,13 @@ $('#equation4').bind('keyup', function(evt) {
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
    var elem = evt.target.id;
-   if (elem === 'equation1' || elem === 'equation2') $('#hint1').fadeIn(1000);
+   if (elem === 'equation1') $('#hint1').fadeIn(1000);
    else if (elem === 'equation3' || elem === 'equation4') $('#hint2').fadeIn(1000);
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
    var elem = evt.target.id;
-   if (elem === 'equation1' || elem === 'equation2') $('#hint1').fadeOut(1000);
+   if (elem === 'equation1') $('#hint1').fadeOut(1000);
    else if (elem === 'equation3' || elem === 'equation4') $('#hint2').fadeOut(1000);
 });
 
