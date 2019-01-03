@@ -21,7 +21,7 @@ var sball = Bodies.circle(75, 30, 15, {density : 0.0005, frictionAir : 0.001, re
 World.add(world, sball);
 
 var mouse = Mouse.create(render.canvas);
-var mouseConstraint = MouseConstraint.create(engine, {mouse: mouse, constraint: {stiffness: 0.2, render: {visible: false}}});
+var mouseConstraint = MouseConstraint.create(engine, {mouse: mouse, constraint: {stiffness: 1, render: {visible: false}}});
 World.add(world, mouseConstraint);
 
 render.mouse = mouse;
