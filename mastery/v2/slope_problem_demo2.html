@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='icon' href='cl_logo.jpg'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css'>
+<script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
+<title>CLI Problem Prototype</title>
+</head>
+
+<style>
+@font-face {
+    font-family: 'Product Sans';
+    src: url(GoogleSans-Regular.ttf) format('truetype');
+}
+html, body {
+  height:100%;
+  font-family:'Product Sans';
+  padding:0;
+  margin:0;
+  overflow:auto;
+  background:rgb(28, 85, 105);
+}
+.page-container {
+  margin:50px;
+}
+.panel-container {
+  display:flex;
+  flex-direction:row;
+  border:1px solid silver;
+  overflow:hidden;
+  xtouch-action:none;
+  border-radius:10px;
+  width:1250px;
+  height:620px;
+  margin:0 auto;
+}
+.panel-left {
+  flex:0 0 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  white-space:pre-wrap;
+  background-color:#fafafa;
+  color:black;
+}
+.splitter {
+  flex:0 0 auto;
+  width:18px;
+  background:url(vsizegrip.png) center center no-repeat #eaeaea;
+  min-height:200px;
+  cursor:col-resize;
+  z-index:999;
+}
+.panel-right {
+  flex:1 1 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  color:black;
+  background-color:white;
+}
+label {
+  font-size:1.2em;
+  display:block;
+  font-weight:bold;
+  margin:30px 0 10px;
+}
+#demo_grapher {
+  width:625px;
+  height:550px;
+  border:1px solid blue;
+  overflow:hidden;
+}
+input {
+   margin-left:5px;
+   width:75px;
+   height:45px;
+   border:none;
+   border-radius:5px;
+   box-shadow:0 0 3px #ccc;
+   text-align:center;
+   font-size:18px;
+   font-family:sans-serif;
+}
+p {
+   margin-top:5px;
+}
+#previousProblem {
+   position:fixed;
+   bottom:20px;
+   left:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
+.hintbox {
+   position:fixed;
+   width:350px;
+   height:150px;
+   border-radius:2px;
+   background-color:teal;
+   box-shadow:0 0 5px #000;
+   display:none;
+   z-index:1000;
+}
+.hintwrapper {
+   position:absolute;
+   top:10px;
+   left:10px;
+   width:330px;
+   height:130px;
+   background-color:white;
+   font-family:sans-serif;
+   font-size:16px;
+   box-sizing:border-box;
+   padding:10px;
+   overflow-x:hidden;
+   overflow-y:scroll;
+}
+.hint {
+   height:110px;
+   box-sizing:border-box;
+   padding-top:5px;
+   padding-left:5px;
+   border-bottom:1px solid black;
+}
+</style>
+
+<body>
+<div class='hintbox' id='hint1'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText1'>A straight line that passes through the origin has the equation <span id='math5'></span>, where <span id='math6'></span> represents the slope.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText2'>Imagine a right triangle with its hypotenuse on the line. Enter the<br />slope of the hypotenuse as the coefficient of <span id='math7'></span>.
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>The equation for line g is <span id='math8'></span> <mark><span id='math9'></span></mark><span id='math10'></span>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText4'>A line that does NOT pass through the origin has the equation <span id='math11'></span>, where <span id='math12'></span> is the slope and <span id='math13'></span> is the translation of the line up or down.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText5'>Enter the slope of the line as the coefficient of <span id='math14'></span>. How much is the line translated up or down from the origin? Add this amount to the equation.
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText6'>The equation for line v is <span id='math15'></span> <mark><span id='math16'></span></mark><span id='math17'></span> + <mark><span id='math18'></span></mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='page-container'>
+<div class='panel-container'>
+<div class='panel-left'>
+<p id='disclose1'><span style='color:teal;'>Enter an equation for line g:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;&#8202;&#8202;<span id='math1'></span><input type='text' id='equation1' />&thinsp;<span id='math2'></span></p>
+<p id='disclose2'><span style='color:teal;'>Enter an equation for line v:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&#8202;<span id='math3'></span><input type='text' id='equation3' />&thinsp;<span id='math4'></span> + (<input type='text' id='equation4' style='margin-left:0px;'/>)</p>
+</div>
+<div class='splitter'></div>
+<div class='panel-right'>
+<div id='demo_grapher'></div>
+</div>
+</div>
+</div>
+<div id='previousProblem'>previous</div>
+</body>
+
+</html>
+<script src='resizable.js'></script>
+<script>
+$('.panel-left').resizable({
+   handleSelector: '.splitter',
+   resizeHeight: false
+ });
+ $('.panel-top').resizable({
+   handleSelector: '.splitter-horizontal',
+   resizeWidth: false
+ });
+
+katex.render('\\mathtt{y=}', math1);
+katex.render('\\mathtt{x}', math2);
+katex.render('\\mathtt{y=}', math3);
+katex.render('\\mathtt{x}', math4);
+katex.render('\\mathtt{y=mx}', math5);
+katex.render('\\mathtt{m}', math6);
+katex.render('\\mathtt{x}', math7);
+katex.render('\\mathtt{y=}', math8);
+katex.render('\\mathtt{\\frac{3}{4}}', math9);
+katex.render('\\mathtt{x}', math10);
+katex.render('\\mathtt{y=mx+b}', math11);
+katex.render('\\mathtt{m}', math12);
+katex.render('\\mathtt{b}', math13);
+katex.render('\\mathtt{x}', math14);
+katex.render('\\mathtt{y=}', math15);
+katex.render('\\mathtt{\\frac{3}{4}}', math16);
+katex.render('\\mathtt{x}', math17);
+katex.render('\\mathtt{-4}', math18);
+</script>
+
+<script>
+var fullLines = ['M 25 550 L 625 100', 'M 125 575 L 625 200'];
+var xandyaxes = [{x : 225, y : 400}];
+var linlabels = [{x : 610, y : 95, label : 'g'}, {x : 610, y : 195, label : 'v'}];
+
+var svg = d3.select('#demo_grapher')
+            .append('svg')
+            .attr('width', '100%').attr('height', '100%');
+function newGraph() {
+   d3.select('#demo_grapher').selectAll('svg').remove();
+   var svg = d3.select('#demo_grapher')
+               .append('svg')
+               .attr('width', '100%').attr('height', '100%');
+   for (var a = 25; a < 625; a += 25) {
+      svg.append('line')
+         .attr('x1', a).attr('y1', 0).attr('x2', a).attr('y2', 600).attr('class', 'gridLine')
+         .style('stroke', 'gray').style('stroke-width', 0.5).style('opacity', 1);
+      svg.append('line')
+         .attr('x1', 0).attr('y1', a).attr('x2', 625).attr('y2', a).attr('class', 'gridLine')
+         .style('stroke', 'gray').style('stroke-width', 0.5).style('opacity', 1);
+   }
+   svg.selectAll('.fullLine')
+      .data(fullLines)
+      .enter()
+      .append('path')
+      .attr('class', 'fullLine')
+      .attr('id', function(d, i){return 'fullLine' + String(i + 1);})
+      .attr('d', function(d){return d;})
+      .style('stroke', 'aqua').style('stroke-width', 5).style('opacity', 1);
+   svg.selectAll('.axes')
+      .data(xandyaxes)
+      .enter()
+      .append('line')
+      .attr('class', 'axis').attr('id', 'yaxis')
+      .attr('x1', function(d){return d.x;}).attr('x2', function(d){return d.x;})
+      .attr('y1', 0).attr('y2', 625)
+      .style('stroke', 'black').style('stroke-width', 3).style('opacity', 1);
+   svg.selectAll('.axes')
+      .data(xandyaxes)
+      .enter()
+      .append('line')
+      .attr('class', 'axis').attr('id', 'xaxis')
+      .attr('y1', function(d){return d.y;}).attr('y2', function(d){return d.y;})
+      .attr('x1', 0).attr('x2', 625)
+      .style('stroke', 'black').style('stroke-width', 3).style('opacity', 1);
+   svg.selectAll('.lintext')
+      .data(linlabels)
+      .enter()
+      .append('text')
+      .attr('class', 'lintext')
+      .attr('x', function(d){return d.x;})
+      .attr('y', function(d){return d.y;})
+      .text(function(d){return d.label;})
+      .style('font-size', '14px').style('font-family', 'sans-serif')
+      .style('fill', 'black').style('stroke', 'none').style('opacity', 1);
+}
+$('#equation1').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 0.75 || norm_response === '0.75') {
+   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
+   $('#equation3').focus();
+   $('#hint1').fadeOut(1000);
+   }
+});
+$('#equation3').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = $(this).val();
+   var response = ($(this).val()).split('/');
+   var answer = Number(response[0]) / Number(response[1]);
+   if (answer === 0.75 || norm_response === '0.75') {
+   $('#equation4').focus();
+   $('#hint2').fadeOut(1000);
+   }
+});
+$('#equation4').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var norm_response = Number($(this).val());
+   if (norm_response === -4) {
+   $('#hint2').fadeOut(1000);
+   }
+});
+$('input').bind('keyup', function(evt) {
+   if (evt.keyCode !== 39) return;
+   var elem = evt.target.id;
+   if (elem === 'equation1') $('#hint1').fadeIn(1000);
+   else if (elem === 'equation3' || elem === 'equation4') $('#hint2').fadeIn(1000);
+});
+$('input').bind('keyup', function(evt) {
+   if (evt.keyCode !== 37) return;
+   var elem = evt.target.id;
+   if (elem === 'equation1') $('#hint1').fadeOut(1000);
+   else if (elem === 'equation3' || elem === 'equation4') $('#hint2').fadeOut(1000);
+});
+
+newGraph();
+</script>
+
+<script>
+$('#previousProblem').bind('click', function() {
+   window.location.href = 'slope_problem_demo.html';
+});
+$('#hint1').offset({'left' : $('#equation1').offset().left + 120, 'top' : $('#equation1').offset().top - 52.5});
+$('#hint2').offset({'left' : $('#equation4').offset().left + 130, 'top' : $('#equation4').offset().top - 52.5});
+</script>
