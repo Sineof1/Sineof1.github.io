@@ -420,6 +420,14 @@ $('#equation2').bind('keyup', function(evt) {
    $('#hint3').fadeOut(1000);
    }
 });
+$('#equation3').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var answer = Number($(this).val());
+   if (answer === 4) {
+   $('#hint3').fadeOut(1000);
+   $('#nextProblem').trigger('click');
+   }
+});
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
    var elem = evt.target.id;
