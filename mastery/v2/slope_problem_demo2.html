@@ -305,7 +305,7 @@ $('input').bind('keyup', function(evt) {
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
    var elem = evt.target.id;
-   if (elem === 'equation1') {$('#hint1').fadeOut(1000); $('#hintPointTriangle').fadeOut(1000);}
+   if (elem === 'equation1') {$('#hint1').fadeOut(1000); $('#hintPointTriangle').animate({'opacity' : '-=1'}, 1000)}
    else if (elem === 'equation3' || elem === 'equation4') $('#hint2').fadeOut(1000);
 });
 
@@ -324,6 +324,7 @@ $('#hintpointer').bind('scroll', function() {
       .attr('d', 'M 225 400 L 325 400 L 325 325 Z')
       .attr('id', 'hintPointTriangle')
       .style('stroke', 'none').style('fill', 'orange')
+      .style('fill-opacity', 0.5)
       .style('opacity', 0)
       .transition()
       .duration(1000)
