@@ -207,6 +207,14 @@ p {
 </div>
 </div>
 
+<div class='jitbox' id='jit2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText1'>The graph of line g increases from left to right, so the slope is positive.</p>
+</div>
+</div>
+</div>
+
 <div class='page-container'>
 <div class='panel-container'>
 <div class='panel-left'>
@@ -383,6 +391,7 @@ $('#slope1').bind('keyup', function(evt) {
    $('#hint1').fadeOut(1000);
    }
    else if ((Number(response[1]) / Number(response[0])) === 0.75) $('#jit1').fadeIn(1000);
+   else if (answer <= 0) $('#jit2').fadeIn(1000);
 });
 $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -470,4 +479,5 @@ $('#hint1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('
 $('#hint2').offset({'left' : $('#equation1').offset().left + 130, 'top' : $('#equation1').offset().top - 52.5});
 $('#hint3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
 $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
+$('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 </script>
