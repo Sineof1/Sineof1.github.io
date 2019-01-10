@@ -345,7 +345,7 @@ $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
    var elem = evt.target.id;
    if (elem === 'equation1') {$('#hint1').fadeOut(1000); $('#jit1').fadeOut(1000); $('#jit2').fadeOut(1000); $('#hintPointTriangle').animate({'opacity' : '-=1'}, 1000)}
-   else if (elem === 'equation3' || elem === 'equation4') {$('#hint2').fadeOut(1000); $('#jit3').fadeOut(1000); $('#jit4').fadeIn(1000);}
+   else if (elem === 'equation3' || elem === 'equation4') {$('#hint2').fadeOut(1000); $('#jit3').fadeOut(1000); $('#jit4').fadeOut(1000);}
 });
 
 newGraph();
