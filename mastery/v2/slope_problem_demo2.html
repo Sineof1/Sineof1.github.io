@@ -305,7 +305,7 @@ $('input').bind('keyup', function(evt) {
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
    var elem = evt.target.id;
-   if (elem === 'equation1') $('#hint1').fadeOut(1000);
+   if (elem === 'equation1') {$('#hint1').fadeOut(1000); $('#hintPointTriangle').fadeOut(1000);}
    else if (elem === 'equation3' || elem === 'equation4') $('#hint2').fadeOut(1000);
 });
 
@@ -322,6 +322,7 @@ $('#hint2').offset({'left' : $('#equation4').offset().left + 130, 'top' : $('#eq
 $('#hintpointer').bind('scroll', function() {
     d3.select('#demo_grapher').select('svg').append('path')
       .attr('d', 'M 225 400 L 325 400 L 325 325 Z')
+      .attr('id', 'hintPointTriangle')
       .style('stroke', 'none').style('fill', 'rgba(255, 165, 0, 1)')
       .style('opacity', 0)
       .transition()
