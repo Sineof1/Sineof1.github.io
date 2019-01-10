@@ -458,7 +458,7 @@ $('input').bind('keyup', function(evt) {
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
    var elem = evt.target.id;
-   if (elem === 'slope1') {$('#hint1').fadeOut(1000); $('#jit1').fadeOut(1000);}
+   if (elem === 'slope1') {$('#hint1').fadeOut(1000); $('#jit1').fadeOut(1000); $('#jit2').fadeOut(1000);}
    else if (elem === 'equation1') $('#hint2').fadeOut(1000);
    else if (elem === 'equation2' || elem === 'equation3') $('#hint3').fadeOut(1000);
 });
