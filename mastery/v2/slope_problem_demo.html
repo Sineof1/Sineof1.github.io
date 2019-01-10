@@ -223,6 +223,14 @@ p {
 </div>
 </div>
 
+<div class='jitbox' id='jit4'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText4'>Check the sign of your answer.</p>
+</div>
+</div>
+</div>
+
 <div class='page-container'>
 <div class='panel-container'>
 <div class='panel-left'>
@@ -456,6 +464,7 @@ $('#equation3').bind('keyup', function(evt) {
    $('#hint3').fadeOut(1000);
    $('#nextProblem').trigger('click');
    }
+   else if (answer <= 0) $('#jit4').fadeIn(1000);
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
@@ -469,7 +478,7 @@ $('input').bind('keyup', function(evt) {
    var elem = evt.target.id;
    if (elem === 'slope1') {$('#hint1').fadeOut(1000); $('#jit1').fadeOut(1000); $('#jit2').fadeOut(1000);}
    else if (elem === 'equation1') $('#hint2').fadeOut(1000);
-   else if (elem === 'equation2' || elem === 'equation3') {$('#hint3').fadeOut(1000); $('#jit3').fadeOut(1000);}
+   else if (elem === 'equation2' || elem === 'equation3') {$('#hint3').fadeOut(1000); $('#jit3').fadeOut(1000); $('#jit4').fadeOut(1000);}
 });
 
 newGraph();
@@ -490,4 +499,5 @@ $('#hint3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation
 $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
+$('#jit4').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
 </script>
