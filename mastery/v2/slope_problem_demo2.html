@@ -137,7 +137,7 @@ p {
 
 <body>
 <div class='hintbox' id='hint1'>
-<div class='hintwrapper'>
+<div class='hintwrapper' id='hintpointer'>
 <div class='hint' style='background-color:white;'>
 <p id='hintText1'>A straight line that passes through the origin has the equation <span id='math5'></span>, where <span id='math6'></span> represents the slope.</p>
 </div>
@@ -319,7 +319,7 @@ $('#previousProblem').bind('click', function() {
 $('#hint1').offset({'left' : $('#equation1').offset().left + 120, 'top' : $('#equation1').offset().top - 52.5});
 $('#hint2').offset({'left' : $('#equation4').offset().left + 130, 'top' : $('#equation4').offset().top - 52.5});
 
-$('#hint1').bind('scroll', function() {
+$('#hintpointer').bind('scroll', function() {
     d3.select('#demo_grapher').select('svg').append('path')
       .attr('d', 'M 225 400 L 325 400 L 325 325 Z')
       .style('stroke', 'none').style('fill', 'rgba(255, 165, 0, 0.5)')
