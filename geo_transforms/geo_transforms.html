@@ -309,7 +309,6 @@ $('.shape-button').bind('click', function(evt) {
    $('#reflyhis').text('No');
 });
 $('#button1').bind('mousedown', function(evt){
-   recognition.start();
    but1 += 1;
    but2 = 1; but3 = 1; but4 = 1; but5 = 1; but6 = 1; but7 = 1; but8 = 1; but9 = 1; but10 = 1; but11 = 1;
    svg.selectAll("*").remove();
@@ -719,29 +718,4 @@ $(window).scroll(function(){
    $('#challenge').offset({left : $('#shapes_frame').offset().left + 88, top : $('#control-box').offset().top});
    $('#reset-box').offset({left : $('#shapes_frame').offset().left + 2, top : $('#control-box').offset().top + 88});
 });
-
-var recognition = new webkitSpeechRecognition();
-recognition.continuous = true;
-recognition.interimResults = false;
-var final_transcript = '';
-recognition.onresult = function(event) {
-   var interim_transcript = '';
-   for (var i = event.resultIndex; i < event.results.length; ++i) {
-   if (event.results[i].isFinal) {
-      final_transcript += event.results[i][0].transcript;
-      final_transcript = (final_transcript.trim()).toLowerCase();
-      console.log(final_transcript);
-   }
-   else interim_transcript += event.results[i][0].transcript;
-   }
-   var transcriptList = final_transcript.split(' ');
-   if ((transcriptList[0] === 'translate') &&
-       (transcriptList[1] === 'x' || transcriptList[1] === 'ex' || transcriptList[1] === 'ex-' || transcriptList[1] === 'horizontally')) {
-   if (transcriptList[1] === 'ex-') {transcriptList[1] = 'ex'; transcriptList[2] = '-' + transcriptList[2];}
-   if (transcriptList[2] === 'negative') transcriptList[2] = '-' + transcriptList[3];
-   $('#translationX').val(transcriptList[2]);
-   translateX();
-   final_transcript = '';
-   }
-}
 </script>
