@@ -21,8 +21,8 @@
   left:424px;
   width:625px;
   height:550px;
-  border:1px solid blue;
   overflow:hidden;
+  border:1px solid black;
 }
 #yaxis {
    position:absolute;
@@ -73,13 +73,18 @@
 
 <body>
 <div class='inequality' id='inequality1' style='top:100px;'>inequality 1:&nbsp;<input class='ineqInput' id='ineqInput1' type='text' /></p></div>
-<div class='inequality' id='inequality2' style='top:200px;'>inequality 2:&nbsp;<input class='ineqInput' id='ineqInput2' type='text' /></p></div>
-<div class='inequality' id='testpoint' style='top:300px;'>test point:&nbsp;&nbsp;&#8202;(<input class='tstPntInput' id='testPntX' type='text' />, <input class='tstPntInput' id='testPntY' type='text' />)</p></div>
+<div class='inequality' id='inequality2' style='top:200px;color:#228b22;'>inequality 2:&nbsp;<input class='ineqInput' id='ineqInput2' type='text' /></p></div>
+<div class='inequality' id='testpoint' style='top:300px;color:black;'>test point:&nbsp;&nbsp;&#8202;(<input class='tstPntInput' id='testPntX' type='text' />, <input class='tstPntInput' id='testPntY' type='text' />)</p></div>
 <div style='text-align:center;'>
 <div id='yaxis'></div>
 <div id='demo_grapher'></div>
 </div>
 <div id='xaxis'></div>
+
+<input class='tstPntInput' id='xMax' type='text' style='position:fixed;color:gray;' />
+<input class='tstPntInput' id='yMax' type='text' style='position:fixed;color:gray;' />
+<input class='tstPntInput' id='xMin' type='text' style='position:fixed;color:gray;' />
+<input class='tstPntInput' id='yMin' type='text' style='position:fixed;color:gray;' />
 
 <img src='https://guzintamath.com/textsavvy/wp-content/uploads/2019/01/ineqsystems.png' style='position:fixed;visibility:hidden;' />
 </body>
@@ -87,19 +92,23 @@
 </html>
 
 <script>
-var xandyaxes = [{x : 225, y : 400}];
-var linlabels = [{x : 612, y : 413, label : 'x'}, {x : 215, y : 10, label : 'y'}];
-
 var xScale = d3.scaleLinear()
                .domain([-9, 16])
-               .range([-1, 625]);
+               .range([0, 625]);
 
 var yScale = d3.scaleLinear()
                .domain([16, -6])
                .range([0, 550]);
 
-var xAxis = d3.axisBottom(xScale).ticks(5);
-var yAxis = d3.axisLeft(yScale).ticks(5);
+var curTstPnt = [];
+var x_Max = 16;
+var y_Max = 16;
+var x_Min = -9;
+var y_Min = -6;
+var circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+
+var xAxis = d3.axisBottom(xScale).ticks(5).tickSizeOuter(0);
+var yAxis = d3.axisLeft(yScale).ticks(5).tickSizeOuter(0);
 
 var svg =  d3.select('#demo_grapher')
              .append('svg')
@@ -108,46 +117,49 @@ var xBox = d3.select('#xaxis').append('svg')
              .attr('width', 625).attr('height', 100);
 var yBox = d3.select('#yaxis').append('svg')
              .attr('width', 100).attr('height', 550);
+
 function newGraph() {
    d3.select('#demo_grapher').selectAll('svg').remove();
    var svg = d3.select('#demo_grapher')
                .append('svg')
                .attr('width', '100%').attr('height', '100%');
-   for (var a = 25; a < 625; a += 25) {
+   for (var a = xScale(x_Min + 1); a < xScale(x_Max); a += xScale(x_Min + 1)) {
       svg.append('line')
          .attr('x1', a).attr('y1', 0).attr('x2', a).attr('y2', 600).attr('class', 'gridLine')
          .style('stroke', 'gray').style('stroke-width', 0.5).style('opacity', 1);
+   }
+   for (var a = yScale(y_Max - 1); a < yScale(y_Min); a += yScale(y_Max - 1)) {
       svg.append('line')
          .attr('x1', 0).attr('y1', a).attr('x2', 625).attr('y2', a).attr('class', 'gridLine')
          .style('stroke', 'gray').style('stroke-width', 0.5).style('opacity', 1);
    }
-   svg.selectAll('.axes')
-      .data(xandyaxes)
-      .enter()
-      .append('line')
+   svg.append('line')
       .attr('class', 'axis').attr('id', 'yaxis')
-      .attr('x1', function(d){return d.x;}).attr('x2', function(d){return d.x;})
+      .attr('x1', xScale(0)).attr('x2', xScale(0))
       .attr('y1', 0).attr('y2', 625)
       .style('stroke', 'black').style('stroke-width', 3).style('opacity', 1);
-   svg.selectAll('.axes')
-      .data(xandyaxes)
-      .enter()
-      .append('line')
+   svg.append('line')
       .attr('class', 'axis').attr('id', 'xaxis')
-      .attr('y1', function(d){return d.y;}).attr('y2', function(d){return d.y;})
+      .attr('y1', yScale(0)).attr('y2', yScale(0))
       .attr('x1', 0).attr('x2', 625)
       .style('stroke', 'black').style('stroke-width', 3).style('opacity', 1);
-   svg.selectAll('.lintext')
-      .data(linlabels)
-      .enter()
-      .append('text')
+   svg.append('text')
       .attr('class', 'lintext')
-      .attr('x', function(d){return d.x;})
-      .attr('y', function(d){return d.y;})
-      .text(function(d){return d.label;})
+      .attr('x', 612)
+      .attr('y', yScale(0) + 13)
+      .text('x')
+      .style('font-size', '14px').style('font-family', 'sans-serif')
+      .style('fill', 'black').style('stroke', 'none').style('opacity', 1);
+   svg.append('text')
+      .attr('class', 'lintext')
+      .attr('x', xScale(0) - 13)
+      .attr('y', 10)
+      .text('y')
       .style('font-size', '14px').style('font-family', 'sans-serif')
       .style('fill', 'black').style('stroke', 'none').style('opacity', 1);
 
+   xBox.selectAll('*').remove();
+   yBox.selectAll('*').remove();
    xBox.append('g')
        .attr('transform', 'translate(0, 0)')
        .call(xAxis);
@@ -157,21 +169,24 @@ function newGraph() {
 }
 newGraph();
 $('.tstPntInput').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
    if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
    d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
    var x = xScale(Number($('#testPntX').val()));
    var y = yScale(Number($('#testPntY').val()));
    d3.select('#demo_grapher').select('svg')
      .append('circle')
-     .attr('cx', x + 0.6).attr('cy', y).attr('r', 0)
+     .attr('cx', x).attr('cy', y).attr('r', 0)
      .style('stroke', 'white').style('fill', 'yellow')
      .transition()
      .duration(1000)
      .ease(d3.easeBackOut)
-     .attr('r', 8);
+     .attr('r', circSize);
+   curTstPnt = [Number($('#testPntX').val()), Number($('#testPntY').val())];
 });
 $('#ineqInput1').bind('keydown', function(evt) {
    var text = $(this).val();
+   if (text === '') return;
    if (text.indexOf('<=') !== -1) {
    text = text.replace(/<=/g, '≤');
    }
@@ -211,6 +226,7 @@ $('#ineqInput1').bind('keydown', function(evt) {
 });
 $('#ineqInput2').bind('keydown', function(evt) {
    var text = $(this).val();
+   if (text === '') return;
    if (text.indexOf('<=') !== -1) {
    text = text.replace(/<=/g, '≤');
    }
@@ -258,24 +274,93 @@ function drawLine(tms, dsh, clss) {
    else var slope = Number(tms[0].slice(0, tms[0].indexOf('x')));
    var intcp = yScale(Number(tms[1])) - yScale(0);
    if (tms[2] === 'minus') intcp = -intcp;
-   var startPointY = yScale(-10 * slope);
-   var endPointY = yScale(17 * slope);
+   var startPointY = yScale((x_Min - 1) * slope);
+   var endPointY = yScale((x_Max + 1) * slope);
+
+   if (clss === 'inequality1') var stroke = 'brown';
+   else var stroke = '#228b22';
 
    if (dsh === '<' || dsh === '≤') {
       d3.select('#demo_grapher').select('svg').selectAll('.' + clss).remove();
       d3.select('#demo_grapher').select('svg').append('path')
         .attr('class', clss)
-        .attr('d', 'M -26.04 ' + String(startPointY) + ' L -26.04 ' + String(560 - intcp) + ' L 650.04 ' + String(560 - intcp) + ' L 650.04 ' + String(endPointY) + 'Z')
-        .style('stroke', 'black').style('stroke-width', 2).style('fill', 'rgba(255, 0, 0, 0.3)').style('stroke-dasharray', dsharr)
+        .attr('d', 'M ' + String(xScale(x_Min - 1)) + ' ' + String(startPointY) + ' L ' + String(xScale(x_Min - 1)) + ' ' + String(560 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(560 - intcp) + ' L '  + String(xScale(x_Max + 1)) + ' ' + String(endPointY) + 'Z')
+        .style('stroke', stroke).style('stroke-width', 2).style('fill', 'rgba(255, 0, 0, 0.3)').style('stroke-dasharray', dsharr)
         .attr('transform', 'translate(0, ' + String(intcp) + ')');
    }
    else if (dsh === '>' || dsh === '≥') {
       d3.select('#demo_grapher').select('svg').selectAll('.' + clss).remove();
       d3.select('#demo_grapher').select('svg').append('path')
         .attr('class', clss)
-        .attr('d', 'M -26.04 ' + String(startPointY) + ' L -26.04 ' + String(-10 - intcp) + ' L 650.04 ' + String(-10 - intcp) + ' L 650.04 ' + String(endPointY) + 'Z')
-        .style('stroke', 'black').style('stroke-width', 2).style('fill', 'rgba(0, 0, 255, 0.3)').style('stroke-dasharray', dsharr)
+        .attr('d', 'M ' + String(xScale(x_Min - 1)) + ' ' + String(startPointY) + ' L ' + String(xScale(x_Min - 1)) + ' ' + String(x_Min - 1 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(x_Min - 1 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(endPointY) + 'Z')
+        .style('stroke', stroke).style('stroke-width', 2).style('fill', 'rgba(0, 0, 255, 0.3)').style('stroke-dasharray', dsharr)
         .attr('transform', 'translate(0, ' + String(intcp) + ')');
    }
 }
+function tstPntTrigger(x, y) {
+   if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
+   d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
+   var x = xScale(curTstPnt[0]) + 0.6;
+   var y = yScale(curTstPnt[1]);
+   d3.select('#demo_grapher').select('svg')
+     .append('circle')
+     .attr('cx', x).attr('cy', y).attr('r', 0)
+     .style('stroke', 'white').style('fill', 'yellow')
+     .transition()
+     .duration(1000)
+     .ease(d3.easeBackOut)
+     .attr('r', circSize);
+}
+$('#xMax').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var xMax = Number($(this).val());
+   x_Max = xMax;
+   xScale.domain([x_Min, x_Max]);
+   newGraph();
+   var e = $.Event('keydown', {keyCode: 13});
+   $('#ineqInput1').trigger(e);
+   $('#ineqInput2').trigger(e);
+   circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   tstPntTrigger(curTstPnt[0], curTstPnt[1]);
+});
+$('#yMax').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var yMax = Number($(this).val());
+   y_Max = yMax;
+   yScale.domain([yMax, y_Min]);
+   newGraph();
+   var e = $.Event('keydown', {keyCode: 13});
+   $('#ineqInput1').trigger(e);
+   $('#ineqInput2').trigger(e);
+   circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   tstPntTrigger(curTstPnt[0], curTstPnt[1]);
+});
+$('#xMin').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var xMin = Number($(this).val());
+   x_Min = xMin;
+   xScale.domain([x_Min, x_Max]);
+   newGraph();
+   var e = $.Event('keydown', {keyCode: 13});
+   $('#ineqInput1').trigger(e);
+   $('#ineqInput2').trigger(e);
+   circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   tstPntTrigger(curTstPnt[0], curTstPnt[1]);
+});
+$('#yMin').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var yMin = Number($(this).val());
+   y_Min = yMin;
+   yScale.domain([y_Max, yMin]);
+   newGraph();
+   var e = $.Event('keydown', {keyCode: 13});
+   $('#ineqInput1').trigger(e);
+   $('#ineqInput2').trigger(e);
+   circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   tstPntTrigger(curTstPnt[0], curTstPnt[1]);
+});
+$('#xMax').offset({top : $('#demo_grapher').offset().top + 532.5, left : $('#demo_grapher').offset().left + 650});
+$('#yMax').offset({top : $('#demo_grapher').offset().top - 45, left : $('#demo_grapher').offset().left - 35});
+$('#xMin').offset({top : $('#demo_grapher').offset().top + 532.5, left : $('#demo_grapher').offset().left - 100});
+$('#yMin').offset({top : $('#demo_grapher').offset().top + 575, left : $('#demo_grapher').offset().left - 35});
 </script>
