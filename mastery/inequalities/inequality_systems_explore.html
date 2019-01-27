@@ -315,7 +315,7 @@ function tstPntTrigger(x, y) {
 $('#xMax').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    var xMax = Number($(this).val());
-   x_Max = xMax;
+   x_Max = xMax + 1;
    xScale.domain([x_Min, x_Max]);
    newGraph();
    var e = $.Event('keydown', {keyCode: 13});
@@ -327,8 +327,8 @@ $('#xMax').bind('keyup', function(evt) {
 $('#yMax').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    var yMax = Number($(this).val());
-   y_Max = yMax;
-   yScale.domain([yMax, y_Min]);
+   y_Max = yMax + 1;
+   yScale.domain([y_Max, y_Min]);
    newGraph();
    var e = $.Event('keydown', {keyCode: 13});
    $('#ineqInput1').trigger(e);
@@ -339,7 +339,7 @@ $('#yMax').bind('keyup', function(evt) {
 $('#xMin').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    var xMin = Number($(this).val());
-   x_Min = xMin;
+   x_Min = xMin - 1;
    xScale.domain([x_Min, x_Max]);
    newGraph();
    var e = $.Event('keydown', {keyCode: 13});
@@ -351,8 +351,8 @@ $('#xMin').bind('keyup', function(evt) {
 $('#yMin').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    var yMin = Number($(this).val());
-   y_Min = yMin;
-   yScale.domain([y_Max, yMin]);
+   y_Min = yMin - 1;
+   yScale.domain([y_Max, y_Min]);
    newGraph();
    var e = $.Event('keydown', {keyCode: 13});
    $('#ineqInput1').trigger(e);
