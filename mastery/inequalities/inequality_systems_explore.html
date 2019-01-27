@@ -177,7 +177,7 @@ $('.tstPntInput').bind('keyup', function(evt) {
    var y = yScale(Number($('#testPntY').val()));
    d3.select('#demo_grapher').select('svg')
      .append('circle')
-     .attr('cx', x).attr('cy', y).attr('r', 0)
+     .attr('cx', x + 0.2).attr('cy', y).attr('r', 0)
      .style('stroke', 'white').style('fill', 'yellow')
      .transition()
      .duration(1000)
