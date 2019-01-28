@@ -109,7 +109,7 @@ var x_Max = 16;
 var y_Max = 16;
 var x_Min = -9;
 var y_Min = -6;
-var circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+var circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
 
 var xAxis = d3.axisBottom(xScale).ticks(5).tickSizeOuter(0);
 var yAxis = d3.axisLeft(yScale).ticks(5).tickSizeOuter(0);
@@ -174,6 +174,7 @@ function newGraph() {
 newGraph();
 $('.tstPntInput').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
+   circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
    d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
    var x = xScale(Number($('#testPntX').val()));
@@ -306,7 +307,8 @@ function drawLine(tms, dsh, clss) {
 function tstPntTrigger(x, y) {
    if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
    d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
-   var x = xScale(curTstPnt[0]) + 0.6;
+   circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   var x = xScale(curTstPnt[0]) + 0.3;
    var y = yScale(curTstPnt[1]);
    d3.select('#demo_grapher').select('svg')
      .append('circle')
