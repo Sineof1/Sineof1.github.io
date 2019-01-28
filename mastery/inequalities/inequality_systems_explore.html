@@ -328,7 +328,7 @@ $('#xMax').bind('keyup', function(evt) {
    var e = $.Event('keydown', {keyCode: 13});
    $('#ineqInput1').trigger(e);
    $('#ineqInput2').trigger(e);
-   circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    tstPntTrigger(curTstPnt[0], curTstPnt[1]);
 });
 $('#yMax').bind('keyup', function(evt) {
@@ -340,7 +340,7 @@ $('#yMax').bind('keyup', function(evt) {
    var e = $.Event('keydown', {keyCode: 13});
    $('#ineqInput1').trigger(e);
    $('#ineqInput2').trigger(e);
-   circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    tstPntTrigger(curTstPnt[0], curTstPnt[1]);
 });
 $('#xMin').bind('keyup', function(evt) {
@@ -352,7 +352,7 @@ $('#xMin').bind('keyup', function(evt) {
    var e = $.Event('keydown', {keyCode: 13});
    $('#ineqInput1').trigger(e);
    $('#ineqInput2').trigger(e);
-   circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    tstPntTrigger(curTstPnt[0], curTstPnt[1]);
 });
 $('#yMin').bind('keyup', function(evt) {
@@ -364,7 +364,7 @@ $('#yMin').bind('keyup', function(evt) {
    var e = $.Event('keydown', {keyCode: 13});
    $('#ineqInput1').trigger(e);
    $('#ineqInput2').trigger(e);
-   circSize = 2000 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    tstPntTrigger(curTstPnt[0], curTstPnt[1]);
 });
 $('#xMax').offset({top : $('#demo_grapher').offset().top + 532.5, left : $('#demo_grapher').offset().left + 650});
