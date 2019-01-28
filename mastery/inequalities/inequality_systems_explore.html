@@ -199,6 +199,7 @@ $('#ineqInput1').bind('keydown', function(evt) {
    }
    $(this).val(text);
    if (evt.keyCode !== 13) return;
+   d3.select('#demo_grapher').select('svg').selectAll('.inequality1').remove();
    if (text[0] !== 'y') return;
    var inxs = [{d : '<', i : text.indexOf('<')}, {d : '>', i : text.indexOf('>')}, {d : '≤', i : text.indexOf('≤')}, {d : '≥', i : text.indexOf('≥')}];
    var ind;
@@ -240,6 +241,7 @@ $('#ineqInput2').bind('keydown', function(evt) {
    }
    $(this).val(text);
    if (evt.keyCode !== 13) return;
+   d3.select('#demo_grapher').select('svg').selectAll('.inequality2').remove();
    if (text[0] !== 'y') return;
    var inxs = [{d : '<', i : text.indexOf('<')}, {d : '>', i : text.indexOf('>')}, {d : '≤', i : text.indexOf('≤')}, {d : '≥', i : text.indexOf('≥')}];
    var ind;
@@ -287,7 +289,6 @@ function drawLine(tms, dsh, clss) {
    else var stroke = '#228b22';
 
    if (dsh === '<' || dsh === '≤') {
-      d3.select('#demo_grapher').select('svg').selectAll('.' + clss).remove();
       d3.select('#demo_grapher').select('svg').append('path')
         .attr('class', clss)
         .attr('d', 'M ' + String(xScale(x_Min - 1)) + ' ' + String(startPointY) + ' L ' + String(xScale(x_Min - 1)) + ' ' + String(560 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(560 - intcp) + ' L '  + String(xScale(x_Max + 1)) + ' ' + String(endPointY) + 'Z')
@@ -295,7 +296,6 @@ function drawLine(tms, dsh, clss) {
         .attr('transform', 'translate(0, ' + String(intcp) + ')');
    }
    else if (dsh === '>' || dsh === '≥') {
-      d3.select('#demo_grapher').select('svg').selectAll('.' + clss).remove();
       d3.select('#demo_grapher').select('svg').append('path')
         .attr('class', clss)
         .attr('d', 'M ' + String(xScale(x_Min - 1)) + ' ' + String(startPointY) + ' L ' + String(xScale(x_Min - 1)) + ' ' + String(x_Min - 1 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(x_Min - 1 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(endPointY) + 'Z')
