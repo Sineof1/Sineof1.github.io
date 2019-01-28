@@ -199,7 +199,7 @@ $('#ineqInput1').bind('keydown', function(evt) {
    }
    $(this).val(text);
    if (evt.keyCode !== 13) return;
-   if (text[0] !== y) return;
+   if (text[0] !== 'y') return;
    var inxs = [{d : '<', i : text.indexOf('<')}, {d : '>', i : text.indexOf('>')}, {d : '≤', i : text.indexOf('≤')}, {d : '≥', i : text.indexOf('≥')}];
    var ind;
    var dash;
@@ -240,7 +240,7 @@ $('#ineqInput2').bind('keydown', function(evt) {
    }
    $(this).val(text);
    if (evt.keyCode !== 13) return;
-   if (text[0] !== y) return;
+   if (text[0] !== 'y') return;
    var inxs = [{d : '<', i : text.indexOf('<')}, {d : '>', i : text.indexOf('>')}, {d : '≤', i : text.indexOf('≤')}, {d : '≥', i : text.indexOf('≥')}];
    var ind;
    var dash;
