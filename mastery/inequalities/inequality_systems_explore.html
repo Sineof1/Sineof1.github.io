@@ -284,8 +284,8 @@ function drawLine(tms, dsh, clss) {
    else var slope = Number(tms[0].slice(0, tms[0].indexOf('x')));
    var intcp = yScale(Number(tms[1])) - yScale(0);
    if (tms[2] === 'minus') intcp = -intcp;
-   var startPointY = yScale((x_Min - 1) * slope);
-   var endPointY = yScale((x_Max + 1) * slope);
+   var startPointY = yScale((x_Min - 2) * slope);
+   var endPointY = yScale((x_Max + 2) * slope);
 
    if (clss === 'inequality1') var stroke = 'brown';
    else var stroke = '#228b22';
