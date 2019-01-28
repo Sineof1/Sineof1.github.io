@@ -276,7 +276,7 @@ $('#ineqInput2').bind('keydown', function(evt) {
 });
 
 function drawLine(tms, dsh, clss) {
-   if (dsh === '<' || dsh === '>') var dsharr = '5, 5';
+   if (dsh === '<' || dsh === '>') var dsharr = '10, 5';
    else var dsharr = '1, 0';
    if (tms[0].indexOf('x') === -1) var slope = 0;
    else if (tms[0].slice(0, tms[0].indexOf('x')) === '') var slope = 1;
