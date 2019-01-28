@@ -176,6 +176,7 @@ $('.tstPntInput').bind('keyup', function(evt) {
    d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
    if (evt.keyCode !== 13) return;
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   if (circSize > 15) circSize = 15;
    if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
    var x = xScale(Number($('#testPntX').val()));
    var y = yScale(Number($('#testPntY').val()));
@@ -307,7 +308,6 @@ function drawLine(tms, dsh, clss) {
 function tstPntTrigger(x, y) {
    d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
    if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
-   circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    var x = xScale(curTstPnt[0]) + 0.3;
    var y = yScale(curTstPnt[1]);
    d3.select('#demo_grapher').select('svg')
@@ -329,6 +329,7 @@ $('#xMax').bind('keyup', function(evt) {
    $('#ineqInput1').trigger(e);
    $('#ineqInput2').trigger(e);
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   if (circSize > 15) circSize = 15;
    tstPntTrigger(curTstPnt[0], curTstPnt[1]);
 });
 $('#yMax').bind('keyup', function(evt) {
@@ -341,6 +342,7 @@ $('#yMax').bind('keyup', function(evt) {
    $('#ineqInput1').trigger(e);
    $('#ineqInput2').trigger(e);
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   if (circSize > 15) circSize = 15;
    tstPntTrigger(curTstPnt[0], curTstPnt[1]);
 });
 $('#xMin').bind('keyup', function(evt) {
@@ -353,6 +355,7 @@ $('#xMin').bind('keyup', function(evt) {
    $('#ineqInput1').trigger(e);
    $('#ineqInput2').trigger(e);
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   if (circSize > 15) circSize = 15;
    tstPntTrigger(curTstPnt[0], curTstPnt[1]);
 });
 $('#yMin').bind('keyup', function(evt) {
@@ -365,6 +368,7 @@ $('#yMin').bind('keyup', function(evt) {
    $('#ineqInput1').trigger(e);
    $('#ineqInput2').trigger(e);
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
+   if (circSize > 15) circSize = 15;
    tstPntTrigger(curTstPnt[0], curTstPnt[1]);
 });
 $('#xMax').offset({top : $('#demo_grapher').offset().top + 532.5, left : $('#demo_grapher').offset().left + 650});
