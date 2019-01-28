@@ -284,8 +284,8 @@ function drawLine(tms, dsh, clss) {
    else var slope = Number(tms[0].slice(0, tms[0].indexOf('x')));
    var intcp = yScale(Number(tms[1])) - yScale(0);
    if (tms[2] === 'minus') intcp = -intcp;
-   var startPointY = yScale((x_Min - 1) * slope);
-   var endPointY = yScale((x_Max + 1) * slope);
+   var startPointY = yScale((x_Min - 2) * slope);
+   var endPointY = yScale((x_Max + 2) * slope);
 
    if (clss === 'inequality1') var stroke = 'brown';
    else var stroke = '#228b22';
@@ -293,14 +293,14 @@ function drawLine(tms, dsh, clss) {
    if (dsh === '<' || dsh === '≤') {
       d3.select('#demo_grapher').select('svg').append('path')
         .attr('class', clss)
-        .attr('d', 'M ' + String(xScale(x_Min - 1)) + ' ' + String(startPointY) + ' L ' + String(xScale(x_Min - 1)) + ' ' + String(560 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(560 - intcp) + ' L '  + String(xScale(x_Max + 1)) + ' ' + String(endPointY) + 'Z')
+        .attr('d', 'M ' + String(xScale(x_Min - 2)) + ' ' + String(startPointY) + ' L ' + String(xScale(x_Min - 2)) + ' ' + String(560 - intcp) + ' L ' + String(xScale(x_Max + 2)) + ' ' + String(560 - intcp) + ' L '  + String(xScale(x_Max + 2)) + ' ' + String(endPointY) + 'Z')
         .style('stroke', stroke).style('stroke-width', 2).style('fill', 'rgba(255, 0, 0, 0.3)').style('stroke-dasharray', dsharr)
         .attr('transform', 'translate(0, ' + String(intcp) + ')');
    }
    else if (dsh === '>' || dsh === '≥') {
       d3.select('#demo_grapher').select('svg').append('path')
         .attr('class', clss)
-        .attr('d', 'M ' + String(xScale(x_Min - 1)) + ' ' + String(startPointY) + ' L ' + String(xScale(x_Min - 1)) + ' ' + String(x_Min - 1 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(x_Min - 1 - intcp) + ' L ' + String(xScale(x_Max + 1)) + ' ' + String(endPointY) + 'Z')
+        .attr('d', 'M ' + String(xScale(x_Min - 2)) + ' ' + String(startPointY) + ' L ' + String(xScale(x_Min - 2)) + ' ' + String(x_Min - 2 - intcp) + ' L ' + String(xScale(x_Max + 2)) + ' ' + String(x_Min - 2 - intcp) + ' L ' + String(xScale(x_Max + 2)) + ' ' + String(endPointY) + 'Z')
         .style('stroke', stroke).style('stroke-width', 2).style('fill', 'rgba(0, 0, 255, 0.3)').style('stroke-dasharray', dsharr)
         .attr('transform', 'translate(0, ' + String(intcp) + ')');
    }
