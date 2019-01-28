@@ -173,10 +173,10 @@ function newGraph() {
 }
 newGraph();
 $('.tstPntInput').bind('keyup', function(evt) {
+   d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
    if (evt.keyCode !== 13) return;
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
-   d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
    var x = xScale(Number($('#testPntX').val()));
    var y = yScale(Number($('#testPntY').val()));
    d3.select('#demo_grapher').select('svg')
@@ -305,8 +305,8 @@ function drawLine(tms, dsh, clss) {
    }
 }
 function tstPntTrigger(x, y) {
-   if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
    d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
+   if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    var x = xScale(curTstPnt[0]) + 0.3;
    var y = yScale(curTstPnt[1]);
