@@ -214,9 +214,9 @@
 
 <div style='width:1300px;margin:0 auto;'>
 <div id='lhs'>
-<p>Ben's mom is at least 30 years older<br />than Ben. She is at least 50 years old.</p>
-<p style='text-indent:15px;'><strong>y = Mom's age</strong></p>
-<p style='text-indent:15px;margin-top:-5px;'><strong>x = &#8202;Ben's age</strong></p>
+<p>Tisha bought at least 4 notebooks. She paid at least $20 for all the notebooks.</p>
+<p style='text-indent:15px;'><strong>y = Amount Tisha paid</strong></p>
+<p style='text-indent:15px;margin-top:-5px;'><strong>x = Cost of each notebook</strong></p>
 <br />
 <p style='color:teal;margin-top:5px;'>Select the inequality that shows that Ben's mom is <span style='text-decoration:underline;'>at least 30</span> years older than Ben.</p>
 <p>
@@ -241,22 +241,9 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
 </p>
 <br />
 <p style='color:teal;margin-top:5px;'>Graph the inequalities in the Explore Tool.</p>
+<p style='color:teal;'>What is the minimum amount Tisha would pay if each notebook cost $6?</p>
+<p>Minimum: &nbsp;&nbsp;$<input class='tstPntInput' id='minAmount' type='text' style='width:150px;' />
 
-<p style='color:teal;'>The intersection point is (<input class='tstPntInput' id='intPntX' type='text'/>, <input class='tstPntInput' id='intPntY' type='text'/>).</p>
-
-<p style='color:teal;line-height:42px;margin-top:30px;'>This point
-<select name='solutions' class='ineqDrop' id='ineq3Drop' style='width:74%;box-sizing:border-box;'>
-  <option value="nothing3"></option>
-  <option value="ineq3Drop1">is a solution to just one inequality</option>
-  <option value="ineq3Drop2">is a solution to both inequalities</option>
-  <option value="ineq3Drop3">is a solution to neither inequality</option>
-</select>, &nbsp;because &nbsp;<select name='solutions' class='ineqDrop' id='ineq3Drop' style='width:74%;'>
-  <option value="nothing4"></option>
-  <option value="ineq4Drop1">10 is greater than or equal to 5, and 10 is more than 3 times greater than 5</option>
-  <option value="ineq4Drop2">10 is greater than or equal to 5, but 10 is not more than 3 times greater than 5</option>
-  <option value="ineq4Drop3">10 is not greater than 5, and 10 is not more than 3 times greater than 5</option>
-</select>.
-</p>
 </div>
 
 <div id='rhs'>
@@ -278,7 +265,6 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
 
 <img src='https://guzintamath.com/textsavvy/wp-content/uploads/2019/01/inequality_solns.png' style='position:fixed;visibility:hidden;' />
 <div id='previousProblem'>previous</div>
-<div id='nextProblem'>next</div>
 </body>
 
 </html>
@@ -578,11 +564,8 @@ $('#hintButton').bind('click', function(evt) {
    //else if (elem === 'equation2' || elem === 'equation3') $('#hint3').fadeIn(1000);
 });
 
-$('#nextProblem').bind('click', function() {
-   window.location.href = 'interpret_solns_inequalities3.html';
-});
 $('#previousProblem').bind('click', function() {
-   window.location.href = 'interpret_solns_inequalities.html';
+   window.location.href = 'interpret_solns_inequalities2.html';
 });
 $('#hint1').offset({'left' : $('#ineq1Drop').offset().left + 165, 'top' : $('#ineq1Drop').offset().top - 65});
 </script>
