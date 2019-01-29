@@ -204,10 +204,68 @@
 </div>
 </div>
 
+<div class='hintbox' id='hint2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText1'>Jonah's saved amount, y, is more than 3 times x, his sister's amount.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText2'>If y is equal to 3 times x, then y = 3x.<br />But here, y is more than 3 times x, but not equal to 3 times x.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>The inequality <mark>y &gt; 3x</mark> means that Jonah's savings, y, is more than 3 times his sister's amount, x.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint3'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText1'>Determine whether the point (5, 10) is a solution to just one inequality, both inequalities, or neither inequality.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText2'>The points in the area where both inequalities overlap are solutions to both inequalities. The points in the unshaded area are solutions to neither inequality.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>The point (5, 10) <mark>is a solution to just one inequality</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint4'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText1'>Select the phrase that best describes why (5, 10) is a solution to just one inequality.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText2'>Substitute the values from (5, 10) into the inequalities y ≥ 5 and y &gt; 3x to see if they make the inequalities true or not.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>10 ≥ 5 is true, but 10 &gt; 3(5) is not true.<br />So, <mark>10 is greater than or equal to 5, but 10 is not more than 3 times 5</mark>.</p>
+</div>
+</div>
+</div>
+
 <div class='jitbox' id='jit1'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;'>
-<p id='jitText1'>Slope is the ratio of the vertical distance to the horizontal distance. So, the vertical distance between the points should be in the numerator.</p>
+<p id='jitText1'>The phrase "at least $5" means that it could be $5 or more than $5.</p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText2'>In this situation, y &gt; 3 means that Jonah's savings is greater than $3.</p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit3'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText3'>In this situation, y ≥ 3x means that Jonah's savings is at least 3 times greater than Sara's.</p>
 </div>
 </div>
 </div>
@@ -248,11 +306,11 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
   <option value="ineq3Drop1">is a solution to just one inequality</option>
   <option value="ineq3Drop2">is a solution to both inequalities</option>
   <option value="ineq3Drop3">is a solution to neither inequality</option>
-</select>, &nbsp;because &nbsp;<select name='solutions' class='ineqDrop' id='ineq3Drop' style='width:70%;'>
+</select>, &nbsp;because &nbsp;<select name='solutions' class='ineqDrop' id='ineq4Drop' style='width:70%;'>
   <option value="nothing4"></option>
-  <option value="ineq4Drop1">10 is greater than or equal to 5, and 10 is more than 3 times greater than 5</option>
-  <option value="ineq4Drop2">10 is greater than or equal to 5, but 10 is not more than 3 times greater than 5</option>
-  <option value="ineq4Drop3">10 is not greater than 5, and 10 is not more than 3 times greater than 5</option>
+  <option value="ineq4Drop1">10 is greater than or equal to 5, and 10 is more than 3 times 5</option>
+  <option value="ineq4Drop2">10 is greater than or equal to 5, but 10 is not more than 3 times 5</option>
+  <option value="ineq4Drop3">10 is not greater than or equal to 5, and 10 is not more than 3 times 5</option>
 </select>.
 </p>
 </div>
@@ -571,12 +629,51 @@ $('#hintButton').bind('click', function(evt) {
    else if (elem === 'ineq4Drop') elem4Click += 1;
    if (elem === 'ineq1Drop' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
    else $('#hint1').fadeOut(1000);
-   //else if (elem === 'equation1') $('#hint2').fadeIn(1000);
-   //else if (elem === 'equation2' || elem === 'equation3') $('#hint3').fadeIn(1000);
+   if (elem === 'ineq2Drop' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
+   else $('#hint2').fadeOut(1000);
+   if (elem === 'ineq3Drop' && elem3Click % 2 === 0) $('#hint3').fadeIn(1000);
+   else $('#hint3').fadeOut(1000);
+   if (elem === 'ineq4Drop' && elem4Click % 2 === 0) $('#hint4').fadeIn(1000);
+   else $('#hint4').fadeOut(1000);
 });
 
 $('#nextProblem').bind('click', function() {
    window.location.href = 'interpret_solns_inequalities2.html';
 });
+$('#ineq1Drop').bind('change', function(evt) {
+   $('#hint1').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq1Drop3') curFocus = 'ineq2Drop';
+   else if (choice === 'ineq1Drop2') $('#jit1').fadeIn(1000);
+});
+$('#ineq2Drop').bind('change', function(evt) {
+   $('#hint2').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq2Drop3') curFocus = 'ineq3Drop';
+   else if (choice === 'ineq2Drop1') $('#jit2').fadeIn(1000);
+   else if (choice === 'ineq2Drop2') $('#jit3').fadeIn(1000);
+});
+$('#ineq3Drop').bind('change', function(evt) {
+   $('#hint3').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq3Drop1') curFocus = 'ineq4Drop';
+});
+$('#ineq4Drop').bind('change', function(evt) {
+   $('#hint4').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq4Drop2') curFocus = 'done';
+});
+
+$('#jit1').bind('click', function(){$(this).fadeOut();});
 $('#hint1').offset({'left' : $('#ineq1Drop').offset().left + 165, 'top' : $('#ineq1Drop').offset().top - 65});
+$('#jit1').offset({'left' : $('#ineq1Drop').offset().left + 165, 'top' : $('#ineq1Drop').offset().top - 65});
+
+$('#jit2').bind('click', function(){$(this).fadeOut();});
+$('#jit3').bind('click', function(){$(this).fadeOut();});
+$('#hint2').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top - 65});
+$('#jit2').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top - 65});
+$('#jit3').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top - 65});
+
+$('#hint3').offset({'left' : $('#ineq3Drop').offset().left + 275, 'top' : $('#ineq3Drop').offset().top - 60});
+$('#hint4').offset({'left' : $('#ineq4Drop').offset().left + 275, 'top' : $('#ineq4Drop').offset().top - 60});
 </script>
