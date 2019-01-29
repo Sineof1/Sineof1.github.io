@@ -87,7 +87,7 @@
    margin-top:30px;
    width:28%;
    height:94vh;
-   background:linear-gradient(to bottom, lightblue, lightblue, white);
+   background:linear-gradient(to bottom, white, lightblue, lightblue, white);
    border-radius:5px;
    font-family:'Product Sans';
    font-size:17px;
@@ -103,9 +103,37 @@
    font-family:'Product Sans';
    font-size:17px;
 }
+#navbar {
+   position:fixed;
+   top:0;
+   left:0;
+   height:45px;
+   width:100%;
+   background-color:navy;
+}
+#hintButton {
+   position:absolute;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   top:2.5px;
+   right:20px;
+   width:65px;
+   height:40px;
+   background-color:rgb(255, 186, 0);
+   color:white;
+   font-family:'Product Sans';
+   font-size:18px;
+   border-radius:5px;
+   outline:none;
+   cursor:pointer;
+}
 </style>
 </head>
 
+<div id='navbar'>
+<div id='hintButton'>Hints</div>
+</div>
 <body>
 <div style='width:1300px;margin:0 auto;'>
 <div id='lhs'>
@@ -262,7 +290,7 @@ $('.tstPntInput').bind('keyup', function(evt) {
    d3.select('#demo_grapher').select('svg')
      .append('circle')
      .attr('cx', x + 0.2).attr('cy', y).attr('r', 0)
-     .style('stroke', 'black').style('fill', 'rgba(255, 255, 0, 0.8')
+     .style('stroke', 'black').style('fill', 'rgba(255, 255, 0, 0.8)')
      .transition()
      .duration(1000)
      .ease(d3.easeBackOut)
