@@ -9,7 +9,7 @@
 <script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
-<title>Interpreting Solutions to Systems of Inequalities (A-CED.3)</title>
+<title>Interpreting Solutions to Inequalities (A-CED.3)</title>
 
 <style>
 @font-face {
@@ -193,13 +193,69 @@
 <div class='hintbox' id='hint1'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;'>
-<p id='hintText1'>Jonah's savings amount, y, is at least $5, but it could be more.</p>
+<p id='hintText1'>Ben's mom's age, y, is at least 30 more than x, which is Ben's age.</p>
 </div>
 <div class='hint' style='background-color:#fafafa;'>
-<p id='hintText2'>You know that Jonah's savings amount, y, cannot be less than $5, but it could be equal to or more than $5.</p>
+<p id='hintText2'>If y is equal to 30 more than x, then<br />y = x + 30. But here, y is greater than or equal to 30 more than x.</p>
 </div>
 <div class='hint' style='background-color:white;'>
-<p id='hintText3'>The inequality <mark>y ≥ 5</mark> means that Jonah's savings, y, is at least $5.</p>
+<p id='hintText3'>The inequality <mark>y ≥ x + 30</mark> means that Ben's mom's age, y, is at least 30 more than Ben's age, x.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText1'>Ben's mom's age, y, is more than 50.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText2'>You know that Ben's mom's age, y, cannot be less than 50, and is not equal to 50, but is more than 50.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>The inequality <mark>y &gt; 50</mark> means that Ben's mom's age, y, is more than 50.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint3'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText1'>Rewrite the inequalities as equations and set them equal to each other:<br /><br />y = x + 30 and y = 50, so x + 30 = 50.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText2'>Solve the equation x + 30 = 50 for x. Then substitute the solution into one of the equations to determine y.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>Since x + 30 = 50, x = 20.<br />And so y = (20) + 30. Thus, y = 50. The intersection point is (<mark>20</mark>, <mark>50</mark>).</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint4'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText1'>Determine whether the intersection point (20, 50) is a solution to just one inequality, both inequalities, or neither inequality.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText2'>The points in the area where both inequalities overlap are solutions to both inequalities. The points in the unshaded area are solutions to neither inequality.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>The intersection point (20, 50) <mark>is a solution to just one inequality</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint5'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText1'>Select the phrase that best describes why (20, 50) is a solution to just one inequality.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText2'>Substitute the values from (20, 50) into the inequalities y ≥ x + 30 and y &gt; 50 to see if they make the inequalities true or not.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText3'>50 ≥ 20 + 30 is true, but 50 &gt; 50 is not true.<br />So, <mark>50 is greater than or equal to 20 + 30, but 50 is not greater than 50</mark>.</p>
 </div>
 </div>
 </div>
@@ -207,14 +263,39 @@
 <div class='jitbox' id='jit1'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;'>
-<p id='jitText1'>Slope is the ratio of the vertical distance to the horizontal distance. So, the vertical distance between the points should be in the numerator.</p>
+<p id='jitText1'>The phrase "at least 30" means that it could be 30 or more than 30.</p>
 </div>
 </div>
 </div>
 
+<div class='jitbox' id='jit2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText1'>Ben's mom's age cannot be equal to 50, only more than 50.</p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit3'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText1'>You have reversed the coordinates of the point of intersection.</p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit4'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText1'>Each point on the horizontal dashed line in the graph represents y = 50, so no point on this line is a solution to the inequality y > 50.</p>
+</div>
+</div>
+</div>
+
+
 <div style='width:1300px;margin:0 auto;'>
 <div id='lhs'>
-<p>Ben's mom is at least 30 years older<br />than Ben. She is at least 50 years old.</p>
+<p>Ben's mom is at least 30 years older<br />than Ben. She is more than 50 years old.</p>
 <p style='text-indent:15px;'><strong>y = Mom's age</strong></p>
 <p style='text-indent:15px;margin-top:-5px;'><strong>x = &#8202;Ben's age</strong></p>
 <br />
@@ -222,21 +303,21 @@
 <p>
 Inequality 1: &nbsp;<select name='inequality1' class='ineqDrop' id='ineq1Drop'>
   <option value="nothing1"></option>
-  <option value="ineq1Drop1">y &lt; 5</option>
-  <option value="ineq1Drop2">y &gt; 5</option>
-  <option value="ineq1Drop3">y ≥ 5</option>
-  <option value="ineq1Drop4">y ≤ 5</option>
+  <option value="ineq1Drop1">y ≥ 30x</option>
+  <option value="ineq1Drop2">y ≥ x + 30</option>
+  <option value="ineq1Drop3">y ≤ 30x</option>
+  <option value="ineq1Drop4">y &gt; x + 30</option>
 </select>
 </p>
 <br />
-<p style='color:teal;margin-top:5px;'>Select the inequality that shows that Ben's mom is <span style='text-decoration:underline;'>at least 50</span> years old.</p>
+<p style='color:teal;margin-top:5px;'>Select the inequality that shows that Ben's mom is <span style='text-decoration:underline;'>more than 50</span> years old.</p>
 <p>
 Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
   <option value="nothing2"></option>
-  <option value="ineq2Drop1">y ≥ 3</option>
-  <option value="ineq2Drop2">y ≥ 3x</option>
-  <option value="ineq2Drop3">y &gt; 3x</option>
-  <option value="ineq2Drop4">y ≤ 3x</option>
+  <option value="ineq2Drop1">y &gt; 50</option>
+  <option value="ineq2Drop2">y ≥ 50x</option>
+  <option value="ineq2Drop3">y ≤ 50</option>
+  <option value="ineq2Drop4">y ≥ 50</option>
 </select>
 </p>
 <br />
@@ -250,11 +331,11 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
   <option value="ineq3Drop1">is a solution to just one inequality</option>
   <option value="ineq3Drop2">is a solution to both inequalities</option>
   <option value="ineq3Drop3">is a solution to neither inequality</option>
-</select>, &nbsp;because &nbsp;<select name='solutions' class='ineqDrop' id='ineq3Drop' style='width:74%;'>
+</select>, &nbsp;because &nbsp;<select name='solutions' class='ineqDrop' id='ineq4Drop' style='width:74%;'>
   <option value="nothing4"></option>
-  <option value="ineq4Drop1">10 is greater than or equal to 5, and 10 is more than 3 times greater than 5</option>
-  <option value="ineq4Drop2">10 is greater than or equal to 5, but 10 is not more than 3 times greater than 5</option>
-  <option value="ineq4Drop3">10 is not greater than 5, and 10 is not more than 3 times greater than 5</option>
+  <option value="ineq4Drop1">50 is greater than or equal to 20 + 30, but 50 is not greater than 50</option>
+  <option value="ineq4Drop2">50 is greater than or equal to 20 + 30, and 50 is greater than 50</option>
+  <option value="ineq4Drop3">50 is not greater than or equal to 20 + 30, and 50 is not greater than 50</option>
 </select>.
 </p>
 </div>
@@ -303,6 +384,7 @@ var elem1Click = 1;
 var elem2Click = 1;
 var elem3Click = 1;
 var elem4Click = 1;
+var elem5Click = 1;
 
 var xAxis = d3.axisBottom(xScale).ticks(5).tickSizeOuter(0);
 var yAxis = d3.axisLeft(yScale).ticks(5).tickSizeOuter(0);
@@ -568,14 +650,22 @@ $('#yMin').bind('keyup', function(evt) {
 
 $('#hintButton').bind('click', function(evt) {
    var elem = curFocus;
+   $('#jit1, #jit2, #jit3, #jit4').fadeOut();
    if (elem === 'ineq1Drop') elem1Click += 1;
    else if (elem === 'ineq2Drop') elem2Click += 1;
-   else if (elem === 'ineq3Drop') elem3Click += 1;
-   else if (elem === 'ineq4Drop') elem4Click += 1;
+   else if (elem === 'intPnt') elem3Click += 1;
+   else if (elem === 'ineq3Drop') elem4Click += 1;
+   else if (elem === 'ineq4Drop') elem5Click += 1;
    if (elem === 'ineq1Drop' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
    else $('#hint1').fadeOut(1000);
-   //else if (elem === 'equation1') $('#hint2').fadeIn(1000);
-   //else if (elem === 'equation2' || elem === 'equation3') $('#hint3').fadeIn(1000);
+   if (elem === 'ineq2Drop' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
+   else $('#hint2').fadeOut(1000);
+   if (elem === 'intPnt' && elem3Click % 2 === 0) $('#hint3').fadeIn(1000);
+   else $('#hint3').fadeOut(1000);
+   if (elem === 'ineq3Drop' && elem4Click % 2 === 0) $('#hint4').fadeIn(1000);
+   else $('#hint4').fadeOut(1000);
+   if (elem === 'ineq4Drop' && elem5Click % 2 === 0) $('#hint5').fadeIn(1000);
+   else $('#hint5').fadeOut(1000);
 });
 
 $('#nextProblem').bind('click', function() {
@@ -584,5 +674,101 @@ $('#nextProblem').bind('click', function() {
 $('#previousProblem').bind('click', function() {
    window.location.href = 'interpret_solns_inequalities.html';
 });
-$('#hint1').offset({'left' : $('#ineq1Drop').offset().left + 165, 'top' : $('#ineq1Drop').offset().top - 65});
+
+$('#yMax').val('60');
+$('#xMax').val('25');
+$('#xMin').val('0');
+$('#yMin').val('-1');
+var e = $.Event('keyup', {keyCode: 13});
+$('#yMax').trigger(e);
+$('#yMin').trigger(e);
+$('#xMax').trigger(e);
+$('#xMin').trigger(e);
+
+$('#ineq1Drop').bind('change', function(evt) {
+   $('#hint1').fadeOut();
+   $('#jit1').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq1Drop2') {
+   $(this).css('border', '1px solid green');
+   curFocus = 'ineq2Drop';
+   }
+   else if (choice === 'ineq1Drop4') {
+   $(this).css('border', '1px solid red');
+   $('#jit1').fadeIn(1000);
+   }
+   else $(this).css('border', '1px solid red');
+});
+$('#ineq2Drop').bind('change', function(evt) {
+   $('#hint2').fadeOut();
+   $('#jit2').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq2Drop1') {
+   $(this).css('border', '1px solid green');
+   curFocus = 'intPnt';
+   }
+   else if (choice === 'ineq2Drop4') {
+   $(this).css('border', '1px solid red');
+   $('#jit2').fadeIn(1000);
+   }
+   else $(this).css('border', '1px solid red');
+});
+$('#intPntX, #intPntY').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($('#intPntX').val() === '' || $('#intPntY').val() === '') return;
+   $('#hint3').fadeOut();
+   $('#jit3').fadeOut();
+   var choiceX = Number($('#intPntX').val());
+   var choiceY = Number($('#intPntY').val());
+   if (choiceX === 20 && choiceY === 50) {
+   $('#intPntX, #intPntY').css('border', '1px solid green');
+   curFocus = 'ineq3Drop';
+   }
+   else if (choiceX === 50 && choiceY === 20) {
+   $('#intPntX, #intPntY').css('border', '1px solid red');
+   $('#jit3').fadeIn(1000);
+   }
+   else $('#intPntX, #intPntY').css('border', '1px solid red');
+});
+$('#ineq3Drop').bind('change', function(evt) {
+   $('#hint4').fadeOut();
+   $('#jit4').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq3Drop1') {
+   $(this).css('border', '1px solid green');
+   curFocus = 'ineq4Drop';
+   }
+   else if (choice === 'ineq3Drop2') {
+   $(this).css('border', '1px solid red');
+   $('#jit4').fadeIn(1000);
+   }
+   else $(this).css('border', '1px solid red');
+});
+$('#ineq4Drop').bind('change', function(evt) {
+   $('#hint5').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq4Drop1') {
+   $(this).css('border', '1px solid green');
+   curFocus = 'done';
+   }
+   else $(this).css('border', '1px solid red');
+});
+
+$('#jit1').bind('click', function(){$(this).fadeOut();});
+$('#hint1').offset({'left' : $('#ineq1Drop').offset().left + 165, 'top' : $('#ineq1Drop').offset().top});
+$('#jit1').offset({'left' : $('#ineq1Drop').offset().left + 165, 'top' : $('#ineq1Drop').offset().top});
+
+$('#jit2').bind('click', function(){$(this).fadeOut();});
+$('#hint2').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top});
+$('#jit2').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top});
+
+$('#jit3').bind('click', function(){$(this).fadeOut();});
+$('#jit3').offset({'left' : $('#intPntY').offset().left + 85, 'top' : $('#intPntY').offset().top});
+$('#hint3').offset({'left' : $('#intPntY').offset().left + 85, 'top' : $('#intPntY').offset().top});
+
+$('#jit4').bind('click', function(){$(this).fadeOut();});
+$('#jit4').offset({'left' : $('#ineq3Drop').offset().left + 275, 'top' : $('#ineq3Drop').offset().top});
+$('#hint4').offset({'left' : $('#ineq3Drop').offset().left + 275, 'top' : $('#ineq3Drop').offset().top});
+
+$('#hint5').offset({'left' : $('#ineq4Drop').offset().left + 275, 'top' : $('#ineq4Drop').offset().top});
 </script>
