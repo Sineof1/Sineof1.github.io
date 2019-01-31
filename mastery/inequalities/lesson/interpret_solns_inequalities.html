@@ -628,7 +628,7 @@ $('#hintButton').bind('click', function(evt) {
    if (elem === 'ineq1Drop') elem1Click += 1;
    else if (elem === 'ineq2Drop') elem2Click += 1;
    else if (elem === 'ineq3Drop') elem3Click += 1;
-   else if (elem === 'ineq4Drop') elem4Click += 1;
+   else if (elem === 'ineq4Drop' || elem === 'ineq5Drop') elem4Click += 1;
    if (elem === 'ineq1Drop' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
    else $('#hint1').fadeOut(1000);
    if (elem === 'ineq2Drop' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
