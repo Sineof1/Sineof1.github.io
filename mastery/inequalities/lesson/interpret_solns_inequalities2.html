@@ -329,11 +329,14 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
   <option value="ineq3Drop1">is a solution to just one inequality</option>
   <option value="ineq3Drop2">is a solution to both inequalities</option>
   <option value="ineq3Drop3">is a solution to neither inequality</option>
-</select>, &nbsp;because &nbsp;<select name='solutions' class='ineqDrop' id='ineq4Drop' style='width:74%;'>
+</select>, &nbsp;because &nbsp;<select name='solutions1' class='ineqDrop' id='ineq4Drop' style='width:74%;'>
   <option value="nothing4"></option>
-  <option value="ineq4Drop1">50 is greater than or equal to 20 + 30, but 50 is not greater than 50</option>
-  <option value="ineq4Drop2">50 is greater than or equal to 20 + 30, and 50 is greater than 50</option>
-  <option value="ineq4Drop3">50 is not greater than or equal to 20 + 30, and 50 is not greater than 50</option>
+  <option value="ineq4Drop1">50 is greater than or equal to 20 + 30</option>
+  <option value="ineq4Drop3">50 is not greater than or equal to 20 + 30</option>
+    </select>, <span style='visibility:hidden;'>&nbsp;because &nbsp;</span><select name='solutions2' class='ineqDrop' id='ineq5Drop' style='width:74%;'>
+  <option value="nothing5"></option>
+  <option value="ineq5Drop1">but 50 is not greater than 50</option>
+  <option value="ineq5Drop3">and 50 is not greater than 50</option>
 </select>.
 </p>
 </div>
@@ -653,7 +656,7 @@ $('#hintButton').bind('click', function(evt) {
    else if (elem === 'ineq2Drop') elem2Click += 1;
    else if (elem === 'intPnt') elem3Click += 1;
    else if (elem === 'ineq3Drop') elem4Click += 1;
-   else if (elem === 'ineq4Drop') elem5Click += 1;
+   else if (elem === 'ineq4Drop' || elem === 'ineq5Drop') elem5Click += 1;
    if (elem === 'ineq1Drop' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
    else $('#hint1').fadeOut(1000);
    if (elem === 'ineq2Drop' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
@@ -662,7 +665,7 @@ $('#hintButton').bind('click', function(evt) {
    else $('#hint3').fadeOut(1000);
    if (elem === 'ineq3Drop' && elem4Click % 2 === 0) $('#hint4').fadeIn(1000);
    else $('#hint4').fadeOut(1000);
-   if (elem === 'ineq4Drop' && elem5Click % 2 === 0) $('#hint5').fadeIn(1000);
+   if ((elem === 'ineq4Drop' && elem5Click % 2 === 0) || (elem === 'ineq5Drop' && elem5Click % 2 === 0)) $('#hint5').fadeIn(1000);
    else $('#hint5').fadeOut(1000);
 });
 
@@ -747,7 +750,16 @@ $('#ineq4Drop').bind('change', function(evt) {
    var choice = $(this).val();
    if (choice === 'ineq4Drop1') {
    $(this).css('border', '1px solid green');
-   curFocus = 'done';
+   curFocus = 'ineq4Drop';
+   }
+   else $(this).css('border', '1px solid red');
+});
+$('#ineq5Drop').bind('change', function(evt) {
+   $('#hint5').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq5Drop1') {
+   $(this).css('border', '1px solid green');
+   curFocus = 'ineq4Drop';
    }
    else $(this).css('border', '1px solid red');
 });
