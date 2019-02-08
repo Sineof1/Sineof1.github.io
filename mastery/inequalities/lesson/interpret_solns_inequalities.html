@@ -91,6 +91,7 @@
    font-size:17px;
    box-sizing:border-box;
    padding:10px 15px;
+   overflow-y:scroll;
 }
 .ineqDrop {
    width:150px;
@@ -180,6 +181,9 @@
    font-variant:small-caps;
    cursor:pointer;
 }
+.round2 {
+   display:none;
+}
 </style>
 </head>
 
@@ -205,13 +209,13 @@
 <div class='hintbox' id='hint2'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;'>
-<p id='hintText1'>Jonah's saved amount, y, is more than 3 times x, his sister's amount.</p>
+<p id='hintText4'>Jonah's saved amount, y, is more than 3 times x, his sister's amount.</p>
 </div>
 <div class='hint' style='background-color:#fafafa;'>
-<p id='hintText2'>If y is equal to 3 times x, then y = 3x.<br />But here, y is more than 3 times x, but not equal to 3 times x.</p>
+<p id='hintText5'>If y is equal to 3 times x, then y = 3x.<br />But here, y is more than 3 times x, but not equal to 3 times x.</p>
 </div>
 <div class='hint' style='background-color:white;'>
-<p id='hintText3'>The inequality <mark>y &gt; 3x</mark> means that Jonah's savings, y, is more than 3 times his sister's amount, x.</p>
+<p id='hintText6'>The inequality <mark>y &gt; 3x</mark> means that Jonah's savings, y, is more than 3 times his sister's amount, x.</p>
 </div>
 </div>
 </div>
@@ -219,13 +223,13 @@
 <div class='hintbox' id='hint3'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;'>
-<p id='hintText1'>Determine whether the point (5, 10) is a solution to just one inequality, both inequalities, or neither inequality.</p>
+<p id='hintText7'>Determine whether the point (5, 10) is a solution to just one inequality, both inequalities, or neither inequality.</p>
 </div>
 <div class='hint' style='background-color:#fafafa;'>
-<p id='hintText2'>The points in the area where both inequalities overlap are solutions to both inequalities. The points in the unshaded area are solutions to neither inequality.</p>
+<p id='hintText8'>The points in the area where both inequalities overlap are solutions to both inequalities. The points in the unshaded area are solutions to neither inequality.</p>
 </div>
 <div class='hint' style='background-color:white;'>
-<p id='hintText3'>The point (5, 10) <mark>is a solution to just one inequality</mark>.</p>
+<p id='hintText9'>The point (5, 10) <mark>is a solution to just one inequality</mark>.</p>
 </div>
 </div>
 </div>
@@ -233,13 +237,83 @@
 <div class='hintbox' id='hint4'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;'>
-<p id='hintText1'>Select the phrase that best describes why (5, 10) is a solution to just one inequality.</p>
+<p id='hintText10'>Select the phrase that best describes why (5, 10) is a solution to just one inequality.</p>
 </div>
 <div class='hint' style='background-color:#fafafa;'>
-<p id='hintText2'>Substitute the values from (5, 10) into the inequalities y ≥ 5 and y &gt; 3x to see if they make the inequalities true or not.</p>
+<p id='hintText11'>Substitute the values from (5, 10) into the inequalities y ≥ 5 and y &gt; 3x to see if they make the inequalities true or not.</p>
 </div>
 <div class='hint' style='background-color:white;'>
-<p id='hintText3'>10 ≥ 5 is true, but 10 &gt; 3(5) is not true.<br />So, <mark>10 is greater than or equal to 5, but 10 is not more than 3 times 5</mark>.</p>
+<p id='hintText12'>10 ≥ 5 is true, but 10 &gt; 3(5) is not true.<br />So, <mark>10 is greater than or equal to 5, but 10 is not more than 3 times 5</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint5'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText13'>Graph the inequalities and the test point in the Explore Tool. Does the test point belong to a region that is shaded once, twice, or not at all?</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText14'>For these inequalities, a region that is shaded just once is light blue, a region shaded twice is dark blue, and an unshaded region is white.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText15'>The point (5, 10) belongs to <mark>just one shaded region on the graph</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint6'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText16'>Test the point (5, 10) in the inequality<br />y ≥ 5.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText17'>Substitute the y-value of the test point for the variable y in the inequality y ≥ 5.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText18'>Enter the y-value of the test point, <mark>10</mark>, to form the inequality 10 ≥ 5.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint7'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText19'>Decide whether the inequality 10 ≥ 5 is true or false.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText20'>The inequality 10 ≥ 5 can be read as<br />"10 is greater than or equal to 5."</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText21'>It is true that 10 is greater than or equal to 5, so choose <mark>True</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint8'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText22'>Test the point (5, 10) in the inequality<br />y &gt; 3x.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText23'>Substitute the x- and y-values of the test point for the variables x and y in the inequality y &gt; 3x.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText24'>Use the values of the test point to enter the inequality <mark>10</mark> &gt; 3(<mark>5</mark>).</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint9'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='hintText25'>Decide whether the inequality 10 &gt; 3(5) is true or false.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p id='hintText26'>The inequality 10 &gt; 3(5) can be read as<br />"10 is greater than 3 times 5."</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p id='hintText27'>It is false that 10 is greater than 15, so choose <mark>False</mark>.</p>
 </div>
 </div>
 </div>
@@ -297,23 +371,43 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
 </p>
 <br />
 <p style='color:teal;margin-top:5px;'>Graph the inequalities in the Explore Tool.</p>
-
-<p style='color:teal;line-height:42px;'>Test the point (5, 10) in the Explore Tool. This point
-<select name='solutions' class='ineqDrop' id='ineq3Drop' style='width:70%;box-sizing:border-box;'>
+<br />
+<p style='color:teal;line-height:42px;'>Test the point (5, 10) in the Explore Tool. <span style='color:black;'>This point belongs to</span>
+<select name='graphAreas' class='ineqDrop' id='ineq6Drop' style='width:43%;box-sizing:border-box;'>
+  <option value="nothing6"></option>
+  <option value="ineq6Drop1">none of the shaded regions on the graph</option>
+  <option value="ineq6Drop2">just one shaded region on the graph</option>
+  <option value="ineq6Drop3">two shaded regions on the graph</option>
+</select>.</p>
+<span class='round2'>
+<div style='background-color:rgba(255, 255, 255, 0.25);box-sizing:border-box;padding:10px;'>
+<p style='color:teal;margin-top:0;' class='round2'>Test the point (5, 10) in each inequality. Decide whether the point makes the inequality true or not.</p>
+<input class='tstPntInput round2' id='ineq1LHS' type='text' style='color:black;' /> <span class='round2' id='ineq1Sign' style='color:black;'>≥</span> <span class='round2' style='color:black;'>5</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' class='round2' id='ineq1RadioT' name='radio1' value='true'><label class='round2' for='ineq1RadioT' style='color:black;'>True</label>&nbsp;&nbsp;<input type='radio' class='round2' id='ineq1RadioF' name='radio1' value='false'><label class='round2' for='ineq1RadioF' style='color:black;'>False</label><br /><br />
+<input class='tstPntInput round2' id='ineq2LHS' type='text' style='color:black;' /> <span class='round2' id='ineq2Sign' style='color:black;'>&gt;</span> <span class='round2' style='color:black;'>3(<input class='tstPntInput round2' id='ineq2RHS' type='text' />)</span> &thinsp;&nbsp;&thinsp;<input type='radio' class='round2' id='ineq2RadioT' name='radio2' value='true'><label class='round2' for='ineq1RadioT' style='color:black;'>True</label>&nbsp;&nbsp;<input type='radio' class='round2' id='ineq2RadioF' name='radio2' value='false'><label class='round2' for='ineq1RadioF' style='color:black;'>False</label>
+</div>
+<br />
+<span class='round2' style='color:black;'>The point (5, 10)</span>
+<select name='solutions' class='ineqDrop round2' id='ineq3Drop' style='width:20%;box-sizing:border-box;'>
   <option value="nothing3"></option>
   <option value="ineq3Drop1">is a solution to just one inequality</option>
   <option value="ineq3Drop2">is a solution to both inequalities</option>
   <option value="ineq3Drop3">is a solution to neither inequality</option>
-</select>, &nbsp;because &nbsp;<select name='solutions1' class='ineqDrop' id='ineq4Drop' style='width:70%;'>
+</select>, &nbsp;<span class='round2' style='color:black;'>because</span> <br /><br /><select name='solutions1' class='ineqDrop round2' id='ineq4Drop' style='width:47%;'>
   <option value="nothing4"></option>
   <option value="ineq4Drop2">10 is greater than or equal to 5</option>
   <option value="ineq4Drop3">10 is not greater than or equal to 5</option>
-    </select>, <span style='visibility:hidden;'>&nbsp;because &nbsp;</span><select name='solutions2' class='ineqDrop' id='ineq5Drop' style='width:70%;'>
+    </select>, <select name='solutions2' class='ineqDrop round2' id='ineq5Drop' style='width:47%;'>
   <option value="nothing5"></option>
   <option value="ineq5Drop1">and 10 is more than 3 times 5</option>
   <option value="ineq5Drop2">but 10 is not more than 3 times 5</option>
 </select>.
 </p>
+<div style='background-color:rgba(255, 255, 255, 0.25);box-sizing:border-box;padding:5px;'>
+<p style='color:teal;margin-top:0;'>Enter a system of inequalities so that the point (5, 10) makes both inequalities true.</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y = <input class='tstPntInput' type='text' disabled='disabled' />x + <input class='tstPntInput' type='text' disabled='disabled' /><br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y = <input class='tstPntInput' type='text' disabled='disabled' />x + <input class='tstPntInput' type='text' disabled='disabled' />
+</div>
+</span>
 </div>
 
 <div id='rhs'>
@@ -359,6 +453,13 @@ var elem1Click = 1;
 var elem2Click = 1;
 var elem3Click = 1;
 var elem4Click = 1;
+var elem6Click = 1;
+var elem7Click = 1;
+var elem8Click = 1;
+var elem9Click = 1;
+var elem10Click = 1;
+var radio2_1Correct = false;
+var radio2_2Correct = false;
 
 var xAxis = d3.axisBottom(xScale).ticks(5).tickSizeOuter(0);
 var yAxis = d3.axisLeft(yScale).ticks(5).tickSizeOuter(0);
@@ -629,6 +730,11 @@ $('#hintButton').bind('click', function(evt) {
    else if (elem === 'ineq2Drop') elem2Click += 1;
    else if (elem === 'ineq3Drop') elem3Click += 1;
    else if (elem === 'ineq4Drop' || elem === 'ineq5Drop') elem4Click += 1;
+   else if (elem === 'ineq6Drop') elem6Click += 1;
+   else if (elem === 'ineq1LHS') elem7Click += 1;
+   else if (elem === 'radio1') elem8Click += 1;
+   else if (elem === 'ineq2LHS' || elem === 'ineqRHS') elem9Click += 1;
+   else if (elem === 'radio2') elem10Click += 1;
    if (elem === 'ineq1Drop' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
    else $('#hint1').fadeOut(1000);
    if (elem === 'ineq2Drop' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
@@ -637,6 +743,28 @@ $('#hintButton').bind('click', function(evt) {
    else $('#hint3').fadeOut(1000);
    if ((elem === 'ineq4Drop' && elem4Click % 2 === 0) || (elem === 'ineq5Drop' && elem4Click % 2 === 0)) $('#hint4').fadeIn(1000);
    else $('#hint4').fadeOut(1000);
+   if (elem === 'ineq6Drop' && elem6Click % 2 === 0) $('#hint5').fadeIn(1000);
+   else $('#hint5').fadeOut(1000);
+   if (elem === 'ineq1LHS' && elem7Click % 2 === 0) {
+      $('#hint6').fadeIn(1000);
+      $('#hint6').offset({'left' : $('#ineq1LHS').offset().left + 325, 'top' : $('#ineq1LHS').offset().top});
+   }
+   else $('#hint6').fadeOut(1000);
+   if (elem === 'radio1' && elem8Click % 2 === 0) {
+      $('#hint7').fadeIn(1000);
+      $('#hint7').offset({'left' : $('input[name=radio1]').offset().left + 225, 'top' : $('input[name=radio1]').offset().top});
+   }
+   else $('#hint7').fadeOut(1000);
+   if ((elem === 'ineq2LHS' || elem === 'ineqRHS') && elem9Click % 2 === 0) {
+      $('#hint8').fadeIn(1000);
+      $('#hint8').offset({'left' : $('#ineq2LHS').offset().left + 325, 'top' : $('#ineq2LHS').offset().top});
+   }
+   else $('#hint8').fadeOut(1000);
+   if (elem === 'radio2' && elem10Click % 2 === 0) {
+      $('#hint9').fadeIn(1000);
+      $('#hint9').offset({'left' : $('input[name=radio2]').offset().left + 225, 'top' : $('input[name=radio2]').offset().top});
+   }
+   else $('#hint9').fadeOut(1000);
 });
 
 $('#nextProblem').bind('click', function() {
@@ -663,7 +791,7 @@ $('#ineq2Drop').bind('change', function(evt) {
    var choice = $(this).val();
    if (choice === 'ineq2Drop3') {
    $(this).css('border', '1px solid green');
-   curFocus = 'ineq3Drop';
+   curFocus = 'ineq6Drop';
    }
    else if (choice === 'ineq2Drop1') {
    $(this).css('border', '1px solid red');
@@ -702,6 +830,72 @@ $('#ineq5Drop').bind('change', function(evt) {
    }
    else $(this).css('border', '1px solid red');
 });
+$('#ineq6Drop').bind('change', function(evt) {
+   $('#hint5').fadeOut();
+   var choice = $(this).val();
+   if (choice === 'ineq6Drop2') {
+   $(this).css('border', '1px solid green');
+   curFocus = 'ineq1LHS';
+   $('.round2').fadeIn(1000);
+   }
+   else $(this).css('border', '1px solid red');
+});
+$('#ineq1LHS').bind('keyup', function(evt) {
+   $('#hint6').fadeOut();
+   if (evt.keyCode !== 13) return;
+   var answer = $(this).val();
+   if (answer === '10') {
+   $(this).css('border', '1px solid green');
+   curFocus = 'radio1';
+   }
+   else $(this).css('border', '1px solid red');
+});
+$('input[name=radio1]').bind('change', function(evt) {
+   $('#hint7').fadeOut();
+   $('input[name=radio1]').css('outline', 'none');
+   $('input[name=radio2]').css('outline', 'none');
+   var choice = $('input[name=radio1]:checked').val();
+   if (choice === 'true') {
+   $(this).css('outline', '1px solid green');
+   curFocus = 'ineq2LHS'
+   }
+   else $(this).css('outline', '1px solid red');
+});
+$('#ineq2LHS').bind('keyup', function(evt) {
+   $('#hint8').fadeOut();
+   if (evt.keyCode !== 13) return;
+   var answer = $(this).val();
+   if (answer === '10') {
+   radio2_1Correct = true;
+   $(this).css('border', '1px solid green');
+   if (radio2_1Correct && radio2_2Correct) curFocus = 'radio2';
+   else curFocus = 'ineq2RHS'
+   }
+   else $(this).css('border', '1px solid red');
+});
+$('#ineq2RHS').bind('keyup', function(evt) {
+   $('#hint8').fadeOut();
+   if (evt.keyCode !== 13) return;
+   var answer = $(this).val();
+   if (answer === '5') {
+   radio2_2Correct = true;
+   $(this).css('border', '1px solid green');
+   if (radio2_1Correct && radio2_2Correct) curFocus = 'radio2';
+   else curFocus = 'ineq2LHS'
+   }
+   else $(this).css('border', '1px solid red');
+});
+$('input[name=radio2]').bind('change', function(evt) {
+   $('#hint9').fadeOut();
+   $('input[name=radio1]').css('outline', 'none');
+   $('input[name=radio2]').css('outline', 'none');
+   var choice = $('input[name=radio2]:checked').val();
+   if (choice === 'false') {
+   $(this).css('outline', '1px solid green');
+   curFocus = 'ineq3Drop'
+   }
+   else $(this).css('outline', '1px solid red');
+});
 
 $('#jit1').bind('click', function(){$(this).fadeOut();});
 $('#hint1').offset({'left' : $('#ineq1Drop').offset().left + 165, 'top' : $('#ineq1Drop').offset().top});
@@ -713,6 +907,11 @@ $('#hint2').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#in
 $('#jit2').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top});
 $('#jit3').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top});
 
-$('#hint3').offset({'left' : $('#ineq3Drop').offset().left + 275, 'top' : $('#ineq3Drop').offset().top - 60});
-$('#hint4').offset({'left' : $('#ineq4Drop').offset().left + 275, 'top' : $('#ineq4Drop').offset().top - 60});
+$('#hint3').offset({'left' : $('#lhs').offset().left + 350, 'top' : window.innerHeight * 0.97 - 250});
+$('#hint4').offset({'left' : $('#lhs').offset().left + 350, 'top' : window.innerHeight * 0.97 - 250});
+$('#hint5').offset({'left' : $('#lhs').offset().left + 350, 'top' : window.innerHeight * 0.97 - 250});
+$('#hint6').offset({'left' : $('#ineq1LHS').offset().left + 325, 'top' : $('#ineq1LHS').offset().top});
+$('#hint7').offset({'left' : $('input[name=radio1]').offset().left + 225, 'top' : $('input[name=radio1]').offset().top});
+$('#hint8').offset({'left' : $('#ineq2LHS').offset().left + 325, 'top' : $('#ineq2LHS').offset().top});
+$('#hint9').offset({'left' : $('input[name=radio2]').offset().left + 225, 'top' : $('input[name=radio2]').offset().top});
 </script>

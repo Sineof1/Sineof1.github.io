@@ -91,6 +91,7 @@
    font-size:17px;
    box-sizing:border-box;
    padding:10px 15px;
+   overflow-y:scroll;
 }
 .ineqDrop {
    width:150px;
@@ -321,7 +322,14 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
 <br />
 <p style='color:teal;margin-top:5px;'>Graph the inequalities in the Explore Tool.</p>
 
-<p style='color:teal;'>The intersection point is (<input class='tstPntInput' id='intPntX' type='text'/>, <input class='tstPntInput' id='intPntY' type='text'/>).</p>
+<p style='color:teal;'>The intersection point is (<input class='tstPntInput' id='intPntX' type='text' style='width:45px;'/>, <input class='tstPntInput' id='intPntY' type='text' style='width:45px;'/>).</p>
+
+<span class='round2'>
+<div style='background-color:rgba(255, 255, 255, 0.25);box-sizing:border-box;padding:10px;'>
+<p style='color:teal;margin-top:0;' class='round2'>Test the intersection point in each inequality. Decide whether the point makes the inequality true or not.</p>
+<input class='tstPntInput round2' id='ineq1LHS' type='text' style='color:black;width:45px;' disabled='disabled' /> <span class='round2' id='ineq1Sign' style='color:black;'>≥</span> <span class='round2' style='color:black;'><input class='tstPntInput round2' id='ineq1LHS' type='text' style='color:black;width:45px;' disabled='disabled' /> + 30</span> &nbsp;&nbsp;<input type='radio' class='round2' id='ineq1RadioT' name='radio1' value='true' disabled='disabled'><label class='round2' for='ineq1RadioT' style='color:black;'>True</label>&nbsp;&nbsp;<input type='radio' class='round2' id='ineq1RadioF' name='radio1' value='false' disabled='disabled'><label class='round2' for='ineq1RadioF' style='color:black;'>False</label><br /><br />
+<input class='tstPntInput round2' id='ineq2LHS' type='text' style='color:black;width:45px;' disabled='disabled' /> <span class='round2' id='ineq2Sign' style='color:black;'>&gt;</span> <span class='round2' style='color:black;'>50</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;<input type='radio' class='round2' id='ineq2RadioT' name='radio2' value='true' disabled='disabled'><label class='round2' for='ineq1RadioT' style='color:black;'>True</label>&nbsp;&nbsp;<input type='radio' class='round2' id='ineq2RadioF' name='radio2' value='false' disabled='disabled'><label class='round2' for='ineq1RadioF' style='color:black;'>False</label>
+</div>
 
 <p style='color:teal;line-height:42px;margin-top:30px;'>This point
 <select name='solutions' class='ineqDrop' id='ineq3Drop' style='width:74%;box-sizing:border-box;'>
@@ -339,6 +347,7 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
   <option value="ineq5Drop3">and 50 is not greater than 50</option>
 </select>.
 </p>
+</span>
 </div>
 
 <div id='rhs'>
@@ -778,7 +787,7 @@ $('#hint3').offset({'left' : $('#intPntY').offset().left + 85, 'top' : $('#intPn
 
 $('#jit4').bind('click', function(){$(this).fadeOut();});
 $('#jit4').offset({'left' : $('#ineq3Drop').offset().left + 275, 'top' : $('#ineq3Drop').offset().top});
-$('#hint4').offset({'left' : $('#ineq3Drop').offset().left + 275, 'top' : $('#ineq3Drop').offset().top});
+$('#hint4').offset({'left' : $('#ineq3Drop').offset().left + 275, 'top' : $('#ineq3Drop').offset().top - 150});
 
-$('#hint5').offset({'left' : $('#ineq4Drop').offset().left + 275, 'top' : $('#ineq4Drop').offset().top});
+$('#hint5').offset({'left' : $('#ineq4Drop').offset().left + 275, 'top' : $('#ineq4Drop').offset().top - 150});
 </script>
