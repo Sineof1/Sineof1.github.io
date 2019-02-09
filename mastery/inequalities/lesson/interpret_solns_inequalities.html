@@ -349,6 +349,14 @@
 </div>
 </div>
 </div>
+    
+<div class='jitbox' id='jit5'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText5'>Enter the x-value of the test point.</p>
+</div>
+</div>
+</div>
 
 <div style='width:1300px;margin:0 auto;'>
 <div id='lhs'>
@@ -733,7 +741,7 @@ $('#yMin').bind('keyup', function(evt) {
 
 $('#hintButton').bind('click', function(evt) {
    var elem = curFocus;
-   $('#jit1, #jit2, #jit3, #jit4').fadeOut();
+   $('#jit1, #jit2, #jit3, #jit4, #jit5').fadeOut();
    if (elem === 'ineq1Drop') elem1Click += 1;
    else if (elem === 'ineq2Drop') elem2Click += 1;
    else if (elem === 'ineq3Drop') elem3Click += 1;
@@ -883,6 +891,10 @@ $('#ineq2LHS').bind('keyup', function(evt) {
    if (radio2_1Correct && radio2_2Correct) curFocus = 'radio2';
    else curFocus = 'ineq2RHS'
    }
+   else if (answer === 'y') {
+   $(this).css('border', '1px solid red');
+   $('#jit4').fadeIn(1000);
+   }
    else $(this).css('border', '1px solid red');
 });
 $('#ineq2RHS').bind('keyup', function(evt) {
@@ -893,7 +905,11 @@ $('#ineq2RHS').bind('keyup', function(evt) {
    radio2_2Correct = true;
    $(this).css('border', '1px solid green');
    if (radio2_1Correct && radio2_2Correct) curFocus = 'radio2';
-   else curFocus = 'ineq2LHS'
+   else curFocus = 'ineq2LHS';
+   }
+   else if (answer === 'x') {
+   $(this).css('border', '1px solid red');
+   $('#jit5').fadeIn(1000);
    }
    else $(this).css('border', '1px solid red');
 });
@@ -916,10 +932,12 @@ $('#jit1').offset({'left' : $('#ineq1Drop').offset().left + 165, 'top' : $('#ine
 $('#jit2').bind('click', function(){$(this).fadeOut();});
 $('#jit3').bind('click', function(){$(this).fadeOut();});
 $('#jit4').bind('click', function(){$(this).fadeOut();});
+$('#jit5').bind('click', function(){$(this).fadeOut();});
 $('#hint2').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top});
 $('#jit2').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top});
 $('#jit3').offset({'left' : $('#ineq2Drop').offset().left + 165, 'top' : $('#ineq2Drop').offset().top});
 $('#jit4').offset({'left' : $('#lhs').offset().left + 350, 'top' : window.innerHeight * 0.97 - 250});
+$('#jit5').offset({'left' : $('#lhs').offset().left + 350, 'top' : window.innerHeight * 0.97 - 250});
 
 $('#hint3').offset({'left' : $('#lhs').offset().left + 350, 'top' : window.innerHeight * 0.97 - 250});
 $('#hint4').offset({'left' : $('#lhs').offset().left + 350, 'top' : window.innerHeight * 0.97 - 250});
