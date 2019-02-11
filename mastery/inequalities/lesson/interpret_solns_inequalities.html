@@ -539,6 +539,7 @@ function newGraph() {
 }
 newGraph();
 $('.tstPntInput').bind('keyup', function(evt) {
+   if (evt.target.id !== 'testPntX' || evt.target.id !== 'testPntY') return;
    d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
    if (evt.keyCode !== 13) return;
    if ($('#testPntX').val() === '' || $('#testPntY').val() === '' || isNaN($('#testPntX').val()) || isNaN($('#testPntY').val())) return;
