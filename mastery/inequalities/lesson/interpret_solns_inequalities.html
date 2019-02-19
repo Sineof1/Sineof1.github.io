@@ -809,8 +809,12 @@ $('#ineq2Drop').bind('change', function(evt) {
    $('#ineqInput2').val('y > 3x');
    var e = $.Event('keydown');
    e.keyCode = 13;
+   var e2 = $.Event('keyup');
+   e2.keyCode = 13;
    $('#ineqInput2').trigger(e);
-   tstPntTrigger(5, 10)
+   $('#testPntX').val('5');
+   $('#testPntY').val('10');
+   $('.tstPntInput').trigger(e2)
    }
    else if (choice === 'ineq2Drop1') {
    $(this).css('border', '1px solid red');
