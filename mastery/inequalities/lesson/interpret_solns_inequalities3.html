@@ -246,7 +246,7 @@
 <br />
 <p style='color:teal;margin-top:5px;'>Select the inequality that shows that Tisha paid for <span style='text-decoration:underline;'>at least 4</span> notebooks.</p>
 <p>
-Inequality 1: &nbsp;<select name='inequality1' class='ineqDrop' id='ineq1Drop'>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inequality 1: &nbsp;<select name='inequality1' class='ineqDrop' id='ineq1Drop' style='width:43%;box-sizing:border-box;'>
   <option value="nothing1"></option>
   <option value="ineq1Drop1">y ≥ 4</option>
   <option value="ineq1Drop2">y ≥ 4x</option>
@@ -257,7 +257,7 @@ Inequality 1: &nbsp;<select name='inequality1' class='ineqDrop' id='ineq1Drop'>
 <br />
 <p style='color:teal;margin-top:5px;'>Select the inequality that shows that Tisha paid <span style='text-decoration:underline;'>at most $20</span> total.</p>
 <p>
-Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop' style='width:43%;box-sizing:border-box;'>
   <option value="nothing2"></option>
   <option value="ineq2Drop1">y ≥ 20</option>
   <option value="ineq2Drop2">y ≥ 20x</option>
@@ -266,26 +266,26 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
 </select>
 </p>
 <br />
-<p style='color:teal;margin-top:5px;'>Graph the inequalities in the Explore Tool. Then use the graph or the Solver to answer the question.</p>
+<p style='color:teal;margin-top:5px;'>Use the graph or the Solver to answer the question.</p>
 <p style='color:teal;'>What is the maximum amount Tisha paid for each notebook?</p>
-<p>Maximum: &nbsp;&nbsp;$<input class='tstPntInput' id='maxAmount' type='text' style='width:150px;' />
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maximum: &nbsp;<input class='tstPntInput' id='maxAmount' type='text' style='width:43%;box-sizing:border-box;' />
 
 </div>
 
 <div id='rhs'>
-<div class='inequality' id='inequality1' style='top:100px;'>inequality 1:<br /><input class='ineqInput' id='ineqInput1' type='text' /></p></div>
-<div class='inequality' id='inequality2' style='top:200px;color:#228b22;'>inequality 2:<br /><input class='ineqInput' id='ineqInput2' type='text' /></p></div>
-<div class='inequality' id='testpoint' style='top:300px;color:black;'>test point:<br />(<input class='tstPntInput' id='testPntX' type='text' />, <input class='tstPntInput' id='testPntY' type='text' />)</p></div>
+<div class='inequality' id='inequality1' style='top:100px;visibility:hidden;'>inequality 1:<br /><input class='ineqInput' id='ineqInput1' type='text' /></p></div>
+<div class='inequality' id='inequality2' style='top:200px;color:#228b22;visibility:hidden;'>inequality 2:<br /><input class='ineqInput' id='ineqInput2' type='text' /></p></div>
+<div class='inequality' id='testpoint' style='top:300px;color:black;visibility:hidden;'>test point:<br />(<input class='tstPntInput' id='testPntX' type='text' />, <input class='tstPntInput' id='testPntY' type='text' />)</p></div>
 <div style='text-align:center;'>
 <div id='yaxis'></div>
 <div id='demo_grapher'></div>
 </div>
 <div id='xaxis'></div>
 
-<input class='tstPntInput' id='xMax' type='text' maxlength='2' style='position:absolute;top:607.5px;left:893px;color:gray;' />
-<input class='tstPntInput' id='yMax' type='text' maxlength='2' style='position:absolute;top:25px;left:215px;color:gray;' />
-<input class='tstPntInput' id='xMin' type='text' maxlength='2' style='position:absolute;top:607.5px;left:150px;color:gray;' />
-<input class='tstPntInput' id='yMin' type='text' maxlength='2' style='position:absolute;top:655px;left:215px;color:gray;' />
+<input class='tstPntInput' id='xMax' type='text' maxlength='2' style='position:absolute;top:607.5px;left:893px;color:gray;visibility:hidden;' />
+<input class='tstPntInput' id='yMax' type='text' maxlength='2' style='position:absolute;top:25px;left:215px;color:gray;visibility:hidden;' />
+<input class='tstPntInput' id='xMin' type='text' maxlength='2' style='position:absolute;top:607.5px;left:150px;color:gray;visibility:hidden;' />
+<input class='tstPntInput' id='yMin' type='text' maxlength='2' style='position:absolute;top:655px;left:215px;color:gray;visibility:hidden;' />
 </div>
 </div>
 
@@ -609,6 +609,10 @@ $('#ineq1Drop').bind('change', function(evt) {
    if (choice === 'ineq1Drop2') {
    $(this).css('border', '1px solid green');
    curFocus = 'ineq2Drop';
+   $('#ineqInput1').val('y ≥ 4x');
+   var e = $.Event('keydown');
+   e.keyCode = 13;
+   $('#ineqInput1').trigger(e);
    }
    else if (choice === 'ineq1Drop1') {
    $(this).css('border', '1px solid red');
@@ -622,6 +626,10 @@ $('#ineq2Drop').bind('change', function(evt) {
    if (choice === 'ineq2Drop4') {
    $(this).css('border', '1px solid green');
    curFocus = 'maxAmount';
+   $('#ineqInput2').val('y ≤ 20');
+   var e = $.Event('keydown');
+   e.keyCode = 13;
+   $('#ineqInput2').trigger(e);
    }
    else $(this).css('border', '1px solid red');
 });
