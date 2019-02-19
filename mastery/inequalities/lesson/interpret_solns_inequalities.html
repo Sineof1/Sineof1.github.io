@@ -787,6 +787,10 @@ $('#ineq1Drop').bind('change', function(evt) {
    if (choice === 'ineq1Drop3') {
    $(this).css('border', '1px solid green');
    curFocus = 'ineq2Drop';
+   $('#ineqInput1').val('y ≥ 5');
+   var e = $.Event('keydown');
+   e.keyCode = 13;
+   $('#ineqInput1').trigger(e);
    }
    else if (choice === 'ineq1Drop2') {
    $(this).css('border', '1px solid red');
