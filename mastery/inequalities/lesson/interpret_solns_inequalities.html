@@ -421,8 +421,8 @@ Inequality 2: <select name='inequality2' class='ineqDrop' id='ineq2Drop'>
 
 <div id='rhs'>
 <div class='inequality' id='inequality1' style='top:100px;visibility:hidden;'>inequality 1:<br /><input class='ineqInput' id='ineqInput1' type='text' /></p></div>
-<div class='inequality' id='inequality2' style='top:200px;color:#228b22;'>inequality 2:<br /><input class='ineqInput' id='ineqInput2' type='text' /></p></div>
-<div class='inequality' id='testpoint' style='top:300px;color:black;'>test point:<br />(<input class='tstPntInput' id='testPntX' type='text' />, <input class='tstPntInput' id='testPntY' type='text' />)</p></div>
+<div class='inequality' id='inequality2' style='top:200px;color:#228b22;visibility:hidden;'>inequality 2:<br /><input class='ineqInput' id='ineqInput2' type='text' /></p></div>
+<div class='inequality' id='testpoint' style='top:300px;color:black;visibility:hidden;'>test point:<br />(<input class='tstPntInput' id='testPntX' type='text' />, <input class='tstPntInput' id='testPntY' type='text' />)</p></div>
 <div style='text-align:center;'>
 <div id='yaxis'></div>
 <div id='demo_grapher'></div>
@@ -806,6 +806,10 @@ $('#ineq2Drop').bind('change', function(evt) {
    if (choice === 'ineq2Drop3') {
    $(this).css('border', '1px solid green');
    curFocus = 'ineq6Drop';
+   var e = $.Event('keydown');
+   e.keyCode = 13;
+   $('#ineqInput1').trigger(e);
+   tstPntTrigger(5, 10)
    }
    else if (choice === 'ineq2Drop1') {
    $(this).css('border', '1px solid red');
