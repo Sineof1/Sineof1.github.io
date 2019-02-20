@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='icon' href='cl_logo.jpg'>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<title>Permutations and Combinations (HSS-CP.9+)</title>
+</head>
+
+<style>
+@font-face {
+    font-family: 'Product Sans';
+    src: url(GoogleSans-Regular.ttf) format('truetype');
+}
+html, body {
+  height:100%;
+  font-family:'Product Sans';
+  padding:0;
+  margin:0;
+  overflow:auto;
+  background:rgb(28, 85, 105);
+}
+.page-container {
+  margin:50px;
+}
+.panel-container {
+  display:flex;
+  flex-direction:row;
+  border:1px solid silver;
+  overflow:hidden;
+  xtouch-action:none;
+  border-radius:10px;
+  width:1250px;
+  height:620px;
+  margin:80px auto 0 auto;
+}
+.panel-left {
+  flex:0 0 auto;
+  padding:35px 35px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  white-space:pre-wrap;
+  background-color:#fafafa;
+  color:black;
+  overflow-y:auto;
+}
+.splitter {
+  flex:0 0 auto;
+  width:18px;
+  background:url(vsizegrip.png) center center no-repeat #eaeaea;
+  min-height:200px;
+  cursor:col-resize;
+  z-index:999;
+}
+.panel-right {
+  position:relative;
+  flex:1 1 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  color:black;
+  background-color:white;
+}
+label {
+  font-size:1.2em;
+  display:block;
+  font-weight:bold;
+  margin:30px 0 10px;
+}
+#demo_grapher {
+  width:625px;
+  height:550px;
+  border:1px solid blue;
+  overflow:hidden;
+}
+input {
+   margin-left:5px;
+   width:75px;
+   height:45px;
+   border:none;
+   border-radius:5px;
+   box-shadow:0 0 3px #ccc;
+   text-align:center;
+   font-size:18px;
+   font-family:sans-serif;
+}
+p {
+   margin-top:5px;
+}
+#navbar {
+   position:fixed;
+   top:0;
+   left:0;
+   height:50px;
+   width:100%;
+   background-color:navy;
+}
+#hintButton {
+   position:absolute;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   top:5px;
+   right:20px;
+   width:65px;
+   height:40px;
+   background-color:rgb(255, 186, 0);
+   color:white;
+   font-family:'Product Sans';
+   font-size:18px;
+   border-radius:5px;
+   outline:none;
+   cursor:pointer;
+}
+#previousProblem {
+   position:fixed;
+   bottom:20px;
+   left:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
+.hintbox, .jitbox {
+   position:fixed;
+   bottom:0;
+   left:calc(50% - 175px);
+   width:350px;
+   height:150px;
+   border-radius:2px;
+   background-color:teal;
+   box-shadow:0 0 5px #000;
+   display:none;
+   z-index:1000;
+}
+.jitbox {
+   background-color:red;
+   top:0;
+}
+.hintwrapper {
+   position:absolute;
+   top:10px;
+   left:10px;
+   width:330px;
+   height:130px;
+   background-color:white;
+   font-family:sans-serif;
+   font-size:16px;
+   box-sizing:border-box;
+   padding:10px;
+   overflow-x:hidden;
+   overflow-y:scroll;
+}
+.hint {
+   height:110px;
+   box-sizing:border-box;
+   padding-top:5px;
+   padding-left:5px;
+   border-bottom:1px solid black;
+}
+.exercise {
+   color:teal;
+   opacity:0;
+}
+.math {
+   color:black;
+}
+#nextProblem {
+   position:fixed;
+   bottom:20px;
+   right:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
+.direction-line {
+   color:teal;
+   font-weight:bold;
+}
+#disclose1 {
+   text-align:justify;
+}
+#disclose2 {
+   margin-top:-5px;
+}
+#rpanel-top {
+   width:100%;
+   position:absolute;
+   top:0;
+   left:0;
+   height:30px;
+   box-sizing:border-box;
+   padding:10px 0 0 15px;
+   font-family:sans-serif;
+   color:brown;
+   border-radius:5px;
+   overflow:hidden;
+}
+#rpanel-bottom {
+   width:100%;
+   position:absolute;
+   top:30px;
+   left:0;
+   height:30px;
+   box-sizing:border-box;
+   padding:10px 0 0 15px;
+   font-family:sans-serif;
+   color:blue;
+   border-radius:5px;
+   overflow:hidden;
+}
+.rpanel-section {
+   position:absolute;
+   display:inline-flex;
+   align-items:flex-start;
+   justify-content:center;
+   width:25%;
+   height:100%;
+   opacity:0;
+   box-sizing:border-box;
+   padding:5px;
+   font-size:18px;
+}
+#topsec1 {
+   top:0;
+   left:5px;
+   opacity:0;
+}
+#topsec2 {
+   top:0;
+   left:170px;
+   opacity:0;
+}
+#topsec3 {
+   top:0;
+   left:350px;
+   opacity:0;
+}
+#topsec4 {
+   top:0;
+   left:475px;
+   opacity:1;
+}
+#botsec1 {
+   top:0;
+   left:0px;
+}
+#botsec2 {
+   top:0;
+   left:170px;
+}
+#botsec3 {
+   top:0;
+   left:350px;
+}
+#botsec4 {
+   top:0;
+   left:475px;
+   justify-content:flex-start;
+}
+a:visited {
+   color:blue;
+}
+.fraction, .top, .bottom {
+    padding: 0 4px;
+    font-size:18px;
+}
+.fraction {
+    display: inline-block;
+    text-align: center;
+    vertical-align:-12px;
+}
+.bottom{
+    border-top: 1px solid #000;
+    display: block;
+    padding:0 5px;
+}
+</style>
+
+<div id='navbar'>
+<div id='hintButton'>Hints</div>
+</div>
+<body>
+<div class='hintbox' id='hint1'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Enter the total number of 4-letter permutations of the 4 letters using factorial notation, with an exclamation mark (!).</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>There are 4 &times; 3 &times; 2 &times; &times; 1 total 4-letter permutations of 4 letters. Enter this value as a factorial, with an exclamation mark (!).</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>There are <mark>4!</mark> possible permutations of the 4 letters.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Study the diagram. What do you divide 4! by to determine the number of 2-letter permutations from a set of 4?</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>You divide 4! by 2! to determine the number of 2-letter permutations from a set of 4. How can you write 2! using the expression (4 &ndash; ▨)!.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>To determine the number of 2-letter permutations from a set of 4, divide by 2!, or (4 &ndash; <mark>2</mark>)!.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint3'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Enter the value of <span class='fraction'>4!/(4 &ndash; 2)!</span>.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>You can count on the diagram or enter the expression <span class='fraction'>4!/(4 &ndash; 2)!</span>.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>The expression <span class='fraction'>4!/(4 &ndash; 2)!</span> is equal to <span class='fraction'>4 &times; 3 &times; 2 &times; 1/2 &times; 1</span>, which is 4 &times; 3, or <mark>12</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit1'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText2'>24 is correct, but enter the expression as a factorial, using an exclamation mark: n!.</p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText1'>This is the correct value, but enter the number without the factorial symbol.</p>
+</div>
+</div>
+</div>
+
+<div class='page-container'>
+<div class='panel-container'>
+<div class='panel-left'>
+<p id='intro_text' style='text-align:justify;'>If you use the letters H, Y, E, and T, how many different arrangements, or <a href='#'>permutations</a>, of 2 letters, like HE or YT, could you make?</p>
+<p style='text-align:center;font-size:20px;margin-top:-15px;margin-bottom:0px;'>&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p class='direction-line'>First, determine the number of 4-letter permutations of 4 letters there are. Write the number as a factorial.</p>
+<p style='line-height:60px;text-align:justify;margin-top:0px;'>There are <input type='text' id='combperminput1' /> possible 4-letter permutations of 4 letters.</p>
+
+<div id='combpermpart2' style='opacity:0;'>
+<p class='direction-line' style='margin-top:-30px;'>Then divide to determine the number of permutations there are of 2 elements from a set of 4 elements.</p>
+<p id='disclose1' style='margin-top:-10px;'>There are 4! possible permutations of the 4 letters. And you choose 2 letters from the set of 4. How many permutations of 2 letters from the set of 4 are there? To determine this value, you can divide.</p>
+<p style='text-align:justify;line-height:40px;'>Divide 4! by (4 &ndash; <input type='text' id='combperminput2' />)<span style='font-size:24px;'>!</span>.</p>
+<p id='disclose2' style='margin-bottom:100px;line-height:40px;opacity:0;'>There are <span class='fraction'>4!/(4 &ndash; 2)!</span>, or <input type='text' id='combperminput3' />, possible permutations of 2 elements chosen from a set of 4 elements.</p>
+</div>
+</div>
+
+<div class='panel-right'>
+<div id='rpanel-top'>
+<div class='rpanel-section' id='topsec1'>4</div><div class='rpanel-section' id='topsec2'>4 &times; 3</div><div class='rpanel-section' id='topsec3'>4 &times; 3 &times; 2</div><div class='rpanel-section' id='topsec4'>4 &times; 3 &times; 2 &times; 1</div>
+</div>
+
+<div id='rpanel-bottom'>
+<div class='rpanel-section' id='botsec1'>&divide; 3!</div><div class='rpanel-section' id='botsec2'>&divide; 2!</div><div class='rpanel-section' id='botsec3'>&divide; 1!</div><div class='rpanel-section' id='botsec4'>&nbsp;&nbsp;&nbsp;&divide; 0!</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='nextProblem' style='visibility:hidden;'>next</div>
+</body>
+
+</html>
+
+
+<script>
+$('#nextProblem').bind('click', function() {
+   window.location.href = '';
+});
+</script>
+
+<script>
+var letters = [{x : 50, y : 80, ltr : 'H', id : '1d1'}, {x : 50, y : 225, ltr : 'Y', id : '1r1'},
+               {x : 50, y : 355, ltr : 'E', id : '1a1'}, {x : 50, y : 495, ltr : 'T', id : '1b1'},
+               {x : 225, y : 35, ltr : 'Y', id : '2r1'}, {x : 225, y : 80, ltr : 'E', id : '2a1'},
+               {x : 225, y : 125, ltr : 'T', id : '2b1'}, {x : 225, y : 180, ltr : 'H', id : '2d1'},
+               {x : 225, y : 225, ltr : 'E', id : '2a2'}, {x : 225, y : 270, ltr : 'T', id : '2b2'},
+               {x : 225, y : 310, ltr : 'H', id : '2d2'}, {x : 225, y : 355, ltr : 'Y', id : '2r2'},
+               {x : 225, y : 400, ltr : 'T', id : '2b3'}, {x : 225, y : 450, ltr : 'H', id : '2d3'},
+               {x : 225, y : 495, ltr : 'Y', id : '2r3'}, {x : 225, y : 540, ltr : 'E', id : '2a3'},
+               {x : 400, y : 25, ltr : 'E', id : '3a1'}, {x : 400, y : 45, ltr : 'T', id : '3b1'},
+               {x : 400, y : 70, ltr : 'Y', id : '3r1'}, {x : 400, y : 90, ltr : 'T', id : '3b2'},
+               {x : 400, y : 115, ltr : 'Y', id : '3r2'}, {x : 400, y : 135, ltr : 'E', id : '3a2'},
+               {x : 400, y : 170, ltr : 'E', id : '3a3'}, {x : 400, y : 190, ltr : 'T', id : '3b3'},
+               {x : 400, y : 215, ltr : 'H', id : '3d1'}, {x : 400, y : 235, ltr : 'T', id : '3b4'},
+               {x : 400, y : 260, ltr : 'H', id : '3d2'}, {x : 400, y : 280, ltr : 'E', id : '3a4'},
+               {x : 400, y : 300, ltr : 'Y', id : '3r3'}, {x : 400, y : 320, ltr : 'T', id : '3b5'},
+               {x : 400, y : 345, ltr : 'H', id : '3d3'}, {x : 400, y : 365, ltr : 'T', id : '3b6'},
+               {x : 400, y : 390, ltr : 'H', id : '3d4'}, {x : 400, y : 410, ltr : 'Y', id : '3r4'},
+               {x : 400, y : 440, ltr : 'Y', id : '3r5'}, {x : 400, y : 460, ltr : 'E', id : '3a5'},
+               {x : 400, y : 485, ltr : 'H', id : '3d5'}, {x : 400, y : 505, ltr : 'E', id : '3a6'},
+               {x : 400, y : 530, ltr : 'Y', id : '3r6'}, {x : 400, y : 550, ltr : 'H', id : '3d6'},
+
+               {x : 475, y : 25, ltr : 'T', id : '4b1'}, {x : 475, y : 45, ltr : 'E', id : '4a1'},
+               {x : 475, y : 70, ltr : 'T', id : '4b2'}, {x : 475, y : 90, ltr : 'Y', id : '4r1'},
+               {x : 475, y : 115, ltr : 'E', id : '4a2'}, {x : 475, y : 135, ltr : 'Y', id : '4r2'},
+               {x : 475, y : 170, ltr : 'T', id : '4b3'}, {x : 475, y : 190, ltr : 'E', id : '4a3'},
+               {x : 475, y : 215, ltr : 'T', id : '4b4'}, {x : 475, y : 235, ltr : 'H', id : '4d1'},
+               {x : 475, y : 260, ltr : 'E', id : '4a4'}, {x : 475, y : 280, ltr : 'H', id : '4d2'},
+               {x : 475, y : 300, ltr : 'T', id : '4b5'}, {x : 475, y : 320, ltr : 'Y', id : '4r3'},
+               {x : 475, y : 345, ltr : 'T', id : '4b6'}, {x : 475, y : 365, ltr : 'H', id : '4d3'},
+               {x : 475, y : 390, ltr : 'Y', id : '4r4'}, {x : 475, y : 410, ltr : 'H', id : '4d4'},
+               {x : 475, y : 440, ltr : 'E', id : '4a5'}, {x : 475, y : 460, ltr : 'Y', id : '4r5'},
+               {x : 475, y : 485, ltr : 'E', id : '4a6'}, {x : 475, y : 505, ltr : 'H', id : '4d5'},
+               {x : 475, y : 530, ltr : 'H', id : '4d6'}, {x : 475, y : 550, ltr : 'Y', id : '4r6'}];
+var svg = d3.select('.panel-right')
+            .append('svg')
+            .style('position', 'absolute').style('top', '50px')
+            .attr('width', 500).attr('height', 620);
+
+svg.selectAll('text')
+   .data(letters)
+   .enter()
+   .append('text')
+   .attr('x', function(d){return d.x;})
+   .attr('y', function(d){return d.y;})
+   .attr('class', function(d){
+                     if (Number(d.id.slice(0, 1)) === 1) return 'col1';
+                     else if (Number(d.id.slice(0, 1)) === 2) return 'col2';
+                     else if (Number(d.id.slice(0, 1)) === 3) return 'col3';
+                     else if (Number(d.id.slice(0, 1)) === 4) return 'col4';
+                     })
+   .attr('id', function(d){return d.id;})
+   .text(function(d){return d.ltr;})
+   .style('stroke', 'none').style('fill', 'black').style('font-family', 'sans-serif')
+   .style('font-size', function(d){
+                       if (Number(d.id.slice(0, 1)) === 1) return '16px';
+                       else if (Number(d.id.slice(0, 1)) === 2) return '14px';
+                       else if (Number(d.id.slice(0, 1)) === 3 || Number(d.id.slice(0, 1)) === 4) return '12px';
+                       });
+
+var curFocus = 'input1';
+var elem1Click = 1;
+var elem2Click = 1;
+var elem3Click = 1;
+var elem4Click = 1;
+var elem5Click = 1;
+
+for (var b = 0; b < 3; b++) {
+  svg.append('line')
+     .attr('x1', 65)
+     .attr('y1', 75)
+     .attr('x2', 220)
+     .attr('y2', letters[b + 4].y - 3)
+     .attr('class', 'linecol1')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 3; b++) {
+  svg.append('line')
+     .attr('x1', 65)
+     .attr('y1', 220)
+     .attr('x2', 220)
+     .attr('y2', letters[b + 7].y - 3)
+     .attr('class', 'linecol1')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 3; b++) {
+  svg.append('line')
+     .attr('x1', 65)
+     .attr('y1', 350)
+     .attr('x2', 220)
+     .attr('y2', letters[b + 10].y - 3)
+     .attr('class', 'linecol1')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 3; b++) {
+  svg.append('line')
+     .attr('x1', 65)
+     .attr('y1', 490)
+     .attr('x2', 220)
+     .attr('y2', letters[b + 13].y - 3)
+     .attr('class', 'linecol1')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 30)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 16].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 75)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 18].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 120)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 20].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 175)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 22].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 220)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 24].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 265)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 26].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 305)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 28].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 350)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 30].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 395)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 32].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 445)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 34].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 490)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 36].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 535)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 38].y - 3)
+     .attr('class', 'linecol2')
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+
+for (var a = 16; a < 40; a++) {
+   svg.append('line')
+      .attr('x1', 415)
+      .attr('y1', letters[a].y - 5)
+      .attr('x2', 470)
+      .attr('y2', letters[a].y - 5)
+     .attr('class', 'linecol3')
+      .style('stroke', 'brown').style('stroke-width', 1);
+}
+$('.linecol1').css({'stroke-width' : 2});
+$('.linecol2').css({'stroke-width' : 1.5});
+$('.col1, .col2, .col3, .col4').css({'text-shadow' : '1px 1px #ccc', 'opacity' : 1});
+$('.linecol1, .linecol2, .linecol3').css({'opacity' : 1});
+
+$('#combperminput1').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '4!') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   $('#combpermpart2').animate({'opacity' : '+=1'}, 1500);
+   curFocus = 'input2';
+   d3.selectAll('.linecol3, .col4').transition().delay(3000).duration(1000).style('opacity', 0.2);
+   d3.selectAll('.linecol2, .col3').transition().delay(5000).duration(1000).style('opacity', 0.2);
+   d3.select('#botsec4').transition().delay(1000).duration(1000).style('opacity', 1);
+   d3.select('#botsec3').transition().delay(3000).duration(1000).style('opacity', 1);
+   d3.select('#botsec2').transition().delay(5000).duration(1000).style('opacity', 1);
+   }
+   else if ($(this).val() === '24') $('#jit1').fadeIn(1000);
+   else $(this).css('outline', '1px solid red');
+});
+$('#combperminput2').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '2') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
+   curFocus = 'input3';
+   }
+   else if ($(this).val() === '2!') $('#jit2').fadeIn(1000);
+   else $(this).css('outline', '1px solid red');
+});
+$('#combperminput3').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '12') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   }
+   else if ($(this).val() === '1') $('#jit4').fadeIn(1000);
+   else $(this).css('outline', '1px solid red');
+});
+
+$('.jitbox').bind('click', function(){$(this).fadeOut(1000);});
+
+$('.fraction').each(function(key, value) {
+  $this = $(this);
+  var split = $this.html().split("/");
+  $this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')
+});
+</script>
+
+<script>
+$('#hintButton').bind('click', function(evt) {
+   var elem = curFocus;
+   $('#jit1, #jit2').fadeOut();
+   if (elem === 'input1') elem1Click += 1;
+   else if (elem === 'input2') elem2Click += 1;
+   else if (elem === 'input3') elem3Click += 1;
+   if (elem === 'input1' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
+   else $('#hint1').fadeOut(1000);
+   if (elem === 'input2' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
+   else $('#hint2').fadeOut(1000);
+   if (elem === 'input3' && elem3Click % 2 === 0) $('#hint3').fadeIn(1000);
+   else $('#hint3').fadeOut(1000);
+});
+</script>
