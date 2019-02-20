@@ -372,6 +372,14 @@ a:visited {
 </div>
 </div>
 
+<div class='jitbox' id='jit5'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText1'>Enter a permutation other than DRAB or RDBA.</p>
+</div>
+</div>
+</div>
+
 <div class='page-container'>
 <div class='panel-container'>
 <div class='panel-left'>
@@ -696,6 +704,7 @@ $('#combperminput4').bind('keyup', function(evt) {
    $(this).attr('disabled', 'disabled');
    $(this).css('outline', '1px solid green');
    }
+   else if (permtn === 'drab' || permtn === 'rdba') $('#jit5').fadeIn(1000);
 });
 $('#combperminput5').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
