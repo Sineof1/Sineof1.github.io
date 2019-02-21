@@ -288,6 +288,32 @@ a:visited {
 <div id='hintButton'>Hints</div>
 </div>
 <body>
+
+<div class='hintbox' id='hint0A'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Enter the number of letters you are selecting from when making the arrangements.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>You are selecting from the letters<br />H, Y, E, and T.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>You are selecting from 4 letters,<br />so n = <mark>4</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint0B'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Enter the number of letters you are selecting when making the arrangements.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>You are selecting 2 letters, so r = <mark>2</mark>.</p>
+</div>
+</div>
+</div>
+
 <div class='hintbox' id='hint1'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;'>
@@ -351,6 +377,7 @@ a:visited {
 <div class='panel-left'>
 <p id='intro_text' style='text-align:justify;'>If you use the letters H, Y, E, and T, how many different arrangements, or <a href='#'>permutations</a>, of 2 letters, like HE or YT, could you make?</p>
 <p style='text-align:center;font-size:20px;margin-top:-15px;margin-bottom:0px;'>&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p style='line-height:40px;'>Let n be the number of elements you are selecting from.<br />And let r be the number of elements you are selecting. In this case, n = <input type='text' id='combperminput0A' /> and r = <input type='text' id='combperminput0B' />.</p>
 <p class='direction-line'>First, determine the number of 4-letter permutations of 4 letters there are. Write the number as a factorial.</p>
 <p style='line-height:60px;text-align:justify;margin-top:0px;'>There are <input type='text' id='combperminput1' /> possible 4-letter permutations of 4 letters.</p>
 
@@ -358,7 +385,8 @@ a:visited {
 <p class='direction-line' style='margin-top:-30px;'>Then divide to determine the number of permutations there are of 2 elements from a set of 4 elements.</p>
 <p id='disclose1' style='margin-top:-10px;'>There are 4! possible permutations of the 4 letters. And you choose 2 letters from the set of 4. How many permutations of 2 letters from the set of 4 are there? To determine this value, you can divide.</p>
 <p style='text-align:justify;line-height:40px;'>Divide 4! by (4 &ndash; <input type='text' id='combperminput2' />)<span style='font-size:24px;'>!</span>.</p>
-<p id='disclose2' style='margin-bottom:100px;line-height:40px;opacity:0;'>There are <span class='fraction'>4!/(4 &ndash; 2)!</span>, or <input type='text' id='combperminput3' />, possible permutations of 2 elements chosen from a set of 4 elements.</p>
+<p id='disclose3' style='opacity:0;text-align:justify;margin-bottom:-10px;'>The number of permutations of n elements when selecting r of those elements is <span class='fraction'>n!/(n &ndash; r)!</span>.</p>
+<p id='disclose2' style='margin-bottom:100px;line-height:40px;opacity:0;text-align:justify;'>There are <span class='fraction'>4!/(4 &ndash; 2)!</span>, or <input type='text' id='combperminput3' />, possible permutations of 2 elements chosen from a set of 4 elements.</p>
 </div>
 </div>
 
@@ -446,7 +474,9 @@ svg.selectAll('text')
                        else if (Number(d.id.slice(0, 1)) === 3 || Number(d.id.slice(0, 1)) === 4) return '12px';
                        });
 
-var curFocus = 'input1';
+var curFocus = 'input0A';
+var elem0AClick = 1;
+var elem0BClick = 1;
 var elem1Click = 1;
 var elem2Click = 1;
 var elem3Click = 1;
@@ -613,6 +643,24 @@ $('.linecol2').css({'stroke-width' : 1.5});
 $('.col1, .col2, .col3, .col4').css({'text-shadow' : '1px 1px #ccc', 'opacity' : 1});
 $('.linecol1, .linecol2, .linecol3').css({'opacity' : 1});
 
+$('#combperminput0A').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '4') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   curFocus = 'input0B';
+   }
+   else $(this).css('outline', '1px solid red');
+});
+$('#combperminput0B').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '2') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   curFocus = 'input1';
+   }
+   else $(this).css('outline', '1px solid red');
+});
 $('#combperminput1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if ($(this).val() === '4!') {
@@ -634,7 +682,7 @@ $('#combperminput2').bind('keyup', function(evt) {
    if ($(this).val() === '2') {
    $(this).attr('disabled', 'disabled');
    $(this).css('outline', '1px solid green');
-   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
+   $('#disclose2, #disclose3').animate({'opacity' : '+=1'}, 1000);
    curFocus = 'input3';
    }
    else if ($(this).val() === '2!') $('#jit2').fadeIn(1000);
@@ -663,9 +711,15 @@ $('.fraction').each(function(key, value) {
 $('#hintButton').bind('click', function(evt) {
    var elem = curFocus;
    $('#jit1, #jit2').fadeOut();
-   if (elem === 'input1') elem1Click += 1;
+   if (elem === 'input0A') elem0AClick += 1;
+   else if (elem === 'input0B') elem0BClick += 1;
+   else if (elem === 'input1') elem1Click += 1;
    else if (elem === 'input2') elem2Click += 1;
    else if (elem === 'input3') elem3Click += 1;
+   if (elem === 'input0A' && elem0AClick % 2 === 0) $('#hint0A').fadeIn(1000);
+   else $('#hint0A').fadeOut(1000);
+   if (elem === 'input0B' && elem0BClick % 2 === 0) $('#hint0B').fadeIn(1000);
+   else $('#hint0B').fadeOut(1000);
    if (elem === 'input1' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
    else $('#hint1').fadeOut(1000);
    if (elem === 'input2' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
