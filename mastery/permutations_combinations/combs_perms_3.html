@@ -370,30 +370,14 @@ a:visited {
 </div>
 </div>
 
-<div class='jitbox' id='jit1'>
-<div class='hintwrapper'>
-<div class='hint' style='background-color:white;'>
-<p id='jitText2'>24 is correct, but enter the expression as a factorial, using an exclamation mark: n!.</p>
-</div>
-</div>
-</div>
-
-<div class='jitbox' id='jit2'>
-<div class='hintwrapper'>
-<div class='hint' style='background-color:white;'>
-<p id='jitText1'>This is the correct value, but enter the number without the factorial symbol.</p>
-</div>
-</div>
-</div>
-
 <div class='page-container'>
 <div class='panel-container'>
 <div class='panel-left'>
 <p id='intro_text' style='text-align:justify;'>If you use the symbols ▷, ◼, ◑, and ▯, how many different <a href='#'>combinations</a>, of 2 symbols could you make? In each combination, one or more of the elements must be different.</p>
-<p style='text-align:center;font-size:20px;margin-top:-15px;margin-bottom:0px;'>&nbsp;&nbsp;&nbsp;&nbsp;◑&nbsp;&nbsp;&nbsp;&nbsp;▷&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p style='line-height:40px;'>Let n be the number of elements you are selecting from.<br />And let r be the number of elements you are selecting. In this case, n = <input type='text' id='combperminput0A' /> and r = <input type='text' id='combperminput0B' />.</p>
-<p class='direction-line'>First, determine the number of 4-element permutations of 4 elements there are. Write the number as a factorial.</p>
-<p style='line-height:60px;text-align:justify;margin-top:0px;'>There are <input type='text' id='combperminput1' /> possible 4-element permutations of 4 elements.</p>
+<p style='text-align:center;font-size:20px;margin-top:-15px;margin-bottom:0px;'>&nbsp;&nbsp;&nbsp;&nbsp;▷&nbsp;&nbsp;&nbsp;&nbsp;◑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◑&nbsp;&nbsp;&nbsp;&nbsp;◼&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>Let n be the number of elements you are selecting from. And let r be the number of elements you are selecting.<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thus, &nbsp;n = <input type='text' id='combperminput0A' /> and r = <input type='text' id='combperminput0B' />.</p>
+<p class='direction-line'>First, determine how many permutations of 4 elements there are. Write the number as a factorial.</p>
+<p style='line-height:60px;margin-top:0px;text-indent:50px;'>There are <input type='text' id='combperminput1' /> possible permutations of 4 elements.</p>
 
 <div id='combpermpart2' style='opacity:0;'>
 <p class='direction-line' style='margin-top:-30px;'>Then divide to determine the number of permutations there are of 2 elements from a set of 4 elements.</p>
@@ -402,11 +386,11 @@ a:visited {
 
 <div id='combpermpart3' style='opacity:0;'>
 <p class='direction-line' style='margin-top:-30px;'>Finally, divide again to remove the repeated permutations.<br />Write the number of combinations that remain using factorials.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&divide; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2
-<p style='text-align:justify;line-height:40px;'>4! &divide; (4 &ndash; 2)! &divide; (<input type='text' id='combperminput3' />)<span style='font-size:24px;'>!</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;12 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&divide; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2
+<p style='text-align:justify;line-height:40px;'>&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;4! &divide; (4 &ndash; 2)! &divide; (<input type='text' id='combperminput3' />)<span style='font-size:24px;'>!</span></p>
 <p class='direction-line' id='disclose4' style='opacity:0;'>Determine the number of combinations of 2 elements from a set of 4 elements.</p>
 <p id='disclose5' style='opacity:0;text-align:justify;margin-bottom:-10px;'>The number of combinations of n elements when selecting r of those elements is <span class='fraction'>n!/(n &ndash; r)!r!</span>.</p>
-<p id='disclose3' style='margin-bottom:100px;line-height:40px;opacity:0;'>There are <span class='fraction'>4!/(4 &ndash; 2)!(2)!</span>, or <input type='text' id='combperminput4' />, possible combinations of 2 elements chosen from a set of 4 elements.</p>
+<p id='disclose3' style='margin-bottom:100px;line-height:40px;opacity:0;margin-left:42px;'>There are <input type='text' id='combperminput4' />, or <span class='fraction'>4!/(4 &ndash; 2)!(2)!</span>, possible combinations of 2 elements chosen from a set of 4 elements.</p>
 </div>
 
 </div>
@@ -424,7 +408,6 @@ a:visited {
 </div>
 </div>
 <div id='previousProblem'>previous</div>
-<img src='https://guzintamath.com/textsavvy/wp-content/uploads/2019/02/combperm_img.png' style='position:fixed;visibility:hidden;' />
 </body>
 
 </html>
@@ -732,7 +715,6 @@ $('#combperminput1').bind('keyup', function(evt) {
    d3.select('#botsec3').transition().delay(3000).duration(1000).style('opacity', 1);
    d3.select('#botsec2').transition().delay(5000).duration(1000).style('opacity', 1);
    }
-   else if ($(this).val() === '24') $('#jit1').fadeIn(1000);
    else $(this).css('outline', '1px solid red');
 });
 $('#combperminput2').bind('keyup', function(evt) {
@@ -756,7 +738,6 @@ $('#combperminput2').bind('keyup', function(evt) {
    d3.select('#txt2a3').transition().delay(5500).duration(1000).style('opacity', 0.2);
    d3.select('#txt1b1').transition().delay(5500).duration(1000).style('opacity', 0.2);
    }
-   else if ($(this).val() === '2!') $('#jit2').fadeIn(1000);
    else $(this).css('outline', '1px solid red');
 });
 $('#combperminput3').bind('keyup', function(evt) {
@@ -767,7 +748,6 @@ $('#combperminput3').bind('keyup', function(evt) {
    curFocus = 'input4';
    $('#disclose3, #disclose4, #disclose5').animate({'opacity' : '+=1'}, 1000);
    }
-   else if ($(this).val() === '1') $('#jit4').fadeIn(1000);
    else $(this).css('outline', '1px solid red');
 });
 $('#combperminput4').bind('keyup', function(evt) {
@@ -791,7 +771,6 @@ $('.fraction').each(function(key, value) {
 <script>
 $('#hintButton').bind('click', function(evt) {
    var elem = curFocus;
-   $('#jit1, #jit2').fadeOut();
    if (elem === 'input0A') elem0AClick += 1;
    else if (elem === 'input0B') elem0BClick += 1;
    else if (elem === 'input1') elem1Click += 1;
