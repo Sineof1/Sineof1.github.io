@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='icon' href='cl_logo.jpg'>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<title>Permutations and Combinations (HSS-CP.9+)</title>
+</head>
+
+<style>
+@font-face {
+    font-family: 'Product Sans';
+    src: url(GoogleSans-Regular.ttf) format('truetype');
+}
+html, body {
+  height:100%;
+  font-family:'Product Sans';
+  padding:0;
+  margin:0;
+  overflow:auto;
+  background:rgb(28, 85, 105);
+}
+.page-container {
+  margin:50px;
+}
+.panel-container {
+  display:flex;
+  flex-direction:row;
+  border:1px solid silver;
+  overflow:hidden;
+  xtouch-action:none;
+  border-radius:10px;
+  width:1250px;
+  height:620px;
+  margin:80px auto 0 auto;
+}
+.panel-left {
+  flex:0 0 auto;
+  padding:35px 35px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  white-space:pre-wrap;
+  background-color:#fafafa;
+  color:black;
+  overflow-y:auto;
+}
+.splitter {
+  flex:0 0 auto;
+  width:18px;
+  background:url(vsizegrip.png) center center no-repeat #eaeaea;
+  min-height:200px;
+  cursor:col-resize;
+  z-index:999;
+}
+.panel-right {
+  position:relative;
+  flex:1 1 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  color:black;
+  background-color:white;
+}
+label {
+  font-size:1.2em;
+  display:block;
+  font-weight:bold;
+  margin:30px 0 10px;
+}
+#demo_grapher {
+  width:625px;
+  height:550px;
+  border:1px solid blue;
+  overflow:hidden;
+}
+input {
+   margin-left:5px;
+   width:75px;
+   height:45px;
+   border:none;
+   border-radius:5px;
+   box-shadow:0 0 3px #ccc;
+   text-align:center;
+   font-size:18px;
+   font-family:sans-serif;
+}
+p {
+   margin-top:5px;
+}
+#navbar {
+   position:fixed;
+   top:0;
+   left:0;
+   height:50px;
+   width:100%;
+   background-color:navy;
+}
+#hintButton {
+   position:absolute;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   top:5px;
+   right:20px;
+   width:65px;
+   height:40px;
+   background-color:rgb(255, 186, 0);
+   color:white;
+   font-family:'Product Sans';
+   font-size:18px;
+   border-radius:5px;
+   outline:none;
+   cursor:pointer;
+}
+#previousProblem {
+   position:fixed;
+   bottom:20px;
+   left:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
+.hintbox, .jitbox {
+   position:fixed;
+   bottom:0;
+   left:calc(50% - 175px);
+   width:350px;
+   height:150px;
+   border-radius:2px;
+   background-color:teal;
+   box-shadow:0 0 5px #000;
+   display:none;
+   z-index:1000;
+}
+.jitbox {
+   background-color:red;
+   top:0;
+}
+.hintwrapper {
+   position:absolute;
+   top:10px;
+   left:10px;
+   width:330px;
+   height:130px;
+   background-color:white;
+   font-family:sans-serif;
+   font-size:16px;
+   box-sizing:border-box;
+   padding:10px;
+   overflow-x:hidden;
+   overflow-y:scroll;
+}
+.hint {
+   height:110px;
+   box-sizing:border-box;
+   padding-top:5px;
+   padding-left:5px;
+   border-bottom:1px solid black;
+}
+.exercise {
+   color:teal;
+   opacity:0;
+}
+.math {
+   color:black;
+}
+#nextProblem {
+   position:fixed;
+   bottom:20px;
+   right:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
+.direction-line {
+   color:teal;
+   font-weight:bold;
+}
+#disclose1 {
+   text-align:justify;
+}
+#disclose2 {
+   margin-top:-5px;
+}
+#rpanel-top {
+   width:100%;
+   position:absolute;
+   top:0;
+   left:0;
+   height:30px;
+   box-sizing:border-box;
+   padding:10px 0 0 15px;
+   font-family:sans-serif;
+   color:brown;
+   border-radius:5px;
+   overflow:hidden;
+}
+#rpanel-bottom {
+   width:100%;
+   position:absolute;
+   top:30px;
+   left:0;
+   height:30px;
+   box-sizing:border-box;
+   padding:10px 0 0 15px;
+   font-family:sans-serif;
+   color:blue;
+   border-radius:5px;
+   overflow:hidden;
+}
+.rpanel-section {
+   position:absolute;
+   display:inline-flex;
+   align-items:flex-start;
+   justify-content:center;
+   width:25%;
+   height:100%;
+   opacity:0;
+   box-sizing:border-box;
+   padding:5px;
+   font-size:18px;
+}
+#topsec1 {
+   top:0;
+   left:5px;
+   opacity:0;
+}
+#topsec2 {
+   top:0;
+   left:170px;
+   opacity:0;
+}
+#topsec3 {
+   top:0;
+   left:350px;
+   opacity:0;
+}
+#topsec4 {
+   top:0;
+   left:475px;
+   opacity:1;
+}
+#botsec1 {
+   top:0;
+   left:0px;
+}
+#botsec2 {
+   top:0;
+   left:170px;
+}
+#botsec3 {
+   top:0;
+   left:350px;
+}
+#botsec4 {
+   top:0;
+   left:475px;
+   justify-content:flex-start;
+}
+a:visited {
+   color:blue;
+}
+.fraction, .top, .bottom {
+    padding: 0 4px;
+    font-size:18px;
+}
+.fraction {
+    display: inline-block;
+    text-align: center;
+    vertical-align:-12px;
+}
+.bottom{
+    border-top: 1px solid #000;
+    display: block;
+    padding:0 5px;
+}
+</style>
+
+<div id='navbar'>
+<div id='hintButton'>Hints</div>
+</div>
+<body>
+
+<div class='hintbox' id='hint0A'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Enter the number of symbols you are selecting from when making the combinations.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>You are selecting from the symbols<br />▷, ◼, ◑, and ▯.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>You are selecting from 4 symbols,<br />so n = <mark>4</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint0B'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Enter the number of symbols you are selecting when making the combinations.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>You are selecting 2 symbols for each combination, so r = <mark>2</mark>.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint1'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Enter the total number of 4-element permutations of the 4 symbols using factorial notation, with an exclamation mark (!).</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>There are 4 &times; 3 &times; 2 &times; &times; 1 total 4-element permutations of 4 symbols. Enter this value as a factorial, with an exclamation mark (!).</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>There are <mark>4!</mark> possible permutations of the 4 symbols.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Study the diagram. What do you divide 4! by to determine the number of 2-element permutations from a set of 4?</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>You divide 4! by 2! to determine the number of 2-element permutations from a set of 4. How can you write 2! using the expression (4 &ndash; ▨)!.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>To determine the number of 2-element permutations from a set of 4, divide by 2!, or (4 &ndash; <mark>2</mark>)!.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint3'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Divide the number of permutations of 2 elements from 4 by a factorial so that the number remaining does not include the repeated permutations.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>In this case, divide 12 by a value which will leave 6 remaining combinations. Write this value as a factorial.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>There are 6 combinations of 2 elements left after removing repeated permutations. So, 12 is divided by <mark>2</mark>! to determine the number of combinations.</p>
+</div>
+</div>
+</div>
+
+<div class='hintbox' id='hint4'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Enter the value of <span class='fraction'>4!/(4 &ndash; 2)!(2)!</span>.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>You can count on the diagram or enter the expression <span class='fraction'>4!/(4 &ndash; 2)!(2)!</span>.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>The expression <span class='fraction'>4!/(4 &ndash; 2)!(2)!</span> is equal to <mark>6</mark>. There are 6 total combinations of 2 elements when chosen from 4 elements.</p>
+</div>
+</div>
+</div>
+
+<div class='page-container'>
+<div class='panel-container'>
+<div class='panel-left'>
+<p id='intro_text' style='text-align:justify;'>If you use the symbols ▷, ◼, ◑, and ▯, how many different <a href='#'>combinations</a>, of 2 symbols could you make? In each combination, one or more of the elements must be different.</p>
+<p style='text-align:center;font-size:20px;margin-top:-15px;margin-bottom:0px;'>&nbsp;&nbsp;&nbsp;&nbsp;▷&nbsp;&nbsp;&nbsp;&nbsp;◑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◑&nbsp;&nbsp;&nbsp;&nbsp;◼&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>Let n be the number of elements you are selecting from. And let r be the number of elements you are selecting.<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thus, &nbsp;n = <input type='text' id='combperminput0A' /> and r = <input type='text' id='combperminput0B' />.</p>
+<p class='direction-line'>First, determine how many permutations of 4 elements there are. Write the number as a factorial.</p>
+<p style='line-height:60px;margin-top:0px;text-indent:50px;'>There are <input type='text' id='combperminput1' /> possible permutations of 4 elements.</p>
+
+<div id='combpermpart2' style='opacity:0;'>
+<p class='direction-line' style='margin-top:-30px;'>Then divide to determine the number of permutations there are of 2 elements from a set of 4 elements.</p>
+<p style='text-align:justify;line-height:40px;'>Divide 4! by (4 &ndash; <input type='text' id='combperminput2' />)<span style='font-size:24px;'>!</span>.</p>
+</div>
+
+<div id='combpermpart3' style='opacity:0;'>
+<p class='direction-line' style='margin-top:-30px;'>Finally, divide again to remove the repeated permutations.<br />Write the number of combinations that remain using factorials.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;12 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8202;&divide; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2
+<p style='text-align:justify;line-height:40px;'>&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;4! &divide; (4 &ndash; 2)! &divide; (<input type='text' id='combperminput3' />)<span style='font-size:24px;'>!</span></p>
+<p class='direction-line' id='disclose4' style='opacity:0;'>Determine the number of combinations of 2 elements from a set of 4 elements.</p>
+<p id='disclose5' style='opacity:0;text-align:justify;margin-bottom:-10px;'>The number of combinations of n elements when selecting r of those elements is <span class='fraction'>n!/(n &ndash; r)!r!</span>.</p>
+<p id='disclose3' style='margin-bottom:100px;line-height:40px;opacity:0;margin-left:42px;'>There are <input type='text' id='combperminput4' />, or <span class='fraction'>4!/(4 &ndash; 2)!(2)!</span>, possible combinations of 2 elements chosen from a set of 4 elements.</p>
+</div>
+
+</div>
+
+<div class='panel-right'>
+<div id='rpanel-top'>
+<div class='rpanel-section' id='topsec1'>4</div><div class='rpanel-section' id='topsec2'>4 &times; 3</div><div class='rpanel-section' id='topsec3'>4 &times; 3 &times; 2</div><div class='rpanel-section' id='topsec4'>4 &times; 3 &times; 2 &times; 1</div>
+</div>
+
+<div id='rpanel-bottom'>
+<div class='rpanel-section' id='botsec1'>&divide; 3!</div><div class='rpanel-section' id='botsec2'>&divide; 2!</div><div class='rpanel-section' id='botsec3'>&divide; 1!</div><div class='rpanel-section' id='botsec4'>&nbsp;&nbsp;&nbsp;&divide; 0!</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='previousProblem'>previous</div>
+</body>
+
+</html>
+
+
+<script>
+$('#previousProblem').bind('click', function() {
+   window.location.href = 'combs_perms_2.html';
+});
+</script>
+
+<script>
+var letters = [{x : 50, y : 80, ltr : '▷', id : 'txt1d1'}, {x : 50, y : 225, ltr : '◼', id : 'txt1r1'},
+               {x : 50, y : 355, ltr : '◑', id : 'txt1a1'}, {x : 50, y : 495, ltr : '▯', id : 'txt1b1'},
+               {x : 225, y : 35, ltr : '◼', id : 'txt2r1'}, {x : 225, y : 80, ltr : '◑', id : 'txt2a1'},
+               {x : 225, y : 125, ltr : '▯', id : 'txt2b1'}, {x : 225, y : 180, ltr : '▷', id : 'txt2d1'},
+               {x : 225, y : 225, ltr : '◑', id : 'txt2a2'}, {x : 225, y : 270, ltr : '▯', id : 'txt2b2'},
+               {x : 225, y : 310, ltr : '▷', id : 'txt2d2'}, {x : 225, y : 355, ltr : '◼', id : 'txt2r2'},
+               {x : 225, y : 400, ltr : '▯', id : 'txt2b3'}, {x : 225, y : 450, ltr : '▷', id : 'txt2d3'},
+               {x : 225, y : 495, ltr : '◼', id : 'txt2r3'}, {x : 225, y : 540, ltr : '◑', id : 'txt2a3'},
+               {x : 400, y : 25, ltr : '◑', id : 'txt3a1'}, {x : 400, y : 45, ltr : '▯', id : 'txt3b1'},
+               {x : 400, y : 70, ltr : '◼', id : 'txt3r1'}, {x : 400, y : 90, ltr : '▯', id : 'txt3b2'},
+               {x : 400, y : 115, ltr : '◼', id : 'txt3r2'}, {x : 400, y : 135, ltr : '◑', id : 'txt3a2'},
+               {x : 400, y : 170, ltr : '◑', id : 'txt3a3'}, {x : 400, y : 190, ltr : '▯', id : 'txt3b3'},
+               {x : 400, y : 215, ltr : '▷', id : 'txt3d1'}, {x : 400, y : 235, ltr : '▯', id : 'txt3b4'},
+               {x : 400, y : 260, ltr : '▷', id : 'txt3d2'}, {x : 400, y : 280, ltr : '◑', id : 'txt3a4'},
+               {x : 400, y : 300, ltr : '◼', id : 'txt3r3'}, {x : 400, y : 320, ltr : '▯', id : 'txt3b5'},
+               {x : 400, y : 345, ltr : '▷', id : 'txt3d3'}, {x : 400, y : 365, ltr : '▯', id : 'txt3b6'},
+               {x : 400, y : 390, ltr : '▷', id : 'txt3d4'}, {x : 400, y : 410, ltr : '◼', id : 'txt3r4'},
+               {x : 400, y : 440, ltr : '◼', id : 'txt3r5'}, {x : 400, y : 460, ltr : '◑', id : 'txt3a5'},
+               {x : 400, y : 485, ltr : '▷', id : 'txt3d5'}, {x : 400, y : 505, ltr : '◑', id : 'txt3a6'},
+               {x : 400, y : 530, ltr : '◼', id : 'txt3r6'}, {x : 400, y : 550, ltr : '▷', id : 'txt3d6'},
+
+               {x : 475, y : 25, ltr : '▯', id : 'txt4b1'}, {x : 475, y : 45, ltr : '◑', id : 'txt4a1'},
+               {x : 475, y : 70, ltr : '▯', id : 'txt4b2'}, {x : 475, y : 90, ltr : '◼', id : 'txt4r1'},
+               {x : 475, y : 115, ltr : '◑', id : 'txt4a2'}, {x : 475, y : 135, ltr : '◼', id : 'txt4r2'},
+               {x : 475, y : 170, ltr : '▯', id : 'txt4b3'}, {x : 475, y : 190, ltr : '◑', id : 'txt4a3'},
+               {x : 475, y : 215, ltr : '▯', id : 'txt4b4'}, {x : 475, y : 235, ltr : '▷', id : 'txt4d1'},
+               {x : 475, y : 260, ltr : '◑', id : 'txt4a4'}, {x : 475, y : 280, ltr : '▷', id : 'txt4d2'},
+               {x : 475, y : 300, ltr : '▯', id : 'txt4b5'}, {x : 475, y : 320, ltr : '◼', id : 'txt4r3'},
+               {x : 475, y : 345, ltr : '▯', id : 'txt4b6'}, {x : 475, y : 365, ltr : '▷', id : 'txt4d3'},
+               {x : 475, y : 390, ltr : '◼', id : 'txt4r4'}, {x : 475, y : 410, ltr : '▷', id : 'txt4d4'},
+               {x : 475, y : 440, ltr : '◑', id : 'txt4a5'}, {x : 475, y : 460, ltr : '◼', id : 'txt4r5'},
+               {x : 475, y : 485, ltr : '◑', id : 'txt4a6'}, {x : 475, y : 505, ltr : '▷', id : 'txt4d5'},
+               {x : 475, y : 530, ltr : '▷', id : 'txt4d6'}, {x : 475, y : 550, ltr : '◼', id : 'txt4r6'}];
+var svg = d3.select('.panel-right')
+            .append('svg')
+            .style('position', 'absolute').style('top', '50px')
+            .attr('width', 500).attr('height', 620);
+
+svg.selectAll('text')
+   .data(letters)
+   .enter()
+   .append('text')
+   .attr('x', function(d){return d.x;})
+   .attr('y', function(d){return d.y;})
+   .attr('class', function(d){
+                     if (Number(d.id.slice(3, 4)) === 1) return 'col1';
+                     else if (Number(d.id.slice(3, 4)) === 2) return 'col2';
+                     else if (Number(d.id.slice(3, 4)) === 3) return 'col3';
+                     else if (Number(d.id.slice(3, 4)) === 4) return 'col4';
+                     })
+   .attr('id', function(d){return d.id;})
+   .text(function(d){return d.ltr;})
+   .style('stroke', 'none').style('fill', 'black').style('font-family', 'sans-serif')
+   .style('font-size', function(d){
+                       if (Number(d.id.slice(0, 1)) === 1) return '16px';
+                       else if (Number(d.id.slice(0, 1)) === 2) return '14px';
+                       else if (Number(d.id.slice(0, 1)) === 3 || Number(d.id.slice(0, 1)) === 4) return '12px';
+                       });
+
+var curFocus = 'input0A';
+var elem0AClick = 1;
+var elem0BClick = 1;
+var elem1Click = 1;
+var elem2Click = 1;
+var elem3Click = 1;
+var elem4Click = 1;
+var lineCounter = 0;
+
+for (var b = 0; b < 3; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 65)
+     .attr('y1', 75)
+     .attr('x2', 220)
+     .attr('y2', letters[b + 4].y - 3)
+     .attr('class', 'linecol1')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 3; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 65)
+     .attr('y1', 220)
+     .attr('x2', 220)
+     .attr('y2', letters[b + 7].y - 3)
+     .attr('class', 'linecol1')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 3; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 65)
+     .attr('y1', 350)
+     .attr('x2', 220)
+     .attr('y2', letters[b + 10].y - 3)
+     .attr('class', 'linecol1')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 3; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 65)
+     .attr('y1', 490)
+     .attr('x2', 220)
+     .attr('y2', letters[b + 13].y - 3)
+     .attr('class', 'linecol1')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 30)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 16].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 75)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 18].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 120)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 20].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 175)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 22].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 220)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 24].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 265)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 26].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 305)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 28].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 350)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 30].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 395)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 32].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 445)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 34].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 490)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 36].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+for (var b = 0; b < 2; b++) {
+  lineCounter += 1;
+  svg.append('line')
+     .attr('x1', 240)
+     .attr('y1', 535)
+     .attr('x2', 395)
+     .attr('y2', letters[b + 38].y - 3)
+     .attr('class', 'linecol2')
+     .attr('id', 'line' + String(lineCounter))
+     .style('stroke', 'brown').style('stroke-width', 1);
+}
+
+for (var a = 16; a < 40; a++) {
+  lineCounter += 1;
+   svg.append('line')
+      .attr('x1', 415)
+      .attr('y1', letters[a].y - 5)
+      .attr('x2', 470)
+      .attr('y2', letters[a].y - 5)
+     .attr('class', 'linecol3')
+     .attr('id', 'line' + String(lineCounter))
+      .style('stroke', 'brown').style('stroke-width', 1);
+}
+$('.linecol1').css({'stroke-width' : 2});
+$('.linecol2').css({'stroke-width' : 1.5});
+$('.col1, .col2, .col3, .col4').css({'text-shadow' : '1px 1px #ccc', 'opacity' : 1});
+$('.linecol1, .linecol2, .linecol3').css({'opacity' : 1});
+
+$('#combperminput0A').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '4') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   curFocus = 'input0B';
+   $('#combperminput0B').focus();
+   }
+   else $(this).css('outline', '1px solid red');
+});
+$('#combperminput0B').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '2') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   curFocus = 'input1';
+   $('#combperminput1').focus();
+   }
+   else $(this).css('outline', '1px solid red');
+});
+$('#combperminput1').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '4!') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   $('#combpermpart2').animate({'opacity' : '+=1'}, 1500);
+   curFocus = 'input2';
+   d3.selectAll('.linecol3, .col4').transition().delay(3000).duration(1000).style('opacity', 0.2);
+   d3.selectAll('.linecol2, .col3').transition().delay(5000).duration(1000).style('opacity', 0.2);
+   d3.select('#botsec4').transition().delay(1000).duration(1000).style('opacity', 1);
+   d3.select('#botsec3').transition().delay(3000).duration(1000).style('opacity', 1);
+   d3.select('#botsec2').transition().delay(5000).duration(1000).style('opacity', 1);
+   }
+   else $(this).css('outline', '1px solid red');
+});
+$('#combperminput2').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '2') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   $('#combpermpart3').animate({'opacity' : '+=1'}, 1000);
+   curFocus = 'input3';
+   d3.select('#line4').transition().delay(500).duration(1000).style('opacity', 0.2);
+   d3.select('#txt2d1').transition().delay(500).duration(1000).style('opacity', 0.2);
+   d3.select('#line7').transition().delay(1500).duration(1000).style('opacity', 0.2);
+   d3.select('#txt2d2').transition().delay(1500).duration(1000).style('opacity', 0.2);
+   d3.select('#line8').transition().delay(2500).duration(1000).style('opacity', 0.2);
+   d3.select('#txt2r2').transition().delay(2500).duration(1000).style('opacity', 0.2);
+   d3.select('#line10').transition().delay(3500).duration(1000).style('opacity', 0.2);
+   d3.select('#txt2d3').transition().delay(3500).duration(1000).style('opacity', 0.2);
+   d3.select('#line11').transition().delay(4500).duration(1000).style('opacity', 0.2);
+   d3.select('#txt2r3').transition().delay(4500).duration(1000).style('opacity', 0.2);
+   d3.select('#line12').transition().delay(5500).duration(1000).style('opacity', 0.2);
+   d3.select('#txt2a3').transition().delay(5500).duration(1000).style('opacity', 0.2);
+   d3.select('#txt1b1').transition().delay(5500).duration(1000).style('opacity', 0.2);
+   }
+   else $(this).css('outline', '1px solid red');
+});
+$('#combperminput3').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '2') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   curFocus = 'input4';
+   $('#disclose3, #disclose4, #disclose5').animate({'opacity' : '+=1'}, 1000);
+   }
+   else $(this).css('outline', '1px solid red');
+});
+$('#combperminput4').bind('keyup', function(evt) {
+   if (evt.keyCode !== 13) return;
+   if ($(this).val() === '6') {
+   $(this).attr('disabled', 'disabled');
+   $(this).css('outline', '1px solid green');
+   }
+   else $(this).css('outline', '1px solid red');
+});
+
+$('.jitbox').bind('click', function(){$(this).fadeOut(1000);});
+
+$('.fraction').each(function(key, value) {
+  $this = $(this);
+  var split = $this.html().split("/");
+  $this.html('<span class="top">'+ split[0] + '</span><span class="bottom">' + split[1] + '</span>')
+});
+</script>
+
+<script>
+$('#hintButton').bind('click', function(evt) {
+   var elem = curFocus;
+   if (elem === 'input0A') elem0AClick += 1;
+   else if (elem === 'input0B') elem0BClick += 1;
+   else if (elem === 'input1') elem1Click += 1;
+   else if (elem === 'input2') elem2Click += 1;
+   else if (elem === 'input3') elem3Click += 1;
+   else if (elem === 'input4') elem4Click += 1;
+   if (elem === 'input0A' && elem0AClick % 2 === 0) $('#hint0A').fadeIn(1000);
+   else $('#hint0A').fadeOut(1000);
+   if (elem === 'input0B' && elem0BClick % 2 === 0) $('#hint0B').fadeIn(1000);
+   else $('#hint0B').fadeOut(1000);
+   if (elem === 'input1' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
+   else $('#hint1').fadeOut(1000);
+   if (elem === 'input2' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
+   else $('#hint2').fadeOut(1000);
+   if (elem === 'input3' && elem3Click % 2 === 0) $('#hint3').fadeIn(1000);
+   else $('#hint3').fadeOut(1000);
+   if (elem === 'input4' && elem4Click % 2 === 0) $('#hint4').fadeIn(1000);
+   else $('#hint4').fadeOut(1000);
+});
+</script>
