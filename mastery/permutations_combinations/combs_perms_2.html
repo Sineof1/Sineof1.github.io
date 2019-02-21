@@ -376,17 +376,17 @@ a:visited {
 <div class='panel-container'>
 <div class='panel-left'>
 <p id='intro_text' style='text-align:justify;'>If you use the letters H, Y, E, and T, how many different arrangements, or <a href='#'>permutations</a>, of 2 letters, like HE or YT, could you make?</p>
-<p style='text-align:center;font-size:20px;margin-top:-15px;margin-bottom:0px;'>&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p style='line-height:40px;'>Let n be the number of elements you are selecting from.<br />And let r be the number of elements you are selecting. In this case, n = <input type='text' id='combperminput0A' /> and r = <input type='text' id='combperminput0B' />.</p>
-<p class='direction-line'>First, determine the number of 4-letter permutations of 4 letters there are. Write the number as a factorial.</p>
-<p style='line-height:60px;text-align:justify;margin-top:0px;'>There are <input type='text' id='combperminput1' /> possible 4-letter permutations of 4 letters.</p>
+<p style='text-align:center;font-size:20px;margin-top:-15px;margin-bottom:0px;'>&nbsp;&nbsp;&nbsp;&nbsp;H&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>Let n be the number of elements you are selecting from. And let r be the number of elements you are selecting.<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thus, &nbsp;n = <input type='text' id='combperminput0A' /> and r = <input type='text' id='combperminput0B' />.</p>
+<p class='direction-line'>First, determine how many permutations of 4 letters there are. Write the number as a factorial.</p>
+<p style='line-height:60px;margin-top:0px;text-indent:50px;'>There are <input type='text' id='combperminput1' /> possible permutations of 4 letters.</p>
 
 <div id='combpermpart2' style='opacity:0;'>
 <p class='direction-line' style='margin-top:-30px;'>Then divide to determine the number of permutations there are of 2 elements from a set of 4 elements.</p>
 <p id='disclose1' style='margin-top:-10px;'>There are 4! possible permutations of the 4 letters. And you choose 2 letters from the set of 4. How many permutations of 2 letters from the set of 4 are there? To determine this value, you can divide.</p>
 <p style='text-align:justify;line-height:40px;'>Divide 4! by (4 &ndash; <input type='text' id='combperminput2' />)<span style='font-size:24px;'>!</span>.</p>
 <p id='disclose3' style='opacity:0;text-align:justify;margin-bottom:-10px;'>The number of permutations of n elements when selecting r of those elements is <span class='fraction'>n!/(n &ndash; r)!</span>.</p>
-<p id='disclose2' style='margin-bottom:100px;line-height:40px;opacity:0;text-align:justify;'>There are <span class='fraction'>4!/(4 &ndash; 2)!</span>, or <input type='text' id='combperminput3' />, possible permutations of 2 elements chosen from a set of 4 elements.</p>
+<p id='disclose2' style='margin-bottom:100px;line-height:40px;opacity:0;text-align:justify;margin-left:45px;'>There are <input type='text' id='combperminput3' />, or <span class='fraction'>4!/(4 &ndash; 2)!</span>, possible permutations of 2 elements chosen from a set of 4 elements.</p>
 </div>
 </div>
 
@@ -653,6 +653,7 @@ $('#combperminput0A').bind('keyup', function(evt) {
    $(this).attr('disabled', 'disabled');
    $(this).css('outline', '1px solid green');
    curFocus = 'input0B';
+   $('#combperminput0B').focus();
    }
    else $(this).css('outline', '1px solid red');
 });
@@ -662,6 +663,7 @@ $('#combperminput0B').bind('keyup', function(evt) {
    $(this).attr('disabled', 'disabled');
    $(this).css('outline', '1px solid green');
    curFocus = 'input1';
+   $('#combperminput1').focus();
    }
    else $(this).css('outline', '1px solid red');
 });
@@ -698,7 +700,6 @@ $('#combperminput3').bind('keyup', function(evt) {
    $(this).attr('disabled', 'disabled');
    $(this).css('outline', '1px solid green');
    }
-   else if ($(this).val() === '1') $('#jit4').fadeIn(1000);
    else $(this).css('outline', '1px solid red');
 });
 
