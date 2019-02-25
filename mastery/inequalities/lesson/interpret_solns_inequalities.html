@@ -317,6 +317,20 @@
 </div>
 </div>
 </div>
+   
+<div class='hintbox' id='hint10'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p>Decide whether or not it is possible for Jonah to have $10 saved if Sara has $5 in her piggy bank.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;'>
+<p>The point (5, 10) means that Sara has $5 and Jonah has $10. But the inequality y &gt; 3x means that Jonah must have more than 3 times what Sara has.</p>
+</div>
+<div class='hint' style='background-color:white;'>
+<p>Jonah does not have more than 3 times what Sara has, so it <mark>is not</mark> possible for him to have $10 saved.</p>
+</div>
+</div>
+</div>
 
 <div class='jitbox' id='jit1'>
 <div class='hintwrapper'>
@@ -474,6 +488,7 @@ var elem7Click = 1;
 var elem8Click = 1;
 var elem9Click = 1;
 var elem10Click = 1;
+var elem11Click = 1;
 var radio2_1Correct = false;
 var radio2_2Correct = false;
 
@@ -752,6 +767,7 @@ $('#hintButton').bind('click', function(evt) {
    else if (elem === 'radio1') elem8Click += 1;
    else if (elem === 'ineq2LHS' || elem === 'ineqRHS') elem9Click += 1;
    else if (elem === 'radio2') elem10Click += 1;
+   else if (elem === 'lstinpt') elem11Click += 1;
    if (elem === 'ineq1Drop' && elem1Click % 2 === 0) $('#hint1').fadeIn(1000);
    else $('#hint1').fadeOut(1000);
    if (elem === 'ineq2Drop' && elem2Click % 2 === 0) $('#hint2').fadeIn(1000);
@@ -782,6 +798,8 @@ $('#hintButton').bind('click', function(evt) {
       $('#hint9').offset({'left' : $('input[name=radio2]').offset().left + 225, 'top' : $('input[name=radio2]').offset().top});
    }
    else $('#hint9').fadeOut(1000);
+   if (elem === 'lstinpt' && elem11Click % 2 === 0) $('#hint10').fadeIn(1000);
+   else $('#hint10').fadeOut(1000);
 });
 
 $('#nextProblem').bind('click', function() {
@@ -856,7 +874,7 @@ $('#ineq5Drop').bind('change', function(evt) {
    var choice = $(this).val();
    if (choice === 'ineq5Drop2') {
    $(this).css('border', '1px solid green');
-   curFocus = 'ineq4Drop';
+   curFocus = 'lstinput';
    }
    else $(this).css('border', '1px solid red');
 });
