@@ -444,10 +444,10 @@ function movePoint() {
         point_H.y = 200;
         point_P.x = point_H.x;
         point_P.y = ((point_E.y - point_A.y) / (point_E.x - point_A.x)) * (point_H.x - point_E.x) + point_E.y;
-        var t_point = {x: point_P.x, y: point_P.y, radius: 0.05, color: point_P.color, draw: point_P.draw};
-        var t_point3 = {x: 200 - (point_P.x - 200), y: point_P.y, radius: 0.05, color: point_P.color, draw: point_P.draw};
-        var t_point2 = {x: t_point3.x, y: 200 - (t_point3.y - 200), radius: 0.05, color: point_P.color, draw: point_P.draw};
-        var t_point1 = {x: t_point.x, y: 200 - (t_point.y - 200), radius: 0.05, color: point_P.color, draw: point_P.draw};
+        var t_point = {x: point_P.x, y: point_P.y, radius: 1, color: point_P.color, draw: point_P.draw};
+        var t_point3 = {x: 200 - (point_P.x - 200), y: point_P.y, radius: 1, color: point_P.color, draw: point_P.draw};
+        var t_point2 = {x: t_point3.x, y: 200 - (t_point3.y - 200), radius: 1, color: point_P.color, draw: point_P.draw};
+        var t_point1 = {x: t_point.x, y: 200 - (t_point.y - 200), radius: 1, color: point_P.color, draw: point_P.draw};
         t_points.push(t_point, t_point3, t_point2, t_point1);
     }
     redraw();
