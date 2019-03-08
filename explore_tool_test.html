@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='icon' href='https://sineof1.github.io/mastery/permutations_combinations/cl_logo.jpg'>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<title>Drawing Reflections</title>
+</head>
+
+<style>
+@font-face {
+    font-family: 'Product Sans';
+    src: url(GoogleSans-Regular.ttf) format('truetype');
+}
+html, body {
+  height:100%;
+  font-family:'Product Sans';
+  padding:0;
+  margin:0;
+  overflow:auto;
+  background:rgb(28, 85, 105);
+}
+.page-container {
+  margin:50px;
+}
+.panel-container {
+  display:flex;
+  flex-direction:row;
+  border:1px solid silver;
+  overflow:hidden;
+  xtouch-action:none;
+  border-radius:10px;
+  width:1250px;
+  height:620px;
+  margin:80px auto 0 auto;
+}
+.panel-left {
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:35px 35px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  white-space:pre-wrap;
+  color:black;
+  overflow-y:auto;
+  background-color:white;
+}
+.splitter {
+  flex:0 0 auto;
+  width:18px;
+  background:url(vsizegrip.png) center center no-repeat #eaeaea;
+  min-height:200px;
+  cursor:col-resize;
+  z-index:999;
+}
+.panel-right {
+  position:relative;
+  flex:1 1 auto;
+  padding:35px 10px 10px 35px;
+  width:500px;
+  height:620px;
+  min-height:200px;
+  color:black;
+  background-color:#fafafa;
+  font-family:sans-serif;
+  font-size:19px;
+}
+label {
+  font-size:1.2em;
+  display:block;
+  font-weight:bold;
+  margin:30px 0 10px;
+}
+#demo_grapher {
+  width:625px;
+  height:550px;
+  border:1px solid blue;
+  overflow:hidden;
+}
+input {
+   margin-left:5px;
+   width:75px;
+   height:45px;
+   border:none;
+   border-radius:5px;
+   box-shadow:0 0 3px #ccc;
+   text-align:center;
+   font-size:18px;
+   font-family:sans-serif;
+}
+p {
+   margin-top:5px;
+}
+#navbar {
+   position:fixed;
+   top:0;
+   left:0;
+   height:50px;
+   width:100%;
+   background-color:navy;
+}
+#hintButton {
+   position:absolute;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   top:5px;
+   right:20px;
+   width:65px;
+   height:40px;
+   background-color:rgb(255, 186, 0);
+   color:white;
+   font-family:'Product Sans';
+   font-size:18px;
+   border-radius:5px;
+   outline:none;
+   cursor:pointer;
+}
+#previousProblem {
+   position:fixed;
+   bottom:20px;
+   left:50px;
+   font-family:sans-serif;
+   font-size:18px;
+   color:white;
+   font-variant:small-caps;
+   cursor:pointer;
+}
+.hintbox, .jitbox {
+   position:fixed;
+   bottom:0;
+   left:calc(50% - 175px);
+   width:350px;
+   height:150px;
+   border-radius:2px;
+   background-color:teal;
+   box-shadow:0 0 5px #000;
+   display:none;
+   z-index:1000;
+}
+.jitbox {
+   background-color:red;
+   top:0;
+}
+.hintwrapper {
+   position:absolute;
+   top:10px;
+   left:10px;
+   width:330px;
+   height:130px;
+   background-color:white;
+   font-family:sans-serif;
+   font-size:16px;
+   box-sizing:border-box;
+   padding:10px;
+   overflow-x:hidden;
+   overflow-y:scroll;
+}
+.hint {
+   height:110px;
+   box-sizing:border-box;
+   padding-top:5px;
+   padding-left:5px;
+   border-bottom:1px solid black;
+}
+.exercise {
+   color:teal;
+   opacity:0;
+}
+.math {
+   color:black;
+}
+.direction-line {
+   color:teal;
+   font-weight:bold;
+}
+.rpanel-section {
+   position:absolute;
+   display:inline-flex;
+   align-items:flex-start;
+   justify-content:center;
+   width:25%;
+   height:100%;
+   opacity:0;
+   box-sizing:border-box;
+   padding:5px;
+   font-size:18px;
+}
+a:visited {
+   color:blue;
+}
+.ineqDrop {
+   width:150px;
+   height:35px;
+   background:#fafafa;
+   border-radius:5px;
+   outline:none;
+   font-family:'Product Sans';
+   font-size:17px;
+}
+</style>
+
+<body>
+
+<div class='page-container'>
+<div class='panel-container'>
+<div class='panel-left'>
+<iframe src='https://mathigon.org/embed/transformations-and-symmetry/reflections-1' scrolling='no' style='width:300px;height:450px;border:none;margin-top:-85px;transform:scale(1.1, 1.1);'></iframe>
+</div>
+
+<div class='panel-right'>
+<p>A reflection is a transformation that "flips" a figure across a line.<br />Suppose that each of the figures shown is reflected across the given line.</p>
+<p class='direction-line'>In the Explore Tool shown, draw the reflection of each figure across the given line. Then answer each question.</p>
+<br />
+<p>Each transformed figure is <span id='refldrop1repl'><select name='drop1' class='ineqDrop' id='refldrop1' style='width:250px;'>
+  <option value="nothing3"></option>
+  <option value="refldrop1_1">congruent and similar</option>
+  <option value="refldrop1_2">similar</option>
+  <option value="refldrop1_3">neither congruent nor similar</option>
+</select></span> to the original figure.
+<br /><br />
+<p>Consider each pair of corresponding vertices on the two figures&mdash;the original vertex and the reflected vertex. Which statement is true about these points?</p>
+<span id='refldrop2repl'><select name='drop2' class='ineqDrop' id='refldrop2' style='width:400px;'>
+  <option value="nothing4"></option>
+  <option value="refldrop2_1">the points always have the same vertical location</option>
+  <option value="refldrop2_2">the points always have the same horizontal location</option>
+  <option value="refldrop2_3">the points are always at the same location</option>
+  <option value="refldrop2_4">the points are always the same distance from the line</option>
+</select></span>
+</div>
+</div>
+</div>
+</body>
+
+</html>
+
+<script>
+$('#refldrop1').bind('change', function(evt){
+   var choice = $(this).val();
+   if (choice === 'refldrop1_1') {
+   $(this).css({'border' : '1px solid green', 'background-color' : 'rgba(0, 255, 0, 0.3)'});
+   setTimeout(function(){
+   $('#refldrop1repl').html('congruent and similar');
+   $('#refldrop1repl').css('font-weight', 900);
+   }, 800);
+   }
+   else $(this).css({'border' : '1px solid red', 'background-color' : 'rgba(255, 0, 0, 0.3)'});
+});
+$('#refldrop2').bind('change', function(evt){
+   var choice = $(this).val();
+   if (choice === 'refldrop2_4') {
+   $(this).css({'border' : '1px solid green', 'background-color' : 'rgba(0, 255, 0, 0.3)'});
+   setTimeout(function(){
+   $('#refldrop2repl').html('the points are always the same distance from the line');
+   $('#refldrop2repl').css('font-weight', 900);
+   }, 800);
+   }
+   else $(this).css({'border' : '1px solid red', 'background-color' : 'rgba(255, 0, 0, 0.3)'});
+});
+</script>
