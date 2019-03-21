@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset = 'utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Handshake Problem">
+<meta property="og:description" content="Dynamic interactive handshake problem.">
+<meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2019/03/handshake.png'>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="icon" href="https://sineof1.github.io/mastery/inequalities/lesson/cl_logo.jpg">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<title>Handshake Problem</title>
+
+<style>
+body {
+   overflow:hidden;
+   background:black;
+}
+.shake_input {
+   width:100px;
+   height:50px;
+   font-family:'Open Sans';
+   font-size:24px;
+   text-align:center;
+   box-sizing:border-box;
+   padding:8px;
+   border-radius:3px;
+   border:none;
+   box-shadow:0 0 3px #ccc;
+   outline:none;
+}
+.entry-div {
+   position:fixed;
+   display:flex;
+   align-items:center;
+   justify-content:flex-end;
+   top:-2px;
+   left:-2px;
+   width:250px;
+   height:100px;
+   background:linear-gradient(to right, black, #bababa);
+   box-sizing:border-box;
+   padding:0 20px;
+   border-radius:5px;
+}
+.text-div {
+   font-family:'Open Sans';
+   font-size:16px;
+   margin-right:20px;
+   color:white;
+}
+.result-div {
+   position:absolute;
+   width:40px;
+   right:50px;
+   bottom:5px;
+   font-family:'Open Sans';
+   font-size:12px;
+   color:white;
+   text-align:center;
+}
+</style>
+</head>
+
+
+
+<body>
+<div class='entry-div'>
+<div class='text-div'>Number of handshakes:</div>
+<input class='shake_input' type='text' maxlength='2' />
+<div class='result-div'>0</div>
+</div>
+</body>
+
+<meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Text Savvy" /><meta name="twitter:title" content="The Handshake Problem" /><meta name="twitter:description" content="Dynamic visualization of the handshake problem." /><meta name="twitter:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2019/03/handshake.png" />
+</html>
+
+<script>
+var points = [];
+var lnpoints = [];
+var colors = []
+var circRad = (Math.min(window.innerHeight, window.innerWidth) - 50) / 2 - 25;
+var circCX = (window.innerWidth - 20) / 2;
+var circCY = (window.innerHeight - 50) / 2;
+var counter = 0;
+var intv1;
+var tmot1;
+
+function randColor() {
+   var letters = "0123456789ABCDEF";
+   var color = '#';
+   for (var i = 0; i < 6; i++) color += letters[(Math.floor(Math.random() * 16))];
+   return color;
+}
+
+$('.shake_input').bind('keyup', function(evt) {
+   points = [];
+   lnpoints = [];
+   counter = 0;
+   if (evt.keyCode !== 13) return;
+   var num = Number($(this).val());
+   if (!(Number.isInteger(num)) || num === 0 || num > 100) return;
+   $('.result-div').html(String(counter));
+   var thetaMult = (2 * Math.PI) / num;
+
+   for (var a = 0; a < num; a++) {
+   points.push({x : circCX + (circRad * Math.cos(thetaMult * a)), y : circCY + (circRad * Math.sin(thetaMult * a))});
+   }
+   svg.select('#nodes').selectAll('*').remove();
+   svg.select('#links').selectAll('*').remove();
+   svg.select('#nodes').selectAll('circle')
+      .data(points)
+      .enter()
+      .append('circle')
+      .attr('class', 'shake_circle')
+      .attr('cx', circCX).attr('cy', circCY).attr('r', 10)
+      .style('stroke', '#4E78A0').style('fill', 'gold').style('stroke-width', 3).style('opacity', 0)
+      .transition()
+      .delay(function(d, i){return i * 100;})
+      .duration(800)
+      .ease(d3.easeBackInOut)
+      .style('opacity', 1).style('fill', function(d){return randColor();})
+      .attr('cx', function(d){return d.x;})
+      .attr('cy', function(d){return d.y;});
+
+   for (var b = 0; b < points.length; b++)     {
+   for (var c = b + 1; c < points.length; c++) {
+   lnpoints.push({x1 : points[b].x, y1 : points[b].y, x2 : points[c].x, y2 : points[c].y, col : randColor()});
+   }}
+   svg.select('#links').selectAll('line')
+      .data(lnpoints)
+      .enter()
+      .append('line')
+      .attr('class', 'shake_line')
+      .attr('x1', function(d){return d.x1;}).attr('y1', function(d){return d.y1;})
+      .attr('x2', function(d){return d.x1;}).attr('y2', function(d){return d.y1;})
+      .style('stroke', function(d){return d.col;}).style('stroke-width', 1)
+      .transition()
+      .delay(function(d, i){return i * 100 + 1000;})
+      .duration(500)
+      .ease(d3.easeExpInOut)
+      .attr('x2', function(d){return d.x2;}).attr('y2', function(d){return d.y2});
+   tmot1 = setTimeout(function() {
+   intv1 = setInterval(function(){
+      if (counter === lnpoints.length) {clearInterval(intv1); clearTimeout(tmot1); return;}
+      counter += 1;
+      $('.result-div').html(String(counter));
+   }, 100);
+   }, 1000);
+});
+
+var svg = d3.select('body')
+            .append('svg')
+            .attr('id', 'mainSVG')
+            .attr('width', window.innerWidth - 20)
+            .attr('height', window.innerHeight - 50);
+
+svg.append('g').attr('id', 'links');
+svg.append('g').attr('id', 'nodes');
+
+window.addEventListener('resize', function() {
+   counter = 0;
+   d3.select('#mainSVG').attr('width', window.innerWidth - 20).attr('height', window.innerHeight - 50);
+   circRad = (Math.min(window.innerHeight, window.innerWidth) - 50) / 2 - 25;
+   circCX = (window.innerWidth - 20) / 2;
+   circCY = (window.innerHeight - 50) / 2;
+});
+$('.shake_input').focus();
+</script>
