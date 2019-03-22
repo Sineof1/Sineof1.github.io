@@ -69,7 +69,7 @@ body {
 
 
 <body>
-<div class='entry-div'>
+<div class='entry-div' style='z-index:99;'>
 <div class='text-div'>Number of people:</div>
 <input class='shake_input' type='text' maxlength='2' />
 <div class='result-div'>0</div>
@@ -107,6 +107,8 @@ $('.shake_input').bind('keyup', function(evt) {
    if (!(Number.isInteger(num)) || num === 0 || num > 100) return;
    $('.result-div').html(String(counter));
    var thetaMult = (2 * Math.PI) / num;
+
+   svg.attr('transform', 'rotate(0)');
 
    for (var a = 0; a < num; a++) {
    points.push({x : circCX + (circRad * Math.cos(thetaMult * a)), y : circCY + (circRad * Math.sin(thetaMult * a))});
@@ -152,17 +154,29 @@ $('.shake_input').bind('keyup', function(evt) {
       $('.result-div').html(String(counter));
    }, 100);
    }, 1000);
+   svg.transition()
+      .delay(1500 + lnpoints.length * 100)
+      .duration(10000)
+      .ease(d3.easeBackInOut)
+      .attrTween('transform', rotTween);
 });
 
 var svg = d3.select('body')
             .append('svg')
             .attr('id', 'mainSVG')
             .attr('width', window.innerWidth - 20)
-            .attr('height', window.innerHeight - 50);
+            .attr('height', window.innerHeight - 50)
+            .style('z-index', -1);
 
 svg.append('g').attr('id', 'links');
 svg.append('g').attr('id', 'nodes');
 
+function rotTween() {
+   var i = d3.interpolate(0, 360);
+   return function(t) {
+      return "rotate(" + i(t) + ",0,0)";
+   };
+}
 window.addEventListener('resize', function() {
    counter = 0;
    d3.select('#mainSVG').attr('width', window.innerWidth - 20).attr('height', window.innerHeight - 50);
