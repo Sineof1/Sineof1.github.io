@@ -108,7 +108,7 @@ $('.shake_input').bind('keyup', function(evt) {
    $('.result-div').html(String(counter));
    var thetaMult = (2 * Math.PI) / num;
 
-   svg.attr('transform', 'rotate(0)');
+   svg.transition().delay(0).duration(0).attr('transform', 'rotate(0)');
 
    for (var a = 0; a < num; a++) {
    points.push({x : circCX + (circRad * Math.cos(thetaMult * a)), y : circCY + (circRad * Math.sin(thetaMult * a))});
