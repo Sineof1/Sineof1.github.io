@@ -90,14 +90,12 @@ var circCY = (window.innerHeight - 50) / 2;
 var counter = 0;
 var intv1;
 var tmot1;
-
 function randColor() {
    var letters = "0123456789ABCDEF";
    var color = '#';
    for (var i = 0; i < 6; i++) color += letters[(Math.floor(Math.random() * 16))];
    return color;
 }
-
 $('.shake_input').bind('keyup', function(evt) {
    points = [];
    lnpoints = [];
@@ -107,9 +105,7 @@ $('.shake_input').bind('keyup', function(evt) {
    if (!(Number.isInteger(num)) || num === 0 || num > 100) return;
    $('.result-div').html(String(counter));
    var thetaMult = (2 * Math.PI) / num;
-
    svg.transition().delay(0).duration(0).attr('transform', 'rotate(0)');
-
    for (var a = 0; a < num; a++) {
    points.push({x : circCX + (circRad * Math.cos(thetaMult * a)), y : circCY + (circRad * Math.sin(thetaMult * a))});
    }
@@ -122,6 +118,9 @@ $('.shake_input').bind('keyup', function(evt) {
       .attr('class', 'shake_circle')
       .attr('cx', circCX).attr('cy', circCY).attr('r', 10)
       .style('stroke', '#4E78A0').style('fill', 'gold').style('stroke-width', 3).style('opacity', 0)
+      .style('cursor', 'pointer')
+      .on('mouseover', fadeHoverIn)
+      .on('mouseout', fadeHoverOut)
       .transition()
       .delay(function(d, i){return i * 100;})
       .duration(800)
@@ -129,7 +128,6 @@ $('.shake_input').bind('keyup', function(evt) {
       .style('opacity', 1).style('fill', function(d){return randColor();})
       .attr('cx', function(d){return d.x;})
       .attr('cy', function(d){return d.y;});
-
    for (var b = 0; b < points.length; b++)     {
    for (var c = b + 1; c < points.length; c++) {
    lnpoints.push({x1 : points[b].x, y1 : points[b].y, x2 : points[c].x, y2 : points[c].y, col : randColor()});
@@ -160,14 +158,12 @@ $('.shake_input').bind('keyup', function(evt) {
       .ease(d3.easeBackInOut)
       .attrTween('transform', rotTween);
 });
-
 var svg = d3.select('body')
             .append('svg')
             .attr('id', 'mainSVG')
             .attr('width', window.innerWidth - 20)
             .attr('height', window.innerHeight - 50)
             .style('z-index', -1);
-
 svg.append('g').attr('id', 'links');
 svg.append('g').attr('id', 'nodes');
 
@@ -176,6 +172,18 @@ function rotTween() {
    return function(t) {
       return "rotate(" + i(t) + ",0,0)";
    };
+}
+function fadeHoverIn(d, i) {
+   d3.selectAll('.shake_line')
+     .transition()
+     .duration(1000)
+     .style('opacity', function(item, inx){if ((item.x1 !== d.x || item.y1 !== d.y) && (item.x2 !== d.x || item.y2 !== d.y)) return 0.2;});
+}
+function fadeHoverOut(d, i) {
+   d3.selectAll('.shake_line')
+     .transition()
+     .duration(1000)
+     .style('opacity', function(item, inx){if ((item.x1 !== d.x || item.y1 !== d.y) && (item.x2 !== d.x || item.y2 !== d.y)) return 1;});
 }
 window.addEventListener('resize', function() {
    counter = 0;
