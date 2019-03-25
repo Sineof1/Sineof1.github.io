@@ -169,11 +169,11 @@ svg.append('g').attr('id', 'links');
 svg.append('g').attr('id', 'nodes');
 
 function rotTween() {
+   d3.selectAll('.shake_circle').style('pointer-events', 'all');
    var i = d3.interpolate(0, 360);
    return function(t) {
       return "rotate(" + i(t) + ",0,0)";
    };
-   d3.selectAll('.shake_circle').style('pointer-events', 'all');
 }
 function fadeHoverIn(d, i) {
    d3.selectAll('.shake_line')
