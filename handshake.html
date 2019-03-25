@@ -126,6 +126,7 @@ $('.shake_input').bind('keyup', function(evt) {
       .duration(800)
       .ease(d3.easeBackInOut)
       .style('opacity', 1).style('fill', function(d){return randColor();})
+      .style('pointer-events', 'none')
       .attr('cx', function(d){return d.x;})
       .attr('cy', function(d){return d.y;});
    for (var b = 0; b < points.length; b++)     {
@@ -172,6 +173,7 @@ function rotTween() {
    return function(t) {
       return "rotate(" + i(t) + ",0,0)";
    };
+   d3.selectAll('.shake_circle').style('pointer-events', 'all');
 }
 function fadeHoverIn(d, i) {
    d3.selectAll('.shake_line')
