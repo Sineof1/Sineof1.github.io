@@ -3,8 +3,7 @@
 <head>
 <meta charset = 'utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<meta property="og:image" content='https://guzintamath.com/textsavvy/wp-content/uploads/2019/04/robot.png'>
-<link rel='icon' href='https://guzintamath.com/textsavvy/wp-content/uploads/2019/04/robot.png'>
+<link rel='icon' href='cl_logo.jpg'>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css'>
 <script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
@@ -13,7 +12,7 @@
 <link rel='stylesheet' href='https://unpkg.com/botui/build/botui-theme-default.css'>
 <script src='https://cdn.jsdelivr.net/vue/latest/vue.min.js'></script>
 <script src='https://unpkg.com/botui/build/botui.min.js'></script>
-<title>TutorBot Demo</title>
+<title>Writing Equations for Lines (8-EE.6)</title>
 </head>
 
 <style>
@@ -194,9 +193,42 @@ p {
    color:white;
    width:95%;
 }
+#navbar {
+   position:fixed;
+   top:0;
+   left:0;
+   height:45px;
+   width:100%;
+   background-color:navy;
+}
+#answerButton {
+   position:absolute;
+   display:flex;
+   text-align:center;
+   align-items:center;
+   justify-content:center;
+   top:2.5px;
+   right:20px;
+   width:65px;
+   height:35px;
+   background-color:rgb(255, 0, 0);
+   color:white;
+   font-family:'Product Sans';
+   font-size:15px;
+   line-height:15px;
+   border-radius:5px;
+   outline:none;
+   cursor:pointer;
+   border:2px groove white;
+}
+#answerButton:hover {
+   background-color:rgba(255, 0, 0, 0.5);
+}
 </style>
 
-
+<div id='navbar'>
+<div id='answerButton'>Show Answer</div>
+</div>
 <body>
 <div class='hintbox'>
 <div class='hintwrapper'>
@@ -210,7 +242,7 @@ p {
 <p id='hintText2'>Count the units of rise for the triangle. Then count the units of run. The slope is the ratio <span id='math5'></span>.
 <p class='botback' id='backhint2' style='position:absolute;right:45px;bottom:-11px;font-size:14px;color:blue;cursor:pointer;'>More</p>
 </div>
-<div class='hint' style='background-color:white;'>
+<div class='hint' style='background-color:white;' id='answer1'>
 <p id='hintText3'>The slope of line g is <mark><span id='math6'></span></mark>.</p>
 </div>
 </div>
@@ -226,7 +258,7 @@ p {
 <p id='hintText5'>Enter the slope of line g as the coefficient of <span id='math9'></span>.
 <p class='botback' id='backhint4' style='position:absolute;right:45px;bottom:-11px;font-size:14px;color:blue;cursor:pointer;'>More</p>
 </div>
-<div class='hint' style='background-color:white;'>
+<div class='hint' style='background-color:white;' id='answer2'>
 <p id='hintText6'>The equation for line g is <span id='math10'></span> <mark><span id='math11'></span></mark><span id='math12'></span>.</p>
 </div>
 </div>
@@ -242,9 +274,15 @@ p {
 <p id='hintText8'>Enter the slope of line v as the coefficient of <span id='math16'></span>. How much is the line translated up or down from the origin? Add this amount to the equation.</p>
 <p class='botback' id='backhint6' style='position:absolute;right:45px;bottom:-11px;font-size:14px;color:blue;cursor:pointer;'>More</p>
 </div>
-<div class='hint' style='background-color:white;'>
+<div class='hint' style='background-color:white;' id='answer3'>
 <p id='hintText9'>The equation for line v is <span id='math17'></span> <mark><span id='math18'></span></mark><span id='math19'></span> + <mark><span id='math20'></span></mark>.</p>
 </div>
+</div>
+</div>
+
+<div class='hintbox' id='answerBox' style='position:fixed;top:60px;right:0px;'>
+<div class='hintwrapper'>
+<div class='answer' style='background-color:white;'></div>
 </div>
 </div>
 
@@ -300,7 +338,6 @@ p {
 
 <div class='bot'></div>
 <div class='speech_bubble' id='speech1'><bot-ui></bot-ui></div>
-<img src='https://guzintamath.com/textsavvy/wp-content/uploads/2019/04/robot.png' style='position:fixed;visibility:hidden;' />
 </body>
 
 </html>
@@ -573,7 +610,6 @@ $(document).on('click', '.bot', function(evt) {
      .style('opacity', 1);
    }
    else if (botClick % 2 === 0 && (curFocus === 'equation2' || curFocus === 'equation3')) {
-   $('.speech_bubble').offset({left : 950, top : $('.bot').offset().top - 180});
    d3.select('.bot')
      .transition()
      .duration(1000)
@@ -581,9 +617,13 @@ $(document).on('click', '.bot', function(evt) {
      .style('left', '840px');
    d3.select('.speech_bubble')
      .transition()
+     .duration(50)
+     .style('left', '950px')
+     .transition()
      .delay(800)
      .duration(800)
-     .style('opacity', 1);
+     .style('opacity', 1)
+     ;
    }
    else {
    d3.select('.speech_bubble')
@@ -595,8 +635,8 @@ $(document).on('click', '.bot', function(evt) {
      .duration(1000)
      .ease(d3.easeBackInOut)
      .style('left', '-50px');
-   }
    setTimeout(function(){$('.speech_bubble').offset({left : 175, top : $('.bot').offset().top - 180});}, 500);
+   }
 });
 
 $(document).bind('click', '.botback', function(evt) {
@@ -617,10 +657,10 @@ function hintGroup1() {
                   })
                .then(function(res){
                   if (res.value === 'bothint1') {
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1').html()})
+                  botUI.message.bot({type : 'html', delay: 1000, loading: true, content: $('#hint1').html()})
                   }
                   else if (res.value === 'bothint2') {
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2').html()})
+                  botUI.message.bot({type : 'html', delay: 1000, loading: true, content: $('#hint2').html()})
                   }
                });
 }
@@ -633,10 +673,10 @@ function hintGroup2() {
                   })
                .then(function(res){
                   if (res.value === 'bothint3') {
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3').html()})
+                  botUI.message.bot({type : 'html', delay: 1000, loading: true, content: $('#hint3').html()})
                   }
                   else if (res.value === 'bothint4') {
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint4').html()})
+                  botUI.message.bot({type : 'html', delay: 1000, loading: true, content: $('#hint4').html()})
                   }
                });
 }
@@ -649,10 +689,10 @@ function hintGroup3() {
                   })
                .then(function(res){
                   if (res.value === 'bothint5') {
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5').html()})
+                  botUI.message.bot({type : 'html', delay: 1000, loading: true, content: $('#hint5').html()})
                   }
                   else if (res.value === 'bothint6') {
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6').html()})
+                  botUI.message.bot({type : 'html', delay: 1000, loading: true, content: $('#hint6').html()})
                   }
                });
 }
@@ -662,5 +702,23 @@ $('.speech_bubble').bind('mouseup', function(){MOUSEDOWN = false;});
 $('.speech_bubble').bind('mousemove', function(evt){
    if (!MOUSEDOWN) return;
    $('.speech_bubble').offset({left : evt.clientX - 175, top : evt.clientY - 125});
+});
+
+$('#answerButton').bind('click', function() {
+   if (curFocus === 'slope1') {
+      $('.answer').html($('#answer1').html());
+      $('#answerBox').fadeIn(1000);
+      setTimeout(function(){$('#answerBox').fadeOut(1000);}, 2000);
+   }
+   else if (curFocus === 'equation1') {
+      $('.answer').html($('#answer2').html());
+      $('#answerBox').fadeIn(1000);
+      setTimeout(function(){$('#answerBox').fadeOut(1000);}, 2000);
+   }
+   else if (curFocus === 'equation2' || curFocus === 'equation3') {
+      $('.answer').html($('#answer3').html());
+      $('#answerBox').fadeIn(1000);
+      setTimeout(function(){$('#answerBox').fadeOut(1000);}, 2000);
+   }
 });
 </script>
