@@ -664,8 +664,8 @@ var botUI = new BotUI('speech1');
 function hintGroup1() {
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What is the slope of a line?', value : 'bothint1'},
-                                                       {cssClass : 'botBut', text : 'How do I find the slope of the line?', value : 'bothint2'}
+                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
+                                                       {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'}
                                                       ]});
                   })
                .then(function(res){
