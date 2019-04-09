@@ -179,7 +179,7 @@ p {
    box-sizing:border-box;
    background-color:white;
    padding:10px;
-   box-shadow:10px 0 5px #000;
+   box-shadow:10px 0 5px #ccc;
    z-index:9999;
    opacity:0;
 }
@@ -501,6 +501,10 @@ $('#slope1').bind('keyup', function(evt) {
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
    $('#equation1').focus();
    curFocus = 'equation1';
+   botUI.message.removeAll();
+   if (curFocus === 'slope1') hintGroup1();
+   else if (curFocus === 'equation1') hintGroup2();
+   else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
    else if ((Number(response[1]) / Number(response[0])) === 0.75) $('#jit1').fadeIn(1000);
    else if (answer <= 0) $('#jit2').fadeIn(1000);
@@ -516,6 +520,10 @@ $('#equation1').bind('keyup', function(evt) {
    $('#second_text').animate({'opacity' : '+=1'}, 1000);
    $('#equation2').focus();
    curFocus = 'equation2';
+   botUI.message.removeAll();
+   if (curFocus === 'slope1') hintGroup1();
+   else if (curFocus === 'equation1') hintGroup2();
+   else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    var transLine = clone('#startLine').style('opacity', 0);
    transLine.transition()
             .delay(1000)
@@ -551,6 +559,10 @@ $('#equation2').bind('keyup', function(evt) {
    if (answer === 0.75 || norm_response === '0.75' || norm_response === '.75') {
    $('#equation3').focus();
    curFocus = 'equation3';
+   botUI.message.removeAll();
+   if (curFocus === 'slope1') hintGroup1();
+   else if (curFocus === 'equation1') hintGroup2();
+   else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
    else $('#jit3').fadeIn(1000);
 });
