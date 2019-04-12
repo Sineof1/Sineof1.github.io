@@ -206,3 +206,6 @@ p {
 button.botui-actions-buttons-button {
    line-height:0.9;
 }
+.botui-message-content {
+   color:black;
+}
