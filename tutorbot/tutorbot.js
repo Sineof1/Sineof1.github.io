@@ -8,6 +8,11 @@ $('.panel-left').resizable({
    resizeWidth: false
  });
 
+var botstart = document.getElementById('botstart');
+botstart.volume = 0.3;
+var botresponse = document.getElementById('botresponse');
+botresponse.volume = 0.2;
+
 katex.render('\\mathtt{y=}', math1);
 katex.render('\\mathtt{x}', math2);
 katex.render('\\mathtt{y=}', math3);
@@ -269,6 +274,7 @@ $(document).on('click', '.bot', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    if (botClick % 2 === 0 && curFocus !== 'equation2' && curFocus !== 'equation3') {
+   botstart.play();
    d3.select('.bot')
      .transition()
      .duration(1000)
@@ -282,6 +288,7 @@ $(document).on('click', '.bot', function(evt) {
      .style('opacity', 1);
    }
    else if (botClick % 2 === 0 && (curFocus === 'equation2' || curFocus === 'equation3')) {
+   botstart.play();
    d3.select('.bot')
      .transition()
      .duration(1000)
@@ -353,21 +360,23 @@ function hintGroup1() {
                   if (res.value === 'bothint1') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint1Count += 1;});
+                       .then(function(){hint1Count += 1; botresponse.play();});
                   }
                   else if (res.value === 'bothint2') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint2Count += 1;});
+                       .then(function(){hint2Count += 1; botresponse.play();});
                   }
                   else if (res.value === 'bothintA1') {
                   if (hint1Count >= 1 && hint2Count >= 1) {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer1').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   else {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   }
                });
@@ -384,21 +393,23 @@ function hintGroup2() {
                   if (res.value === 'bothint3') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint3Count += 1;});
+                       .then(function(){hint3Count += 1; botresponse.play();});
                   }
                   else if (res.value === 'bothint4') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint4').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint4Count += 1;});
+                       .then(function(){hint4Count += 1; botresponse.play();});
                   }
                   else if (res.value === 'bothintA2') {
                   if (hint3Count >= 1 && hint4Count >= 1) {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer2').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   else {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   }
                });
@@ -415,21 +426,23 @@ function hintGroup3() {
                   if (res.value === 'bothint5') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint5Count += 1;});
+                       .then(function(){hint5Count += 1; botresponse.play();});
                   }
                   else if (res.value === 'bothint6') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint6Count += 1;});
+                       .then(function(){hint6Count += 1; botresponse.play();});
                   }
                   else if (res.value === 'bothintA3') {
                   if (hint5Count >= 1 && hint6Count >= 1) {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer3').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   else {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   }
                });
