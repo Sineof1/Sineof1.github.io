@@ -280,7 +280,6 @@ var hint5Count = 0;
 var hint6Count = 0;
 
 $(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
-$(document).on('click', '.clickpnt', function(){startTriangle();});
 
 $(document).ready(function(){
    $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});
