@@ -1,4 +1,4 @@
-
+$(document).ready(function(){
 $('.panel-left').resizable({
    handleSelector: '.splitter',
    resizeHeight: false
@@ -487,4 +487,5 @@ $('#answerButton').bind('click', function() {
       $('#answerBox').fadeIn(1000);
       setTimeout(function(){$('#answerBox').fadeOut(1000);}, 2000);
    }
+});
 });
