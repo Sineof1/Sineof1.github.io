@@ -12,6 +12,8 @@ var botstart = document.getElementById('botstart');
 botstart.volume = 0.3;
 var botresponse = document.getElementById('botresponse');
 botresponse.volume = 0.2;
+var ding = document.getElementById('ding');
+ding.volume = 0.2;
 
 katex.render('\\mathtt{y=}', math1);
 katex.render('\\mathtt{x}', math2);
@@ -156,6 +158,9 @@ $('#slope1').bind('keyup', function(evt) {
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
    if (answer === 0.75 || norm_response === '0.75' || norm_response === '.75') {
+   ding.play();
+   $('.jitbox').fadeOut();
+   $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
    $('#equation1').focus();
    curFocus = 'equation1';
@@ -174,6 +179,9 @@ $('#equation1').bind('keyup', function(evt) {
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
    if (answer === 0.75 || norm_response === '0.75' || norm_response === '.75') {
+   ding.play();
+   $('.jitbox').fadeOut();
+   $('#equation1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    $('#second_text').animate({'opacity' : '+=1'}, 1000);
    $('#equation2').focus();
@@ -216,6 +224,9 @@ $('#equation2').bind('keyup', function(evt) {
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
    if (answer === 0.75 || norm_response === '0.75' || norm_response === '.75') {
+   ding.play();
+   $('.jitbox').fadeOut();
+   $('#equation2').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#equation3').focus();
    curFocus = 'equation3';
    botUI.message.removeAll();
@@ -228,9 +239,12 @@ $('#equation2').bind('keyup', function(evt) {
 $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
-   d3.select('.bot').transition().duration(1000).style('opacity', 0);
    var answer = Number($(this).val());
    if (answer === 4) {
+   ding.play();
+   $('.jitbox').fadeOut();
+   $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
+   d3.select('.bot').transition().duration(1000).style('opacity', 0);
    }
    else if (answer <= 0) $('#jit4').fadeIn(1000);
 });
@@ -265,7 +279,15 @@ var hint4Count = 0;
 var hint5Count = 0;
 var hint6Count = 0;
 
-$(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});});
+$(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
+
+$(document).ready(function(){
+   $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});
+   $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
+   $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
+   $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
+   $('#jit4').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
+});
 
 $(document).on('click', '.bot', function(evt) {
    botClick += 1;

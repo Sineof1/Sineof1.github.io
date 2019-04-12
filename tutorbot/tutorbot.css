@@ -11,7 +11,7 @@ html, body {
   background:rgb(28, 85, 105);
 }
 .page-container {
-  margin:50px;
+  margin:5px;
 }
 .panel-container {
   display:flex;
@@ -22,7 +22,7 @@ html, body {
   border-radius:10px;
   width:1250px;
   height:620px;
-  margin:40px auto 0 auto;
+  margin:20px auto 0 auto;
 }
 .panel-left {
   flex:0 0 auto;
@@ -74,6 +74,7 @@ input {
    font-size:18px;
    font-family:sans-serif;
    z-index:1000;
+   outline:none;
 }
 p {
    margin-top:5px;
@@ -173,7 +174,7 @@ p {
 .ansBut {
    background-color:red;
 }
-.botback, .tryBut {
+.botback, .tryBut, .closeJit {
   display:inline-block;
   float:right;
   font-size:15px;
