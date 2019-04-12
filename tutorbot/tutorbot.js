@@ -206,6 +206,7 @@ $('#equation1').bind('keyup', function(evt) {
 $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
+   $('#equation2, #equation3').css('box-shadow', '0 0 3px #ccc');
    var norm_response = $(this).val();
    var response = ($(this).val()).split('/');
    var answer = Number(response[0]) / Number(response[1]);
@@ -252,6 +253,12 @@ function clone(selector) {
 
 botClick = 1;
 var MOUSEDOWN = false;
+var hint1Count = 0;
+var hint2Count = 0;
+var hint3Count = 0;
+var hint4Count = 0;
+var hint5Count = 0;
+var hint6Count = 0;
 
 $(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});});
 
@@ -303,13 +310,13 @@ $(document).on('click', '.bot', function(evt) {
    setTimeout(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});}, 500);
    }
    if (curFocus === 'slope1' && botClick % 2 === 0) {
-      $('#slope1').css('box-shadow', '0 0 25px rgb(182, 212, 40)');
+      $('#slope1').css('box-shadow', '0 0 25px #cf9893');
    }
    else if (curFocus === 'equation1' && botClick % 2 === 0) {
-      $('#equation1').css('box-shadow', '0 0 25px rgb(182, 212, 40)');
+      $('#equation1').css('box-shadow', '0 0 25px #cf9893');
    }
    else if (curFocus === 'equation2' || curFocus === 'equation3' && botClick % 2 === 0) {
-      $('#equation2, #equation3').css('box-shadow', '0 0 25px rgb(182, 212, 40)');
+      $('#equation2, #equation3').css('box-shadow', '0 0 25px #cf9893');
    }
    else if (curFocus === 'slope1' && botClick % 2 !== 0) {
       $('#slope1').css('box-shadow', '0 0 3px #ccc');
@@ -317,16 +324,19 @@ $(document).on('click', '.bot', function(evt) {
    else if (curFocus === 'equation1' && botClick % 2 !== 0) {
       $('#equation1').css('box-shadow', '0 0 3px #ccc');
    }
-   else if (curFocus === 'equation2' || curFocus === 'equation3' && botClick % 2 !== 0) {
+   else if (curFocus === 'equation2' && botClick % 2 !== 0) {
+      $('#equation2, #equation3').css('box-shadow', '0 0 3px #ccc');
+   }
+   else if (curFocus === 'equation3' && botClick % 2 !== 0) {
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #ccc');
    }
 });
 
 $(document).on('click', '.botback', function(evt) {
    $(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);
-   if (evt.target.id === 'backhint1' || evt.target.id === 'backhint2') hintGroup1();
-   else if (evt.target.id === 'backhint3' || evt.target.id === 'backhint4') hintGroup2();
-   else if (evt.target.id === 'backhint5' || evt.target.id === 'backhint6') hintGroup3();
+   if (curFocus === 'slope1') hintGroup1();
+   else if (curFocus === 'equation1') hintGroup2();
+   else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
 });
 
 $(document).on('click', '.tryBut', function(){$('.bot').trigger('click');});
@@ -335,17 +345,30 @@ function hintGroup1() {
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
-                                                       {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'}
+                                                       {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'},
+                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint1') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){hint1Count += 1;});
                   }
                   else if (res.value === 'bothint2') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2').html()})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){hint2Count += 1;});
+                  }
+                  else if (res.value === 'bothintA1') {
+                  if (hint1Count >= 1 && hint2Count >= 1) {
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer1').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                  }
+                  else {
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                  }
                   }
                });
 }
@@ -353,35 +376,61 @@ function hintGroup2() {
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'What is the equation of a line?', value : 'bothint3'},
-                                                       {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint4'}
+                                                       {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint4'},
+                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint3') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){hint3Count += 1;});
                   }
                   else if (res.value === 'bothint4') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint4').html()})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){hint4Count += 1;});
+                  }
+                  else if (res.value === 'bothintA2') {
+                  if (hint3Count >= 1 && hint4Count >= 1) {
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                  }
+                  else {
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                  }
                   }
                });
 }
 function hintGroup3() {
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What if the line doesn\'t go through (0, 0)?', value : 'bothint5'},
-                                                       {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint6'}
+                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'The line doesn\'t go through (0, 0)!', value : 'bothint5'},
+                                                       {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint6'},
+                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
                                                       ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint5') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){hint5Count += 1;});
                   }
                   else if (res.value === 'bothint6') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6').html()})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){hint6Count += 1;});
+                  }
+                  else if (res.value === 'bothintA3') {
+                  if (hint5Count >= 1 && hint6Count >= 1) {
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                  }
+                  else {
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                  }
                   }
                });
 }

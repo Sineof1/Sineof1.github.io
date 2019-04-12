@@ -139,7 +139,7 @@ p {
    border-top-right-radius:5px;
    border-bottom-right-radius:5px;
    box-sizing:border-box;
-   background: rgb(182, 212, 40);
+   background:#cf9893;
 	 border-radius: .4em;
    padding:10px;
    box-shadow:10px 0 5px #000;
@@ -154,7 +154,7 @@ p {
 	width: 0;
 	height: 0;
 	border: 1.094em solid transparent;
-	border-right-color: rgb(182, 212, 40);
+	border-right-color:#cf9893;
 	border-left: 0;
 	margin-top: -1.094em;
 	margin-left: -1.094em;
@@ -165,23 +165,26 @@ p {
    cursor:pointer;
    text-decoration:underline;
 }
-.botBut {
-   background-color:#4528d4;
+.botBut, .ansBut {
+   background-color:#7a5980;
    color:white;
    width:95%;
+}
+.ansBut {
+   background-color:red;
 }
 .botback, .tryBut {
   display:inline-block;
   float:right;
   font-size:15px;
-  color:blue;
+  color:#3b3b58;
   cursor:pointer;
   border:none;
   outline:none;
   border-radius:2px;
 }
 .tryBut {
-  background-color:#4528d4;
+  background-color:#3b3b58;
   color:white;
 }
 .botback {
@@ -194,4 +197,11 @@ p {
    height:45px;
    width:100%;
    background-color:navy;
+}
+.botui {
+   background:linear-gradient(to bottom right, #fafafa, white, #fafafa);
+   border-radius:5px;
+}
+button.botui-actions-buttons-button {
+   line-height:0.9;
 }
