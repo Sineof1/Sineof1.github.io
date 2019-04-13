@@ -7,7 +7,7 @@ $('.panel-left').resizable({
    handleSelector: '.splitter-horizontal',
    resizeWidth: false
  });
-
+var correctResponses = 0;
 var botstart = document.getElementById('botstart');
 botstart.volume = 0.3;
 var botresponse = document.getElementById('botresponse');
@@ -167,6 +167,7 @@ $('#slope1').bind('keyup', function(evt) {
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
+   correctResponses += 1;
    $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
    equation1Ans.focus();
@@ -186,6 +187,7 @@ $('#equation1').bind('keyup', function(evt) {
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
+   correctResponses += 1;
    $('#equation1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    $('#second_text').animate({'opacity' : '+=1'}, 1000);
@@ -229,6 +231,7 @@ $('#equation2').bind('keyup', function(evt) {
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
+   correctResponses += 1;
    $('#equation2').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    equation3Ans.focus();
    curFocus = 'equation3';
@@ -247,8 +250,9 @@ $('#equation3').bind('keyup', function(evt) {
    ding.play();
    equation3Ans.blur();
    $('.jitbox').fadeOut();
+   correctResponses += 1;
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
-   d3.select('.bot').transition().duration(1000).style('opacity', 0);
+   if (correctResponses >= 4) d3.select('.bot').transition().duration(1000).style('opacity', 0);
    }
    else if (answer <= 0) $('#jit4').fadeIn(1000);
 });
