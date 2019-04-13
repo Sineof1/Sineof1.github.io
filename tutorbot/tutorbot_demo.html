@@ -11,7 +11,10 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
 <link rel='stylesheet' href='https://unpkg.com/botui/build/botui.min.css'>
 <link rel='stylesheet' href='https://unpkg.com/botui/build/botui-theme-default.css'>
+<link rel="stylesheet" href="mathquill/mathquill.css"/>
 <link rel='stylesheet' href='tutorbot.css'>
+<script src="mathquill/mathquill.min.js"></script>
+<script>var MQ = MathQuill.getInterface(2);</script>
 <script src='https://cdn.jsdelivr.net/vue/latest/vue.min.js'></script>
 <script src='https://unpkg.com/botui/build/botui.min.js'></script>
 <title>TutorBot Demo</title>
@@ -118,11 +121,11 @@
 <div class='panel-left'>
 <p id='intro_text'>Line g is a straight line that passes through the origin.</p>
 <p id='disclose1' style='color:teal;'>Select any two points on line g to draw a slope triangle.</p>
-<p class='exercise' id='disclose2'>Enter the slope of line g: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;<input type='text' id='slope1' /></p>
-<p class='exercise' id='disclose3'>Complete the equation for line g: &nbsp;&nbsp;&nbsp;<span class='math' id='math1'></span> <input type='text' id='equation1' />&thinsp;<span class='math' id='math2'></span></p>
+<p class='exercise' id='disclose2'>Enter the slope of line g: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;<span class='input' id='slope1'></span></p>
+<p class='exercise' id='disclose3'>Complete the equation for line g: &nbsp;&nbsp;&nbsp;<span class='math' id='math1'></span> <span class='input' id='equation1'></span>&thinsp;<span class='math' id='math2'></span></p>
 <br />
 <p id='second_text' style='opacity:0;'>Line g is translated up <span id='math21'></span> units to create line v.</p>
-<p class='exercise' id='disclose4'>Complete the equation for line v: &nbsp;&nbsp;&nbsp;<span class='math' id='math3'></span> <input type='text' id='equation2' />&thinsp;<span class='math' id='math4'></span> <span style='color:black;'>(</span><input type='text' id='equation3' style='margin-left:0px;' /><span style='color:black;'>)</span></p>
+<p class='exercise' id='disclose4'>Complete the equation for line v: &nbsp;&nbsp;&nbsp;<span class='math' id='math3'></span> <span class='input' id='equation2'></span>&thinsp;<span class='math' id='math4'></span> <span style='color:black;'>(</span><span class='input' id='equation3' style='margin-left:0px;'></span><span style='color:black;'>)</span></p>
 </div>
 <div class='splitter'></div>
 <div class='panel-right'>
@@ -138,7 +141,6 @@
 <audio id='botstart'><source src='botstart.mp3'></audio>
 <audio id='botresponse'><source src='botresponse.mp3'></audio>
 <audio id='ding'><source src='ding.mp3'></audio>
-
 </body>
 
 </html>

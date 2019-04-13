@@ -63,18 +63,24 @@ label {
   border:1px solid blue;
   overflow:hidden;
 }
-input {
+.input {
+   display:inline-flex;
+   align-items:center;
+   justify-content:center;
    margin-left:5px;
+   vertical-align:5px;
    width:75px;
    height:45px;
    border:none;
    border-radius:5px;
-   box-shadow:0 0 3px #ccc;
+   box-shadow:0 0 3px #aaa;
    text-align:center;
    font-size:18px;
    font-family:sans-serif;
    z-index:1000;
    outline:none;
+   box-sizing:border-box;
+   color:black;
 }
 p {
    margin-top:5px;

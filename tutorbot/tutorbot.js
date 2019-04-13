@@ -45,6 +45,14 @@ var clickpnts = [{x : 325, y : 325, id : 0}, {x : 425, y : 250, id : 1}, {x : 52
 var DRAWTRI = false;
 var startID;
 var pointIndex;
+var slope1Input = document.getElementById('slope1');
+var slope1Ans = MQ.MathField(slope1Input);
+var equation1Input = document.getElementById('equation1');
+var equation1Ans = MQ.MathField(equation1Input);
+var equation2Input = document.getElementById('equation2');
+var equation2Ans = MQ.MathField(equation2Input);
+var equation3Input = document.getElementById('equation3');
+var equation3Ans = MQ.MathField(equation3Input);
 
 var curFocus = 'disclose1';
 
@@ -124,6 +132,7 @@ function endTriangle(butID) {
   if (butID !== startID) {
   DRAWTRI = false;
   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
+  slope1Ans.focus();
   curFocus = 'slope1';
   $('.bot').animate({'opacity' : '+=1'}, 1000);
   }
@@ -154,15 +163,13 @@ function drawTriangle() {
 $('#slope1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
-   var norm_response = $(this).val();
-   var response = ($(this).val()).split('/');
-   var answer = Number(response[0]) / Number(response[1]);
-   if (answer === 0.75 || norm_response === '0.75' || norm_response === '.75') {
+   var answer = slope1Ans.latex();
+   if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
    $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
-   $('#equation1').focus();
+   equation1Ans.focus();
    curFocus = 'equation1';
    botUI.message.removeAll();
    if (curFocus === 'slope1') hintGroup1();
@@ -175,16 +182,14 @@ $('#slope1').bind('keyup', function(evt) {
 $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
-   var norm_response = $(this).val();
-   var response = ($(this).val()).split('/');
-   var answer = Number(response[0]) / Number(response[1]);
-   if (answer === 0.75 || norm_response === '0.75' || norm_response === '.75') {
+   var answer = equation1Ans.latex();
+   if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
    $('#equation1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    $('#second_text').animate({'opacity' : '+=1'}, 1000);
-   $('#equation2').focus();
+   equation2Ans.focus();
    curFocus = 'equation2';
    botUI.message.removeAll();
    if (curFocus === 'slope1') hintGroup1();
@@ -219,15 +224,13 @@ $('#equation1').bind('keyup', function(evt) {
 $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
-   $('#equation2, #equation3').css('box-shadow', '0 0 3px #ccc');
-   var norm_response = $(this).val();
-   var response = ($(this).val()).split('/');
-   var answer = Number(response[0]) / Number(response[1]);
-   if (answer === 0.75 || norm_response === '0.75' || norm_response === '.75') {
+   $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
+   var answer = equation2Ans.latex();
+   if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
    $('#equation2').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
-   $('#equation3').focus();
+   equation3Ans.focus();
    curFocus = 'equation3';
    botUI.message.removeAll();
    if (curFocus === 'slope1') hintGroup1();
@@ -239,9 +242,10 @@ $('#equation2').bind('keyup', function(evt) {
 $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
-   var answer = Number($(this).val());
-   if (answer === 4) {
+   var answer = equation3Ans.latex();
+   if (answer === '4' || answer === '4.0') {
    ding.play();
+   equation3Ans.blur();
    $('.jitbox').fadeOut();
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    d3.select('.bot').transition().duration(1000).style('opacity', 0);
@@ -335,8 +339,8 @@ $(document).on('click', '.bot', function(evt) {
      .style('left', '-50px');
    setTimeout(function(){
       $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});
-      $('#equation2, #equation3').css('box-shadow', '0 0 3px #ccc');
-   }, 500);
+      $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
+   }, 100);
    }
    if (curFocus === 'slope1' && botClick % 2 === 0) {
       $('#slope1').css('box-shadow', '0 0 25px #cf9893');
@@ -348,16 +352,16 @@ $(document).on('click', '.bot', function(evt) {
       $('#equation2, #equation3').css('box-shadow', '0 0 25px #cf9893');
    }
    else if (curFocus === 'slope1' && botClick % 2 !== 0) {
-      $('#slope1').css('box-shadow', '0 0 3px #ccc');
+      $('#slope1').css('box-shadow', '0 0 3px #aaa');
    }
    else if (curFocus === 'equation1' && botClick % 2 !== 0) {
-      $('#equation1').css('box-shadow', '0 0 3px #ccc');
+      $('#equation1').css('box-shadow', '0 0 3px #aaa');
    }
    else if (curFocus === 'equation2' && botClick % 2 !== 0) {
-      $('#equation2, #equation3').css('box-shadow', '0 0 3px #ccc');
+      $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }
    else if (curFocus === 'equation3' && botClick % 2 !== 0) {
-      $('#equation2, #equation3').css('box-shadow', '0 0 3px #ccc');
+      $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }
 });
 
@@ -368,7 +372,13 @@ $(document).on('click', '.botback', function(evt) {
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
 });
 
-$(document).on('click', '.tryBut', function(){$('.bot').trigger('click');});
+$(document).on('click', '.tryBut', function(){
+   $('.bot').trigger('click');
+   if (curFocus === 'slope1') slope1Ans.focus();
+   else if (curFocus === 'equation1') equation1Ans.focus();
+   else if (curFocus === 'equation2') equation2Ans.focus();
+   else if (curFocus === 'equation3') equation3Ans.focus();
+});
 var botUI = new BotUI('speech1');
 function hintGroup1() {
   botUI.message.bot({content: 'I can help! Ask me a question.'})
