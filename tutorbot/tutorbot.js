@@ -280,14 +280,11 @@ var hint5Count = 0;
 var hint6Count = 0;
 
 $(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
-
-$(document).ready(function(){
-   $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});
-   $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
-   $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
-   $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
-   $('#jit4').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
-});
+$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});
+$('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
+$('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
+$('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
+$('#jit4').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
 
 $(document).on('click', '.bot', function(evt) {
    botClick += 1;
@@ -336,7 +333,10 @@ $(document).on('click', '.bot', function(evt) {
      .duration(1000)
      .ease(d3.easeBackInOut)
      .style('left', '-50px');
-   setTimeout(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});}, 500);
+   setTimeout(function(){
+      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 65});
+      $('#equation2, #equation3').css('box-shadow', '0 0 3px #ccc');
+   }, 500);
    }
    if (curFocus === 'slope1' && botClick % 2 === 0) {
       $('#slope1').css('box-shadow', '0 0 25px #cf9893');
@@ -469,23 +469,4 @@ function hintGroup3() {
                   }
                });
 }
-
-
-$('#answerButton').bind('click', function() {
-   if (curFocus === 'slope1') {
-      $('.answer').html($('#answer1').html());
-      $('#answerBox').fadeIn(1000);
-      setTimeout(function(){$('#answerBox').fadeOut(1000);}, 2000);
-   }
-   else if (curFocus === 'equation1') {
-      $('.answer').html($('#answer2').html());
-      $('#answerBox').fadeIn(1000);
-      setTimeout(function(){$('#answerBox').fadeOut(1000);}, 2000);
-   }
-   else if (curFocus === 'equation2' || curFocus === 'equation3') {
-      $('.answer').html($('#answer3').html());
-      $('#answerBox').fadeIn(1000);
-      setTimeout(function(){$('#answerBox').fadeOut(1000);}, 2000);
-   }
-});
 });
