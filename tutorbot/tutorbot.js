@@ -7,7 +7,7 @@ $('.panel-left').resizable({
    handleSelector: '.splitter-horizontal',
    resizeWidth: false
  });
-var correctResponses = 0;
+
 var botstart = document.getElementById('botstart');
 botstart.volume = 0.3;
 var botresponse = document.getElementById('botresponse');
@@ -167,7 +167,6 @@ $('#slope1').bind('keyup', function(evt) {
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
-   correctResponses += 1;
    $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
    equation1Ans.focus();
@@ -187,7 +186,6 @@ $('#equation1').bind('keyup', function(evt) {
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
-   correctResponses += 1;
    $('#equation1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    $('#second_text').animate({'opacity' : '+=1'}, 1000);
@@ -231,7 +229,6 @@ $('#equation2').bind('keyup', function(evt) {
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
-   correctResponses += 1;
    $('#equation2').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    equation3Ans.focus();
    curFocus = 'equation3';
@@ -250,9 +247,8 @@ $('#equation3').bind('keyup', function(evt) {
    ding.play();
    equation3Ans.blur();
    $('.jitbox').fadeOut();
-   correctResponses += 1;
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
-   if (correctResponses >= 4) d3.select('.bot').transition().duration(1000).style('opacity', 0);
+   d3.select('.bot').transition().duration(1000).style('opacity', 0);
    }
    else if (answer <= 0) $('#jit4').fadeIn(1000);
 });
@@ -385,10 +381,11 @@ $(document).on('click', '.tryBut', function(){
 });
 var botUI = new BotUI('speech1');
 function hintGroup1() {
-  botUI.message.bot({content: 'I can help! Ask me a question.'})
+  botUI.message.bot({content: 'I can help! Ask me a question. Or watch a video.'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
                                                        {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'},
+                                                       {cssClass : 'botBut', text : 'Let\'s watch a video about slope.', value : 'bothintVid'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
@@ -402,6 +399,12 @@ function hintGroup1() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){hint2Count += 1; botresponse.play();});
+                  }
+                  else if (res.value === 'bothintVid') {
+                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
+                       .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   else if (res.value === 'bothintA1') {
                   if (hint1Count >= 1 && hint2Count >= 1) {
