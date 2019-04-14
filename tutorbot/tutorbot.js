@@ -176,7 +176,7 @@ $('#slope1').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
-   else if ((Number(response[1]) / Number(response[0])) === 0.75) $('#jit1').fadeIn(1000);
+   else if (answer === '\\frac{4}{3}' || answer === '1.33' || answer === '1.3' || answer === '1.333') $('#jit1').fadeIn(1000);
    else if (answer <= 0) $('#jit2').fadeIn(1000);
 });
 $('#equation1').bind('keyup', function(evt) {
@@ -250,7 +250,7 @@ $('#equation3').bind('keyup', function(evt) {
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    d3.select('.bot').transition().duration(1000).style('opacity', 0);
    }
-   else if (answer <= 0) $('#jit4').fadeIn(1000);
+   else if (answer === '-4') $('#jit4').fadeIn(1000);
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
