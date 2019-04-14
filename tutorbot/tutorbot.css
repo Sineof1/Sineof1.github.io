@@ -127,7 +127,7 @@ p {
    color:black;
 }
 .bot {
-   position:fixed;
+   position:absolute;
    bottom:0;
    left:-50px;
    content:url('robot.png');

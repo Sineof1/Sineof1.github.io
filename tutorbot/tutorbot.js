@@ -36,6 +36,7 @@ katex.render('\\mathtt{\\frac{3}{4}}', math18);
 katex.render('\\mathtt{x}', math19);
 katex.render('\\mathtt{4}', math20);
 katex.render('\\mathtt{4}', math21);
+katex.render('\\mathtt{\\frac{4}{3}}', math100);
 
 var fullLines = ['M -75 625 L 725 25'];
 var xandyaxes = [{x : 225, y : 400}];
@@ -381,11 +382,12 @@ $(document).on('click', '.tryBut', function(){
 });
 var botUI = new BotUI('speech1');
 function hintGroup1() {
-  botUI.message.bot({content: 'I can help! Ask me a question. Or watch a video. Or both!'})
+  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
                                                        {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'},
                                                        {cssClass : 'botBut', text : 'Let\'s watch a video about slope.', value : 'bothintVid'},
+                                                       {cssClass : 'botBut', text : 'Show me a slope example.', value : 'bothintExamp'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
@@ -403,6 +405,11 @@ function hintGroup1() {
                   else if (res.value === 'bothintVid') {
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
+                  }
+                  else if (res.value === 'bothintExamp') {
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();});
                   }
