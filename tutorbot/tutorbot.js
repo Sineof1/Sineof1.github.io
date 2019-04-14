@@ -381,7 +381,7 @@ $(document).on('click', '.tryBut', function(){
 });
 var botUI = new BotUI('speech1');
 function hintGroup1() {
-  botUI.message.bot({content: 'I can help! Ask me a question. Or watch a video.'})
+  botUI.message.bot({content: 'I can help! Ask me a question. Or watch a video. Or both!'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
                                                        {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'},
