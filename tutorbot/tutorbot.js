@@ -15,6 +15,9 @@ botresponse.volume = 0.2;
 var ding = document.getElementById('ding');
 ding.volume = 0.2;
 
+//botClick is hint total
+var errTotal = 0;
+
 katex.render('\\mathtt{y=}', math1);
 katex.render('\\mathtt{x}', math2);
 katex.render('\\mathtt{y=}', math3);
@@ -177,8 +180,9 @@ $('#slope1').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
-   else if (answer === '\\frac{4}{3}' || answer === '1.33' || answer === '1.3' || answer === '1.333') $('#jit1').fadeIn(1000);
-   else if (answer <= 0) $('#jit2').fadeIn(1000);
+   else if (answer === '\\frac{4}{3}' || answer === '1.33' || answer === '1.3' || answer === '1.333') {$('#jit1').fadeIn(1000); errTotal += 1; hintRemind();}
+   else if (answer <= 0) {$('#jit2').fadeIn(1000); errTotal += 1; hintRemind();}
+   else {errTotal += 1; hintRemind();}
 });
 $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -221,6 +225,7 @@ $('#equation1').bind('keyup', function(evt) {
      .duration(1000)
      .style('opacity', 1);
    }
+   else {errTotal += 1; hintRemind();}
 });
 $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -238,7 +243,7 @@ $('#equation2').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
-   else $('#jit3').fadeIn(1000);
+   else {$('#jit3').fadeIn(1000); errTotal += 1; hintRemind();}
 });
 $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -251,7 +256,8 @@ $('#equation3').bind('keyup', function(evt) {
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    d3.select('.bot').transition().duration(1000).style('opacity', 0);
    }
-   else if (answer === '-4') $('#jit4').fadeIn(1000);
+   else if (answer === '-4') {$('#jit4').fadeIn(1000); errTotal += 1; hintRemind();}
+   else {errTotal += 1; hintRemind();}
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
@@ -273,6 +279,12 @@ newGraph();
 function clone(selector) {
     var node = d3.select(selector).node();
     return d3.select(node.parentNode.insertBefore(node.cloneNode(true), node.nextSibling));
+}
+function hintRemind() {
+    if (errTotal > botClick) {
+    d3.select('.bot').transition().duration(2000).style('transform', 'rotateZ(15deg)').style('left', '20px');
+    d3.select('.bot').transition().delay(2000).duration(500).ease(d3.easeExpInOut).style('transform', 'rotateZ(0deg)').style('left', '-50px');
+    }
 }
 
 botClick = 1;
