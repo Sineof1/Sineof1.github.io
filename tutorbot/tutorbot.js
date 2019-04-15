@@ -329,6 +329,10 @@ $(document).on('click', '.bot', function(evt) {
      .style('opacity', 1);
    }
    else {
+   if (curFocus === 'slope1') slope1Ans.focus();
+   else if (curFocus === 'equation1') equation1Ans.focus();
+   else if (curFocus === 'equation2') equation2Ans.focus();
+   else if (curFocus === 'equation3') equation3Ans.focus();
    d3.select('.speech_bubble')
      .transition()
      .duration(50)
