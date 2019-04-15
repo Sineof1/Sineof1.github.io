@@ -386,8 +386,8 @@ function hintGroup1() {
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
                                                        {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'},
-                                                       {cssClass : 'botBut', text : 'Let\'s watch a video about slope.', value : 'bothintVid'},
-                                                       {cssClass : 'botBut', text : 'Show me a slope example.', value : 'bothintExamp'},
+                                                       {cssClass : 'exampBut', text : 'Let\'s watch a video about slope.', value : 'bothintVid'},
+                                                       {cssClass : 'exampBut', text : 'Show me a slope example.', value : 'bothintExamp'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
