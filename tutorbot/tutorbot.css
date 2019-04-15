@@ -172,10 +172,13 @@ p {
    cursor:pointer;
    text-decoration:underline;
 }
-.botBut, .ansBut {
+.botBut, .ansBut, .exampBut {
    background-color:#7a5980;
    color:white;
    width:95%;
+}
+.exampBut {
+   background-color:blue;
 }
 .ansBut {
    background-color:red;
