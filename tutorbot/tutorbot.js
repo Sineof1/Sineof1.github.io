@@ -16,7 +16,7 @@ var ding = document.getElementById('ding');
 ding.volume = 0.2;
 
 //botClick is hint total
-var errTotal = 0;
+var errTotal = 1;
 
 katex.render('\\mathtt{y=}', math1);
 katex.render('\\mathtt{x}', math2);
