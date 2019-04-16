@@ -297,7 +297,7 @@ var hint5Count = 0;
 var hint6Count = 0;
 
 $(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
-$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 85});
+$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});
 $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
@@ -355,7 +355,7 @@ $(document).on('click', '.bot', function(evt) {
      .ease(d3.easeBackInOut)
      .style('left', '-50px');
    setTimeout(function(){
-      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 85});
+      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }, 100);
    }
