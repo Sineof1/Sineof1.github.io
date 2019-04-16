@@ -283,7 +283,7 @@ function clone(selector) {
 function hintRemind() {
     if (errTotal > botClick) {
     d3.select('.bot').transition().duration(2000).style('transform', 'rotateZ(15deg)').style('left', '20px');
-    d3.select('.bot').transition().delay(2000).duration(500).ease(d3.easeBackInOut).style('transform', 'rotateZ(0deg)').style('left', '-50px');
+    d3.select('.bot').transition().delay(2000).duration(1500).ease(d3.easeBackInOut).style('transform', 'rotateZ(0deg)').style('left', '-50px');
     }
 }
 
