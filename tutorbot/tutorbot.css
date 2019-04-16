@@ -128,7 +128,7 @@ p {
 }
 .bot {
    position:fixed;
-   bottom:0;
+   bottom:-20px;
    left:-50px;
    cursor:pointer;
    z-index:1;
