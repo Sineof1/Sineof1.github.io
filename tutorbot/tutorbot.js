@@ -419,7 +419,8 @@ function hintGroup1() {
                        .then(function(){hint2Count += 1; botresponse.play();});
                   }
                   else if (res.value === 'bothintVid') {
-                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
+                  botUI.message.bot({content: 'You can change the video to fullscreen if you want.'})
+                        .then(function(){botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();});
