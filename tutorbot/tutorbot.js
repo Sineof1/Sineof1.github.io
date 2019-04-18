@@ -399,13 +399,13 @@ $(document).on('click', '.tryBut', function(){
 var botUI = new BotUI('speech1');
 function hintGroup1() {
   botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
-               .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
-                                                       {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'},
-                                                       {cssClass : 'exampBut', text : 'Let\'s watch a video about slope.', value : 'bothintVid'},
-                                                       {cssClass : 'exampBut', text : 'Show me a slope example.', value : 'bothintExamp'},
-                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
-                                                      ]});
+       .then(function(){
+       return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
+                                            {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'},
+                                            {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
+                                            {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
+                                            {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
+                                           ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint1') {
