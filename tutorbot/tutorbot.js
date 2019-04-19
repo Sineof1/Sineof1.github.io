@@ -40,7 +40,7 @@ katex.render('\\mathtt{x}', math19);
 katex.render('\\mathtt{4}', math20);
 katex.render('\\mathtt{4}', math21);
 katex.render('\\mathtt{\\frac{4}{3}}', math100);
-katex.render('\\mathtt{y=\\frac{1}{2}x}', math101);
+katex.render('\\mathtt{y=\\frac{4}{3}x}', math101);
 
 var fullLines = ['M -75 625 L 725 25'];
 var xandyaxes = [{x : 225, y : 400}];
@@ -472,7 +472,7 @@ function hintGroup2() {
                        .then(function(){botresponse.play();});
                   }
                   else if (res.value === 'bothintExamp') {
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp2').html()})
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();});
                   }
