@@ -446,9 +446,10 @@ function hintGroup1() {
 function hintGroup2() {
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What is the equation of a line?', value : 'bothint3'},
-                                                       {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint4'},
-                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA2'}
+               return botUI.action.button({action: [{cssClass : 'botBut', text : 'What is the equation of a line?', value : 'bothint3'},
+                                                    {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint4'},
+                                                    {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
+                                                    {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
                .then(function(res){
@@ -461,6 +462,12 @@ function hintGroup2() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint4').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){hint4Count += 1; botresponse.play();});
+                  }
+                  else if (res.value === 'bothintVid') {
+                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
+                       .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   else if (res.value === 'bothintA2') {
                   if (hint3Count >= 1 && hint4Count >= 1) {
@@ -479,9 +486,10 @@ function hintGroup2() {
 function hintGroup3() {
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'The line doesn\'t go through (0, 0)!', value : 'bothint5'},
-                                                       {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint6'},
-                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
+          return botUI.action.button({action: [{cssClass : 'botBut', text : 'The line doesn\'t go through (0, 0)!', value : 'bothint5'},
+                                               {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint6'},
+                                               {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
+                                               {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
                                                       ]});
                   })
                .then(function(res){
@@ -494,6 +502,12 @@ function hintGroup3() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){hint6Count += 1; botresponse.play();});
+                  }
+                  else if (res.value === 'bothintVid') {
+                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
+                       .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
                   }
                   else if (res.value === 'bothintA3') {
                   if (hint5Count >= 1 && hint6Count >= 1) {
