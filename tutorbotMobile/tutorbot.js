@@ -58,7 +58,9 @@ var equation2Ans = MQ.MathField(equation2Input);
 var equation3Input = document.getElementById('equation3');
 var equation3Ans = MQ.MathField(equation3Input);
 
-var curFocus = 'disclose1';
+$('.bot').animate({'opacity' : '+=1'}, 1000);
+
+var curFocus = 'equation1';
 
 var svg = d3.select('#demo_grapher')
             .append('svg')
