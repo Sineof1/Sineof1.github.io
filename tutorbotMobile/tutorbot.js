@@ -59,8 +59,8 @@ var equation3Input = document.getElementById('equation3');
 var equation3Ans = MQ.MathField(equation3Input);
 
 $('.bot').animate({'opacity' : '+=1'}, 1000);
-
-var curFocus = 'equation1';
+$('#disclose2').animate({'opacity' : '+=1'}, 1000);
+var curFocus = 'slope1';
 
 var svg = d3.select('#demo_grapher')
             .append('svg')
@@ -284,8 +284,8 @@ function clone(selector) {
 }
 function hintRemind() {
     if (errTotal > botClick) {
-    d3.select('.bot').transition().duration(2000).style('transform', 'rotateZ(15deg)').style('left', '20px');
-    d3.select('.bot').transition().delay(2000).duration(1500).ease(d3.easeBackInOut).style('transform', 'rotateZ(0deg)').style('left', '-50px');
+    d3.select('.bot').transition().duration(2000).style('transform', 'scale(0.58, 0.58) rotateZ(15deg)').style('left', '-20px');
+    d3.select('.bot').transition().delay(2000).duration(1500).ease(d3.easeBackInOut).style('transform', 'scale(0.58, 0.58) rotateZ(0deg)').style('left', '-50px');
     }
 }
 
@@ -299,9 +299,9 @@ var hint5Count = 0;
 var hint6Count = 0;
 
 $(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
-$('.speech_bubble').offset({left : 150, top : $('.bot').offset().top - 22.5});
-var wdth = String((window.innerWidth - 625) / 2) + 'px';
-var hght = String((window.innerHeight - 310) / 2) + 'px';
+$('.speech_bubble').offset({left : 135, top : $('.bot').offset().top - 22.5});
+var wdth = String((window.innerWidth - 725) / 2) + 'px';
+var hght = String((window.innerHeight - 359.6) / 2) + 'px';
 $('.panel-container').css('margin', hght + ' ' + wdth);
 $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
@@ -321,7 +321,7 @@ $(document).on('click', '.bot', function(evt) {
      .transition()
      .duration(1000)
      .ease(d3.easeBackInOut)
-     .style('left', '32.5px');
+     .style('left', '15px');
    d3.select('.speech_bubble')
      .style('visibility', 'visible')
      .transition()
@@ -335,12 +335,12 @@ $(document).on('click', '.bot', function(evt) {
      .transition()
      .duration(1000)
      .ease(d3.easeBackInOut)
-     .style('left', '420px');
+     .style('left', '400px');
    d3.select('.speech_bubble')
      .style('visibility', 'visible')
      .transition()
      .duration(50)
-     .style('left', '450px')
+     .style('left', '440px')
      .transition()
      .delay(800)
      .duration(800)
@@ -361,7 +361,7 @@ $(document).on('click', '.bot', function(evt) {
      .ease(d3.easeBackInOut)
      .style('left', '-50px');
    setTimeout(function(){
-      $('.speech_bubble').offset({left : 150, top : $('.bot').offset().top - 22.5});
+      $('.speech_bubble').offset({left : 135, top : $('.bot').offset().top - 22.5});
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }, 100);
    }

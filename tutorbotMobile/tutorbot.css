@@ -22,7 +22,7 @@ html, body {
   width:1250px;
   height:620px;
   transform-origin:0% 0%;
-  transform:scale(0.5, 0.5);
+  transform:scale(0.58, 0.58);
   margin:20px 43px 0 43px;
 }
 .panel-left {
@@ -135,7 +135,7 @@ p {
    z-index:1;
    transform-origin:50% 90%;
    opacity:0;
-   transform:scale(0.5, 0.5);
+   transform:scale(0.58, 0.58);
    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .speech_bubble {
@@ -154,7 +154,7 @@ p {
    box-shadow:10px 0 5px #000;
    z-index:1;
    opacity:0;
-   transform:scale(0.5, 0.5);
+   transform:scale(0.58, 0.58);
 }
 .speech_bubble:after {
 	content: '';
