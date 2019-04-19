@@ -473,7 +473,7 @@ function hintGroup2() {
                        .then(function(){botresponse.play();});
                   }
                   else if (res.value === 'bothintExamp') {
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp').html()})
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();});
                   }
@@ -496,6 +496,7 @@ function hintGroup3() {
                .then(function(){
           return botUI.action.button({action: [{cssClass : 'botBut', text : 'The line doesn\'t go through (0, 0)!', value : 'bothint5'},
                                                {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint6'},
+                                               {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
                                                       ]});
@@ -514,6 +515,11 @@ function hintGroup3() {
                   else if (res.value === 'bothintVid') {
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play();});
+                  }
+                  else if (res.value === 'bothintExamp') {
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();});
                   }
