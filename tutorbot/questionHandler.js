@@ -9,6 +9,7 @@ $(document).on('keyup', '#myQuestionInput', function(evt) {
    var origInput = $(this).val();
    $(this).css('border', '1px solid white');
    var userInput = (($(this).val()).toLowerCase()).trim();
+   userInput = userInput.replace(/\.\d+/g, '');
    var uInpCaSR = curseAndStop(userInput);
    //console.log(uInpCaSR);
    if (uInpCaSR === 'curseStop') {$(this).css('border', '1px solid red');}
@@ -33,7 +34,7 @@ function intentHandler(arr, origInput) {
    var numberCount = 0;
    var numbers = [];
    for (item in arr) {
-   if (!isNaN(Number(arr[item])) && Number(arr[item]) >= 0) {
+   if (Number.isInteger(Number(arr[item])) && Number(arr[item]) > 0) {
       numberCount += 1;
       numbers.push(Number(arr[item]));
    }}
@@ -78,7 +79,7 @@ function gcfHandler(nums) {
    for (g in nums) stringnums.push(String(nums[g]));
    var origNums = stringnums.join(', ');
    var gcf = nums.reduce(GCF);
-   var response = 'The GCF, or GCD, of those numbers (' + origNums + ') is <span style="font-weight:900;">' + String(gcf) + '</span>.';
+   var response = 'The GCF, or GCD, of these numbers (' + origNums + ') is <span style="font-weight:900;">' + String(gcf) + '</span>.';
    return response;
 }
 function simplifyFracHandler(frac) {
@@ -90,6 +91,6 @@ function simplifyFracHandler(frac) {
    setTimeout(function(){
    katex.render('\\mathtt{\\frac{' + String(parts[0]) + '}{' + String(parts[1]) + '}}', math500);
    katex.render('\\mathtt{\\frac{' + numerator + '}{' + denominator + '}}', math501);
-   }, 2750);
+   }, 2500);
    return response;
 }
