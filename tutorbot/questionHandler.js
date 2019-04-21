@@ -90,6 +90,6 @@ function simplifyFracHandler(frac) {
    setTimeout(function(){
    katex.render('\\mathtt{\\frac{' + String(parts[0]) + '}{' + String(parts[1]) + '}}', math500);
    katex.render('\\mathtt{\\frac{' + numerator + '}{' + denominator + '}}', math501);
-   }, 2500);
+   }, 2750);
    return response;
 }
