@@ -17,6 +17,7 @@
 <script>var MQ = MathQuill.getInterface(2);</script>
 <script src='https://cdn.jsdelivr.net/vue/latest/vue.min.js'></script>
 <script src='https://unpkg.com/botui/build/botui.min.js'></script>
+<script src='natural/natural.js'></script>
 <title>TutorBot Demo</title>
 </head>
 
@@ -99,7 +100,7 @@
 </div>
 </div>
 </div>
-  
+
 <div class='hintbox'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;' id='hintExamp2'>
@@ -109,13 +110,21 @@
 </div>
 </div>
 </div>
-  
+
 <div class='hintbox'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;' id='hintExamp3'>
 <img src='slope_examples.png' style='display:block;margin:0 auto;width:100%;' />
 <p>The equation of this line is <span id='math102'></span>.</p>
 <p><button class='botback'>More</button><button class='tryBut'>Let me try!</button></p>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='myQuestion'>
+<p><input type='text' class='input' id='myQuestionInput' style='width:100%;margin-left:0;height:30px;color:white;border:1px solid white;background-color:#919292;font-family:"Open Sans";font-size:14px;' /></p>
 </div>
 </div>
 </div>
@@ -186,3 +195,5 @@
 </html>
 <script src='resizable.js'></script>
 <script src='tutorbot.js'></script>
+<script src='questionHandler.js'></script>
+<script src='utility.js'></script>
