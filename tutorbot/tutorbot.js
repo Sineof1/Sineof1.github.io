@@ -407,11 +407,11 @@ function hintGroup1() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
-                                                       {cssClass : 'botBut', text : 'How do I figure out the slope?', value : 'bothint2'},
+                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint1'},
+                                                       {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint2'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video about slope.', value : 'bothintVid'},
-                                                       {cssClass : 'exampBut', text : 'Show me a slope example.', value : 'bothintExamp'},
-                                                       {cssClass : 'botBut', text : 'I want to calculate something.', value : 'bothintMyQuestion'},
+                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
+                                                       {cssClass : 'botBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
@@ -467,8 +467,8 @@ function hintGroup2() {
   botInx += 1;
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What is the equation of a line?', value : 'bothint3'},
-                                                       {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint4'},
+                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint3'},
+                                                       {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint4'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA2'}
@@ -518,8 +518,8 @@ function hintGroup3() {
   botInx += 1;
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'The line doesn\'t go through (0, 0)!', value : 'bothint5'},
-                                                       {cssClass : 'botBut', text : 'What do I enter here?', value : 'bothint6'},
+                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint5'},
+                                                       {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint6'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
