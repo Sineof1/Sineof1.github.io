@@ -409,7 +409,7 @@ function hintGroup1() {
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint1'},
                                                        {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint2'},
-                                                       {cssClass : 'exampBut', text : 'Let\'s watch a video about slope.', value : 'bothintVid'},
+                                                       {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'botBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
