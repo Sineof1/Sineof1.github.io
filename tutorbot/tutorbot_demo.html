@@ -8,7 +8,6 @@
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css'>
 <script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
 <link rel='stylesheet' href='https://unpkg.com/botui/build/botui.min.css'>
 <link rel='stylesheet' href='https://unpkg.com/botui/build/botui-theme-default.css'>
@@ -185,7 +184,7 @@
 </div>
 
 <div class='bot'><img id='botImage' src='blinkbot.gif' /></div>
-<div class='speech_bubble ui-resizable' id='speech1'>
+<div class='speech_bubble' id='speech1'>
 <bot-ui></bot-ui>
 </div>
 <audio id='botstart'><source src='botstart.mp3'></audio>
@@ -198,4 +197,3 @@
 <script src='tutorbot.js'></script>
 <script src='questionHandler.js'></script>
 <script src='utility.js'></script>
-<script>$(function(){$(".speech_bubble").resizable();});</script>
