@@ -315,6 +315,8 @@ $(document).on('click', '.bot', function(evt) {
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
+   var d = new Date();
+   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
