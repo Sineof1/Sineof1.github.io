@@ -580,3 +580,13 @@ function hintGroup3() {
                   }
                });
 }
+
+interact('.resize')
+  .resizable({edges: {left: false, right: false, bottom: true, top: true},
+   modifiers: [
+      interact.modifiers.restrictEdges({
+      outer: 'parent',
+      endOnly: true})
+   ],
+   inertia: true
+});
