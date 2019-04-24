@@ -84,7 +84,7 @@ function gcfHandler(nums) {
    return response;
 }
 function simplifyFracHandler(frac) {
-   latexCounter += 1;
+   latexCounter += 2;
    var latexString = '<span id="math' + String(latexCounter) + '"></span> = <span id="math' + String(latexCounter + 1) + '"></span>.';
    var parts = frac.match(/\d+/g);
    var gcf = parts.reduce(GCF);
