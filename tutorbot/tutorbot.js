@@ -582,6 +582,7 @@ function hintGroup3() {
 }
 
 setInterval(function() {
-   d3.select('.bot').transition().duration(1500).ease(d3.easeBackInOut).style('left', '-40px');
-   d3.select('.bot').transition().delay(1500).duration(1500).ease(d3.easeBackInOut).style('left', '-50px');
+   var loc = Number(($('.bot').css('left')).slice(0, -2));
+   d3.select('.bot').transition().duration(1500).ease(d3.easeBackInOut).style('left', String(loc - 10) + 'px');
+   d3.select('.bot').transition().delay(1500).duration(1500).ease(d3.easeBackInOut).style('left', String(loc - 10) + 'px');
 }, 60000);
