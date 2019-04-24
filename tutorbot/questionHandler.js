@@ -92,8 +92,8 @@ function simplifyFracHandler(frac) {
    var denominator = String(parts[1] / gcf);
    var response = 'In lowest terms, ' + latexString;
    setTimeout(function(){
-   katex.render('\\mathtt{\\frac{' + String(parts[0]) + '}{' + String(parts[1]) + '}}', eval('math' + String(latexCounter));
-   katex.render('\\mathtt{\\frac{' + numerator + '}{' + denominator + '}}', eval('math' + String(latexCounter + 1));
+   katex.render('\\mathtt{\\frac{' + String(parts[0]) + '}{' + String(parts[1]) + '}}', eval('math' + String(latexCounter)));
+   katex.render('\\mathtt{\\frac{' + numerator + '}{' + denominator + '}}', eval('math' + String(latexCounter + 1)));
    }, 2500);
    return response;
 }
