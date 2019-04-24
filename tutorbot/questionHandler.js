@@ -92,5 +92,9 @@ function simplifyFracHandler(frac) {
    katex.render('\\mathtt{\\frac{' + String(parts[0]) + '}{' + String(parts[1]) + '}}', math500);
    katex.render('\\mathtt{\\frac{' + numerator + '}{' + denominator + '}}', math501);
    }, 2500);
+   setTimeout(function(){
+   katex.render('\\mathtt{\\frac{' + String(parts[0]) + '}{' + String(parts[1]) + '}}', math500);
+   katex.render('\\mathtt{\\frac{' + numerator + '}{' + denominator + '}}', math501);
+   }, 3000);
    return response;
 }
