@@ -393,12 +393,19 @@ $(document).on('click', '.bot', function(evt) {
    }
 });
 
+$(document).on('click', '.botBut', function(evt) {
+   var d = new Date();
+   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+});
+
 $(document).on('click', '.botback', function(evt) {
    botInx += 1;
    $(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
+   var d = new Date();
+   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
 });
 
 $(document).on('click', '.tryBut', function(){
@@ -407,6 +414,8 @@ $(document).on('click', '.tryBut', function(){
    else if (curFocus === 'equation1') equation1Ans.focus();
    else if (curFocus === 'equation2') equation2Ans.focus();
    else if (curFocus === 'equation3') equation3Ans.focus();
+   var d = new Date();
+   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
 });
 var botUI = new BotUI('speech1');
 function hintGroup1() {
