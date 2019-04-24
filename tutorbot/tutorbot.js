@@ -580,29 +580,3 @@ function hintGroup3() {
                   }
                });
 }
-
-interact('.resize-drag')
-  .resizable({
-    // resize from all edges and corners
-    edges: { left: false, right: false, bottom: true, top: true },
-
-    modifiers: [
-      // keep the edges inside the parent
-      interact.modifiers.restrictEdges({
-        outer: 'parent',
-        endOnly: true,
-      }),
-
-      // minimum size
-      interact.modifiers.restrictSize({
-        min: { width: 350, height: 250 },
-      }),
-    ],
-
-    inertia: true
-  })
-  .on('resizemove', function (event) {
-    var target = event.target,
-        x = (parseFloat(target.getAttribute('data-x')) || 0),
-        y = (parseFloat(target.getAttribute('data-y')) || 0);
-  });
