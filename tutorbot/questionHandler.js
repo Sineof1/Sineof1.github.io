@@ -82,17 +82,12 @@ function gcfHandler(nums) {
    var response = 'The GCF, or GCD, of these numbers (' + origNums + ') is <span style="font-weight:900;">' + String(gcf) + '</span>.';
    return response;
 }
-var parts;
 function simplifyFracHandler(frac) {
-   parts = frac.match(/\d+/g);
+   var parts = frac.match(/\d+/g);
    var gcf = parts.reduce(GCF);
    var numerator = String(parts[0] / gcf);
    var denominator = String(parts[1] / gcf);
    var response = 'In lowest terms, <span id="math500"></span> = <span id="math501"></span>.';
-   setTimeout(function(){
-   katex.render('\\mathtt{\\frac{' + String(parts[0]) + '}{' + String(parts[1]) + '}}', math500);
-   katex.render('\\mathtt{\\frac{' + numerator + '}{' + denominator + '}}', math501);
-   }, 2500);
    setTimeout(function(){
    katex.render('\\mathtt{\\frac{' + String(parts[0]) + '}{' + String(parts[1]) + '}}', math500);
    katex.render('\\mathtt{\\frac{' + numerator + '}{' + denominator + '}}', math501);
