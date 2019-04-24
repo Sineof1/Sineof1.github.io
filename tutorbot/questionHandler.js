@@ -82,8 +82,9 @@ function gcfHandler(nums) {
    var response = 'The GCF, or GCD, of these numbers (' + origNums + ') is <span style="font-weight:900;">' + String(gcf) + '</span>.';
    return response;
 }
+var parts;
 function simplifyFracHandler(frac) {
-   var parts = frac.match(/\d+/g);
+   parts = frac.match(/\d+/g);
    var gcf = parts.reduce(GCF);
    var numerator = String(parts[0] / gcf);
    var denominator = String(parts[1] / gcf);
