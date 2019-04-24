@@ -177,6 +177,8 @@ $('#slope1').bind('keyup', function(evt) {
    ding.play();
    $('.jitbox').fadeOut();
    $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
+   var d = new Date();
+   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
    equation1Ans.focus();
    curFocus = 'equation1';
@@ -198,6 +200,8 @@ $('#equation1').bind('keyup', function(evt) {
    ding.play();
    $('.jitbox').fadeOut();
    $('#equation1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
+   var d = new Date();
+   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    $('#second_text').animate({'opacity' : '+=1'}, 1000);
    equation2Ans.focus();
@@ -243,6 +247,8 @@ $('#equation2').bind('keyup', function(evt) {
    ding.play();
    $('.jitbox').fadeOut();
    $('#equation2').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
+   var d = new Date();
+   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
    equation3Ans.focus();
    curFocus = 'equation3';
    botUI.message.removeAll();
@@ -435,26 +441,30 @@ function hintGroup1() {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint1Count += 1; botresponse.play();});
+                       .then(function(){hint1Count += 1; botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint2') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint2Count += 1; botresponse.play();});
+                       .then(function(){hint2Count += 1; botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
                   botInx += 1;
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
                        .then(function(){botInx += 1; botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintExamp') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintMyQuestion') {
                   botInx += 1;
@@ -467,13 +477,15 @@ function hintGroup1() {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer1').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   }
                });
@@ -494,37 +506,43 @@ function hintGroup2() {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint3Count += 1; botresponse.play();});
+                       .then(function(){hint3Count += 1; botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint4') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint4').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint4Count += 1; botresponse.play();});
+                       .then(function(){hint4Count += 1; botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintExamp') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintA2') {
                   botInx += 1;
                   if (hint3Count >= 1 && hint4Count >= 1) {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   }
                });
@@ -545,37 +563,43 @@ function hintGroup3() {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint5Count += 1; botresponse.play();});
+                       .then(function(){hint5Count += 1; botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint6') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint6Count += 1; botresponse.play();});
+                       .then(function(){hint6Count += 1; botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintExamp') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintA3') {
                   botInx += 1;
                   if (hint5Count >= 1 && hint6Count >= 1) {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();});
+                       .then(function(){botresponse.play();})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   }
                });
