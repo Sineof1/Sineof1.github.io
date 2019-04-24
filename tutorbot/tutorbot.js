@@ -172,6 +172,7 @@ $('#slope1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
    var answer = slope1Ans.latex();
+   $(this).css('border', 'none');
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
@@ -184,14 +185,15 @@ $('#slope1').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
-   else if (answer === '\\frac{4}{3}' || answer === '1.33' || answer === '1.3' || answer === '1.333') {$('#jit1').fadeIn(1000); errTotal += 1; hintRemind();}
-   else if (answer <= 0) {$('#jit2').fadeIn(1000); errTotal += 1; hintRemind();}
-   else {errTotal += 1; hintRemind();}
+   else if (answer === '\\frac{4}{3}' || answer === '1.33' || answer === '1.3' || answer === '1.333') {$('#jit1').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else if (answer <= 0) {$('#jit2').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
 });
 $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
    var answer = equation1Ans.latex();
+   $(this).css('border', 'none');
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
@@ -229,13 +231,14 @@ $('#equation1').bind('keyup', function(evt) {
      .duration(1000)
      .style('opacity', 1);
    }
-   else {errTotal += 1; hintRemind();}
+   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
 });
 $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
    $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    var answer = equation2Ans.latex();
+   $(this).css('border', 'none');
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
    ding.play();
    $('.jitbox').fadeOut();
@@ -247,12 +250,13 @@ $('#equation2').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
-   else {$('#jit3').fadeIn(1000); errTotal += 1; hintRemind();}
+   else {$('#jit3').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
 });
 $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) $('.bot').trigger('click');
    var answer = equation3Ans.latex();
+   $(this).css('border', 'none');
    if (answer === '4' || answer === '4.0') {
    ding.play();
    equation3Ans.blur();
@@ -260,8 +264,8 @@ $('#equation3').bind('keyup', function(evt) {
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    d3.select('.bot').transition().duration(1000).style('opacity', 0);
    }
-   else if (answer === '-4') {$('#jit4').fadeIn(1000); errTotal += 1; hintRemind();}
-   else {errTotal += 1; hintRemind();}
+   else if (answer === '-4') {$('#jit4').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
