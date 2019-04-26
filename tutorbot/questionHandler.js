@@ -72,7 +72,8 @@ function botRespond(response, orig) {
    botUI.message.human({type : 'html', content: orig});
    botUI.message.bot({type : 'html', delay: 2000, loading: true, content: response})
                 .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                .then(function(){botresponse.play();});
+                .then(function(){botresponse.play();})
+                .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
    botInx += 2;
 }
 function gcfHandler(nums) {
