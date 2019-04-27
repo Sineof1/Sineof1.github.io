@@ -492,7 +492,7 @@ function hintGroup1() {
 }
 function hintGroup2() {
   botInx += 1;
-  botUI.message.bot({content: 'I can help! Ask me a question.'})
+  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint3'},
                                                        {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint4'},
@@ -549,7 +549,7 @@ function hintGroup2() {
 }
 function hintGroup3() {
   botInx += 1;
-  botUI.message.bot({content: 'I can help! Ask me a question.'})
+  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint5'},
                                                        {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint6'},
