@@ -500,7 +500,7 @@ function hintGroup1() {
 }
 function hintGroup2() {
   botInx += 1;
-  botUI.message.bot({content: 'I can help! Ask me a question.'})
+  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'What\'s the equation for a line?', value : 'bothint3'},
                                                        {cssClass : 'botBut', text : 'How do I complete the equation?', value : 'bothint4'},
@@ -557,7 +557,7 @@ function hintGroup2() {
 }
 function hintGroup3() {
   botInx += 1;
-  botUI.message.bot({content: 'I can help! Ask me a question.'})
+  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
                   return botUI.action.button({action: [{cssClass : 'botBut', text : 'This line doesn\'t go through (0, 0)!', value : 'bothint5'},
                                                        {cssClass : 'botBut', text : 'How do I complete the equation?', value : 'bothint6'},
