@@ -170,7 +170,12 @@ function drawTriangle() {
 }
 $('#slope1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
-   if (botClick % 2 === 0) $('.bot').trigger('click');
+   if (botClick % 2 === 0) {
+     $('.bot').trigger('click');
+     $('.speech_bubble').css({'height' : '250px'});
+     var styleElem = document.head.appendChild(document.createElement("style"));
+     styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+   }
    var answer = slope1Ans.latex();
    $(this).css('border', 'none');
    if (answer === '-3' || answer === '-\\frac{3}{1}' || answer === '\\frac{-3}{1}' || answer === '\\frac{3}{-1}' ||
@@ -196,7 +201,12 @@ $('#slope1').bind('keyup', function(evt) {
 });
 $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
-   if (botClick % 2 === 0) $('.bot').trigger('click');
+   if (botClick % 2 === 0) {
+     $('.bot').trigger('click');
+     $('.speech_bubble').css({'height' : '250px'});
+     var styleElem = document.head.appendChild(document.createElement("style"));
+     styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+   }
    var answer = equation1Ans.latex();
    $(this).css('border', 'none');
    if (answer === '-3' || answer === '-\\frac{3}{1}' || answer === '\\frac{-3}{1}' || answer === '\\frac{3}{-1}' ||
@@ -247,7 +257,12 @@ $('#equation1').bind('keyup', function(evt) {
 });
 $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
-   if (botClick % 2 === 0) $('.bot').trigger('click');
+   if (botClick % 2 === 0) {
+     $('.bot').trigger('click');
+     $('.speech_bubble').css({'height' : '250px'});
+     var styleElem = document.head.appendChild(document.createElement("style"));
+     styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+   }
    $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    var answer = equation2Ans.latex();
    $(this).css('border', 'none');
@@ -273,7 +288,12 @@ $('#equation2').bind('keyup', function(evt) {
 });
 $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
-   if (botClick % 2 === 0) $('.bot').trigger('click');
+   if (botClick % 2 === 0) {
+     $('.bot').trigger('click');
+     $('.speech_bubble').css({'height' : '250px'});
+     var styleElem = document.head.appendChild(document.createElement("style"));
+     styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+   }
    var answer = equation3Ans.latex();
    $(this).css('border', 'none');
    if (answer === '-5' || answer === '-5.0') {
@@ -329,6 +349,9 @@ $(document).on('click', '.bot', function(evt) {
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
+   $('.speech_bubble').css({'height' : '250px'});
+   var styleElem = document.head.appendChild(document.createElement("style"));
+   styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
    if (curFocus === 'slope1') hintGroup1();
@@ -436,8 +459,8 @@ function hintGroup1() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What does slope mean?', value : 'bothint1'},
-                                                       {cssClass : 'botBut', text : 'How do I calculate slope?', value : 'bothint2'},
+                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint1'},
+                                                       {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint2'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'botBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
@@ -500,10 +523,10 @@ function hintGroup1() {
 }
 function hintGroup2() {
   botInx += 1;
-  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
+  botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'What\'s the equation for a line?', value : 'bothint3'},
-                                                       {cssClass : 'botBut', text : 'How do I complete the equation?', value : 'bothint4'},
+                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint3'},
+                                                       {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint4'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA2'}
@@ -557,10 +580,10 @@ function hintGroup2() {
 }
 function hintGroup3() {
   botInx += 1;
-  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
+  botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'This line doesn\'t go through (0, 0)!', value : 'bothint5'},
-                                                       {cssClass : 'botBut', text : 'How do I complete the equation?', value : 'bothint6'},
+                  return botUI.action.button({action: [{cssClass : 'botBut', text : 'Can you teach me about this?', value : 'bothint5'},
+                                                       {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint6'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
@@ -612,3 +635,40 @@ function hintGroup3() {
                   }
                });
 }
+
+interact('.resize-drag')
+  .resizable({
+    // resize from all edges and corners
+    edges: { left: false, right: false, bottom: true, top: true },
+    modifiers: [
+      // minimum size
+      interact.modifiers.restrictSize({
+        min: { width: 350, height: 175 },
+      }),
+    ],
+    inertia: true
+  })
+  .on('resizemove', function (event) {
+    var target = event.target,
+        x = (parseFloat(target.getAttribute('data-x')) || 0),
+        y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+    // update the element's style
+    target.style.width  = event.rect.width + 'px';
+    target.style.height = event.rect.height + 'px';
+    var styleElem = document.head.appendChild(document.createElement("style"));
+    var hght = Number(target.style.height.slice(0, -2));
+    var perc = String(100 - (125 / hght * 100)) + '%';
+    styleElem.innerHTML = ".speech_bubble:after {top:" + perc + ";}";
+
+    // translate when resizing from top or left edges
+    x += event.deltaRect.left;
+    y += event.deltaRect.top;
+
+    target.style.webkitTransform = target.style.transform =
+        'translate(' + x + 'px,' + y + 'px)';
+
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+    //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
+  });
