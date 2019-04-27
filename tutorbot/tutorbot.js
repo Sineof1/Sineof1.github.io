@@ -432,7 +432,7 @@ function hintGroup1() {
                                                        {cssClass : 'botBut', text : 'What do I do here?', value : 'bothint2'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                       {cssClass : 'botBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
+                                                       {cssClass : 'botBut', text : 'Can you calculate something for me?', value : 'bothintMyQuestion'},
                                                        {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
