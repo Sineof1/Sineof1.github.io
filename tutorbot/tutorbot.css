@@ -171,7 +171,7 @@ p {
    cursor:pointer;
    text-decoration:underline;
 }
-.botBut, .ansBut, .exampBut {
+.botBut, .ansBut, .ansButReady, .exampBut, .botButVisited {
    background-color:#7a5980;
    color:white;
    width:95%;
@@ -179,8 +179,14 @@ p {
 .exampBut {
    background-color:blue;
 }
-.ansBut {
+.ansBut, .ansButReady {
    background-color:red;
+   opacity:0.4;
+   pointer-events:none;
+}
+.ansButReady {
+   opacity:1;
+   pointer-events:all;
 }
 .botback, .tryBut, .closeJit {
   display:inline-block;
@@ -230,4 +236,7 @@ button.botui-actions-buttons-button {
     border-top: 1px solid #000;
     display: block;
     padding:0 5px;
+}
+.botButVisited {
+    background-color:green;
 }
