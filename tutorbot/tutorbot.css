@@ -149,7 +149,7 @@ p {
 	 border-radius: .4em;
    padding:10px;
    box-shadow:10px 0 5px #000;
-   z-index:1;
+   z-index:9999;
    opacity:0;
 }
 .speech_bubble:after {
@@ -222,20 +222,6 @@ button.botui-actions-buttons-button {
 }
 .botui-message-content {
    color:black;
-}
-.fraction, .top, .bottom {
-    padding: 0 4px;
-    font-size:18px;
-}
-.fraction {
-    display: inline-block;
-    text-align: center;
-    vertical-align:-12px;
-}
-.bottom{
-    border-top: 1px solid #000;
-    display: block;
-    padding:0 5px;
 }
 .botButVisited {
     background-color:green;

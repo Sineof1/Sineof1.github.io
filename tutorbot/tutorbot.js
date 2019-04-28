@@ -530,11 +530,12 @@ function hintGroup2() {
                   else var hint3Class = 'botBut';
                   if (hint4Count >= 1) var hint4Class = 'botButVisited';
                   else var hint4Class = 'botBut';
-                  return botUI.action.button({action: [{cssClass : hint3Class, text : 'Can you teach me about this?', value : 'bothint3'},
-                                                       {cssClass : hint4Class, text : 'What do I do here?', value : 'bothint4'},
-                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                       {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
+                  return botUI.action.button({action: [
+                                               {cssClass : hint3Class, text : 'Can you teach me about this?', value : 'bothint3'},
+                                               {cssClass : hint4Class, text : 'What do I do here?', value : 'bothint4'},
+                                               {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
+                                               {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid', icon : 'play-circle'},
+                                               {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
                .then(function(res){
@@ -683,3 +684,34 @@ interact('.resize-drag')
     target.setAttribute('data-y', y);
     //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
   });
+
+interact('.draggable')
+  .draggable({
+    // enable inertial throwing
+    inertia: true,
+    // enable autoScroll
+    autoScroll: true,
+
+    // call this function on every dragmove event
+    onmove: dragMoveListener,
+    // call this function on every dragend event
+  });
+
+  function dragMoveListener (event) {
+    var target = event.target,
+        // keep the dragged position in the data-x/data-y attributes
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)';
+
+    // update the posiion attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+
+  // this is used later in the resizing and gesture demos
+  window.dragMoveListener = dragMoveListener;
