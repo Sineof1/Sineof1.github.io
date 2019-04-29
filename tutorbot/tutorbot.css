@@ -151,6 +151,7 @@ p {
    box-shadow:10px 0 5px #000;
    z-index:9999;
    opacity:0;
+   touch-action:none;
 }
 .speech_bubble:after {
    content: '';
