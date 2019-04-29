@@ -31,7 +31,7 @@ function curseAndStop(userInput) {
 function intentHandler(arr, origInput) {
    var response = '';
    var tryAndMore = "<p><button class='botback'>More</button><button class='tryBut'>Let me try!</button></p>";
-   //GCFIntentBegin
+   //GCFandLCMIntentBegin
    var numberCount = 0;
    var numbers = [];
    for (item in arr) {
@@ -40,7 +40,8 @@ function intentHandler(arr, origInput) {
       numbers.push(Number(arr[item]));
    }}
    var gcfTest = arr.indexOf('greatest') !== -1 && arr.indexOf('common') !== -1 && (arr.indexOf('factor') !== -1 || arr.indexOf('divisor') !== -1);
-   //GCFIntentBegin
+   var lcmTest = arr.indexOf('least') !== -1 && arr.indexOf('common') !== -1 && (arr.indexOf('multiple') !== -1 || arr.indexOf('divisor') !== -1);
+   //GCFandLCMIntentBegin
 
    //SimplifyIntentBegin
    var fracList = origInput.match(/\d+[\/\\]\d+/g);
@@ -48,12 +49,16 @@ function intentHandler(arr, origInput) {
                       arr.join(' ').indexOf('simplest term') !== -1 || arr.join(' ').indexOf('lowest term') !== -1 || arr.indexOf('reduce') !== -1;
    //SimplifyIntentBegin
 
-   //GCFIntent
+   //GCFandLCMIntent
    if (numberCount >= 2 && (arr.indexOf('gcf') !== -1 || arr.indexOf('gcd') !== -1 || gcfTest)) {
    response = gcfHandler(numbers) + tryAndMore;
    botRespond(response, origInput);
    }
-   //GCFIntent
+   else if (numberCount >= 2 && (arr.indexOf('lcm') !== -1 || arr.indexOf('lcd') !== -1 || lcmTest)) {
+   response = lcmHandler(numbers) + tryAndMore;
+   botRespond(response, origInput);
+   }
+   //GCFandLCMIntent
 
    //SimplifyIntent
    else if (fracList && fracList.length === 1 && simplifyTest) {
@@ -82,6 +87,15 @@ function gcfHandler(nums) {
    var origNums = stringnums.join(', ');
    var gcf = nums.reduce(GCF);
    var response = 'The GCF, or GCD, of these numbers (' + origNums + ') is <span style="font-weight:900;">' + String(gcf) + '</span>.';
+   return response;
+}
+function lcmHandler(nums) {
+   var stringnums = [];
+   for (g in nums) stringnums.push(String(nums[g]));
+   var origNums = stringnums.join(', ');
+   var gcf = nums.reduce(GCF);
+   var lcm = nums.reduce((a, b) => a * b) / gcf;
+   var response = 'The LCM, or LCD, of these numbers (' + origNums + ') is <span style="font-weight:900;">' + String(lcm) + '</span>.';
    return response;
 }
 function simplifyFracHandler(frac) {
