@@ -686,8 +686,8 @@ interact('.resize-drag')
   });
 
 var ININPUT = false;
-$('#myQuestionInput').bind('mouseenter', function(){console.log('entered'); ININPUT = true;});
-$('#myQuestionInput').bind('mouseleave', function(){ININPUT = false;});
+$(document).on('mouseenter', '#myQuestionInput', function(){ININPUT = true;});
+$(document).on('mouseleave', '#myQuestionInput', function(){ININPUT = false;});
 
 interact('.draggable')
   .draggable({
