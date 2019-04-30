@@ -230,4 +230,5 @@ button.botui-actions-buttons-button {
 #myQuestionInput {
    user-drag:none; 
    -webkit-user-drag:none;
+   z-index:99999;
 }
