@@ -691,6 +691,10 @@ interact('.resize-drag')
     //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
   });
 
+var ININPUT = false;
+$(document).on('mouseenter', '#myQuestionInput', function(){ININPUT = true;});
+$(document).on('mouseleave', '#myQuestionInput', function(){ININPUT = false;});
+
 interact('.draggable')
   .draggable({
     // enable inertial throwing
@@ -704,11 +708,12 @@ interact('.draggable')
   });
 
   function dragMoveListener (event) {
+    if (ININPUT) return;
     var target = event.target,
         // keep the dragged position in the data-x/data-y attributes
         x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
+    console.log(target);
     // translate the element
     target.style.webkitTransform =
     target.style.transform =
