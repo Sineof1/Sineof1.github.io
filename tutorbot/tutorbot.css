@@ -227,3 +227,7 @@ button.botui-actions-buttons-button {
 .botButVisited {
     background-color:green;
 }
+#myQuestionInput {
+   user-drag:none; 
+   -webkit-user-drag:none;
+}
