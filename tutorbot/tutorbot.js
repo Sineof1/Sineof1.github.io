@@ -15,7 +15,6 @@ botresponse.volume = 0.2;
 var ding = document.getElementById('ding');
 ding.volume = 0.2;
 
-//botClick is hint total
 var errTotal = 1;
 var botInx = -1;
 var lastInpInx;
@@ -460,6 +459,7 @@ function hintGroup1() {
                   else var hint2Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint1Class, text : 'Can you teach me about this?', value : 'bothint1'},
                                                        {cssClass : hint2Class, text : 'What do I do here?', value : 'bothint2'},
+                                                       //{cssClass : 'stpBkBut', text : 'Can you break this down?', value : 'stpBkHint'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
@@ -468,17 +468,23 @@ function hintGroup1() {
                   })
                .then(function(res){
                   if (res.value === 'bothint1') {
-                  botInx += 1;
+                  botInx += 2;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1a').html()});})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint1Count += 1; botresponse.play();})
+                       .then(function(){hint1Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint2') {
-                  botInx += 1;
+                  botInx += 3;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2b').html()});})
+                       .then(function(){hint2Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint2Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
@@ -502,6 +508,7 @@ function hintGroup1() {
                   botUI.message.human({type : 'html', delay: 1000, content: $('#myQuestion').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
                   }
+                  //else if (res.value === 'stpBkHint') {convo1_1();}
                   else if (res.value === 'bothintA1') {
                   if (hint1Count >= 1 && hint2Count >= 1) {
                   botInx += 1;
@@ -534,16 +541,20 @@ function hintGroup2() {
                                                {cssClass : hint3Class, text : 'Can you teach me about this?', value : 'bothint3'},
                                                {cssClass : hint4Class, text : 'What do I do here?', value : 'bothint4'},
                                                {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                               {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid', icon : 'play-circle'},
+                                               {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint3') {
-                  botInx += 1;
+                  botInx += 3;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3b').html()});})
+                       .then(function(){hint3Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint3Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint4') {
@@ -605,15 +616,23 @@ function hintGroup3() {
                   if (res.value === 'bothint5') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5b').html()});})
+                       .then(function(){hint5Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint5Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint6') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6b').html()});})
+                       .then(function(){hint6Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint6Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
@@ -647,25 +666,45 @@ function hintGroup3() {
                   }
                });
 }
+/*
+var convo1Count = 0;
+function convo1_1() {
+   botInx += 1;
+   lastInpInx = botInx;
+   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Open').html()})
+        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+        .then(function(){botresponse.play();})
+        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());})
+        .then(function(){botUI.message.human({type : 'html', delay: 1000, content: $('#convoMoves').html()})})
+        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
 
+   $(document).on('keyup', '#convoMovesInput', function(evt) {
+   if (evt.keyCode !== 13) return;
+   var origInput = $(this).val();
+   botUI.message.remove(botInx + 1);
+   botInx -= 1;
+   botUI.message.human({type : 'html', content: orig});
+   if (origInput === '3' || origInput === 'three') {
+   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Correct1').html()})
+                .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                .then(function(){botresponse.play();})
+                .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());})
+                .then(function(){botUI.message.human({type : 'html', delay: 1000, content: $('#convoMoves').html()})})
+   }
+   botInx += 2;
+   });
+}*/
 interact('.resize-drag')
   .resizable({
-    // resize from all edges and corners
-    edges: { left: false, right: false, bottom: true, top: true },
-    modifiers: [
-      // minimum size
-      interact.modifiers.restrictSize({
-        min: { width: 350, height: 175 },
-      }),
-    ],
+    edges: {left: false, right: false, bottom: true, top: true},
+    modifiers: [interact.modifiers.restrictSize({min: {width: 350, height: 175}})],
     inertia: true
   })
   .on('resizemove', function (event) {
     var target = event.target,
-        x = (parseFloat(target.getAttribute('data-x')) || 0),
-        y = (parseFloat(target.getAttribute('data-y')) || 0);
+    x = (parseFloat(target.getAttribute('data-x')) || 0),
+    y = (parseFloat(target.getAttribute('data-y')) || 0);
 
-    // update the element's style
     target.style.width  = event.rect.width + 'px';
     target.style.height = event.rect.height + 'px';
     var styleElem = document.head.appendChild(document.createElement("style"));
@@ -673,50 +712,30 @@ interact('.resize-drag')
     var perc = String(100 - (125 / hght * 100)) + '%';
     styleElem.innerHTML = ".speech_bubble:after {top:" + perc + ";}";
 
-    // translate when resizing from top or left edges
     x += event.deltaRect.left;
     y += event.deltaRect.top;
 
-    target.style.webkitTransform = target.style.transform =
-        'translate(' + x + 'px,' + y + 'px)';
+    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px,' + y + 'px)';
 
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
-    //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
   });
 
 var ININPUT = false;
 $(document).on('mouseenter', '#myQuestionInput', function(){ININPUT = true;});
 $(document).on('mouseleave', '#myQuestionInput', function(){ININPUT = false;});
+$(document).on('mouseenter', '.botui-actions-text-input', function(){ININPUT = true;});
+$(document).on('mouseleave', '.botui-actions-text-input', function(){ININPUT = false;});
 
-interact('.draggable')
-  .draggable({
-    // enable inertial throwing
-    inertia: true,
-    // enable autoScroll
-    autoScroll: true,
-
-    // call this function on every dragmove event
-    onmove: dragMoveListener,
-    // call this function on every dragend event
-  });
+interact('.draggable').draggable({inertia: true, autoScroll: true, onmove: dragMoveListener});
 
   function dragMoveListener (event) {
     if (ININPUT) return;
     var target = event.target,
-        // keep the dragged position in the data-x/data-y attributes
-        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-    console.log(target);
-    // translate the element
-    target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)';
-
-    // update the posiion attributes
+    x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+    y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
   }
-
-  // this is used later in the resizing and gesture demos
-  window.dragMoveListener = dragMoveListener;
+window.dragMoveListener = dragMoveListener;
