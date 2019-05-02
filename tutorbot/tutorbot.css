@@ -185,7 +185,14 @@ p {
    background-color:blue;
 }
 .ansBut {
+   background-color:lightgray;
+   pointer-events:none;
+   opacity:0.75;
+}
+.ansbutReady {
    background-color:red;
+   pointer-events:all;
+   opacity:1;
 }
 .botback, .tryBut, .closeJit {
   display:inline-block;
