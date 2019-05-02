@@ -189,7 +189,7 @@ p {
    pointer-events:none;
    opacity:0.75;
 }
-.ansbutReady {
+.ansButReady {
    background-color:red;
    pointer-events:all;
    opacity:1;
