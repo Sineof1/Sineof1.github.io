@@ -172,10 +172,14 @@ p {
    cursor:pointer;
    text-decoration:underline;
 }
-.botBut, .ansBut, .ansButReady, .exampBut, .botButVisited {
+.botBut, .ansBut, .ansButReady, .exampBut, .botButVisited, .stpBkBut {
    background-color:#7a5980;
    color:white;
    width:95%;
+}
+.stpBkBut {
+   background-color:chocolate;
+   color:white;
 }
 .exampBut {
    background-color:blue;
@@ -226,4 +230,9 @@ button.botui-actions-buttons-button {
 }
 .botButVisited {
     background-color:green;
+}
+.human.botui-message-content.html {
+    background-color:white;
+    color:gray;
+    box-shadow:0 0 2px #ccc;
 }
