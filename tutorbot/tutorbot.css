@@ -184,14 +184,8 @@ p {
 .exampBut {
    background-color:blue;
 }
-.ansBut, .ansButReady {
+.ansBut {
    background-color:red;
-   opacity:0.4;
-   pointer-events:none;
-}
-.ansButReady {
-   opacity:1;
-   pointer-events:all;
 }
 .botback, .tryBut, .closeJit {
   display:inline-block;
