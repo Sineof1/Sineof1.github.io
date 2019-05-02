@@ -459,7 +459,7 @@ function hintGroup1() {
                   else var hint2Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint1Class, text : 'Can you teach me about this?', value : 'bothint1'},
                                                        {cssClass : hint2Class, text : 'What do I do here?', value : 'bothint2'},
-                                                       {cssClass : 'stpBkBut', text : 'I don\'t get it.', value : 'stpBkHint'},
+                                                       //{cssClass : 'stpBkBut', text : 'I don\'t get it.', value : 'stpBkHint'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
@@ -508,7 +508,7 @@ function hintGroup1() {
                   botUI.message.human({type : 'html', delay: 1000, content: $('#myQuestion').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
                   }
-                  else if (res.value === 'stpBkHint') {setTimeout(function(){convo1_1();}, 1000);}
+                  //else if (res.value === 'stpBkHint') {setTimeout(function(){convo1_1();}, 1000);}
                   else if (res.value === 'bothintA1') {
                   if (hint1Count >= 1 && hint2Count >= 1) {
                   botInx += 1;
@@ -667,7 +667,7 @@ function hintGroup3() {
                });
 }
 
-var convo1Count = 0;
+/*var convo1Count = 0;
 var convo2Count = 0;
 function convo1_1() {
    botInx += 1;
@@ -746,7 +746,7 @@ function convo1_2() {
    $(document).off('keyup', '#convoMovesInput');
    }
    });
-}
+}*/
 interact('.resize-drag')
   .resizable({
     edges: {left: false, right: false, bottom: true, top: true},
