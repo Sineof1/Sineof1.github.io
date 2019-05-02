@@ -453,8 +453,7 @@ function hintGroup1() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
-                  if (hint1Count >= 1 && hint2Count >= 1) $('.ansBut').attr('disabled', false);
-                  else $('.ansBut').attr('disabled', true);
+                  if (hint1Count >= 1 && hint2Count >= 1) $('.ansBut').css({'background-color' : 'red', 'pointer-events' : 'all', 'opacity' : 1});
                   if (hint1Count >= 1) var hint1Class = 'botButVisited';
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
@@ -533,8 +532,7 @@ function hintGroup2() {
   botInx += 1;
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  if (hint3Count >= 1 && hint4Count >= 1) $('.ansBut').attr('disabled', false);
-                  else $('.ansBut').attr('disabled', true);
+                  if (hint3Count >= 1 && hint4Count >= 1) $('.ansBut').css({'background-color' : 'red', 'pointer-events' : 'all', 'opacity' : 1});
                   if (hint3Count >= 1) var hint3Class = 'botButVisited';
                   else var hint3Class = 'botBut';
                   if (hint4Count >= 1) var hint4Class = 'botButVisited';
@@ -601,8 +599,7 @@ function hintGroup3() {
   botInx += 1;
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  if (hint5Count >= 1 && hint6Count >= 1) $('.ansBut').attr('disabled', false);
-                  else $('.ansBut').attr('disabled', true);
+                  if (hint5Count >= 1 && hint6Count >= 1) $('.ansBut').css({'background-color' : 'red', 'pointer-events' : 'all', 'opacity' : 1});
                   if (hint5Count >= 1) var hint5Class = 'botButVisited';
                   else var hint5Class = 'botBut';
                   if (hint6Count >= 1) var hint6Class = 'botButVisited';
