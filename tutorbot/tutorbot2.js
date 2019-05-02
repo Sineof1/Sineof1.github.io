@@ -459,8 +459,8 @@ function hintGroup1() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
-                  if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
-                  else var ansButReady = 'ansBut';
+                  if (hint1Count >= 1 && hint2Count >= 1) $('.ansBut').attr('disabled', false);
+                  else $('.ansBut').attr('disabled', true);
                   if (hint1Count >= 1) var hint1Class = 'botButVisited';
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
@@ -470,7 +470,7 @@ function hintGroup1() {
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
+                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
                .then(function(res){
@@ -531,8 +531,8 @@ function hintGroup2() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
-                  if (hint3Count >= 1 && hint4Count >= 1) var ansButReady = 'ansButReady';
-                  else var ansButReady = 'ansBut';
+                  if (hint3Count >= 1 && hint4Count >= 1) $('.ansBut').attr('disabled', false);
+                  else $('.ansBut').attr('disabled', true);
                   if (hint3Count >= 1) var hint3Class = 'botButVisited';
                   else var hint3Class = 'botBut';
                   if (hint4Count >= 1) var hint4Class = 'botButVisited';
@@ -541,7 +541,7 @@ function hintGroup2() {
                                                        {cssClass : hint4Class, text : 'How do I complete this equation?', value : 'bothint4'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
+                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
                .then(function(res){
@@ -594,8 +594,8 @@ function hintGroup3() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
-                  if (hint5Count >= 1 && hint6Count >= 1) var ansButReady = 'ansButReady';
-                  else var ansButReady = 'ansBut';
+                  if (hint5Count >= 1 && hint6Count >= 1) $('.ansBut').attr('disabled', false);
+                  else $('.ansBut').attr('disabled', true);
                   if (hint5Count >= 1) var hint5Class = 'botButVisited';
                   else var hint5Class = 'botBut';
                   if (hint6Count >= 1) var hint6Class = 'botButVisited';
@@ -604,7 +604,7 @@ function hintGroup3() {
                                                        {cssClass : hint6Count, text : 'What numbers go here?', value : 'bothint6'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
+                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
                                                       ]});
                   })
                .then(function(res){
