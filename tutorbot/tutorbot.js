@@ -15,7 +15,7 @@ botresponse.volume = 0.2;
 var ding = document.getElementById('ding');
 ding.volume = 0.2;
 
-$('.ansBut').attr('disabled', true);
+$('.ansBut').css({'background-color' : 'lightgray', 'pointer-events' : 'none', 'opacity' : 0.75});
 
 var errTotal = 1;
 var botInx = -1;
