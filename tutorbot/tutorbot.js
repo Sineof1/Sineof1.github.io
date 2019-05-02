@@ -15,8 +15,6 @@ botresponse.volume = 0.2;
 var ding = document.getElementById('ding');
 ding.volume = 0.2;
 
-$('.ansBut').css({'background-color' : 'lightgray', 'pointer-events' : 'none', 'opacity' : 0.75});
-
 var errTotal = 1;
 var botInx = -1;
 var lastInpInx;
@@ -453,7 +451,8 @@ function hintGroup1() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
                .then(function(){
-                  if (hint1Count >= 1 && hint2Count >= 1) $('.ansBut').css({'background-color' : 'red', 'pointer-events' : 'all', 'opacity' : 1});
+                  if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
+                  else var ansButReady = 'ansBut';
                   if (hint1Count >= 1) var hint1Class = 'botButVisited';
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
@@ -464,7 +463,7 @@ function hintGroup1() {
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
-                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
+                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
                .then(function(res){
@@ -532,7 +531,8 @@ function hintGroup2() {
   botInx += 1;
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  if (hint3Count >= 1 && hint4Count >= 1) $('.ansBut').css({'background-color' : 'red', 'pointer-events' : 'all', 'opacity' : 1});
+                  if (hint3Count >= 1 && hint4Count >= 1) var ansButReady = 'ansButReady';
+                  else var ansButReady = 'ansBut';
                   if (hint3Count >= 1) var hint3Class = 'botButVisited';
                   else var hint3Class = 'botBut';
                   if (hint4Count >= 1) var hint4Class = 'botButVisited';
@@ -542,7 +542,7 @@ function hintGroup2() {
                                                {cssClass : hint4Class, text : 'What do I do here?', value : 'bothint4'},
                                                {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
-                                               {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA2'}
+                                               {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
                .then(function(res){
@@ -599,7 +599,8 @@ function hintGroup3() {
   botInx += 1;
   botUI.message.bot({content: 'I can help! Ask me a question.'})
                .then(function(){
-                  if (hint5Count >= 1 && hint6Count >= 1) $('.ansBut').css({'background-color' : 'red', 'pointer-events' : 'all', 'opacity' : 1});
+                  if (hint5Count >= 1 && hint6Count >= 1) var ansButReady = 'ansButReady';
+                  else var ansButReady = 'ansBut';
                   if (hint5Count >= 1) var hint5Class = 'botButVisited';
                   else var hint5Class = 'botBut';
                   if (hint6Count >= 1) var hint6Class = 'botButVisited';
@@ -608,7 +609,7 @@ function hintGroup3() {
                                                        {cssClass : hint6Class, text : 'What do I do here?', value : 'bothint6'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
-                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
+                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
                                                       ]});
                   })
                .then(function(res){
@@ -666,7 +667,7 @@ function hintGroup3() {
                });
 }
 
-/*var convo1Count = 0;
+var convo1Count = 0;
 var convo2Count = 0;
 function convo1_1() {
    botInx += 1;
@@ -745,7 +746,7 @@ function convo1_2() {
    $(document).off('keyup', '#convoMovesInput');
    }
    });
-}*/
+}
 interact('.resize-drag')
   .resizable({
     edges: {left: false, right: false, bottom: true, top: true},
