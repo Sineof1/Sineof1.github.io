@@ -368,7 +368,7 @@ $(document).on('click', '.bot', function(evt) {
    }
    else if (botClick % 2 === 0 && (curFocus === 'equation2' || curFocus === 'equation3')) {
    botstart.play();
-   $('.speech_bubble').offset({'left' : '975px'});
+   $('.speech_bubble').offset({'left' : '975'});
    d3.select('.bot')
      .transition()
      .duration(1000)
