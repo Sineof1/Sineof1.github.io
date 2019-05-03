@@ -349,6 +349,7 @@ $(document).on('click', '.bot', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    if (botClick % 2 === 0 && curFocus !== 'equation2' && curFocus !== 'equation3') {
+   botstart.src = 'botstart.mp3';
    botstart.play();
    d3.select('.bot')
      .transition()
@@ -363,6 +364,7 @@ $(document).on('click', '.bot', function(evt) {
      .style('opacity', 1);
    }
    else if (botClick % 2 === 0 && (curFocus === 'equation2' || curFocus === 'equation3')) {
+   botstart.src = 'botstart.mp3';
    botstart.play();
    d3.select('.bot')
      .transition()
