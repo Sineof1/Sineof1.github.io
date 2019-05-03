@@ -300,6 +300,8 @@ $('input').bind('keyup', function(evt) {
    if (elem === 'slope1') $('#hint1').fadeIn(1000);
    else if (elem === 'equation1') $('#hint2').fadeIn(1000);
    else if (elem === 'equation2' || elem === 'equation3') $('#hint3').fadeIn(1000);
+   botstart.pause();
+   botstart.currentTime = 0;
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
