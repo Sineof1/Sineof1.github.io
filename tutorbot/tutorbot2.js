@@ -377,6 +377,7 @@ $(document).on('click', '.bot', function(evt) {
    }
    else if (botClick % 2 === 0 && (curFocus === 'equation2' || curFocus === 'equation3')) {
    botstart.play();
+   $('.speech_bubble').offset({'left' : '990'});
    d3.select('.bot')
      .transition()
      .duration(1000)
@@ -384,9 +385,6 @@ $(document).on('click', '.bot', function(evt) {
      .style('left', '855px');
    d3.select('.speech_bubble')
      .style('visibility', 'visible')
-     .transition()
-     .duration(50)
-     .style('left', '990px')
      .transition()
      .delay(800)
      .duration(800)
