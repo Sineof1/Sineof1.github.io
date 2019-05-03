@@ -399,6 +399,8 @@ $(document).on('click', '.bot', function(evt) {
       $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }, 100);
+   botstart.pause();
+   botstart.currentTime = 0;
    }
    if (curFocus === 'slope1' && botClick % 2 === 0) {
       $('#slope1').css('box-shadow', '0 0 25px #cf9893');
