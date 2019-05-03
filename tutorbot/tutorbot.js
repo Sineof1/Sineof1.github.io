@@ -376,9 +376,9 @@ $(document).on('click', '.bot', function(evt) {
      .style('left', '840px');
    d3.select('.speech_bubble')
      .style('visibility', 'visible')
-     .transition()
-     .duration(50)
-     .style('left', '975px')
+     //.transition()
+     //.duration(50)
+     //.style('left', '975')
      .transition()
      .delay(800)
      .duration(800)
