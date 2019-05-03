@@ -457,7 +457,7 @@ $(document).on('click', '.tryBut', function(){
 var botUI = new BotUI('speech1');
 function hintGroup1() {
   botInx += 1;
-  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
+  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
                   if (hint1Count >= 1 && hint2Count >= 1) $('.ansBut').attr('disabled', false);
                   else $('.ansBut').attr('disabled', true);
@@ -529,7 +529,7 @@ function hintGroup1() {
 }
 function hintGroup2() {
   botInx += 1;
-  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
+  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
                   if (hint3Count >= 1 && hint4Count >= 1) $('.ansBut').attr('disabled', false);
                   else $('.ansBut').attr('disabled', true);
@@ -592,7 +592,7 @@ function hintGroup2() {
 }
 function hintGroup3() {
   botInx += 1;
-  botUI.message.bot({content: 'I\'m here! Ask a question, watch a video, or see an example.'})
+  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
                   if (hint5Count >= 1 && hint6Count >= 1) $('.ansBut').attr('disabled', false);
                   else $('.ansBut').attr('disabled', true);
