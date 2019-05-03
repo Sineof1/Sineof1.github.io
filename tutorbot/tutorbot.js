@@ -398,7 +398,10 @@ $(document).on('click', '.bot', function(evt) {
      .ease(d3.easeBackInOut)
      .style('left', '-50px');
    setTimeout(function(){
-      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});
+      if (curFocus === 'equation2' || curFocus === 'equation3') {
+      $('.speech_bubble').offset({left : 975, top : $('.bot').offset().top - 45});
+      }
+      else $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }, 100);
    botstart.pause();
