@@ -8,6 +8,8 @@ $('.panel-left').resizable({
    resizeWidth: false
  });
 
+$(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});});
+
 var botstart = document.getElementById('botstart');
 botstart.volume = 0.3;
 var botresponse = document.getElementById('botresponse');
