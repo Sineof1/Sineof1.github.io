@@ -313,6 +313,8 @@ $('input').bind('keyup', function(evt) {
    if (elem === 'slope1') $('#hint1').fadeIn(1000);
    else if (elem === 'equation1') $('#hint2').fadeIn(1000);
    else if (elem === 'equation2' || elem === 'equation3') $('#hint3').fadeIn(1000);
+   botstart.pause();
+   botstart.currentTime = 0;
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 37) return;
@@ -408,6 +410,8 @@ $(document).on('click', '.bot', function(evt) {
       $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }, 100);
+   botstart.pause();
+   botstart.currentTime = 0;
    }
    if (curFocus === 'slope1' && botClick % 2 === 0) {
       $('#slope1').css('box-shadow', '0 0 25px #cf9893');
