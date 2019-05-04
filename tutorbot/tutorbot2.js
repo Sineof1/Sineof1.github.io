@@ -463,8 +463,8 @@ function hintGroup1() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
-                  if (hint1Count >= 1 && hint2Count >= 1) $('.ansBut').attr('disabled', false);
-                  else $('.ansBut').attr('disabled', true);
+                  if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
+                  else var ansButReady = 'ansBut';
                   if (hint1Count >= 1) var hint1Class = 'botButVisited';
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
@@ -474,22 +474,28 @@ function hintGroup1() {
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
-                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA1'}
+                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint1') {
-                  botInx += 1;
+                  botInx += 2;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1a').html()});})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint1Count += 1; botresponse.play();})
+                       .then(function(){hint1Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint2') {
-                  botInx += 1;
+                  botInx += 3;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2b').html()});})
+                       .then(function(){hint2Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint2Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
@@ -535,8 +541,8 @@ function hintGroup2() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
-                  if (hint3Count >= 1 && hint4Count >= 1) $('.ansBut').attr('disabled', false);
-                  else $('.ansBut').attr('disabled', true);
+                  if (hint3Count >= 1 && hint4Count >= 1) var ansButReady = 'ansButReady';
+                  else var ansButReady = 'ansBut';
                   if (hint3Count >= 1) var hint3Class = 'botButVisited';
                   else var hint3Class = 'botBut';
                   if (hint4Count >= 1) var hint4Class = 'botButVisited';
@@ -545,15 +551,19 @@ function hintGroup2() {
                                                        {cssClass : hint4Class, text : 'How do I complete this equation?', value : 'bothint4'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
-                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA2'}
+                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint3') {
-                  botInx += 1;
+                  botInx += 3;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3b').html()});})
+                       .then(function(){hint3Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint3Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint4') {
@@ -598,32 +608,40 @@ function hintGroup3() {
   botInx += 1;
   botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
-                  if (hint5Count >= 1 && hint6Count >= 1) $('.ansBut').attr('disabled', false);
-                  else $('.ansBut').attr('disabled', true);
+                  if (hint5Count >= 1 && hint6Count >= 1) var ansButReady = 'ansButReady';
+                  else var ansButReady = 'ansBut';
                   if (hint5Count >= 1) var hint5Class = 'botButVisited';
                   else var hint5Class = 'botBut';
                   if (hint6Count >= 1) var hint6Class = 'botButVisited';
                   else var hint6Class = 'botBut';
-                  return botUI.action.button({action: [{cssClass : hint5Count, text : 'This line doesn\'t go through (0, 0)?', value : 'bothint5'},
-                                                       {cssClass : hint6Count, text : 'What numbers go here?', value : 'bothint6'},
+                  return botUI.action.button({action: [{cssClass : hint5Class, text : 'This line doesn\'t go through (0, 0)?', value : 'bothint5'},
+                                                       {cssClass : hint6Class, text : 'What numbers go here?', value : 'bothint6'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
-                                                       {cssClass : 'ansBut', text : 'Just give me the answer.', value : 'bothintA3'}
+                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
                                                       ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint5') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5b').html()});})
+                       .then(function(){hint5Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint5Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint6') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6b').html()});})
+                       .then(function(){hint6Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint6Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
