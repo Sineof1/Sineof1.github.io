@@ -673,7 +673,7 @@ function hintGroup3() {
                   }
                });
 }
-
+/*
 var convo1Count = 0;
 var convo2Count = 0;
 function convo1_1() {
@@ -753,7 +753,7 @@ function convo1_2() {
    $(document).off('keyup', '#convoMovesInput');
    }
    });
-}
+}*/
 interact('.resize-drag')
   .resizable({
     edges: {left: false, right: false, bottom: true, top: true},
