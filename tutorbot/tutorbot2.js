@@ -11,7 +11,7 @@ $('.panel-left').resizable({
 $(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});});
 
 var botstart = document.getElementById('botstart');
-botstart.volume = 0.3;
+botstart.volume = 0.2;
 var botresponse = document.getElementById('botresponse');
 botresponse.volume = 0.2;
 var ding = document.getElementById('ding');
