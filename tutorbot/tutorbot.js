@@ -45,6 +45,9 @@ katex.render('\\mathtt{4}', math21);
 katex.render('\\mathtt{\\frac{4}{3}}', math100);
 katex.render('\\mathtt{y=\\frac{4}{3}x}', math101);
 katex.render('\\mathtt{y=\\frac{4}{3}x+0}', math102);
+katex.render('\\mathtt{-\\frac{4}{3}}', math103);
+katex.render('\\mathtt{\\frac{3}{4}}', math104);
+katex.render('\\mathtt{\\frac{4}{3}}', math105);
 
 var fullLines = ['M -75 625 L 725 25'];
 var xandyaxes = [{x : 225, y : 400}];
@@ -466,7 +469,7 @@ function hintGroup1() {
                   else var hint2Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint1Class, text : 'Can you teach me about this?', value : 'bothint1'},
                                                        {cssClass : hint2Class, text : 'What do I do here?', value : 'bothint2'},
-                                                       //{cssClass : 'stpBkBut', text : 'I don\'t get it.', value : 'stpBkHint'},
+                                                       {cssClass : 'botBut', text : 'Can I get multiple choice?', value : 'mltChHint'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
@@ -494,6 +497,19 @@ function hintGroup1() {
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
+                  else if (res.value === 'mltChHint') {
+                  botInx += 4;
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7b').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7c').html()});})
+                       .then(function(){setTimeout(function(){botresponse.play();}, 2000);})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
                   else if (res.value === 'bothintVid') {
                   botInx += 1;
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
@@ -515,7 +531,6 @@ function hintGroup1() {
                   botUI.message.human({type : 'html', delay: 1000, content: $('#myQuestion').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
                   }
-                  //else if (res.value === 'stpBkHint') {setTimeout(function(){convo1_1();}, 1000);}
                   else if (res.value === 'bothintA1') {
                   if (hint1Count >= 1 && hint2Count >= 1) {
                   botInx += 1;
