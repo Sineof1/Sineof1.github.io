@@ -237,3 +237,6 @@ button.botui-actions-buttons-button {
     color:gray;
     box-shadow:0 0 2px #ccc;
 }
+.botui-container {
+    font-size:15px;
+}
