@@ -142,6 +142,7 @@ function startTriangle() {
 }
 function endTriangle(butID) {
   if (butID !== startID) {
+  console.log(startID, butID);
   DRAWTRI = false;
   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
   slope1Ans.focus();
