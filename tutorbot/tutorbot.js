@@ -20,6 +20,7 @@ ding.volume = 0.2;
 var errTotal = 1;
 var botInx = -1;
 var lastInpInx;
+var distTemp, numTemp, denomTemp;
 
 katex.render('\\mathtt{y=}', math1);
 katex.render('\\mathtt{x}', math2);
@@ -142,7 +143,13 @@ function startTriangle() {
 }
 function endTriangle(butID) {
   if (butID !== startID) {
-  console.log(startID, butID);
+  var butTemp = false;
+  if (butID === 3 || startID === 3) butTemp = -1;
+  if (butTemp) distTemp = Math.abs(butTemp - startID);
+  else distTemp = Math.abs(butID - startID);
+  numTemp = distTemp * 3;
+  denomTemp = distTemp * 4;
+  console.log(numTemp, denomTemp);
   DRAWTRI = false;
   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
   slope1Ans.focus();
