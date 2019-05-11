@@ -149,6 +149,7 @@ function endTriangle(butID) {
   else if (startID === 3) {startTemp = -2; distTemp = Math.abs(startTemp - butID);}
   numTemp = distTemp * 3;
   denomTemp = distTemp * 4;
+  console.log(numTemp, denomTemp);
   DRAWTRI = false;
   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
   slope1Ans.focus();
