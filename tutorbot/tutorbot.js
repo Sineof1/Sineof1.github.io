@@ -145,8 +145,8 @@ function endTriangle(butID) {
   if (butID !== startID) {
   var butTemp = false;
   var startTemp = false;
-  if (butID === 3) butTemp = -1;
-  else if (startID === 3) startTemp = -1;
+  if (butID === 3) butTemp = -2;
+  else if (startID === 3) startTemp = -2;
   if (butTemp || startTemp) distTemp = Math.abs(butTemp - startID);
   else distTemp = Math.abs(butID - startID);
   numTemp = distTemp * 3;
