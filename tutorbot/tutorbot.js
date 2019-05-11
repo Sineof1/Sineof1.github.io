@@ -46,9 +46,6 @@ katex.render('\\mathtt{4}', math21);
 katex.render('\\mathtt{\\frac{4}{3}}', math100);
 katex.render('\\mathtt{y=\\frac{4}{3}x}', math101);
 katex.render('\\mathtt{y=\\frac{4}{3}x+0}', math102);
-katex.render('\\mathtt{-\\frac{4}{3}}', math103);
-katex.render('\\mathtt{\\frac{3}{4}}', math104);
-katex.render('\\mathtt{\\frac{4}{3}}', math105);
 
 var fullLines = ['M -75 625 L 725 25'];
 var xandyaxes = [{x : 225, y : 400}];
@@ -150,7 +147,9 @@ function endTriangle(butID) {
   else distTemp = Math.abs(Number(startID) - butID);
   numTemp = distTemp * 3;
   denomTemp = distTemp * 4;
-  console.log(numTemp, denomTemp);
+  katex.render('\\mathtt{-\\frac{' + String(denomTemp) + '}{' + String(numTemp) + '}}', math103);
+  katex.render('\\mathtt{\\frac{' + String(numTemp) + '}{' + String(denomTemp) + '}}', math104);
+  katex.render('\\mathtt{\\frac{' + String(denomTemp) + '}{' + String(numTemp) + '}}', math105);
   DRAWTRI = false;
   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
   slope1Ans.focus();
