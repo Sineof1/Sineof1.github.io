@@ -520,7 +520,7 @@ function hintGroup1() {
                   }
                   else if (res.value === 'bothintVid') {
                   botInx += 1;
-                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
+                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'tutorbot-vid1.mp4'})
                        .then(function(){botInx += 1; botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
@@ -595,7 +595,7 @@ function hintGroup2() {
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
-                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
+                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'tutorbot-vid2.mp4'})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
@@ -666,7 +666,7 @@ function hintGroup3() {
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
-                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'slopes_of_lines.mp4'})
+                  botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'tutorbot-vid2.mp4'})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
@@ -696,87 +696,7 @@ function hintGroup3() {
                   }
                });
 }
-/*
-var convo1Count = 0;
-var convo2Count = 0;
-function convo1_1() {
-   botInx += 1;
-   lastInpInx = botInx;
-   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Open').html()})
-        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-        .then(function(){botresponse.play();})
-        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());})
-        .then(function(){botUI.message.human({type : 'html', delay: 1000, content: $('#convoMoves').html()})})
-        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
 
-   $(document).on('keyup', '#convoMovesInput', function(evt) {
-   if (evt.keyCode !== 13 || $(this).val() === '') return;
-   var origInput = $(this).val();
-   botUI.message.remove(botInx + 2);
-   botInx -= 1;
-   botUI.message.human({type : 'html', content: origInput});
-   botInx += 2;
-   if (origInput === '3' || origInput === 'three') {
-   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Correct1').html()})
-                .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                .then(function(){botresponse.play();})
-                .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());})
-                .then(function(){botUI.message.human({type : 'html', delay: 1000, content: $('#convoMoves').html()})});
-   convo1_2();
-   }
-   else if (convo1Count < 1) {
-   convo1Count += 1;
-   botInx += 1;
-   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Wrong1').html()})
-                .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                .then(function(){botresponse.play();})
-                .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());})
-                .then(function(){botUI.message.human({type : 'html', delay: 1000, content: $('#convoMoves').html()})});
-   }
-   else {
-   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Give1').html()})
-                .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                .then(function(){botresponse.play();})
-                .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());})
-                .then(function(){botUI.message.human({type : 'html', delay: 1000, content: $('#convoMoves').html()})});
-   convo1_2();
-   }
-   });
-}
-function convo1_2() {
-   $(document).off('keyup', '#convoMovesInput');
-   $(document).on('keyup', '#convoMovesInput', function(evt) {
-   if (evt.keyCode !== 13 || $(this).val() === '') return;
-   var origInput = $(this).val();
-   botUI.message.remove(botInx + 3);
-   botInx -= 1;
-   botUI.message.human({type : 'html', content: origInput});
-   botInx += 2;
-   if (origInput === '4' || origInput === 'four') {
-   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Correct2').html()})
-                .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                .then(function(){botresponse.play();})
-                .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-   $(document).off('keyup', '#convoMovesInput');
-   }
-   else if (convo2Count < 1) {
-   convo2Count += 1;
-   botInx += 1;
-   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Wrong2').html()})
-                .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                .then(function(){botresponse.play();})
-                .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());})
-                .then(function(){botUI.message.human({type : 'html', delay: 1000, content: $('#convoMoves').html()})});
-   }
-   else {
-   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#dialogMove1_Give2').html()})
-                .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                .then(function(){botresponse.play();})
-                .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-   $(document).off('keyup', '#convoMovesInput');
-   }
-   });
-}*/
 interact('.resize-drag')
   .resizable({
     edges: {left: false, right: false, bottom: true, top: true},
