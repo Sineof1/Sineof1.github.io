@@ -21,9 +21,16 @@
 <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 <title>TutorBot Demo</title>
 </head>
-
+<div id='lowerlights' style='position:fixed;top:0;left:0;width:100%;height:100vh;background-color:rgb(0, 0, 0, 0.5);display:none;z-index:888888;'></div>
 <body>
-
+<div class='vid-container draggable' id='vid-container1'>
+<video src='tutorbot-vid1.mp4' id='tbvid1' style='width:640px;height:360px;position:absolute;' controls></video>
+<div id='closevid1' style='position:absolute;top:5px;right:5px;z-index:99999999999;cursor:pointer;'>❌</div>
+</div>
+<div class='vid-container draggable' id='vid-container2'>
+<video src='tutorbot-vid2.mp4' id='tbvid2' style='width:640px;height:360px;position:absolute;' controls></video>
+<div id='closevid2' style='position:absolute;top:5px;right:5px;z-index:99999999999;cursor:pointer;'>❌</div>
+</div>
 <div class='hintbox'>
 <div class='hintwrapper'>
 <div class='hint' style='background-color:white;' id='hint1'>

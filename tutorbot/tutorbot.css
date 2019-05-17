@@ -240,3 +240,14 @@ button.botui-actions-buttons-button {
 .botui-container {
     font-size:15px;
 }
+.vid-container {
+   display:none;
+   width:640px;
+   height:360px;
+   position:fixed;
+   top:calc(50% - 180px);
+   left:calc(50% - 320px);
+   z-index:999999;
+   border:10px solid #5c3a58;
+   border-radius:5px;
+}
