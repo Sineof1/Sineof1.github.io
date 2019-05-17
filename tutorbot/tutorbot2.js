@@ -548,7 +548,7 @@ function hintGroup2() {
                   if (hint4Count >= 1) var hint4Class = 'botButVisited';
                   else var hint4Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint3Class, text : 'What is the equation of a line?', value : 'bothint3'},
-                                                       {cssClass : hint4Class, text : 'How do I complete this equation?', value : 'bothint4'},
+                                                       {cssClass : hint4Class, text : 'How do I complete this?', value : 'bothint4'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
@@ -614,7 +614,7 @@ function hintGroup3() {
                   else var hint5Class = 'botBut';
                   if (hint6Count >= 1) var hint6Class = 'botButVisited';
                   else var hint6Class = 'botBut';
-                  return botUI.action.button({action: [{cssClass : hint5Class, text : 'This line doesn\'t go through (0, 0)?', value : 'bothint5'},
+                  return botUI.action.button({action: [{cssClass : hint5Class, text : 'It doesn\'t go through (0, 0)?', value : 'bothint5'},
                                                        {cssClass : hint6Class, text : 'What numbers go here?', value : 'bothint6'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
