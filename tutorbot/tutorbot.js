@@ -382,7 +382,6 @@ $(document).on('click', '.bot', function(evt) {
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
-   $('.botui').prop('scrollTop', 0);
    if (botClick % 2 === 0 && curFocus !== 'equation2' && curFocus !== 'equation3') {
    botstart.play();
    d3.select('.bot')
