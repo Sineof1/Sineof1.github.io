@@ -527,7 +527,7 @@ function hintGroup1() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1').html()})
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1a').html()});})
-                       .then(function(){setTimeout(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);}, 2000)})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){hint1Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
@@ -539,7 +539,7 @@ function hintGroup1() {
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2b').html()});})
                        .then(function(){hint2Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
-                       .then(function(){setTimeout(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);}, 2000)})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'mltChHint') {
@@ -552,7 +552,7 @@ function hintGroup1() {
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7c').html()});})
                        .then(function(){setTimeout(function(){botresponse.play();}, 2000);})
-                       .then(function(){setTimeout(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);}, 2000)})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
@@ -623,7 +623,7 @@ function hintGroup2() {
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3b').html()});})
                        .then(function(){hint3Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
-                       .then(function(){setTimeout(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);}, 2000)})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint4') {
@@ -704,7 +704,7 @@ function hintGroup3() {
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6b').html()});})
                        .then(function(){hint6Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
-                       .then(function(){setTimeout(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);}, 2000)})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
