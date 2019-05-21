@@ -190,7 +190,7 @@ $('#slope1').bind('keyup', function(evt) {
    }
    var answer = slope1Ans.latex();
    $(this).css('border', 'none');
-   if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
+   if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}' || answer === '.75') {
    ding.play();
    $('.jitbox').fadeOut();
    $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
@@ -218,7 +218,7 @@ $('#equation1').bind('keyup', function(evt) {
    }
    var answer = equation1Ans.latex();
    $(this).css('border', 'none');
-   if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}') {
+   if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}' || answer === '.75') {
    ding.play();
    $('.jitbox').fadeOut();
    $('#equation1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
