@@ -374,6 +374,7 @@ $(document).on('click', '.bot', function(evt) {
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
+   $('.botui').prop('scrollTop', 0);
    $('.speech_bubble').css({'height' : '250px'});
    var styleElem = document.head.appendChild(document.createElement("style"));
    styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
@@ -525,7 +526,7 @@ function hintGroup1() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1').html()})
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1a').html()});})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")},2000);})
+                       .then(function(){setTimeout(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")},2000);}, 1000);})
                        .then(function(){hint1Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
@@ -537,7 +538,7 @@ function hintGroup1() {
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2b').html()});})
                        .then(function(){hint2Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")},2000);})
+                       .then(function(){setTimeout(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")},2000);}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'mltChHint') {
@@ -550,7 +551,7 @@ function hintGroup1() {
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7c').html()});})
                        .then(function(){setTimeout(function(){botresponse.play();}, 2000);})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")},2000);})
+                       .then(function(){setTimeout(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")},2000);}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
