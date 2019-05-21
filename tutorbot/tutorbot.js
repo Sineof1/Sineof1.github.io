@@ -577,8 +577,8 @@ function hintGroup1() {
                   else if (res.value === 'bothintMyQuestion') {
                   botInx += 1;
                   lastInpInx = botInx;
-                  botUI.message.human({type : 'html', delay: 1000, content: $('#myQuestion').html()})
-                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
+                  botUI.message.human({type : 'html', delay: 1000, content: $('#myQuestion').html()});
+                       //.then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);});
                   }
                   else if (res.value === 'bothintA1') {
                   if (hint1Count >= 1 && hint2Count >= 1) {
