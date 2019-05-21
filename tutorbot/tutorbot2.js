@@ -199,6 +199,13 @@ $('#slope1').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
+   else if (answer === '3' || answer === '\\frac{3}{1}' || answer === '\\frac{3}{1}' || answer === '\\frac{3}{1}' ||
+       answer === '\\frac{6}{2}' || answer === '\\frac{6}{2}' || answer === '\\frac{6}{2}' ||
+       answer === '\\frac{9}{3}' || answer === '\\frac{9}{3}' || answer === '\\frac{9}{3}' ||
+       answer === '\\frac{18}{6}' || answer === '\\frac{18}{6}' || answer === '\\frac{18}{6}' ||
+       answer === '\\frac{12}{4}' || answer === '\\frac{12}{4}' || answer === '\\frac{12}{4}' ||
+       answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}') { 
+            $('#jit1').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');
    else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
 });
 $('#equation1').bind('keyup', function(evt) {
