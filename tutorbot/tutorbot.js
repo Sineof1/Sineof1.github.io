@@ -510,7 +510,6 @@ function hintGroup1() {
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
                   else var hint2Class = 'botBut';
-                  $('.botui').prop('scrollTop', 0);
                   return botUI.action.button({action: [{cssClass : hint1Class, text : 'Can you teach me about this?', value : 'bothint1'},
                                                        {cssClass : hint2Class, text : 'What do I do here?', value : 'bothint2'},
                                                        {cssClass : 'botBut', text : 'Can I get multiple choice?', value : 'mltChHint'},
@@ -593,6 +592,7 @@ function hintGroup1() {
                   }
                   }
                });
+$('.botui').prop('scrollTop', 0);
 }
 function hintGroup2() {
   botInx += 1;
