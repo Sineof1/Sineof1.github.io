@@ -374,7 +374,6 @@ $(document).on('click', '.bot', function(evt) {
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
-   $('.botui').prop('scrollTop', 0);
    $('.speech_bubble').css({'height' : '250px'});
    var styleElem = document.head.appendChild(document.createElement("style"));
    styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
@@ -511,6 +510,7 @@ function hintGroup1() {
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
                   else var hint2Class = 'botBut';
+                  $('.botui').prop('scrollTop', 0);
                   return botUI.action.button({action: [{cssClass : hint1Class, text : 'Can you teach me about this?', value : 'bothint1'},
                                                        {cssClass : hint2Class, text : 'What do I do here?', value : 'bothint2'},
                                                        {cssClass : 'botBut', text : 'Can I get multiple choice?', value : 'mltChHint'},
