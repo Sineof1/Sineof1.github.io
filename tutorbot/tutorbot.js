@@ -379,6 +379,7 @@ $(document).on('click', '.bot', function(evt) {
    styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('.botui').prop('scrollTop', 0);
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
