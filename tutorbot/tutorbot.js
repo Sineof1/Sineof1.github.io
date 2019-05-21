@@ -502,7 +502,7 @@ function startVid2() {
 }
 function hintGroup1() {
   botInx += 1;
-  setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 1000);
+  $('.botui').prop('scrollTop', 0);
   botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
                   if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
