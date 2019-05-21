@@ -383,6 +383,7 @@ $(document).on('click', '.bot', function(evt) {
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
+   $('.botui').prop('scrollTop', 0);
    if (botClick % 2 === 0 && curFocus !== 'equation2' && curFocus !== 'equation3') {
    botstart.play();
    d3.select('.bot')
@@ -396,6 +397,7 @@ $(document).on('click', '.bot', function(evt) {
      .delay(800)
      .duration(800)
      .style('opacity', 1);
+   $('.botui').prop('scrollTop', 0);
    }
    else if (botClick % 2 === 0 && (curFocus === 'equation2' || curFocus === 'equation3')) {
    botstart.play();
@@ -411,6 +413,7 @@ $(document).on('click', '.bot', function(evt) {
      .delay(800)
      .duration(800)
      .style('opacity', 1);
+   $('.botui').prop('scrollTop', 0);
    }
    else {
    if (curFocus === 'slope1') slope1Ans.focus();
@@ -457,6 +460,7 @@ $(document).on('click', '.bot', function(evt) {
    else if (curFocus === 'equation3' && botClick % 2 !== 0) {
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }
+   $('.botui').prop('scrollTop', 0);
 });
 
 $(document).on('click', '.botBut', function(evt) {
