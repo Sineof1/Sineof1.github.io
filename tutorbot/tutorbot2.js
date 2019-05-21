@@ -205,7 +205,7 @@ $('#slope1').bind('keyup', function(evt) {
        answer === '\\frac{18}{6}' || answer === '\\frac{18}{6}' || answer === '\\frac{18}{6}' ||
        answer === '\\frac{12}{4}' || answer === '\\frac{12}{4}' || answer === '\\frac{12}{4}' ||
        answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}') { 
-            $('#jit1').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');
+            $('#jit1').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
    else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
 });
 $('#equation1').bind('keyup', function(evt) {
