@@ -355,6 +355,7 @@ var hint6Count = 0;
 
 $(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
 $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});
+$('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 
 $(document).on('click', '.bot', function(evt) {
    botClick += 1;
