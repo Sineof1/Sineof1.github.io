@@ -613,7 +613,7 @@ function hintGroup1() {
 function hintGroup2() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
+  botUI.message.bot({type : 'html', content: 'So, now you\'re trying to complete the equation for line g.<br /><br />How can I help?  😊'})
                .then(function(){
                   if (hint3Count >= 1 && hint4Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
@@ -690,7 +690,7 @@ function hintGroup2() {
 function hintGroup3() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
+  botUI.message.bot({type : 'html', content: 'Line v is a <strong>translation</strong> of line g. And you want to complete the equation for <strong>line v</strong><br /><br />How can I help?  🤔'})
                .then(function(){
                   if (hint5Count >= 1 && hint6Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
