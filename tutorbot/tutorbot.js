@@ -537,25 +537,35 @@ function hintGroup1() {
                   }
                   else if (res.value === 'bothint2') {
                   botInx += 3;
+                  $('.bot').css('pointer-events', 'none');
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2').html()})
                        .then(function(){botresponse.play();})
-                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2a').html()});})
+                       .then(function(){
+                           return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2a').html()});
+                       })
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint2b').html()});})
-                       .then(function(){hint2Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
+                       .then(function(){
+                           hint2Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
+                       })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'mltChHint') {
                   botInx += 4;
+                  $('.bot').css('pointer-events', 'none');
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7').html()})
                        .then(function(){botresponse.play();})
-                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7a').html()});})
+                       .then(function(){
+                           return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7a').html()});
+                       })
                        .then(function(){botresponse.play();})
-                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7b').html()});})
+                       .then(function(){
+                           return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7b').html()});
+                       })
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7c').html()});})
-                       .then(function(){setTimeout(function(){botresponse.play();}, 2000);})
+                       .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
@@ -621,12 +631,17 @@ function hintGroup2() {
                .then(function(res){
                   if (res.value === 'bothint3') {
                   botInx += 3;
+                  $('.bot').css('pointer-events', 'none');
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3').html()})
                        .then(function(){botresponse.play();})
-                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3a').html()});})
+                       .then(function(){
+                           return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3a').html()});
+                       })
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint3b').html()});})
-                       .then(function(){hint3Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
+                       .then(function(){
+                           hint3Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
+                       })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
@@ -681,33 +696,44 @@ function hintGroup3() {
                   else var hint5Class = 'botBut';
                   if (hint6Count >= 1) var hint6Class = 'botButVisited';
                   else var hint6Class = 'botBut';
-                  return botUI.action.button({action: [{cssClass : hint5Class, text : 'Can you teach me about this?', value : 'bothint5'},
-                                                       {cssClass : hint6Class, text : 'What do I do here?', value : 'bothint6'},
-                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                       {cssClass : 'exampBut', text : 'Show me a video.', value : 'bothintVid'},
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
-                                                      ]});
+                  return botUI.action.button({action: [
+                     {cssClass : hint5Class, text : 'Can you teach me about this?', value : 'bothint5'},
+                     {cssClass : hint6Class, text : 'What do I do here?', value : 'bothint6'},
+                     {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
+                     {cssClass : 'exampBut', text : 'Show me a video.', value : 'bothintVid'},
+                     {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
+                  ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint5') {
                   botInx += 1;
+                  $('.bot').css('pointer-events', 'none');
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5').html()})
                        .then(function(){botresponse.play();})
-                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5a').html()});})
+                       .then(function(){
+                           return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5a').html()});
+                       })
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint5b').html()});})
-                       .then(function(){hint5Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
+                       .then(function(){
+                           hint5Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
+                       })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint6') {
                   botInx += 1;
+                  $('.bot').css('pointer-events', 'none');
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6').html()})
                        .then(function(){botresponse.play();})
-                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6a').html()});})
+                       .then(function(){
+                           return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6a').html()});
+                       })
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint6b').html()});})
-                       .then(function(){hint6Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
+                       .then(function(){
+                           hint6Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
+                       })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
