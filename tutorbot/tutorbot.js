@@ -512,14 +512,15 @@ function hintGroup1() {
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
                   else var hint2Class = 'botBut';
-                  return botUI.action.button({action: [{cssClass : hint1Class, text : 'Can you teach me about this?', value : 'bothint1'},
-                                                       {cssClass : hint2Class, text : 'What do I do here?', value : 'bothint2'},
-                                                       {cssClass : 'botBut', text : 'Can I get multiple choice?', value : 'mltChHint'},
-                                                       {cssClass : 'exampBut', text : 'Show me a video.', value : 'bothintVid'},
-                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                       {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
-                                                      ]});
+                  return botUI.action.button({action: [
+                     {cssClass : hint1Class, text : 'Can you teach me about this?', value : 'bothint1'},
+                     {cssClass : hint2Class, text : 'What do I do here?', value : 'bothint2'},
+                     {cssClass : 'botBut', text : 'Can I get multiple choice?', value : 'mltChHint'},
+                     {cssClass : 'exampBut', text : 'Show me a video.', value : 'bothintVid'},
+                     {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
+                     {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
+                     {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
+                  ]});
                   })
                .then(function(res){
                   if (res.value === 'bothint1') {
@@ -529,8 +530,10 @@ function hintGroup1() {
                        .then(function(){botresponse.play();})
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint1a').html()});})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){hint1Count += 1; setTimeout(function(){botresponse.play();}, 2000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());$('.bot').css('pointer-events', 'all');});
+                       .then(function(){
+                          hint1Count += 1; setTimeout(function(){botresponse.play();}, 2000);$('.bot').css('pointer-events', 'all');
+                       })
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint2') {
                   botInx += 3;
