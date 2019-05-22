@@ -594,9 +594,10 @@ function hintGroup1() {
                   else if (res.value === 'bothintA1') {
                   if (hint1Count >= 1 && hint2Count >= 1) {
                   botInx += 1;
+                  $('.bot').css('pointer-events', 'none');
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer1').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){botresponse.play();})
+                       .then(function(){botresponse.play(); $('.bot').css('pointer-events', 'all');})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
                   else {
