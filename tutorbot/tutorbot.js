@@ -504,7 +504,7 @@ function startVid2() {
 function hintGroup1() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
+  botUI.message.bot({type : 'html', content: 'Okay, you want to determine the <span style="text-decoration:underline;">slope</span> of <span style="text-decoration:underline;">line g</span>.<br /><br />How can I help?'})
                .then(function(){
                   if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
