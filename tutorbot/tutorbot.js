@@ -690,7 +690,7 @@ function hintGroup2() {
 function hintGroup3() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Line v is a <strong>translation</strong> of line g. And you want to complete the equation for <strong>line v</strong><br /><br />How can I help?  🤔'})
+  botUI.message.bot({type : 'html', content: 'Line v is a <strong>translation</strong> of line g. And you want to complete the equation for <strong>line v</strong>.<br /><br />How can I help?  🤔'})
                .then(function(){
                   if (hint5Count >= 1 && hint6Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
