@@ -807,10 +807,7 @@ $(document).on('mouseleave', '#myQuestionInput', function(){ININPUT = false;});
 $(document).on('mouseenter', '.botui-actions-text-input', function(){ININPUT = true;});
 $(document).on('mouseleave', '.botui-actions-text-input', function(){ININPUT = false;});
 
-interact('.draggable').draggable({inertia: true, autoScroll: false, onmove: dragMoveListener,
-                                  modifiers: [
-                                  interact.modifiers.restrict({x : 10, y : 10, width: 300, height : 50})
-                                  ]});
+interact('.draggable').draggable({inertia: true, autoScroll: false, onmove: dragMoveListener});
 
   function dragMoveListener (event) {
     if (ININPUT) return;
