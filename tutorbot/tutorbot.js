@@ -213,10 +213,10 @@ $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '354px'});
+     $('.speech_bubble').css({'height' : '375px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:64.69%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 146});
+     styleElem.innerHTML = ".speech_bubble:after {top:66.67%;}";
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 166.5});
    }
    var answer = equation1Ans.latex();
    $(this).css('border', 'none');
@@ -265,10 +265,10 @@ $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '354px'});
+     $('.speech_bubble').css({'height' : '375px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:64.69%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 146});
+     styleElem.innerHTML = ".speech_bubble:after {top:66.67%;}";
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 166.5});
    }
    $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    var answer = equation2Ans.latex();
@@ -292,10 +292,10 @@ $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '354px'});
+     $('.speech_bubble').css({'height' : '375px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:64.69%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 146});
+     styleElem.innerHTML = ".speech_bubble:after {top:66.67%;}";
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 166.5});
    }
    var answer = equation3Ans.latex();
    $(this).css('border', 'none');
@@ -385,10 +385,10 @@ $(document).on('click', '.bot', function(evt) {
       $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 258.5});
    }
    else {
-      $('.speech_bubble').css({'height' : '354px'});
+      $('.speech_bubble').css({'height' : '375px'});
       var styleElem = document.head.appendChild(document.createElement("style"));
-      styleElem.innerHTML = ".speech_bubble:after {top:64.69%;}";
-      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 146});
+      styleElem.innerHTML = ".speech_bubble:after {top:66.67%;}";
+      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 166.5});
    }
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
