@@ -516,7 +516,7 @@ function startVid2() {
 function hintGroup1() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
+  botUI.message.bot({type : 'html', content: 'Okay, so you want to determine the <strong>slope</strong> of <strong>line g</strong>.<br /><br />How can I help?  😃'})
                .then(function(){
                   if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
@@ -625,7 +625,7 @@ function hintGroup1() {
 function hintGroup2() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
+  botUI.message.bot({type : 'html', content: 'Now you want to complete the <strong>equation</strong> for <strong>line g</strong>.<br /><br />How can I help?  😊'})
                .then(function(){
                   if (hint3Count >= 1 && hint4Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
@@ -702,7 +702,7 @@ function hintGroup2() {
 function hintGroup3() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
+  botUI.message.bot({type : 'html', content: 'Now you want to complete the equation for <strong>line v</strong>.<br /><br />How can I help?  🤔'})
                .then(function(){
                   if (hint5Count >= 1 && hint6Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
