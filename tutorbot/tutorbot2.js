@@ -8,7 +8,7 @@ $('.panel-left').resizable({
    resizeWidth: false
  });
 
-$(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 45});});
+$(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 258.5});});
 
 var botstart = document.getElementById('botstart');
 botstart.volume = 0.02;
@@ -174,9 +174,10 @@ $('#slope1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '250px'});
+     $('.speech_bubble').css({'height' : '462px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+     styleElem.innerHTML = ".speech_bubble:after {top:72.94%;}";
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 258.5});
    }
    var answer = slope1Ans.latex();
    $(this).css('border', 'none');
@@ -204,7 +205,7 @@ $('#slope1').bind('keyup', function(evt) {
        answer === '\\frac{9}{3}' || answer === '\\frac{9}{3}' || answer === '\\frac{9}{3}' ||
        answer === '\\frac{18}{6}' || answer === '\\frac{18}{6}' || answer === '\\frac{18}{6}' ||
        answer === '\\frac{12}{4}' || answer === '\\frac{12}{4}' || answer === '\\frac{12}{4}' ||
-       answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}') { 
+       answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}') {
             $('#jit1').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
    else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
 });
@@ -212,9 +213,10 @@ $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '250px'});
+     $('.speech_bubble').css({'height' : '354px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+     styleElem.innerHTML = ".speech_bubble:after {top:64.69%;}";
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 146});
    }
    var answer = equation1Ans.latex();
    $(this).css('border', 'none');
@@ -268,9 +270,10 @@ $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '250px'});
+     $('.speech_bubble').css({'height' : '354px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+     styleElem.innerHTML = ".speech_bubble:after {top:64.69%;}";
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 146});
    }
    $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    var answer = equation2Ans.latex();
@@ -299,9 +302,10 @@ $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '250px'});
+     $('.speech_bubble').css({'height' : '354px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+     styleElem.innerHTML = ".speech_bubble:after {top:64.69%;}";
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 146});
    }
    var answer = equation3Ans.latex();
    $(this).css('border', 'none');
@@ -361,9 +365,18 @@ $(document).on('click', '.bot', function(evt) {
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
-   $('.speech_bubble').css({'height' : '250px'});
-   var styleElem = document.head.appendChild(document.createElement("style"));
-   styleElem.innerHTML = ".speech_bubble:after {top:50%;}";
+   if (curFocus === 'slope1') {
+      $('.speech_bubble').css({'height' : '462px'});
+      var styleElem = document.head.appendChild(document.createElement("style"));
+      styleElem.innerHTML = ".speech_bubble:after {top:72.94%;}";
+      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 258.5});
+   }
+   else {
+      $('.speech_bubble').css({'height' : '354px'});
+      var styleElem = document.head.appendChild(document.createElement("style"));
+      styleElem.innerHTML = ".speech_bubble:after {top:64.69%;}";
+      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 146});
+   }
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
    if (curFocus === 'slope1') hintGroup1();
@@ -470,7 +483,7 @@ var botUI = new BotUI('speech1');
 function hintGroup1() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Okay, you want to determine the <strong>slope</strong> of <strong>line h</strong>.<br /><br />How can I help?  😃'})
+  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
                   if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
@@ -552,7 +565,7 @@ function hintGroup1() {
 function hintGroup2() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'So, now you\'re trying to complete the equation for line h.<br /><br />How can I help?  😊'})
+  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
                   if (hint3Count >= 1 && hint4Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
@@ -622,7 +635,7 @@ function hintGroup2() {
 function hintGroup3() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Line w is a <strong>translation</strong> of line h. And you want to complete the equation for <strong>line w</strong>.<br /><br />How can I help?  🤔'})
+  botUI.message.bot({content: 'I\'m here! Ask me a question, watch a video, or see an example.'})
                .then(function(){
                   if (hint5Count >= 1 && hint6Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
