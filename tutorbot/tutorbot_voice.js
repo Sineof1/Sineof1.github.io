@@ -665,7 +665,7 @@ function hintGroup2() {
   if (botClick % 2 === 0 && FROMBOTBACK == false) {
   setTimeout(function(){
   window.speechSynthesis.cancel();
-  var msg = new SpeechSynthesisUtterance('Now you want to complete the equation for line <say-as interpret-as="characters">g</say-as>. How can I help?');
+  var msg = new SpeechSynthesisUtterance('<emphasis level="strong">Now</emphasis> you want to complete the <emphasis level="strong">equation</emphasis> for line <say-as interpret-as="characters">g</say-as>. How can I help?');
   msg.pitch = 2;
   window.speechSynthesis.speak(msg);
   }, 1000);}
