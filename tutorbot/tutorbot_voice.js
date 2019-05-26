@@ -196,7 +196,7 @@ $('#slope1').bind('keyup', function(evt) {
    $('.jitbox').fadeOut();
    $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
    equation1Ans.focus();
    curFocus = 'equation1';
@@ -225,7 +225,7 @@ $('#equation1').bind('keyup', function(evt) {
    $('.jitbox').fadeOut();
    $('#equation1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    $('#second_text').animate({'opacity' : '+=1'}, 1000);
    equation2Ans.focus();
@@ -278,7 +278,7 @@ $('#equation2').bind('keyup', function(evt) {
    $('.jitbox').fadeOut();
    $('#equation2').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());
    equation3Ans.focus();
    curFocus = 'equation3';
    botUI.message.removeAll();
@@ -392,7 +392,7 @@ $(document).on('click', '.bot', function(evt) {
       $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 166.5});
    }
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
@@ -475,7 +475,7 @@ $(document).on('click', '.bot', function(evt) {
 
 $(document).on('click', '.botBut', function(evt) {
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());
 });
 
 var FROMBOTBACK = false;
@@ -488,7 +488,7 @@ $(document).on('click', '.botback', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());
 });
 
 $(document).on('click', '.tryBut', function(){
@@ -498,7 +498,7 @@ $(document).on('click', '.tryBut', function(){
    else if (curFocus === 'equation2') equation2Ans.focus();
    else if (curFocus === 'equation3') equation3Ans.focus();
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());
 });
 
 var botUI = new BotUI('speech1');
@@ -563,7 +563,7 @@ function hintGroup1() {
                        .then(function(){
                           hint1Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint2') {
                   botInx += 3;
@@ -586,7 +586,7 @@ function hintGroup1() {
                            hint2Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'mltChHint') {
                   botInx += 4;
@@ -611,7 +611,7 @@ function hintGroup1() {
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7c').html()});})
                        .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
                   botInx += 1;
@@ -619,7 +619,7 @@ function hintGroup1() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'Okay. Let\'s watch.'})
                        .then(function(){botresponse.play();})
                        .then(function(){setTimeout(function(){$('.bot').trigger('click'); }, 1200)})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   startVid1();
                   }
                   else if (res.value === 'bothintExamp') {
@@ -633,7 +633,7 @@ function hintGroup1() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintMyQuestion') {
                   botInx += 1;
@@ -648,14 +648,14 @@ function hintGroup1() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer1').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play(); $('.bot').css('pointer-events', 'all');})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   }
                });
@@ -708,7 +708,7 @@ function hintGroup2() {
                            hint3Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint4') {
                   botInx += 1;
@@ -721,7 +721,7 @@ function hintGroup2() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint4').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){hint4Count += 1; botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
                   botInx += 1;
@@ -729,7 +729,7 @@ function hintGroup2() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'Okay. Let\'s watch.'})
                        .then(function(){botresponse.play();})
                        .then(function(){setTimeout(function(){$('.bot').trigger('click'); }, 1200)})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   startVid2();
                   }
                   else if (res.value === 'bothintExamp') {
@@ -743,7 +743,7 @@ function hintGroup2() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintA2') {
                   botInx += 1;
@@ -752,14 +752,14 @@ function hintGroup2() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();$('.bot').css('pointer-events', 'all');})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   }
                });
@@ -812,7 +812,7 @@ function hintGroup3() {
                            hint5Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint6') {
                   botInx += 1;
@@ -835,7 +835,7 @@ function hintGroup3() {
                            hint6Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintVid') {
                   botInx += 1;
@@ -843,7 +843,7 @@ function hintGroup3() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'Okay. Let\'s watch.'})
                        .then(function(){botresponse.play();})
                        .then(function(){setTimeout(function(){$('.bot').trigger('click'); }, 1200)})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   startVid2();
                   }
                   else if (res.value === 'bothintExamp') {
@@ -857,7 +857,7 @@ function hintGroup3() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintA3') {
                   botInx += 1;
@@ -866,14 +866,14 @@ function hintGroup3() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();$('.bot').css('pointer-events', 'all');})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'monsterbot.gif?' + d.getTime());});
                   }
                   }
                });
