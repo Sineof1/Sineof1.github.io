@@ -523,7 +523,7 @@ function hintGroup1() {
   if (botClick % 2 === 0 && FROMBOTBACK == false) {
   setTimeout(function(){
   window.speechSynthesis.cancel();
-  var msg = new SpeechSynthesisUtterance('Okay, so you want to determine the <emphasis level="moderate">slope</emphasis> of line <say-as interpret-as="characters">g</say-as>. How can I help?');
+  var msg = new SpeechSynthesisUtterance('Okay, so you want to determine the <emphasis level="strong">slope</emphasis> of line <say-as interpret-as="characters">g</say-as>. How can I help?');
   msg.pitch = 2;
   window.speechSynthesis.speak(msg);
   }, 1000);}
