@@ -491,8 +491,8 @@ function hintGroup1() {
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
                   else var hint2Class = 'botBut';
-                  return botUI.action.button({action: [{cssClass : hint1Class, text : 'What is slope?', value : 'bothint1'},
-                                                    {cssClass : hint2Class, text : 'How do I calculate the slope?', value : 'bothint2'},
+                  return botUI.action.button({action: [{cssClass : hint1Class, text : 'I want to learn more about slope.', value : 'bothint1'},
+                                                    {cssClass : hint2Class, text : 'I want to learn how to calculate slope.', value : 'bothint2'},
                                                        {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
