@@ -42,7 +42,7 @@ katex.render('\\mathtt{4}', math20);
 katex.render('\\mathtt{4}', math21);
 katex.render('\\mathtt{\\frac{4}{3}}', math100);
 katex.render('\\mathtt{y=\\frac{4}{3}x}', math101);
-katex.render('\\mathtt{y=\\frac{4}{3}x+0}', math102);
+katex.render('\\mathtt{y=3x-1}', math102);
 
 var fullLines = ['M -75 625 L 725 25'];
 var xandyaxes = [{x : 225, y : 400}];
