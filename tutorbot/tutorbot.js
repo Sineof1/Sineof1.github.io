@@ -530,7 +530,6 @@ function hintGroup1() {
                      {cssClass : 'botBut', text : 'Can I get multiple choice?', value : 'mltChHint'},
                      {cssClass : 'exampBut', text : 'Show me a video.', value : 'bothintVid'},
                      {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                     {cssClass : 'exampBut', text : 'I need a calculator.', value : 'bothintMyQuestion'},
                      {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
                   ]});
                   })
