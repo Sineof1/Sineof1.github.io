@@ -45,7 +45,7 @@ katex.render('\\mathtt{-5}', math20);
 katex.render('\\mathtt{5}', math21);
 katex.render('\\mathtt{\\frac{4}{3}}', math100);
 katex.render('\\mathtt{y=\\frac{4}{3}x}', math101);
-katex.render('\\mathtt{y=\\frac{4}{3}x+0}', math102);
+katex.render('\\mathtt{y=3x+(-1)}', math102);
 
 var fullLines = ['M 275 550 L 50 -125'];
 var xandyaxes = [{x : 225, y : 400}];
