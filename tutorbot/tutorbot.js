@@ -131,6 +131,7 @@ function startTriangle() {
    if (DRAWTRI === false) {
    DRAWTRI = true;
    startID = d3.event.target.id;
+   d3.select('#' + startID).style('fill', 'pink');
    pointIndex = Number(startID);
    }
    else endTriangle(Number(d3.event.target.id));
