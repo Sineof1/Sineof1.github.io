@@ -174,7 +174,7 @@ function newGraph() {
 }
 newGraph();
 $('.tstPntInput').bind('keyup', function(evt) {
-   //d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
+   d3.select('#demo_grapher').select('svg').selectAll('.circle1').remove();
    if (evt.keyCode !== 13) return;
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    if (circSize > 15) circSize = 15;
@@ -183,6 +183,7 @@ $('.tstPntInput').bind('keyup', function(evt) {
    var y = yScale(Number($('#testPntY').val()));
    d3.select('#demo_grapher').select('svg')
      .append('circle')
+     .attr('class', 'circle1')
      .attr('cx', x + 0.2).attr('cy', y).attr('r', 0)
      .style('stroke', 'black').style('fill', 'rgba(255, 255, 0, 0.8')
      .transition()
@@ -192,7 +193,7 @@ $('.tstPntInput').bind('keyup', function(evt) {
    curTstPnt = [Number($('#testPntX').val()), Number($('#testPntY').val())];
 });
 $('.tstPntInput2').bind('keyup', function(evt) {
-   //d3.select('#demo_grapher').select('svg').selectAll('circle').remove();
+   d3.select('#demo_grapher').select('svg').selectAll('.circle2').remove();
    if (evt.keyCode !== 13) return;
    circSize = 1800 * (1 / ((x_Max - x_Min) * (y_Max - y_Min))) + 4;
    if (circSize > 15) circSize = 15;
@@ -201,6 +202,7 @@ $('.tstPntInput2').bind('keyup', function(evt) {
    var y = yScale(Number($('#testPntY2').val()));
    d3.select('#demo_grapher').select('svg')
      .append('circle')
+     .attr('class', 'circle2')
      .attr('cx', x + 0.2).attr('cy', y).attr('r', 0)
      .style('stroke', 'black').style('fill', 'rgba(255, 255, 0, 0.8')
      .transition()
