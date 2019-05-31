@@ -130,6 +130,7 @@ function newGraph() {
 function startTriangle(evt) {
    if (DRAWTRI === false) {
    DRAWTRI = true;
+   console.log(this);
    startID = d3.event.target.id;
    pointIndex = Number(startID);
    }
