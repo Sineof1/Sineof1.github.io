@@ -166,10 +166,10 @@ p {
    margin-top: -1.094em;
    margin-left: -1.094em;
 }
-.speech_bubble::webkit-scrollbar {
+.speech_bubble::-webkit-scrollbar {
    width:10px;
 }
-.speech_bubble::webkit-scrollbar-thumb {
+.speech_bubble::-webkit-scrollbar-thumb {
    background-color:#93CACF;
 }
 .bothint {
