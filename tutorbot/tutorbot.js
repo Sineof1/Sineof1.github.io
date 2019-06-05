@@ -375,7 +375,7 @@ $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3
 $('#jit4').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
 
 $(document).on('click dblclick', '.bot', function(evt) {
-   console.log(evt.type);
+   if (evt.type === 'dblclick') botClick -= 2;
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
