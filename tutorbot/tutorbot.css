@@ -230,8 +230,9 @@ p {
 .botui::-webkit-scrollbar-thumb {
    background-color:rgba(108,83,78,0.6);
    border-radius:1px;
-   cursor:pointer;
-   z-index:999999999999;
+}
+.botui::-webkit-scrollbar-corner {
+   background-color:rgba(0,0,0,0.3);
 }
 button.botui-actions-buttons-button {
    line-height:0.7;
