@@ -374,9 +374,7 @@ $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#
 $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
 $('#jit4').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
 
-$(document).on('dblclick', '.bot', function(evt) {return false;});
-
-$(document).on('click', '.bot', function(evt) {
+$(document).on('click dblclick', '.bot', function(evt) {
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
