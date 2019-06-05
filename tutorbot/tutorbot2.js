@@ -493,8 +493,8 @@ function hintGroup1() {
                   else var hint2Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint1Class, text : 'I want to learn more about this.', value : 'bothint1'},
                                                     {cssClass : hint2Class, text : 'I want to learn how to do this.', value : 'bothint2'},
-                                                       {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
-                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
+                                                    /*{cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},*/
+                                                       {cssClass : 'botBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                        {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
@@ -520,7 +520,7 @@ function hintGroup1() {
                        .then(function(){hint2Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  }
+                  }/*
                   else if (res.value === 'bothintVid') {
                   botInx += 1;
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'tutorbot-vid1.mp4'})
@@ -528,7 +528,7 @@ function hintGroup1() {
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  }
+                  }*/
                   else if (res.value === 'bothintExamp') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp').html()})
@@ -574,8 +574,8 @@ function hintGroup2() {
                   else var hint4Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint3Class, text : 'I want to learn more about this.', value : 'bothint3'},
                                                        {cssClass : hint4Class, text : 'I want to learn how to do this.', value : 'bothint4'},
-                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                       {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
+                                                       {cssClass : 'botBut', text : 'Show me an example.', value : 'bothintExamp'},
+                                                      /*{cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},*/
                                                        {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
@@ -598,14 +598,14 @@ function hintGroup2() {
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){hint4Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  }
+                  }/*
                   else if (res.value === 'bothintVid') {
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'tutorbot-vid2.mp4'})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  }
+                  }*/
                   else if (res.value === 'bothintExamp') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
@@ -645,7 +645,7 @@ function hintGroup3() {
                   return botUI.action.button({action: [{cssClass : hint5Class, text : 'I want to learn more about this.', value : 'bothint5'},
                                                        {cssClass : hint6Class, text : 'I want to learn how to do this.', value : 'bothint6'},
                                                        {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                       {cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},
+                                                      /*{cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},*/
                                                        {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
                                                       ]});
                   })
@@ -673,14 +673,14 @@ function hintGroup3() {
                        .then(function(){hint6Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  }
+                  }/*
                   else if (res.value === 'bothintVid') {
                   botUI.message.add({cssClass : 'vidEmbed', type : 'embed', delay: 2000, loading: true, content: 'tutorbot-vid2.mp4'})
                        .then(function(){botUI.message.human({cssClass : 'noStyle', type : 'html', content: $('#hintVid').html()})})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  }
+                  }*/
                   else if (res.value === 'bothintExamp') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
