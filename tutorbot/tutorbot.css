@@ -230,7 +230,7 @@ p {
    border-bottom-right-radius:5px;
 }
 .botui::-webkit-scrollbar-thumb {
-   background:linear-gradient(rgba(113,146,190,0.3), rgba(108,83,78,0.6));
+   background:linear-gradient(rgba(108,83,78,0.6), rgba(113,146,190,0.3));
    border-top-right-radius:5px;
    border-bottom-right-radius:5px;
    border-top-left-radius:2px;
