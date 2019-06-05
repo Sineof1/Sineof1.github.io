@@ -524,7 +524,7 @@ function hintGroup1() {
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
                   else var hint2Class = 'botBut';
-                  return botUI.action.button({delay : 1000, loading : true, action: [
+                  return botUI.action.button({action: [
                      {cssClass : hint1Class, text : 'I want to learn more about this.', value : 'bothint1'},
                      {cssClass : hint2Class, text : 'I want to learn how to do this.', value : 'bothint2'},
                      {cssClass : 'botBut', text : 'Show me multiple choice.', value : 'mltChHint'},
