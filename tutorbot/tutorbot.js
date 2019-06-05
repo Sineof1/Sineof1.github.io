@@ -184,10 +184,10 @@ $('#slope1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '462px'});
+     $('.speech_bubble').css({'height' : '385px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:72.94%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 258.5});
+     styleElem.innerHTML = ".speech_bubble:after {top:67.53%;}";
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 195});
    }
    var answer = slope1Ans.latex();
    $(this).css('border', 'none');
@@ -368,7 +368,7 @@ var hint5Count = 0;
 var hint6Count = 0;
 
 $(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
-$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 258.5});
+$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 195});
 $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
@@ -379,10 +379,10 @@ $(document).on('click', '.bot', function(evt) {
    botInx = -1;
    botUI.message.removeAll();
    if (curFocus === 'slope1') {
-      $('.speech_bubble').css({'height' : '462px'});
+      $('.speech_bubble').css({'height' : '385px'});
       var styleElem = document.head.appendChild(document.createElement("style"));
-      styleElem.innerHTML = ".speech_bubble:after {top:72.94%;}";
-      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 258.5});
+      styleElem.innerHTML = ".speech_bubble:after {top:67.53%;}";
+      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 195});
    }
    else {
       $('.speech_bubble').css({'height' : '375px'});
