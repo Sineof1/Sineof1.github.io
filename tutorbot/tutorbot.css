@@ -227,7 +227,7 @@ p {
    width:8px;
 }
 .botui::-webkit-scrollbar-thumb {
-   background-color:#6C534E;
+   background-color:rgba(108,83,78,0.75);
    border-radius:5px;
 }
 button.botui-actions-buttons-button {
