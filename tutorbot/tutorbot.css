@@ -166,12 +166,6 @@ p {
    margin-top: -1.094em;
    margin-left: -1.094em;
 }
-.speech_bubble::-webkit-scrollbar {
-   width:10px;
-}
-.speech_bubble::-webkit-scrollbar-thumb {
-   background-color:#93CACF;
-}
 .bothint {
    font-size:16px;
    color:blue;
@@ -228,6 +222,12 @@ p {
 .botui {
    background:linear-gradient(to bottom right, #fafafa, white, #fafafa);
    border-radius:5px;
+}
+.botui::-webkit-scrollbar {
+   width:10px;
+}
+.botui::-webkit-scrollbar-thumb {
+   background-color:#93CACF;
 }
 button.botui-actions-buttons-button {
    line-height:0.7;
