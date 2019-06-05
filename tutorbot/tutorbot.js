@@ -518,13 +518,14 @@ function hintGroup1() {
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
   botUI.message.bot({type : 'html', content: 'Okay, so you want to determine the <strong>slope</strong> of <strong>line g</strong>.<br /><br />How can I help?  😃', delay : 2000, loading : true})
                .then(function(){
+                  botresponse.play();
                   if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
                   if (hint1Count >= 1) var hint1Class = 'botButVisited';
                   else var hint1Class = 'botBut';
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
                   else var hint2Class = 'botBut';
-                  return botUI.action.button({action: [
+                  return botUI.action.button({delay : 1000, action: [
                      {cssClass : hint1Class, text : 'I want to learn more about this.', value : 'bothint1'},
                      {cssClass : hint2Class, text : 'I want to learn how to do this.', value : 'bothint2'},
                      {cssClass : 'botBut', text : 'Show me multiple choice.', value : 'mltChHint'},
