@@ -224,10 +224,11 @@ p {
    border-radius:5px;
 }
 .botui::-webkit-scrollbar {
-   width:10px;
+   width:5px;
 }
 .botui::-webkit-scrollbar-thumb {
-   background-color:#93CACF;
+   background-color:#3b3b58;
+   border-radius:25%;
 }
 button.botui-actions-buttons-button {
    line-height:0.7;
