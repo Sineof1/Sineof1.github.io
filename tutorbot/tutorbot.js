@@ -635,7 +635,7 @@ function hintGroup2() {
                   return botUI.action.button({action: [
                                                {cssClass : hint3Class, text : 'I want to learn more about this.', value : 'bothint3'},
                                                {cssClass : hint4Class, text : 'I want to learn how to do this.', value : 'bothint4'},
-                                               {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
+                                               {cssClass : 'botBut', text : 'Show me an example.', value : 'bothintExamp'},
                                                /*{cssClass : 'exampBut', text : 'Show me a video.', value : 'bothintVid'},*/
                                                {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
@@ -712,7 +712,7 @@ function hintGroup3() {
                   return botUI.action.button({action: [
                      {cssClass : hint5Class, text : 'I want to learn more about this.', value : 'bothint5'},
                      {cssClass : hint6Class, text : 'I want to learn how to do this.', value : 'bothint6'},
-                     {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
+                     {cssClass : 'botBut', text : 'Show me an example.', value : 'bothintExamp'},
                      /*{cssClass : 'exampBut', text : 'Show me a video.', value : 'bothintVid'},*/
                      {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
                   ]});
