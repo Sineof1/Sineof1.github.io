@@ -184,9 +184,9 @@ $('#slope1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '408.5px'});
+     $('.speech_bubble').css({'height' : '425px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
-     styleElem.innerHTML = ".speech_bubble:after {top:69.4%;}";
+     styleElem.innerHTML = ".speech_bubble:after {top:70.6%;}";
      $('.speech_bubble').offset({top : $('.bot').offset().top - 177.5});
    }
    var answer = slope1Ans.latex();
@@ -379,9 +379,9 @@ $(document).on('click', '.bot', function(evt) {
    botInx = -1;
    botUI.message.removeAll();
    if (curFocus === 'slope1') {
-      $('.speech_bubble').css({'height' : '408.5px'});
+      $('.speech_bubble').css({'height' : '425px'});
       var styleElem = document.head.appendChild(document.createElement("style"));
-      styleElem.innerHTML = ".speech_bubble:after {top:69.4%;}";
+      styleElem.innerHTML = ".speech_bubble:after {top:70.6%;}";
       $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 177.5});
    }
    else {
