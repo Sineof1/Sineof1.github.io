@@ -337,7 +337,7 @@ function clone(selector) {
     return d3.select(node.parentNode.insertBefore(node.cloneNode(true), node.nextSibling));
 }
 function hintRemind(err) {
-    if (err === 3) {
+    if (err >= 3) {
     d3.select('.bot').transition().duration(2000).style('transform', 'rotateZ(15deg)').style('left', '20px');
     d3.select('.bot').transition().delay(2000).duration(1500).ease(d3.easeBackInOut).style('transform', 'rotateZ(0deg)').style('left', '-50px');
     }
