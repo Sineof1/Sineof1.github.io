@@ -533,7 +533,7 @@ function hintGroup1() {
                      {cssClass : hint2Class, text : 'I want to learn how to do this.', value : 'bothint2'},
                      {cssClass : 'exampBut', text : 'Show me multiple choice.', value : 'mltChHint'},
                      {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                     {cssClass : 'exampBut', text : 'Tell me something good.', value : 'goodVibes'},
+                     {cssClass : 'posTBut', text : 'Tell me something good.', value : 'goodVibes'},
                      {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
                   ]});
                   })
