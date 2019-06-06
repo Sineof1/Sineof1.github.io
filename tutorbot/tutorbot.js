@@ -18,6 +18,10 @@ var ding = document.getElementById('ding');
 ding.volume = 0.2;
 
 var errTotal = 1;
+var errGN1 = 0;
+var errGN2 = 0;
+var errGN3 = 0;
+var errGN4 = 0;
 var botInx = -1;
 var lastInpInx;
 var distTemp, numTemp, denomTemp;
@@ -205,9 +209,9 @@ $('#slope1').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
-   else if (answer === '\\frac{4}{3}' || answer === '1.33' || answer === '1.3' || answer === '1.333') {$('#jit1').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
-   else if (answer <= 0) {$('#jit2').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
-   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else if (answer === '\\frac{4}{3}' || answer === '1.33' || answer === '1.3' || answer === '1.333') {$('#jit1').fadeIn(1000); errGN1 += 1; hintRemind(errGN1); $(this).css('border', '2px solid red');}
+   else if (answer <= 0) {$('#jit2').fadeIn(1000); errGN1 += 1; hintRemind(errGN1); $(this).css('border', '2px solid red');}
+   else {errGN1 += 1; hintRemind(errGN1); $(this).css('border', '2px solid red');}
 });
 $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -259,7 +263,7 @@ $('#equation1').bind('keyup', function(evt) {
      .duration(1000)
      .style('opacity', 1);
    }
-   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else {errGN2 += 1; hintRemind(errGN2); $(this).css('border', '2px solid red');}
 });
 $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -286,7 +290,7 @@ $('#equation2').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
-   else {$('#jit3').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else {$('#jit3').fadeIn(1000); errGN3 += 1; hintRemind(errGN3); $(this).css('border', '2px solid red');}
 });
 $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -306,8 +310,8 @@ $('#equation3').bind('keyup', function(evt) {
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    d3.select('.bot').transition().duration(1000).style('opacity', 0);
    }
-   else if (answer === '-4') {$('#jit4').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
-   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else if (answer === '-4') {$('#jit4').fadeIn(1000); errGN4 += 1; hintRemind(errGN4); $(this).css('border', '2px solid red');}
+   else {errGN4 += 1; hintRemind(errGN4); $(this).css('border', '2px solid red');}
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
@@ -332,8 +336,8 @@ function clone(selector) {
     var node = d3.select(selector).node();
     return d3.select(node.parentNode.insertBefore(node.cloneNode(true), node.nextSibling));
 }
-function hintRemind() {
-    if (errTotal > botClick) {
+function hintRemind(err) {
+    if (err === 3) {
     d3.select('.bot').transition().duration(2000).style('transform', 'rotateZ(15deg)').style('left', '20px');
     d3.select('.bot').transition().delay(2000).duration(1500).ease(d3.easeBackInOut).style('transform', 'rotateZ(0deg)').style('left', '-50px');
     }
