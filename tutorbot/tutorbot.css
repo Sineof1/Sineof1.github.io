@@ -172,7 +172,7 @@ p {
    cursor:pointer;
    text-decoration:underline;
 }
-.botBut, .ansBut, .ansButReady, .exampBut, .botButVisited, .stpBkBut {
+.botBut, .ansBut, .ansButReady, .exampBut, .botButVisited, .stpBkBut, .posTBut {
    background-color:#7a5980;
    color:white;
    width:95%;
@@ -183,6 +183,9 @@ p {
 }
 .exampBut {
    background-color:blue;
+}
+.posTBut {
+   background-color:chocolate;
 }
 .ansBut {
    background-color:lightgray;
