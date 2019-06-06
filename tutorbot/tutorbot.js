@@ -8,7 +8,7 @@ $('.panel-left').resizable({
    resizeWidth: false
  });
 
-$(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 177.5});});
+$(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 214.5});});
 
 var botstart = document.getElementById('botstart');
 botstart.volume = 0.02;
@@ -187,7 +187,7 @@ $('#slope1').bind('keyup', function(evt) {
      $('.speech_bubble').css({'height' : '425px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
      styleElem.innerHTML = ".speech_bubble:after {top:70.6%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 177.5});
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 214.5});
    }
    var answer = slope1Ans.latex();
    $(this).css('border', 'none');
@@ -368,7 +368,7 @@ var hint5Count = 0;
 var hint6Count = 0;
 
 $(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
-$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 177.5});
+$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 214.5});
 $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
@@ -382,7 +382,7 @@ $(document).on('click', '.bot', function(evt) {
       $('.speech_bubble').css({'height' : '425px'});
       var styleElem = document.head.appendChild(document.createElement("style"));
       styleElem.innerHTML = ".speech_bubble:after {top:70.6%;}";
-      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 177.5});
+      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 214.5});
    }
    else {
       $('.speech_bubble').css({'height' : '375px'});
