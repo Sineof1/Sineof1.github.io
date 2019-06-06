@@ -19,6 +19,10 @@ ding.volume = 0.2;
 
 $('.ansBut').attr('disabled', true);
 var errTotal = 1;
+var errGN1 = 0;
+var errGN2 = 0;
+var errGN3 = 0;
+var errGN4 = 0;
 var botInx = -1;
 var lastInpInx;
 
@@ -206,8 +210,8 @@ $('#slope1').bind('keyup', function(evt) {
        answer === '\\frac{18}{6}' || answer === '\\frac{18}{6}' || answer === '\\frac{18}{6}' ||
        answer === '\\frac{12}{4}' || answer === '\\frac{12}{4}' || answer === '\\frac{12}{4}' ||
        answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}' || answer === '\\frac{21}{7}') {
-            $('#jit1').fadeIn(1000); errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
-   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+            $('#jit1').fadeIn(1000); errGN1 += 1; hintRemind(errGN1); $(this).css('border', '2px solid red');}
+   else {errGN1 += 1; hintRemind(errGN1); $(this).css('border', '2px solid red');}
 });
 $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -264,7 +268,7 @@ $('#equation1').bind('keyup', function(evt) {
      .duration(1000)
      .style('opacity', 1);
    }
-   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else {errGN2 += 1; hintRemind(errGN2); $(this).css('border', '2px solid red');}
 });
 $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -296,7 +300,7 @@ $('#equation2').bind('keyup', function(evt) {
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    }
-   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else {errGN3 += 1; hintRemind(errGN3); $(this).css('border', '2px solid red');}
 });
 $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
@@ -316,7 +320,7 @@ $('#equation3').bind('keyup', function(evt) {
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    d3.select('.bot').transition().duration(1000).style('opacity', 0);
    }
-   else {errTotal += 1; hintRemind(); $(this).css('border', '2px solid red');}
+   else {errGN4 += 1; hintRemind(errGN4); $(this).css('border', '2px solid red');}
 });
 $('input').bind('keyup', function(evt) {
    if (evt.keyCode !== 39) return;
@@ -341,8 +345,8 @@ function clone(selector) {
     var node = d3.select(selector).node();
     return d3.select(node.parentNode.insertBefore(node.cloneNode(true), node.nextSibling));
 }
-function hintRemind() {
-    if (errTotal > botClick) {
+function hintRemind(err) {
+    if (err >= 3) {
     d3.select('.bot').transition().duration(2000).style('transform', 'rotateZ(15deg)').style('left', '20px');
     d3.select('.bot').transition().delay(2000).duration(1500).ease(d3.easeBackInOut).style('transform', 'rotateZ(0deg)').style('left', '-50px');
     }
