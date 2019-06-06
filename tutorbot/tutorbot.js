@@ -579,6 +579,7 @@ function hintGroup1() {
                        .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
                   else if (res.value === 'goodVibes') {
                   botInx += 3;
                   $('.bot').css('pointer-events', 'none');
