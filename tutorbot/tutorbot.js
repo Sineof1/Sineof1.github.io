@@ -169,6 +169,12 @@ function endTriangle(butID) {
 function answerDraw() {
    d3.select('#demo_grapher').select('svg').selectAll('.tripath').remove();
    d3.select('#demo_grapher').select('svg').selectAll('.clickpnt').remove();
+   katex.render('\\mathtt{-\\frac{3}{4}}', math103);
+   katex.render('\\mathtt{\\frac{4}{3}}', math104);
+   katex.render('\\mathtt{\\frac{3}{4}}', math105);
+   katex.render('\\mathtt{\\frac{' + String(numTemp) + '}{' + String(denomTemp) + '}}', math6);
+   katex.render('\\mathtt{\\frac{' + String(numTemp) + '}{' + String(denomTemp) + '}}', math11);
+   katex.render('\\mathtt{\\frac{' + String(numTemp) + '}{' + String(denomTemp) + '}}', math18);
    d3.select('#demo_grapher').select('svg').append('path')
      .attr('class', 'tripath')
      .attr('id', 'slope_triangle')
