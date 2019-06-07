@@ -138,6 +138,7 @@ function startTriangle(evt) {
    pointIndex = Number(startID);
    }
    else endTriangle(Number(d3.event.target.id));
+   if (botClick % 2 === 0) $('.bot').trigger('click');
 }
 function endTriangle(butID) {
   if (butID !== startID) {
@@ -158,8 +159,40 @@ function endTriangle(butID) {
   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
   slope1Ans.focus();
   curFocus = 'slope1';
-  $('.bot').animate({'opacity' : '+=1'}, 1000);
+  botUI.message.removeAll();
+  if (curFocus === 'disclose1') hintGroup0();
+  else if (curFocus === 'slope1') hintGroup1();
+  else if (curFocus === 'equation1') hintGroup2();
+  else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
   }
+}
+function answerDraw() {
+   d3.select('#demo_grapher').select('svg').selectAll('.tripath').remove();
+   d3.select('#demo_grapher').select('svg').selectAll('.clickpnt').remove();
+   d3.select('#demo_grapher').select('svg').append('path')
+     .attr('class', 'tripath')
+     .attr('id', 'slope_triangle')
+     .attr('d', 'M ' +String(clickpnts[0].x)+' '+String(clickpnts[0].y)+' L '+ String(clickpnts[0].x)+' '+String(clickpnts[1].y)+ ' L ' +String(clickpnts[1].x)+' '+String(clickpnts[1].y)+' Z')
+     .style('stroke', 'none').style('stroke-width', 2).style('fill', 'rgba(255, 165, 0, 0.5)').style('opacity', 0)
+     .transition()
+     .delay(2000)
+     .duration(1000)
+     .style('opacity', 1);
+   d3.select('#demo_grapher').select('svg').selectAll('.clickpnt')
+     .data(clickpnts)
+     .enter()
+     .append('circle')
+     .attr('class', 'clickpnt')
+     .attr('id', function(d){return d.id;})
+     .attr('cx', function(d){return d.x;})
+     .attr('cy', function(d){return d.y;})
+     .attr('r', 6)
+     .style('stroke', 'black').style('fill', 'blue')
+     .style('cursor', 'pointer')
+     .on('click', startTriangle);
+   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
+   slope1Ans.focus();
+   curFocus = 'slope1';
 }
 function drawTriangle() {
   if (!DRAWTRI) return;
@@ -382,7 +415,7 @@ $(document).on('click', '.bot', function(evt) {
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
-   if (curFocus === 'slope1') {
+   if (curFocus === 'slope1' || curFocus === 'disclose1') {
       $('.speech_bubble').css({'height' : '425px'});
       var styleElem = document.head.appendChild(document.createElement("style"));
       styleElem.innerHTML = ".speech_bubble:after {top:70.6%;}";
@@ -396,7 +429,8 @@ $(document).on('click', '.bot', function(evt) {
    }
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
-   if (curFocus === 'slope1') hintGroup1();
+   if (curFocus === 'disclose1') hintGroup0();
+   else if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    if (botClick % 2 === 0 && curFocus !== 'equation2' && curFocus !== 'equation3') {
@@ -483,7 +517,8 @@ $(document).on('click', '.botBut', function(evt) {
 $(document).on('click', '.botback', function(evt) {
    botInx += 1;
    $(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);
-   if (curFocus === 'slope1') hintGroup1();
+   if (curFocus === 'disclose1') hintGroup0();
+   else if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
    var d = new Date();
@@ -516,6 +551,64 @@ function startVid2() {
    vid.play();
    $('#lowerlights').fadeIn(5000);
    }, 2500);
+}
+function hintGroup0() {
+  botInx += 1;
+  setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
+  botUI.message.bot({type : 'html', content: 'You want to draw a <strong>slope triangle</strong>. Don\'t drag your mouse. Just click and move.<br /><br />How else can I help?  😃'})
+               .then(function(){
+                  return botUI.action.button({action: [
+                     {cssClass : 'botBut', text : 'I want to learn more about this.', value : 'bothint0'},
+                     {cssClass : 'botBut', text : 'I want to learn how to do this.', value : 'bothint00'},
+                     {cssClass : 'posTBut', text : 'Tell me something good.', value : 'goodVibes0'},
+                     {cssClass : 'botBut', text : 'Just give me the answer.', value : 'bothintA0'}
+                  ]});
+                  })
+               .then(function(res){
+                  if (res.value === 'bothint0') {
+                  botInx += 2;
+                  $('.bot').css('pointer-events', 'none');
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint0').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint0a').html()});})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
+                  else if (res.value === 'bothint00') {
+                  botInx += 3;
+                  $('.bot').css('pointer-events', 'none');
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint00').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint00a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint00b').html()});})
+                       .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
+                  else if (res.value === 'goodVibes0') {
+                  botInx += 3;
+                  $('.bot').css('pointer-events', 'none');
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintH0').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){return botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintH0a').html()});})
+                       .then(function(){botresponse.play();})
+                       .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintH0b').html()});})
+                       .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
+                  else if (res.value === 'bothintA0') {
+                  botInx += 1;
+                  $('.bot').css('pointer-events', 'none');
+                  answerDraw();
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer0').html()})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){botresponse.play(); $('.bot').css('pointer-events', 'all');})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
+               });
 }
 function hintGroup1() {
   botInx += 1;
