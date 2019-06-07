@@ -555,7 +555,7 @@ function startVid2() {
 function hintGroup0() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'You want to draw a <strong>slope triangle</strong>. Don\'t drag your mouse. Just click and move.<br /><br />How else can I help?  😃'})
+  botUI.message.bot({type : 'html', content: 'You want to draw a <strong>slope triangle</strong>. Don\'t hold down your mouse button. Just click and move.<br /><br />How else can I help?  😃'})
                .then(function(){
                   return botUI.action.button({action: [
                      {cssClass : 'botBut', text : 'I want to learn more about this.', value : 'bothint0'},
