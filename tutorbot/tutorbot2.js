@@ -184,7 +184,7 @@ function answerDraw() {
      .style('stroke', 'black').style('fill', 'blue')
      .style('cursor', 'pointer')
      .on('click', startTriangle);
-   $('#disclose2').animate({'opacity' : '+=1'}, 1000);
+   setTimeout(function(){$('#disclose2').animate({'opacity' : '+=1'}, 1000);}, 2000);
    slope1Ans.focus();
    curFocus = 'slope1';
 }
