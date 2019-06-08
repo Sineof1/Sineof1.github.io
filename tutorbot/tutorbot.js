@@ -906,7 +906,7 @@ function hintGroup3() {
 function hintGroup4() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Whoo! 🎈 Now think about what you\'ve learned.<br /><br />When line g is translated up on the coordinate plane to create line v, its slope _____.'})
+  botUI.message.bot({type : 'html', content: 'Whoo! 🎈 Hey, I noticed something...<br /><br />When line g is translated up on the coordinate plane to create line v, its slope _____.'})
                .then(function(){
                   return botUI.action.button({action: [
                      {cssClass : 'botBut', text : 'changes', value : 'slopeChange'},
