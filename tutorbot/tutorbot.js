@@ -56,6 +56,8 @@ var clickpnts = [{x : 325, y : 325, id : 0}, {x : 425, y : 250, id : 1}, {x : 52
 var DRAWTRI = false;
 var startID;
 var pointIndex;
+var EQ3DONE = false;
+var EQ2DONE = false;
 var slope1Input = document.getElementById('slope1');
 var slope1Ans = MQ.MathField(slope1Input);
 var equation1Input = document.getElementById('equation1');
@@ -164,6 +166,7 @@ function endTriangle(butID) {
   else if (curFocus === 'slope1') hintGroup1();
   else if (curFocus === 'equation1') hintGroup2();
   else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
+  else if (curFocus === 'wrapUpQuestion') hintGroup4();
   }
 }
 function answerDraw() {
@@ -247,6 +250,7 @@ $('#slope1').bind('keyup', function(evt) {
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
+   else if (curFocus === 'wrapUpQuestion') hintGroup4();
    }
    else if (answer === '\\frac{4}{3}' || answer === '1.33' || answer === '1.3' || answer === '1.333') {$('#jit1').fadeIn(1000); errGN1 += 1; hintRemind(errGN1); $(this).css('border', '2px solid red');}
    else if (answer <= 0) {$('#jit2').fadeIn(1000); errGN1 += 1; hintRemind(errGN1); $(this).css('border', '2px solid red');}
@@ -277,6 +281,7 @@ $('#equation1').bind('keyup', function(evt) {
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
+   else if (curFocus === 'wrapUpQuestion') hintGroup4();
    var transLine = clone('#startLine').style('opacity', 0);
    transLine.transition()
             .delay(1000)
@@ -317,17 +322,29 @@ $('#equation2').bind('keyup', function(evt) {
    var answer = equation2Ans.latex();
    $(this).css('border', 'none');
    if (answer === '0.75' || answer === '\\frac{3}{4}' || answer === '\\frac{9}{12}' || answer === '\\frac{12}{16}' || answer === '\\frac{6}{8}' || answer === '.75') {
+   EQ2DONE = true;
    ding.play();
+   equation2Ans.blur();
    $('.jitbox').fadeOut();
    $('#equation2').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   if (EQ3DONE) {
+   curFocus = 'wrapUpQuestion';
+   botUI.message.removeAll();
+   hintGroup4();
+   setTimeout(function(){$('.bot').trigger('click');}, 700);
+   equation3Ans.blur();
+   }
+   else {
    equation3Ans.focus();
    curFocus = 'equation3';
    botUI.message.removeAll();
    if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
+   else if (curFocus === 'wrapUpQuestion') hintGroup4();
+   }
    }
    else {$('#jit3').fadeIn(1000); errGN3 += 1; hintRemind(errGN3); $(this).css('border', '2px solid red');}
 });
@@ -343,11 +360,19 @@ $('#equation3').bind('keyup', function(evt) {
    var answer = equation3Ans.latex();
    $(this).css('border', 'none');
    if (answer === '4' || answer === '4.0') {
+   EQ3DONE = true;
    ding.play();
    equation3Ans.blur();
    $('.jitbox').fadeOut();
    $('#equation3').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
-   d3.select('.bot').transition().duration(1000).style('opacity', 0);
+   if (EQ2DONE) {
+   curFocus = 'wrapUpQuestion';
+   botUI.message.removeAll();
+   hintGroup4();
+   setTimeout(function(){$('.bot').trigger('click');}, 700);
+   equation2Ans.blur();
+   }
+   else equation2Ans.focus();
    }
    else if (answer === '-4') {$('#jit4').fadeIn(1000); errGN4 += 1; hintRemind(errGN4); $(this).css('border', '2px solid red');}
    else {errGN4 += 1; hintRemind(errGN4); $(this).css('border', '2px solid red');}
@@ -439,7 +464,8 @@ $(document).on('click', '.bot', function(evt) {
    else if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
-   if (botClick % 2 === 0 && curFocus !== 'equation2' && curFocus !== 'equation3') {
+   else if (curFocus === 'wrapUpQuestion') hintGroup4();
+   if (botClick % 2 === 0 && curFocus !== 'equation2' && curFocus !== 'equation3' && curFocus !== 'wrapUpQuestion') {
    botstart.play();
    d3.select('.bot')
      .transition()
@@ -453,7 +479,7 @@ $(document).on('click', '.bot', function(evt) {
      .duration(800)
      .style('opacity', 1);
    }
-   else if (botClick % 2 === 0 && (curFocus === 'equation2' || curFocus === 'equation3')) {
+   else if (botClick % 2 === 0 && (curFocus === 'equation2' || curFocus === 'equation3' || curFocus === 'wrapUpQuestion')) {
    botstart.play();
    $('.speech_bubble').offset({'left' : '975'});
    d3.select('.bot')
@@ -527,6 +553,7 @@ $(document).on('click', '.botback', function(evt) {
    else if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
    else if (curFocus === 'equation2' || curFocus === 'equation3') hintGroup3();
+   else if (curFocus === 'wrapUpQuestion') hintGroup4();
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
 });
@@ -773,16 +800,7 @@ function hintGroup2() {
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){hint4Count += 1; botresponse.play();})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  }/*
-                  else if (res.value === 'bothintVid') {
-                  botInx += 1;
-                  $('.bot').css('pointer-events', 'none');
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'Okay. Let\'s watch.'})
-                       .then(function(){botresponse.play();})
-                       .then(function(){setTimeout(function(){$('.bot').trigger('click'); }, 1200)})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  startVid2();
-                  }*/
+                  }
                   else if (res.value === 'bothintExamp') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
@@ -859,16 +877,7 @@ function hintGroup3() {
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  }/*
-                  else if (res.value === 'bothintVid') {
-                  botInx += 1;
-                  $('.bot').css('pointer-events', 'none');
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'Okay. Let\'s watch.'})
-                       .then(function(){botresponse.play();})
-                       .then(function(){setTimeout(function(){$('.bot').trigger('click'); }, 1200)})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
-                  startVid2();
-                  }*/
+                  }
                   else if (res.value === 'bothintExamp') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
@@ -893,6 +902,37 @@ function hintGroup3() {
                   }
                   }
                });
+}
+function hintGroup4() {
+  botInx += 1;
+  setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
+  botUI.message.bot({type : 'html', content: 'Whoo! 🎈 Now think about what you\'ve learned.<br /><br />When line g is translated up on the coordinate plane to create line v, its slope _____.'})
+               .then(function(){
+                  return botUI.action.button({action: [
+                     {cssClass : 'botBut', text : 'changes', value : 'slopeChange'},
+                     {cssClass : 'botBut', text : 'does not change', value : 'slopeNoChange'}
+                  ]});
+                  })
+               .then(function(res){
+                  if (res.value === 'slopeChange') {
+                  botInx += 1;
+                  $('.bot').css('pointer-events', 'none');
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintEndWrong').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){setTimeout(function(){$('.bot').css('pointer-events', 'all');}, 2000);})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
+                  else if (res.value === 'slopeNoChange') {
+                  botInx += 1;
+                  $('.bot').css('pointer-events', 'none');
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintEndRight').html()})
+                       .then(function(){botresponse.play();})
+                       .then(function(){setTimeout(function(){$('.bot').css('pointer-events', 'all');}, 2000);})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
+                  });
 }
 
 interact('.resize-drag')
