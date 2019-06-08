@@ -800,7 +800,7 @@ function hintGroup3() {
 function hintGroup4() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Woo-hoo! 🎉 Now try to extend your learning.<br /><br />Line h and line w have the same slope, and they appear to be _____.'})
+  botUI.message.bot({type : 'html', content: 'Woo-hoo! 🎉 Hey, I noticed something...<br /><br />Line h and line w have the same slope, and they appear to be _____.'})
                .then(function(){
                   return botUI.action.button({action: [
                      {cssClass : 'botBut', text : 'parallel lines', value : 'parallel'},
