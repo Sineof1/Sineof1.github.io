@@ -588,7 +588,7 @@ function startVid2() {
 function hintGroup0() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'You want to draw a <strong>slope triangle</strong>. Don\'t hold down your mouse button. Just click and move.<br /><br />What can I do for you?  😃'})
+  botUI.message.bot({type : 'html', content: 'You want to draw a <strong>slope triangle</strong>. Don\'t hold down your mouse button. Just click and move.<br /><br />What do you want to do?  😃'})
                .then(function(){
                   return botUI.action.button({action: [
                      {cssClass : 'botBut', text : 'I want to learn more about this.', value : 'bothint0'},
@@ -646,7 +646,7 @@ function hintGroup0() {
 function hintGroup1() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Okay, so you want to determine the <strong>slope</strong> of <strong>line g</strong>.<br /><br />What can I do for you?  😃'})
+  botUI.message.bot({type : 'html', content: 'Okay, so you want to determine the <strong>slope</strong> of <strong>line g</strong>.<br /><br />What do you want to do?  😃'})
                .then(function(){
                   if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
@@ -761,7 +761,7 @@ function hintGroup1() {
 function hintGroup2() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Now you want to complete the <strong>equation</strong> for <strong>line g</strong>.<br /><br />What can I do for you?  😊'})
+  botUI.message.bot({type : 'html', content: 'Now you want to complete the <strong>equation</strong> for <strong>line g</strong>.<br /><br />What do you want to do?  😊'})
                .then(function(){
                   if (hint3Count >= 1 && hint4Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
@@ -829,7 +829,7 @@ function hintGroup2() {
 function hintGroup3() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Now you want to complete the equation for <strong>line v</strong>.<br /><br />What can I do for you?  🤔'})
+  botUI.message.bot({type : 'html', content: 'Now you want to complete the equation for <strong>line v</strong>.<br /><br />What do you want to do?  🤔'})
                .then(function(){
                   if (hint5Count >= 1 && hint6Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
