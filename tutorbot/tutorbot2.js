@@ -605,10 +605,9 @@ function hintGroup1() {
                   if (hint2Count >= 1) var hint2Class = 'botButVisited';
                   else var hint2Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint1Class, text : 'I want to learn more about this.', value : 'bothint1'},
-                                                    {cssClass : hint2Class, text : 'I want to study how to do this.', value : 'bothint2'},
-                                                    /*{cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},*/
-                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
+                                                  {cssClass : hint2Class, text : 'I want to study how to do this.', value : 'bothint2'},
+                                                  {cssClass : 'exampBut', text : 'I want to see an example.', value : 'bothintExamp'},
+                                                  {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA1'}
                                                       ]});
                   })
                .then(function(res){
@@ -678,10 +677,9 @@ function hintGroup2() {
                   if (hint4Count >= 1) var hint4Class = 'botButVisited';
                   else var hint4Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint3Class, text : 'I want to learn more about this.', value : 'bothint3'},
-                                                       {cssClass : hint4Class, text : 'I want to study how to do this.', value : 'bothint4'},
-                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                      /*{cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},*/
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
+                                                  {cssClass : hint4Class, text : 'I want to study how to do this.', value : 'bothint4'},
+                                                  {cssClass : 'exampBut', text : 'I want to see an example.', value : 'bothintExamp'},
+                                                  {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA2'}
                                                       ]});
                   })
                .then(function(res){
@@ -741,10 +739,9 @@ function hintGroup3() {
                   if (hint6Count >= 1) var hint6Class = 'botButVisited';
                   else var hint6Class = 'botBut';
                   return botUI.action.button({action: [{cssClass : hint5Class, text : 'I want to learn more about this.', value : 'bothint5'},
-                                                       {cssClass : hint6Class, text : 'I want to study how to do this.', value : 'bothint6'},
-                                                       {cssClass : 'exampBut', text : 'Show me an example.', value : 'bothintExamp'},
-                                                      /*{cssClass : 'exampBut', text : 'Let\'s watch a video.', value : 'bothintVid'},*/
-                                                       {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
+                                                  {cssClass : hint6Class, text : 'I want to study how to do this.', value : 'bothint6'},
+                                                  {cssClass : 'exampBut', text : 'I want to see an example.', value : 'bothintExamp'},
+                                                  {cssClass : ansButReady, text : 'Just give me the answer.', value : 'bothintA3'}
                                                       ]});
                   })
                .then(function(res){
