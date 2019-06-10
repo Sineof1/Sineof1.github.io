@@ -646,7 +646,7 @@ function hintGroup0() {
 function hintGroup1() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Thanks for talking with me!<br /><br />Okay, so you want to determine the <strong>slope</strong> of <strong>line g</strong>.  😃'})
+  botUI.message.bot({type : 'html', content: 'Thanks for talking with me!<br /><br />So, you want to determine the <strong>slope</strong> of <strong>line g</strong>.  😃'})
                .then(function(){
                   if (hint1Count >= 1 && hint2Count >= 1) var ansButReady = 'ansButReady';
                   else var ansButReady = 'ansBut';
