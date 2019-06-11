@@ -797,29 +797,36 @@ function hintGroup3() {
 function hintGroup4() {
   botInx += 1;
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
-  botUI.message.bot({type : 'html', content: 'Woo-hoo! 🎉 Hey, I noticed something...<br /><br />Line h and line w have the same slope, and they look like _____.'})
+  botUI.message.bot({type : 'html', content: 'Woo-hoo! 🎉 Hey, what did you think of this workspace?'})
                .then(function(){
                   return botUI.action.button({action: [
-                     {cssClass : 'botBut', text : 'parallel lines', value : 'parallel'},
-                     {cssClass : 'botBut', text : 'perpendicular lines', value : 'perpendicular'}
+                     {cssClass : 'botBut', text : 'It was fun and interesting.', value : 'fun'},
+                     {cssClass : 'botBut', text : 'It was okay.', value : 'okay'},
+                     {cssClass : 'botBut', text : 'It was kind of boring.', value : 'boring'}
                   ]});
                   })
                .then(function(res){
-                  if (res.value === 'perpendicular') {
+                  if (res.value === 'fun') {
                   botInx += 1;
                   $('.bot').css('pointer-events', 'none');
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintEndWrong').html()})
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'I\'ll go tell my creators that you liked it. I really liked it too! 🥇'})
                        .then(function(){botresponse.play();})
-                       .then(function(){setTimeout(function(){$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
-                  else if (res.value === 'parallel') {
+                  else if (res.value === 'okay') {
                   botInx += 1;
                   $('.bot').css('pointer-events', 'none');
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintEndRight').html()})
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'I\'ll go tell my creators that you thought it was okay. And, I agree. We make a <span style="text-decoration:underline;">great</span> team, though! 🤳'})
                        .then(function(){botresponse.play();})
-                       .then(function(){setTimeout(function(){$('.bot').css('pointer-events', 'all');}, 2000);})
+                       .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                  }
+                  else if (res.value === 'boring') {
+                  botInx += 1;
+                  $('.bot').css('pointer-events', 'none');
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'I\'ll tell my creators to do better. And, hey,...at least WE aren\'t boring! 🙃'})
+                       .then(function(){botresponse.play();})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
                   }
