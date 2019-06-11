@@ -948,12 +948,18 @@ function hintGroup5() {
   setTimeout(function(){$('.botui').prop('scrollTop', 0);}, 500);
   $('#lowerlights').fadeIn(1500);
   $('.speech_bubble').removeClass('draggable');
-  botUI.message.bot({type : 'html', content: 'Let\'s stop for a moment.<br /><br />I would like you to help your teacher and maybe some other students. Share with them how you think about these problems.<br /><br />Write a short message to them below.'})
+  botUI.message.bot({type : 'html', content: 'Let\'s stop for a moment.<br /><br />How are you feeling about this topic?'})
                .then(function(){
-                  return botUI.action.text({action: {placeholder : ''}});})
+                  return botUI.action.button({action: [
+                     {cssClass : 'botBut', text : 'I feel confident.', value : 'confident'},
+                     {cssClass : 'botBut', text : 'I think I\'m getting better.', value : 'better'},
+                     {cssClass : 'botBut', text : 'I could use some more help.', value : 'morehelp'},
+                     {cssClass : 'botBut', text : 'I just don\'t get it.', value : 'getit'},
+                  ]});
+                  })
                .then(function(res){
                   botInx += 1;
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'Thank you! I let your teacher know. We\'ll pick up where we left off when you come back.'})
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'Okay, thank you! I would like you to talk with your teacher and maybe some other students.<br /><br />Share your thinking with them. I\'ll see you when you get back.'})
                        .then(function(){botresponse.play();})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
