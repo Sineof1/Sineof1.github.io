@@ -953,6 +953,7 @@ function hintGroup5() {
                   return botUI.action.button({action: [
                      {cssClass : 'botBut', text : 'I feel confident.', value : 'confident'},
                      {cssClass : 'botBut', text : 'I think I\'m getting better.', value : 'better'},
+                     {cssClass : 'botBut', text : 'Just one thing confuses me.', value : 'confuse'},
                      {cssClass : 'botBut', text : 'I could use some more help.', value : 'morehelp'},
                      {cssClass : 'botBut', text : 'I just don\'t get it.', value : 'getit'},
                   ]});
