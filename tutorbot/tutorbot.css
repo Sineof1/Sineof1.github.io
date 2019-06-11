@@ -131,7 +131,7 @@ p {
    bottom:-20px;
    left:-50px;
    cursor:pointer;
-   z-index:1000;
+   z-index:9999;
    transform-origin:50% 90%;
 }
 .speech_bubble {
