@@ -825,7 +825,7 @@ function hintGroup4() {
                   else if (res.value === 'boring') {
                   botInx += 1;
                   $('.bot').css('pointer-events', 'none');
-                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'I\'ll tell my creators to do better. And, hey,...at least WE aren\'t boring! 🙃'})
+                  botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'I\'ll go tell my creators that you thought it was boring. But, hey,...at least WE aren\'t boring! 🙃'})
                        .then(function(){botresponse.play();})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
