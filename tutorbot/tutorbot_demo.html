@@ -296,8 +296,19 @@
 <audio id='botstart' preload='auto'><source src='botstart.mp3'></audio>
 <audio id='botresponse'><source src='botresponse.mp3'></audio>
 <audio id='ding' preload='auto'><source src='ding.mp3'></audio>
+<script src="https://unpkg.com/popper.js@1"></script>
+<script src="https://unpkg.com/tippy.js@4"></script>
 </body>
 
 </html>
 <script src='resizable.js'></script>
 <script src='tutorbot.js'></script>
+<script>
+tippy('.bot', {
+  animateFill:false,
+  animation:'shift-away',
+  placement:'top',
+  arrow:true,
+  content: 'Click me for help!',
+});
+</script>
