@@ -133,6 +133,8 @@ p {
    cursor:pointer;
    z-index:9999;
    transform-origin:50% 90%;
+   outline:none !important;
+   border:none !important;
 }
 .speech_bubble {
    visibility:hidden;
