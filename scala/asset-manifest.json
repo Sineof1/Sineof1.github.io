@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/scala/static/css/main.69fa68c0.chunk.css",
+    "main.js": "/scala/static/js/main.12b8872d.chunk.js",
+    "main.js.map": "/scala/static/js/main.12b8872d.chunk.js.map",
+    "runtime~main.js": "/scala/static/js/runtime~main.03457a72.js",
+    "runtime~main.js.map": "/scala/static/js/runtime~main.03457a72.js.map",
+    "static/js/2.0f58faaa.chunk.js": "/scala/static/js/2.0f58faaa.chunk.js",
+    "static/js/2.0f58faaa.chunk.js.map": "/scala/static/js/2.0f58faaa.chunk.js.map",
+    "index.html": "/scala/index.html",
+    "precache-manifest.f4610df9b2a938e052055230d9b2426e.js": "/scala/precache-manifest.f4610df9b2a938e052055230d9b2426e.js",
+    "service-worker.js": "/scala/service-worker.js",
+    "static/css/main.69fa68c0.chunk.css.map": "/scala/static/css/main.69fa68c0.chunk.css.map"
+  }
+}
