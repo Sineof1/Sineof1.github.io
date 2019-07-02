@@ -9,7 +9,7 @@ $('.panel-left').resizable({
  });
 
 $(document).ready(function(){
-   $('.speech_bubble').offset({left : 131.5, top : 331.5});
+   $('.speech_bubble').offset({left : 131.5, top : $('.bot').offset().top - 320});
    var styleElem = document.head.appendChild(document.createElement("style"));
    styleElem.innerHTML = ".speech_bubble:after {top:90.6%;}";
 });
