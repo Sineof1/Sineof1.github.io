@@ -445,12 +445,6 @@ $(document).on('click', '.bot', function(evt) {
    botClick += 1;
    botInx = -1;
    botUI.message.removeAll();
-   if (curFocus === 'slope1' || curFocus === 'disclose1') {
-      $('.speech_bubble').css({'height' : '425px'});
-   }
-   else {
-      $('.speech_bubble').css({'height' : '375px'});
-   }
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot_head.gif?' + d.getTime());
    if (curFocus === 'disclose1') hintGroup0();
@@ -485,10 +479,6 @@ $(document).on('click', '.bot', function(evt) {
      .duration(50)
      .style('opacity', 0).style('visibility', 'hidden');
    setTimeout(function(){
-      if (curFocus === 'equation2' || curFocus === 'equation3') {
-      //$('.speech_bubble').offset({left : 975, top : $('.bot').offset().top - 258.5});
-      }
-      else //$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 258.5});
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }, 100);
    botstart.pause();
