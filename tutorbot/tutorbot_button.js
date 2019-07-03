@@ -10,6 +10,7 @@ $('.panel-left').resizable({
 
 $(document).ready(function(){
    $('.speech_bubble').offset({left : 131.5, top : $('.bot').offset().top - 320});
+   $('.speech_bubble').css({'height' : '425px'});
    var styleElem = document.head.appendChild(document.createElement("style"));
    styleElem.innerHTML = ".speech_bubble:after {top:90.6%;}";
 });
@@ -235,7 +236,7 @@ $('#slope1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '425px'});
+     //$('.speech_bubble').css({'height' : '425px'});
    }
    var answer = slope1Ans.latex();
    $(this).css('border', 'none');
@@ -264,7 +265,7 @@ $('#equation1').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '375px'});
+     //$('.speech_bubble').css({'height' : '375px'});
    }
    var answer = equation1Ans.latex();
    $(this).css('border', 'none');
@@ -315,7 +316,7 @@ $('#equation2').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '375px'});
+     //$('.speech_bubble').css({'height' : '375px'});
    }
    $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    var answer = equation2Ans.latex();
@@ -353,7 +354,7 @@ $('#equation3').bind('keyup', function(evt) {
    if (evt.keyCode !== 13) return;
    if (botClick % 2 === 0) {
      $('.bot').trigger('click');
-     $('.speech_bubble').css({'height' : '375px'});
+     //$('.speech_bubble').css({'height' : '375px'});
    }
    var answer = equation3Ans.latex();
    $(this).css('border', 'none');
