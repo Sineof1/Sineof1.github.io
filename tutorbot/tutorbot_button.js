@@ -244,7 +244,7 @@ $('#slope1').bind('keyup', function(evt) {
    ding.play();
    $('.jitbox').fadeOut();
    $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
-   $('.speech_bubble').offset({left : 131.5, top : 385});
+   //$('.speech_bubble').offset({left : 131.5, top : 385});
    var d = new Date();
    $('#botImage').attr('src', 'blinkbot_head.gif?' + d.getTime());
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
