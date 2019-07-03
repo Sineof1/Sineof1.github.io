@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/scala/static/css/main.c65c73dd.chunk.css",
-    "main.js": "/scala/static/js/main.d702fcf7.chunk.js",
-    "main.js.map": "/scala/static/js/main.d702fcf7.chunk.js.map",
+    "main.js": "/scala/static/js/main.dc22f82e.chunk.js",
+    "main.js.map": "/scala/static/js/main.dc22f82e.chunk.js.map",
     "runtime~main.js": "/scala/static/js/runtime~main.03457a72.js",
     "runtime~main.js.map": "/scala/static/js/runtime~main.03457a72.js.map",
     "static/js/2.ad2667a6.chunk.js": "/scala/static/js/2.ad2667a6.chunk.js",
     "static/js/2.ad2667a6.chunk.js.map": "/scala/static/js/2.ad2667a6.chunk.js.map",
     "index.html": "/scala/index.html",
-    "precache-manifest.8eb4c5a143879dd1d2424ce46dbc64c2.js": "/scala/precache-manifest.8eb4c5a143879dd1d2424ce46dbc64c2.js",
+    "precache-manifest.d4e9262f404ec7273a30f6b3f62698e2.js": "/scala/precache-manifest.d4e9262f404ec7273a30f6b3f62698e2.js",
     "service-worker.js": "/scala/service-worker.js",
     "static/css/main.c65c73dd.chunk.css.map": "/scala/static/css/main.c65c73dd.chunk.css.map"
   }
