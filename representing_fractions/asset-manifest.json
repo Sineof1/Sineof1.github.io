@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/representing_fractions/static/css/main.6e51cddb.chunk.css",
+    "main.js": "/representing_fractions/static/js/main.205f1245.chunk.js",
+    "main.js.map": "/representing_fractions/static/js/main.205f1245.chunk.js.map",
+    "runtime~main.js": "/representing_fractions/static/js/runtime~main.8f289de6.js",
+    "runtime~main.js.map": "/representing_fractions/static/js/runtime~main.8f289de6.js.map",
+    "static/js/2.9dd7f2bf.chunk.js": "/representing_fractions/static/js/2.9dd7f2bf.chunk.js",
+    "static/js/2.9dd7f2bf.chunk.js.map": "/representing_fractions/static/js/2.9dd7f2bf.chunk.js.map",
+    "index.html": "/representing_fractions/index.html",
+    "precache-manifest.5f5a22c75a4951779583832685d79256.js": "/representing_fractions/precache-manifest.5f5a22c75a4951779583832685d79256.js",
+    "service-worker.js": "/representing_fractions/service-worker.js",
+    "static/css/main.6e51cddb.chunk.css.map": "/representing_fractions/static/css/main.6e51cddb.chunk.css.map"
+  }
+}
