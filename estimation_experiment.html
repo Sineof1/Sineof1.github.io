@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fraction Estimation</title>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+</head>
+
+<body>
+<div style='width:520px;display:flex;flex-direction:column;align-items:center;margin:0 auto;font-family:sans-serif;font-size:1.3em;'>
+<canvas class="experiment" id="exp1" width="500px" height="250px" style='cursor:crosshair;'></canvas>
+<p>Your PAE average is <span id='paescore' style='color:blue;'>0</span>, for <span id='trials' style='color:blue;'>0</span> trials.
+</div>
+</body>
+
+</html>
+
+<script>
+var expcanvas = document.getElementById('exp1');
+var expcontxt = expcanvas.getContext('2d');
+
+var exp1_fracs = {1: [0, 1],  2: [1, 9],  3: [1, 8],  4: [1, 7],
+                  5: [1, 6],  6: [1, 5],  7: [2, 9],  8: [1, 4],
+                  9: [2, 7], 10: [1, 3], 11: [3, 8], 12: [2, 5],
+                 13: [3, 7], 14: [4, 9], 15: [1, 2], 16: [5, 9],
+                 17: [4, 7], 18: [3, 5], 19: [5, 8], 20: [2, 3],
+                 21: [5, 7], 22: [3, 4], 23: [7, 9], 24: [4, 5],
+                 25: [5, 6], 26: [6, 7], 27: [7, 8], 28: [8, 9], 29: [1, 1]};
+
+var completed_fracs = [];
+var curfrac;
+var paes = 0;
+var trial_count = 0;
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function baseDraw_exp() {
+   expcontxt.clearRect(0, 0, expcanvas.width, expcanvas.height);
+   expcontxt.beginPath();
+   expcontxt.moveTo(20, expcanvas.height / 2);
+   expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+   expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 - 5);
+   expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 + 5);
+   expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+   expcontxt.stroke();
+   expcontxt.fill();
+
+   expcontxt.beginPath();
+   expcontxt.moveTo(20, expcanvas.height / 2);
+   expcontxt.lineTo(30, expcanvas.height / 2 - 5);
+   expcontxt.lineTo(30, expcanvas.height / 2 + 5);
+   expcontxt.lineTo(20, expcanvas.height / 2);
+   expcontxt.stroke();
+   expcontxt.fill();
+
+   expcontxt.beginPath();
+   expcontxt.moveTo(40, expcanvas.height / 2 - 20);
+   expcontxt.lineTo(40, expcanvas.height / 2 + 20);
+   expcontxt.stroke();
+   expcontxt.beginPath();
+   expcontxt.moveTo(expcanvas.width - 40, expcanvas.height / 2 - 20);
+   expcontxt.lineTo(expcanvas.width - 40, expcanvas.height / 2 + 20);
+   expcontxt.stroke();
+
+   expcontxt.font = '20px Arial';
+   expcontxt.textAlign = 'center';
+   expcontxt.fillText('0', 40, expcanvas.height / 2 + 45);
+   expcontxt.fillText('1', expcanvas.width - 40, expcanvas.height / 2 + 45);
+
+   if (completed_fracs.length < 29) {
+     var frac = Math.floor(Math.random() * 29) + 1;
+     while ($.inArray(frac, completed_fracs) !== -1) frac = Math.floor(Math.random() * 29) + 1;
+     completed_fracs.push(frac);
+     curfrac = frac;
+     expcontxt.fillText(exp1_fracs[frac][0], expcanvas.width / 2, 38);
+     expcontxt.fillText(exp1_fracs[frac][1], expcanvas.width / 2, 62);
+     expcontxt.beginPath();
+     expcontxt.moveTo(expcanvas.width / 2 - 15, 43);
+     expcontxt.lineTo(expcanvas.width / 2 + 15, 43);
+     expcontxt.stroke();
+   }
+   else expcanvas.removeEventListener('click', getAnswer, true);
+}
+function getAnswer(evt) {
+  var loc = windowToCanvas_mouse(expcanvas, evt.clientX, evt.clientY);
+  var userAnswer = loc.x / 460;
+  trial_count += 1;
+  var actualAnswer = exp1_fracs[curfrac][0] / exp1_fracs[curfrac][1];
+  var PAE = 100 * (Math.abs(userAnswer - actualAnswer));
+  paes += PAE;
+  var pae_avg = paes / trial_count;
+  $('#paescore').text(pae_avg.toFixed(2));
+  $('#trials').text(trial_count);
+  baseDraw_exp();
+}
+
+baseDraw_exp();
+expcanvas.addEventListener('click', getAnswer, true);
+</script>
