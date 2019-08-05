@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/whole_numbers_to_rationals/static/css/main.d5b242df.chunk.css",
-    "main.js": "/whole_numbers_to_rationals/static/js/main.aeabe37f.chunk.js",
-    "main.js.map": "/whole_numbers_to_rationals/static/js/main.aeabe37f.chunk.js.map",
-    "runtime~main.js": "/whole_numbers_to_rationals/static/js/runtime~main.f03e85b2.js",
-    "runtime~main.js.map": "/whole_numbers_to_rationals/static/js/runtime~main.f03e85b2.js.map",
-    "static/css/2.2e34ae7f.chunk.css": "/whole_numbers_to_rationals/static/css/2.2e34ae7f.chunk.css",
-    "static/js/2.1699d16b.chunk.js": "/whole_numbers_to_rationals/static/js/2.1699d16b.chunk.js",
-    "static/js/2.1699d16b.chunk.js.map": "/whole_numbers_to_rationals/static/js/2.1699d16b.chunk.js.map",
-    "index.html": "/whole_numbers_to_rationals/index.html",
-    "precache-manifest.7a4a4e5f8f33191036c1f5768954eb10.js": "/whole_numbers_to_rationals/precache-manifest.7a4a4e5f8f33191036c1f5768954eb10.js",
-    "service-worker.js": "/whole_numbers_to_rationals/service-worker.js",
-    "static/css/2.2e34ae7f.chunk.css.map": "/whole_numbers_to_rationals/static/css/2.2e34ae7f.chunk.css.map",
-    "static/css/main.d5b242df.chunk.css.map": "/whole_numbers_to_rationals/static/css/main.d5b242df.chunk.css.map"
+    "main.css": "/scala/whole_numbers_to_rationals/static/css/main.d5b242df.chunk.css",
+    "main.js": "/scala/whole_numbers_to_rationals/static/js/main.213c9d41.chunk.js",
+    "main.js.map": "/scala/whole_numbers_to_rationals/static/js/main.213c9d41.chunk.js.map",
+    "runtime~main.js": "/scala/whole_numbers_to_rationals/static/js/runtime~main.983d1e5b.js",
+    "runtime~main.js.map": "/scala/whole_numbers_to_rationals/static/js/runtime~main.983d1e5b.js.map",
+    "static/css/2.2e34ae7f.chunk.css": "/scala/whole_numbers_to_rationals/static/css/2.2e34ae7f.chunk.css",
+    "static/js/2.1699d16b.chunk.js": "/scala/whole_numbers_to_rationals/static/js/2.1699d16b.chunk.js",
+    "static/js/2.1699d16b.chunk.js.map": "/scala/whole_numbers_to_rationals/static/js/2.1699d16b.chunk.js.map",
+    "index.html": "/scala/whole_numbers_to_rationals/index.html",
+    "precache-manifest.2c902fa742bfa721dfc6f1cd9f9c088a.js": "/scala/whole_numbers_to_rationals/precache-manifest.2c902fa742bfa721dfc6f1cd9f9c088a.js",
+    "service-worker.js": "/scala/whole_numbers_to_rationals/service-worker.js",
+    "static/css/2.2e34ae7f.chunk.css.map": "/scala/whole_numbers_to_rationals/static/css/2.2e34ae7f.chunk.css.map",
+    "static/css/main.d5b242df.chunk.css.map": "/scala/whole_numbers_to_rationals/static/css/main.d5b242df.chunk.css.map"
   }
 }
