@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1c19ddf53bd3883ca8a302db1cfb7698",
+    "revision": "de4ca3b99920151f8656cfaa8a6301e2",
     "url": "/scalamath/comparing_two_fractions/index.html"
   },
   {
-    "revision": "da64c27255d4a8067d6f",
+    "revision": "ecb83c2ae77104b3f4f9",
     "url": "/scalamath/comparing_two_fractions/static/css/2.2e34ae7f.chunk.css"
   },
   {
-    "revision": "060aae84577bc18279f4",
+    "revision": "04eca8c8877d949ad219",
     "url": "/scalamath/comparing_two_fractions/static/css/main.7b8bd13f.chunk.css"
   },
   {
-    "revision": "da64c27255d4a8067d6f",
-    "url": "/scalamath/comparing_two_fractions/static/js/2.dc9218fd.chunk.js"
+    "revision": "ecb83c2ae77104b3f4f9",
+    "url": "/scalamath/comparing_two_fractions/static/js/2.8a09c756.chunk.js"
   },
   {
-    "revision": "060aae84577bc18279f4",
-    "url": "/scalamath/comparing_two_fractions/static/js/main.57d05300.chunk.js"
+    "revision": "04eca8c8877d949ad219",
+    "url": "/scalamath/comparing_two_fractions/static/js/main.c07d62a5.chunk.js"
   },
   {
     "revision": "ebe5443be4c4933ef18d",
