@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset = 'utf-8'>
+<meta name='description' content="Interactive tool to explore linear regression and Anscombe's Quartet.">
+<meta name = 'author' content = 'Josh Fisher'>
+<link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+<title>Exponential Regression</title>
+</head>
+
+<style>
+body {margin:0; padding:0;}
+table {
+   border-collapse:collapse;
+}
+#wrapper {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   margin-top:50px;
+}
+#data-table {
+   display:block;
+   margin-right:100px;
+   margin-bottom:50px;
+   height:500px;
+   width:250px;
+}
+#data-table th {
+   background-color:aliceblue;
+   font-family:'Arimo';
+   padding:8px;
+}
+#data-table tr {
+   height:45px;
+}
+#data-table td {
+   width:125px;
+   min-width:125px;
+   max-width:125px;
+   text-align:center;
+   padding:8px;
+   font-family:'Arimo';
+   outline:none;
+   overflow:hidden;
+}
+.update-plot {
+   display:inline-block;
+   width:135px;
+   height:50px;
+   font-family:Arimo;
+   font-size:1.5em;
+   font-variant:small-caps;
+   outline:none;
+   border:none;
+   border-radius:2px;
+   box-sizing:border-box;
+   padding-top:3px;
+   cursor:pointer;
+}
+.update-plot:hover {
+   background-color:#ccc;
+}
+.update-plot:active {
+   background-color:#bbb;
+}
+td + td,
+th + th { border-left: 1px solid gray; }
+tr + tr { border-top: 1px solid gray; }
+#lobf_map {
+   position:relative;
+   display:inline-block;
+   width:500px;
+   height:500px;
+   border-left:3px solid gray;
+   border-bottom:3px solid gray;
+   box-shadow:0 0 3px #ccc;
+   z-index:98;
+}
+#lobf_canvas {
+   position:absolute;
+   left:0;
+   bottom:0;
+   width:500px;
+   height:500px;
+   background-color:white;
+   cursor:pointer;
+   z-index:99;
+}
+#canvas1 {
+   position:fixed;
+   width:500px;
+   height:500px;
+   visibility:hidden;
+   cursor:crosshair;
+   z-index:100;
+}
+#xmax, #xmin, #ymax, #ymin, #ylab, #xlab {
+   position:fixed;
+   width:100px;
+   height:50px;
+   color:gray;
+}
+#regression-equation {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:500px;
+   height:40px;
+   font-family:Arimo;
+   font-size:1.2em;
+   color:#8A2BE2;
+}
+.side-button {
+   position:fixed;
+   display:flex;
+   align-items:center;
+   justify-content:flex-end;
+   box-sizing:border-box;
+   padding-right:8px;
+   width:40px;
+   height:60px;
+   background-color:#fafafa;
+   border-top-right-radius:12px;
+   border-bottom-right-radius:12px;
+   box-shadow:1px 0 3px #ccc;
+   z-index:0;
+   cursor:pointer;
+}
+#clearButton {
+   position:fixed;
+   bottom:10px;
+   right:10px;
+   width:60px;
+   height:60px;
+   background-color:#fafafa;
+   box-shadow:1px 1px 3px #ccc;
+   border-radius:5px;
+   content:url('https://png.icons8.com/metro/540/undo.png');
+   cursor:pointer;
+}
+#clearButton:hover {
+   background-color:#ccc;
+}
+#clearButton:active {
+   background-color:#bbb;
+}
+.anscombe {
+   width:50px;
+   height:50px;
+   background-color:#fafafa;
+   border-radius:100%;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-family:Arimo;
+   font-size:1.2em;
+   color:blue;
+   box-shadow:0 0 3px #ccc;
+   cursor:pointer;
+   margin-bottom:-50px;
+}
+.anscombe:hover {background-color:#ccc;}
+.anscombe:active {background-color:#bbb;};
+</style>
+
+<body>
+<canvas id='canvas1' width='500' height='500'></canvas>
+<div id='wrapper'>
+<div id='table-n-update' style='width:325px;margin-right:80px;'>
+<table id='data-table'>
+<tr><th>x</th><th>y</th></tr>
+<tr><td contenteditable="true" class='x-values' id='x1'></td><td contenteditable="true" class='y-values' id='y1'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x2'></td><td contenteditable="true" class='y-values' id='y2'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x3'></td><td contenteditable="true" class='y-values' id='y3'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x4'></td><td contenteditable="true" class='y-values' id='y4'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x5'></td><td contenteditable="true" class='y-values' id='y5'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x6'></td><td contenteditable="true" class='y-values' id='y6'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x7'></td><td contenteditable="true" class='y-values' id='y7'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x8'></td><td contenteditable="true" class='y-values' id='y8'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x9'></td><td contenteditable="true" class='y-values' id='y9'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x10'></td><td contenteditable="true" class='y-values' id='y10'></td></tr>
+<tr><td contenteditable="true" class='x-values' id='x11'></td><td contenteditable="true" class='y-values' id='y11'></td></tr>
+</table>
+<button class='update-plot' id='update-points'>
+<img src='https://cdn0.iconfinder.com/data/icons/presentation-graphs-vol-2/48/v-29-512.png' style='width:35%;' />
+</button>
+<button class='update-plot' id='update-line' style='margin-left:10px;'>
+<img src='https://d30y9cdsu7xlg0.cloudfront.net/png/986777-200.png' style='width:35%;' />
+</button>
+</div>
+
+<div class='side-button' id='draw-tab'><img src='https://d30y9cdsu7xlg0.cloudfront.net/png/17406-200.png' style='width:60%;'></div>
+<div id='lobf_map'><canvas id='lobf_canvas' width='500' height='500'></canvas></div>
+</div>
+<div id='ylab'>y</div>
+<div id='ymin'></div>
+<div id='ymax'></div>
+<div id='xmin'></div>
+<div id='xmax'></div>
+<div id='xlab'>x</div>
+
+<div id='regression-equation'></div>
+<div class='anscombe' id='anscombe1'>I</div>
+<div class='anscombe' id='anscombe2'>II</div>
+<div class='anscombe' id='anscombe3'>III</div>
+<div class='anscombe' id='anscombe4'>IV</div>
+<div id='clearButton'></div>
+</body>
+</html>
+<script src='canvas_script.js' type='text/javascript'></script>
+
+<script>
+var tabClick = 1;
+$('.x-values, .y-values').keypress(function(e){if (e.keyCode == '13' || e.keyCode == '10') e.preventDefault();});
+$('#draw-tab').click(function(){
+   tabClick += 1;
+   if (tabClick % 2 == 0) {$(this).css({'background-color': 'rgba(165, 42, 42, 0.6)'}); $('#canvas1').css({'visibility' : 'visible'});}
+   else {
+   context.clearRect(0, 0, canvas1.width, canvas1.height);
+   $(this).css({'background-color': '#fafafa'});
+   $('#canvas1').css({'visibility' : 'hidden'});}
+   });
+$('#canvas1').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top});
+$('#xmax').offset({left: $('#lobf_map').offset().left + 500, top: $('#lobf_map').offset().top + 510});
+$('#xmin').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top + 510});
+$('#ymax').offset({left: $('#lobf_map').offset().left - 30, top: $('#lobf_map').offset().top - 10});
+$('#ymin').offset({left: $('#lobf_map').offset().left - 30, top: $('#lobf_map').offset().top + 490});
+$('#ylab').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top - 30});
+$('#xlab').offset({left: $('#lobf_map').offset().left + 520, top: $('#lobf_map').offset().top + 490});
+$('#regression-equation').offset({left: $('#lobf_map').offset().left, top: $('#lobf_map').offset().top + 510});
+$('#draw-tab').offset({left: $('#lobf_map').offset().left + 495, top: $('#lobf_map').offset().top + 50});
+$('#anscombe1').offset({left: $('#lobf_map').offset().left + 25, top: $('#lobf_map').offset().top + 575});
+$('#anscombe2').offset({left: $('#lobf_map').offset().left + 100, top: $('#lobf_map').offset().top + 575});
+$('#anscombe3').offset({left: $('#lobf_map').offset().left + 175, top: $('#lobf_map').offset().top + 575});
+$('#anscombe4').offset({left: $('#lobf_map').offset().left + 250, top: $('#lobf_map').offset().top + 575});
+var canvas = document.getElementById('lobf_canvas');
+var contxt = canvas.getContext('2d');
+var xVals = [];
+var xMin  =  0;
+var xMax  =  0;
+var yVals = [];
+var yValsLog = [];
+var yMin  =  0;
+var yMax  =  0;
+var plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}, p11: {}};
+var lastPlot = {lineintc: undefined, lineEnd: undefined};
+var point;
+var TWOPRESSED = false;
+var MOUSEDOWN = false;
+$('#update-points').click(function(){updateXAxis(); updateYAxis(); plotPoints();});
+$('#update-line').click(function(){bestFitPlot();});
+$('#clearButton').click(function(){clearAll();});
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function clearAll() {
+   $('.x-values, .y-values').each(function(elt) {$(this).text('');});
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   xVals = [];
+   xMin  =  0;
+   xMax  =  0;
+   yVals = [];
+   yMin  =  0;
+   yMax  =  0;
+   plottedPoints = {p1: {}, p2: {}, p3: {}, p4: {}, p5: {}, p6: {}, p7: {}, p8: {}, p9: {}, p10: {}, p11: {}};
+   lastPlot = {lineintc: undefined, lineEnd: undefined};
+   $('#regression-equation').text('');
+   $('#xmin, #xmax, #ymin, #ymax').text('');
+}
+function updateXAxis() {
+   xVals = [];
+   $('.x-values').each(function() {
+   var xNum;
+   if ($(this).text() !== '' && typeof(parseFloat($(this).text())) == 'number') {
+   xNum = parseFloat($(this).text());
+   xVals.push(xNum);
+   xMax = Math.ceil(Math.max.apply(null, xVals) / 10) * 10 + 10;
+   if (xMax !== xMin) {
+      $('#xmax').text(xMax);
+      $('#xmin').text(xMin);
+   }}});
+}
+function updateYAxis() {
+   yVals = [];
+   yValsLog = [];
+   $('.y-values').each(function() {
+   var yNum;
+   if ($(this).text() !== '' && typeof(parseFloat($(this).text())) == 'number') {
+   yNum = parseFloat($(this).text());
+   yVals.push(yNum);
+   yValsLog.push(Math.log10(yNum));
+   if (TWOPRESSED) yMax = 30;
+   else yMax = Math.ceil(Math.max.apply(null, yVals) / 10) * 10 + 10;
+   if (yMax !== yMin) {
+      $('#ymax').text(yMax);
+      $('#ymin').text(yMin);
+   }}});
+}
+function bestFitPlot() {
+   var xSum = 0;
+   var ySum = 0;
+   var xMean = 0;
+   var yMean = 0;
+   var numerator = 0;
+   var denominator = 0;
+   xVals.forEach(function(xval){xSum += xval;});
+   yValsLog.forEach(function(yval){ySum += yval;});
+   xMean = xSum / xVals.length;
+   yMean = ySum / yValsLog.length;
+   xVals.forEach(function(xval, inx){numerator += (xval - xMean) * (yValsLog[inx] - yMean);});
+   xVals.forEach(function(xval){denominator += (xval - xMean) * (xval - xMean);});
+   var slope = numerator / denominator;
+   var expSlope = Math.pow(10, slope);
+   var yintc = yMean - (slope * xMean);
+   var expCoeff = Math.pow(10, yintc);
+   var lineslope = (slope * -xMax) / yMax;
+   var lineintc = 500 - ((yintc * 500) / yMax);
+   var lineEnd = lineslope * 500 + lineintc;
+   lastPlot.lineintc = lineintc;
+   lastPlot.lineEnd = lineEnd;
+   plotPoints();
+   for (var a = 0; a < 500; a += 0.1) {
+     contxt.beginPath();
+     contxt.fillStyle = '#8A2BE2';
+     contxt.arc(a / xMax * 500, 500 - (expCoeff * Math.pow(expSlope, a)) / yMax * 500, 1, 0, 2 * Math.PI);
+     contxt.fill();
+   }
+   contxt.strokeStyle = 'black';
+   if (xVals.length > 1 && yVals.length > 1) {
+      $('#regression-equation').text('f(x) = ' + expCoeff.toFixed(2) + ' * ' + expSlope.toFixed(2) + '^x');
+   }
+   else $('#regression-equation').text('');
+}
+function plotPoints() {
+   if (xVals.length !== yVals.length) return;
+   contxt.clearRect(0, 0, canvas.width, canvas.height);
+   contxt.strokeStyle = 'black';
+   contxt.fillStyle = 'white';
+   var x1 = parseFloat($('#x1').text()) / xMax * 500;
+   var y1 = 500 - (parseFloat($('#y1').text()) / yMax * 500);
+   if (x1 && y1) {
+      contxt.beginPath();
+      contxt.arc(x1, y1, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p1.x = x1;
+      plottedPoints.p1.y = y1;
+   }
+   var x2 = parseFloat($('#x2').text()) / xMax * 500;
+   var y2 = 500 - (parseFloat($('#y2').text()) / yMax * 500);
+   if (x2 && y2) {
+      contxt.beginPath();
+      contxt.arc(x2, y2, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p2.x = x2;
+      plottedPoints.p2.y = y2;
+   }
+   var x3 = parseFloat($('#x3').text()) / xMax * 500;
+   var y3 = 500 - (parseFloat($('#y3').text()) / yMax * 500);
+   if (x3 && y3) {
+      contxt.beginPath();
+      contxt.arc(x3, y3, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p3.x = x3;
+      plottedPoints.p3.y = y3;
+   }
+   var x4 = parseFloat($('#x4').text()) / xMax * 500;
+   var y4 = 500 - (parseFloat($('#y4').text()) / yMax * 500);
+   if (x4 && y4) {
+      contxt.beginPath();
+      contxt.arc(x4, y4, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p4.x = x4;
+      plottedPoints.p4.y = y4;
+   }
+   var x5 = parseFloat($('#x5').text()) / xMax * 500;
+   var y5 = 500 - (parseFloat($('#y5').text()) / yMax * 500);
+   if (x5 && y5) {
+      contxt.beginPath();
+      contxt.arc(x5, y5, 4, 0, Math.PI * 2);
+      contxt.fill();
+      contxt.stroke();
+      plottedPoints.p5.x = x5;
+      plottedPoints.p5.y = y5;
+   }
+   var x6 = parseFloat($('#x6').text()) / xMax * 500;
+   var y6 = 500 - (parseFloat($('#y6').text()) / yMax * 500);
+   if (x6 && y6) {
+      contxt.beginPath();
+      contxt.arc(x6, y6, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p6.x = x6;
+      plottedPoints.p6.y = y6;
+   }
+   var x7 = parseFloat($('#x7').text()) / xMax * 500;
+   var y7 = 500 - (parseFloat($('#y7').text()) / yMax * 500);
+   if (x7 && y7) {
+      contxt.beginPath();
+      contxt.arc(x7, y7, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p7.x = x7;
+      plottedPoints.p7.y = y7;
+   }
+   var x8 = parseFloat($('#x8').text()) / xMax * 500;
+   var y8 = 500 - (parseFloat($('#y8').text()) / yMax * 500);
+   if (x8 && y8) {
+      contxt.beginPath();
+      contxt.arc(x8, y8, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p8.x = x8;
+      plottedPoints.p8.y = y8;
+   }
+   var x9 = parseFloat($('#x9').text()) / xMax * 500;
+   var y9 = 500 - (parseFloat($('#y9').text()) / yMax * 500);
+   if (x9 && y9) {
+      contxt.beginPath();
+      contxt.arc(x9, y9, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p9.x = x9;
+      plottedPoints.p9.y = y9;
+   }
+   var x10 = parseFloat($('#x10').text()) / xMax * 500;
+   var y10 = 500 - (parseFloat($('#y10').text()) / yMax * 500);
+   if (x10 && y10) {
+      contxt.beginPath();
+      contxt.arc(x10, y10, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p10.x = x10;
+      plottedPoints.p10.y = y10;
+   }
+   var x11 = parseFloat($('#x11').text()) / xMax * 500;
+   var y11 = 500 - (parseFloat($('#y11').text()) / yMax * 500);
+   if (x11 && y11) {
+      contxt.beginPath();
+      contxt.arc(x11, y11, 4, 0, Math.PI * 2);
+      contxt.stroke();
+      plottedPoints.p11.x = x11;
+      plottedPoints.p11.y = y11;
+   }
+}
+function startMouse() {MOUSEDOWN = true;}
+function endMouse() {
+   MOUSEDOWN = false;
+   $('.x-values').css({'background-color': 'white'});
+   $('.y-values').css({'background-color': 'white'});
+}
+function dragPoint(evt) {
+   if (!MOUSEDOWN) return;
+   if (xVals.length == 0 || yVals.length == 0) return;
+   var loc = windowToCanvas_mouse(canvas, evt.clientX, evt.clientY);
+   for (var pt in plottedPoints) {
+      if (loc.x <= plottedPoints[pt].x + 5 && loc.x >= plottedPoints[pt].x - 5
+       && loc.y <= plottedPoints[pt].y + 5 && loc.y >= plottedPoints[pt].y - 5) {point = pt; break;}
+   }
+   var xinx = xVals.indexOf(xVals.find(function(el){return el == parseFloat($('#x' + point.slice(1)).text());}));
+   var yinx = yVals.indexOf(yVals.find(function(el){return el == parseFloat($('#y' + point.slice(1)).text());}));
+   var newX = loc.x / 500 * xMax;
+   var newY = (500 - loc.y) * yMax / 500;
+   xVals[xinx] = parseFloat(newX.toFixed(2));
+   yVals[yinx] = parseFloat(newY.toFixed(2));
+   $('#x' + point.slice(1)).text(newX.toFixed(2));
+   $('#y' + point.slice(1)).text(newY.toFixed(2));
+   plotPoints();
+   bestFitPlot();
+   $('#x' + point.slice(1)).css({'background-color': '#fafafa'});
+   $('#y' + point.slice(1)).css({'background-color': '#fafafa'});
+}
+function populate(evt) {
+   clearAll();
+   if (evt.target.id === 'anscombe1' || evt.target.id === 'anscombe2' || evt.target.id === 'anscombe3') {
+      $('#x1').text('10.0');$('#x2').text('8.0');$('#x3').text('13.0');$('#x4').text('9.0');$('#x5').text('11.0');
+      $('#x6').text('14.0');$('#x7').text('6.0');$('#x8').text('4.0');$('#x9').text('12.0');$('#x10').text('7.0');
+      $('#x11').text('5.0');
+      }
+   else if (evt.target.id === 'anscombe4') {
+      $('#x1, #x2, #x3, #x4, #x5, #x6, #x7, #x9, #x10, #x11').text('8.0');
+      $('#x8').text('19.0');
+      $('#y1').text('6.58');$('#y2').text('5.76');$('#y3').text('7.71');$('#y4').text('8.84');$('#y5').text('8.47');
+      $('#y6').text('7.04');$('#y7').text('5.25');$('#y8').text('12.50');$('#y9').text('5.56');$('#y10').text('7.91');
+      $('#y11').text('6.89');
+      }
+   if (evt.target.id === 'anscombe1') {
+      $('#y1').text('8.04');$('#y2').text('6.95');$('#y3').text('7.58');$('#y4').text('8.81');$('#y5').text('8.33');
+      $('#y6').text('9.96');$('#y7').text('7.24');$('#y8').text('4.26');$('#y9').text('10.84');$('#y10').text('4.82');
+      $('#y11').text('5.68');
+      }
+   else if (evt.target.id === 'anscombe2') {
+      TWOPRESSED = true;
+      $('#y1').text('9.14');$('#y2').text('8.14');$('#y3').text('8.74');$('#y4').text('8.77');$('#y5').text('9.26');
+      $('#y6').text('8.10');$('#y7').text('6.13');$('#y8').text('3.10');$('#y9').text('9.13');$('#y10').text('7.26');
+      $('#y11').text('4.74');
+      }
+   else if (evt.target.id === 'anscombe3') {
+      $('#y1').text('7.46');$('#y2').text('6.77');$('#y3').text('12.74');$('#y4').text('7.11');$('#y5').text('7.81');
+      $('#y6').text('8.84');$('#y7').text('6.08');$('#y8').text('5.39');$('#y9').text('8.15');$('#y10').text('6.42');
+      $('#y11').text('5.73');
+      }
+   updateXAxis();
+   updateYAxis();
+   plotPoints();
+   bestFitPlot();
+   TWOPRESSED = false;
+}
+$('#lobf_canvas').bind('mousedown', startMouse);
+$('#lobf_canvas').bind('mouseup', endMouse);
+$('#lobf_canvas').bind('mousemove', dragPoint);
+$('.anscombe').bind('click', populate);
+</script>
