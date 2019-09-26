@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset = 'utf-8'>
-<meta name='description' content="Interactive tool to explore exponential regression.">
+<meta name='description' content="Interactive tool to explore linear regression and Anscombe's Quartet.">
 <meta name = 'author' content = 'Josh Fisher'>
 <link rel='icon' href='https://lh6.googleusercontent.com/-VnLfzaTTCIQ/VSC_JKFIGnI/AAAAAAAAR68/4oDPXB7oOOQ/s144-no/nbk_favicon.gif'>
 <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
@@ -457,11 +457,11 @@ function dragPoint(evt) {
        && loc.y <= plottedPoints[pt].y + 5 && loc.y >= plottedPoints[pt].y - 5) {point = pt; break;}
    }
    var xinx = xVals.indexOf(xVals.find(function(el){return el == parseFloat($('#x' + point.slice(1)).text());}));
-   var yinx = yVals.indexOf(yVals.find(function(el){return el == parseFloat($('#y' + point.slice(1)).text());}));
+   var yinx = yValsLog.indexOf(yValsLog.find(function(el){return el == parseFloat($('#y' + point.slice(1)).text());}));
    var newX = loc.x / 500 * xMax;
    var newY = (500 - loc.y) * yMax / 500;
    xVals[xinx] = parseFloat(newX.toFixed(2));
-   yVals[yinx] = parseFloat(newY.toFixed(2));
+   yValsLog[yinx] = parseFloat(newY.toFixed(2));
    $('#x' + point.slice(1)).text(newX.toFixed(2));
    $('#y' + point.slice(1)).text(newY.toFixed(2));
    plotPoints();
