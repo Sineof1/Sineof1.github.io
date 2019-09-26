@@ -333,6 +333,7 @@ function bestFitPlot() {
 }
 function plotPoints() {
    if (xVals.length !== yVals.length) return;
+   $('#regression-equation').html('')
    contxt.clearRect(0, 0, canvas.width, canvas.height);
    contxt.strokeStyle = 'black';
    contxt.fillStyle = 'white';
