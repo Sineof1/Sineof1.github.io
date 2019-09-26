@@ -327,7 +327,7 @@ function bestFitPlot() {
    }
    contxt.strokeStyle = 'black';
    if (xVals.length > 1 && yVals.length > 1) {
-      $('#regression-equation').html('<span>f(x) = ' + expCoeff.toFixed(2) + ' × ' + expSlope.toFixed(2) + <sup>x</sup></span>');
+      $('#regression-equation').html(`<span>f(x) = ${expCoeff.toFixed(2)} × ${expSlope.toFixed(2)} <sup>x</sup></span>`);
    }
    else $('#regression-equation').html('');
 }
