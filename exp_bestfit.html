@@ -327,9 +327,9 @@ function bestFitPlot() {
    }
    contxt.strokeStyle = 'black';
    if (xVals.length > 1 && yVals.length > 1) {
-      $('#regression-equation').text('f(x) = ' + expCoeff.toFixed(2) + ' * ' + expSlope.toFixed(2) + 'ˣ');
+      $('#regression-equation').html('<span>f(x) = ' + expCoeff.toFixed(2) + ' × ' + expSlope.toFixed(2) + <sup>x</sup></span>');
    }
-   else $('#regression-equation').text('');
+   else $('#regression-equation').html('');
 }
 function plotPoints() {
    if (xVals.length !== yVals.length) return;
