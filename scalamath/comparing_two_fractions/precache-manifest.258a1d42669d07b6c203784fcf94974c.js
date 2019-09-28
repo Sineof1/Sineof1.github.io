@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "52de245a098beb1cead377949fe06b78",
+    "revision": "7ea41e145f70146cb605af348e92fa40",
     "url": "/scalamath/comparing_two_fractions/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/scalamath/comparing_two_fractions/static/css/2.2e34ae7f.chunk.css"
   },
   {
-    "revision": "339cae2e68e884005b69",
+    "revision": "46f86b7b9f7e8a6a2bf3",
     "url": "/scalamath/comparing_two_fractions/static/css/main.7b8bd13f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/scalamath/comparing_two_fractions/static/js/2.8a09c756.chunk.js"
   },
   {
-    "revision": "339cae2e68e884005b69",
-    "url": "/scalamath/comparing_two_fractions/static/js/main.e4bdf6c2.chunk.js"
+    "revision": "46f86b7b9f7e8a6a2bf3",
+    "url": "/scalamath/comparing_two_fractions/static/js/main.d8dd0538.chunk.js"
   },
   {
     "revision": "ebe5443be4c4933ef18d",
