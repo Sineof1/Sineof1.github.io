@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/scalamath/making_fractions_smaller_larger/static/css/main.960bb231.chunk.css",
-    "main.js": "/scalamath/making_fractions_smaller_larger/static/js/main.0c9b0ec7.chunk.js",
-    "main.js.map": "/scalamath/making_fractions_smaller_larger/static/js/main.0c9b0ec7.chunk.js.map",
+    "main.js": "/scalamath/making_fractions_smaller_larger/static/js/main.4bfd922b.chunk.js",
+    "main.js.map": "/scalamath/making_fractions_smaller_larger/static/js/main.4bfd922b.chunk.js.map",
     "runtime~main.js": "/scalamath/making_fractions_smaller_larger/static/js/runtime~main.855418ba.js",
     "runtime~main.js.map": "/scalamath/making_fractions_smaller_larger/static/js/runtime~main.855418ba.js.map",
     "static/css/2.2e34ae7f.chunk.css": "/scalamath/making_fractions_smaller_larger/static/css/2.2e34ae7f.chunk.css",
     "static/js/2.63a9a9a0.chunk.js": "/scalamath/making_fractions_smaller_larger/static/js/2.63a9a9a0.chunk.js",
     "static/js/2.63a9a9a0.chunk.js.map": "/scalamath/making_fractions_smaller_larger/static/js/2.63a9a9a0.chunk.js.map",
     "index.html": "/scalamath/making_fractions_smaller_larger/index.html",
-    "precache-manifest.ca4884c83c92e33ea13382e7b46f16e9.js": "/scalamath/making_fractions_smaller_larger/precache-manifest.ca4884c83c92e33ea13382e7b46f16e9.js",
+    "precache-manifest.10b62664883b4df6ce325a8f08872618.js": "/scalamath/making_fractions_smaller_larger/precache-manifest.10b62664883b4df6ce325a8f08872618.js",
     "service-worker.js": "/scalamath/making_fractions_smaller_larger/service-worker.js",
     "static/css/2.2e34ae7f.chunk.css.map": "/scalamath/making_fractions_smaller_larger/static/css/2.2e34ae7f.chunk.css.map",
     "static/css/main.960bb231.chunk.css.map": "/scalamath/making_fractions_smaller_larger/static/css/main.960bb231.chunk.css.map"
