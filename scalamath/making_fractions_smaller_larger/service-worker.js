@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/scalamath/making_fractions_smaller_larger/precache-manifest.497a56efca4849bebd845f5138e92fdb.js"
+  "/scalamath/making_fractions_smaller_larger/precache-manifest.046beeae6e76f80299f39efcd00f31a4.js"
 );
 
 self.addEventListener('message', (event) => {
