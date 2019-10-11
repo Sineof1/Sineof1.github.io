@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/scala/fractions_of_all_sizes/static/css/main.1e5820e2.chunk.css",
-    "main.js": "/scala/fractions_of_all_sizes/static/js/main.d714b4d8.chunk.js",
-    "main.js.map": "/scala/fractions_of_all_sizes/static/js/main.d714b4d8.chunk.js.map",
-    "runtime~main.js": "/scala/fractions_of_all_sizes/static/js/runtime~main.53c0004a.js",
-    "runtime~main.js.map": "/scala/fractions_of_all_sizes/static/js/runtime~main.53c0004a.js.map",
-    "static/css/2.2e34ae7f.chunk.css": "/scala/fractions_of_all_sizes/static/css/2.2e34ae7f.chunk.css",
-    "static/js/2.8a09c756.chunk.js": "/scala/fractions_of_all_sizes/static/js/2.8a09c756.chunk.js",
-    "static/js/2.8a09c756.chunk.js.map": "/scala/fractions_of_all_sizes/static/js/2.8a09c756.chunk.js.map",
-    "index.html": "/scala/fractions_of_all_sizes/index.html",
-    "precache-manifest.10ee22b8f81a31d07efb798b6380ff4a.js": "/scala/fractions_of_all_sizes/precache-manifest.10ee22b8f81a31d07efb798b6380ff4a.js",
-    "service-worker.js": "/scala/fractions_of_all_sizes/service-worker.js",
-    "static/css/2.2e34ae7f.chunk.css.map": "/scala/fractions_of_all_sizes/static/css/2.2e34ae7f.chunk.css.map",
-    "static/css/main.1e5820e2.chunk.css.map": "/scala/fractions_of_all_sizes/static/css/main.1e5820e2.chunk.css.map"
+    "main.css": "/scalamath/fractions_of_all_sizes/static/css/main.1e5820e2.chunk.css",
+    "main.js": "/scalamath/fractions_of_all_sizes/static/js/main.d714b4d8.chunk.js",
+    "main.js.map": "/scalamath/fractions_of_all_sizes/static/js/main.d714b4d8.chunk.js.map",
+    "runtime~main.js": "/scalamath/fractions_of_all_sizes/static/js/runtime~main.058f5286.js",
+    "runtime~main.js.map": "/scalamath/fractions_of_all_sizes/static/js/runtime~main.058f5286.js.map",
+    "static/css/2.2e34ae7f.chunk.css": "/scalamath/fractions_of_all_sizes/static/css/2.2e34ae7f.chunk.css",
+    "static/js/2.8a09c756.chunk.js": "/scalamath/fractions_of_all_sizes/static/js/2.8a09c756.chunk.js",
+    "static/js/2.8a09c756.chunk.js.map": "/scalamath/fractions_of_all_sizes/static/js/2.8a09c756.chunk.js.map",
+    "index.html": "/scalamath/fractions_of_all_sizes/index.html",
+    "precache-manifest.7ecdddde828e12d2df220883b0fd0ea5.js": "/scalamath/fractions_of_all_sizes/precache-manifest.7ecdddde828e12d2df220883b0fd0ea5.js",
+    "service-worker.js": "/scalamath/fractions_of_all_sizes/service-worker.js",
+    "static/css/2.2e34ae7f.chunk.css.map": "/scalamath/fractions_of_all_sizes/static/css/2.2e34ae7f.chunk.css.map",
+    "static/css/main.1e5820e2.chunk.css.map": "/scalamath/fractions_of_all_sizes/static/css/main.1e5820e2.chunk.css.map"
   }
 }
