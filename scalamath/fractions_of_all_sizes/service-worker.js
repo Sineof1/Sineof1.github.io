@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/scalamath/fractions_of_all_sizes/precache-manifest.d88f7113288370f49abe9ebbe05befc7.js"
+  "/scalamath/fractions_of_all_sizes/precache-manifest.22eba60832537ae6d653e1e078f6fa32.js"
 );
 
 self.addEventListener('message', (event) => {
