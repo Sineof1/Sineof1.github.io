@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/scalamath/comparing_two_fractions/precache-manifest.7a4d5c75f6ac77128556a56bdcc1f8f2.js"
+  "/scalamath/comparing_two_fractions/precache-manifest.e6b812636826bb0385152882007163d9.js"
 );
 
 self.addEventListener('message', (event) => {
