@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/scalamath/one_step_equations/precache-manifest.f8904f79ac84219719b679fb7eb65986.js"
+  "/scalamath/one_step_equations/precache-manifest.3a13061d23f4da3987846ac85f3333cc.js"
 );
 
 self.addEventListener('message', (event) => {
