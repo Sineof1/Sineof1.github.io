@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name='description' content='Walking through a proof of the triangle sum theorem.'>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none"});</script>
+<script type="text/javascript"src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<title>Triangle Sum Theorem</title>
+</head>
+
+<style>
+body {
+   margin:0;
+   padding:0;
+}
+#proof-steps {
+   width:40%;
+   height:100vh;
+   float:right;
+   padding-top:30px;
+   box-sizing:border-box;
+   border-left:2px dashed gray;
+   overflow-y:scroll;
+   -ms-overflow-style: none;
+   overflow:-moz-scrollbars-none;
+}
+#proof-steps::-webkit-scrollbar {display: none;}
+#step-title {
+   display:block;
+   width:100%;
+   height:50px;
+   margin-bottom:40px;
+   font-family:Arimo;
+   font-weight:900;
+   font-size:2vw;
+   text-align:center;
+}
+.step {
+   position:relative;
+   width:100%;
+   height:12%;
+   border-top:1px solid gray;
+   border-bottom:1px solid gray;
+   margin-bottom:3vh;
+   overflow:hidden;
+}
+.step-number {
+   position:absolute;
+   top:0;
+   left:0;
+   display:inline-flex;
+   align-items:center;
+   justify-content:center;
+   width:10%;
+   height:100%;
+   font-family:Arimo;
+   font-size:2vw;
+   background-color:#ccc;
+   color:white;
+   overflow:hidden;
+   cursor:pointer;
+}
+.step-text {
+   position:absolute;
+   top:5px;
+   left:12%;
+   display:inline-block;
+   width:85%;
+   height:100%;
+   box-sizing:border-box;
+   padding:10px;
+   font-family:Arimo;
+   font-size:1.3vw;
+   line-height:1.6em;
+}
+#workspace {
+   position:relative;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:60%;
+   height:100vh;
+   float:left;
+   padding:5%;
+   box-sizing:border-box;
+   overflow:hidden;
+   background-color:beige;
+}
+#svg-content-responsive {
+   display: inline-block;
+   position: absolute;
+   top: 10px;
+   left: 0;
+}
+#startover {
+   text-align:center;
+   font-family:Arimo;
+   font-size:1.3vmax;
+   color:blue;
+   cursor:pointer;
+   margin-top:15px;
+   margin-bottom:40px;
+}
+</style>
+
+<body>
+<img src='trisumimage1.PNG' style='position:fixed;visibility:hidden;' alt='triangle sum theorem' />
+<img src='trisumimage2.PNG' style='position:fixed;visibility:hidden;' alt='triangle sum theorem' />
+<div id='workspace'></div>
+<div id='proof-steps'>
+<div id='step-title'>Triangle Sum + Exterior Angle Theorem</div>
+<div style='font-family:Arimo;font-size:1.2vw;padding-left:5%;margin-bottom:15px;'>Press on the numbers to see the steps of the proof.</div>
+<div class='step' id='1step' style='background-color:#eaeaea;'>
+<div class='step-number' id='step1'>1</div>
+<div class='step-text'>Start with \(\Delta\mathtt{ABC}\). Extend \(\mathtt{\overline{BC}}\) to point \(\mathtt{D}\).<br />Line \(\mathtt{BD}\) will be a transversal.</div>
+</div>
+
+<div class='step' id='2step' style='background-color:#eaeaea;'>
+<div class='step-number' id='step2' style='pointer-events:none;'>2</div>
+<div class='step-text'>Draw line \(\mathtt{EC}\) parallel to segment \(\mathtt{AB}\).<br />Draw transversal \(\mathtt{\overleftrightarrow{AC}}\).</div>
+</div>
+
+<div class='step' id='3step' style='background-color:#eaeaea;'>
+<div class='step-number' id='step3' style='pointer-events:none;'>3</div>
+<div class='step-text'>Corresponding angles are congruent.<br />\(\mathtt{m\color{green}{\measuredangle{ECD}}}\) = \(\mathtt{m\color{green}{\measuredangle{ABC}}}\)</div>
+</div>
+
+<div class='step' id='4step' style='background-color:#eaeaea;'>
+<div class='step-number' id='step4' style='pointer-events:none;'>4</div>
+<div class='step-text'>Alternate interior angles are congruent.<br />\(\mathtt{m\color{orange}{\measuredangle{ECA}}}\) = \(\mathtt{m\color{orange}{\measuredangle{CAB}}}\)</div>
+</div>
+
+<div class='step' id='5step' style='background-color:#eaeaea;'>
+<div class='step-number' id='step5' style='pointer-events:none;'>5</div>
+<div class='step-text'>The exterior angle is congruent to the two remote interior angles. And, \(\mathtt{m\color{orange}{\measuredangle{A}}}\) + \(\mathtt{m\color{green}{\measuredangle{B}}}\) + \(\mathtt{m\color{slateblue}{\measuredangle{C}}}\) = \(\mathtt{180^\circ}\).</div>
+</div>
+<div id='startover'>Start Over</div>
+</div>
+<!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-556d04cc5bc8f00e"></script>
+</body>
+</html>
+
+<meta name="twitter:card" content="summary" /><meta name="twitter:site" content="Step by Step Proofs" /><meta name="twitter:title" content="Triangle Sum + Exterior Angle Theorem" /><meta name="twitter:description" content="A walkthrough for the steps of a proof to the Triangle Sum and Exterior Angle Theorems." /><meta name="twitter:image" content="https://guzintamath.com/theorems/trisumimage1.PNG" />
+<script src='trisumscript.js' type='text/javascript'></script>
