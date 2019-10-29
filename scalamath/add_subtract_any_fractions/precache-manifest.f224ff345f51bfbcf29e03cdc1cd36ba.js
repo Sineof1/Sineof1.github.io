@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7b9a5ee17f44a486c14e95c18480e2c0",
+    "revision": "f13e19f973baa91e986c19303af14521",
     "url": "/scalamath/add_subtract_any_fractions/index.html"
   },
   {
-    "revision": "6a21823d0a1ec8c77904",
+    "revision": "85dea212e493d6156ddc",
     "url": "/scalamath/add_subtract_any_fractions/static/css/main.e4768864.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/scalamath/add_subtract_any_fractions/static/js/2.fc7f80dd.chunk.js"
   },
   {
-    "revision": "6a21823d0a1ec8c77904",
-    "url": "/scalamath/add_subtract_any_fractions/static/js/main.5f860ef7.chunk.js"
+    "revision": "85dea212e493d6156ddc",
+    "url": "/scalamath/add_subtract_any_fractions/static/js/main.f4646ddb.chunk.js"
   },
   {
     "revision": "314ba9de284991b877e8",
