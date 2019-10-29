@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/scalamath/add_subtract_any_fractions/precache-manifest.ce10b8779390f4a75d8c2fb0ead50eeb.js"
+  "/scalamath/add_subtract_any_fractions/precache-manifest.115c07919e6ffc63f8b5f4581168e5da.js"
 );
 
 self.addEventListener('message', (event) => {
