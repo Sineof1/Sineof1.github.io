@@ -1,17 +1,15 @@
 {
   "files": {
-    "main.css": "/scalamath/comparing_two_fractions/static/css/main.95b6065a.chunk.css",
-    "main.js": "/scalamath/comparing_two_fractions/static/js/main.21d4b537.chunk.js",
-    "main.js.map": "/scalamath/comparing_two_fractions/static/js/main.21d4b537.chunk.js.map",
+    "main.css": "/scalamath/comparing_two_fractions/static/css/main.2d3c8ec1.chunk.css",
+    "main.js": "/scalamath/comparing_two_fractions/static/js/main.c8931cc8.chunk.js",
+    "main.js.map": "/scalamath/comparing_two_fractions/static/js/main.c8931cc8.chunk.js.map",
     "runtime~main.js": "/scalamath/comparing_two_fractions/static/js/runtime~main.df36ffdb.js",
     "runtime~main.js.map": "/scalamath/comparing_two_fractions/static/js/runtime~main.df36ffdb.js.map",
-    "static/css/2.2e34ae7f.chunk.css": "/scalamath/comparing_two_fractions/static/css/2.2e34ae7f.chunk.css",
-    "static/js/2.bbf8bcb5.chunk.js": "/scalamath/comparing_two_fractions/static/js/2.bbf8bcb5.chunk.js",
-    "static/js/2.bbf8bcb5.chunk.js.map": "/scalamath/comparing_two_fractions/static/js/2.bbf8bcb5.chunk.js.map",
+    "static/js/2.fc7f80dd.chunk.js": "/scalamath/comparing_two_fractions/static/js/2.fc7f80dd.chunk.js",
+    "static/js/2.fc7f80dd.chunk.js.map": "/scalamath/comparing_two_fractions/static/js/2.fc7f80dd.chunk.js.map",
     "index.html": "/scalamath/comparing_two_fractions/index.html",
-    "precache-manifest.1ca651c36337e72bc7767eaf90d3a4dd.js": "/scalamath/comparing_two_fractions/precache-manifest.1ca651c36337e72bc7767eaf90d3a4dd.js",
+    "precache-manifest.2fbee5fe96aadd5003582acdf61032e0.js": "/scalamath/comparing_two_fractions/precache-manifest.2fbee5fe96aadd5003582acdf61032e0.js",
     "service-worker.js": "/scalamath/comparing_two_fractions/service-worker.js",
-    "static/css/2.2e34ae7f.chunk.css.map": "/scalamath/comparing_two_fractions/static/css/2.2e34ae7f.chunk.css.map",
-    "static/css/main.95b6065a.chunk.css.map": "/scalamath/comparing_two_fractions/static/css/main.95b6065a.chunk.css.map"
+    "static/css/main.2d3c8ec1.chunk.css.map": "/scalamath/comparing_two_fractions/static/css/main.2d3c8ec1.chunk.css.map"
   }
 }
