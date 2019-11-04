@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/scalamath/comparing_two_fractions/static/css/main.2d3c8ec1.chunk.css",
-    "main.js": "/scalamath/comparing_two_fractions/static/js/main.c8931cc8.chunk.js",
-    "main.js.map": "/scalamath/comparing_two_fractions/static/js/main.c8931cc8.chunk.js.map",
+    "main.js": "/scalamath/comparing_two_fractions/static/js/main.f7a65392.chunk.js",
+    "main.js.map": "/scalamath/comparing_two_fractions/static/js/main.f7a65392.chunk.js.map",
     "runtime~main.js": "/scalamath/comparing_two_fractions/static/js/runtime~main.df36ffdb.js",
     "runtime~main.js.map": "/scalamath/comparing_two_fractions/static/js/runtime~main.df36ffdb.js.map",
     "static/js/2.fc7f80dd.chunk.js": "/scalamath/comparing_two_fractions/static/js/2.fc7f80dd.chunk.js",
     "static/js/2.fc7f80dd.chunk.js.map": "/scalamath/comparing_two_fractions/static/js/2.fc7f80dd.chunk.js.map",
     "index.html": "/scalamath/comparing_two_fractions/index.html",
-    "precache-manifest.2fbee5fe96aadd5003582acdf61032e0.js": "/scalamath/comparing_two_fractions/precache-manifest.2fbee5fe96aadd5003582acdf61032e0.js",
+    "precache-manifest.300f5890edafb8edee4a371099b0a0fc.js": "/scalamath/comparing_two_fractions/precache-manifest.300f5890edafb8edee4a371099b0a0fc.js",
     "service-worker.js": "/scalamath/comparing_two_fractions/service-worker.js",
     "static/css/main.2d3c8ec1.chunk.css.map": "/scalamath/comparing_two_fractions/static/css/main.2d3c8ec1.chunk.css.map"
   }
