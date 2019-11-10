@@ -1,17 +1,15 @@
 {
   "files": {
-    "main.css": "/scalamath/fractions_of_all_sizes/static/css/main.1e5820e2.chunk.css",
-    "main.js": "/scalamath/fractions_of_all_sizes/static/js/main.c35b2d6f.chunk.js",
-    "main.js.map": "/scalamath/fractions_of_all_sizes/static/js/main.c35b2d6f.chunk.js.map",
+    "main.css": "/scalamath/fractions_of_all_sizes/static/css/main.18dfe7fc.chunk.css",
+    "main.js": "/scalamath/fractions_of_all_sizes/static/js/main.fda959e7.chunk.js",
+    "main.js.map": "/scalamath/fractions_of_all_sizes/static/js/main.fda959e7.chunk.js.map",
     "runtime~main.js": "/scalamath/fractions_of_all_sizes/static/js/runtime~main.058f5286.js",
     "runtime~main.js.map": "/scalamath/fractions_of_all_sizes/static/js/runtime~main.058f5286.js.map",
-    "static/css/2.2e34ae7f.chunk.css": "/scalamath/fractions_of_all_sizes/static/css/2.2e34ae7f.chunk.css",
-    "static/js/2.8a09c756.chunk.js": "/scalamath/fractions_of_all_sizes/static/js/2.8a09c756.chunk.js",
-    "static/js/2.8a09c756.chunk.js.map": "/scalamath/fractions_of_all_sizes/static/js/2.8a09c756.chunk.js.map",
+    "static/js/2.fc7f80dd.chunk.js": "/scalamath/fractions_of_all_sizes/static/js/2.fc7f80dd.chunk.js",
+    "static/js/2.fc7f80dd.chunk.js.map": "/scalamath/fractions_of_all_sizes/static/js/2.fc7f80dd.chunk.js.map",
     "index.html": "/scalamath/fractions_of_all_sizes/index.html",
-    "precache-manifest.22eba60832537ae6d653e1e078f6fa32.js": "/scalamath/fractions_of_all_sizes/precache-manifest.22eba60832537ae6d653e1e078f6fa32.js",
+    "precache-manifest.01549446e94d66813ea83977c1d8263f.js": "/scalamath/fractions_of_all_sizes/precache-manifest.01549446e94d66813ea83977c1d8263f.js",
     "service-worker.js": "/scalamath/fractions_of_all_sizes/service-worker.js",
-    "static/css/2.2e34ae7f.chunk.css.map": "/scalamath/fractions_of_all_sizes/static/css/2.2e34ae7f.chunk.css.map",
-    "static/css/main.1e5820e2.chunk.css.map": "/scalamath/fractions_of_all_sizes/static/css/main.1e5820e2.chunk.css.map"
+    "static/css/main.18dfe7fc.chunk.css.map": "/scalamath/fractions_of_all_sizes/static/css/main.18dfe7fc.chunk.css.map"
   }
 }
