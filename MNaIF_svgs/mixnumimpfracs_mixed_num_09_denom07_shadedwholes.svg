@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 450" width="95%" height="100%" preserveAspectRatio="xMidYMid" style="transform:scale(0.95, -0.95);">
+<rect x="0" y="0.0" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="28.928571428571427" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="57.857142857142854" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="86.78571428571428" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="115.71428571428571" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="144.64285714285714" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="173.57142857142856" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="0.0" width="95%" height="45.0%" style="fill: none; stroke: blue; stroke-width: 2;"></rect>
+<rect x="0" y="225.0" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="253.92857142857142" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="282.85714285714283" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="311.7857142857143" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="340.7142857142857" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="369.6428571428571" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="398.57142857142856" width="95%" height="6.428571428571429%" style="fill:none; stroke: gray;stroke-width:1;"></rect>
+<rect x="0" y="225.0" width="95%" height="45.0%" style="fill: none; stroke: blue; stroke-width: 2;"></rect>
+<rect x="0" y="0.0" width="95%" height="45.0%" style="fill:rgba(100, 100, 100, 0.3); stroke: none;"></rect>
+<text x="455" y="267.5" style="text-anchor:start;transform:scale(1, -1);transform-origin:50% 50%;fill:blue;stroke:none;font-size:14px;">1 whole</text><line x1="450" y1="262.5" x2="427.5" y2="262.5" style="stroke:blue;stroke-width:2;stroke-linecap:round;transform-origin:50% 50%;transform:scale(1, -1);" /></svg>

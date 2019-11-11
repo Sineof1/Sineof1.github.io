@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 450" width="95%" height="100%" preserveAspectRatio="xMidYMid" style="transform:scale(0.95, -0.95);">
+<rect x="0" y="0.0" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="33.75" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="67.5" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="101.25" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="135.0" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="168.75" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="0.0" width="95%" height="45.0%" style="fill: none; stroke: blue; stroke-width: 2;"></rect>
+<rect x="0" y="225.0" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="258.75" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="292.5" width="95%" height="7.5%" style="fill: rgba(100, 100, 100, 0.3); stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="326.25" width="95%" height="7.5%" style="fill: none; stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="360.0" width="95%" height="7.5%" style="fill: none; stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="393.75" width="95%" height="7.5%" style="fill: none; stroke: gray;stroke-width: 1"></rect>
+<rect x="0" y="225.0" width="95%" height="45.0%" style="fill: none; stroke: blue; stroke-width: 2;"></rect>
+<text x="455" y="267.5" style="text-anchor:start;transform:scale(1, -1);transform-origin:50% 50%;fill:blue;stroke:none;font-size:14px;">1 whole</text><line x1="450" y1="262.5" x2="427.5" y2="262.5" style="stroke:blue;stroke-width:2;stroke-linecap:round;transform-origin:50% 50%;transform:scale(1, -1);" /></svg>
