@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "15ec878f13a9d7be14b76e9b7127ede2",
+    "revision": "003282bbc19a237b3bde1a02bda568a8",
     "url": "/scalamath/whole_numbers_to_rationals/index.html"
   },
   {
-    "revision": "8c15909c22903706a2f7",
+    "revision": "00f6dc383ed882a363fe",
     "url": "/scalamath/whole_numbers_to_rationals/static/css/main.f77d9a2d.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/scalamath/whole_numbers_to_rationals/static/js/2.fc7f80dd.chunk.js"
   },
   {
-    "revision": "8c15909c22903706a2f7",
-    "url": "/scalamath/whole_numbers_to_rationals/static/js/main.0faf6ce9.chunk.js"
+    "revision": "00f6dc383ed882a363fe",
+    "url": "/scalamath/whole_numbers_to_rationals/static/js/main.74d9819e.chunk.js"
   },
   {
     "revision": "ac03081deb3df4b09c30",
