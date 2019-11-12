@@ -1,13 +1,22 @@
-let deferredInstallPrompt;
+var deferredPrompt;
 
-window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
-
-function saveBeforeInstallPromptEvent(evt) {
-  deferredInstallPrompt = evt;
-  installButton.removeAttribute('hidden');
-  deferredInstallPrompt.prompt();
+window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  showAddToHomeScreen();
+});
+function showAddToHomeScreen() {
+  var a2hsBtn = document.querySelector(".ad2hs-prompt");
+  a2hsBtn.style.display = "block";
+  a2hsBtn.addEventListener("click", addToHomeScreen);
 }
-function add2Home(evt) {
-  // Hide the install button, it can't be called twice.
-  document.getElementById('add2Home').setAttribute('hidden', true);
+function addToHomeScreen() {
+  var a2hsBtn = document.querySelector(".ad2hs-prompt");
+  a2hsBtn.style.display = 'none';
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(choiceResult){
+    if (choiceResult.outcome === 'accepted') console.log('User accepted the A2HS prompt');
+    else console.log('User dismissed the A2HS prompt');
+  deferredPrompt = null;
+  });
 }

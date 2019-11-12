@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c8425589a4a83ffa07c8095e48b40606",
+    "revision": "15ec878f13a9d7be14b76e9b7127ede2",
     "url": "/scalamath/whole_numbers_to_rationals/index.html"
   },
   {

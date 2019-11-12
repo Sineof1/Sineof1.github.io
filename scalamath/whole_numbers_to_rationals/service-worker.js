@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/scalamath/whole_numbers_to_rationals/precache-manifest.c8102795fe810406d9c0793aec022b67.js"
+  "/scalamath/whole_numbers_to_rationals/precache-manifest.f5396442bcccdcbf4fbd02329fec6b82.js"
 );
 
 self.addEventListener('message', (event) => {
