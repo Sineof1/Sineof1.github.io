@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/scalamath/adding_like_fractions/precache-manifest.7edcedd39049d3c1475c68ab69a633f9.js"
+  "/scalamath/adding_like_fractions/precache-manifest.3fe6f1d45d7a3431c837512f69d9c9e3.js"
 );
 
 self.addEventListener('message', (event) => {

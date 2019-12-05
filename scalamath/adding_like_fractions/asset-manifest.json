@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/scalamath/adding_like_fractions/static/css/main.a6786ed7.chunk.css",
-    "main.js": "/scalamath/adding_like_fractions/static/js/main.2932faf3.chunk.js",
-    "main.js.map": "/scalamath/adding_like_fractions/static/js/main.2932faf3.chunk.js.map",
+    "main.css": "/scalamath/adding_like_fractions/static/css/main.08be05d7.chunk.css",
+    "main.js": "/scalamath/adding_like_fractions/static/js/main.dcd23c4d.chunk.js",
+    "main.js.map": "/scalamath/adding_like_fractions/static/js/main.dcd23c4d.chunk.js.map",
     "runtime~main.js": "/scalamath/adding_like_fractions/static/js/runtime~main.9e5eaa32.js",
     "runtime~main.js.map": "/scalamath/adding_like_fractions/static/js/runtime~main.9e5eaa32.js.map",
     "static/js/2.c94bf451.chunk.js": "/scalamath/adding_like_fractions/static/js/2.c94bf451.chunk.js",
     "static/js/2.c94bf451.chunk.js.map": "/scalamath/adding_like_fractions/static/js/2.c94bf451.chunk.js.map",
     "index.html": "/scalamath/adding_like_fractions/index.html",
-    "precache-manifest.7edcedd39049d3c1475c68ab69a633f9.js": "/scalamath/adding_like_fractions/precache-manifest.7edcedd39049d3c1475c68ab69a633f9.js",
+    "precache-manifest.3fe6f1d45d7a3431c837512f69d9c9e3.js": "/scalamath/adding_like_fractions/precache-manifest.3fe6f1d45d7a3431c837512f69d9c9e3.js",
     "service-worker.js": "/scalamath/adding_like_fractions/service-worker.js",
-    "static/css/main.a6786ed7.chunk.css.map": "/scalamath/adding_like_fractions/static/css/main.a6786ed7.chunk.css.map"
+    "static/css/main.08be05d7.chunk.css.map": "/scalamath/adding_like_fractions/static/css/main.08be05d7.chunk.css.map"
   }
 }
