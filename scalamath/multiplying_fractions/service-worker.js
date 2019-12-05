@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/scalamath/multiplying_fractions/precache-manifest.18410d2443f532e390ae02bab266583a.js"
+  "/scalamath/multiplying_fractions/precache-manifest.94b5c89257c7c69cac0981ad06e07f33.js"
 );
 
 self.addEventListener('message', (event) => {
