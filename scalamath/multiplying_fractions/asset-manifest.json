@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/scalamath/multiplying_fractions/static/css/main.8079ed55.chunk.css",
-    "main.js": "/scalamath/multiplying_fractions/static/js/main.82fc3fe3.chunk.js",
-    "main.js.map": "/scalamath/multiplying_fractions/static/js/main.82fc3fe3.chunk.js.map",
+    "main.css": "/scalamath/multiplying_fractions/static/css/main.08be05d7.chunk.css",
+    "main.js": "/scalamath/multiplying_fractions/static/js/main.452c7672.chunk.js",
+    "main.js.map": "/scalamath/multiplying_fractions/static/js/main.452c7672.chunk.js.map",
     "runtime~main.js": "/scalamath/multiplying_fractions/static/js/runtime~main.92cdb4a5.js",
     "runtime~main.js.map": "/scalamath/multiplying_fractions/static/js/runtime~main.92cdb4a5.js.map",
     "static/js/2.c94bf451.chunk.js": "/scalamath/multiplying_fractions/static/js/2.c94bf451.chunk.js",
     "static/js/2.c94bf451.chunk.js.map": "/scalamath/multiplying_fractions/static/js/2.c94bf451.chunk.js.map",
     "index.html": "/scalamath/multiplying_fractions/index.html",
-    "precache-manifest.c6e0fcf148f1dd8c8094db6457fec2e9.js": "/scalamath/multiplying_fractions/precache-manifest.c6e0fcf148f1dd8c8094db6457fec2e9.js",
+    "precache-manifest.0ab5e6d497b434190b251557f9384a4b.js": "/scalamath/multiplying_fractions/precache-manifest.0ab5e6d497b434190b251557f9384a4b.js",
     "service-worker.js": "/scalamath/multiplying_fractions/service-worker.js",
-    "static/css/main.8079ed55.chunk.css.map": "/scalamath/multiplying_fractions/static/css/main.8079ed55.chunk.css.map"
+    "static/css/main.08be05d7.chunk.css.map": "/scalamath/multiplying_fractions/static/css/main.08be05d7.chunk.css.map"
   }
 }
