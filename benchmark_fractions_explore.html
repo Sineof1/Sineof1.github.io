@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fraction Estimation</title>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+</head>
+
+<body>
+<div style='width:520px;display:flex;flex-direction:column;align-items:center;margin:0 auto;font-family:sans-serif;font-size:1.3em;'>
+<canvas class="experiment" id="exp1" width="500px" height="250px" style='cursor:crosshair;border:3px double brown;border-radius:1%;'></canvas>
+</div>
+<div id='pae-bar-container' style='width:500px;height:20px;border-radius:5px;border:1px solid gray;position:relative;text-align:center;'>
+<div id='paescore' style='color:blue;position:absolute;margin-top:2px;width:505px;text-align:center;font-family:sans-serif;'>0</div>
+<div id='pae-bar' style='width:0;height:20px;background-color:rgba(0, 255, 0, 0.5);position:absolute;'></div>
+</div>
+<div id='prob-container' style='width:100px;height:100px;'>
+<div id='prob1' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob2' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob3' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob4' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob5' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob6' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob7' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob8' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob9' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob10' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob11' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob12' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob13' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob14' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob15' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob16' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob17' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob18' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob19' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob20' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob21' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob22' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob23' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob24' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob25' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob26' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob27' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob28' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+<div id='prob29' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
+</div>
+</body>
+
+</html>
+
+<script>
+$('#prob-container').offset({top : $('#exp1').offset().top + 325, left : $('#exp1').offset().left + 400});
+$('#pae-bar-container').offset({top : $('#exp1').offset().top + 285, left : $('#exp1').offset().left});
+var expcanvas = document.getElementById('exp1');
+var expcontxt = expcanvas.getContext('2d');
+
+var exp1_fracs = {1: [0, 1],  2: [1, 9],  3: [1, 8],  4: [1, 7],
+                  5: [1, 6],  6: [1, 5],  7: [2, 9],  8: [1, 4],
+                  9: [2, 7], 10: [1, 3], 11: [3, 8], 12: [2, 5],
+                 13: [3, 7], 14: [4, 9], 15: [1, 2], 16: [5, 9],
+                 17: [4, 7], 18: [3, 5], 19: [5, 8], 20: [2, 3],
+                 21: [5, 7], 22: [3, 4], 23: [7, 9], 24: [4, 5],
+                 25: [5, 6], 26: [6, 7], 27: [7, 8], 28: [8, 9], 29: [1, 1]};
+
+var completed_fracs = [];
+var curfrac;
+var paes = 0;
+var trial_count = 0;
+
+function windowToCanvas_mouse(canvas, x, y) {
+    var bbox = canvas.getBoundingClientRect();
+    return {x: (x - bbox.left) * (canvas.width / bbox.width), y: (y - bbox.top) * (canvas.height / bbox.height)};
+}
+function reDraw() {
+  expcontxt.clearRect(0, 0, expcanvas.width, expcanvas.height);
+  expcontxt.beginPath();
+  expcontxt.setLineDash([1, 0]);
+  expcontxt.moveTo(20, expcanvas.height / 2);
+  expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+  expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 - 5);
+  expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 + 5);
+  expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+  expcontxt.stroke();
+  expcontxt.fill();
+
+  expcontxt.beginPath();
+  expcontxt.moveTo(20, expcanvas.height / 2);
+  expcontxt.lineTo(30, expcanvas.height / 2 - 5);
+  expcontxt.lineTo(30, expcanvas.height / 2 + 5);
+  expcontxt.lineTo(20, expcanvas.height / 2);
+  expcontxt.stroke();
+  expcontxt.fill();
+
+  expcontxt.beginPath();
+  expcontxt.moveTo(40, expcanvas.height / 2 - 20);
+  expcontxt.lineTo(40, expcanvas.height / 2 + 20);
+  expcontxt.stroke();
+  expcontxt.beginPath();
+  expcontxt.moveTo(expcanvas.width - 40, expcanvas.height / 2 - 20);
+  expcontxt.lineTo(expcanvas.width - 40, expcanvas.height / 2 + 20);
+  expcontxt.stroke();
+
+  expcontxt.font = '20px Arial';
+  expcontxt.textAlign = 'center';
+  expcontxt.fillText('0', 40, expcanvas.height / 2 + 45);
+  expcontxt.fillText('1', expcanvas.width - 40, expcanvas.height / 2 + 45);
+
+  expcontxt.fillText(exp1_fracs[curfrac][0], expcanvas.width / 2, 38);
+  expcontxt.fillText(exp1_fracs[curfrac][1], expcanvas.width / 2, 62);
+  expcontxt.beginPath();
+  expcontxt.moveTo(expcanvas.width / 2 - 15, 43);
+  expcontxt.lineTo(expcanvas.width / 2 + 15, 43);
+  expcontxt.stroke();
+}
+function baseDraw_exp() {
+   expcontxt.clearRect(0, 0, expcanvas.width, expcanvas.height);
+   expcontxt.setLineDash([1, 0]);
+   expcontxt.beginPath();
+   expcontxt.moveTo(20, expcanvas.height / 2);
+   expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+   expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 - 5);
+   expcontxt.lineTo(expcanvas.width - 30, expcanvas.height / 2 + 5);
+   expcontxt.lineTo(expcanvas.width - 20, expcanvas.height / 2);
+   expcontxt.stroke();
+   expcontxt.fill();
+
+   expcontxt.beginPath();
+   expcontxt.moveTo(20, expcanvas.height / 2);
+   expcontxt.lineTo(30, expcanvas.height / 2 - 5);
+   expcontxt.lineTo(30, expcanvas.height / 2 + 5);
+   expcontxt.lineTo(20, expcanvas.height / 2);
+   expcontxt.stroke();
+   expcontxt.fill();
+
+   expcontxt.beginPath();
+   expcontxt.moveTo(40, expcanvas.height / 2 - 20);
+   expcontxt.lineTo(40, expcanvas.height / 2 + 20);
+   expcontxt.stroke();
+   expcontxt.beginPath();
+   expcontxt.moveTo(expcanvas.width - 40, expcanvas.height / 2 - 20);
+   expcontxt.lineTo(expcanvas.width - 40, expcanvas.height / 2 + 20);
+   expcontxt.stroke();
+
+   expcontxt.font = '20px Arial';
+   expcontxt.textAlign = 'center';
+   expcontxt.fillText('0', 40, expcanvas.height / 2 + 45);
+   expcontxt.fillText('1', expcanvas.width - 40, expcanvas.height / 2 + 45);
+
+   if (completed_fracs.length < 29) {
+     var frac = Math.floor(Math.random() * 29) + 1;
+     while ($.inArray(frac, completed_fracs) !== -1) frac = Math.floor(Math.random() * 29) + 1;
+     completed_fracs.push(frac);
+     curfrac = frac;
+     expcontxt.fillText(exp1_fracs[frac][0], expcanvas.width / 2, 38);
+     expcontxt.fillText(exp1_fracs[frac][1], expcanvas.width / 2, 62);
+     expcontxt.beginPath();
+     expcontxt.moveTo(expcanvas.width / 2 - 15, 43);
+     expcontxt.lineTo(expcanvas.width / 2 + 15, 43);
+     expcontxt.stroke();
+   }
+   else {
+     expcanvas.removeEventListener('click', getAnswer, true);
+     expcanvas.removeEventListener('mousemove', drawCross, true);
+     expcanvas.removeEventListener('mouseout', function(){reDraw();}, true);
+   }
+   for (var a = 0; a <= trial_count; a++) {
+     if (a === trial_count) $(`#prob${a + 1}`).css({'background-color' : 'rgba(255, 165, 0, 0.5)'});
+     else $(`#prob${a + 1}`).css({'background-color' : 'lightgray'});
+   }
+}
+function getAnswer(evt) {
+  var loc = windowToCanvas_mouse(expcanvas, evt.clientX, evt.clientY);
+  var userAnswer = (loc.x - 40) / 420;
+  trial_count += 1;
+  var actualAnswer = exp1_fracs[curfrac][0] / exp1_fracs[curfrac][1];
+  var PAE = 100 * (Math.abs(userAnswer - actualAnswer));
+  paes += PAE;
+  var pae_avg = paes / trial_count;
+  $('#paescore').text(pae_avg.toFixed(2));
+  $('#trials').text(trial_count);
+  baseDraw_exp();
+  if (pae_avg < 10 && pae_avg > 6) $('#pae-bar').css({'background-color' : 'rgba(255, 255, 0, 0.5)'});
+  else if (pae_avg < 6) $('#pae-bar').css({'background-color' : 'rgba(0, 255, 0, 0.5)'});
+  else $('#pae-bar').css({'background-color' : 'rgba(255, 0, 0, 0.5)'});
+  $('#pae-bar').animate({width : pae_avg / 100 * 500}, 1000);
+}
+function drawCross(evt) {
+  reDraw();
+  var loc = windowToCanvas_mouse(expcanvas, evt.clientX, evt.clientY);
+  expcontxt.beginPath();
+  expcontxt.setLineDash([5, 5]);
+  expcontxt.moveTo(loc.x, 0);
+  expcontxt.lineTo(loc.x, 250);
+  expcontxt.stroke();
+}
+
+baseDraw_exp();
+expcanvas.addEventListener('click', getAnswer, true);
+expcanvas.addEventListener('mousemove', drawCross, true);
+expcanvas.addEventListener('mouseout', function(){reDraw();}, true);
+</script>
