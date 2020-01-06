@@ -8,11 +8,15 @@
 <body>
 <div style='width:520px;display:flex;flex-direction:column;align-items:center;margin:0 auto;font-family:sans-serif;font-size:1.3em;'>
 <canvas class="experiment" id="exp1" width="500px" height="250px" style='cursor:crosshair;border:3px double brown;border-radius:1%;'></canvas>
+<div id='pae-bar-container' style='width:500px;height:20px;border-radius:5px;border:1px solid gray;position:relative;text-align:center;margin-top:20px;'>
+<div style='width:450px;height:20px;border-right:1px solid red;position:absolute;left:0;background-color:transparent;'></div>
+<div style='width:470px;height:20px;border-right:1px solid green;position:absolute;left:0;background-color:transparent;'></div>
+<div style='width:485px;height:20px;border-right:1px solid blue;position:absolute;left:0;background-color:transparent;'></div>
+<div id='paescore' style='color:blue;position:absolute;margin-top:1px;width:505px;text-align:center;font-family:sans-serif;font-size:0.85em;'></div>
+<div id='pae-bar' style='width:0;height:20px;background-color:rgba(0, 255, 0, 0.5);position:absolute;'></div>
 </div>
-<div id='pae-bar-container' style='width:500px;height:20px;border-radius:5px;border:1px solid gray;position:relative;text-align:center;'>
-<div id='paescore' style='color:blue;position:absolute;margin-top:2px;width:505px;text-align:center;font-family:sans-serif;'>0</div>
-<div id='pae-bar' style='width:0;height:20px;background-color:rgba(0, 255, 0, 0.5);position:absolute;padding:0;margin:0;'></div>
 </div>
+
 <div id='prob-container' style='width:100px;height:100px;'>
 <div id='prob1' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
 <div id='prob2' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
@@ -44,13 +48,16 @@
 <div id='prob28' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
 <div id='prob29' style='width:11px;height:11px;border:1px solid gray;display:inline-block;margin-right:0.3px;'></div>
 </div>
+<div id='trialsTag' style='font-family:sans-serif;width:100px;'>Trials</div>
+<button id='reset' onclick='reset()' style='font-variant:small-caps;'>reset</button>
 </body>
 
 </html>
 
 <script>
 $('#prob-container').offset({top : $('#exp1').offset().top + 325, left : $('#exp1').offset().left + 400});
-$('#pae-bar-container').offset({top : $('#exp1').offset().top + 285, left : $('#exp1').offset().left});
+$('#reset').offset({top : $('#prob-container').offset().top + 40, left : $('#prob-container').offset().left - 100});
+$('#trialsTag').offset({top : $('#prob-container').offset().top + 100, left : $('#prob-container').offset().left + 25});
 var expcanvas = document.getElementById('exp1');
 var expcontxt = expcanvas.getContext('2d');
 
@@ -66,6 +73,10 @@ var completed_fracs = [];
 var curfrac;
 var paes = 0;
 var trial_count = 0;
+
+function reset() {
+  location.reload();
+}
 
 function windowToCanvas_mouse(canvas, x, y) {
     var bbox = canvas.getBoundingClientRect();
@@ -176,12 +187,13 @@ function getAnswer(evt) {
   var PAE = 100 * (Math.abs(userAnswer - actualAnswer));
   paes += PAE;
   var pae_avg = paes / trial_count;
-  $('#paescore').text(pae_avg.toFixed(2));
+  pae_avg = 100 - pae_avg;
+  $('#paescore').text(`${pae_avg.toFixed(2)}%`);
   $('#trials').text(trial_count);
   baseDraw_exp();
-  if (pae_avg < 10 && pae_avg > 6) $('#pae-bar').css({'background-color' : 'rgba(255, 255, 0, 0.5)'});
-  else if (pae_avg < 6) $('#pae-bar').css({'background-color' : 'rgba(0, 255, 0, 0.5)'});
-  else $('#pae-bar').css({'background-color' : 'rgba(255, 0, 0, 0.5)'});
+  if (pae_avg > 90 && pae_avg < 97) $('#pae-bar').css({'background-color' : 'rgba(0, 255, 0, 0.3)'});
+  else if (pae_avg >= 97) $('#pae-bar').css({'background-color' : 'rgba(0, 0, 255, 0.3)'});
+  else $('#pae-bar').css({'background-color' : 'rgba(255, 0, 0, 0.3)'});
   $('#pae-bar').animate({width : pae_avg / 100 * 500}, 1000);
 }
 function drawCross(evt) {
