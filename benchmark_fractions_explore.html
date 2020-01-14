@@ -189,11 +189,33 @@ function getAnswer(evt) {
   pae_avg = 100 - pae_avg;
   $('#paescore').text(`${pae_avg.toFixed(2)}%`);
   $('#trials').text(trial_count);
-  baseDraw_exp();
   if (pae_avg > 90 && pae_avg < 97) $('#pae-bar').css({'background-color' : 'rgba(0, 255, 0, 0.3)'});
   else if (pae_avg >= 97) $('#pae-bar').css({'background-color' : 'rgba(0, 0, 255, 0.3)'});
   else $('#pae-bar').css({'background-color' : 'rgba(255, 0, 0, 0.3)'});
   $('#pae-bar').animate({width : pae_avg / 100 * 500}, 1000);
+  expcontxt.strokeStyle = 'lightgray';
+  expcontxt.setLineDash([5, 5]);
+  expcontxt.beginPath();
+  expcontxt.moveTo(loc.x, 0);
+  expcontxt.lineTo(loc.x, 250);
+  expcontxt.stroke();
+  expcontxt.setLineDash([1, 0]);
+  expcontxt.strokeStyle = 'gray';
+  expcontxt.beginPath();
+  expcontxt.arc(loc.x, expcanvas.height / 2, 6, 0, 2 * Math.PI);
+  expcontxt.stroke();
+  expcontxt.strokeStyle = 'green';
+  expcontxt.beginPath();
+  expcontxt.arc(actualAnswer * 420 + 40, expcanvas.height / 2, 6, 0, 2 * Math.PI);
+  expcontxt.stroke();
+  expcontxt.strokeStyle = 'black';
+  expcanvas.removeEventListener('mousemove', drawCross, true);
+  expcanvas.removeEventListener('mouseout', function(){reDraw();}, true);
+  setTimeout(function() {
+  expcanvas.addEventListener('mousemove', drawCross, true);
+  expcanvas.addEventListener('mouseout', function(){reDraw();}, true);
+  baseDraw_exp();
+  }, 1500);
 }
 function drawCross(evt) {
   reDraw();
