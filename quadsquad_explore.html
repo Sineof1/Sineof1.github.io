@@ -77,6 +77,8 @@ var pointPairs = {'circ1' : 'circ4', 'circ4' : 'circ1', 'circ2' : 'circ3', 'circ
                   'circ5' : 'circ8', 'circ8' : 'circ5', 'circ6' : 'circ7', 'circ7' : 'circ6'};
 var linePairs =  {'circ1' : 'lgline1', 'circ2' : 'smline1', 'circ3' : 'smline1', 'circ4' : 'lgline1',
                   'circ5' : 'lgline2', 'circ6' : 'smline2', 'circ7' : 'smline2', 'circ8' : 'lgline2'};
+var yCoordsLarge = [31.815, 51.795, 83.579, 125, 173.236, 225, 276.764, 325, 366.421, 398.205, 418.185, 425];
+var yCoordsSmall = [128.407, 138.397, 154.289, 175, 199.118, 225, 250.882, 275, 295.711, 311.603, 321.593, 425];
 
 var svg = d3.select('#quadsquad_main').append('svg').attr('width', 450).attr('height', 450);
 
@@ -133,15 +135,22 @@ function dragged(d) {
     else if (locX < 25) locX = 25;
     if (locY > 425) locY = 425;
     else if (locY < 25) locY = 25;
+    for (var c = 0; c < yCoordsLarge.length; c++) {
+    if (locY + 28 >= yCoordsLarge[c] && locY - 28 < yCoordsLarge[c]) {locY = yCoordsLarge[c]; break;}
+    }
     }
     else if (rad === 100) {
     if (locX > 325) locX = 325;
     else if (locX < 125) locX = 125;
     if (locY > 325) locY = 325;
     else if (locY < 125) locY = 125;
+    for (var d = 0; d < yCoordsSmall.length; d++) {
+    if (locY + 15 >= yCoordsSmall[d] && locY - 15 < yCoordsSmall[d]) {locY = yCoordsSmall[d]; break;}
     }
-    if (locX <= 220) pointX = Math.round(-Math.sqrt(Math.pow(rad, 2) - Math.pow(225 - locY, 2)) + 225);
-    else if (locX >= 230) pointX = Math.round(Math.sqrt(Math.pow(rad, 2) - Math.pow(225 - locY, 2)) + 225);
+    }
+
+    if (locX <= 220) pointX = -Math.sqrt(Math.pow(rad, 2) - Math.pow(225 - locY, 2)) + 225;
+    else if (locX >= 230) pointX = Math.sqrt(Math.pow(rad, 2) - Math.pow(225 - locY, 2)) + 225;
     else {
       if (rad === 200) {
       if (locY > 225) locY = 425;
@@ -214,9 +223,12 @@ function checkQuad() {
    let vec4 = [sides[3].x2.baseVal.value - sides[3].x1.baseVal.value, sides[3].y2.baseVal.value - sides[3].y1.baseVal.value];
 
    if (checkSquare(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a square!'); return;}
-   if (checkRect(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a rectangle!'); return;}
-   if (checkRhomb(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a rhombus!'); return;}
-   if (checkPgram(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a parallelogram!'); return;}
+   else if (checkRect(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a rectangle!'); return;}
+   else if (checkRhomb(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a rhombus!'); return;}
+   else if (checkPgram(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a parallelogram!'); return;}
+   else if (checkKite(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a kite!'); return;}
+   else if (checkTrap(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a trapezoid!'); return;}
+   else {$('#message-board').text('You drew a quadrilateral.'); return;}
 }
 function checkClosed(arr) {
     var uniques = [];
@@ -231,7 +243,6 @@ function checkClosed(arr) {
 }
 function checkPgram(v1, v2, v3, v4) {
    let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
-   console.log(perpcheck);
    let perpcount = 0;
    let parlcount = 0;
    let nthrcount = 0;
@@ -259,7 +270,9 @@ function checkRhomb(v1, v2, v3, v4) {
    else return false;
 }
 function checkRect(v1, v2, v3, v4) {
+   console.log(v1, v2, v3, v4);
    let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
+   console.log(perpcheck);
    let perpcount = 0;
    let parlcount = 0;
    let nthrcount = 0;
@@ -273,6 +286,7 @@ function checkRect(v1, v2, v3, v4) {
 }
 function checkSquare(v1, v2, v3, v4) {
    let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
+   console.log(perpcheck);
    let perpcount = 0;
    let parlcount = 0;
    let nthrcount = 0;
@@ -285,17 +299,60 @@ function checkSquare(v1, v2, v3, v4) {
    if (anglrel && getVecLength(v1) === getVecLength(v2) && getVecLength(v2) === getVecLength(v3) && getVecLength(v3) === getVecLength(v4)) return true;
    return false;
 }
+function checkKite(v1, v2, v3, v4) {
+   let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
+   let perpcount = 0;
+   let parlcount = 0;
+   let nthrcount = 0;
+   let truecount = 0;
+   let falscount = 0;
+   for (chk in perpcheck) {
+      if (perpcheck[chk] === 'perpendicular') perpcount += 1;
+      else if (perpcheck[chk] === 'parallel') parlcount += 1;
+      else if (perpcheck[chk] === 'neither')  nthrcount += 1;
+   }
+   let congchk = [getVecLength(v1) === getVecLength(v2), getVecLength(v1) === getVecLength(v3), getVecLength(v1) === getVecLength(v4),
+                  getVecLength(v2) === getVecLength(v3), getVecLength(v2) === getVecLength(v4), getVecLength(v3) === getVecLength(v4)];
+
+  for (len in congchk) {
+      if (congchk[len] === true) truecount += 1;
+      else if (congchk[len] === false) falscount += 1;
+  }
+   if ((nthrcount === 6 || (nthrcount === 5 && perpcount === 1)) && truecount === 2 && falscount === 4) return true;
+   return false;
+}
+function checkTrap(v1, v2, v3, v4) {
+   let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
+   let perpcount = 0;
+   let parlcount = 0;
+   let nthrcount = 0;
+   let truecount = 0;
+   let falscount = 0;
+   for (chk in perpcheck) {
+      if (perpcheck[chk] === 'perpendicular') perpcount += 1;
+      else if (perpcheck[chk] === 'parallel') parlcount += 1;
+      else if (perpcheck[chk] === 'neither')  nthrcount += 1;
+   }
+   let congchk = [getVecLength(v1) === getVecLength(v2), getVecLength(v1) === getVecLength(v3), getVecLength(v1) === getVecLength(v4),
+                  getVecLength(v2) === getVecLength(v3), getVecLength(v2) === getVecLength(v4), getVecLength(v3) === getVecLength(v4)];
+   for (len in congchk) {
+      if (congchk[len] === true) truecount += 1;
+      else if (congchk[len] === false) falscount += 1;
+  }
+   if (parlcount === 1 && perpcount === 0 && nthrcount === 5 && truecount === 1 && falscount === 5) return true;
+   return false;
+}
 function checkParOrPerp(v1, v2) {
-   if (Math.round(v1[0] * v2[0] + v1[1] * v2[1]) === 0) return 'perpendicular';
-   if (Math.round(v1[0] / v2[0]) === Math.round(v1[1] / v2[1])) return 'parallel';
+   if (Math.round(v1[0] * v2[0] + v1[1] * v2[1]) == 0) return 'perpendicular';
+   if ((Math.round(v1[0] / v2[0]) === Math.round(v1[1] / v2[1])) || (v1[0] === 0 && v2[0] === 0 && Math.abs(v1[1]) === Math.abs(v2[1])) || (v1[1] === 0 && v2[1] === 0 && Math.abs(v1[0]) === Math.abs(v2[0]))) return 'parallel';
    return 'neither';
 }
-function getVecLength(v1) {return Math.sqrt(Math.pow(v1[0], 2) + Math.pow(v1[1], 2));}
+function getVecLength(v1) {return Math.round(Math.sqrt(Math.pow(v1[0], 2) + Math.pow(v1[1], 2)));}
 function startCheck() {
-  let veclg1 = [Number(d3.select('#lgline1').attr('x2')) - Number(d3.select('#lgline1').attr('x1')), Number(d3.select('#lgline1').attr('y2')) - Number(d3.select('#lgline1').attr('y1'))];
-  let veclg2 = [Number(d3.select('#lgline2').attr('x2')) - Number(d3.select('#lgline2').attr('x1')), Number(d3.select('#lgline2').attr('y2')) - Number(d3.select('#lgline2').attr('y1'))];
-  let vecsm1 = [Number(d3.select('#smline1').attr('x2')) - Number(d3.select('#smline1').attr('x1')), Number(d3.select('#smline1').attr('y2')) - Number(d3.select('#smline1').attr('y1'))];
-  let vecsm2 = [Number(d3.select('#smline2').attr('x2')) - Number(d3.select('#smline2').attr('x1')), Number(d3.select('#smline2').attr('y2')) - Number(d3.select('#smline2').attr('y1'))];
+  let veclg1 = [Math.round(Number(d3.select('#lgline1').attr('x2')) - Number(d3.select('#lgline1').attr('x1'))), Math.round(Number(d3.select('#lgline1').attr('y2')) - Number(d3.select('#lgline1').attr('y1')))];
+  let veclg2 = [Math.round(Number(d3.select('#lgline2').attr('x2')) - Number(d3.select('#lgline2').attr('x1'))), Math.round(Number(d3.select('#lgline2').attr('y2')) - Number(d3.select('#lgline2').attr('y1')))];
+  let vecsm1 = [Math.round(Number(d3.select('#smline1').attr('x2')) - Number(d3.select('#smline1').attr('x1'))), Math.round(Number(d3.select('#smline1').attr('y2')) - Number(d3.select('#smline1').attr('y1')))];
+  let vecsm2 = [Math.round(Number(d3.select('#smline2').attr('x2')) - Number(d3.select('#smline2').attr('x1'))), Math.round(Number(d3.select('#smline2').attr('y2')) - Number(d3.select('#smline2').attr('y1')))];
 
   if (checkParOrPerp(veclg1, veclg2) === 'perpendicular' || checkParOrPerp(veclg1, vecsm1) === 'perpendicular' || checkParOrPerp(veclg1, vecsm2) === 'perpendicular') {
     d3.select('#lgline1').style('stroke', 'red');
