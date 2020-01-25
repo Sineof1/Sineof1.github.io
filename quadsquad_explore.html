@@ -57,7 +57,6 @@
 <body>
 <div id='quadsquad_main'></div>
 <div id='control-panel'>
-<button class='quadbut' id='moveMode' style='margin-right:10px;'>move</button>
 <button class='quadbut' id='drawMode' style='margin-right:10px;'>draw</button>
 <button class='quadbut' id='eraseMode' style='margin-right:10px;'>erase</button>
 <button class='quadbut' id='checkMode'>check</button>
@@ -68,17 +67,23 @@
 </html>
 
 <script>
-var MODE = 'move';
-var DRAWING = false;
+var MODE = 'draw';
 var lineCounter = 0;
-var points = [[225, 25, 'circ1'], [225, 125, 'circ2'], [225, 325, 'circ3'], [225, 425, 'circ4'],
-              [25, 225, 'circ5'], [125, 225, 'circ6'], [325, 225, 'circ7'], [425, 225, 'circ8']];
-var pointPairs = {'circ1' : 'circ4', 'circ4' : 'circ1', 'circ2' : 'circ3', 'circ3' : 'circ2',
-                  'circ5' : 'circ8', 'circ8' : 'circ5', 'circ6' : 'circ7', 'circ7' : 'circ6'};
-var linePairs =  {'circ1' : 'lgline1', 'circ2' : 'smline1', 'circ3' : 'smline1', 'circ4' : 'lgline1',
-                  'circ5' : 'lgline2', 'circ6' : 'smline2', 'circ7' : 'smline2', 'circ8' : 'lgline2'};
-var yCoordsLarge = [31.815, 51.795, 83.579, 125, 173.236, 225, 276.764, 325, 366.421, 398.205, 418.185, 425];
-var yCoordsSmall = [128.407, 138.397, 154.289, 175, 199.118, 225, 250.882, 275, 295.711, 311.603, 321.593, 425];
+
+var circVertices = [{x : 225, y : 25, id : '225_25'}, {x : 225, y : 125, id : '225_125'},
+                    {x : 225, y : 425, id : '225_425'}, {x : 225, y : 325, id : '225_325'},
+                    {x : 425, y : 225, id : '425_225'}, {x : 325, y : 225, id : '325_225'},
+                    {x : 25, y : 225, id : '25_225'}, {x : 125, y : 225, id : '75_225'},
+                    {x : 200 * Math.cos(-Math.PI / 4) + 225, y : 200 * Math.sin(-Math.PI / 4) + 225, id : '200_-pi4'},
+                    {x : 100 * Math.cos(-Math.PI / 4) + 225, y : 100 * Math.sin(-Math.PI / 4) + 225, id : '100_-pi4'},
+                    {x : 200 * Math.cos(3 * Math.PI / 4) + 225, y : 200 * Math.sin(3 * Math.PI / 4) + 225, id : '200_3pi4'},
+                    {x : 100 * Math.cos(3 * Math.PI / 4) + 225, y : 100 * Math.sin(3 * Math.PI / 4) + 225, id : '100_3pi4'},
+                    {x : 200 * Math.cos(-3 * Math.PI / 4) + 225, y : 200 * Math.sin(-3 * Math.PI / 4) + 225, id : '200_-3pi4'},
+                    {x : 100 * Math.cos(-3 * Math.PI / 4) + 225, y : 100 * Math.sin(-3 * Math.PI / 4) + 225, id : '100_-3pi4'},
+                    {x : 200 * Math.cos(Math.PI / 4) + 225, y : 200 * Math.sin(Math.PI / 4) + 225, id : '200_pi4'},
+                    {x : 100 * Math.cos(Math.PI / 4) + 225, y : 100 * Math.sin(Math.PI / 4) + 225, id : '100_pi4'}];
+
+var slctdNodes = [];
 
 var svg = d3.select('#quadsquad_main').append('svg').attr('width', 450).attr('height', 450);
 
@@ -86,9 +91,9 @@ svg.append('line').attr('id', 'lgline1').attr('x1', 225).attr('y1', 25).attr('x2
    .style('stroke', 'lightgray').style('stroke-width', 2).style('stroke-linecap', 'round');
 svg.append('line').attr('id', 'lgline2').attr('x1', 25).attr('y1', 225).attr('x2', 425).attr('y2', 225)
    .style('stroke', 'lightgray').style('stroke-width', 2).style('stroke-linecap', 'round');
-svg.append('line').attr('id', 'smline1').attr('x1', 225).attr('y1', 125).attr('x2', 225).attr('y2', 325)
+svg.append('line').attr('id', 'dgline1').attr('x1', 200 * Math.cos(-Math.PI / 4) + 225).attr('y1', 200 * Math.sin(-Math.PI / 4) + 225).attr('x2', 200 * Math.cos(3 * Math.PI / 4) + 225).attr('y2', 200 * Math.sin(3 * Math.PI / 4) + 225)
    .style('stroke', 'lightgray').style('stroke-width', 2).style('stroke-linecap', 'round');
-svg.append('line').attr('id', 'smline2').attr('x1', 125).attr('y1', 225).attr('x2', 325).attr('y2', 225)
+svg.append('line').attr('id', 'dgline2').attr('x1', 200 * Math.cos(-3 * Math.PI / 4) + 225).attr('y1', 200 * Math.sin(-3 * Math.PI / 4) + 225).attr('x2', 200 * Math.cos(Math.PI / 4) + 225).attr('y2', 200 * Math.sin(Math.PI / 4) + 225)
    .style('stroke', 'lightgray').style('stroke-width', 2).style('stroke-linecap', 'round');
 
 svg.append('g').attr('id', 'lineCanvas');
@@ -99,320 +104,139 @@ svg.append('circle').attr('id', 'smallCirc').attr('cx', 225).attr('cy', 225).att
    .style('stroke', 'gray').style('fill', 'none').style('stroke-width', 4);
 svg.append('circle').attr('id', 'center').attr('cx', 225).attr('cy', 225).attr('r', 3).style('fill', 'gray');
 
-var drag_behavior = d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);
-
 svg.selectAll('.grabcirc')
-   .data(points)
+   .data(circVertices)
    .enter()
    .append('circle')
    .attr('class', 'grabcirc')
-   .attr('cx', function(d){return d[0];})
-   .attr('cy', function(d){return d[1];})
+   .attr('cx', function(d){return d.x;})
+   .attr('cy', function(d){return d.y;})
    .attr('r', 8)
-   .attr('id', function(d){return d[2];})
-   .style('fill', 'blue').style('stroke', 'white').style('stroke-width', 2).style('cursor', 'pointer')
-   .call(drag_behavior);
+   .attr('id', function(d){return d.id;})
+   .style('fill', 'white').style('stroke', 'blue').style('stroke-width', 2).style('cursor', 'pointer')
+   .on('click', selectVertex);
 
-function dragstarted(d) {
-    if (MODE !== 'move') return;
-    d3.event.sourceEvent.stopPropagation();
-    d3.select(this).classed("dragging", true);
-}
-function dragged(d) {
-    if (MODE !== 'move') return;
-    let rad;
-    let curpoint = d3.select(this).attr('id');
-    let partner = pointPairs[curpoint];
-    if (linePairs[curpoint] === 'lgline1' || linePairs[curpoint] === 'lgline2') rad = 200;
-    else rad = 100;
-
-    let pointX;
-    let locX = d3.event.x;
-    let locY = Math.round(d3.event.y);
-
-    if (rad === 200) {
-    if (locX > 425) locX = 425;
-    else if (locX < 25) locX = 25;
-    if (locY > 425) locY = 425;
-    else if (locY < 25) locY = 25;
-    for (var c = 0; c < yCoordsLarge.length; c++) {
-    if (locY + 28 >= yCoordsLarge[c] && locY - 28 < yCoordsLarge[c]) {locY = yCoordsLarge[c]; break;}
-    }
-    }
-    else if (rad === 100) {
-    if (locX > 325) locX = 325;
-    else if (locX < 125) locX = 125;
-    if (locY > 325) locY = 325;
-    else if (locY < 125) locY = 125;
-    for (var d = 0; d < yCoordsSmall.length; d++) {
-    if (locY + 15 >= yCoordsSmall[d] && locY - 15 < yCoordsSmall[d]) {locY = yCoordsSmall[d]; break;}
-    }
-    }
-
-    if (locX <= 220) pointX = -Math.sqrt(Math.pow(rad, 2) - Math.pow(225 - locY, 2)) + 225;
-    else if (locX >= 230) pointX = Math.sqrt(Math.pow(rad, 2) - Math.pow(225 - locY, 2)) + 225;
-    else {
-      if (rad === 200) {
-      if (locY > 225) locY = 425;
-      else if (locY < 225) locY = 25;
-      pointX = 225;
-      }
-      else if (rad === 100) {
-      if (locY > 225) locY = 325;
-      else if (locY < 225) locY = 125;
-      pointX = 225;
-      }
-    }
-
-    d3.select(this).attr('cx', d[0] = pointX).attr('cy', d[1] = locY);
-    d3.select(`#${partner}`).attr('cx', -pointX + 450).attr('cy', -locY + 450);
-    d3.select(`#${linePairs[curpoint]}`)
-      .attr('x1', pointX).attr('y1', locY).attr('x2', -pointX + 450).attr('y2', -locY + 450);
-
-    startCheck();
-}
-function dragended(d) {
-    if (MODE !== 'move') return;
-    d3.select(this).classed("dragging", false);
-}
-function startandEndDraw(evt) {
+function selectVertex(d, i) {
    if (MODE !== 'draw') return;
-   if (!DRAWING) {
-   DRAWING = true;
-   let cx = d3.select(this).attr('cx');
-   let cy = d3.select(this).attr('cy');
+   for (pair in slctdNodes) if (slctdNodes[pair].x === d3.select(this).attr('cx') && slctdNodes[pair].y === d3.select(this).attr('cy')) return;
+   d3.select(this).style('fill', 'orange');
+   slctdNodes.push({x : d.x, y : d.y, id : d.id});
+   if (slctdNodes.length === 4) drawQuad();
+}
+function drawQuad() {
+   $('#checkMode').attr('disabled', true);
+   setTimeout(function(){$('#checkMode').attr('disabled', false);}, 2500);
+   for (var coords = 0; coords < slctdNodes.length - 1; coords++) {
    lineCounter += 1;
    d3.select('#lineCanvas').append('line').attr('class', 'sideLine').attr('id', `line${lineCounter}`)
-     .attr('x1', cx).attr('y1', cy).attr('x2', cx).attr('y2', cy)
+     .attr('x1', slctdNodes[coords].x).attr('y1', slctdNodes[coords].y).attr('x2', slctdNodes[coords].x).attr('y2', slctdNodes[coords].y)
      .style('stroke', 'orange').style('stroke-width', 2).style('stroke-linecap', 'round')
-     .on('click', deleteSide);
-   d3.select(this).style('fill', 'orange');
+     .transition()
+     .delay(500 * coords + 500)
+     .duration(800)
+     .attr('x2', slctdNodes[coords + 1].x).attr('y2', slctdNodes[coords + 1].y);
    }
-   else {
-   DRAWING = false;
-   d3.select(this).style('fill', 'orange');
-   let cx = d3.select(this).attr('cx');
-   let cy = d3.select(this).attr('cy');
-   d3.select(`#line${lineCounter}`).attr('x2', cx).attr('y2', cy);
-   d3.selectAll('.grabcirc').transition().delay(500).duration(500).style('fill', 'blue');
-   }
-}
-function drawSide(evt) {
-   if (MODE !== 'draw' || !DRAWING) return;
-   var offsetX = $('#quadsquad_main').offset().left;
-   var offsetY = $('#quadsquad_main').offset().top;
-   d3.select(`#line${lineCounter}`).attr('x2', evt.clientX - offsetX).attr('y2', evt.clientY - offsetY);
-}
-function deleteSide() {
-   if (MODE !== 'erase') return;
-   d3.select(this).remove();
+   lineCounter += 1;
+   d3.select('#lineCanvas').append('line').attr('class', 'sideLine').attr('id', `line${lineCounter}`)
+     .attr('x1', slctdNodes[3].x).attr('y1', slctdNodes[3].y).attr('x2', slctdNodes[3].x).attr('y2', slctdNodes[3].y)
+     .style('stroke', 'orange').style('stroke-width', 2).style('stroke-linecap', 'round')
+     .transition()
+     .delay(500 * 3 + 500)
+     .duration(800)
+     .attr('x2', slctdNodes[0].x).attr('y2', slctdNodes[0].y);
+
+   svg.selectAll('.grabcirc').on('click', null);
 }
 function checkQuad() {
-   let sides = $('.sideLine');
-   let side_count = sides.length;
-   if (side_count !== 4) {$('#message-board').text('Draw a quadrilateral. It should have 4 sides.'); return;}
-   let endpoints = [[sides[0].x1.baseVal.value, sides[0].y1.baseVal.value], [sides[0].x2.baseVal.value, sides[0].y2.baseVal.value],
-                    [sides[1].x1.baseVal.value, sides[1].y1.baseVal.value], [sides[1].x2.baseVal.value, sides[1].y2.baseVal.value],
-                    [sides[2].x1.baseVal.value, sides[2].y1.baseVal.value], [sides[2].x2.baseVal.value, sides[2].y2.baseVal.value],
-                    [sides[3].x1.baseVal.value, sides[3].y1.baseVal.value], [sides[3].x2.baseVal.value, sides[3].y2.baseVal.value]];
-   let vertices = checkClosed(endpoints);
-   if (vertices.length !== 4) {$('#message-board').text('This is not a closed quadrilateral.'); return;}
-   let vec1 = [sides[0].x2.baseVal.value - sides[0].x1.baseVal.value, sides[0].y2.baseVal.value - sides[0].y1.baseVal.value];
-   let vec2 = [sides[1].x2.baseVal.value - sides[1].x1.baseVal.value, sides[1].y2.baseVal.value - sides[1].y1.baseVal.value];
-   let vec3 = [sides[2].x2.baseVal.value - sides[2].x1.baseVal.value, sides[2].y2.baseVal.value - sides[2].y1.baseVal.value];
-   let vec4 = [sides[3].x2.baseVal.value - sides[3].x1.baseVal.value, sides[3].y2.baseVal.value - sides[3].y1.baseVal.value];
+   var ids = [];
+   for (var a = 0; a < 4; a++) ids.push(slctdNodes[a].id);
+   var idsSet = new Set(ids);
 
-   if (checkSquare(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a square!'); return;}
-   else if (checkRect(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a rectangle!'); return;}
-   else if (checkRhomb(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a rhombus!'); return;}
-   else if (checkPgram(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a parallelogram!'); return;}
-   else if (checkKite(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a kite!'); return;}
-   else if (checkTrap(vec1, vec2, vec3, vec4)) {$('#message-board').text('You drew a trapezoid!'); return;}
-   else {$('#message-board').text('You drew a quadrilateral.'); return;}
-}
-function checkClosed(arr) {
-    var uniques = [];
-    var itemsFound = {};
-    for(var i = 0, l = arr.length; i < l; i++) {
-    var stringified = JSON.stringify(arr[i]);
-    if (itemsFound[stringified]) continue;
-    uniques.push(arr[i]);
-    itemsFound[stringified] = true;
-    }
-    return uniques;
-}
-function checkPgram(v1, v2, v3, v4) {
-   let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
-   let perpcount = 0;
-   let parlcount = 0;
-   let nthrcount = 0;
-   for (chk in perpcheck) {
-      if (perpcheck[chk] === 'perpendicular') perpcount += 1;
-      else if (perpcheck[chk] === 'parallel') parlcount += 1;
-      else if (perpcheck[chk] === 'neither') nthrcount += 1;
+   if ((idsSet.has('200_pi4') && idsSet.has('425_225') && idsSet.has('200_-3pi4') && idsSet.has('25_225')) ||
+       (idsSet.has('425_225') && idsSet.has('200_-pi4') && idsSet.has('25_225') && idsSet.has('200_3pi4')) ||
+       (idsSet.has('200_-pi4') && idsSet.has('225_25') && idsSet.has('200_3pi4') && idsSet.has('225_425')) ||
+       (idsSet.has('225_25') && idsSet.has('200_-3pi4') && idsSet.has('225_425') && idsSet.has('200_pi4')) ||
+       (idsSet.has('325_225') && idsSet.has('100_-pi4') && idsSet.has('75_225') && idsSet.has('100_3pi4')) ||
+       (idsSet.has('100_-pi4') && idsSet.has('225_75') && idsSet.has('100_3pi4') && idsSet.has('225_325')) ||
+       (idsSet.has('225_75') && idsSet.has('100_-3pi4') && idsSet.has('225_325') && idsSet.has('100_pi4')) ||
+       (idsSet.has('100_-3pi4') && idsSet.has('75_225') && idsSet.has('100_pi4') && idsSet.has('325_225'))) {
+   $('#message-board').text('You drew a rectangle!');
    }
-   let anglrel = (parlcount === 2 && nthrcount === 4);
-   if (anglrel) return true;
-   else return false;
-}
-function checkRhomb(v1, v2, v3, v4) {
-   let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
-   let perpcount = 0;
-   let parlcount = 0;
-   let nthrcount = 0;
-   for (chk in perpcheck) {
-      if (perpcheck[chk] === 'perpendicular') perpcount += 1;
-      else if (perpcheck[chk] === 'parallel') parlcount += 1;
-      else if (perpcheck[chk] === 'neither') nthrcount += 1;
+   else if ((idsSet.has('225_425') && idsSet.has('425_225') && idsSet.has('225_25') && idsSet.has('25_225')) ||
+            (idsSet.has('225_325') && idsSet.has('325_225') && idsSet.has('225_75') && idsSet.has('75_225')) ||
+            (idsSet.has('200_pi4') && idsSet.has('200_-pi4') && idsSet.has('200_-3pi4') && idsSet.has('200_3pi4')) ||
+            (idsSet.has('100_pi4') && idsSet.has('100_-pi4') && idsSet.has('100_-3pi4') && idsSet.has('100_3pi4'))) {
+   $('#message-board').text('You drew a square!');
    }
-   let anglrel = (parlcount === 2 && nthrcount === 4);
-   if (anglrel && getVecLength(v1) === getVecLength(v2) && getVecLength(v2) === getVecLength(v3) && getVecLength(v3) === getVecLength(v4)) return true;
-   else return false;
-}
-function checkRect(v1, v2, v3, v4) {
-   console.log(v1, v2, v3, v4);
-   let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
-   console.log(perpcheck);
-   let perpcount = 0;
-   let parlcount = 0;
-   let nthrcount = 0;
-   for (chk in perpcheck) {
-      if (perpcheck[chk] === 'perpendicular') perpcount += 1;
-      else if (perpcheck[chk] === 'parallel') parlcount += 1;
-      else if (perpcheck[chk] === 'neither') nthrcount += 1;
+   else if ((idsSet.has('225_425') && idsSet.has('325_225') && idsSet.has('225_25') && idsSet.has('75_225')) ||
+            (idsSet.has('225_325') && idsSet.has('425_225') && idsSet.has('225_75') && idsSet.has('25_225')) ||
+            (idsSet.has('100_-pi4') && idsSet.has('200_-3pi4') && idsSet.has('100_3pi4') && idsSet.has('200_pi4')) ||
+            (idsSet.has('200_-pi4') && idsSet.has('100_-3pi4') && idsSet.has('200_3pi4') && idsSet.has('100_pi4'))) {
+   $('#message-board').text('You drew a rhombus!');
    }
-   if (perpcount === 4 && parlcount === 2) return true;
-   return false;
-}
-function checkSquare(v1, v2, v3, v4) {
-   let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
-   console.log(perpcheck);
-   let perpcount = 0;
-   let parlcount = 0;
-   let nthrcount = 0;
-   for (chk in perpcheck) {
-      if (perpcheck[chk] === 'perpendicular') perpcount += 1;
-      else if (perpcheck[chk] === 'parallel') parlcount += 1;
-      else if (perpcheck[chk] === 'neither')  nthrcount += 1;
+   else if ((idsSet.has('100_-pi4') && idsSet.has('25_225') && idsSet.has('100_3pi4') && idsSet.has('425_225')) ||
+           (idsSet.has('225_75') && idsSet.has('200_3pi4') && idsSet.has('225_325') && idsSet.has('200_-pi4')) ||
+           (idsSet.has('100_-3pi4') && idsSet.has('225_425') && idsSet.has('100_pi4') && idsSet.has('225_25')) ||
+           (idsSet.has('75_225') && idsSet.has('200_pi4') && idsSet.has('325_225') && idsSet.has('200_-3pi4')) ||
+           (idsSet.has('200_3pi4') && idsSet.has('325_225') && idsSet.has('200_-pi4') && idsSet.has('75_225')) ||
+           (idsSet.has('225_425') && idsSet.has('100_-pi4') && idsSet.has('225_25') && idsSet.has('100_3pi4')) ||
+           (idsSet.has('200_pi4') && idsSet.has('225_75') && idsSet.has('200_-3pi4') && idsSet.has('225_325')) ||
+           (idsSet.has('425_225') && idsSet.has('100_-3pi4') && idsSet.has('25_225') && idsSet.has('100_pi4'))) {
+   $('#message-board').text('You drew a parallelogram!');
    }
-   let anglrel = (perpcount === 4 && parlcount === 2);
-   if (anglrel && getVecLength(v1) === getVecLength(v2) && getVecLength(v2) === getVecLength(v3) && getVecLength(v3) === getVecLength(v4)) return true;
-   return false;
-}
-function checkKite(v1, v2, v3, v4) {
-   let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
-   let perpcount = 0;
-   let parlcount = 0;
-   let nthrcount = 0;
-   let truecount = 0;
-   let falscount = 0;
-   for (chk in perpcheck) {
-      if (perpcheck[chk] === 'perpendicular') perpcount += 1;
-      else if (perpcheck[chk] === 'parallel') parlcount += 1;
-      else if (perpcheck[chk] === 'neither')  nthrcount += 1;
+   else if ((idsSet.has('225_25') && idsSet.has('100_-3pi4') && idsSet.has('225_325') && idsSet.has('200_pi4')) ||
+           (idsSet.has('200_-3pi4') && idsSet.has('75_225') && idsSet.has('100_pi4') && idsSet.has('425_225')) ||
+           (idsSet.has('100_-3pi4') && idsSet.has('200_pi4') && idsSet.has('100_3pi4') && idsSet.has('200_-pi4')) ||
+           (idsSet.has('100_-pi4') && idsSet.has('200_3pi4') && idsSet.has('100_pi4') && idsSet.has('200_-3pi4')) ||
+           (idsSet.has('25_225') && idsSet.has('100_3pi4') && idsSet.has('325_225') && idsSet.has('200_-pi4')) ||
+           (idsSet.has('200_3pi4') && idsSet.has('225_325') && idsSet.has('100_-pi4') && idsSet.has('225_25')) ||
+           (idsSet.has('225_425') && idsSet.has('100_pi4') && idsSet.has('225_75') && idsSet.has('200_-3pi4')) ||
+           (idsSet.has('200_pi4') && idsSet.has('325_225') && idsSet.has('100_-3pi4') && idsSet.has('25_225')) ||
+           (idsSet.has('425_225') && idsSet.has('100_-pi4') && idsSet.has('75_225') && idsSet.has('200_3pi4')) ||
+           (idsSet.has('200_-pi4') && idsSet.has('225_75') && idsSet.has('100_3pi4') && idsSet.has('225_425')) ||
+           (idsSet.has('225_25') && idsSet.has('100_3pi4') && idsSet.has('225_325') && idsSet.has('200_-pi4')) ||
+           (idsSet.has('200_-3pi4') && idsSet.has('225_325') && idsSet.has('100_pi4') && idsSet.has('225_25')) ||
+           (idsSet.has('25_225') && idsSet.has('100_pi4') && idsSet.has('325_225') && idsSet.has('200_-3pi4')) ||
+           (idsSet.has('200_3pi4') && idsSet.has('325_225') && idsSet.has('100_-pi4') && idsSet.has('25_225')) ||
+           (idsSet.has('225_425') && idsSet.has('100_-pi4') && idsSet.has('225_75') && idsSet.has('200_3pi4')) ||
+           (idsSet.has('200_pi4') && idsSet.has('225_75') && idsSet.has('100_-3pi4') && idsSet.has('225_425')) ||
+           (idsSet.has('425_225') && idsSet.has('100_-3pi4') && idsSet.has('75_225') && idsSet.has('200_pi4')) ||
+           (idsSet.has('200_-pi4') && idsSet.has('75_225') && idsSet.has('100_3pi4') && idsSet.has('425_225'))) {
+   $('#message-board').text('You drew a trapezoid!');
    }
-   let congchk = [getVecLength(v1) === getVecLength(v2), getVecLength(v1) === getVecLength(v3), getVecLength(v1) === getVecLength(v4),
-                  getVecLength(v2) === getVecLength(v3), getVecLength(v2) === getVecLength(v4), getVecLength(v3) === getVecLength(v4)];
-
-  for (len in congchk) {
-      if (congchk[len] === true) truecount += 1;
-      else if (congchk[len] === false) falscount += 1;
-  }
-   if ((nthrcount === 6 || (nthrcount === 5 && perpcount === 1)) && truecount === 2 && falscount === 4) return true;
-   return false;
+   else $('#message-board').text('You drew a quadrilateral.');
 }
-function checkTrap(v1, v2, v3, v4) {
-   let perpcheck = [checkParOrPerp(v1, v2), checkParOrPerp(v1, v3), checkParOrPerp(v1, v4), checkParOrPerp(v2, v3), checkParOrPerp(v2, v4), checkParOrPerp(v3, v4)];
-   let perpcount = 0;
-   let parlcount = 0;
-   let nthrcount = 0;
-   let truecount = 0;
-   let falscount = 0;
-   for (chk in perpcheck) {
-      if (perpcheck[chk] === 'perpendicular') perpcount += 1;
-      else if (perpcheck[chk] === 'parallel') parlcount += 1;
-      else if (perpcheck[chk] === 'neither')  nthrcount += 1;
-   }
-   let congchk = [getVecLength(v1) === getVecLength(v2), getVecLength(v1) === getVecLength(v3), getVecLength(v1) === getVecLength(v4),
-                  getVecLength(v2) === getVecLength(v3), getVecLength(v2) === getVecLength(v4), getVecLength(v3) === getVecLength(v4)];
-   for (len in congchk) {
-      if (congchk[len] === true) truecount += 1;
-      else if (congchk[len] === false) falscount += 1;
-  }
-   if (parlcount === 1 && perpcount === 0 && nthrcount === 5 && truecount === 1 && falscount === 5) return true;
-   return false;
-}
-function checkParOrPerp(v1, v2) {
-   if (Math.round(v1[0] * v2[0] + v1[1] * v2[1]) == 0) return 'perpendicular';
-   if ((Math.round(v1[0] / v2[0]) === Math.round(v1[1] / v2[1])) || (v1[0] === 0 && v2[0] === 0 && Math.abs(v1[1]) === Math.abs(v2[1])) || (v1[1] === 0 && v2[1] === 0 && Math.abs(v1[0]) === Math.abs(v2[0]))) return 'parallel';
-   return 'neither';
-}
-function getVecLength(v1) {return Math.round(Math.sqrt(Math.pow(v1[0], 2) + Math.pow(v1[1], 2)));}
-function startCheck() {
-  let veclg1 = [Math.round(Number(d3.select('#lgline1').attr('x2')) - Number(d3.select('#lgline1').attr('x1'))), Math.round(Number(d3.select('#lgline1').attr('y2')) - Number(d3.select('#lgline1').attr('y1')))];
-  let veclg2 = [Math.round(Number(d3.select('#lgline2').attr('x2')) - Number(d3.select('#lgline2').attr('x1'))), Math.round(Number(d3.select('#lgline2').attr('y2')) - Number(d3.select('#lgline2').attr('y1')))];
-  let vecsm1 = [Math.round(Number(d3.select('#smline1').attr('x2')) - Number(d3.select('#smline1').attr('x1'))), Math.round(Number(d3.select('#smline1').attr('y2')) - Number(d3.select('#smline1').attr('y1')))];
-  let vecsm2 = [Math.round(Number(d3.select('#smline2').attr('x2')) - Number(d3.select('#smline2').attr('x1'))), Math.round(Number(d3.select('#smline2').attr('y2')) - Number(d3.select('#smline2').attr('y1')))];
-
-  if (checkParOrPerp(veclg1, veclg2) === 'perpendicular' || checkParOrPerp(veclg1, vecsm1) === 'perpendicular' || checkParOrPerp(veclg1, vecsm2) === 'perpendicular') {
-    d3.select('#lgline1').style('stroke', 'red');
-  }
-  else d3.select('#lgline1').style('stroke', 'lightgray');
-  if (checkParOrPerp(veclg2, veclg1) === 'perpendicular' || checkParOrPerp(veclg2, vecsm1) === 'perpendicular' || checkParOrPerp(veclg2, vecsm2) === 'perpendicular') {
-    d3.select('#lgline2').style('stroke', 'blue');
-  }
-  else d3.select('#lgline2').style('stroke', 'lightgray');
-  if (checkParOrPerp(vecsm1, veclg1) === 'perpendicular' || checkParOrPerp(vecsm1, veclg2) === 'perpendicular' || checkParOrPerp(vecsm1, vecsm2) === 'perpendicular') {
-    d3.select('#smline1').style('stroke', 'purple');
-  }
-  else d3.select('#smline1').style('stroke', 'lightgray');
-  if (checkParOrPerp(vecsm2, veclg1) === 'perpendicular' || checkParOrPerp(vecsm2, veclg2) === 'perpendicular' || checkParOrPerp(vecsm2, vecsm1) === 'perpendicular') {
-    d3.select('#smline2').style('stroke', 'green');
-  }
-  else d3.select('#smline2').style('stroke', 'lightgray');
-}
-
 $('.quadbut').click(function(evt){
    $('#message-board').text('');
    if (evt.target.id === 'drawMode') {
       MODE = 'draw';
+      d3.selectAll('.sideLine').remove();
+      lineCounter = 0;
+      slctdNodes = [];
+      d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
+      svg.selectAll('.grabcirc').on('click', selectVertex);
       d3.selectAll('.sideLine').style('cursor', 'default')
         .transition().duration(800).style('stroke', 'orange').style('stroke-width', 2);
       $('#drawMode').css({'background-color' : 'orange', 'color' : 'white'});
-      $('#moveMode').css({'background-color' : 'white', 'color' : 'black'});
-      $('#eraseMode').css({'background-color' : 'white', 'color' : 'black'});
-      $('#checkMode').css({'background-color' : 'white', 'color' : 'black'});
-   }
-   else if (evt.target.id === 'moveMode') {
-      MODE = 'move';
-      d3.selectAll('.sideLine').remove();
-      lineCounter = 0;
-      $('#moveMode').css({'background-color' : 'blue', 'color' : 'white'});
-      $('#drawMode').css({'background-color' : 'white', 'color' : 'black'});
       $('#eraseMode').css({'background-color' : 'white', 'color' : 'black'});
       $('#checkMode').css({'background-color' : 'white', 'color' : 'black'});
    }
    else if (evt.target.id === 'eraseMode') {
       MODE = 'erase';
-      d3.selectAll('.sideLine').transition().duration(800).style('stroke', 'rgba(255, 0, 0, 0.5)')
-        .style('stroke-width', 4).style('cursor', 'pointer');
-      $('#eraseMode').css({'background-color' : 'red', 'color' : 'white'});
+      d3.selectAll('.sideLine').remove();
+      d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
+      lineCounter = 0;
+      slctdNodes = [];
       $('#drawMode').css({'background-color' : 'white', 'color' : 'black'});
-      $('#moveMode').css({'background-color' : 'white', 'color' : 'black'});
       $('#checkMode').css({'background-color' : 'white', 'color' : 'black'});
    }
    else if (evt.target.id === 'checkMode') {
       MODE = 'check';
       $('#eraseMode').css({'background-color' : 'white', 'color' : 'black'});
       $('#drawMode').css({'background-color' : 'white', 'color' : 'black'});
-      $('#moveMode').css({'background-color' : 'white', 'color' : 'black'});
       $('#checkMode').css({'background-color' : 'purple', 'color' : 'white'});
       checkQuad();
    }
 });
-
-$('.grabcirc').bind('click', startandEndDraw);
-$('#quadsquad_main').bind('mousemove', drawSide);
-$('#moveMode').css({'background-color' : 'blue', 'color' : 'white'});
-startCheck();
+$('#drawMode').css({'background-color' : 'orange', 'color' : 'white'});
 </script>
