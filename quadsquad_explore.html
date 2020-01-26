@@ -55,13 +55,11 @@
 </head>
 
 <body>
-<div id='quadsquad_main'></div>
-<div id='control-panel'>
-<button class='quadbut' id='drawMode' style='margin-right:10px;'>draw</button>
-<button class='quadbut' id='eraseMode' style='margin-right:10px;'>erase</button>
-<button class='quadbut' id='checkMode'>check</button>
+<div id='quadsquad_main' style='position:fixed;left:455px;top:25px;z-index:99;'></div>
+<button class='quadbut' id='drawMode' style='position:fixed;top:525px;left:590px;'>draw</button>
+<button class='quadbut' id='eraseMode' style='position:fixed;top:525px;left:690px;'>erase</button>
 </div>
-<div id='message-board'></div>
+<div id='message-board' style='position:fixed;left:450px;top:600px;'></div>
 </body>
 
 </html>
@@ -69,19 +67,21 @@
 <script>
 var MODE = 'draw';
 var lineCounter = 0;
+var rotAngle = 0;
+var transAmount = 0;
 
-var circVertices = [{x : 225, y : 25, id : '225_25'}, {x : 225, y : 125, id : '225_125'},
-                    {x : 225, y : 425, id : '225_425'}, {x : 225, y : 325, id : '225_325'},
-                    {x : 425, y : 225, id : '425_225'}, {x : 325, y : 225, id : '325_225'},
-                    {x : 25, y : 225, id : '25_225'}, {x : 125, y : 225, id : '75_225'},
-                    {x : 200 * Math.cos(-Math.PI / 4) + 225, y : 200 * Math.sin(-Math.PI / 4) + 225, id : '200_-pi4'},
-                    {x : 100 * Math.cos(-Math.PI / 4) + 225, y : 100 * Math.sin(-Math.PI / 4) + 225, id : '100_-pi4'},
-                    {x : 200 * Math.cos(3 * Math.PI / 4) + 225, y : 200 * Math.sin(3 * Math.PI / 4) + 225, id : '200_3pi4'},
-                    {x : 100 * Math.cos(3 * Math.PI / 4) + 225, y : 100 * Math.sin(3 * Math.PI / 4) + 225, id : '100_3pi4'},
-                    {x : 200 * Math.cos(-3 * Math.PI / 4) + 225, y : 200 * Math.sin(-3 * Math.PI / 4) + 225, id : '200_-3pi4'},
-                    {x : 100 * Math.cos(-3 * Math.PI / 4) + 225, y : 100 * Math.sin(-3 * Math.PI / 4) + 225, id : '100_-3pi4'},
-                    {x : 200 * Math.cos(Math.PI / 4) + 225, y : 200 * Math.sin(Math.PI / 4) + 225, id : '200_pi4'},
-                    {x : 100 * Math.cos(Math.PI / 4) + 225, y : 100 * Math.sin(Math.PI / 4) + 225, id : '100_pi4'}];
+var circVertices = [{x : 225, y : 25, id : '225_25', txt : 'S'}, {x : 225, y : 125, id : '225_125', txt : 'B'},
+                    {x : 225, y : 425, id : '225_425', txt : 'C'}, {x : 225, y : 325, id : '225_325', txt : 'D'},
+                    {x : 425, y : 225, id : '425_225', txt : 'T'}, {x : 325, y : 225, id : '325_225', txt : 'F'},
+                    {x : 25, y : 225, id : '25_225', txt : 'G'}, {x : 125, y : 225, id : '75_225', txt : 'H'},
+                    {x : 200 * Math.cos(-Math.PI / 4) + 225, y : 200 * Math.sin(-Math.PI / 4) + 225, id : '200_-pi4', txt : 'J'},
+                    {x : 100 * Math.cos(-Math.PI / 4) + 225, y : 100 * Math.sin(-Math.PI / 4) + 225, id : '100_-pi4', txt : 'K'},
+                    {x : 200 * Math.cos(3 * Math.PI / 4) + 225, y : 200 * Math.sin(3 * Math.PI / 4) + 225, id : '200_3pi4', txt : 'L'},
+                    {x : 100 * Math.cos(3 * Math.PI / 4) + 225, y : 100 * Math.sin(3 * Math.PI / 4) + 225, id : '100_3pi4', txt : 'M'},
+                    {x : 200 * Math.cos(-3 * Math.PI / 4) + 225, y : 200 * Math.sin(-3 * Math.PI / 4) + 225, id : '200_-3pi4', txt : 'N'},
+                    {x : 100 * Math.cos(-3 * Math.PI / 4) + 225, y : 100 * Math.sin(-3 * Math.PI / 4) + 225, id : '100_-3pi4', txt : 'P'},
+                    {x : 200 * Math.cos(Math.PI / 4) + 225, y : 200 * Math.sin(Math.PI / 4) + 225, id : '200_pi4', txt : 'Q'},
+                    {x : 100 * Math.cos(Math.PI / 4) + 225, y : 100 * Math.sin(Math.PI / 4) + 225, id : '100_pi4', txt : 'R'}];
 
 var slctdNodes = [];
 
@@ -116,8 +116,14 @@ svg.selectAll('.grabcirc')
    .style('fill', 'white').style('stroke', 'blue').style('stroke-width', 2).style('cursor', 'pointer')
    .on('click', selectVertex);
 
+svg.selectAll('.vertText')
+   .data(circVertices)
+   .enter()
+   .append('text').attr('class', 'vertText')
+   .style('text-anchor', 'middle').attr('x', function(d){if (d.x < 225) return d.x - 8; else return d.x + 8;}).attr('y', function(d){if (d.y <= 225) return d.y - 10; else return d.y + 20;})
+   .text(function(d){return d.txt;}).style('font-size', 14).style('font-family', 'sans-serif').style('fill', 'black').style('stroke', 'none');
+
 function selectVertex(d, i) {
-   if (MODE !== 'draw') return;
    for (pair in slctdNodes) if (slctdNodes[pair].x === d3.select(this).attr('cx') && slctdNodes[pair].y === d3.select(this).attr('cy')) return;
    d3.select(this).style('fill', 'orange');
    slctdNodes.push({x : d.x, y : d.y, id : d.id});
@@ -146,11 +152,30 @@ function drawQuad() {
      .attr('x2', slctdNodes[0].x).attr('y2', slctdNodes[0].y);
 
    svg.selectAll('.grabcirc').on('click', null);
+
+   let x1 = slctdNodes[0].x;
+   let x2 = slctdNodes[1].x;
+   let x3 = slctdNodes[2].x;
+   let x4 = slctdNodes[3].x;
+   let y1 = slctdNodes[0].y;
+   let y2 = slctdNodes[1].y;
+   let y3 = slctdNodes[2].y;
+   let y4 = slctdNodes[3].y;
+   d3.select('#lineCanvas').append('path').attr('d', `M ${x1} ${y1} L ${x2} ${y2} L ${x3} ${y3} L ${x4} ${y4} L ${x1} ${y1} Z`)
+     .style('stroke', 'none').style('fill', 'black').style('opacity', 0)
+     .transition()
+     .delay(2500)
+     .duration(2500)
+     .style('opacity', 0.2);
+
+   setTimeout(function() {checkQuad();}, 4000);
 }
 function checkQuad() {
    var ids = [];
    for (var a = 0; a < 4; a++) ids.push(slctdNodes[a].id);
    var idsSet = new Set(ids);
+
+   console.log(idsSet);
 
    if ((idsSet.has('200_pi4') && idsSet.has('425_225') && idsSet.has('200_-3pi4') && idsSet.has('25_225')) ||
        (idsSet.has('425_225') && idsSet.has('200_-pi4') && idsSet.has('25_225') && idsSet.has('200_3pi4')) ||
@@ -163,6 +188,7 @@ function checkQuad() {
    $('#message-board').text('You drew a rectangle!');
    }
    else if ((idsSet.has('225_425') && idsSet.has('425_225') && idsSet.has('225_25') && idsSet.has('25_225')) ||
+            (idsSet.has('225_125') && idsSet.has('75_225') && idsSet.has('225_325') && idsSet.has('325_225')) ||
             (idsSet.has('225_325') && idsSet.has('325_225') && idsSet.has('225_75') && idsSet.has('75_225')) ||
             (idsSet.has('200_pi4') && idsSet.has('200_-pi4') && idsSet.has('200_-3pi4') && idsSet.has('200_3pi4')) ||
             (idsSet.has('100_pi4') && idsSet.has('100_-pi4') && idsSet.has('100_-3pi4') && idsSet.has('100_3pi4'))) {
@@ -204,39 +230,31 @@ function checkQuad() {
            (idsSet.has('200_-pi4') && idsSet.has('75_225') && idsSet.has('100_3pi4') && idsSet.has('425_225'))) {
    $('#message-board').text('You drew a trapezoid!');
    }
-   else $('#message-board').text('You drew a quadrilateral.');
 }
 $('.quadbut').click(function(evt){
-   $('#message-board').text('');
    if (evt.target.id === 'drawMode') {
-      MODE = 'draw';
+      $('#message-board').text('');
       d3.selectAll('.sideLine').remove();
+      d3.selectAll('path').remove();
       lineCounter = 0;
       slctdNodes = [];
-      d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
       svg.selectAll('.grabcirc').on('click', selectVertex);
+      d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
       d3.selectAll('.sideLine').style('cursor', 'default')
         .transition().duration(800).style('stroke', 'orange').style('stroke-width', 2);
       $('#drawMode').css({'background-color' : 'orange', 'color' : 'white'});
       $('#eraseMode').css({'background-color' : 'white', 'color' : 'black'});
-      $('#checkMode').css({'background-color' : 'white', 'color' : 'black'});
    }
    else if (evt.target.id === 'eraseMode') {
-      MODE = 'erase';
+      $('#message-board').text('');
       d3.selectAll('.sideLine').remove();
+      d3.selectAll('path').remove();
+      svg.selectAll('.grabcirc').on('click', selectVertex);
       d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
       lineCounter = 0;
       slctdNodes = [];
-      $('#drawMode').css({'background-color' : 'white', 'color' : 'black'});
-      $('#checkMode').css({'background-color' : 'white', 'color' : 'black'});
-   }
-   else if (evt.target.id === 'checkMode') {
-      MODE = 'check';
-      $('#eraseMode').css({'background-color' : 'white', 'color' : 'black'});
-      $('#drawMode').css({'background-color' : 'white', 'color' : 'black'});
-      $('#checkMode').css({'background-color' : 'purple', 'color' : 'white'});
-      checkQuad();
    }
 });
+
 $('#drawMode').css({'background-color' : 'orange', 'color' : 'white'});
 </script>
