@@ -55,11 +55,11 @@
 </head>
 
 <body>
-<div id='quadsquad_main' style='position:fixed;left:455px;top:25px;z-index:99;'></div>
-<button class='quadbut' id='drawMode' style='position:fixed;top:525px;left:590px;'>draw</button>
-<button class='quadbut' id='eraseMode' style='position:fixed;top:525px;left:690px;'>erase</button>
+<div id='quadsquad_main' style='position:fixed;left:calc(50vw - 225px);top:25px;z-index:99;'></div>
+<button class='quadbut' id='drawMode' style='position:fixed;top:525px;left:calc(50vw - 90px);'>draw</button>
+<button class='quadbut' id='eraseMode' style='position:fixed;top:525px;left:calc(50vw + 10px);'>reset</button>
 </div>
-<div id='message-board' style='position:fixed;left:450px;top:600px;'></div>
+<div id='message-board' style='position:fixed;left:calc(50vw - 225px);top:600px;'></div>
 </body>
 
 </html>
@@ -126,7 +126,7 @@ svg.selectAll('.vertText')
 function selectVertex(d, i) {
    for (pair in slctdNodes) if (slctdNodes[pair].x === d3.select(this).attr('cx') && slctdNodes[pair].y === d3.select(this).attr('cy')) return;
    d3.select(this).style('fill', 'orange');
-   slctdNodes.push({x : d.x, y : d.y, id : d.id});
+   slctdNodes.push({x : d.x, y : d.y, id : d.id, ltr : d.txt});
    if (slctdNodes.length === 4) drawQuad();
 }
 function drawQuad() {
@@ -172,64 +172,52 @@ function drawQuad() {
 }
 function checkQuad() {
    var ids = [];
-   for (var a = 0; a < 4; a++) ids.push(slctdNodes[a].id);
-   var idsSet = new Set(ids);
+   for (var a = 0; a < 4; a++) ids.push(slctdNodes[a].ltr);
 
-   console.log(idsSet);
+   if (checkPerms(ids, 'SGCT') || checkPerms(ids, 'NLQJ') || checkPerms(ids, 'BHDF') || checkPerms(ids, 'PMRK')) {
+      $('#message-board').text('You drew a square!');
+   }
+   else if (checkPerms(ids, 'TJGL') || checkPerms(ids, 'QCNS') || checkPerms(ids, 'CLSJ') || checkPerms(ids, 'NGQT') ||
+            checkPerms(ids, 'KBMD') || checkPerms(ids, 'FKHM') || checkPerms(ids, 'RFPH') || checkPerms(ids, 'DRBP')) {
+      $('#message-board').text('You drew a rectangle!');
+   }
+   else if (checkPerms(ids, 'BHDT') || checkPerms(ids, 'PMRJ') || checkPerms(ids, 'HDFS') || checkPerms(ids, 'MRKN') ||
+            checkPerms(ids, 'DFBG') || checkPerms(ids, 'RKPL') || checkPerms(ids, 'FBHC') || checkPerms(ids, 'KPMQ') ||
+            checkPerms(ids, 'SGCF') || checkPerms(ids, 'NLQK') || checkPerms(ids, 'GCTB') || checkPerms(ids, 'LQJP') ||
+            checkPerms(ids, 'CTSH') || checkPerms(ids, 'QJNM') || checkPerms(ids, 'TSGD') || checkPerms(ids, 'JNLR')) {
+      $('#message-board').text('You drew a kite!');
+   }
+   else if (checkPerms(ids, 'SHCF') || checkPerms(ids, 'NMQK') || checkPerms(ids, 'GDTB') || checkPerms(ids, 'LRJP')) {
+      $('#message-board').text('You drew a rhombus!');
+   }
 
-   if ((idsSet.has('200_pi4') && idsSet.has('425_225') && idsSet.has('200_-3pi4') && idsSet.has('25_225')) ||
-       (idsSet.has('425_225') && idsSet.has('200_-pi4') && idsSet.has('25_225') && idsSet.has('200_3pi4')) ||
-       (idsSet.has('200_-pi4') && idsSet.has('225_25') && idsSet.has('200_3pi4') && idsSet.has('225_425')) ||
-       (idsSet.has('225_25') && idsSet.has('200_-3pi4') && idsSet.has('225_425') && idsSet.has('200_pi4')) ||
-       (idsSet.has('325_225') && idsSet.has('100_-pi4') && idsSet.has('75_225') && idsSet.has('100_3pi4')) ||
-       (idsSet.has('100_-pi4') && idsSet.has('225_75') && idsSet.has('100_3pi4') && idsSet.has('225_325')) ||
-       (idsSet.has('225_75') && idsSet.has('100_-3pi4') && idsSet.has('225_325') && idsSet.has('100_pi4')) ||
-       (idsSet.has('100_-3pi4') && idsSet.has('75_225') && idsSet.has('100_pi4') && idsSet.has('325_225'))) {
-   $('#message-board').text('You drew a rectangle!');
+   else if (checkPerms(ids, 'SPCR') || checkPerms(ids, 'NHQF') || checkPerms(ids, 'GMTK') || checkPerms(ids, 'LDJB') ||
+            checkPerms(ids, 'BNDQ') || checkPerms(ids, 'PGRT') || checkPerms(ids, 'HLFJ') || checkPerms(ids, 'MCKS')) {
+      $('#message-board').text('You drew a parallelogram!');
    }
-   else if ((idsSet.has('225_425') && idsSet.has('425_225') && idsSet.has('225_25') && idsSet.has('25_225')) ||
-            (idsSet.has('225_125') && idsSet.has('75_225') && idsSet.has('225_325') && idsSet.has('325_225')) ||
-            (idsSet.has('225_325') && idsSet.has('325_225') && idsSet.has('225_75') && idsSet.has('75_225')) ||
-            (idsSet.has('200_pi4') && idsSet.has('200_-pi4') && idsSet.has('200_-3pi4') && idsSet.has('200_3pi4')) ||
-            (idsSet.has('100_pi4') && idsSet.has('100_-pi4') && idsSet.has('100_-3pi4') && idsSet.has('100_3pi4'))) {
-   $('#message-board').text('You drew a square!');
+   else if (checkPerms(ids, 'SPDQ') || checkPerms(ids, 'NHRT') || checkPerms(ids, 'GMFJ') || checkPerms(ids, 'LDKS') ||
+            checkPerms(ids, 'CRBN') || checkPerms(ids, 'QFPG') || checkPerms(ids, 'TKHL') || checkPerms(ids, 'JBMC') ||
+            checkPerms(ids, 'SNDR') || checkPerms(ids, 'NGRF') || checkPerms(ids, 'GLFK') || checkPerms(ids, 'LCKB') ||
+            checkPerms(ids, 'CQBP') || checkPerms(ids, 'QTPH') || checkPerms(ids, 'TJHM') || checkPerms(ids, 'JSMD') ||
+            checkPerms(ids, 'TJSN') || checkPerms(ids, 'JSNG') || checkPerms(ids, 'SNGL') || checkPerms(ids, 'NGLC') ||
+            checkPerms(ids, 'GLCQ') || checkPerms(ids, 'LCQT') || checkPerms(ids, 'CQTJ') || checkPerms(ids, 'QTJS')) {
+      $('#message-board').text('You drew an isosceles trapezoid!');
    }
-   else if ((idsSet.has('225_425') && idsSet.has('325_225') && idsSet.has('225_25') && idsSet.has('75_225')) ||
-            (idsSet.has('225_325') && idsSet.has('425_225') && idsSet.has('225_75') && idsSet.has('25_225')) ||
-            (idsSet.has('100_-pi4') && idsSet.has('200_-3pi4') && idsSet.has('100_3pi4') && idsSet.has('200_pi4')) ||
-            (idsSet.has('200_-pi4') && idsSet.has('100_-3pi4') && idsSet.has('200_3pi4') && idsSet.has('100_pi4'))) {
-   $('#message-board').text('You drew a rhombus!');
+}
+function checkPerms(ids, answer) {
+   let perms = [];
+   perms.push(ids[0] + ids[1] + ids[2] + ids[3]);
+   perms.push(ids[3] + ids[2] + ids[1] + ids[0]);
+   perms.push(ids[1] + ids[2] + ids[3] + ids[0]);
+   perms.push(ids[0] + ids[3] + ids[2] + ids[1]);
+   perms.push(ids[2] + ids[3] + ids[0] + ids[1]);
+   perms.push(ids[1] + ids[0] + ids[3] + ids[2]);
+   perms.push(ids[3] + ids[0] + ids[1] + ids[2]);
+   perms.push(ids[2] + ids[1] + ids[0] + ids[3]);
+   for (perm in perms) {
+      if (perms[perm] === answer) return true;
    }
-   else if ((idsSet.has('100_-pi4') && idsSet.has('25_225') && idsSet.has('100_3pi4') && idsSet.has('425_225')) ||
-           (idsSet.has('225_75') && idsSet.has('200_3pi4') && idsSet.has('225_325') && idsSet.has('200_-pi4')) ||
-           (idsSet.has('100_-3pi4') && idsSet.has('225_425') && idsSet.has('100_pi4') && idsSet.has('225_25')) ||
-           (idsSet.has('75_225') && idsSet.has('200_pi4') && idsSet.has('325_225') && idsSet.has('200_-3pi4')) ||
-           (idsSet.has('200_3pi4') && idsSet.has('325_225') && idsSet.has('200_-pi4') && idsSet.has('75_225')) ||
-           (idsSet.has('225_425') && idsSet.has('100_-pi4') && idsSet.has('225_25') && idsSet.has('100_3pi4')) ||
-           (idsSet.has('200_pi4') && idsSet.has('225_75') && idsSet.has('200_-3pi4') && idsSet.has('225_325')) ||
-           (idsSet.has('425_225') && idsSet.has('100_-3pi4') && idsSet.has('25_225') && idsSet.has('100_pi4'))) {
-   $('#message-board').text('You drew a parallelogram!');
-   }
-   else if ((idsSet.has('225_25') && idsSet.has('100_-3pi4') && idsSet.has('225_325') && idsSet.has('200_pi4')) ||
-           (idsSet.has('200_-3pi4') && idsSet.has('75_225') && idsSet.has('100_pi4') && idsSet.has('425_225')) ||
-           (idsSet.has('100_-3pi4') && idsSet.has('200_pi4') && idsSet.has('100_3pi4') && idsSet.has('200_-pi4')) ||
-           (idsSet.has('100_-pi4') && idsSet.has('200_3pi4') && idsSet.has('100_pi4') && idsSet.has('200_-3pi4')) ||
-           (idsSet.has('25_225') && idsSet.has('100_3pi4') && idsSet.has('325_225') && idsSet.has('200_-pi4')) ||
-           (idsSet.has('200_3pi4') && idsSet.has('225_325') && idsSet.has('100_-pi4') && idsSet.has('225_25')) ||
-           (idsSet.has('225_425') && idsSet.has('100_pi4') && idsSet.has('225_75') && idsSet.has('200_-3pi4')) ||
-           (idsSet.has('200_pi4') && idsSet.has('325_225') && idsSet.has('100_-3pi4') && idsSet.has('25_225')) ||
-           (idsSet.has('425_225') && idsSet.has('100_-pi4') && idsSet.has('75_225') && idsSet.has('200_3pi4')) ||
-           (idsSet.has('200_-pi4') && idsSet.has('225_75') && idsSet.has('100_3pi4') && idsSet.has('225_425')) ||
-           (idsSet.has('225_25') && idsSet.has('100_3pi4') && idsSet.has('225_325') && idsSet.has('200_-pi4')) ||
-           (idsSet.has('200_-3pi4') && idsSet.has('225_325') && idsSet.has('100_pi4') && idsSet.has('225_25')) ||
-           (idsSet.has('25_225') && idsSet.has('100_pi4') && idsSet.has('325_225') && idsSet.has('200_-3pi4')) ||
-           (idsSet.has('200_3pi4') && idsSet.has('325_225') && idsSet.has('100_-pi4') && idsSet.has('25_225')) ||
-           (idsSet.has('225_425') && idsSet.has('100_-pi4') && idsSet.has('225_75') && idsSet.has('200_3pi4')) ||
-           (idsSet.has('200_pi4') && idsSet.has('225_75') && idsSet.has('100_-3pi4') && idsSet.has('225_425')) ||
-           (idsSet.has('425_225') && idsSet.has('100_-3pi4') && idsSet.has('75_225') && idsSet.has('200_pi4')) ||
-           (idsSet.has('200_-pi4') && idsSet.has('75_225') && idsSet.has('100_3pi4') && idsSet.has('425_225'))) {
-   $('#message-board').text('You drew a trapezoid!');
-   }
+   return false;
 }
 $('.quadbut').click(function(evt){
    if (evt.target.id === 'drawMode') {
