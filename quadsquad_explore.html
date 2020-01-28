@@ -220,20 +220,7 @@ function checkPerms(ids, answer) {
    return false;
 }
 $('.quadbut').click(function(evt){
-   if (evt.target.id === 'drawMode') {
-      $('#message-board').text('');
-      d3.selectAll('.sideLine').remove();
-      d3.selectAll('path').remove();
-      lineCounter = 0;
-      slctdNodes = [];
-      svg.selectAll('.grabcirc').on('click', selectVertex);
-      d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
-      d3.selectAll('.sideLine').style('cursor', 'default')
-        .transition().duration(800).style('stroke', 'orange').style('stroke-width', 2);
-      $('#drawMode').css({'background-color' : 'orange', 'color' : 'white'});
-      $('#eraseMode').css({'background-color' : 'white', 'color' : 'black'});
-   }
-   else if (evt.target.id === 'eraseMode') {
+   if (evt.target.id === 'eraseMode') {
       $('#message-board').text('');
       d3.selectAll('.sideLine').remove();
       d3.selectAll('path').remove();
