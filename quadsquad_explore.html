@@ -56,8 +56,7 @@
 
 <body>
 <div id='quadsquad_main' style='position:fixed;left:calc(50vw - 225px);top:25px;z-index:99;'></div>
-<button class='quadbut' id='drawMode' style='position:fixed;top:525px;left:calc(50vw - 90px);'>draw</button>
-<button class='quadbut' id='eraseMode' style='position:fixed;top:525px;left:calc(50vw + 10px);'>reset</button>
+<button class='quadbut' id='eraseMode' style='position:fixed;top:525px;left:calc(50vw - 40px);'>reset</button>
 </div>
 <div id='message-board' style='position:fixed;left:calc(50vw - 225px);top:600px;'></div>
 </body>
@@ -124,7 +123,7 @@ svg.selectAll('.vertText')
    .text(function(d){return d.txt;}).style('font-size', 14).style('font-family', 'sans-serif').style('fill', 'black').style('stroke', 'none');
 
 function selectVertex(d, i) {
-   for (pair in slctdNodes) if (slctdNodes[pair].x === d3.select(this).attr('cx') && slctdNodes[pair].y === d3.select(this).attr('cy')) return;
+   for (var pair in slctdNodes) if (slctdNodes[pair].x === d.x && slctdNodes[pair].y === d.y) return;
    d3.select(this).style('fill', 'orange');
    slctdNodes.push({x : d.x, y : d.y, id : d.id, ltr : d.txt});
    if (slctdNodes.length === 4) drawQuad();
@@ -184,7 +183,15 @@ function checkQuad() {
    else if (checkPerms(ids, 'BHDT') || checkPerms(ids, 'PMRJ') || checkPerms(ids, 'HDFS') || checkPerms(ids, 'MRKN') ||
             checkPerms(ids, 'DFBG') || checkPerms(ids, 'RKPL') || checkPerms(ids, 'FBHC') || checkPerms(ids, 'KPMQ') ||
             checkPerms(ids, 'SGCF') || checkPerms(ids, 'NLQK') || checkPerms(ids, 'GCTB') || checkPerms(ids, 'LQJP') ||
-            checkPerms(ids, 'CTSH') || checkPerms(ids, 'QJNM') || checkPerms(ids, 'TSGD') || checkPerms(ids, 'JNLR')) {
+            checkPerms(ids, 'FRDP') || checkPerms(ids, 'RDMB') || checkPerms(ids, 'DMHK') || checkPerms(ids, 'MHPF') ||
+            checkPerms(ids, 'HPBR') || checkPerms(ids, 'PBKD') || checkPerms(ids, 'BKFM') || checkPerms(ids, 'KFRH') ||
+            checkPerms(ids, 'TQCN') || checkPerms(ids, 'QCLS') || checkPerms(ids, 'CLGJ') || checkPerms(ids, 'LGNT') ||
+            checkPerms(ids, 'GNSQ') || checkPerms(ids, 'NSJC') || checkPerms(ids, 'SJTL') || checkPerms(ids, 'JTQG') ||
+            checkPerms(ids, 'CTSH') || checkPerms(ids, 'QJNM') || checkPerms(ids, 'TSGD') || checkPerms(ids, 'JNLR') ||
+            checkPerms(ids, 'NSPG') || checkPerms(ids, 'SJBN') || checkPerms(ids, 'JTKS') || checkPerms(ids, 'TQFJ') ||
+            checkPerms(ids, 'GNSR') || checkPerms(ids, 'NSJD') || checkPerms(ids, 'SJTM') || checkPerms(ids, 'JTQH') ||
+            checkPerms(ids, 'TQCP') || checkPerms(ids, 'QCLB') || checkPerms(ids, 'CLGK') || checkPerms(ids, 'LGNF') ||
+            checkPerms(ids, 'QCRT') || checkPerms(ids, 'CLDQ') || checkPerms(ids, 'LGMC') || checkPerms(ids, 'GNHL')) {
       $('#message-board').text('You drew a kite!');
    }
    else if (checkPerms(ids, 'SHCF') || checkPerms(ids, 'NMQK') || checkPerms(ids, 'GDTB') || checkPerms(ids, 'LRJP')) {
@@ -192,11 +199,25 @@ function checkQuad() {
    }
 
    else if (checkPerms(ids, 'SPCR') || checkPerms(ids, 'NHQF') || checkPerms(ids, 'GMTK') || checkPerms(ids, 'LDJB') ||
-            checkPerms(ids, 'BNDQ') || checkPerms(ids, 'PGRT') || checkPerms(ids, 'HLFJ') || checkPerms(ids, 'MCKS')) {
+            checkPerms(ids, 'HFQL') || checkPerms(ids, 'PRCG') || checkPerms(ids, 'BDLN') || checkPerms(ids, 'KMGS')) {
       $('#message-board').text('You drew a parallelogram!');
    }
    else if (checkPerms(ids, 'SPDQ') || checkPerms(ids, 'NHRT') || checkPerms(ids, 'GMFJ') || checkPerms(ids, 'LDKS') ||
             checkPerms(ids, 'CRBN') || checkPerms(ids, 'QFPG') || checkPerms(ids, 'TKHL') || checkPerms(ids, 'JBMC') ||
+            checkPerms(ids, 'MDCL') || checkPerms(ids, 'DRQC') || checkPerms(ids, 'RFTQ') || checkPerms(ids, 'FKJT') ||
+            checkPerms(ids, 'KBSJ') || checkPerms(ids, 'BPNS') || checkPerms(ids, 'PHGN') || checkPerms(ids, 'HMLG') ||
+            checkPerms(ids, 'MRQL') || checkPerms(ids, 'DFTC') || checkPerms(ids, 'RKJQ') || checkPerms(ids, 'FBST') ||
+            checkPerms(ids, 'KPNJ') || checkPerms(ids, 'BHGS') || checkPerms(ids, 'PMLN') || checkPerms(ids, 'HDCG') ||
+            checkPerms(ids, 'MFTL') || checkPerms(ids, 'DKJC') || checkPerms(ids, 'RBSQ') || checkPerms(ids, 'FPNT') ||
+            checkPerms(ids, 'KHGJ') || checkPerms(ids, 'BMLS') || checkPerms(ids, 'PDCN') || checkPerms(ids, 'HRQG') ||
+            checkPerms(ids, 'PBKF') || checkPerms(ids, 'BKFR') || checkPerms(ids, 'KFRD') || checkPerms(ids, 'FRDM') ||
+            checkPerms(ids, 'RDMH') || checkPerms(ids, 'DMHP') || checkPerms(ids, 'MHPB') || checkPerms(ids, 'HPBK') ||
+            checkPerms(ids, 'PKFH') || checkPerms(ids, 'BFRP') || checkPerms(ids, 'KRDB') || checkPerms(ids, 'FDMK') ||
+            checkPerms(ids, 'RMHF') || checkPerms(ids, 'DHPR') || checkPerms(ids, 'MPBD') || checkPerms(ids, 'HBKM') ||
+            checkPerms(ids, 'FHNJ') || checkPerms(ids, 'RPST') || checkPerms(ids, 'DBJQ') || checkPerms(ids, 'MKTC') ||
+            checkPerms(ids, 'HFQL') || checkPerms(ids, 'PRCG') || checkPerms(ids, 'BDLN') || checkPerms(ids, 'KMGS') ||
+            checkPerms(ids, 'GSJL') || checkPerms(ids, 'NJTG') || checkPerms(ids, 'STQN') || checkPerms(ids, 'JQCS') ||
+            checkPerms(ids, 'TCLJ') || checkPerms(ids, 'QLGT') || checkPerms(ids, 'CGNQ') || checkPerms(ids, 'LNSC') ||
             checkPerms(ids, 'SNDR') || checkPerms(ids, 'NGRF') || checkPerms(ids, 'GLFK') || checkPerms(ids, 'LCKB') ||
             checkPerms(ids, 'CQBP') || checkPerms(ids, 'QTPH') || checkPerms(ids, 'TJHM') || checkPerms(ids, 'JSMD') ||
             checkPerms(ids, 'TJSN') || checkPerms(ids, 'JSNG') || checkPerms(ids, 'SNGL') || checkPerms(ids, 'NGLC') ||
