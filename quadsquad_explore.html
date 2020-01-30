@@ -230,6 +230,7 @@ function checkQuad() {
             checkPerms(ids, 'GLCQ') || checkPerms(ids, 'LCQT') || checkPerms(ids, 'CQTW') || checkPerms(ids, 'QTWS')) {
       $('#message-board').text('You drew an isosceles trapezoid!');
    }
+   else if (checkPerms(ids, 'SLRQ')) $('#message-board').text('Impressive, Number One.');
 }
 function checkPerms(ids, answer) {
    let perms = [];
