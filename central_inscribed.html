@@ -237,12 +237,6 @@ function angleReport(a) {
       if (finAngle > 180) finAngle = 360 - finAngle;
 
       $('#centrangle-board').html(`${Math.round(finAngle)}&deg;`);
-
-      if (angle1 - angle2 > 180 || angle1 - angle2 < -180) angle2 = angle1 - finAngle;
-
-      var arc = d3.arc().innerRadius(200).outerRadius(200).startAngle(angle1 / converter).endAngle(angle2 / converter);
-      var intcarc = d3.select('#arcCanvas').append('path').attr('id', 'central-arc').attr('d', arc).attr('transform', 'translate(225, 225) rotate(90)')
-                      .style('stroke', 'rgb(200, 14, 20)').style('stroke-width', 2);
       }
       else if (a === 'inscribed') {
 
@@ -258,29 +252,6 @@ function angleReport(a) {
       let meas = Math.round(Math.acos(dots / (len1 * len2)) * converter * 10) / 10;
 
       $('#inscr-board').html(`${meas}&deg;`);
-
-      let ang1 = slctdNodes_i[0].id;
-      mult1 = Number(ang1.slice(4, ang1.indexOf('i') - 1));
-      div1 = Number(ang1.slice(ang1.indexOf('i') + 1));
-
-      let ang2 = slctdNodes_i[2].id;
-      mult2 = Number(ang2.slice(4, ang2.indexOf('i') - 1));
-      div2 = Number(ang2.slice(ang2.indexOf('i') + 1));
-
-      let angle1 = mult1 * (Math.PI / div1) * converter;
-      let angle2 = mult2 * (Math.PI / div2) * converter;
-
-      if (div1 === 0) angle1 = 0;
-      if (div2 === 0) angle2 = 0;
-
-      let finAngle = Math.abs(angle1 - angle2);
-      if (finAngle > 180) finAngle = 360 - finAngle;
-
-      if (angle1 - angle2 > 180 || angle1 - angle2 < -180) angle2 = angle1 - finAngle;
-
-      var arc = d3.arc().innerRadius(200).outerRadius(200).startAngle(angle1 / converter).endAngle(angle2 / converter);
-      var intcarc = d3.select('#arcCanvas').append('path').attr('id', 'inscribed-arc').attr('d', arc).attr('transform', 'translate(225, 225) rotate(90)')
-                      .style('stroke', 'rgb(125, 60, 255)').style('stroke-width', 2);
       }
 }
 $('.anglbut').click(function(evt){
