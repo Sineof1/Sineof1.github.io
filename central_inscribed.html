@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,6 +112,7 @@ var svg = d3.select('#centrinsc_main').append('svg').attr('width', 450).attr('he
 svg.append('g').attr('id', 'lineCanvas');
 svg.append('circle').attr('id', 'largeCirc').attr('cx', 225).attr('cy', 225).attr('r', 200)
    .style('stroke', 'gray').style('fill', 'none').style('stroke-width', 4);
+svg.append('g').attr('id', 'arcCanvas');
 
 svg.selectAll('.grabcirc')
    .data(circVertices)
@@ -235,6 +237,12 @@ function angleReport(a) {
       if (finAngle > 180) finAngle = 360 - finAngle;
 
       $('#centrangle-board').html(`${Math.round(finAngle)}&deg;`);
+
+      if (angle1 - angle2 > 180 || angle1 - angle2 < -180) angle2 = angle1 - finAngle;
+
+      var arc = d3.arc().innerRadius(200).outerRadius(200).startAngle(angle1 / converter).endAngle(angle2 / converter);
+      var intcarc = d3.select('#arcCanvas').append('path').attr('id', 'central-arc').attr('d', arc).attr('transform', 'translate(225, 225) rotate(90)')
+                      .style('stroke', 'rgb(200, 14, 20)').style('stroke-width', 2);
       }
       else if (a === 'inscribed') {
 
@@ -250,6 +258,29 @@ function angleReport(a) {
       let meas = Math.round(Math.acos(dots / (len1 * len2)) * converter * 10) / 10;
 
       $('#inscr-board').html(`${meas}&deg;`);
+
+      let ang1 = slctdNodes_i[0].id;
+      mult1 = Number(ang1.slice(4, ang1.indexOf('i') - 1));
+      div1 = Number(ang1.slice(ang1.indexOf('i') + 1));
+
+      let ang2 = slctdNodes_i[2].id;
+      mult2 = Number(ang2.slice(4, ang2.indexOf('i') - 1));
+      div2 = Number(ang2.slice(ang2.indexOf('i') + 1));
+
+      let angle1 = mult1 * (Math.PI / div1) * converter;
+      let angle2 = mult2 * (Math.PI / div2) * converter;
+
+      if (div1 === 0) angle1 = 0;
+      if (div2 === 0) angle2 = 0;
+
+      let finAngle = Math.abs(angle1 - angle2);
+      if (finAngle > 180) finAngle = 360 - finAngle;
+
+      if (angle1 - angle2 > 180 || angle1 - angle2 < -180) angle2 = angle1 - finAngle;
+
+      var arc = d3.arc().innerRadius(200).outerRadius(200).startAngle(angle1 / converter).endAngle(angle2 / converter);
+      var intcarc = d3.select('#arcCanvas').append('path').attr('id', 'inscribed-arc').attr('d', arc).attr('transform', 'translate(225, 225) rotate(90)')
+                      .style('stroke', 'rgb(125, 60, 255)').style('stroke-width', 2);
       }
 }
 $('.anglbut').click(function(evt){
@@ -262,6 +293,8 @@ $('.anglbut').click(function(evt){
       $('#inscr-board').text('');
       d3.selectAll('.sideLine').remove();
       d3.selectAll('.sideLine_i').remove();
+      d3.select('#inscribed-arc').remove();
+      d3.select('#central-arc').remove();
       svg.selectAll('.grabcirc').on('click', selectVertex);
       d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
       slctdNodes = [];
@@ -287,6 +320,7 @@ $('.anglbut').click(function(evt){
       $('#centrangle-board').text('');
       }
       for (i in slctdNodes_i) $(`#${slctdNodes_i[i].id}`).css('fill', 'rgb(125, 60, 255)');
+      d3.select('#central-arc').remove();
    }
    else if (evt.target.id === 'inscribeErase') {
       slctdNodes_i = [];
@@ -296,6 +330,7 @@ $('.anglbut').click(function(evt){
       $('#inscr-board').text('');
       }
       for (i in slctdNodes) $(`#${slctdNodes[i].id}`).css('fill', 'rgb(200, 14, 20)');
+      d3.select('#inscribed-arc').remove();
    }
    $('#centralErase').css('color', 'red');
    $('#inscribeErase').css('color', 'red');
