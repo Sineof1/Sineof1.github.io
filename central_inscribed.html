@@ -134,11 +134,12 @@ svg.selectAll('.vertText')
    .text(function(d){return d.name;}).style('font-size', 14).style('font-family', 'sans-serif').style('fill', 'gray').style('stroke', 'none');
 
 function selectVertex(d, i) {
-   if (slctdNodes.length >= 3 || slctdNodes_i.length >= 3) return;
    if (MODE === 'centralMode') {
+      if (slctdNodes.length >= 3) return;
       for (var pair in slctdNodes) if (slctdNodes[pair].x === d.x && slctdNodes[pair].y === d.y) return;
    }
    else if (MODE === 'inscribeMode') {
+      if (slctdNodes_i.length >= 3) return;
       for (var p in slctdNodes_i) if (slctdNodes_i[p].x === d.x && slctdNodes_i[p].y === d.y) return;
    }
    let col;
