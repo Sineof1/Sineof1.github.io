@@ -134,6 +134,7 @@ svg.selectAll('.vertText')
    .text(function(d){return d.name;}).style('font-size', 14).style('font-family', 'sans-serif').style('fill', 'gray').style('stroke', 'none');
 
 function selectVertex(d, i) {
+   if (slctdNodes.length >= 3 || slctdNodes_i.length >= 3) return;
    if (MODE === 'centralMode') {
       for (var pair in slctdNodes) if (slctdNodes[pair].x === d.x && slctdNodes[pair].y === d.y) return;
    }
