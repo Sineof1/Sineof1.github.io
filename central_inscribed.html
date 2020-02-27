@@ -131,7 +131,7 @@ svg.selectAll('.vertText')
    .enter()
    .append('text').attr('class', 'vertText')
    .style('text-anchor', 'middle').attr('x', function(d){if (d.x < 225) return d.x - 8; else return d.x + 8;}).attr('y', function(d){if (d.y <= 225) return d.y - 10; else return d.y + 20;})
-   .text(function(d){return d.name;}).style('font-size', 14).style('font-family', 'sans-serif').style('fill', 'lightgray').style('stroke', 'none');
+   .text(function(d){return d.name;}).style('font-size', 14).style('font-family', 'sans-serif').style('fill', 'gray').style('stroke', 'none');
 
 function selectVertex(d, i) {
    if (MODE === 'centralMode') {
