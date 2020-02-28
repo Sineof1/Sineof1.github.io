@@ -113,9 +113,9 @@
 
 <body>
 <div id='centrinsc_main' style='position:fixed;left:calc(50vw - 325px);top:0;z-index:99;'></div>
-<button class='anglbut' id='centralErase' style='position:fixed;top:190px;right:163px;width:50px;color:rgb(200, 14, 20);font-size:2em;'>&times;</button>
+<button class='anglbut' id='centralErase' style='position:fixed;top:190px;right:117px;width:50px;color:rgb(200, 14, 20);font-size:2em;'>&times;</button>
 <button class='anglbut' id='eraseMode' style='position:fixed;top:190px;right:223px;'>reset</button>
-<button class='anglbut' id='inscribeErase' style='position:fixed;top:190px;right:353px;width:50px;color:rgb(125, 60, 255);font-size:2em;'>&times;</button>
+<button class='anglbut' id='inscribeErase' style='position:fixed;top:190px;right:400px;width:50px;color:rgb(125, 60, 255);font-size:2em;'>&times;</button>
 <div id='centrangle-board' style='position:fixed;right:80px;top:120px;'></div>
 <div id='message-board' style='position:fixed;right:200px;top:50px;'></div>
 <div id='inscr-board' style='position:fixed;right:375px;top:120px;'></div>
@@ -325,6 +325,7 @@ $('input[type="checkbox"]').click(function(evt){
 $('.anglbut').click(function(evt) {
    if (evt.target.id === 'eraseMode') {
       MODE = 'centralMode';
+      $('input[type=checkbox]').prop('checked', true);
       $('#message-board').text('');
       $('#centrangle-board').text('');
       $('#inscr-board').text('');
@@ -333,7 +334,7 @@ $('.anglbut').click(function(evt) {
       d3.select('#inscribed-arc').remove();
       d3.select('#central-arc').remove();
       svg.selectAll('.grabcirc').on('click', selectVertex);
-      d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
+      d3.selectAll('.grabcirc').style('fill', 'white');
       slctdNodes = [];
       slctdNodes_i = [];
    }
