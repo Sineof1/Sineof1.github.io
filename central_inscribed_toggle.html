@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="An Explore Tool for investigating central and inscribed angles.">
+<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Central and Inscribed Angles">
+<meta property="og:image" content="https://guzintamath.com/textsavvy/wp-content/uploads/2020/02/centr_inscribe_angles.png"/>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<title>Central and Inscribed Angles</title>
+
+<style>
+#centrinsc_main {
+   width:450px;
+   height:450px;
+   margin:0 auto;
+}
+#control-panel {
+   margin:10px auto;
+   width:450px;
+   height:100px;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+}
+.anglbut {
+   width:120px;
+   height:50px;
+   font-size:1.25em;
+   font-variant:small-caps;
+   cursor:pointer;
+   outline:none;
+   background-color:white;
+   border:2px double navy;
+   border-radius:5px;
+}
+#message-board, #centrangle-board, #inscr-board {
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-size:1.2em;
+   font-family:sans-serif;
+   width:120px;
+   height:60px;
+   margin:0 auto;
+   border-radius:8px;
+}
+#message-board {
+   justify-content:center;
+   width:170px;
+   background-color:white;
+   color:red;
+   font-size:1em;
+}
+#centrangle-board {
+   color:rgb(200, 14, 20);
+}
+#inscr-board {
+   color:rgb(125, 60, 255);
+}
+.onoffswitch {
+    position: relative; width: 170px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 15px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 35px; padding: 0; line-height: 35px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "";
+    padding-left: 15px;
+    background-color: #EEEEEE; color: #999999;
+}
+.onoffswitch-inner:after {
+    content: "";
+    padding-right: 15px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 35px; margin: 0px;
+    background: #7D3CFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 131px;
+    border: 2px solid #999999; border-radius: 15px;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+    background-color: #C80E14;
+}
+</style>
+</head>
+
+<body>
+<div id='centrinsc_main' style='position:fixed;left:calc(50vw - 325px);top:0;z-index:99;'></div>
+<button class='anglbut' id='centralErase' style='position:fixed;top:190px;right:163px;width:50px;color:rgb(200, 14, 20);font-size:2em;'>&times;</button>
+<button class='anglbut' id='eraseMode' style='position:fixed;top:190px;right:223px;'>reset</button>
+<button class='anglbut' id='inscribeErase' style='position:fixed;top:190px;right:353px;width:50px;color:rgb(125, 60, 255);font-size:2em;'>&times;</button>
+<div id='centrangle-board' style='position:fixed;right:80px;top:120px;'></div>
+<div id='message-board' style='position:fixed;right:200px;top:50px;'></div>
+<div id='inscr-board' style='position:fixed;right:375px;top:120px;'></div>
+<div style='position:fixed;right:95px;top:110px;color:rgb(200, 14, 20);font-family:sans-serif;font-size:1em;'>Central Angle</div>
+<div style='position:fixed;right:385px;top:110px;color:rgb(125, 60, 255);font-family:sans-serif;font-size:1em;'>Inscribed Angle</div>
+<div class="onoffswitch" style='position:fixed;top:130px;right:200px;'>
+<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+<label class="onoffswitch-label" for="myonoffswitch">
+<span class="onoffswitch-inner"></span>
+<span class="onoffswitch-switch"></span>
+</label>
+</div>
+</body>
+
+</html>
+
+<script>
+var MODE = 'centralMode';
+
+var circVertices = [
+        {x : 225, y : 225, id : 'center', name : 'O'},
+        {x : 225, y : 25, id : '200_-1pi2', ltr : 7, name : 'A'},
+        {x : 225, y : 425, id : '200_1pi2', ltr : 19, name : 'B'},
+        {x : 425, y : 225, id : '200_1pi0', ltr : 1, name : 'C'},
+        {x : 25, y : 225, id : '200_1pi1', ltr : 13, name : 'D'},
+        {x : 200 * Math.cos(-Math.PI / 4) + 225, y : 200 * Math.sin(-Math.PI / 4) + 225, id : '200_-1pi4', ltr : 4, name : 'Z'},
+        {x : 200 * Math.cos(-Math.PI / 12) + 225, y : 200 * Math.sin(-Math.PI / 12) + 225, id : '200_-1pi12', ltr : 2, name : 'Y'},
+        {x : 200 * Math.cos(-5 * Math.PI / 12) + 225, y : 200 * Math.sin(-5 * Math.PI / 12) + 225, id : '200_-5pi12', ltr : 6, name : 'X'},
+        {x : 200 * Math.cos(5 * Math.PI / 12) + 225, y : 200 * Math.sin(5 * Math.PI / 12) + 225, id : '200_5pi12', ltr : 20, name : 'W'},
+        {x : 200 * Math.cos(7 * Math.PI / 12) + 225, y : 200 * Math.sin(7 * Math.PI / 12) + 225, id : '200_7pi12', ltr : 18, name : 'V'},
+        {x : 200 * Math.cos(-7 * Math.PI / 12) + 225, y : 200 * Math.sin(-7 * Math.PI / 12) + 225, id : '200_-7pi12', ltr : 8, name : 'U'},
+        {x : 200 * Math.cos(-11 * Math.PI / 12)+225, y : 200 * Math.sin(-11 * Math.PI / 12)+225, id : '200_-11pi12', ltr : 12, name : 'T'},
+        {x : 200 * Math.cos(11 * Math.PI / 12)+225, y : 200 * Math.sin(11 * Math.PI / 12)+225, id : '200_11pi12', ltr : 14, name : 'S'},
+        {x : 200 * Math.cos(Math.PI / 12) + 225, y : 200 * Math.sin(Math.PI / 12) + 225, id : '200_1pi12', ltr : 24, name : 'R'},
+        {x : 200 * Math.cos(-Math.PI / 6) + 225, y : 200 * Math.sin(-Math.PI / 6) + 225, id : '200_-1pi6', ltr : 3, name : 'Q'},
+        {x : 200 * Math.cos(-Math.PI / 3) + 225, y : 200 * Math.sin(-Math.PI / 3) + 225, id : '200_-1pi3', ltr : 5, name : 'P'},
+        {x : 200 * Math.cos(Math.PI / 6) + 225, y : 200 * Math.sin(Math.PI / 6) + 225, id : '200_1pi6', ltr : 23, name : 'N'},
+        {x : 200 * Math.cos(5 * Math.PI / 6) + 225, y : 200 * Math.sin(5 * Math.PI / 6) + 225, id : '200_5pi6', ltr : 15, name : 'M'},
+        {x : 200 * Math.cos(-5 * Math.PI / 6) + 225, y : 200 * Math.sin(-5 * Math.PI / 6) + 225, id : '200_-5pi6', ltr : 11, name : 'L'},
+        {x : 200 * Math.cos(Math.PI / 3) + 225, y : 200 * Math.sin(Math.PI / 3) + 225, id : '200_1pi3', ltr : 21, name : 'K'},
+        {x : 200 * Math.cos(2 * Math.PI / 3) + 225, y : 200 * Math.sin(2 * Math.PI / 3) + 225, id : '200_2pi3', ltr : 17, name : 'J'},
+        {x : 200 * Math.cos(-2 * Math.PI / 3) + 225, y : 200 * Math.sin(-2 * Math.PI / 3) + 225, id : '200_-2pi3', ltr : 9, name : 'H'},
+        {x : 200 * Math.cos(3 * Math.PI / 4) + 225, y : 200 * Math.sin(3 * Math.PI / 4) + 225, id : '200_3pi4', ltr : 16, name : 'G'},
+        {x : 200 * Math.cos(-3 * Math.PI / 4) + 225, y : 200 * Math.sin(-3 * Math.PI / 4) + 225, id : '200_-3pi4', ltr : 10, name : 'F'},
+        {x : 200 * Math.cos(Math.PI / 4) + 225, y : 200 * Math.sin(Math.PI / 4) + 225, id : '200_1pi4', ltr : 22, name : 'E'}];
+
+var slctdNodes = [];
+var slctdNodes_i = [];
+var svg = d3.select('#centrinsc_main').append('svg').attr('width', 450).attr('height', 450);
+svg.append('g').attr('id', 'lineCanvas');
+svg.append('circle').attr('id', 'largeCirc').attr('cx', 225).attr('cy', 225).attr('r', 200)
+   .style('stroke', 'gray').style('fill', 'none').style('stroke-width', 4);
+svg.append('g').attr('id', 'arcCanvas');
+
+svg.selectAll('.grabcirc')
+   .data(circVertices)
+   .enter()
+   .append('circle')
+   .attr('class', 'grabcirc')
+   .attr('cx', function(d){return d.x;})
+   .attr('cy', function(d){return d.y;})
+   .attr('r', 7)
+   .attr('id', function(d){return d.id;})
+   .style('fill', 'white').style('stroke', 'gray').style('stroke-width', 1).style('cursor', 'pointer')
+   .on('click', selectVertex);
+
+svg.selectAll('.vertText')
+   .data(circVertices)
+   .enter()
+   .append('text').attr('class', 'vertText')
+   .style('text-anchor', 'middle').attr('x', function(d){if (d.x < 225) return d.x - 8; else return d.x + 8;}).attr('y', function(d){if (d.y <= 225) return d.y - 10; else return d.y + 20;})
+   .text(function(d){return d.name;}).style('font-size', 14).style('font-family', 'sans-serif').style('fill', 'gray').style('stroke', 'none');
+
+function selectVertex(d, i) {
+   if (MODE === 'centralMode') {
+      if (slctdNodes.length >= 3) return;
+      for (var pair in slctdNodes) if (slctdNodes[pair].x === d.x && slctdNodes[pair].y === d.y) return;
+   }
+   else if (MODE === 'inscribeMode') {
+      if (slctdNodes_i.length >= 3) return;
+      for (var p in slctdNodes_i) if (slctdNodes_i[p].x === d.x && slctdNodes_i[p].y === d.y) return;
+   }
+   let col;
+   if (MODE === 'centralMode') {
+      if (slctdNodes.length === 3) return;
+      col = 'rgb(200, 14, 20)';
+      slctdNodes.push({x : d.x, y : d.y, id : d.id});
+   }
+   else if (MODE === 'inscribeMode') {
+      if (slctdNodes_i.length === 3 || d3.select(this).attr('id') === 'center') return;
+      col = 'rgb(125, 60, 255)';
+      slctdNodes_i.push({x : d.x, y : d.y, id : d.id, ltr : d.ltr});
+   }
+   d3.select(this).style('fill', col);
+   if (MODE === 'centralMode' && slctdNodes.length === 3) {drawAngle(); setTimeout(function(){checkAngle();}, 2000);}
+   else if (MODE === 'inscribeMode' && slctdNodes_i.length === 3) {drawAngle(); setTimeout(function(){checkAngle();}, 2000);}
+}
+function drawAngle() {
+   let col, lnclass;
+   if (MODE === 'centralMode') {
+      col = 'rgb(200, 14, 20)';
+      lnclass = 'sideLine';
+
+      for (var coords = 0; coords < slctdNodes.length - 1; coords++) {
+      d3.select('#lineCanvas').append('line').attr('class', lnclass)
+        .attr('x1', slctdNodes[coords].x).attr('y1', slctdNodes[coords].y)
+        .attr('x2', slctdNodes[coords].x).attr('y2', slctdNodes[coords].y)
+        .style('stroke', col).style('stroke-width', 2).style('stroke-linecap', 'round').style('shape-rendering', 'geometricPrecision')
+        .transition()
+        .delay(500 * coords + 500)
+        .duration(800)
+        .attr('x2', slctdNodes[coords + 1].x).attr('y2', slctdNodes[coords + 1].y);
+      }
+   }
+   else if (MODE === 'inscribeMode') {
+      col = 'rgb(125, 60, 255)';
+      lnclass = 'sideLine_i';
+
+      for (var coords = 0; coords < slctdNodes_i.length - 1; coords++) {
+      d3.select('#lineCanvas').append('line').attr('class', lnclass)
+        .attr('x1', slctdNodes_i[coords].x).attr('y1', slctdNodes_i[coords].y)
+        .attr('x2', slctdNodes_i[coords].x).attr('y2', slctdNodes_i[coords].y)
+        .style('stroke', col).style('stroke-width', 2).style('stroke-linecap', 'round').style('shape-rendering', 'geometricPrecision')
+        .transition()
+        .delay(500 * coords + 500)
+        .duration(800)
+        .attr('x2', slctdNodes_i[coords + 1].x).attr('y2', slctdNodes_i[coords + 1].y);
+      }
+   }
+}
+function checkAngle() {
+   if (MODE === 'centralMode') {
+   if (slctdNodes[1].id !== 'center') {
+      $('#message-board').text('Not a central angle.');
+      slctdNodes = [];
+      setTimeout(function(){
+      d3.selectAll('.sideLine').remove();
+      $('#message-board').text('');
+      d3.selectAll('.grabcirc').style('fill', 'white');
+      }, 2000);
+   }
+   else angleReport('central');
+   }
+   else if (MODE === 'inscribeMode') {
+   if (slctdNodes_i[1].id === 'center') {
+      $('#message-board').text('Not an inscribed angle.');
+      slctdNodes_i = [];
+      setTimeout(function(){
+      d3.selectAll('.sideLine_i').remove();
+      $('#message-board').text('');
+      d3.selectAll('.grabcirc').style('fill', 'white');
+      }, 2000);
+   }
+   else angleReport('inscribed');
+   }
+}
+function angleReport(a) {
+      let mult1, mult2, div1, div2;
+      const converter = 180 / Math.PI;
+
+      if (a === 'central') {
+      let ang1 = slctdNodes[0].id;
+      mult1 = Number(ang1.slice(4, ang1.indexOf('i') - 1));
+      div1 = Number(ang1.slice(ang1.indexOf('i') + 1));
+
+      let ang2 = slctdNodes[2].id;
+      mult2 = Number(ang2.slice(4, ang2.indexOf('i') - 1));
+      div2 = Number(ang2.slice(ang2.indexOf('i') + 1));
+
+      let angle1 = mult1 * (Math.PI / div1) * converter;
+      let angle2 = mult2 * (Math.PI / div2) * converter;
+
+      if (div1 === 0) angle1 = 0;
+      if (div2 === 0) angle2 = 0;
+
+      let finAngle = Math.abs(angle1 - angle2);
+      if (finAngle > 180) finAngle = 360 - finAngle;
+
+      $('#centrangle-board').html(`${Math.round(finAngle)}&deg;`);
+      }
+      else if (a === 'inscribed') {
+
+      let x1 = (slctdNodes_i[0].x - 225) - (slctdNodes_i[1].x - 225);
+      let x2 = (slctdNodes_i[2].x - 225) - (slctdNodes_i[1].x - 225);
+      let y1 = (425 - slctdNodes_i[0].y) - (425 - slctdNodes_i[1].y);
+      let y2 = (425 - slctdNodes_i[2].y) - (425 - slctdNodes_i[1].y);
+
+      let dots = x1 * x2 + y1 * y2;
+      let len1 = Math.sqrt(Math.pow((slctdNodes_i[0].x - 225) - (slctdNodes_i[1].x - 225), 2) + Math.pow((425 - slctdNodes_i[0].y) - (425 - slctdNodes_i[1].y), 2));
+      let len2 = Math.sqrt(Math.pow((slctdNodes_i[2].x - 225) - (slctdNodes_i[1].x - 225), 2) + Math.pow((425 - slctdNodes_i[2].y) - (425 - slctdNodes_i[1].y), 2));
+
+      let meas = Math.round(Math.acos(dots / (len1 * len2)) * converter * 10) / 10;
+
+      $('#inscr-board').html(`${meas}&deg;`);
+      }
+}
+
+$('input[type="checkbox"]').click(function(evt){
+   if ($('input[type=checkbox]').prop('checked') === true) {
+      MODE = 'centralMode'
+   }
+   else if ($('input[type=checkbox]').prop('checked') === false) {
+      MODE = 'inscribeMode';
+   }
+});
+
+$('.anglbut').click(function(evt) {
+   if (evt.target.id === 'eraseMode') {
+      MODE = 'centralMode';
+      $('#message-board').text('');
+      $('#centrangle-board').text('');
+      $('#inscr-board').text('');
+      d3.selectAll('.sideLine').remove();
+      d3.selectAll('.sideLine_i').remove();
+      d3.select('#inscribed-arc').remove();
+      d3.select('#central-arc').remove();
+      svg.selectAll('.grabcirc').on('click', selectVertex);
+      d3.selectAll('.grabcirc').style('fill', 'white').style('stroke', 'blue');
+      slctdNodes = [];
+      slctdNodes_i = [];
+   }
+   else if (evt.target.id === 'centralErase') {
+      slctdNodes = [];
+      d3.selectAll('.sideLine').remove();
+      for (item in circVertices) {
+      if ($(`#${circVertices[item].id}`).css('fill') === 'rgb(200, 14, 20)') $(`#${circVertices[item].id}`).css('fill', 'rgb(255, 255, 255)');
+      $('#centrangle-board').text('');
+      }
+      for (i in slctdNodes_i) $(`#${slctdNodes_i[i].id}`).css('fill', 'rgb(125, 60, 255)');
+      d3.select('#central-arc').remove();
+   }
+   else if (evt.target.id === 'inscribeErase') {
+      slctdNodes_i = [];
+      d3.selectAll('.sideLine_i').remove();
+      for (item in circVertices) {
+      if ($(`#${circVertices[item].id}`).css('fill') === 'rgb(125, 60, 255)') $(`#${circVertices[item].id}`).css('fill', 'rgb(255, 255, 255)');
+      $('#inscr-board').text('');
+      }
+      for (i in slctdNodes) $(`#${slctdNodes[i].id}`).css('fill', 'rgb(200, 14, 20)');
+      d3.select('#inscribed-arc').remove();
+   }
+   $('#centralErase').css('color', 'rgb(200, 14, 20)');
+   $('#inscribeErase').css('color', 'rgb(125, 60, 255)');
+});
+</script>
