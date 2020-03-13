@@ -466,6 +466,14 @@ $(document).on('click', '.bot', function(evt) {
    }
    var d = new Date();
    $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());
+   if ((curFocus === 'equation2' || curFocus === 'equation3') && botClick % 2 === 0) {
+      $('#botImage').attr('src', 'tutorbot_moving.png');
+      setTimeout(function(){$('#botImage').attr('src', 'tutorbot_neutral.gif');}, 800);
+   }
+   else if ((curFocus === 'equation2' || curFocus === 'equation3') && botClick % 2 !== 0) {
+      $('#botImage').attr('src', 'tutorbot_moving_close.png');
+      setTimeout(function(){$('#botImage').attr('src', 'tutorbot_neutral.gif');}, 800);
+   }
    if (curFocus === 'disclose1') hintGroup0();
    else if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
