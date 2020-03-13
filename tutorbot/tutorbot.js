@@ -8,7 +8,7 @@ $('.panel-left').resizable({
    resizeWidth: false
  });
 
-$(document).ready(function(){$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 214.5});});
+$(document).ready(function(){$('.speech_bubble').offset({left : 250, top : $('.bot').offset().top - 175});});
 
 var botstart = document.getElementById('botstart');
 botstart.volume = 0.02;
@@ -234,7 +234,7 @@ $('#slope1').bind('keyup', function(evt) {
      $('.speech_bubble').css({'height' : '425px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
      styleElem.innerHTML = ".speech_bubble:after {top:70.6%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 214.5});
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 175});
    }
    var answer = slope1Ans.latex();
    $(this).css('border', 'none');
@@ -243,7 +243,7 @@ $('#slope1').bind('keyup', function(evt) {
    $('.jitbox').fadeOut();
    $('#slope1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());
    $('#disclose3').animate({'opacity' : '+=1'}, 1000);
    equation1Ans.focus();
    curFocus = 'equation1';
@@ -265,7 +265,7 @@ $('#equation1').bind('keyup', function(evt) {
      $('.speech_bubble').css({'height' : '375px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
      styleElem.innerHTML = ".speech_bubble:after {top:66.67%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 166.5});
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 175});
    }
    var answer = equation1Ans.latex();
    $(this).css('border', 'none');
@@ -274,7 +274,7 @@ $('#equation1').bind('keyup', function(evt) {
    $('.jitbox').fadeOut();
    $('#equation1').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());
    $('#disclose4').animate({'opacity' : '+=1'}, 1000);
    $('#second_text').animate({'opacity' : '+=1'}, 1000);
    equation2Ans.focus();
@@ -319,7 +319,7 @@ $('#equation2').bind('keyup', function(evt) {
      $('.speech_bubble').css({'height' : '375px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
      styleElem.innerHTML = ".speech_bubble:after {top:66.67%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 166.5});
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 175});
    }
    $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    var answer = equation2Ans.latex();
@@ -331,7 +331,7 @@ $('#equation2').bind('keyup', function(evt) {
    $('.jitbox').fadeOut();
    $('#equation2').css({'border' : '2px solid green', 'pointer-events' : 'none', 'box-shadow' : 'none', 'font-weight' : 900, 'background-color' : '#fafafa'});
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());
    if (EQ3DONE) {
    curFocus = 'wrapUpQuestion';
    botUI.message.removeAll();
@@ -360,7 +360,7 @@ $('#equation3').bind('keyup', function(evt) {
      $('.speech_bubble').css({'height' : '375px'});
      var styleElem = document.head.appendChild(document.createElement("style"));
      styleElem.innerHTML = ".speech_bubble:after {top:66.67%;}";
-     $('.speech_bubble').offset({top : $('.bot').offset().top - 166.5});
+     $('.speech_bubble').offset({top : $('.bot').offset().top - 175});
    }
    var answer = equation3Ans.latex();
    $(this).css('border', 'none');
@@ -442,7 +442,7 @@ var hint5Count = 0;
 var hint6Count = 0;
 
 $(document).on('click', '.closeJit', function(evt){$('.jitbox').fadeOut();});
-$('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 214.5});
+$('.speech_bubble').offset({left : 250, top : $('.bot').offset().top - 175});
 $('#jit1').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit2').offset({'left' : $('#demo_grapher').offset().left - 125, 'top' : $('#demo_grapher').offset().top + 100});
 $('#jit3').offset({'left' : $('#equation3').offset().left, 'top' : $('#equation3').offset().top + 85});
@@ -456,16 +456,16 @@ $(document).on('click', '.bot', function(evt) {
       $('.speech_bubble').css({'height' : '425px'});
       var styleElem = document.head.appendChild(document.createElement("style"));
       styleElem.innerHTML = ".speech_bubble:after {top:70.6%;}";
-      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 214.5});
+      $('.speech_bubble').offset({left : 250, top : $('.bot').offset().top - 210});
    }
    else {
       $('.speech_bubble').css({'height' : '375px'});
       var styleElem = document.head.appendChild(document.createElement("style"));
       styleElem.innerHTML = ".speech_bubble:after {top:66.67%;}";
-      $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 166.5});
+      $('.speech_bubble').offset({left : 250, top : $('.bot').offset().top - 165});
    }
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());
    if (curFocus === 'disclose1') hintGroup0();
    else if (curFocus === 'slope1') hintGroup1();
    else if (curFocus === 'equation1') hintGroup2();
@@ -493,7 +493,7 @@ $(document).on('click', '.bot', function(evt) {
      .transition()
      .duration(1000)
      .ease(d3.easeBackInOut)
-     .style('left', '840px');
+     .style('left', '800px');
    d3.select('.speech_bubble')
      .style('visibility', 'visible')
      .transition()
@@ -517,9 +517,9 @@ $(document).on('click', '.bot', function(evt) {
      .style('left', '-50px');
    setTimeout(function(){
       if (curFocus === 'equation2' || curFocus === 'equation3') {
-      $('.speech_bubble').offset({left : 975, top : $('.bot').offset().top - 258.5});
+      $('.speech_bubble').offset({left : 975, top : $('.bot').offset().top - 175});
       }
-      else $('.speech_bubble').offset({left : 200, top : $('.bot').offset().top - 258.5});
+      else $('.speech_bubble').offset({left : 250, top : $('.bot').offset().top - 175});
       $('#equation2, #equation3').css('box-shadow', '0 0 3px #aaa');
    }, 100);
    botstart.pause();
@@ -550,7 +550,7 @@ $(document).on('click', '.bot', function(evt) {
 
 $(document).on('click', '.botBut', function(evt) {
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());
 });
 
 $(document).on('click', '.botback', function(evt) {
@@ -563,7 +563,7 @@ $(document).on('click', '.botback', function(evt) {
    else if (curFocus === 'wrapUpQuestion' && errGN1 + errGN2 + errGN3 + errGN4 < 6) hintGroup4();
    else if (errGN1 + errGN2 + errGN3 + errGN4 >= 6) hintGroup5();
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());
 });
 
 $(document).on('click', '.tryBut', function(){
@@ -573,7 +573,7 @@ $(document).on('click', '.tryBut', function(){
    else if (curFocus === 'equation2') equation2Ans.focus();
    else if (curFocus === 'equation3') equation3Ans.focus();
    var d = new Date();
-   $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());
+   $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());
 });
 
 var botUI = new BotUI('speech1');
@@ -614,7 +614,7 @@ function hintGroup0() {
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint0a').html()});})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint00') {
                   botInx += 3;
@@ -626,7 +626,7 @@ function hintGroup0() {
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint00b').html()});})
                        .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'goodVibes0') {
                   botInx += 3;
@@ -638,7 +638,7 @@ function hintGroup0() {
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintH0b').html()});})
                        .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintA0') {
                   botInx += 1;
@@ -647,7 +647,7 @@ function hintGroup0() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer0').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play(); $('.bot').css('pointer-events', 'all');})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                });
 }
@@ -682,7 +682,7 @@ function hintGroup1() {
                        .then(function(){
                           hint1Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint2') {
                   botInx += 3;
@@ -698,7 +698,7 @@ function hintGroup1() {
                            hint2Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'mltChHint') {
                   botInx += 4;
@@ -716,7 +716,7 @@ function hintGroup1() {
                        .then(function(){botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint7c').html()});})
                        .then(function(){setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'goodVibes') {
                   botInx += 3;
@@ -732,14 +732,14 @@ function hintGroup1() {
                            setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintExamp') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintMyQuestion') {
                   botInx += 1;
@@ -754,14 +754,14 @@ function hintGroup1() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer1').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play(); $('.bot').css('pointer-events', 'all');})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   }
                });
@@ -800,20 +800,20 @@ function hintGroup2() {
                            hint3Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint4') {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hint4').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){hint4Count += 1; botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintExamp') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintA2') {
                   botInx += 1;
@@ -822,14 +822,14 @@ function hintGroup2() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer2').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();$('.bot').css('pointer-events', 'all');})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   }
                });
@@ -868,7 +868,7 @@ function hintGroup3() {
                            hint5Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothint6') {
                   botInx += 1;
@@ -884,13 +884,13 @@ function hintGroup3() {
                            hint6Count += 1; setTimeout(function(){botresponse.play();$('.bot').css('pointer-events', 'all');}, 2000);
                        })
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintExamp') {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#hintExamp3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'bothintA3') {
                   botInx += 1;
@@ -899,14 +899,14 @@ function hintGroup3() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#answer3').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();$('.bot').css('pointer-events', 'all');})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else {
                   botInx += 1;
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: $('#ansNo').html()})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
                        .then(function(){botresponse.play();})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   }
                });
@@ -929,7 +929,7 @@ function hintGroup4() {
                        .then(function(){botresponse.play();})
                        .then(function(){setTimeout(function(){$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   else if (res.value === 'slopeNoChange') {
                   botInx += 1;
@@ -938,7 +938,7 @@ function hintGroup4() {
                        .then(function(){botresponse.play();})
                        .then(function(){setTimeout(function(){$('.bot').css('pointer-events', 'all');}, 2000);})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   }
                   });
 }
@@ -963,7 +963,7 @@ function hintGroup5() {
                   botUI.message.bot({type : 'html', delay: 2000, loading: true, content: 'Okay, thank you! I would like you to talk with your teacher and maybe some other students.<br /><br />Share your thinking with them. I\'ll see you when you get back.'})
                        .then(function(){botresponse.play();})
                        .then(function(){$(".botui").animate({ scrollTop: $('.botui').prop("scrollHeight")}, 1000);})
-                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'blinkbot.gif?' + d.getTime());});
+                       .then(function(){var d = new Date(); $('#botImage').attr('src', 'tutorbot_neutral.gif?' + d.getTime());});
                   });
 }
 
