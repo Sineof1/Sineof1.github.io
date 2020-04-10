@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.js": "/livehint/static/js/main.b12f46b6.chunk.js",
+    "main.js.map": "/livehint/static/js/main.b12f46b6.chunk.js.map",
+    "runtime-main.js": "/livehint/static/js/runtime-main.9b622124.js",
+    "runtime-main.js.map": "/livehint/static/js/runtime-main.9b622124.js.map",
+    "index.html": "/livehint/index.html",
+    "precache-manifest.3184de13075c43ccfdd8c495d5a5bf64.js": "/livehint/precache-manifest.3184de13075c43ccfdd8c495d5a5bf64.js",
+    "service-worker.js": "/livehint/service-worker.js"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9b622124.js",
+    "static/js/main.b12f46b6.chunk.js"
+  ]
+}
