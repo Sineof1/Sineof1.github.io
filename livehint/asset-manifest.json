@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/livehint/static/js/main.b12f46b6.chunk.js",
-    "main.js.map": "/livehint/static/js/main.b12f46b6.chunk.js.map",
-    "runtime-main.js": "/livehint/static/js/runtime-main.9b622124.js",
-    "runtime-main.js.map": "/livehint/static/js/runtime-main.9b622124.js.map",
+    "main.js": "/livehint/static/js/main.8bf1040b.chunk.js",
+    "main.js.map": "/livehint/static/js/main.8bf1040b.chunk.js.map",
+    "runtime-main.js": "/livehint/static/js/runtime-main.391288f0.js",
+    "runtime-main.js.map": "/livehint/static/js/runtime-main.391288f0.js.map",
     "index.html": "/livehint/index.html",
-    "precache-manifest.04b82d5391427a17341ea5b04d05c3d7.js": "/livehint/precache-manifest.04b82d5391427a17341ea5b04d05c3d7.js",
+    "precache-manifest.67af0da6d16b74e2b9deb1deb0434db3.js": "/livehint/precache-manifest.67af0da6d16b74e2b9deb1deb0434db3.js",
     "service-worker.js": "/livehint/service-worker.js"
   },
   "entrypoints": [
-    "static/js/runtime-main.9b622124.js",
-    "static/js/main.b12f46b6.chunk.js"
+    "static/js/runtime-main.391288f0.js",
+    "static/js/main.8bf1040b.chunk.js"
   ]
 }
