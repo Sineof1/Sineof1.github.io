@@ -1,8 +1,6 @@
 {
   "name": "LiveHint",
   "short_name": "LiveHint",
-  "gcm_sender_id": "330561634409",
-  "gcm_user_visible_only": true,
   "icons": [{
     "src": "logo128.png",
       "sizes": "128x128",
