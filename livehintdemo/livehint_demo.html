@@ -67,8 +67,8 @@ html {
 <body>
 <div class='header'></div>
 <div class='container' style='padding-top:5vh;'>
-<div class='demo demo-lhs' style='overflow:auto;-webkit-overflow-scrolling:touch;'>
-<object id='pdf' data="lhdemo1.pdf" type="application/pdf" style='height:100%;width:100%;'>
+<div id='pdfSide' class='demo demo-lhs' style='overflow:auto;-webkit-overflow-scrolling:touch;'>
+<object id='pdf' data="lhdemo1.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style='height:100%;width:100%;'>
 <embed id='pdfembed' src="lhdemo1.pdf" type="application/pdf" />
 </object>
 <button class='nextBut' onclick='cyclePDF()'>Next</button>
@@ -81,7 +81,7 @@ html {
 
 <script>
 var ind = 0;
-pages = ['lhdemo1.pdf', 'lhdemo2.pdf', 'lhdemo3.pdf']
+pages = ['lhdemo1.pdf#toolbar=0&navpanes=0&scrollbar=0', 'lhdemo2.pdf#toolbar=0&navpanes=0&scrollbar=0', 'lhdemo3.pdf#toolbar=0&navpanes=0&scrollbar=0']
 function cyclePDF() {
    ind += 1;
    if (ind === 3) ind = 0;
