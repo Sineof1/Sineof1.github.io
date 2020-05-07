@@ -55,7 +55,7 @@ html {
    font-family:sans-serif;
    border:none;
    outline:none;
-   background-color:#213446;
+   background-color:#800040;
    color:white;
    cursor:pointer;
    border-radius:5px;
@@ -68,13 +68,26 @@ html {
 <div class='header'></div>
 <div class='container' style='padding-top:5vh;'>
 <div class='demo demo-lhs' style='overflow:auto;-webkit-overflow-scrolling:touch;'>
-<object data="LiveHintDemo.pdf" type="application/pdf" style='height:100%;width:100%;'>
-<embed src="LiveHintDemo.pdf" type="application/pdf" />
+<object id='pdf' data="lhdemo1.pdf" type="application/pdf" style='height:100%;width:100%;'>
+<embed id='pdfembed' src="lhdemo1.pdf" type="application/pdf" />
 </object>
+<button class='nextBut' onclick='cyclePDF()'>Next</button>
 </div>
 <div class='demo demo-rhs'>
 <iframe src='https://livehint.com' allowfullscreen='false' width='100%' height='100%' style='border:none;border-radius:2px;'></iframe>
 </div>
 </div>
 </body>
+
+<script>
+var ind = 0;
+pages = ['lhdemo1.pdf', 'lhdemo2.pdf', 'lhdemo3.pdf']
+function cyclePDF() {
+   ind += 1;
+   if (ind === 3) ind = 0;
+   const pag = pages[ind];
+   document.getElementById('pdf').data = pag;
+   document.getElementById('pdfembed').data = pag;
+}
+</script>
 </html>
