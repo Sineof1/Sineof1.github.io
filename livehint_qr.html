@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/uuid-js@0.7.5/lib/uuid.min.js'></script>
 <title>LiveHint QR</title>
 </head>
 
@@ -20,9 +20,19 @@ var userUniqueID;
 window.onload = function() {
    userUniqueID = localStorage.getItem('userUniqueID');
    if (userUniqueID === 'null') {
-   userUniqueID = uuidv4();
+   userUniqueID = create_UUID();
    localStorage.setItem('userUniqueID', userUniqueID);
    }
+}
+
+function create_UUID(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+       var r = (dt + Math.random()*16)%16 | 0;
+       dt = Math.floor(dt/16);
+       return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
 }
 
 var myLandbot = new LandbotFullpage({
