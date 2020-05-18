@@ -2,7 +2,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src='https://cdn.jsdelivr.net/npm/uuid-js@0.7.5/lib/uuid.min.js'></script>
 <title>LiveHint QR</title>
 </head>
 
@@ -17,12 +16,10 @@ const module = urlParams.get('module');
 const pagenm = urlParams.get('page');
 var userUniqueID;
 
-window.onload = function() {
-   userUniqueID = localStorage.getItem('userUniqueID');
-   if (userUniqueID === 'null') {
+userUniqueID = localStorage.getItem('userUniqueID');
+if (userUniqueID === null) {
    userUniqueID = create_UUID();
    localStorage.setItem('userUniqueID', userUniqueID);
-   }
 }
 
 function create_UUID(){
