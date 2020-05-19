@@ -24,6 +24,8 @@ if (userUniqueID === null) {
    userUniqueID = create_UUID();
    localStorage.setItem('userUniqueID', userUniqueID);
 }
+function setTheCourse(crs) {localStorage.setItem('userCourse', crs);}
+function setTheModule(mod) {localStorage.setItem('userModule', mod);}
 function create_UUID(){
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -37,8 +39,8 @@ function create_UUID(){
 var myLandbot = new LandbotFullpage({
 index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}&setcourse=${setCourse}$setmodule=${setModule}`,
 });
-myLandbot.on('setCourse', (data1) => {localStorage.setItem('userCourse', data1);});
-myLandbot.on('setModule', (data2) => {localStorage.setItem('userModule', data2);});
+myLandbot.on('setCourse', setTheCourse(data1));
+myLandbot.on('setModule', setTheModule(data2));
 </script>
 </body>
 
