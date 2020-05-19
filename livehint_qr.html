@@ -37,10 +37,10 @@ function create_UUID(){
 }
 
 var myLandbot = new LandbotFullpage({
-index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}&setcourse=${setCourse}$setmodule=${setModule}`,
+index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}&setcourse=${setCourse}&setmodule=${setModule}`,
 });
-myLandbot.on('setCourse', setTheCourse(data1));
-myLandbot.on('setModule', setTheModule(data2));
+myLandbot.on('setCourse', function(data1){setTheCourse(data1);});
+myLandbot.on('setModule', function(data2){setTheModule(data2);});
 </script>
 </body>
 
