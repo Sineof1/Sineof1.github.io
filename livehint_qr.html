@@ -42,6 +42,8 @@ function create_UUID(){
 var myLandbot = new LandbotFullpage({
 index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}&usercourse=${userCourse}&usermodule=${userModule}`,
 });
+myLandbot.on('setCourse', (userCourse) => {localStorage.setItem('userCourse', userCourse);});
+myLandbot.on('setModule', (userModule) => {localStorage.setItem('userCourse', userModule);});
 </script>
 </body>
 
