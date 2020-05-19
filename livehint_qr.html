@@ -17,10 +17,15 @@ const pagenm = urlParams.get('page');
 var userUniqueID;
 
 userUniqueID = localStorage.getItem('userUniqueID');
+userCourse = localStorage.getItem('userCourse');
+userModule = localStorage.getItem('userModule');
+console.log(userCourse, userModule);
+   
 if (userUniqueID === null) {
    userUniqueID = create_UUID();
    localStorage.setItem('userUniqueID', userUniqueID);
 }
+
 
 function create_UUID(){
     var dt = new Date().getTime();
@@ -33,7 +38,7 @@ function create_UUID(){
 }
 
 var myLandbot = new LandbotFullpage({
-index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}`,
+index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}&usercourse=${userCourse}&usermodule=${userModule}`,
 });
 </script>
 </body>
