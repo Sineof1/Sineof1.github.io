@@ -15,11 +15,12 @@ const course = urlParams.get('course');
 const module = urlParams.get('module');
 const pagenm = urlParams.get('page');
 var userUniqueID;
+var usercourse = 'none';
+var usermodule = 'none';
 
 userUniqueID = localStorage.getItem('userUniqueID');
 userCourse = localStorage.getItem('userCourse');
 userModule = localStorage.getItem('userModule');
-console.log(userCourse, userModule);
    
 if (userUniqueID === null) {
    userUniqueID = create_UUID();
