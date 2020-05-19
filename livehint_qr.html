@@ -14,9 +14,7 @@ const urlParams = new URLSearchParams(queryString);
 const course = urlParams.get('course');
 const module = urlParams.get('module');
 const pagenm = urlParams.get('page');
-var userUniqueID;
-var usercourse = 'none';
-var usermodule = 'none';
+var userUniqueID, userCourse, userModule;
 
 userUniqueID = localStorage.getItem('userUniqueID');
 userCourse = localStorage.getItem('userCourse');
@@ -26,7 +24,10 @@ if (userUniqueID === null) {
    userUniqueID = create_UUID();
    localStorage.setItem('userUniqueID', userUniqueID);
 }
-
+if (userCourse === null && userModule === null) {
+   userCourse = 'none';
+   userModule = 'none';
+}
 
 function create_UUID(){
     var dt = new Date().getTime();
