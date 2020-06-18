@@ -14,6 +14,9 @@ const urlParams = new URLSearchParams(queryString);
 const course = urlParams.get('course');
 const module = urlParams.get('module');
 const pagenm = urlParams.get('page');
+const ch1 = urlParams.get('customhint1');
+const ch2 = urlParams.get('customhint2');
+const ch3 = urlParams.get('customhint3');
 var userUniqueID, setCourse, setModule;
 
 userUniqueID = localStorage.getItem('userUniqueID');
@@ -37,7 +40,7 @@ function create_UUID(){
 }
 
 var myLandbot = new LandbotFullpage({
-index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}&setcourse=${setCourse}&setmodule=${setModule}`,
+index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}&setcourse=${setCourse}&setmodule=${setModule}&ch1=${ch1}&ch2=${ch2}&ch3=${ch3}`,
 });
 myLandbot.on('setCourse', function(data1){setTheCourse(data1);});
 myLandbot.on('setModule', function(data2){setTheModule(data2);});
