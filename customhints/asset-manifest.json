@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/customhints/static/css/main.76496f34.chunk.css",
-    "main.js": "/customhints/static/js/main.f271d984.chunk.js",
-    "main.js.map": "/customhints/static/js/main.f271d984.chunk.js.map",
+    "main.js": "/customhints/static/js/main.2dc621e9.chunk.js",
+    "main.js.map": "/customhints/static/js/main.2dc621e9.chunk.js.map",
     "runtime-main.js": "/customhints/static/js/runtime-main.c165628e.js",
     "runtime-main.js.map": "/customhints/static/js/runtime-main.c165628e.js.map",
     "static/js/2.fa1485b6.chunk.js": "/customhints/static/js/2.fa1485b6.chunk.js",
     "static/js/2.fa1485b6.chunk.js.map": "/customhints/static/js/2.fa1485b6.chunk.js.map",
     "index.html": "/customhints/index.html",
-    "precache-manifest.83ce4b2b2d694b6685f62853de5b1f53.js": "/customhints/precache-manifest.83ce4b2b2d694b6685f62853de5b1f53.js",
+    "precache-manifest.15e4802896e457c435479dedf0fcfc6f.js": "/customhints/precache-manifest.15e4802896e457c435479dedf0fcfc6f.js",
     "service-worker.js": "/customhints/service-worker.js",
     "static/css/main.76496f34.chunk.css.map": "/customhints/static/css/main.76496f34.chunk.css.map",
     "static/js/2.fa1485b6.chunk.js.LICENSE.txt": "/customhints/static/js/2.fa1485b6.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.c165628e.js",
     "static/js/2.fa1485b6.chunk.js",
     "static/css/main.76496f34.chunk.css",
-    "static/js/main.f271d984.chunk.js"
+    "static/js/main.2dc621e9.chunk.js"
   ]
 }
