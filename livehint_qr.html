@@ -8,12 +8,13 @@
 <body>
 <script SameSite="None; Secure" src="https://static.landbot.io/landbot-widget/landbot-widget-1.0.0.js"></script>
 <script>
+var landbotChoice = null;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
-const course = urlParams.get('course');
-const module = urlParams.get('module');
-const pagenm = urlParams.get('page');
+const course = urlParams.get('qr_course');
+const module = urlParams.get('qr_module');
+const pagenm = urlParams.get('qr_page');
 const ch1 = urlParams.get('customhint1');
 const ch2 = urlParams.get('customhint2');
 const ch3 = urlParams.get('customhint3');
@@ -27,6 +28,12 @@ if (userUniqueID === null) {
    userUniqueID = create_UUID();
    localStorage.setItem('userUniqueID', userUniqueID);
 }
+if (course && module && pagenm) {
+   landbotChoice = new LandbotFullpage({index: `https://chats.landbot.io/v2/H-735420-KQUNO6NA262KFM4E/index.html?qr_course=${course}&qr_module=${module}&qr_page=${pagenm}&uniqueid=${userUniqueID}`,});
+}
+else {
+   landbotChoice = new LandbotFullpage({index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?uniqueid=${userUniqueID}&setcourse=${setCourse}&setmodule=${setModule}`,});
+}
 function setTheCourse(crs) {localStorage.setItem('userCourse', crs);}
 function setTheModule(mod) {localStorage.setItem('userModule', mod);}
 function create_UUID(){
@@ -39,9 +46,7 @@ function create_UUID(){
     return uuid;
 }
 
-var myLandbot = new LandbotFullpage({
-index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?course=${course}&module=${module}&page=${pagenm}&uniqueid=${userUniqueID}&setcourse=${setCourse}&setmodule=${setModule}&customhint1=${ch1}&customhint2=${ch2}&customhint3=${ch3}`,
-});
+var myLandbot = landbotChoice;
 myLandbot.on('setCourse', function(data1){setTheCourse(data1);});
 myLandbot.on('setModule', function(data2){setTheModule(data2);});
 </script>
