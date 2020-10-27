@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<script SameSite="None; Secure" src="https://static.landbot.io/landbot-widget/landbot-widget-1.0.0.js"></script>
+<script SameSite="None; Secure" src="https://static.landbot.io/landbot-3/landbot-3.0.0.js"></script>
 <script>
 var landbotChoice = null;
 const queryString = window.location.search;
@@ -32,7 +32,7 @@ if (course && module && pagenm) {
    landbotChoice = new LandbotFullpage({index: `https://chats.landbot.io/v2/H-735420-KQUNO6NA262KFM4E/index.html?qr_course=${course}&qr_module=${module}&qr_page=${pagenm}&uniqueid=${userUniqueID}`,});
 }
 else {
-   landbotChoice = new LandbotFullpage({index: `https://landbot.io/u/H-476750-FBOGF72L39X0UFUW/index.html?uniqueid=${userUniqueID}&setcourse=${setCourse}&setmodule=${setModule}`,});
+   landbotChoice = new LandbotFullpage({index: `https://chats.landbot.io/v3/H-738372-KK0889SBPWEDRICO/index.html?uniqueid=${userUniqueID}`,});
 }
 function setTheCourse(crs) {localStorage.setItem('userCourse', crs);}
 function setTheModule(mod) {localStorage.setItem('userModule', mod);}
