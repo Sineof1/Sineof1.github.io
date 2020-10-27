@@ -32,7 +32,7 @@ if (course && module && pagenm) {
    landbotChoice = new LandbotFullpage({index: `https://chats.landbot.io/v2/H-735420-KQUNO6NA262KFM4E/index.html?qr_course=${course}&qr_module=${module}&qr_page=${pagenm}&uniqueid=${userUniqueID}`,});
 }
 else {
-   landbotChoice = new LandbotFullpage({index: `https://chats.landbot.io/v3/H-738372-KK0889SBPWEDRICO/index.html?uniqueid=${userUniqueID}`,});
+   landbotChoice = new Landbot.Fullpage({index: `https://chats.landbot.io/v3/H-738372-KK0889SBPWEDRICO/index.html?uniqueid=${userUniqueID}`,});
 }
 function setTheCourse(crs) {localStorage.setItem('userCourse', crs);}
 function setTheModule(mod) {localStorage.setItem('userModule', mod);}
