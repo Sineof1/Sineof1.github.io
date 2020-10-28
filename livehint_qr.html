@@ -23,7 +23,7 @@ var userUniqueID, setCourse, setModule;
 userUniqueID = localStorage.getItem('userUniqueID');
    
 var user_location = null;
-fetch('https://geolocation-db.com/json/6db070f0-7c27-11ea-8264-e974339fc182').then((resp) => resp.json()).then(data => {user_location = `${data.city}, ${data.state}`;});
+fetch('https://geolocation-db.com/json/6db070f0-7c27-11ea-8264-e974339fc182').then((resp) => resp.json()).then(data => {user_location = `${data.city},%20${data.state}`;});
    
 if (userUniqueID === null) {
    userUniqueID = create_UUID();
