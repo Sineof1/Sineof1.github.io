@@ -51,14 +51,6 @@ var myLandbot = landbotChoice;
 myLandbot.on('setCourse', function(data1){setTheCourse(data1);});
 myLandbot.on('setModule', function(data2){setTheModule(data2);});
 </script>
-<script>
-var landbotScope = this;
-this.onload(function(){
-   var user_location = null;
-   fetch('https://geolocation-db.com/json/6db070f0-7c27-11ea-8264-e974339fc182').then((resp) => resp.json()).then(data => {user_location = `${data.city}, ${data.state}`;});
-   landbotScope.setCustomData({userloc : user_location});
-});
-</script>
 </body>
 
 </html>
