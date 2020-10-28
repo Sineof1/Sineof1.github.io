@@ -15,26 +15,16 @@ const urlParams = new URLSearchParams(queryString);
 const course = urlParams.get('qr_course');
 const module = urlParams.get('qr_module');
 const pagenm = urlParams.get('qr_page');
-const ch1 = urlParams.get('customhint1');
-const ch2 = urlParams.get('customhint2');
-const ch3 = urlParams.get('customhint3');
-var userUniqueID, setCourse, setModule;
+var userUniqueID;
 
 userUniqueID = localStorage.getItem('userUniqueID');
-   
-var user_location;
-var obj;
-fetch('https://geolocation-db.com/json/6db070f0-7c27-11ea-8264-e974339fc182')
-   .then(resp => resp.json())
-   .then(data => obj = data)
-   .then(() => user_location = `${obj.city}, ${obj.state}`);
    
 if (userUniqueID === null) {
    userUniqueID = create_UUID();
    localStorage.setItem('userUniqueID', userUniqueID);
 }
-if (course && module && pagenm) {
-   landbotChoice = new LandbotFullpage({index: `https://chats.landbot.io/v2/H-735420-KQUNO6NA262KFM4E/index.html?qr_course=${course}&qr_module=${module}&qr_page=${pagenm}&uniqueid=${userUniqueID}`,});
+if (course && pagenm) {
+   landbotChoice = new LandbotFullpage({index: `https://chats.landbot.io/v2/H-735420-KQUNO6NA262KFM4E/index.html?qr_course=${course}&qr_page=${pagenm}&uniqueid=${userUniqueID}`,});
 }
 
 else {
