@@ -26,9 +26,10 @@ var user_location;
 var obj;
 fetch('https://geolocation-db.com/json/6db070f0-7c27-11ea-8264-e974339fc182')
    .then(resp => resp.json())
-   .then(data => obj = data);
-user_location = `${obj.city}, ${obj.state}`;
-console.log(user_location);
+   .then(data => obj = data)
+   .then(() => console.log(obj));
+//user_location = `${obj.city}, ${obj.state}`;
+//console.log(user_location);
    
 if (userUniqueID === null) {
    userUniqueID = create_UUID();
