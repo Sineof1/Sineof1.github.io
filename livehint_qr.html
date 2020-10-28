@@ -21,8 +21,6 @@ const ch3 = urlParams.get('customhint3');
 var userUniqueID, setCourse, setModule;
 
 userUniqueID = localStorage.getItem('userUniqueID');
-setCourse = localStorage.getItem('userCourse');
-setModule = localStorage.getItem('userModule');
    
 if (userUniqueID === null) {
    userUniqueID = create_UUID();
@@ -35,8 +33,6 @@ if (course && module && pagenm) {
 else {
    landbotChoice = new Landbot.Fullpage({configUrl: 'https://chats.landbot.io/v3/H-738372-KK0889SBPWEDRICO/index.json',});
 }
-function setTheCourse(crs) {localStorage.setItem('userCourse', crs);}
-function setTheModule(mod) {localStorage.setItem('userModule', mod);}
 function create_UUID(){
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -46,10 +42,7 @@ function create_UUID(){
     });
     return uuid;
 }
-
 var myLandbot = landbotChoice;
-myLandbot.on('setCourse', function(data1){setTheCourse(data1);});
-myLandbot.on('setModule', function(data2){setTheModule(data2);});
 </script>
 </body>
 
