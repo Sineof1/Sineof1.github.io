@@ -34,7 +34,7 @@ if (course && module && pagenm) {
 }
 
 else {
-   landbotChoice = new Landbot.Fullpage({configUrl: 'https://chats.landbot.io/v3/H-738372-KK0889SBPWEDRICO/index.json', customData : {userloc : user_location}});
+   landbotChoice = new Landbot.Fullpage({configUrl: `https://chats.landbot.io/v3/H-738372-KK0889SBPWEDRICO/index.json?userloc=${user_location}`,});
 }
 function create_UUID(){
     var dt = new Date().getTime();
