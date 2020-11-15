@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="description" content="Two-player games.">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="For 2.">
+<link rel="apple-touch-icon" href="icon-152x152.png">
+<link rel="icon" href="guzintafish128.png" />
+<link rel="stylesheet" href="for2.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<title>For 2</title>
+</head>
+
+<body>
+<div class='turn-shield'></div>
+<div class='play_area'>
+<div class='score top-score'>0</div>
+<div class='score bottom-score'>0</div>
+<div class='roll-area'>
+<button class='roll-button'>roll</button>
+<div class='black-roll'></div>
+<div class='red-roll'></div>
+</div>
+<div class='math-football'>
+<div class='math-football-section endzone' id='home_endzone'>Home Team</div>
+<div class='math-football-section' id='home_10'></div>
+<div class='math-football-section' id='home_9'></div>
+<div class='math-football-section' id='home_8'></div>
+<div class='math-football-section' id='home_7'></div>
+<div class='math-football-section' id='home_6'></div>
+<div class='math-football-section' id='home_5'></div>
+<div class='math-football-section' id='home_4'></div>
+<div class='math-football-section' id='home_3'></div>
+<div class='math-football-section' id='home_2'></div>
+<div class='math-football-section' id='home_1'></div>
+<div class='math-football-section' id='visiting_-1'></div>
+<div class='math-football-section' id='visiting_-2'></div>
+<div class='math-football-section' id='visiting_-3'></div>
+<div class='math-football-section' id='visiting_-4'></div>
+<div class='math-football-section' id='visiting_-5'></div>
+<div class='math-football-section' id='visiting_-6'></div>
+<div class='math-football-section' id='visiting_-7'></div>
+<div class='math-football-section' id='visiting_-8'></div>
+<div class='math-football-section' id='visiting_-9'></div>
+<div class='math-football-section' id='visiting_-10'></div>
+<div class='math-football-section endzone' id='visiting_endzone'>Visiting Team</div>
+</div>
+</div>
+<div class='user-avatar-container'>
+<img class='avatar-button' id='player1' src='female_1.png' alt='' />
+<img class='avatar-button' id='player2' src='man_1.png' alt='' />
+<img class='avatar-button' id='player3' src='female_2.png' alt='' />
+<img class='avatar-button' id='player4' src='man_2.png' alt='' />
+</div>
+</body>
+<script src='socket.js'></script>
+<script>
+$('.avatar-button').click(function(evt) {
+   var buttonID = evt.target.id;
+   login(buttonID);
+   socket.send(JSON.stringify({info : 'otherUser', user : buttonID}));
+   $(`#${evt.target.id}`).css('opacity', 1);
+   $('.avatar-button').css('pointer-events', 'none');
+});
+$('.roll-button').click(function(evt) {
+   var black = Math.floor(Math.random() * 6 + 1);
+   var red = Math.floor(Math.random() * 6 + 1);
+   $('.red-roll').html(red);
+   $('.black-roll').html(black);
+   $('.roll-button').css('pointer-events', 'none');
+   $('.math-football-section').css('pointer-events', 'all');
+});
+$('.math-football-section').click(function(evt) {
+   var firstListPlayer = Number(userList[0][6]);
+   var secndListPlayer = Number(userList[1][6]);
+   var locColor;
+   if ($(`#${evt.target.id}`).css('background-color') != "rgb(211, 211, 211)") {
+   locColor = 'purple';
+   $(`#${evt.target.id}`).css('background-color', locColor);
+   }
+   else if (myPlayer <= firstListPlayer && myPlayer <= secndListPlayer) {
+   locColor = 'green';
+   $(`#${evt.target.id}`).css('background-color', locColor);
+   }
+   else {
+   locColor = 'brown';
+   $(`#${evt.target.id}`).css('background-color', locColor);
+   }
+   $('.math-football-section').css('pointer-events', 'none');
+   if ($('.turn-shield').css('display') === 'block') $('.turn-shield').css('display', 'none');
+   else $('.turn-shield').css('display', 'block');
+   socket.send(JSON.stringify({info : 'playerMove', loc : evt.target.id, color : locColor}));
+   socket.send(JSON.stringify({info : 'turnSwitch'}));
+});
+</script>
+</html>
