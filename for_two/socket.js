@@ -50,5 +50,5 @@ function playerMove(msg) {
    $(`#${msg.loc}`).css('background-color', msg.color);
    otherPlayerCur = `#${msg.loc}`;
    var prevLoc = `#${msg.prevloc}`;
-   $('.math-football-section').not(`.endzone, #${evt.target.id}, ${otherPlayerCur}, ${prevLoc}`).css('background-color', 'white');
+   $('.math-football-section').not(`.endzone, #${evt.target.id}, ${otherPlayerCur}`).css('background-color', 'white');
 }
