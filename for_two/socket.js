@@ -5,7 +5,6 @@ socket.addEventListener('message', function(event) {handleMessage(JSON.parse(eve
 
 var userList = [];
 var myPlayer;
-var otherPlayerCur;
 
 function login(user) {
    userList.push(user);
