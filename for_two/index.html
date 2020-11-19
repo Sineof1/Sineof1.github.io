@@ -93,7 +93,7 @@ $('.math-football-section').click(function(evt) {
    $('.math-football-section').css('pointer-events', 'none');
    if ($('.turn-shield').css('display') === 'block') $('.turn-shield').css('display', 'none');
    else $('.turn-shield').css('display', 'block');
-   socket.send(JSON.stringify({info : 'playerMove', loc : evt.target.id, color : locColor, prevloc : myPrevious}));
+   socket.send(JSON.stringify({info : 'playerMove', loc : evt.target.id, color : locColor}));
    socket.send(JSON.stringify({info : 'turnSwitch'}));
 });
 </script>
