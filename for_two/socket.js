@@ -6,8 +6,6 @@ socket.addEventListener('message', function(event) {handleMessage(JSON.parse(eve
 var userList = [];
 var myPlayer;
 var otherPlayerCur;
-var myPlayerCur;
-var myPrevious;
 
 function login(user) {
    userList.push(user);
@@ -49,6 +47,5 @@ function switchTurn() {
 function playerMove(msg) {
    $(`#${msg.loc}`).css('background-color', msg.color);
    otherPlayerCur = `#${msg.loc}`;
-   var prevLoc = `#${msg.prevloc}`;
-   $('.math-football-section').not(`.endzone, ${otherPlayerCur}, ${prevLoc}`).css('background-color', 'white');
+   $('.math-football-section').not(`.endzone, ${otherPlayerCur}`).css('background-color', 'white');
 }
