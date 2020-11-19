@@ -64,6 +64,12 @@
    cursor:pointer;
    pointer-events:none;
 }
+.endzone:hover {
+   background-color:rgba(0, 0, 50, 0.7);
+}
+.math-football-section:not(.endzone):hover {
+   background-color:lightgray;
+}
 .endzone {
    background-color:navy;
    color:white;
