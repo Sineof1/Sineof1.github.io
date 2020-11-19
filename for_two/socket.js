@@ -7,6 +7,7 @@ var userList = [];
 var myPlayer;
 var otherPlayerCur;
 var myPlayerCur;
+var myPrevious;
 
 function login(user) {
    userList.push(user);
