@@ -5,6 +5,7 @@ socket.addEventListener('message', function(event) {handleMessage(JSON.parse(eve
 
 var userList = [];
 var myPlayer;
+var otherPlayerCur;
 
 function login(user) {
    userList.push(user);
@@ -45,4 +46,5 @@ function switchTurn() {
 }
 function playerMove(msg) {
    $(`#${msg.loc}`).css('background-color', msg.color);
+   otherPlayerCur = `#${msg.loc}`;
 }
