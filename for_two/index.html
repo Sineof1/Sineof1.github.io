@@ -89,7 +89,6 @@ $('.math-football-section').click(function(evt) {
    locColor = 'brown';
    $(`#${evt.target.id}`).css('background-color', locColor);
    }
-   $('.math-football-section').not(`.endzone, #${evt.target.id}`).css('background-color', 'white');
    $('.math-football-section').css('pointer-events', 'none');
    if ($('.turn-shield').css('display') === 'block') $('.turn-shield').css('display', 'none');
    else $('.turn-shield').css('display', 'block');
