@@ -77,6 +77,7 @@ $('.math-football-section').click(function(evt) {
    var firstListPlayer = Number(userList[0][6]);
    var secndListPlayer = Number(userList[1][6]);
    var locColor;
+   myPlayerCur = evt.target.id;
    $('.math-football-section').not(`.endzone, #${evt.target.id}, ${otherPlayerCur}`).css('background-color', 'white');
    if ($(`#${evt.target.id}`).css('background-color') != "rgb(255, 255, 255)") {
    locColor = 'purple';
@@ -93,7 +94,7 @@ $('.math-football-section').click(function(evt) {
    $('.math-football-section').css('pointer-events', 'none');
    if ($('.turn-shield').css('display') === 'block') $('.turn-shield').css('display', 'none');
    else $('.turn-shield').css('display', 'block');
-   socket.send(JSON.stringify({info : 'playerMove', loc : evt.target.id, color : locColor}));
+   socket.send(JSON.stringify({info : 'playerMove', loc : evt.target.id, color : locColor, prevloc : myPlayerCur}));
    socket.send(JSON.stringify({info : 'turnSwitch'}));
 });
 </script>
