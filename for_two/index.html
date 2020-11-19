@@ -79,6 +79,7 @@ $('.math-football-section').click(function(evt) {
    var locColor;
    myPrevious = myPlayerCur;
    myPlayerCur = evt.target.id;
+   console.log(myPrevious, myPlayerCur);
    $('.math-football-section').not(`.endzone, #${evt.target.id}, ${otherPlayerCur}`).css('background-color', 'white');
    if ($(`#${evt.target.id}`).css('background-color') != "rgb(255, 255, 255)") {
    locColor = 'purple';
