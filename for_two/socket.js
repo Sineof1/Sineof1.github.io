@@ -46,6 +46,4 @@ function switchTurn() {
 }
 function playerMove(msg) {
    $(`#${msg.loc}`).css('background-color', msg.color);
-   otherPlayerCur = `#${msg.loc}`;
-   $('.math-football-section').not(`.endzone, ${otherPlayerCur}`).css('background-color', 'white');
 }
