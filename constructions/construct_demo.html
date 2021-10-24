@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta name='og:image' content='https://guzintamath.com/textsavvy/wp-content/uploads/2019/04/robot.png'>
+<link rel='icon' href='cl_logo.jpg'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css'>
+<script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<link rel="stylesheet" href="mathquill/mathquill.css"/>
+<link rel='stylesheet' href='tutorbot.css'>
+<script src="mathquill/mathquill.min.js"></script>
+<script>var MQ = MathQuill.getInterface(2);</script>
+<script src='https://cdn.jsdelivr.net/vue/latest/vue.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+<script src="https://www.desmos.com/api/v1.6/geometry.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+<title>Constructions Demo</title>
+</head>
+
+<body>
+
+<div class='page-container'>
+<div class='panel-container'>
+<div class='panel-left'>
+<div id="geometry" style="width: 700px; height: 400px;"></div>
+</div>
+<div class='splitter'></div>
+<div class='panel-right'>
+
+</div>
+</div>
+</div>
+
+<audio id='botstart' preload='auto'><source src='botstart.mp3'></audio>
+<audio id='botresponse'><source src='botresponse.mp3'></audio>
+<audio id='ding' preload='auto'><source src='ding.mp3'></audio>
+<script src="https://unpkg.com/popper.js@1"></script>
+<script src="https://unpkg.com/tippy.js@4"></script>
+</body>
+
+</html>
+<script src='resizable.js'></script>
+<script src='tutorbot.js'></script>
+<script>
+  var elt = document.getElementById('geometry');
+  var geometry = Desmos.Geometry(elt);
+</script>

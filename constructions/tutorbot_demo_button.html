@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = 'utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta name='og:image' content='https://guzintamath.com/textsavvy/wp-content/uploads/2019/04/robot.png'>
+<link rel='icon' href='cl_logo.jpg'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.css'>
+<script src='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.js'></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+<link rel='stylesheet' href='https://unpkg.com/botui/build/botui.min.css'>
+<link rel='stylesheet' href='https://unpkg.com/botui/build/botui-theme-default.css'>
+<link rel="stylesheet" href="mathquill/mathquill.css"/>
+<link rel='stylesheet' href='tutorbot_button.css'>
+<script src="mathquill/mathquill.min.js"></script>
+<script>var MQ = MathQuill.getInterface(2);</script>
+<script src='https://cdn.jsdelivr.net/vue/latest/vue.min.js'></script>
+<script src='https://unpkg.com/botui/build/botui.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+<title>TB Demo</title>
+</head>
+<div id='lowerlights' style='position:fixed;top:0;left:0;width:100%;height:100vh;background-color:rgb(0, 0, 0, 0.5);display:none;z-index:9998;'></div>
+<body>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hintH1'>
+<p id='hintText4'>Sooner or later...</p>
+</div>
+<div class='hint' style='background-color:white;' id='hintH1a'>
+<p id='hintText4'>You will win. 🏆</p>
+</div>
+<div class='hint' style='background-color:white;' id='hintH1b'>
+  <p id='hintText4'>Because you think <span style="text-decoration:underline;">you can</span>!</p>
+<button class='botback' id='backhint3'>More</button><button class='tryBut'>Let's do this!</button>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hintH0'>
+<p id='hintText4'>I just want to say...</p>
+</div>
+<div class='hint' style='background-color:white;' id='hintH0a'>
+<p id='hintText4'>I'm proud of you!&nbsp;&nbsp;</p>
+</div>
+<div class='hint' style='background-color:white;' id='hintH0b'>
+  <p id='hintText4'>For all the <strong>hard work</strong> you do.</p>
+<button class='botback' id='backhint3'>More</button><button class='tryBut'>Let's do this!</button>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hint0'>
+<p id='hintText1'>The <strong>slope</strong> of a line...</p>
+</div>
+<div class='hint' style='background-color:white;' id='hint0a'>
+<p id='hintText1'>is the SAME between any two points on the line.</p>
+<button class='botback' id='backhint1'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint00'>
+<p id='hintText2'>Click on a point 🔵 on line g...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint00a'>
+<p id='hintText2'>Then click on a different point 🔵 on line g.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint00b'>
+<p id='hintText2'>You don't need to hold down the mouse button. You can just click and move.</p>
+<button class='botback' id='backhint2'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+<div class='hint' style='background-color:white;' id='answer0'>
+<p id='hintText3'>Okay, I drew <strong>one possible</strong> slope triangle. I know you can do this on your own! Keep at it!</p>
+<button class='botback' id='backhint1'>More</button><button class='tryBut'>Keep going</button>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hint1'>
+<p id='hintText1'>The slope of a line segment or line...</p>
+</div>
+<div class='hint' style='background-color:white;' id='hint1a'>
+<img src='slopehintimg1.svg' style='float:right;margin:5px 0 0 10px;width:50%;' />
+<p id='hintText1'>is the ratio of the rise to the run.</p>
+<button class='botback' id='backhint1'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint2'>
+<p id='hintText2'>Count the units of rise ↑&nbsp;<br />for the triangle.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint2a'>
+<p id='hintText2'>Count the units of run →<br />for the triangle.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint2b'>
+<img src='slopehintimg2.svg' style='float:right;width:40%;' />
+<p id='hintText2'>The slope is the ratio <span id='math5'></span>.</p>
+<br />
+<button class='botback' id='backhint2'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+<div class='hint' style='background-color:white;' id='answer1'>
+<p id='hintText3'>The slope of line g is <mark><span id='math6'></span></mark>. Try to get it without asking for the answer next time.</p>
+<button class='tryBut'>Let me try.</button>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hint3'>
+<p id='hintText4'>A straight line that goes through the origin (0, 0)</p>
+</div>
+<div class='hint' style='background-color:white;' id='hint3a'>
+<p id='hintText4'>has the equation <span id='math7'></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</div>
+<div class='hint' style='background-color:white;' id='hint3b'>
+<p id='hintText4'>where <span id='math8'></span> represents the slope.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<button class='botback' id='backhint3'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint4'>
+<p id='hintText5'>Enter the slope of line g as the coefficient of <span id='math9'></span>.
+<br /><br />
+<button class='botback' id='backhint4'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+<div class='hint' style='background-color:white;' id='answer2'>
+<p id='hintText6'>The equation for line g is <br /><span id='math10'></span> <mark><span id='math11'></span></mark><span id='math12'></span>. I know you can do this on your own! Keep at it!</p>
+<button class='tryBut'>Let me try.</button>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hint5'>
+<p id='hintText7'>A line that does NOT pass through the origin has the equation <span id='math13'></span></p>
+</div>
+<div class='hint' style='background-color:white;' id='hint5a'>
+<p id='hintText7'>where <span id='math14'></span> is the slope</p>
+</div>
+<div class='hint' style='background-color:white;' id='hint5b'>
+<p id='hintText7'>and <span id='math15'></span> is the translation of the line up &#8593; or down &#8595;.</p>
+<button class='botback' id='backhint5'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint6'>
+<p id='hintText8'>Enter the slope of line v as the coefficient of <span id='math16'></span>.</p>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint6a'>
+<p id='hintText8'>How much is the line translated up &#8593; or down &#8595; from the origin?</p>
+</div>
+<div class='hint' style='background-color:#fafafa;' id='hint6b'>
+<p id='hintText8'>Add this amount to the equation.</p>
+<button class='botback' id='backhint6'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+<div class='hint' style='background-color:white;' id='answer3'>
+<p id='hintText9'>The equation for line v is <br /><span id='math17'></span> <mark><span id='math18'></span></mark><span id='math19'></span> + <mark><span id='math20'></span></mark>. Think about WHY the answer is correct!</p>
+<button class='tryBut'>Let me try.</button>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hint7'>
+<p id='hintText7'>Okay. The slope is one of these ratios:</p>
+</div>
+<div class='hint' style='background-color:white;' id='hint7a'>
+<p id='hintText7'><span id='math103'></span></p>
+</div>
+<div class='hint' style='background-color:white;' id='hint7b'>
+<p id='hintText7'>&nbsp;&nbsp;&nbsp;&#8202;&#8202;<span id='math104'></span></p>
+</div>
+<div class='hint' style='background-color:white;' id='hint7c'>
+<p id='hintText7'>&nbsp;&nbsp;&nbsp;&#8202;&#8202;<span id='math105'></span></p>
+<button class='botback' id='backhint6'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hint' style='background-color:white;' id='hintVid'>
+<button class='botback' id='backhintVid'>More</button><button class='tryBut'>Let me try!</button>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hintExamp'>
+<img src='slope_examples.png' style='display:block;margin:0 auto;width:100%;' />
+<p>The slope of this line is <span id='math100'></span>.</p>
+<p><button class='botback'>More</button><button class='tryBut'>Let me try!</button></p>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hintExamp2'>
+<img src='slope_examples.png' style='display:block;margin:0 auto;width:100%;' />
+<p>The equation of this line is <span id='math101'></span>.</p>
+<p><button class='botback'>More</button><button class='tryBut'>Let me try!</button></p>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hintExamp3'>
+<img src='intercept_change.PNG' style='display:block;margin:0 auto;width:90%;' />
+<p>The equation of this line is <span id='math102'></span>.</p>
+<p><button class='botback'>More</button><button class='tryBut'>Let me try!</button></p>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='myQuestion'>
+<p><input type='text' class='input' id='myQuestionInput' style='width:100%;margin-left:0;height:30px;color:white;border:1px solid white;background-color:#919292;font-family:"Open Sans";font-size:14px;' /></p>
+</div>
+</div>
+</div>
+
+<div class='hintbox'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;' id='hintEndWrong'>
+<p id='hintText7'>No, if the slope changed, then line v would be steeper or less steep than line g. But they are the exact same steepness.</p>
+<p><button class='botback'>Try again</button></p>
+</div>
+<div class='hint' style='background-color:white;' id='hintEndRight'>
+<p id='hintText7'>Yeah! The slope of a straight line does NOT change when you translate it up or down.</p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit1'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText1'>Slope is the ratio of the vertical distance to the horizontal distance. So, the vertical distance between the points should be in the numerator.</p>
+<p><button class='closeJit' id='closeJIT1' style='margin-top:-15px;'>Close</button></p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit2'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText2'>The graph of line g increases from left to right, so the slope is positive.</p>
+<p><button class='closeJit' id='closeJIT2' style='margin-top:-15px;'>Close</button></p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit3'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText3'>Since line v is a translation of line g, it has the same slope as line g.</p>
+<p><button class='closeJit' id='closeJIT3' style='margin-top:-15px;'>Close</button></p>
+</div>
+</div>
+</div>
+
+<div class='jitbox' id='jit4'>
+<div class='hintwrapper'>
+<div class='hint' style='background-color:white;'>
+<p id='jitText4'>Check the sign of your answer.</p>
+<p><button class='closeJit' id='closeJIT4' style='margin-top:-15px;'>Close</button></p>
+</div>
+</div>
+</div>
+
+<div class='page-container'>
+<div class='panel-container'>
+<div class='panel-left'>
+<p id='intro_text'>Line g is a straight line that passes through the origin.</p>
+<p id='disclose1' style='color:teal;'>Click on two points on line g to draw a slope triangle.</p>
+<p class='exercise' id='disclose2'>Enter the slope of line g: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;<span class='input' id='slope1'></span></p>
+<p class='exercise' id='disclose3'>Complete the equation for line g: &nbsp;&nbsp;&nbsp;<span class='math' id='math1'></span> <span class='input' id='equation1'></span>&thinsp;<span class='math' id='math2'></span></p>
+<br />
+<p id='second_text' style='opacity:0;'>Line g is translated up <span id='math21'></span> units to create line v.</p>
+<p class='exercise' id='disclose4'>Complete the equation for line v: &nbsp;&nbsp;&nbsp;<span class='math' id='math3'></span> <span class='input' id='equation2'></span>&thinsp;<span class='math' id='math4'></span> <span style='color:black;'>(</span><span class='input' id='equation3' style='margin-left:0px;'></span><span style='color:black;'>)</span></p>
+</div>
+<div class='splitter'></div>
+<div class='panel-right'>
+<div id='demo_grapher'></div>
+</div>
+</div>
+</div>
+
+<div class='bot'></div>
+<div class='speech_bubble resize-drag draggable' id='speech1'>
+<bot-ui></bot-ui>
+</div>
+<audio id='botstart' preload='auto'><source src='botstart.mp3'></audio>
+<audio id='botresponse'><source src='botresponse.mp3'></audio>
+<audio id='ding' preload='auto'><source src='ding.mp3'></audio>
+<script src="https://unpkg.com/popper.js@1"></script>
+<script src="https://unpkg.com/tippy.js@4"></script>
+</body>
+
+</html>
+<script src='resizable.js'></script>
+<script src='tutorbot_button.js'></script>
+<script>
+tippy('.bot', {
+  animateFill:false,
+  delay:[800,0],
+  animation:'shift-away',
+  placement:'top',
+  arrow:false,
+  content: 'Click me to chat!',
+});
+</script>
