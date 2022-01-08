@@ -1,4 +1,4 @@
-var CACHE_NAME = 'clcontentbrowser';
+var CACHE_NAME = 'content_browser_mathia';
 var urlsToCache = [
   '/'
 ];
@@ -32,7 +32,7 @@ self.addEventListener('fetch', event => {
 
 // Update a service worker
 self.addEventListener('activate', event => {
-  var cacheWhitelist = ['clcontentbrowser'];
+  var cacheWhitelist = ['content_browser_mathia'];
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
