@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 450">
+  <g>
+    <line x1="340.45" y1="360.74" x2="42.49" y2="360.74" style="fill: none; stroke: #aaa; stroke-linecap: round; stroke-linejoin: round; stroke-width: 3px;"/>
+    <polygon points="47.55 354.07 44.71 360.74 47.55 367.41 31.75 360.74 47.55 354.07" style="fill: #aaa;"/>
+  </g>
+  <g>
+    <line x1="340.45" y1="360.74" x2="283.38" y2="37.08" style="fill: none; stroke: #aaa; stroke-linecap: round; stroke-linejoin: round; stroke-width: 3px;"/>
+    <polygon points="290.82 40.9 283.77 39.27 277.69 43.22 281.51 26.5 290.82 40.9" style="fill: #aaa;"/>
+  </g>
+  <circle cx="340.45" cy="360.74" r="7.63" style="fill: #fff; stroke: #000; stroke-miterlimit: 10;"/>
+  <circle cx="225" cy="360.74" r="5.97"/>
+  <circle cx="306.19" cy="166.43" r="5.97"/>
+  <path d="M230.03,385.47h-10.33v-2.02l8-11.17h-7.67v-1.85h9.91v2.02l-8,11.17h8.09v1.85Z"/>
+  <path d="M322.03,175.03h-2.27l5.04-7.77-4.75-7.27h2.31l3.65,5.75h.08l3.65-5.75h2.31l-4.75,7.27,5.04,7.77h-2.27l-3.99-6.15h-.08l-3.99,6.15Z"/>
+  <path d="M359.78,372.81v6.99h-1.93v-6.99l-5.06-8.04h2.27l3.72,6.11h.08l3.63-6.11h2.27l-4.98,8.04Z"/>
+</svg>

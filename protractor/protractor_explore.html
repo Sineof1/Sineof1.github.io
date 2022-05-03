@@ -60,6 +60,14 @@
    color:white;
    cursor:pointer;
 }
+.buttons-deg {
+   width:50px;
+   height:75px;
+   margin-right:20px;
+}
+.rotbutton {
+   cursor:pointer;
+}
 </style>
 
 <body>
@@ -69,6 +77,12 @@
 </div>
 <button class='show-hide' onclick="toggle_protractor_visibility()">Show Protractor</button>
 <div class='button_bank'>
+
+<div class='buttons-deg'>
+<img class='rotbutton' id='up1deg' src='up1deg.svg' onclick="rotup1()" />
+<img class='rotbutton' id='down1deg' src='down1deg.svg' onclick="rotdown1()" />
+</div>
+
 <button class='imgbutton' id='angles1' onclick="show_angles(1)">1</button>
 <button class='imgbutton' id='angles2' onclick="show_angles(2)">2</button>
 <button class='imgbutton' id='angles3' onclick="show_angles(3)">3</button>
@@ -77,7 +91,11 @@
 <button class='imgbutton' id='angles6' onclick="show_angles(6)">6</button>
 <button class='imgbutton' id='angles7' onclick="show_angles(7)">7</button>
 <button class='imgbutton' id='angles8' onclick="show_angles(8)">8</button>
-<button class='imgbutton' id='angles9' onclick="show_angles(9)">9</button>
+
+<div class='buttons-deg'>
+<img class='rotbutton' id='up5deg' src='up5deg.svg' onclick="rotup5()" />
+<img class='rotbutton' id='down5deg' src='down5deg.svg' onclick="rotdown5()" />
+</div>
 </div>
 <button class='reset' onclick="reset()">Reset</button>
 </body>
@@ -87,7 +105,7 @@
 <script>
 let MOUSEISDOWN = false;
 let TOOLISVISIBLE = false;
-angles_list = ['', 'angles1.svg', 'angles2.svg', 'angles3.svg', 'angles4.svg', 'angles5.svg', 'angles6.svg', 'angles7.svg', 'angles8.svg', 'angles9.svg'];
+angles_list = ['', 'angles1.svg', 'angles2.svg', 'angles3.svg', 'angles4.svg', 'angles5.svg', 'angles6.svg', 'angles7.svg', 'angles8.svg'];
 
 $('.explore').click(function(e) {
    if (!TOOLISVISIBLE) return;
@@ -119,6 +137,22 @@ $('html').keydown(function(e){
    $('#protractor').rotate(1, {duration:200});
    }
 });
+function rotup5() {
+   if (!TOOLISVISIBLE) return;
+   $('#protractor').rotate(-5, {duration:200});
+}
+function rotdown5() {
+   if (!TOOLISVISIBLE) return;
+   $('#protractor').rotate(5, {duration:200});
+}
+function rotup1() {
+   if (!TOOLISVISIBLE) return;
+   $('#protractor').rotate(-1, {duration:200});
+}
+function rotdown1() {
+   if (!TOOLISVISIBLE) return;
+   $('#protractor').rotate(1, {duration:200});
+}
 function toggle_protractor_visibility() {
    if (TOOLISVISIBLE) {
       $('#protractor').css('opacity', 0);
