@@ -8,7 +8,7 @@
     <line x1="420.11" y1="390.41" x2="272.89" y2="62.62" style="fill: none; stroke: #aaa; stroke-linecap: round; stroke-linejoin: round; stroke-width: 3px;"/>
     <polygon points="281.04 64.5 273.8 64.65 268.88 69.97 268.49 52.82 281.04 64.5" style="fill: #aaa;"/>
   </g>
-  <circle cx="420.11" cy="390.41" r="6.76" style="fill: #fff; stroke: #000; stroke-miterlimit: 10;"/>
+  <circle cx="420.11" cy="390.41" r="5.97" style="fill: #fff; stroke: #000; stroke-miterlimit: 10;"/>
   <circle cx="158.19" cy="201.41" r="5.97"/>
   <circle cx="314.44" cy="155.13" r="5.97"/>
   <path d="M141.74,215.17v6.45h-1.93v-15.04h8.78v1.85h-6.85v4.94h6.17v1.81h-6.17Z"/>

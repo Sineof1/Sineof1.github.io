@@ -2,8 +2,11 @@
 <html lang='en'>
 <head>
 <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/Draggable.min.js"></script>
+<!--<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script src="dist/js/rotate.js"></script>
+<!--<script src="dist/js/rotate.js"></script>-->
 <title>Protractor Explore</title>
 </head>
 
@@ -33,16 +36,19 @@
    outline:none;
    border:none;
    border-radius:3px;
-   background-color:blue;
+   background-color:black;
    color:white;
    font-family:sans-serif;
    font-size:0.9em;
    cursor:pointer;
 }
+.navigate {
+   display:inline-block;
+}
 .button_bank {
    display:flex;
    align-items:center;
-   justify-content:center;
+   justify-content:space-between;
    width:450px;
    height:50px;
    margin:15px auto;
@@ -60,13 +66,12 @@
    color:white;
    cursor:pointer;
 }
-.buttons-deg {
-   width:50px;
-   height:75px;
-   margin-right:20px;
-}
-.rotbutton {
+.protractor_button {
+   width:65px;
+   height:65px;
    cursor:pointer;
+   border-radius:5px;
+   padding-top:5px;
 }
 </style>
 
@@ -75,27 +80,21 @@
 <img id='protractor' src='protractor.svg' alt='' style='width:380px;position:absolute;bottom:15px;left:35px;' />
 <img id='measure_img' src='' />
 </div>
-<button class='show-hide' onclick="toggle_protractor_visibility()">Show Protractor</button>
-<div class='button_bank'>
 
-<div class='buttons-deg'>
-<img class='rotbutton' id='up1deg' src='up1deg.svg' onclick="rotup1()" />
-<img class='rotbutton' id='down1deg' src='down1deg.svg' onclick="rotdown1()" />
+<div class='button_bank'>
+<!--<button class='show-hide' id='toggle' style='display:inline;' onclick="toggle_protractor_visibility()">Show Protractor</button>-->
+<img src='move.svg' class='protractor_button' id='move' onclick='protractor_move()' />
+<img src='not_visible.svg' class='protractor_button' id='visible' onclick='toggle_protractor_visibility()' />
+<img src='rotate.svg' class='protractor_button' id='rotate' onclick='protractor_rotate()' />
 </div>
 
+<div class='button_bank'>
 <button class='imgbutton' id='angles1' onclick="show_angles(1)">1</button>
 <button class='imgbutton' id='angles2' onclick="show_angles(2)">2</button>
 <button class='imgbutton' id='angles3' onclick="show_angles(3)">3</button>
 <button class='imgbutton' id='angles4' onclick="show_angles(4)">4</button>
 <button class='imgbutton' id='angles5' onclick="show_angles(5)">5</button>
 <button class='imgbutton' id='angles6' onclick="show_angles(6)">6</button>
-<button class='imgbutton' id='angles7' onclick="show_angles(7)">7</button>
-<button class='imgbutton' id='angles8' onclick="show_angles(8)">8</button>
-
-<div class='buttons-deg'>
-<img class='rotbutton' id='up5deg' src='up5deg.svg' onclick="rotup5()" />
-<img class='rotbutton' id='down5deg' src='down5deg.svg' onclick="rotdown5()" />
-</div>
 </div>
 <button class='reset' onclick="reset()">Reset</button>
 </body>
@@ -103,72 +102,37 @@
 </html>
 
 <script>
-let MOUSEISDOWN = false;
 let TOOLISVISIBLE = false;
-angles_list = ['', 'angles1.svg', 'angles2.svg', 'angles3.svg', 'angles4.svg', 'angles5.svg', 'angles6.svg', 'angles7.svg', 'angles8.svg'];
+Draggable.create("#protractor", {type:"x,y", edgeResistance:0.65, inertia:false});
+angles_list = ['', 'angles1.svg', 'angles2.svg', 'angles3.svg', 'angles4.svg', 'angles5.svg', 'angles6.svg'];
 
-$('.explore').click(function(e) {
-   if (!TOOLISVISIBLE) return;
-   if (MOUSEISDOWN) MOUSEISDOWN = false;
-   else MOUSEISDOWN = true;
-   var relX = e.pageX - $(this).offset().left - 190;
-   var relY = e.pageY - $(this).offset().top - 200;
-   $("#protractor").css({left:relX, top:relY});
-});
-
-$('.explore').mousemove(function(e) {
-   if (!MOUSEISDOWN || !TOOLISVISIBLE) return;
-   var relX = e.pageX - $(this).offset().left - 190;
-   var relY = e.pageY - $(this).offset().top - 200;
-   $("#protractor").css({left:relX, top:relY});
-});
-$('html').keydown(function(e){
-   if (!TOOLISVISIBLE) return;
-   if (e.keyCode === 38 && !e.shiftKey) {
-   $('#protractor').rotate(-5, {duration:200});
-   }
-   else if (e.keyCode === 38 && e.shiftKey) {
-   $('#protractor').rotate(-1, {duration:200});
-   }
-   else if (e.keyCode === 40 && !e.shiftKey) {
-   $('#protractor').rotate(5, {duration:200});
-   }
-   else if (e.keyCode === 40 && e.shiftKey) {
-   $('#protractor').rotate(1, {duration:200});
-   }
-});
-function rotup5() {
-   if (!TOOLISVISIBLE) return;
-   $('#protractor').rotate(-5, {duration:200});
-}
-function rotdown5() {
-   if (!TOOLISVISIBLE) return;
-   $('#protractor').rotate(5, {duration:200});
-}
-function rotup1() {
-   if (!TOOLISVISIBLE) return;
-   $('#protractor').rotate(-1, {duration:200});
-}
-function rotdown1() {
-   if (!TOOLISVISIBLE) return;
-   $('#protractor').rotate(1, {duration:200});
-}
 function toggle_protractor_visibility() {
    if (TOOLISVISIBLE) {
       $('#protractor').css('opacity', 0);
-      $('.show-hide').text('Show Protractor');
+      $('#visible').attr('src', 'not_visible.svg');
+      $('.protractor_button').css('background-color', 'transparent');
       TOOLISVISIBLE = false;
    }
    else {
       $('#protractor').css('opacity', 1);
-      $('.show-hide').text('Hide Protractor');
+      $('#visible').attr('src', 'visible.svg');
+      $('#move').css('background-color', 'lightgreen');
+      Draggable.create("#protractor", {type:"x,y", edgeResistance:0.65, inertia:false});
       TOOLISVISIBLE = true;
    }
 }
-function show_angles(ang) {
-   $('#measure_img').attr('src', angles_list[ang]);
+function show_angles(ang) {$('#measure_img').attr('src', angles_list[ang]);}
+function reset() {location.reload();}
+function protractor_move() {
+   if (!TOOLISVISIBLE) return;
+   $('#rotate').css('background-color', 'transparent');
+   $('#move').css('background-color', 'lightgreen');
+   Draggable.create("#protractor", {type:"x,y", edgeResistance:0.65, inertia:false});
 }
-function reset() {
-   location.reload();
+function protractor_rotate() {
+   if (!TOOLISVISIBLE) return;
+   $('#move').css('background-color', 'transparent');
+   $('#rotate').css('background-color', 'lightgreen');
+   Draggable.create("#protractor", {type: "rotation", inertia: true});
 }
 </script>
