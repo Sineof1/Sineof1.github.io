@@ -1,0 +1,198 @@
+* {
+   box-sizing:border-box;
+}
+::-webkit-scrollbar {
+   display:none;
+}
+body {
+   margin:50px;
+}
+.lesson_title {
+   position:fixed;
+   top:10px;
+   left:50px;
+   font-family:sans-serif;
+   font-weight:900;
+   font-size:1.3em;
+}
+.activity_area {
+   display:inline-block;
+   width:75vw;
+   height:70vh;
+   border:2px solid #4e6172;
+   box-shadow:0 0 10px #aaa;
+   overflow:hidden;
+}
+.control_area {
+   display:inline-block;
+   width:calc(18vw - 50px);
+   height:70vh;
+   box-shadow:0 0 10px #aaa;
+   overflow:hidden;
+}
+.navigation_area {
+   width:calc(75vw + 18vw - 46px);
+   height:calc(22vh - 50px);
+   box-shadow:0 0 10px #aaa;
+   overflow-x:scroll;
+   overflow-y:hidden;
+   white-space:nowrap;
+   padding:5px;
+}
+.navigation_area img {
+   height:95%;
+   opacity:0.3;
+}
+.activity {
+   display:inline-block;
+   position:relative;
+   width:calc(75vw / 4 - 4px);
+   height:70vh;
+   overflow-y:scroll;
+   background-color:rgba(131, 146, 159, 0.3);
+}
+.activity_type_header {
+   width:85%;
+   margin:10px auto;
+   font-family:sans-serif;
+   font-weight:700;
+   font-size:1.1em;
+   font-variant:small-caps;
+   color:gray;
+   background-color:rgba(255, 255, 255, 0.75);
+   text-align:center;
+   border-radius:2%;
+   cursor:pointer;
+}
+.activity_title {
+   width:85%;
+   margin:0 auto 10px auto;
+   font-family:sans-serif;
+   font-weight:900;
+   font-size:0.9em;
+   color:black;
+}
+.add_content_group {
+   position:absolute;
+   bottom:15px;
+   left:calc(75vw / 8 - 19px);
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:30px;
+   height:30px;
+   border-radius:100%;
+   color:white;
+   background-color:gray;
+   border:1px solid white;
+   font-family:sans-serif;
+   font-size:1.3em;
+   font-weight:700;
+   cursor:pointer;
+}
+.add_content_group:hover {
+   background-color:rgb(127, 0, 127);
+}
+.content_group, .added_content_group {
+   position:relative;
+   width:85%;
+   margin:0 auto 10px auto;
+   min-height:12%;
+   background-color:rgba(131, 146, 159, 0.5);
+   border:2px dashed gray;
+   border-radius:2%;
+   padding:5px;
+}
+.added_content_group {
+   background-color:rgba(100, 100, 100, 0.2);
+}
+.close_empty_content_group {
+   position:absolute;
+   top:0;
+   right:3px;
+   cursor:pointer;
+   color:red;
+}
+.content_group_timing {
+   text-align:right;
+   margin:-3px 0 -3px 0;
+   font-family:sans-serif;
+   font-weight:700;
+   font-size:0.8em;
+   color:white;
+   -webkit-text-stroke-width:0.2px;
+   -webkit-text-stroke-color: black;
+}
+.content-component {
+   width:calc(100% - 5px);
+   height:4vh;
+   margin:3px 3px 8px 3px;
+   background-color:white;
+   border:0.5px solid white;
+   overflow:hidden;
+   cursor:pointer;
+}
+.content-preview {
+   display:inline-flex;
+   align-items:center;
+   width:75%;
+   height:100%;
+   padding:3px;
+}
+.content-preview img {
+   max-height:100%;
+}
+.content-preview.content-display-bgrnd {
+   background-color:black;
+   justify-content:center;
+}
+.content-preview.content-game-bgrnd {
+   background-color:purple;
+   justify-content:center;
+}
+.content-flags {
+   float:right;
+   width:25%;
+   height:100%;
+   border-left:2px solid black;
+   overflow:hidden;
+}
+.content-grouping, .content-response {
+   display:inline-flex;
+   float:left;
+   width:50%;
+   height:100%;
+   background-color:black;
+   padding:5px;
+   border-left:0.5px solid white;
+}
+.content-grouping {
+   border-left:none;
+}
+.content-grouping img, .content-response img {
+   width:100%;
+}
+.whole-class-group {
+   background-color:#575200;
+}
+.pairs-group {
+   background-color:#008970;
+}
+.individuals-group {
+   background-color:darkgreen;
+}
+.type-response {
+   background-color:#f4b41a;
+}
+.draw-response {
+   background-color:#5b0e2d;
+}
+.discuss-response {
+   background-color:#213970;
+}
+.view-response {
+   background-color:darkslateblue;
+}
+.print-response {
+   background-color:#e54b22;
+}
