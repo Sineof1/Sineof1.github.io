@@ -7,10 +7,36 @@
 body {
    margin:50px;
 }
+.activity_tabs {
+  width:calc(75vw + 18vw - 46px);
+  display:inline-block;
+  overflow:hidden;
+  border:1px solid #ccc;
+  background-color:#f1f1f1;
+}
+.activity_tabs button {
+  background-color:inherit;
+  float:right;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  padding:14px 16px;
+  transition:0.3s;
+}
+.activity_tabs button:hover {
+  background-color: #ddd;
+}
+.activity_tabs button.active {
+  background-color: #ccc;
+}
+.tabcontent {
+  display:inline-block;
+  width:75vw;
+}
 .lesson_title {
    position:fixed;
-   top:10px;
-   left:50px;
+   top:22px;
+   left:70px;
    font-family:sans-serif;
    font-weight:900;
    font-size:1.3em;

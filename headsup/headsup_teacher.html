@@ -12,6 +12,15 @@
 <body>
 <div class='lesson_title'>Lesson 6: Comparing and Ordering Decimals</div>
 
+<div class='activity_tabs'>
+<button class='tablinks' onclick="openActivity(event, 'Reflect')">Reflect</button>
+<button class='tablinks' onclick="openActivity(event, 'Explore')">Explore</button>
+<button class='tablinks' onclick="openActivity(event, 'Activate')">Activate</button>
+<button class='tablinks' onclick="openActivity(event, 'Opener')">Lesson Open</button>
+<button class='tablinks' id='defaultOpen' onclick="openActivity(event, 'Overview')">Overview</button>
+</div>
+
+<div id='Overview' class='tabcontent'>
 <div class='activity_area'>
 
 <div class='activity opener_area'>
@@ -166,6 +175,12 @@
 </div>
 
 </div>
+</div>
+
+<div id='Opener' class='tabcontent'></div>
+<div id='Activate' class='tabcontent'></div>
+<div id='Explore' class='tabcontent'></div>
+<div id='Reflect' class='tabcontent'></div>
 
 <div class='control_area'>
 </div>
@@ -215,5 +230,19 @@ scrollContainer.addEventListener("wheel", (evt) => {
     evt.preventDefault();
     scrollContainer.scrollLeft += evt.deltaY;
 });
+
+function openActivity(evt, activityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {tabcontent[i].style.display = "none";}
+
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {tablinks[i].className = tablinks[i].className.replace(" active", "");}
+
+
+  document.getElementById(activityName).style.display = "inline-block";
+  evt.currentTarget.className += " active";
+}
+document.getElementById('defaultOpen').click();
 </script>
 </html>
