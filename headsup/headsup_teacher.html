@@ -13,21 +13,89 @@
 <div class='lesson_title'>Lesson 6: Comparing and Ordering Decimals</div>
 
 <div class='activity_tabs'>
-<button class='tablinks' onclick="openActivity(event, 'Reflect')">Reflect</button>
-<button class='tablinks' onclick="openActivity(event, 'Explore')">Explore</button>
-<button class='tablinks' onclick="openActivity(event, 'Activate')">Activate</button>
-<button class='tablinks' onclick="openActivity(event, 'Opener')">Lesson Open</button>
+<button class='tablinks' onclick="openActivity(event, 'Reflect')" style='background-color:rgba(101, 178, 198, 0.3);'>Reflect</button>
+<button class='tablinks' onclick="openActivity(event, 'Explore')" style='background-color:rgba(214, 194, 188, 1);'>Explore</button>
+<button class='tablinks' onclick="openActivity(event, 'Activate')" style='background-color:rgba(213, 114, 118, 0.5);'>Activate</button>
+<button class='tablinks' onclick="openActivity(event, 'Opener')" style='background-color:rgba(215, 61, 108, 0.3);'>Lesson Open</button>
 <button class='tablinks' id='defaultOpen' onclick="openActivity(event, 'Overview')">Overview</button>
 </div>
 
+<!--Overview Tab-->
 <div id='Overview' class='tabcontent'>
 <div class='activity_area'>
 
 <div class='activity opener_area'>
+<div class='activity_type_header' style='background-color:rgba(215, 61, 108, 0.3);'>lesson open</div>
+</div>
+
+<div class='activity activate_area'>
+<div class='activity_type_header' style='background-color:rgba(213, 114, 118, 0.5);'>activate</div>
+<p class='activity_title'>Exploring Decimals with the Same Digits</p>
+
+<div class='content_group'>
+<ul class='content_group_description'>
+<li>Students see the digits 3, 6, and 8 (<img class='grouping_overview_icon' src='images/whole_class.svg' />)(<img class='grouping_overview_icon' src='images/view_response.svg' />).</li>
+<li>They answer Question 1 by typing all the whole numbers that can be made by these three digits, using each digit once and only once (<img class='grouping_overview_icon' src='images/pairs.svg' />)(<img class='grouping_overview_icon' src='images/type_response.svg' />).</li>
+</ul>
+<div class='content_group_timing'>7 min</div>
+</div>
+
+<div class='content_group'>
+<ul class='content_group_description'>
+<li>For Question 2, students use the digits 3, 6, and 8 to enter as many decimals as they can (<img class='grouping_overview_icon' src='images/pairs.svg' style='width:8%;' />)(<img class='grouping_overview_icon' src='images/type_response.svg' />).</li>
+<li>Students then describe in Question 3 the strategy they used to determine their decimals. (<img class='grouping_overview_icon' src='images/pairs.svg' style='width:8%;' />)(<img class='grouping_overview_icon' src='images/type_response.svg' />).</li>
+</ul>
+<div class='content_group_timing'>8 min</div>
+</div>
+</div>
+
+<div class='activity explore_area'>
+<div class='activity_type_header' style='background-color:rgba(214, 194, 188, 1);'>explore</div>
+<p class='activity_title'>Using Place Value to Compare and Order Decimals</p>
+
+<div class='content_group'>
+<ul class='content_group_description'>
+<li>As a class, discuss the example that shows how to compare decimals using a number line (<img class='grouping_overview_icon' src='images/whole_class.svg' />)(<img class='grouping_overview_icon' src='images/discuss_response.svg' style='width:8%;' />).</li>
+<li>Students complete Questions 1&ndash;7 by drawing two points on each number line to locate and compare the two given decimals. (<img class='grouping_overview_icon' src='images/pairs.svg' style='width:8%;' />)(<img class='grouping_overview_icon' src='images/draw_response.svg' style='width:8%;' />).</li>
+</ul>
+<div class='content_group_timing'>15 min</div>
+</div>
+
+<div class='content_group'>
+<ul class='content_group_description'>
+<li>Students play a game where they practice comparing decimals to the hundredths. Students compare decimals by reasoning about their sizes (<img class='grouping_overview_icon' src='images/pairs.svg' />)(<img class='grouping_overview_icon' src='images/print_response.svg' style='width:8%;' />).</li>
+</ul>
+<div class='content_group_timing'>20 min</div>
+</div>
+</div>
+
+<div class='activity reflect_area'>
+<div class='activity_type_header' style='background-color:rgba(101, 178, 198, 0.3);'>reflect</div>
+<p class='activity_title'>Reflect and Summarize</p>
+
+<div class='content_group'>
+<ul class='content_group_description'>
+<li>Students use models, numbers, or words to explain how they use place value to help them compare and order decimals (<img class='grouping_overview_icon' src='images/pairs.svg' />)(<img class='grouping_overview_icon' src='images/print_response.svg' style='width:8%;' />).</li>
+</ul>
+<div class='content_group_timing'>10 min</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!--Opener Tab-->
+
+<div id='Opener' class='tabcontent'>
+<div class='activity opener_area'>
 <div class='activity_type_header'>lesson open</div>
 <button class='add_content_group' id='opener'>+</button>
 </div>
+</div>
 
+<!--Activate Tab-->
+
+<div id='Activate' class='tabcontent'>
 <div class='activity activate_area'>
 <div class='activity_type_header'>activate</div>
 <p class='activity_title'>Exploring Decimals with the Same Digits</p>
@@ -70,7 +138,11 @@
 
 <button class='add_content_group' id='activate'>+</button>
 </div>
+</div>
 
+<!--Explore Tab-->
+
+<div id='Explore' class='tabcontent'>
 <div class='activity explore_area'>
 <div class='activity_type_header'>explore</div>
 <p class='activity_title'>Using Place Value to Compare and Order Decimals</p>
@@ -155,7 +227,11 @@
 
 <button class='add_content_group' id='explore'>+</button>
 </div>
+</div>
 
+<!--Reflect Tab-->
+
+<div id='Reflect' class='tabcontent'>
 <div class='activity reflect_area'>
 <div class='activity_type_header'>reflect</div>
 <p class='activity_title'>Reflect and Summarize</p>
@@ -173,14 +249,7 @@
 
 <button class='add_content_group' id='reflect'>+</button>
 </div>
-
 </div>
-</div>
-
-<div id='Opener' class='tabcontent'></div>
-<div id='Activate' class='tabcontent'></div>
-<div id='Explore' class='tabcontent'></div>
-<div id='Reflect' class='tabcontent'></div>
 
 <div class='control_area'>
 </div>
