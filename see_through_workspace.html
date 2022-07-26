@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>See-Through Workspace</title>
+</head>
+
+<style>
+* {
+   box-sizing:border-box;
+}
+html {
+   background-color:black;
+}
+.workspace_window {
+   display:inline-block;
+}
+iframe {
+   width:1152px;
+   height:637px;
+   border-radius:5px;
+   background-color:#6667AB;
+   outline:none;
+   border:none;
+   margin:15px 0 0 25px;
+}
+.information_window {
+   float:right;
+   width:calc(97vw - 1177px);
+   height:97vh;
+   margin:0;
+   background-color:black;
+   color:white;
+   font-family:sans-serif;
+   font-size:1em;
+   padding:10px;
+}
+.screen {
+   position:fixed;
+   width:1152px;
+   height:637px;
+   margin:15px 0 0 25px;
+   background-color:rgba(255, 0, 0, 0.2);
+}
+</style>
+
+<body>
+<div class='screen'></div>
+<div class='workspace_window'><iframe src='https://www.qa-cli.com/ctp/#/?configUrl=https:%2F%2Fwww.qa-cli.com%2Fconfig&configRider=sp&sectionId=equivalent_ratios_rates_table&problemId=equivalent_ratios_rates_table-065&ignoreTicket=true&launchSection=true'></iframe></div>
+
+<div class='information_window'>
+<p>Welcome to this workspace thingy! Here you will test yourself on these skills:</p>
+<ul>
+<li>Enter calculated scaled ratio symbolic.</li>
+<li>Enter calculated scaled ratio table.</li>
+<li>Enter given ratio in table.</li>
+<li>Enter given scaled ratio symbolic.</li>
+<li>Enter given scaled ratio table.</li>
+<li>Enter scaling factor.</li>
+</ul>
+</div>
+</body>
+
+</html>
