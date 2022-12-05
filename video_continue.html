@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+<title>Video Continue</title>
+<style>
+.response {
+   display:none;
+   position:fixed;
+   width:38px;
+   height:38px;
+   outline:none;
+   border:1px solid gray;
+   box-shadow:0 0 5px #ccc;
+   border-radius:2px;
+   font-size:1em;
+   text-align:center;
+   z-index:100;
+}
+#input1 {
+   top:240px;
+   left:630px;
+}
+#input2 {
+   top:240px;
+   left:705px;
+}
+#submit {
+   display:none;
+   position:fixed;
+   top:240px;
+   left:1000px;
+   width:100px;
+   height:38px;
+}
+</style>
+</head>
+
+
+
+<body>
+<input class='response' name='inp1' id='input1' type='text' />
+<input class='response' name='inp2' id='input2' type='text' />
+<button id='submit'>Submit</button>
+<video id='instruction' src='https://guzintamath.com/audio_fonts/TwelveAngryTutorbots.mp4' controls width='960px' height='540px' ontimeupdate="timeUpdate()" />
+</body>
+
+<script>
+$('#submit').click(function() {
+   let vid = document.getElementById('instruction');
+   if ($('#input1').val() === '-3' && $('#input2').val() === '4') {
+   vid.currentTime = 70;
+   }
+});
+function timeUpdate() {
+   let vid = document.getElementById('instruction');
+   if (vid.currentTime > 28) {
+   $('.response').css('display', 'inline');
+   $('#submit').css('display', 'inline');
+   }
+   if (vid.currentTime > 70) {
+   $('.response').css('display', 'none');
+   $('#submit').css('display', 'none');
+   }
+}
+</script>
+
+</html>
