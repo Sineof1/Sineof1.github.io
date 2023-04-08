@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Decimal Facts</title>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<style>
+html {
+   font-family:sans-serif;
+   font-size:16px;
+}
+.grid {
+   display: inline-block;
+   width: 500px;
+   height: 500px;
+   position: relative;
+   border: 1px solid lightgray;
+   box-sizing: border-box;
+}
+.cell {
+   width: 50px;
+   height: 50px;
+   display: inline-block;
+   position: absolute;
+   border: 1px solid lightgray;
+   box-sizing: border-box;
+}
+.yellow-shading, .blue-shading {
+   position: absolute;
+   transition: all 2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.yellow-shading {
+   background-color: rgba(255, 255, 0, 0.5);
+   height: 100%;
+   width: 0;
+}
+.blue-shading {
+   background-color: rgba(0, 0, 255, 0.5);
+   width: 100%;
+   height: 0;
+   bottom: 0;
+}
+#inputspace {
+   width:500px;
+   text-align:center;
+   margin-top:25px;
+}
+#input1, #input2 {
+   width:30px;
+   height:30px;
+   text-align:center;
+   font-size:16px;
+}
+</style>
+</head>
+
+<body>
+<div class="grid">
+<div class="yellow-shading"></div>
+<div class="blue-shading"></div>
+</div>
+
+<p id='inputspace'>
+0.<input type="text" id="input1" maxlength="1" size="1"> × 0.<input type="text" id="input2" maxlength="1" size="1">
+</p>
+
+<script>
+const width = 500;
+const height = 500;
+const rows = 10;
+const columns = 10;
+const grid = d3.select('.grid').attr('width', width).attr('height', height);
+
+for (let i = 0; i < rows * columns; i++) {
+const x = (i % columns) * 50;
+const y = Math.floor(i / columns) * 50;
+grid.append('div')
+.attr('class', 'cell')
+.style('left', x + 'px')
+.style('top', y + 'px');
+}
+
+const yellowShading = d3.select('.yellow-shading');
+const blueShading = d3.select('.blue-shading');
+
+d3.select('#input1').on('input', function() {
+const inputValue = +this.value;
+const shadingWidth = inputValue * 50;
+yellowShading.style('width', shadingWidth + 'px');
+});
+
+d3.select('#input2').on('input', function() {
+const inputValue = +this.value;
+const shadingHeight = inputValue * 50;
+blueShading.style('height', shadingHeight + 'px');
+});
+</script>
+</body>
+</html>
