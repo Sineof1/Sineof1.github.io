@@ -92,8 +92,8 @@ yellowShading.style('width', shadingWidth + 'px');
 
 d3.select('#input2').on('input', function() {
 const inputValue = +this.value;
-const shadingHeight = inputValue * 49.5;
-blueShading.style('height', shadingHeight + 'px');
+const shadingHeight = inputValue * 50;
+blueShading.style('height', (shadingHeight - 0.5) + 'px');
 });
 </script>
 </body>
