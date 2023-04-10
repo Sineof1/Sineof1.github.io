@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enigma</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+
+  table {
+    width: calc(100% - 100px);
+    border-collapse: collapse;
+    margin: 50px;
+  }
+
+  th, td {
+    border: 1px solid #333;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+  }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .input-container span {
+    margin-right: 5px;
+    font-weight: bold;
+  }
+
+  .input-container .input-space {
+    margin-right: 25px;
+  }
+
+  .custom-input {
+    height: 40px;
+    width: 120px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    padding: 5px;
+    font-size:1.4em;
+  }
+</style>
+</head>
+<body>
+  <table id="myTable">
+  </table>
+  <div class="input-container">
+    <span>Cipher: </span>
+    <input type="text" class="custom-input" id="cipher-input">
+  </div>
+  <div class="input-container">
+    <span>Word: </span>
+    <input type="text" class="custom-input input-space" id="word-input" style="color:blue;">
+    <span>Code: </span>
+    <input type="text" class="custom-input" id="code-input" style='color:blue;'>
+  </div>
+  <script>
+    const table = document.getElementById("myTable");
+    const numberOfRows = 2;
+    const numberOfColumns = 26;
+
+    for (let row = 0; row < numberOfRows; row++) {
+      const newRow = table.insertRow();
+
+      for (let col = 0; col < numberOfColumns; col++) {
+        const cell = newRow.insertCell();
+
+        if (row === 0) {
+          cell.innerText = col + 1;
+        } else {
+          cell.innerText = String.fromCharCode(65 + col);
+        }
+      }
+    }
+
+    const cipherInput = document.getElementById("cipher-input");
+    const wordInput = document.getElementById("word-input");
+    const codeInput = document.getElementById("code-input");
+
+    cipherInput.addEventListener("input", function() {
+      const regex = /[a-zA-Z]/g;
+      const input = cipherInput.value;
+      const variables = input.match(regex);
+
+      if (variables && variables.length > 1) {
+        alert("Only one variable can be used.");
+        cipherInput.value = ""; // Clear the contents of the input
+      }
+    });
+
+wordInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    if (cipherInput.value === "") {
+      alert("Please enter a cipher.");
+      return;
+    }
+
+    const word = wordInput.value.toUpperCase();
+    const cipherExpression = cipherInput.value;
+    const variableRegex = /[a-zA-Z]/;
+    const variable = cipherExpression.match(variableRegex);
+
+    if (!variable) {
+      alert("Please include a variable in the cipher.");
+      return;
+    }
+
+    const variableRegExp = new RegExp(variable, "g");
+
+    let codedWord = "";
+
+    for (let i = 0; i < word.length; i++) {
+      const charCode = word.charCodeAt(i) - 65 + 1; // A is 1, B is 2, etc.
+      const expression = cipherExpression.replace(variableRegExp, `(${charCode})`);
+      const newCharCode = (eval(expression) + 26 - 1) % 26 + 1; // Ensure positive result
+      const newChar = String.fromCharCode(newCharCode + 65 - 1); // Convert back to character
+      codedWord += newChar;
+    }
+
+    codeInput.value = codedWord; // Display the coded word in the "code" input
+  }
+});
+
+
+
+
+
+
+
+  </script>
+</body
+
+</html>
