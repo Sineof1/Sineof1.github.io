@@ -121,7 +121,7 @@ wordInput.addEventListener("keypress", function (event) {
 
     for (let i = 0; i < word.length; i++) {
       const charCode = word.charCodeAt(i) - 65 + 1; // A is 1, B is 2, etc.
-      const expression = cipherExpression.replace(variableRegExp, `(${charCode})`);
+      const expression = cipherExpression.replace(variableRegExp, `(${charCode})`).replace('^', '**');
       const newCharCode = (eval(expression) + 26 - 1) % 26 + 1; // Ensure positive result
       const newChar = String.fromCharCode(newCharCode + 65 - 1); // Convert back to character
       codedWord += newChar;
@@ -130,6 +130,7 @@ wordInput.addEventListener("keypress", function (event) {
     codeInput.value = codedWord; // Display the coded word in the "code" input
   }
 });
+
 
 
 
