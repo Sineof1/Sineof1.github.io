@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+        }
+
+        .left {
+            flex: 50%;
+            background-image: url('https://guzintamath.com/images/activity1_lhs.png');
+            background-size: contain;
+            background-repeat:no-repeat;
+            overflow-y: scroll;
+        }
+
+        .right {
+            flex: 50%;
+            padding: 20px;
+            overflow-y: scroll;
+            background-color: white;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question-label {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #008480;
+            color: #008480;
+            padding: 10px;
+            border-radius: 50%;
+            width: 5px;
+            height: 5px;
+        }
+
+        textarea {
+            width: 90%;
+            height: 75px;
+            margin-top: 10px;
+            outline: none;
+            font-family: sans-serif;
+            font-size: 1em;
+            padding: 10px;
+            resize: none;
+        }
+        .response-builder {
+            width: 90%;
+            border: 2px dashed brown;
+            margin-bottom: 25px;
+            padding: 10px;
+            height: 30px;
+            overflow: hidden;
+        }
+        .rb-direction {
+            font-family: sans-serif;
+            font-size: 1em;
+            font-weight: 900;
+            margin: 5px 0 20px 10px;
+            padding: 0;
+        }
+        .response-builder-selection {
+            display: inline-block;
+            margin: 0 0 10px 10px;
+            padding: 5px;
+            border: 5px dotted orange;
+            background-color: rgba(255, 165, 0, 0.5);
+            font-family: sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .rb-toggle {
+            float: right;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+    </style>
+    <title>Reason Builder</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left"></div>
+        <div class="right">
+            <div class="question">
+                <div class="question-label">a</div>
+                <p style='display:inline;'>Describe the reasoning that Robena and Eryn used to make each statement.</p>
+                <textarea id='rb1text' rows="4"></textarea>
+            </div>
+            <div class='response-builder' id='rb1'>
+                <span class='rb-toggle' onclick='rb_toggle1()'>↕</span>
+                <p class='rb-direction'>Reason Builder</p>
+                <span class='response-builder-selection' id='response1' onclick='process_response1("response1")'>Robena used multiplication in her prediction strategy.</span>
+                <span class='response-builder-selection' id='response2' onclick='process_response1("response2")'>Eryn multiplied the halftime scores by 2 to make her prediction.</span>
+                <span class='response-builder-selection' id='response3' onclick='process_response1("response3")'>Eryn used addition in her prediction.</span>
+                <span class='response-builder-selection' id='response4' onclick='process_response1("response4")'>Robena assumed that the scores would double by the end of the game.</span>
+                <span class='response-builder-selection' id='response5' onclick='process_response1("response5")'>Robena subtracted the halftime scores to predict the final score.</span>
+                <span class='response-builder-selection' id='response6' onclick='process_response1("response6")'>Eryn assumed the difference between the teams' scores would remain constant.</span>
+                <span class='response-builder-selection' id='response7' onclick='process_response1("response7")'>Robena assumed the Blue Jays would score more than the Crusaders in the second half.</span>
+                <span class='response-builder-selection' id='response8' onclick='process_response1("response8")'>Eryn predicted the Crusaders would score twice as much as the Blue Jays in the second half.</span>
+                <span class='response-builder-selection' id='response9' onclick='process_response1("response9")'>Robena's prediction was based on the halftime scores of both teams.</span>
+                <span class='response-builder-selection' id='response10' onclick='process_response1("response10")'>Robena's prediction didn't take into account the halftime scores.</span>
+                <span class='response-builder-selection' id='response11' onclick='process_response1("response11")'>Eryn's prediction considered the halftime scores.</span>
+                <span class='response-builder-selection' id='response12' onclick='process_response1("response12")'>Eryn's prediction ignored the initial 10-point lead of the Crusaders.</span>
+            </div>
+            <div class="question">
+                <div class="question-label">b</div>
+                <p style='display:inline;'>Based on the two predictions, which team scored more points in the second half?</p>
+                <textarea id='rb2text' rows="4"></textarea>
+            </div>
+            <div class='response-builder' id='rb2'>
+                <span class='rb-toggle' onclick='rb_toggle2()'>↕</span>
+                <p class='rb-direction'>Reason Builder</p>
+                <span class='response-builder-selection' id='response21' onclick='process_response2("response21")'>Robena's prediction means that the Crusaders scored more in the second half.</span>
+                <span class='response-builder-selection' id='response22' onclick='process_response2("response22")'>Eryn's prediction means that the Crusaders scored more in the second half.</span>
+                <span class='response-builder-selection' id='response23' onclick='process_response2("response23")'>To get the second half scores, I need to subtract the halftime scores from the final scores.</span>
+                <span class='response-builder-selection' id='response24' onclick='process_response2("response24")'>Robena's prediction means that the Blue Jays scored more in the second half.</span>
+                <span class='response-builder-selection' id='response25' onclick='process_response2("response25")'>Eryn's prediction means that both teams scored an equal number of points in the second half.</span>
+                <span class='response-builder-selection' id='response26' onclick='process_response2("response26")'>To get the second half scores, I need to add the halftime scores to the final scores.</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+toggle1 = 0;
+toggle2 = 0;
+
+function rb_toggle1() {
+  if (toggle1 === 0) toggle1 = 1;
+  else toggle1 = 0;
+  if (toggle1 === 0) {$('#rb1').height('30px');}
+  else $('#rb1').height('auto');
+}
+function rb_toggle2() {
+  if (toggle2 === 0) toggle2 = 1;
+  else toggle2 = 0;
+  if (toggle2 === 0) {$('#rb2').height('30px');}
+  else $('#rb2').height('auto');
+}
+function process_response1(id) {
+  if ($('#' + id).css('color') == 'rgb(255, 255, 255)') {
+    $('#' + id).css({'background-color': 'rgba(255, 165, 0, 0.5)', 'color': 'black'});
+    $('#rb1text').val($('#rb1text').val().replace($('#' + id).text() + ' ', ''));
+  }
+  else {
+    $('#' + id).css({'background-color': 'black', 'color': 'white'});
+    $('#rb1text').val($('#rb1text').val() + $('#' + id).text() + ' ');
+  }
+}
+function process_response2(id) {
+  if ($('#' + id).css('color') == 'rgb(255, 255, 255)') {
+    $('#' + id).css({'background-color': 'rgba(255, 165, 0, 0.5)', 'color': 'black'});
+    $('#rb2text').val($('#rb2text').val().replace($('#' + id).text() + ' ', ''));
+  }
+  else {
+    $('#' + id).css({'background-color': 'black', 'color': 'white'});
+    $('#rb2text').val($('#rb2text').val() + $('#' + id).text() + ' ');
+  }
+}
+</script>
+</html>

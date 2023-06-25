@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script defer="defer" type="text/x-mathjax-config">MathJax.Hub.Config({messageStyle: "none", displayAlign: "left"});</script>
+<script defer="defer" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <title>Worked Example</title>
+    <style>
+        #rectangle {
+            width: 40vw;
+            margin:0 auto;
+            height: 50vh;
+            border-radius: 0 2% 2% 2%;
+            position: relative;
+            border: 2px solid black;
+        }
+
+        #banner {
+            background-color: #008480;
+            width: 33%;
+            height: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family:sans-serif;
+        }
+
+        #grid {
+            position: absolute;
+            right: 20px;
+            height: 75%;
+            display: grid;
+            grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+            width: 50%;
+            border:1px solid black;
+        }
+
+        .cell {
+            border: 1px solid gray;
+        }
+
+        .cell.light-blue {
+            background-color: #adc5e6;
+        }
+
+        #text {
+            position: absolute;
+            left: 2%;
+            top: 40px;
+            width: 42%;
+            font-family:sans-serif;
+            font-size:1.2em;
+        }
+        #buttons {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+        }
+
+        .btn {
+            flex: 1;
+            background-color: black;
+            color: white;
+            border-right: 0.5px solid white;
+            border-top:none;
+            border-left:none;
+            border-bottom:none;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #directions {
+            width: 40%;
+            margin:0 auto;
+            margin-top: 20px;
+            font-family: sans-serif;
+            font-size: 1.1em;
+        }
+
+        #questions {
+            width: 50%;
+            margin:0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .question {
+            width: 60vw;
+            font-family: sans-serif;
+            font-size: 1.1em;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+            border: 1px solid black;
+            margin: 0 20px 20px 10%;
+            height: 125px;
+            width: 125px;
+        }
+        #practice {
+            position: fixed;
+            bottom: 0;
+            right: 10px;
+            border-radius: 5%;
+        }
+        .input {
+            width: 35%;
+            height: 35px;
+            margin-bottom: 10px;
+            outline: none;
+            font-family: sans-serif;
+            font-size: 0.9em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="rectangle">
+        <div id="banner">WORKED EXAMPLES</div>
+        <div id="text">
+            <p id='p1'>35% means 35 out of 100.</p>
+            <p id='p2'>You can shade 35 of the 100 squares on the hundredths grid to represent 35%.</p>
+            <p id='p3'>The fraction \(\mathtt{\frac{35}{100}}\) is equivalent to 35%.</p>
+        </div>
+        <div id="grid">
+            <script>
+                // Create 100 cells in the grid
+                for (let i = 0; i < 100; i++) {
+                    let cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.id = 'cell' + i;
+                    // If the cell is in the first three columns or in the fourth column but not past the fifth row, add the light-blue class
+                    if (i % 10 < 3 || (i % 10 == 3 && i < 50)) {
+                        cell.className += ' light-blue';
+                    }
+                    // Add the cell to the grid
+                    document.getElementById('grid').appendChild(cell);
+                }
+            </script>
+        </div>
+        <div id="buttons">
+            <button class="btn" style='border-bottom-left-radius:5%;' onclick="updateGridAndText(35, 35)">A</button>
+            <button class="btn" onclick="updateGridAndText(14, 14)">B</button>
+            <button class="btn" onclick="updateGridAndText(50, 50)">C</button>
+            <button class="btn" onclick="updateGridAndText(6, 6)">D</button>
+            <button class="btn" style='border:none;border-bottom-right-radius:5%;' onclick="updateGridAndText(95, 95)">E</button>
+        </div>
+    </div>
+    <div id="directions">
+        <p>Write a fraction and a percent to represent the shaded part of each grid. Each hundredths grid represents a whole.</p>
+    </div>
+    <div id="questions">
+        <div class="question">
+            <p>1</p>
+            <div id="question1" class="question-grid"></div>
+            <span style='margin-left:20px;'>Fraction: <input class='input' type="text"></span><br />
+            <span style='margin-left:20px;'>Percent&#8202;&#8202;: <input class='input' type="text"></span>
+        </div>
+        <div class="question">
+            <p>2</p>
+            <div id="question2" class="question-grid"></div>
+            <span style='margin-left:20px;'>Fraction: <input class='input' type="text"></span><br />
+            <span style='margin-left:20px;'>Percent&#8202;&#8202;: <input class='input' type="text"></span>
+        </div>
+        <div class="question">
+            <p>3</p>
+            <div id="question3" class="question-grid"></div>
+            <span style='margin-left:20px;'>Fraction: <input class='input' type="text"></span><br />
+            <span style='margin-left:20px;'>Percent&#8202;&#8202;: <input class='input' type="text"></span>
+        </div>
+        <div class="question">
+            <p>4</p>
+            <div id="question4" class="question-grid"></div>
+            <span style='margin-left:20px;'>Fraction: <input class='input' type="text"></span><br />
+            <span style='margin-left:20px;'>Percent&#8202;&#8202;: <input class='input' type="text"></span>
+        </div>
+    </div>
+    <button id="practice" class="btn">Practice</button>
+    <script>
+        function createGrid(gridId, shadedCells) {
+            for (let i = 0; i < 100; i++) {
+                let cell = document.createElement('div');
+                cell.className = 'cell';
+                if (i < shadedCells) {
+                    cell.className += ' light-blue';
+                }
+                document.getElementById(gridId).appendChild(cell);
+            }
+        }
+        function updateGridAndText(percentage, shadedCells) {
+            // Update text
+            document.getElementById('p1').innerText = percentage + '% means ' + percentage + ' out of 100.';
+            document.getElementById('p2').innerText = 'You can shade ' + shadedCells + ' of the 100 squares on the hundredths grid to represent ' + percentage + '%.';
+            document.getElementById('p3').innerText = `The fraction \\(\\mathtt{\\frac{${percentage}}{100}}\\) is equivalent to ${percentage}%.`
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+
+            // Update grid
+            let tens = Math.floor(shadedCells / 10);
+            let ones = Number(String(shadedCells).slice(-1)) * 10;
+            for (let i = 0; i < 100; i++) {
+                let cell = document.getElementById('cell' + i);
+                if (i % 10 < tens || (i % 10 == tens && i < ones)) {
+                    cell.className = 'cell light-blue';
+                } else {
+                    cell.className = 'cell';
+                }
+            }
+        }
+        function practice() {
+            for (let i = 1; i <= 4; i++) {
+                let percentage = Math.floor(Math.random() * 101);
+                let grid = document.getElementById('question' + i);
+                grid.innerHTML = '';
+                createGrid('question' + i, percentage);
+            }
+        }
+        // Initialize question grids
+        createGrid('question1', 45);
+        createGrid('question2', 11);
+        createGrid('question3', 70);
+        createGrid('question4', 100);
+        document.getElementById('practice').addEventListener('click', practice);
+    </script>
+</body>
+</html>
