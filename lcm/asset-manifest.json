@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/lcm/static/css/main.d905b823.css",
+    "main.js": "/lcm/static/js/main.8bf3c6b3.js",
+    "static/js/453.15313422.chunk.js": "/lcm/static/js/453.15313422.chunk.js",
+    "static/media/dragonfly-bg.png": "/lcm/static/media/dragonfly-bg.89022ae3851415d3f24a.png",
+    "index.html": "/lcm/index.html",
+    "main.d905b823.css.map": "/lcm/static/css/main.d905b823.css.map",
+    "main.8bf3c6b3.js.map": "/lcm/static/js/main.8bf3c6b3.js.map",
+    "453.15313422.chunk.js.map": "/lcm/static/js/453.15313422.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d905b823.css",
+    "static/js/main.8bf3c6b3.js"
+  ]
+}
