@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/lcm/static/css/main.d905b823.css",
-    "main.js": "/lcm/static/js/main.5947336b.js",
+    "main.css": "/lcm/static/css/main.dd1d367a.css",
+    "main.js": "/lcm/static/js/main.757e1fd7.js",
     "static/js/453.15313422.chunk.js": "/lcm/static/js/453.15313422.chunk.js",
+    "static/media/dragonfly-flying.wav": "/lcm/static/media/dragonfly-flying.512d42a4d14253aa222c.wav",
     "static/media/dragonfly-bg.png": "/lcm/static/media/dragonfly-bg.89022ae3851415d3f24a.png",
     "static/media/dragonred.png": "/lcm/static/media/dragonred.6d60f82c021122992263.png",
     "static/media/dragonblue.png": "/lcm/static/media/dragonblue.7abbe0fd9a983befadb2.png",
     "index.html": "/lcm/index.html",
-    "main.d905b823.css.map": "/lcm/static/css/main.d905b823.css.map",
-    "main.5947336b.js.map": "/lcm/static/js/main.5947336b.js.map",
+    "main.dd1d367a.css.map": "/lcm/static/css/main.dd1d367a.css.map",
+    "main.757e1fd7.js.map": "/lcm/static/js/main.757e1fd7.js.map",
     "453.15313422.chunk.js.map": "/lcm/static/js/453.15313422.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d905b823.css",
-    "static/js/main.5947336b.js"
+    "static/css/main.dd1d367a.css",
+    "static/js/main.757e1fd7.js"
   ]
 }
