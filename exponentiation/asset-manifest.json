@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.3b67e377.css",
-    "main.js": "/static/js/main.da656056.js",
-    "index.html": "/index.html",
-    "main.3b67e377.css.map": "/static/css/main.3b67e377.css.map",
-    "main.da656056.js.map": "/static/js/main.da656056.js.map"
+    "main.css": "/exponentiation/static/css/main.3b67e377.css",
+    "main.js": "/exponentiation/static/js/main.da656056.js",
+    "index.html": "/exponentiation/index.html",
+    "main.3b67e377.css.map": "/exponentiation/static/css/main.3b67e377.css.map",
+    "main.da656056.js.map": "/exponentiation/static/js/main.da656056.js.map"
   },
   "entrypoints": [
     "static/css/main.3b67e377.css",
